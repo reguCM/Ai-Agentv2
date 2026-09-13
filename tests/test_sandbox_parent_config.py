@@ -9,11 +9,13 @@ from tools.ai.sandbox_workspace import (
     resolve_configured_sandbox_parent,
 )
 
+V2_SANDBOX_RELATIVE = "Ai-Agent_v2-worktrees/sandboxes"
+
 
 def test_env_override_wins_over_config(tmp_path, monkeypatch):
     cfg = tmp_path / "sandbox_workspace.json"
     cfg.write_text(
-        json.dumps({"sandbox_parent": "AI-Agent-worktrees/sandboxes", "relative_to": "volume_root"}),
+        json.dumps({"sandbox_parent": V2_SANDBOX_RELATIVE, "relative_to": "volume_root"}),
         encoding="utf-8",
     )
     override = tmp_path / "from-env"
@@ -43,7 +45,7 @@ def test_volume_root_relative_config_uses_worktree_drive(tmp_path):
     cfg.write_text(
         json.dumps(
             {
-                "sandbox_parent": "AI-Agent-worktrees/sandboxes",
+                "sandbox_parent": V2_SANDBOX_RELATIVE,
                 "relative_to": "volume_root",
             }
         ),
@@ -56,7 +58,9 @@ def test_volume_root_relative_config_uses_worktree_drive(tmp_path):
         config_path=cfg,
         environ={},
     )
-    assert resolved == (Path(worktree.resolve().anchor) / "AI-Agent-worktrees" / "sandboxes").resolve()
+    assert resolved == (
+        Path(worktree.resolve().anchor) / "Ai-Agent_v2-worktrees" / "sandboxes"
+    ).resolve()
 
 
 def test_missing_config_fails_closed(tmp_path):
@@ -68,9 +72,9 @@ def test_missing_config_fails_closed(tmp_path):
         )
 
 
-def test_repo_config_points_at_worktrees_sandboxes():
+def test_repo_config_points_at_v2_worktrees_sandboxes():
     resolved = resolve_configured_sandbox_parent(
-        Path(r"D:\AI-Agent-worktrees\current-dev"),
+        Path(r"D:\Ai-Agent_v2"),
         environ={},
     )
-    assert resolved == Path(r"D:\AI-Agent-worktrees\sandboxes")
+    assert resolved == Path(r"D:\Ai-Agent_v2-worktrees\sandboxes")

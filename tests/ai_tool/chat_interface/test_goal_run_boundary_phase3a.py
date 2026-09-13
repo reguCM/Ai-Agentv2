@@ -13,6 +13,7 @@ from ai_tool.chat_interface.requirement_resolution import (
     StructuredRequirement,
 )
 from ai_tool.dev_skill_pipeline import build_handoff_packet, validate_handoff_packet
+from tools.ai.sandbox_workspace import SandboxSession
 
 
 def _packet(*, goal: str, meaning: str, path: str, slug: str) -> dict:
@@ -185,7 +186,7 @@ def test_goal_command_reuses_specification_path_and_stops_with_saved_handoff(mon
         ),
     ],
 )
-def test_run_prepares_exact_saved_handoff_without_regeneration_or_execution(
+def test_run_starts_sandbox_for_exact_saved_handoff_without_regeneration_or_task_execution(
     monkeypatch,
     tmp_path,
     goal,
@@ -199,6 +200,35 @@ def test_run_prepares_exact_saved_handoff_without_regeneration_or_execution(
     session = empty_session()
     session["last_mission_id"] = "m-phase3a"
     session["production_handoff_packet"] = packet
+    sandbox_root = tmp_path / "sandbox"
+    sandbox_root.mkdir()
+    sandbox = SandboxSession(
+        session_id=f"sandbox-{slug}",
+        sandbox_root=str(sandbox_root),
+        branch=f"agent-sandbox/{slug}",
+        base_head="head",
+        current_head="head",
+        status="ACTIVE",
+        created_at="2026-09-13T00:00:00+00:00",
+        production_applied=False,
+        git_base="HEAD:head",
+        workspace_base="working-tree-sha256:test",
+        session_kind="DEDICATED",
+    )
+
+    def start_sandbox(runtime, _source, _parent):
+        runtime.sandbox_session = sandbox
+        return sandbox
+
+    monkeypatch.setattr(
+        "tools.ai.task_runtime.AgentTaskRuntime.start_dedicated_sandbox",
+        start_sandbox,
+    )
+    monkeypatch.setattr("tools.ai.task_runtime.verify_sandbox_identity", lambda value: value)
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.resolve_configured_sandbox_parent",
+        lambda _source: tmp_path / "sandboxes",
+    )
 
     monkeypatch.setattr(
         "ai_tool.chat_interface.agent_turn.run_production_handoff_pipeline",
@@ -212,16 +242,19 @@ def test_run_prepares_exact_saved_handoff_without_regeneration_or_execution(
     result = run_chat_turn(session, "/run", model="test")
 
     assert result["runtime_prepared"] is True
-    assert result["runtime_started"] is False
-    assert result["sandbox_started"] is False
+    assert result["runtime_started"] is True
+    assert result["sandbox_started"] is True
     assert result["handoff_packet"] == packet
     assert json.dumps(packet, ensure_ascii=False, sort_keys=True) == saved_json
     assert result["handoff_integrity"]["handoff_id"] == packet["handoff_id"]
     assert result["handoff_integrity"]["canonical_hash_equal"] is True
     assert result["handoff_integrity"]["immutable_fields_equal"] is True
     runtime = result["task_runtime"]
-    assert runtime["sandbox_session"] is None
+    assert runtime["sandbox_session"]["session_id"] == sandbox.session_id
     assert all(row["status"] == "pending" for row in runtime["tasks"])
+    assert runtime["actions"] == []
+    assert runtime["mutations"] == []
+    assert session["production_runtime_snapshot"] == runtime
     rendered = json.dumps(result, ensure_ascii=False)
     assert meaning in rendered
     assert path in rendered
@@ -230,3 +263,32 @@ def test_run_prepares_exact_saved_handoff_without_regeneration_or_execution(
         assert "Tetris" not in rendered
         assert "テトリス" not in rendered
         assert "tetris/main.py" not in rendered
+
+
+def test_run_fails_closed_when_sandbox_bootstrap_fails(monkeypatch, tmp_path):
+    _isolate_session(monkeypatch, tmp_path)
+    packet = _packet(
+        goal="PythonでCLI電卓を作って",
+        meaning="四則演算が動く",
+        path="calculator/main.py",
+        slug="phase3b-sandbox-failure",
+    )
+    session = empty_session()
+    session["production_handoff_packet"] = packet
+    monkeypatch.setattr(
+        "tools.ai.task_runtime.AgentTaskRuntime.start_dedicated_sandbox",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("blocked")),
+    )
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.resolve_configured_sandbox_parent",
+        lambda _source: tmp_path / "sandboxes",
+    )
+
+    result = run_chat_turn(session, "/run", model="test")
+
+    assert result["production_run_error"] == "sandbox_bootstrap_failed"
+    assert result["runtime_prepared"] is True
+    assert result["runtime_started"] is False
+    assert result["sandbox_started"] is False
+    assert result["task_runtime"]["sandbox_session"] is None
+    assert "production_runtime_snapshot" not in session

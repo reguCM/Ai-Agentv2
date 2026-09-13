@@ -3125,7 +3125,7 @@ def _canonical_handoff_hash(packet: Mapping[str, Any]) -> str:
 
 def _phase3a_command_result(
     *,
-    session: Mapping[str, Any],
+    session: dict[str, Any],
     correlation_id: str,
     memory: dict[str, Any],
     model: str,
@@ -3188,14 +3188,58 @@ def _phase3a_command_result(
     after_hash = _canonical_handoff_hash(packet)
     immutable_fields = ("handoff_id", "goal", "scope", "acceptance_criteria", "implementation_tasks")
     immutable_equal = all(packet.get(key) == saved.get(key) for key in immutable_fields)
+    try:
+        sandbox = orchestrator.runtime.start_dedicated_sandbox(
+            DEVELOPMENT_WORKTREE,
+            resolve_configured_sandbox_parent(DEVELOPMENT_WORKTREE),
+        )
+    except Exception as exc:
+        return {
+            "route": "chat",
+            "answer": "Dedicated Sandboxを開始できなかったため、Runtime実行を開始していません。",
+            "events": [
+                event(
+                    "production_run_blocked",
+                    reason="sandbox_bootstrap_failed",
+                    error_type=type(exc).__name__,
+                )
+            ],
+            "tool_used": False,
+            "tools": [],
+            "web_search": False,
+            "research_saved": False,
+            "executor": "local_agent",
+            "cursor_connected": False,
+            "memory": memory,
+            "task_runtime": orchestrator.snapshot(),
+            "runtime_prepared": True,
+            "runtime_started": False,
+            "sandbox_started": False,
+            "production_run_error": "sandbox_bootstrap_failed",
+            "handoff_packet": packet,
+            "handoff_integrity": {
+                "handoff_id": packet.get("handoff_id"),
+                "saved_canonical_hash": before_hash,
+                "runtime_input_canonical_hash": after_hash,
+                "canonical_hash_equal": before_hash == after_hash,
+                "immutable_fields": list(immutable_fields),
+                "immutable_fields_equal": immutable_equal,
+            },
+            "production_status": "RUNTIME_BLOCKED_BEFORE_START",
+            "mission_memory": {"mission_id": mission_id or None},
+            "model": model,
+        }
+    runtime_snapshot = orchestrator.snapshot()
+    session["production_runtime_snapshot"] = runtime_snapshot
     return {
         "route": "chat",
-        "answer": "保存済みGoal HandoffをRuntime Goal / Taskへ変換しました。実行はまだ開始していません。",
+        "answer": "保存済みGoal HandoffをRuntimeへ渡し、Dedicated Sandboxを開始しました。Task実行はまだ開始していません。",
         "events": [
             event(
-                "production_run_prepared",
+                "production_run_sandbox_started",
                 handoff_id=packet.get("handoff_id"),
-                runtime_started=False,
+                sandbox_session_id=sandbox.session_id,
+                runtime_started=True,
             )
         ],
         "tool_used": False,
@@ -3205,10 +3249,10 @@ def _phase3a_command_result(
         "executor": "local_agent",
         "cursor_connected": False,
         "memory": memory,
-        "task_runtime": orchestrator.snapshot(),
+        "task_runtime": runtime_snapshot,
         "runtime_prepared": True,
-        "runtime_started": False,
-        "sandbox_started": False,
+        "runtime_started": True,
+        "sandbox_started": True,
         "handoff_packet": packet,
         "handoff_integrity": {
             "handoff_id": packet.get("handoff_id"),
@@ -3218,7 +3262,7 @@ def _phase3a_command_result(
             "immutable_fields": list(immutable_fields),
             "immutable_fields_equal": immutable_equal,
         },
-        "production_status": "RUNTIME_PREPARED_NOT_STARTED",
+        "production_status": "RUNTIME_SANDBOX_READY_TASKS_PENDING",
         "mission_memory": {"mission_id": mission_id or None},
         "final_llm_lifecycle": {
             "llm_request_id": f"{correlation_id}-production-run-prepare",
