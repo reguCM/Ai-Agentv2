@@ -13,7 +13,7 @@ from tests.ai_tool.chat_interface.test_agent_task_loop_p216 import (
 from tests.ai_tool.chat_interface.test_execution_end_invariants import (
     README_E2E_REQUEST,
     _listing_execute,
-    _run_agent_completed,
+    _run_agent_false_success_llm_final_without_runtime,
     _run_goal_completion_judged,
 )
 def _gap_event(result: dict) -> dict | None:
@@ -23,10 +23,12 @@ def _gap_event(result: dict) -> dict | None:
     return None
 
 
-def test_agent_completed_records_gap_resolution_and_continuation_resume(
+def test_false_success_llm_final_records_fact_gap_and_continuation_resume(
     monkeypatch, tmp_path
 ):
-    result, session = _run_agent_completed(monkeypatch, tmp_path)
+    result, session = _run_agent_false_success_llm_final_without_runtime(
+        monkeypatch, tmp_path
+    )
     routed = _gap_event(result)
     assert routed is not None
     assert routed.get("gap_kind") == "fact_gap"

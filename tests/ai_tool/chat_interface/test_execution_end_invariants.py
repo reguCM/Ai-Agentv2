@@ -64,11 +64,28 @@ def _run_agent_false_success_llm_final_without_runtime(monkeypatch, tmp_path):
     """One tool + LLM final text; runtime G1 is not canonically complete (false success regression)."""
     _prepare(monkeypatch, tmp_path, {"ok": True, "status": "success"})
     session = empty_session("inv-false-success")
+    correlation_id = "inv-false-success"
+    begin_turn(session["session_id"], correlation_id, correlation_id)
+    request = "repository audit plan"
+    orchestrator = ChatTaskOrchestrator(correlation_id, request)
+    orchestrator.initialize()
+    orchestrator.configure_tool_expectation(REGISTRY, registry_tools=REGISTRY)
     chat = _chat_sequence(
         _response(calls=[_tool_call("read_file", {"path": "a.txt"})]),
         _response("audit summary without verified evidence"),
     )
-    result = run_chat_turn(session, "repository audit plan", chat_fn=chat, model="fake")
+    result = _chat_turn(
+        request,
+        session,
+        chat_fn=chat,
+        model="fake",
+        memory={},
+        correlation_id=correlation_id,
+        orchestrator=orchestrator,
+    )
+    resume = result.get("goal_continuation_resume")
+    session["awaiting_goal_continuation"] = bool(resume)
+    session["goal_continuation_resume"] = resume
     return result, session
 
 

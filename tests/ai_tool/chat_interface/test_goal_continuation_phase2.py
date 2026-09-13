@@ -18,7 +18,9 @@ from tests.ai_tool.chat_interface.test_agent_task_loop_p216 import (
     _response,
     _tool_call,
 )
-from tests.ai_tool.chat_interface.test_execution_end_invariants import _run_agent_completed
+from tests.ai_tool.chat_interface.test_execution_end_invariants import (
+    _run_agent_false_success_llm_final_without_runtime,
+)
 from tests.ai_tool.chat_interface.test_gap_resolution_phase1 import _gap_event
 
 
@@ -30,7 +32,9 @@ def _continuation_event(result: dict) -> dict | None:
 
 
 def _run_fact_gap_with_continuation(monkeypatch, tmp_path):
-    first, session = _run_agent_completed(monkeypatch, tmp_path)
+    first, session = _run_agent_false_success_llm_final_without_runtime(
+        monkeypatch, tmp_path
+    )
     assert first.get("goal_continuation_resume") is not None
     assert session.get("awaiting_goal_continuation") is True
     routed = _gap_event(first)

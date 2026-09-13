@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import json
 import pytest
 
 from ai_tool.chat_interface.agent_turn import run_chat_turn
@@ -120,8 +121,31 @@ def test_run_chat_turn_blocks_then_resumes_e2e(monkeypatch, tmp_path):
         fake_chat_turn,
     )
     session = empty_session()
-    def noop_chat(**_kwargs):
-        return type("R", (), {"message": type("M", (), {"content": "{}"})()})()
+    def noop_chat(**kwargs):
+        system = "\n".join(
+            str(row.get("content") or "")
+            for row in (kwargs.get("messages") or [])
+            if row.get("role") == "system"
+        )
+        if "scoring a grill-me interview" in system:
+            content = json.dumps(
+                {
+                    "dimensions": {key: 0 for key in ("goals", "acceptance", "boundaries", "alternatives", "assumptions")},
+                    "aggregate": 0,
+                    "weakest": [],
+                    "ready_to_exit": True,
+                    "aligned_spec": {
+                        "summary": "minimal tetris",
+                        "numbered_conditions": [],
+                        "non_goals": [],
+                        "acceptance_criteria": [],
+                    },
+                },
+                ensure_ascii=False,
+            )
+        else:
+            content = "{}"
+        return type("R", (), {"message": type("M", (), {"content": content})()})()
 
     first = run_chat_turn(
         session,
@@ -146,7 +170,8 @@ def test_run_chat_turn_blocks_then_resumes_e2e(monkeypatch, tmp_path):
         model="test-model",
     )
     assert second.get("awaiting_requirement_resolution") is False
-    assert agent_turn_calls["n"] == 1
+    assert agent_turn_calls["n"] == 0
+    assert second.get("aligned_spec")
     mission = store.get_mission(mission_id)
     assert mission.get("requirement_resolution_phase") == PHASE_REQUIREMENTS_RESOLVED
     assert any(

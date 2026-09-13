@@ -22,7 +22,6 @@ from tests.ai_tool.chat_interface.test_agent_task_loop_p216 import (
     _response,
     _tool_call,
 )
-from tests.ai_tool.chat_interface.test_execution_end_invariants import _run_agent_completed
 from tests.ai_tool.chat_interface.test_gap_resolution_phase1 import _gap_event
 from tests.ai_tool.chat_interface.test_goal_continuation_phase2 import (
     _continuation_event,
