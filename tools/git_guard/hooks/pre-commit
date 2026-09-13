@@ -1,0 +1,16 @@
+#!/bin/sh
+# Git Guard pre-commit — in-repo canonical hook (see install-hooks.md / DEPLOYED.v2.md)
+set -e
+TOP=$(git rev-parse --show-toplevel)
+GUARD="$TOP/tools/git_guard/guard.py"
+CFG="$TOP/tools/git_guard/configs/ai-agent.pre-commit.json"
+if [ ! -f "$GUARD" ]; then
+  echo "git-guard pre-commit: FAIL - in-repo guard missing: $GUARD" >&2
+  exit 1
+fi
+if [ ! -f "$CFG" ]; then
+  echo "git-guard pre-commit: FAIL - config missing: $CFG" >&2
+  exit 1
+fi
+PY="${PYTHON:-python}"
+exec "$PY" "$GUARD" --config "$CFG"

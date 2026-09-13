@@ -1,5 +1,8 @@
 # Git Guard — DEPLOYED (AI-Agent)
 
+**V2 host live install (2026-09-13):** `tools/git_guard/DEPLOYED.v2.md`  
+(`D:\Ai-Agent_v2\.git\hooks`. This file below is the 2026-09-08 Production / `D:\AI-Agent` record — LEGACY_EVIDENCE_ONLY.)
+
 **Status:** Promoted into `stabilize/tool-result-contract` (in-repo `tools/git_guard/`). Hooks use **in-repo only** (sandbox fallback removed).
 **Installed / updated:** 2026-09-08 (Asia/Tokyo)
 **Canonical package root:** worktree `tools/git_guard/` (e.g. `D:\AI-Agent-worktrees\_promote-tooling\tools\git_guard\`)
@@ -22,7 +25,7 @@ Optional override: set env `GIT_GUARD_REPO` to an absolute worktree path.
 
 | File | Use |
 |------|-----|
-| `ai-agent.pre-commit.json` | Hook: secrets deny globs, origin URL must contain `github.com/reguCM/Ai-Agent`, forbid force_push/reset_hard. |
+| `ai-agent.pre-commit.json` | Hook: secrets deny globs, origin URL must contain `github.com/reguCM/Ai-Agentv2`, forbid force_push/reset_hard. |
 | `ai-agent.pre-push.json` | Hook: remote check + forbid force_push/reset_hard; **push_safety v2.1** — verified fast-forward **PASS**; unsafe **BLOCK**; unresolved **NEED_HUMAN**. |
 | `local.check-stabilize.json` | Local CLI for stabilize/wip/sandbox/promote worktrees. |
 | `local.selective-adopt.json` | Local CLI for selective-adopt style. |
