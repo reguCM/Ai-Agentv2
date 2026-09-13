@@ -1,0 +1,23 @@
+{
+  "kind": "observer_notes_after_stop",
+  "note": "Does not rewrite Local LLM outputs or repair game code.",
+  "test_failure_observed": {
+    "type": "collection_error",
+    "error": "ModuleNotFoundError: No module named 'workspace'",
+    "test_file": "tests/test_medium_task_v0.py",
+    "import": "from workspace.window_loop import update, grid, score"
+  },
+  "window_loop_after_patch_facts": [
+    "update() imports workspace.line_clear (not the experiment package path)",
+    "update() uses global grid and score",
+    "module-level grid and score are NOT DEFINED (AST / file read)"
+  ],
+  "focus_mismatch": {
+    "gap_components": ["LineClear", "Score"],
+    "observer_minimum_focus": ["line_clear"],
+    "observer_allowed_write": ["workspace/window_loop.py", "tests/test_medium_task_v0.py"],
+    "reason": "provisional integration heuristic always allowed window_loop writes"
+  },
+  "phase7_connected_true_means": "AST saw window_loop referencing line_clear names; runtime import path was not validated",
+  "second_repair": "not_run"
+}

@@ -1,0 +1,38 @@
+{
+  "experiment_id": "upper_judgment",
+  "role": "cursor_solver",
+  "agent_id": "dd27db87-6495-4d3a-8dc9-2971401b2504",
+  "prompt_given": "SOLVER_PROMPT.txt only plus workspace path. No helper/config/bay hints. No two-bug design.",
+  "contamination": {
+    "parent_authored_fixture": true,
+    "solver_prompt_included_intended_route": false,
+    "solver_could_list_entire_workspace": true
+  },
+  "files_listed": [
+    "tests/test_main.py",
+    "bay.py",
+    "config.py",
+    "helper.py",
+    "main.py"
+  ],
+  "files_read_order": [
+    "tests/test_main.py",
+    "main.py",
+    "helper.py",
+    "config.py",
+    "bay.py"
+  ],
+  "edits": [
+    {"path": "config.py", "change": "LANE_TAKE 1 -> 3"},
+    {"path": "bay.py", "change": "BAY_OPEN False -> True"}
+  ],
+  "tests_after_first_partial_fix": "NOT_OBSERVED",
+  "note": "Both edits were applied before the first post-edit pytest. Second failure was visible from reading the test file, not from a failed test after the first patch.",
+  "pytest_after_edits": {"exit_code": 0, "stdout": "1 passed"},
+  "python_main_after_edits": {"exit_code": 0, "stdout": "{\"lane\": \"west\", \"bay\": true}"},
+  "parent_verification": {
+    "pytest_exit_code": 0,
+    "program_exit_code": 0,
+    "application_behavior": "{\"lane\": \"west\", \"bay\": true}"
+  }
+}

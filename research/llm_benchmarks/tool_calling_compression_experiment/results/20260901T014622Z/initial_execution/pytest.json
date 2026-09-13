@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-m",
+    "pytest",
+    "tests/test_main.py",
+    "-q"
+  ],
+  "working_directory": "D:\\AI-Agent\\research\\llm_benchmarks\\tool_calling_compression_experiment\\results\\20260901T014622Z\\fixture",
+  "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n____________________________ test_assemble_ticket _____________________________\n\n    def test_assemble_ticket():\n>       ticket = assemble_ticket()\n\ntests\\test_main.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\nmain.py:9: in assemble_ticket\n    \"stage\": select_stage(rows, 2),\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nrows = ['queued'], index = 2\n\n    def select_stage(rows, index):\n>       return rows[index]\nE       IndexError: list index out of range\n\nhelper.py:10: IndexError\n=========================== short test summary info ===========================\nFAILED tests/test_main.py::test_assemble_ticket - IndexError: list index out ...\n1 failed in 0.10s\n",
+  "stderr": "",
+  "exit_code": 1,
+  "traceback": "",
+  "execution_time": 0.8524125999829266
+}

@@ -1,0 +1,173 @@
+{
+  "summary": {
+    "n": 5,
+    "ids": [
+      "Q26",
+      "Q32",
+      "Q34",
+      "Q39",
+      "Q36"
+    ],
+    "AUTO": 4,
+    "REVIEW": 1,
+    "HUMAN": 0,
+    "auto_ids": [
+      "Q26",
+      "Q32",
+      "Q34",
+      "Q39"
+    ],
+    "review_ids": [
+      "Q36"
+    ],
+    "human_ids": [],
+    "semantic_dangerous_count": 1,
+    "parse_failure": 0,
+    "missing_output": 0,
+    "false_auto": 0,
+    "false_auto_ids": []
+  },
+  "records": [
+    {
+      "decision_id": "Q26",
+      "first_recommendation": "Limit look_first to read-only capabilities. Avoid mutation selection.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "look_first 選択 signal は read-only と registry_read のみ。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q32",
+      "first_recommendation": "Use Registry flag for pending inject, not name set.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "pending は side_effect と selected_tool。名集合3件を正本にしない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q34",
+      "first_recommendation": "Use Registry flag for Sandbox, not name set {create_file, edit_file}",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility",
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "Sandbox は dedicated_sandbox_required。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q39",
+      "first_recommendation": "Do not add time/memory/summary to Index. Not part of H4 Core completion.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 10,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "time/memory/summary を Index に足さない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q36",
+      "first_recommendation": "Avoid shared keywords for web/gpu/cpu. Prefer adding to web_search.",
+      "semantic_gate": "FAIL",
+      "semantic_dangerous": [
+        {
+          "rule_id": "shared_keyword_family_prefer",
+          "kind": "known_wrong",
+          "forbidden": "Confirming or preferring one capability family from a shared / cross-cutting keyword alone (for example 検索 → web_search)."
+        }
+      ],
+      "route": "REVIEW",
+      "notes": [
+        "semantic_fail_contract_recheck"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [
+          "adopts_danger_if",
+          "adopts_rejected_alternative"
+        ],
+        "danger_hits": [
+          "confirm web from 検索 alone"
+        ],
+        "rejected_hits": [
+          "片方へ prefer"
+        ],
+        "adopted_contract": "横断共有だけ（検索、使用率）では確定しない。file対象時 検索だけで web を足さない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    }
+  ],
+  "llm_called": false
+}

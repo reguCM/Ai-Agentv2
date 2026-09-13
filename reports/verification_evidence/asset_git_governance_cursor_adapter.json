@@ -1,0 +1,114 @@
+{
+  "schema_version": "1",
+  "verification_id": "ve_20260911T222954161590Z_git_governance_cursor_adapter",
+  "asset_id": "git_governance_cursor_adapter",
+  "verified_at": "2026-09-11T22:29:55.086001+00:00",
+  "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+  "verification_method": "git_governance_post_g6_closure_reverify",
+  "resolved_watch_paths": [
+    ".cursor/rules/git-governance-adapter.mdc",
+    "ai_tool/policy/git_governance.json",
+    "docs/GIT_OPERATION_POLICY.md",
+    "tests/ai_tool/policy/test_git_governance.py",
+    "tests/ai_tool/policy/test_git_governance_adapters.py",
+    "tests/ai_tool/policy/test_git_governance_drift.py",
+    "tests/tools/test_git_guard_governance_alignment.py",
+    "ai_tool/policy/development_policy.json"
+  ],
+  "watch_snapshots": [
+    {
+      "path": ".cursor/rules/git-governance-adapter.mdc",
+      "existence": true,
+      "content_fingerprint": "sha256:60c3935e607f519742d4349f2cca7786df5592772eabc282fc9fa828f957fb44",
+      "git_state_if_available": {
+        "path": ".cursor/rules/git-governance-adapter.mdc",
+        "tracked": false,
+        "porcelain": "?? .cursor/rules/git-governance-adapter.mdc",
+        "index_status": "??"
+      }
+    },
+    {
+      "path": "ai_tool/policy/git_governance.json",
+      "existence": true,
+      "content_fingerprint": "sha256:12e974606b6b8850bbbe169d876a06d4c183efefd309c91a996e641cbd05f17e",
+      "git_state_if_available": {
+        "path": "ai_tool/policy/git_governance.json",
+        "tracked": false,
+        "porcelain": "?? ai_tool/policy/git_governance.json",
+        "index_status": "??"
+      }
+    },
+    {
+      "path": "docs/GIT_OPERATION_POLICY.md",
+      "existence": true,
+      "content_fingerprint": "sha256:8fa94c449f83d853739915308dfbb01f15103e4b917c4e5fd498a5dd7f8c921e",
+      "git_state_if_available": {
+        "path": "docs/GIT_OPERATION_POLICY.md",
+        "tracked": true,
+        "porcelain": "M docs/GIT_OPERATION_POLICY.md",
+        "index_status": "M"
+      }
+    },
+    {
+      "path": "tests/ai_tool/policy/test_git_governance.py",
+      "existence": true,
+      "content_fingerprint": "sha256:2a1e777293e5ad16d4d9784e28f7bc5156b4333e47ac4646afcc895e03bdf2d9",
+      "git_state_if_available": {
+        "path": "tests/ai_tool/policy/test_git_governance.py",
+        "tracked": false,
+        "porcelain": "?? tests/ai_tool/policy/test_git_governance.py",
+        "index_status": "??"
+      }
+    },
+    {
+      "path": "tests/ai_tool/policy/test_git_governance_adapters.py",
+      "existence": true,
+      "content_fingerprint": "sha256:43ebe81b4a01b55c2d19f2fc9a4469f2234bb9eef01d0dd4c74438f44a30b8d4",
+      "git_state_if_available": {
+        "path": "tests/ai_tool/policy/test_git_governance_adapters.py",
+        "tracked": false,
+        "porcelain": "?? tests/ai_tool/policy/test_git_governance_adapters.py",
+        "index_status": "??"
+      }
+    },
+    {
+      "path": "tests/ai_tool/policy/test_git_governance_drift.py",
+      "existence": true,
+      "content_fingerprint": "sha256:4e0f90639b006f4ae9e6912039239ef2e2d5397afae1d1b3ec8d1d3e41b43b3d",
+      "git_state_if_available": {
+        "path": "tests/ai_tool/policy/test_git_governance_drift.py",
+        "tracked": false,
+        "porcelain": "?? tests/ai_tool/policy/test_git_governance_drift.py",
+        "index_status": "??"
+      }
+    },
+    {
+      "path": "tests/tools/test_git_guard_governance_alignment.py",
+      "existence": true,
+      "content_fingerprint": "sha256:05bdf89ed0cd60695ea47f5fb3e80bfd55d01155e6e047005a9bc2d08e98a2f5",
+      "git_state_if_available": {
+        "path": "tests/tools/test_git_guard_governance_alignment.py",
+        "tracked": false,
+        "porcelain": "?? tests/tools/test_git_guard_governance_alignment.py",
+        "index_status": "??"
+      }
+    },
+    {
+      "path": "ai_tool/policy/development_policy.json",
+      "existence": true,
+      "content_fingerprint": "sha256:011e8466f19fbed7b9d7f183e81a3aa844b02891ef27fcb060f4b21e4bf60f97",
+      "git_state_if_available": {
+        "path": "ai_tool/policy/development_policy.json",
+        "tracked": true,
+        "porcelain": "M ai_tool/policy/development_policy.json",
+        "index_status": "M"
+      }
+    }
+  ],
+  "closure_phase": "post_g6_human_approval_packet",
+  "source_audit": {
+    "label": "git_governance_post_g6_closure_reverify",
+    "g5_verdict": "CONSISTENT_WITH_KNOWN_GAPS",
+    "registry_freshness_unchanged": true
+  }
+}

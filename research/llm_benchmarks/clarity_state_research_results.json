@@ -1,0 +1,408 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-08-19T02:54:40.603126+00:00",
+      "note": "Clarity問答由来の STATE を Research へ。最初からSTATEがあるベンチではない。",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "pass": false,
+      "ok": false,
+      "user_state": {
+        "ok": true,
+        "checks": [
+          {
+            "key": "status.meaning",
+            "ok": true,
+            "value": "Windowsのメモリ使用率",
+            "source": "user"
+          },
+          {
+            "key": "status.unit",
+            "ok": true,
+            "value": "%",
+            "source": "user"
+          },
+          {
+            "key": "status.range",
+            "ok": true,
+            "value": "0-100",
+            "source": "user"
+          }
+        ]
+      },
+      "in_research": {
+        "ok": true,
+        "prompts": {
+          "research": {
+            "ok": true,
+            "has_state": true,
+            "has_meaning": true,
+            "has_user_source": true,
+            "state_before_materials": true
+          },
+          "judge": {
+            "ok": true,
+            "has_state": true,
+            "has_meaning": true,
+            "has_user_source": true,
+            "state_before_materials": true,
+            "sample_in_materials": true,
+            "meaning_not_only_from_materials": true
+          }
+        }
+      },
+      "meaning": {
+        "ok": false,
+        "trials": [
+          {
+            "n": 1,
+            "ok": false,
+            "pass": false,
+            "error": null,
+            "labels": {
+              "recognized_memory_usage": false,
+              "recognized_tool_status": true,
+              "unit_percent": true,
+              "generic_status": false,
+              "reason_class": "state_based"
+            },
+            "answer": "%",
+            "reason": "The tool returned a value of 43.2, and the question specifically asks about the unit of this value. Based on the confirmed status.unit from the user's decision, the unit is a percentage.",
+            "timing": {
+              "total_seconds": 12.7,
+              "llm_seconds": 12.7,
+              "machine_seconds": 0.0,
+              "research_seconds": 0.0,
+              "judge_seconds": 0.0,
+              "implementation_seconds": 0.0,
+              "repair_seconds": 0.0,
+              "validation_seconds": 0.0,
+              "llm_calls": 1
+            }
+          },
+          {
+            "n": 2,
+            "ok": true,
+            "pass": true,
+            "error": null,
+            "labels": {
+              "recognized_memory_usage": true,
+              "recognized_tool_status": true,
+              "unit_percent": true,
+              "generic_status": false,
+              "reason_class": "state_based"
+            },
+            "answer": "%",
+            "reason": "The tool returned a value of 43.2, and the question asked for the unit of this value. The unit is '%', which is the standard unit for memory usage in percentage terms.",
+            "timing": {
+              "total_seconds": 0.7,
+              "llm_seconds": 0.7,
+              "machine_seconds": 0.0,
+              "research_seconds": 0.0,
+              "judge_seconds": 0.0,
+              "implementation_seconds": 0.0,
+              "repair_seconds": 0.0,
+              "validation_seconds": 0.0,
+              "llm_calls": 1
+            }
+          },
+          {
+            "n": 3,
+            "ok": true,
+            "pass": true,
+            "error": null,
+            "labels": {
+              "recognized_memory_usage": true,
+              "recognized_tool_status": true,
+              "unit_percent": true,
+              "generic_status": false,
+              "reason_class": "state_based"
+            },
+            "answer": "%",
+            "reason": "The tool returned a value of 43.2, and the question asked for the unit of this value. The unit is '%', which is the standard unit for memory usage in percentage terms.",
+            "timing": {
+              "total_seconds": 0.7,
+              "llm_seconds": 0.7,
+              "machine_seconds": 0.0,
+              "research_seconds": 0.0,
+              "judge_seconds": 0.0,
+              "implementation_seconds": 0.0,
+              "repair_seconds": 0.0,
+              "validation_seconds": 0.0,
+              "llm_calls": 1
+            }
+          }
+        ]
+      },
+      "not_overwritten": {
+        "ok": true,
+        "checks": [
+          {
+            "key": "status.meaning",
+            "ok": true
+          },
+          {
+            "key": "status.unit",
+            "ok": true
+          },
+          {
+            "key": "status.range",
+            "ok": true
+          }
+        ]
+      },
+      "state": {
+        "task": "Windowsのメモリを取得するToolを作って",
+        "facts": [],
+        "decisions": [
+          {
+            "key": "request.metric",
+            "value": "使用率",
+            "source": "user",
+            "confidence": "confirmed"
+          },
+          {
+            "key": "status.meaning",
+            "value": "Windowsのメモリ使用率",
+            "source": "user",
+            "confidence": "confirmed"
+          },
+          {
+            "key": "status.unit",
+            "value": "%",
+            "source": "user",
+            "confidence": "confirmed"
+          },
+          {
+            "key": "status.range",
+            "value": "0-100",
+            "source": "user",
+            "confidence": "confirmed"
+          }
+        ],
+        "selected_findings": [],
+        "constraints": [],
+        "unresolved": []
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:58:44.793468+00:00",
+      "note": "Clarity問答由来の STATE を Research へ。最初からSTATEがあるベンチではない。",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "pass": true,
+      "ok": true,
+      "user_state": {
+        "ok": true,
+        "checks": [
+          {
+            "key": "status.meaning",
+            "ok": true,
+            "value": "Windowsのメモリ使用率",
+            "source": "user"
+          },
+          {
+            "key": "status.unit",
+            "ok": true,
+            "value": "%",
+            "source": "user"
+          },
+          {
+            "key": "status.range",
+            "ok": true,
+            "value": "0-100",
+            "source": "user"
+          }
+        ]
+      },
+      "in_research": {
+        "ok": true,
+        "prompts": {
+          "research": {
+            "ok": true,
+            "has_state": true,
+            "has_meaning": true,
+            "has_user_source": true,
+            "state_before_materials": true
+          },
+          "judge": {
+            "ok": true,
+            "has_state": true,
+            "has_meaning": true,
+            "has_user_source": true,
+            "state_before_materials": true,
+            "sample_in_materials": true,
+            "meaning_not_only_from_materials": true
+          }
+        }
+      },
+      "meaning": {
+        "ok": true,
+        "trials": [
+          {
+            "n": 1,
+            "ok": true,
+            "pass": true,
+            "error": null,
+            "labels": {
+              "recognized_memory_usage": true,
+              "recognized_tool_status": true,
+              "unit_percent": true,
+              "generic_status": false,
+              "reason_class": "state_based"
+            },
+            "held": {
+              "ok": true,
+              "memory": true,
+              "unit": true,
+              "state_based": true,
+              "used_state_keys": [
+                "status.unit",
+                "status.range",
+                "status.meaning",
+                "tool.return_value.status"
+              ]
+            },
+            "answer": "43.2 は Windowsのメモリ使用率を表しており、単位は % です。",
+            "reason": "ツールが返した値は 43.2 であり、これは Windowsのメモリ使用率を表しています。また、単位はパーセント（%）です。",
+            "timing": {
+              "total_seconds": 5.8,
+              "llm_seconds": 5.8,
+              "machine_seconds": 0.0,
+              "research_seconds": 0.0,
+              "judge_seconds": 0.0,
+              "implementation_seconds": 0.0,
+              "repair_seconds": 0.0,
+              "validation_seconds": 0.0,
+              "llm_calls": 1
+            }
+          },
+          {
+            "n": 2,
+            "ok": true,
+            "pass": true,
+            "error": null,
+            "labels": {
+              "recognized_memory_usage": true,
+              "recognized_tool_status": true,
+              "unit_percent": true,
+              "generic_status": false,
+              "reason_class": "state_based"
+            },
+            "held": {
+              "ok": true,
+              "memory": true,
+              "unit": true,
+              "state_based": true,
+              "used_state_keys": [
+                "task",
+                "tool",
+                "question"
+              ]
+            },
+            "answer": "このToolが返した 43.2 は Windowsのメモリ使用率を表しており、単位は % です。",
+            "reason": "ユーザーが要求したメトリクスであるメモリ使用率がToolによって返され、その値は 43.2 であり、単位はパーセント（%）です。",
+            "timing": {
+              "total_seconds": 1.4,
+              "llm_seconds": 1.4,
+              "machine_seconds": 0.0,
+              "research_seconds": 0.0,
+              "judge_seconds": 0.0,
+              "implementation_seconds": 0.0,
+              "repair_seconds": 0.0,
+              "validation_seconds": 0.0,
+              "llm_calls": 1
+            }
+          },
+          {
+            "n": 3,
+            "ok": true,
+            "pass": true,
+            "error": null,
+            "labels": {
+              "recognized_memory_usage": true,
+              "recognized_tool_status": true,
+              "unit_percent": true,
+              "generic_status": false,
+              "reason_class": "state_based"
+            },
+            "held": {
+              "ok": true,
+              "memory": true,
+              "unit": true,
+              "state_based": true,
+              "used_state_keys": [
+                "task",
+                "tool",
+                "question"
+              ]
+            },
+            "answer": "このToolが返した 43.2 は Windowsのメモリ使用率を表しており、単位は % です。",
+            "reason": "ユーザーが要求したメトリクスであるメモリ使用率がToolによって返され、その値は 43.2 であり、単位はパーセント（%）です。",
+            "timing": {
+              "total_seconds": 1.4,
+              "llm_seconds": 1.4,
+              "machine_seconds": 0.0,
+              "research_seconds": 0.0,
+              "judge_seconds": 0.0,
+              "implementation_seconds": 0.0,
+              "repair_seconds": 0.0,
+              "validation_seconds": 0.0,
+              "llm_calls": 1
+            }
+          }
+        ]
+      },
+      "not_overwritten": {
+        "ok": true,
+        "checks": [
+          {
+            "key": "status.meaning",
+            "ok": true
+          },
+          {
+            "key": "status.unit",
+            "ok": true
+          },
+          {
+            "key": "status.range",
+            "ok": true
+          }
+        ]
+      },
+      "state": {
+        "task": "Windowsのメモリを取得するToolを作って",
+        "facts": [],
+        "decisions": [
+          {
+            "key": "request.metric",
+            "value": "使用率",
+            "source": "user",
+            "confidence": "confirmed"
+          },
+          {
+            "key": "status.meaning",
+            "value": "Windowsのメモリ使用率",
+            "source": "user",
+            "confidence": "confirmed"
+          },
+          {
+            "key": "status.unit",
+            "value": "%",
+            "source": "user",
+            "confidence": "confirmed"
+          },
+          {
+            "key": "status.range",
+            "value": "0-100",
+            "source": "user",
+            "confidence": "confirmed"
+          }
+        ],
+        "selected_findings": [],
+        "constraints": [],
+        "unresolved": []
+      }
+    }
+  ]
+}

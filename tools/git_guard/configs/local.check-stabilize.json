@@ -1,0 +1,21 @@
+{
+  "repo": ".",
+  "allow_branches": [
+    "stabilize/*",
+    "wip/*",
+    "sandbox/*",
+    "promote/*"
+  ],
+  "deny_path_globs": [
+    ".env",
+    "**/.env",
+    "**/secrets/**",
+    "**/*.pem",
+    "**/credentials.json"
+  ],
+  "forbid_overlap_refs": [],
+  "human_gate_actions": [
+    "push",
+    "merge"
+  ]
+}

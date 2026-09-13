@@ -1,0 +1,379 @@
+{
+  "experiment": "problem_analysis_context_split",
+  "note": "Split Failure / traceback / source / conversation. Not FA. Prompt fixed. No invented traceback/source. F5 conversation copied from previous context experiment fixture.",
+  "at": "2026-09-01T00:16:27.036967+00:00",
+  "prompt_header": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.",
+  "conditions": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5"
+  ],
+  "models": [
+    "deepseek-coder-v2:16b",
+    "qwen3:14b"
+  ],
+  "models_run": [
+    {
+      "model": "deepseek-coder-v2:16b",
+      "cases": [
+        {
+          "id": "A_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1207,
+          "thinking_observed": false
+        },
+        {
+          "id": "A_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1437,
+          "thinking_observed": false
+        },
+        {
+          "id": "A_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1607,
+          "thinking_observed": false
+        },
+        {
+          "id": "A_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 735,
+          "thinking_observed": false
+        },
+        {
+          "id": "A_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 952,
+          "thinking_observed": false
+        },
+        {
+          "id": "B_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1958,
+          "thinking_observed": false
+        },
+        {
+          "id": "B_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1360,
+          "thinking_observed": false
+        },
+        {
+          "id": "B_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1185,
+          "thinking_observed": false
+        },
+        {
+          "id": "B_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1278,
+          "thinking_observed": false
+        },
+        {
+          "id": "B_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 318,
+          "thinking_observed": false
+        },
+        {
+          "id": "C_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 873,
+          "thinking_observed": false
+        },
+        {
+          "id": "C_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1277,
+          "thinking_observed": false
+        },
+        {
+          "id": "C_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 876,
+          "thinking_observed": false
+        },
+        {
+          "id": "C_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1888,
+          "thinking_observed": false
+        },
+        {
+          "id": "C_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1107,
+          "thinking_observed": false
+        },
+        {
+          "id": "D_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1214,
+          "thinking_observed": false
+        },
+        {
+          "id": "D_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1694,
+          "thinking_observed": false
+        },
+        {
+          "id": "D_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1289,
+          "thinking_observed": false
+        },
+        {
+          "id": "D_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 2152,
+          "thinking_observed": false
+        },
+        {
+          "id": "D_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1030,
+          "thinking_observed": false
+        },
+        {
+          "id": "E_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 221,
+          "thinking_observed": false
+        },
+        {
+          "id": "E_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 2104,
+          "thinking_observed": false
+        },
+        {
+          "id": "E_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 809,
+          "thinking_observed": false
+        },
+        {
+          "id": "E_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 383,
+          "thinking_observed": false
+        },
+        {
+          "id": "E_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 552,
+          "thinking_observed": false
+        }
+      ]
+    },
+    {
+      "model": "qwen3:14b",
+      "cases": [
+        {
+          "id": "A_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 957,
+          "thinking_observed": true
+        },
+        {
+          "id": "A_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1167,
+          "thinking_observed": true
+        },
+        {
+          "id": "A_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 285,
+          "thinking_observed": true
+        },
+        {
+          "id": "A_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 509,
+          "thinking_observed": true
+        },
+        {
+          "id": "A_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 460,
+          "thinking_observed": true
+        },
+        {
+          "id": "B_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 782,
+          "thinking_observed": true
+        },
+        {
+          "id": "B_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 601,
+          "thinking_observed": true
+        },
+        {
+          "id": "B_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 619,
+          "thinking_observed": true
+        },
+        {
+          "id": "B_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 952,
+          "thinking_observed": true
+        },
+        {
+          "id": "B_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 836,
+          "thinking_observed": true
+        },
+        {
+          "id": "C_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 709,
+          "thinking_observed": true
+        },
+        {
+          "id": "C_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1055,
+          "thinking_observed": true
+        },
+        {
+          "id": "C_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1197,
+          "thinking_observed": true
+        },
+        {
+          "id": "C_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1123,
+          "thinking_observed": true
+        },
+        {
+          "id": "C_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 375,
+          "thinking_observed": true
+        },
+        {
+          "id": "D_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1457,
+          "thinking_observed": true
+        },
+        {
+          "id": "D_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1537,
+          "thinking_observed": true
+        },
+        {
+          "id": "D_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1502,
+          "thinking_observed": true
+        },
+        {
+          "id": "D_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1656,
+          "thinking_observed": true
+        },
+        {
+          "id": "D_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 552,
+          "thinking_observed": true
+        },
+        {
+          "id": "E_F1",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1207,
+          "thinking_observed": true
+        },
+        {
+          "id": "E_F2",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1501,
+          "thinking_observed": true
+        },
+        {
+          "id": "E_F3",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1696,
+          "thinking_observed": true
+        },
+        {
+          "id": "E_F4",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 1629,
+          "thinking_observed": true
+        },
+        {
+          "id": "E_F5",
+          "call_ok": true,
+          "error": null,
+          "raw_chars": 568,
+          "thinking_observed": true
+        }
+      ]
+    }
+  ]
+}

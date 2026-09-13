@@ -1,0 +1,41 @@
+{
+  "unresolved_regions": [
+    {
+      "id": "ui_design",
+      "title": "ユーザーインターフェース設計",
+      "text": "画面レイアウト・色・UI要素の詳細が未確定",
+      "goal_impact": "medium",
+      "human_intent_required": true,
+      "human_impact": "high",
+      "rollback_impact": "high",
+      "cross_cutting_impact": "medium",
+      "ai_decidable": false,
+      "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+    },
+    {
+      "id": "resolution_settings",
+      "title": "解像度設定",
+      "text": "ゲームウィンドウのサイズやスケーリング方法が未確定",
+      "goal_impact": "low",
+      "human_intent_required": false,
+      "human_impact": "medium",
+      "rollback_impact": "low",
+      "cross_cutting_impact": "low",
+      "ai_decidable": true,
+      "why": "Pygameのデフォルト設定やPC環境に合わせてAIが自動的に決定可能"
+    }
+  ],
+  "comparison": "UI設計はユーザー体験に直接影響するが人間の意図が必要。解像度設定はAIが自動決定可能で手戻りリスクが低い。Goal達成への影響はUI設計がやや高いが、実装可能性では解像度設定が優先。",
+  "next": {
+    "id": "resolution_settings",
+    "action": "internal_ai_decision",
+    "reason": "AIが自動決定可能で手戻りリスクが低く、実装の早期進捗に寄与",
+    "ai_decision": {
+      "id": "resolution_settings",
+      "title": "解像度設定",
+      "value": "800x600 (Pygameのデフォルトスケーリング)",
+      "reason": "PC環境に適した標準解像度で、Pygameのデフォルト設定と互換性がある",
+      "evidence": "PygameのドキュメントおよびWindows 10環境の一般的なゲーム解像度を参考"
+    }
+  }
+}

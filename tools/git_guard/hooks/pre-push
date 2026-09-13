@@ -1,0 +1,26 @@
+#!/bin/sh
+# Git Guard pre-push — in-repo canonical hook (see install-hooks.md / DEPLOYED.md)
+set -e
+TOP=$(git rev-parse --show-toplevel)
+GUARD="$TOP/tools/git_guard/guard.py"
+CFG="$TOP/tools/git_guard/configs/ai-agent.pre-push.json"
+if [ ! -f "$GUARD" ]; then
+  echo "git-guard pre-push: FAIL - in-repo guard missing: $GUARD" >&2
+  exit 1
+fi
+if [ ! -f "$CFG" ]; then
+  echo "git-guard pre-push: FAIL - config missing: $CFG" >&2
+  exit 1
+fi
+PY="${PYTHON:-python}"
+remote_name="${1:-origin}"
+push_ref_args=""
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [ -z "$local_ref" ] && [ -z "$local_sha" ] && [ -z "$remote_ref" ] && [ -z "$remote_sha" ]; then
+    continue
+  fi
+  push_ref_args="$push_ref_args --push-ref ${local_ref}|${local_sha}|${remote_ref}|${remote_sha}"
+done
+# shellcheck disable=SC2086
+exec "$PY" "$GUARD" --config "$CFG" \
+  --action push --target-remote "$remote_name" $push_ref_args

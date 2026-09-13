@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local Agent</title>
+  <link rel="stylesheet" href="/app.css?v=024">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="top-row primary">
+        <div class="top-left">
+          <div class="brand-line">
+            <h1>Local Agent</h1>
+            <span class="sub">ブラウザから Local Agent に話しかけ、実際の処理を確認する</span>
+          </div>
+          <nav class="workspace-tabs" id="wsTabs">
+            <button type="button" class="active" data-ws="chat">会話</button>
+            <button type="button" data-ws="processing">処理</button>
+            <button type="button" data-ws="development">開発</button>
+          </nav>
+        </div>
+        <div class="model-bar" aria-label="使用モデル">
+          <div class="current-model" id="currentModel">使用モデル: （未選択）</div>
+          <div class="picker">
+            <button type="button" id="modelBtn" aria-haspopup="listbox" aria-expanded="false">モデル選択</button>
+            <ul class="menu hidden" id="modelMenu" role="listbox"></ul>
+          </div>
+          <button type="button" id="newChat">新規チャット</button>
+        </div>
+        <div class="top-right">
+          <div class="who" id="who">
+            <span><span class="mark on"></span>Local Agent</span>
+            <span class="who-sep">·</span>
+            <span><span class="mark off"></span>Cursor 未接続</span>
+          </div>
+        </div>
+      </div>
+      <div class="top-row secondary">
+        <div class="status" id="ollamaStatus"></div>
+        <div class="caps" id="caps"></div>
+        <div class="meta" id="meta">Session: 未開始</div>
+        <details class="test-panel" id="testPanel">
+          <summary>Test</summary>
+          <div class="test-controls">
+            <label><input type="checkbox" id="testMode"> Test Mode</label>
+            <fieldset id="testRuns">
+              <legend>Runs</legend>
+              <label><input type="radio" name="testRuns" value="1" checked>1</label>
+              <label><input type="radio" name="testRuns" value="5">5</label>
+              <label><input type="radio" name="testRuns" value="10">10</label>
+            </fieldset>
+            <strong id="testModeStatus">TEST MODE OFF</strong>
+          </div>
+          <div id="testProgress" class="test-progress">テスト未実行</div>
+          <div id="testResults" class="test-results"></div>
+        </details>
+      </div>
+    </header>
+
+    <div id="wsChat" class="ws">
+      <main id="log" class="log"></main>
+    </div>
+
+    <div id="wsProcessing" class="ws hidden">
+      <p class="dev-note">これは Local Agent の会話処理です。Cursor のライブ状態ではありません。</p>
+      <div id="processingBody">まだ処理がありません。</div>
+      <div class="matrix-panel" id="matrixPanel">
+        <p class="dev-sep">Matrix（Chat 回答経路ではない。LLM なし）</p>
+        <p class="dev-note">Web → 抽出 → 保存 → 機械検索。質問利用は Chat 通常経路ではない。照合は正しさを確定しない。</p>
+        <div class="matrix-actions">
+          <input id="matrixQuery" type="text" value="RTX 3060" aria-label="Matrix ingest query">
+          <button type="button" id="matrixIngest">Web → Matrix</button>
+          <input id="matrixSearchQ" type="text" value="RTX 3060" aria-label="Matrix search query">
+          <button type="button" id="matrixSearch">機械検索</button>
+          <input id="matrixEntity" type="text" value="RTX 3060" aria-label="Matrix entity">
+          <input id="matrixAttribute" type="text" value="VRAM capacity" aria-label="Matrix attribute">
+          <button type="button" id="matrixAttrSearch">属性検索</button>
+          <input id="matrixAskQ" type="text" value="RTX 3060のVRAM容量を教えて" aria-label="Matrix ask question">
+          <label><input id="matrixAskFallback" type="checkbox" checked> 不足時に Web 再調査</label>
+          <label><input id="matrixAskLlm" type="checkbox"> LLM で整理</label>
+          <button type="button" id="matrixAsk">Matrix で答える</button>
+        </div>
+        <div id="matrixBody">
+          <div id="matrixPipeline">Matrix ingest: 未実行</div>
+          <div id="matrixAskResult">Matrix ask: 未実行</div>
+          <div id="matrixSearchResult"></div>
+          <div id="matrixVerify">Matrix verify: 未実行</div>
+          <div id="matrixTrace">Matrix trace: 未実行</div>
+        </div>
+      </div>
+      <div class="matrix-panel" id="specPanel">
+        <p class="dev-sep">仕様候補（仮仕様の観測。完成・学習・自動改善ではない）</p>
+        <p class="dev-note">LLM案は追記保存。人間修正と問題記録は別レコード。上書きしない。正しさは自動判定しない。learning_method は NOT_DETERMINED。</p>
+        <div class="matrix-actions">
+          <input id="specRequest" type="text" value="CPU温度を取得するToolを作って" aria-label="Specification proposal request">
+          <button type="button" id="specPropose">仕様候補を提案</button>
+          <input id="specParentId" type="text" placeholder="parent proposal_id" aria-label="Parent proposal id">
+          <input id="specRevisionReason" type="text" placeholder="修正理由" aria-label="Revision reason">
+          <button type="button" id="specRevise">人間修正を追記</button>
+          <input id="specProblem" type="text" placeholder="発覚した問題" aria-label="Problem description">
+          <button type="button" id="specProblemBtn">問題を記録</button>
+        </div>
+        <div id="specBody">仕様候補: 未実行</div>
+      </div>
+    </div>
+
+    <div id="wsDevelopment" class="ws hidden">
+      <p class="dev-note">Cursor を監視しているのではありません。残った成果物を案件単位で見ます。</p>
+      <p class="live-status" id="cursorLive">Cursor live status: NOT OBSERVED</p>
+      <div class="dev-toolbar">
+        <label>案件
+          <select id="caseFilter">
+            <option value="all">全案件</option>
+            <option value="latest">最新</option>
+            <option value="cursor">Cursor</option>
+            <option value="tool">Tool作成</option>
+            <option value="ui">UI</option>
+            <option value="test">Test</option>
+            <option value="research">Research</option>
+            <option value="matrix">Matrix</option>
+          </select>
+        </label>
+        <button type="button" id="timelineReload">再読み込み</button>
+        <button type="button" id="caseBack" class="hidden">一覧へ戻る</button>
+      </div>
+      <div id="timelineBody" class="timeline">読み込み中…</div>
+      <details class="dev-panel" id="devPanel">
+        <summary>成果物を個別に見る</summary>
+        <nav class="dev-tabs" id="devTabs">
+          <button type="button" class="active" data-tab="run">Run</button>
+          <button type="button" data-tab="report">Report</button>
+          <button type="button" data-tab="git">Git</button>
+          <button type="button" data-tab="test">Test</button>
+        </nav>
+        <div class="dev-body" id="devBody">読み込み中…</div>
+      </details>
+    </div>
+
+    <form id="form" class="composer">
+      <textarea id="input" rows="2" autocomplete="off" placeholder="メッセージを入力（Enter で送信、Shift+Enter で改行）"></textarea>
+      <button type="submit" id="send">送信</button>
+    </form>
+  </div>
+  <script src="/app.js?v=024"></script>
+</body>
+</html>

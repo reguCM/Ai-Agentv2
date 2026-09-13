@@ -1,0 +1,92 @@
+{
+  "kind": "observed_facts",
+  "experiment_workspace": "D:\\AI-Agent-worktrees\\current-dev\\research\\grill_observation_v0\\completion_gap_v0\\workspace",
+  "files_in_workspace": [
+    "__init__.py",
+    "collision.py",
+    "line_clear.py",
+    "movement.py",
+    "tetromino.py",
+    "window_loop.py"
+  ],
+  "python_modules": [
+    {
+      "file": "__init__.py",
+      "functions": [],
+      "simple_constants": {}
+    },
+    {
+      "file": "collision.py",
+      "functions": [
+        "empty_grid",
+        "occupied_cells",
+        "collides"
+      ],
+      "simple_constants": {
+        "GRID_WIDTH": 10,
+        "GRID_HEIGHT": 20
+      }
+    },
+    {
+      "file": "line_clear.py",
+      "functions": [
+        "clear_full_lines",
+        "add_score"
+      ],
+      "simple_constants": {}
+    },
+    {
+      "file": "movement.py",
+      "functions": [
+        "try_move",
+        "try_rotate",
+        "fall_due"
+      ],
+      "simple_constants": {
+        "FALL_INTERVAL_MS": 500
+      }
+    },
+    {
+      "file": "tetromino.py",
+      "functions": [
+        "rotate",
+        "spawn"
+      ],
+      "simple_constants": {}
+    },
+    {
+      "file": "window_loop.py",
+      "functions": [
+        "init_window",
+        "handle_events",
+        "update",
+        "draw",
+        "run_one_iteration",
+        "shutdown",
+        "run_forever"
+      ],
+      "simple_constants": {
+        "SCREEN_WIDTH": 300,
+        "SCREEN_HEIGHT": 600
+      }
+    }
+  ],
+  "python": "3.10.11",
+  "pygame_import_ok": true,
+  "pygame_version": "2.5.0",
+  "tests": {
+    "ran": true,
+    "passed": true,
+    "stdout": "...                                                                      [100%]\n3 passed in 0.03s\n"
+  },
+  "errors": [],
+  "completed_gaps": [
+    "ゲームウィンドウの初期化と基本的なゲームループ",
+    "テトロミノの形状と初期配置の実装",
+    "衝突判定の実装",
+    "行の削除（ラインクリア）のロジック",
+    "テトロミノの落下・移動・回転"
+  ],
+  "last_completed_gap": "テトロミノの落下・移動・回転",
+  "note": "Facts from workspace files and test process. No inferred features."
+}

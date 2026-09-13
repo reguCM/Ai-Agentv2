@@ -1,0 +1,308 @@
+{
+  "research_id": "RR-ircm-20260830",
+  "requirement": "When an Agent or Tool drives an industrial robot controller, separate transport, control authority, controller state, program state, power, safety, cycle layer, and human handoff. Do not treat Universal Robots Dashboard TCP disconnect as ownership release.",
+  "topic": "Industrial robot Control Authority state model",
+  "checked_at": "2026-08-30T07:00:00+00:00",
+  "provenance": "web_research+ursim_5.15.2_measurement",
+  "technology_candidates": [
+    {
+      "name": "Universal Robots PolyScope / Dashboard Server",
+      "type": "Vendor controller",
+      "version": "5.15.2",
+      "url": "https://www.universal-robots.com/manuals/EN/HTML/SW5_20/Content/prod-usr-man/software/PolyScope/content/hamburger_menu_g5/System_remote_en.htm",
+      "source_title": "PolyScope Remote Control (SW5_20; feature present at 5.15 generation)",
+      "source_category": "official",
+      "unknowns": [
+        "Human J-2 simulation test not completed",
+        "Controller-level counted cycle API not found in Dashboard table"
+      ]
+    },
+    {
+      "name": "ISO 10218-1",
+      "type": "Safety standard",
+      "version": "2011 (do not apply 2025 Direct/External wording to UR 5.15.2)",
+      "url": "https://www.iso.org/standard/51330.html",
+      "source_title": "ISO 10218-1:2011 industrial robots — single point of control / local control",
+      "source_category": "official"
+    }
+  ],
+  "version_facts": [
+    {
+      "technology": "UR Dashboard set/clear/get operational mode",
+      "version": "commands since 5.0.0; get operational mode since 5.6.0",
+      "applies_to": "5.15.2",
+      "does_not_apply": "PolyScope 5.17 default security / System admin lock"
+    },
+    {
+      "technology": "ISO 10218-1 terminology",
+      "version": "2011 local/remote + single point of control",
+      "later_revision": "2025 Direct Control / External Control (UR Safety FAQ). Not mapped onto this URSim."
+    }
+  ],
+  "environment_facts": {
+    "ursim_image": "universalrobots/ursim_e-series:5.15",
+    "ursim_version": "5.15.2",
+    "robot": "UR5",
+    "container": "ai_agent_ursim_phase_i",
+    "real_robot": "forbidden"
+  },
+  "license_facts": [],
+  "api_observations": [
+    {
+      "api": "Dashboard set operational mode automatic",
+      "result": "FOUND",
+      "note": "Locks PolyScope Manual/Automatic until clear operational mode. Survives TCP close."
+    },
+    {
+      "api": "Dashboard clear operational mode",
+      "result": "FOUND",
+      "note": "J-1 measured: No longer controlling... Current operational mode: NONE"
+    },
+    {
+      "api": "Dashboard is in remote control",
+      "result": "FOUND",
+      "note": "J-1 both before and after clear: false. Distinct from operational mode lock."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Dashboard Server Remote Control Interface e-Series",
+      "url": "https://www.universal-robots.com/manuals/EN/HTML/SW5_24/Content/prod-dashboard/Dashboard_table.htm",
+      "category": "official",
+      "note": "Command versions 5.0.0/5.6.0; used because SW5_15 HTML Dashboard table returned 404. Not a 5.24-only feature."
+    },
+    {
+      "title": "PolyScope Remote Control SW5_20",
+      "url": "https://www.universal-robots.com/manuals/EN/HTML/SW5_20/Content/prod-usr-man/software/PolyScope/content/hamburger_menu_g5/System_remote_en.htm",
+      "category": "official"
+    },
+    {
+      "title": "UR Safety FAQ — ISO 10218-1:2011 vs 2025 control paradigm",
+      "url": "https://www.universal-robots.com/articles/ur/safety/safety-faq/",
+      "category": "official"
+    },
+    {
+      "title": "UR Forum — clear operational mode required after Dashboard/IO owns mode",
+      "url": "https://forum.universal-robots.com/t/operation-mode-controlled-by-dashboard-server-or-i-o/26442",
+      "category": "vendor_forum"
+    },
+    {
+      "title": "UR Forum — cannot return to Remote from Dashboard for ISO safety reasons",
+      "url": "https://forum.universal-robots.com/t/switch-back-to-remote-control-from-another-operational-mode-without-teach-pendant/18048",
+      "category": "vendor_forum"
+    },
+    {
+      "title": "SRCI tutorial Enable Remote Control on PolyScope 5.15.0",
+      "url": "https://docs.universal-robots.com/tutorials/communication-protocol-tutorials/srci-tutorials.html",
+      "category": "official"
+    },
+    {
+      "title": "FANUC External Mode Select — one mode control source",
+      "url": "https://www.fanucamerica.com/products/software/external-mode-select",
+      "category": "official"
+    },
+    {
+      "title": "Yaskawa YMConnect SetCycleMode Step/Cycle/Auto",
+      "url": "https://developer.motoman.com/en/YMConnect/ControlCommandsInterface",
+      "category": "official"
+    },
+    {
+      "title": "ABB IRC5 Product specification — ISO 10218-1 5.3.5 single point of control",
+      "url": "https://library.e.abb.com/public/77e8a6e0b66c4bde843c7994f0f7705c/3HAC050945%20PS%20Controller%20software%20IRC5%20RW%206-en.pdf",
+      "category": "official"
+    }
+  ],
+  "unknowns": [
+    "J-2 human simulation test (edit, initialize, Play, 3D, Stop) not completed — not treated as PASS",
+    "J-4 State A/B/C live ownership not measured",
+    "J-8 Remote Enable and Dashboard play/load live path skipped because J-2 is not PASS",
+    "Whether UR 5.15.2 exposes a first-class counted controller cycle",
+    "FANUC / Yaskawa / ABB / KUKA not live-measured in this project"
+  ],
+  "conflicts": [
+    {
+      "id": "ISO-2011-vs-2025",
+      "summary": "2011 local/remote vs 2025 Direct/External. 2025 wording is not applied to URSim 5.15.2."
+    },
+    {
+      "id": "UR-split-vs-KUKA-EXT",
+      "summary": "UR splits Automatic vs Remote. KUKA EXT folds automatic + external into one key."
+    },
+    {
+      "id": "transport-vs-authority",
+      "summary": "TCP disconnect does not clear UR operational mode ownership (J-1)."
+    },
+    {
+      "id": "accept-vs-execute",
+      "summary": "Dashboard command accepted is not program execution (Phase I-Live Secondary heuristic rejected)."
+    }
+  ],
+  "queries": [
+    "PolyScope 5.15 Remote Control Local Control operational mode Dashboard Server",
+    "ISO 10218-1 single point of control local pendant",
+    "FANUC T1 T2 AUTO remote local External Mode Select",
+    "Yaskawa Motoman TEACH PLAY REMOTE SetCycleMode",
+    "ABB IRC5 manual automatic single point of control",
+    "KUKA T1 T2 AUT EXT CELL.SRC EXT_START"
+  ],
+  "facet_records": [
+    {
+      "facet_id": "control_authority",
+      "working_name": "Control Authority",
+      "common_concept": "Only one source may initiate robot motion; pendant/local control blocks external motion start (ISO 10218-1:2011 5.3.5).",
+      "vendor_mapping": [
+        {"vendor": "UR 5.15.2", "terms": "Local Control / Remote Control; Enable is not the same as Remote"},
+        {"vendor": "FANUC", "terms": "Remote/Local plus T1/T2/AUTO; External Mode Select = one mode source"},
+        {"vendor": "Yaskawa", "terms": "TEACH / PLAY / REMOTE key"},
+        {"vendor": "ABB", "terms": "FlexPendant vs Automatic; System Inputs rejected in Manual"},
+        {"vendor": "KUKA", "terms": "T1/T2/AUT human; EXT = PLC/external"}
+      ],
+      "version": "ISO 2011; UR Remote Control documented in SW5_19/SW5_20",
+      "evidence": ["ISO 10218-1:2011 3.13 3.21 5.3.5", "UR SW5_20 Remote Control page", "ABB product spec citing ISO 5.3.5"],
+      "unknown": ["Non-UR vendors not live-tested"],
+      "conflicts": ["KUKA EXT vs UR split Automatic/Remote"]
+    },
+    {
+      "facet_id": "operational_mode_source",
+      "working_name": "Operational Mode Source",
+      "common_concept": "Who is allowed to change operating mode is distinct from the mode value.",
+      "vendor_mapping": [
+        {"vendor": "UR 5.15.2", "terms": "Dashboard set operational mode owns PolyScope Manual/Automatic until clear"},
+        {"vendor": "FANUC", "terms": "Physical key XOR External Mode Select XOR TP Mode Select"}
+      ],
+      "version": "UR Dashboard 5.0.0+",
+      "evidence": ["J-1 JSON AUTOMATIC then NONE after clear", "UR Dashboard table", "UR forum 26442"],
+      "unknown": [],
+      "conflicts": ["Not the same lock as Remote Control"]
+    },
+    {
+      "facet_id": "cycle_model",
+      "working_name": "Cycle layers 0-4",
+      "common_concept": "Program loop is not controller cycle is not external trigger.",
+      "vendor_mapping": [
+        {"vendor": "Yaskawa", "terms": "SetCycleMode STEP/CYCLE/AUTO"},
+        {"vendor": "FANUC", "terms": "UI Start / Prod Start / Cycle Stop"},
+        {"vendor": "ABB", "terms": "continuous vs cycle run mode; StartAtMain"},
+        {"vendor": "KUKA", "terms": "CELL.SRC loop + EXT_START + PGNO"},
+        {"vendor": "UR 5.15.2", "terms": "Dashboard play; no counted cycle command found"}
+      ],
+      "version": "vendor-specific",
+      "evidence": ["YMConnect ControlCommands", "FANUC UOP descriptions"],
+      "unknown": ["UR first-class counted cycle"],
+      "conflicts": ["LLM for-loop vs controller cycle"]
+    }
+  ],
+  "capability_observations": [
+    {
+      "id": "HUMAN_CONTROL_OWNERSHIP",
+      "phase": "J",
+      "stage": "Evidence",
+      "problem": "Agent Dashboard set operational mode blocked PolyScope Automatic to Manual after TCP close.",
+      "idea": "Treat controller ownership as a first-class facet, not a socket.",
+      "trigger": "Any Tool that calls set operational mode or equivalent vendor lock",
+      "existing_capability": "ResearchRecord + live_ursim_manager command/close; official clear operational mode",
+      "reuse_potential": "HIGH",
+      "implementation_cost": "MEDIUM",
+      "risk": "HIGH",
+      "decision": "RECORD",
+      "reason": "Measured on UR 5.15.2; ISO single point of control generalizes it. Do not implement a new Core yet."
+    },
+    {
+      "id": "ControllerOwnershipGuard",
+      "phase": "J",
+      "stage": "Candidate",
+      "problem": "Agent may start while human holds the pendant.",
+      "idea": "Snapshot authority/mode/program/safety before Agent motion commands.",
+      "trigger": "J-8 or first production-like UR Tool",
+      "existing_capability": "Dashboard get operational mode, is in remote control, robotmode, programstate",
+      "reuse_potential": "HIGH",
+      "implementation_cost": "LOW",
+      "risk": "MEDIUM",
+      "decision": "DEFER",
+      "reason": "Queryable with existing Manager. Implement after J-2/J-8 live path exists."
+    },
+    {
+      "id": "OwnershipRelease",
+      "phase": "J",
+      "stage": "Candidate",
+      "problem": "Process stop does not restore PolyScope.",
+      "idea": "Always send vendor release (UR: clear operational mode) then Local.",
+      "trigger": "Agent session end or fault",
+      "existing_capability": "Dashboard clear operational mode",
+      "reuse_potential": "HIGH",
+      "implementation_cost": "LOW",
+      "risk": "MEDIUM",
+      "decision": "DEFER",
+      "reason": "Official command already proven in J-1. Wiring into Manager is a later experimental change, not a new C3."
+    },
+    {
+      "id": "HumanHandoff",
+      "phase": "J",
+      "stage": "Candidate",
+      "problem": "Human Review during Agent ownership is blocked.",
+      "idea": "Release then request PolyScope confirmation.",
+      "trigger": "Validator live observation by a human",
+      "existing_capability": "none as a workflow",
+      "reuse_potential": "MEDIUM",
+      "implementation_cost": "MEDIUM",
+      "risk": "HIGH",
+      "decision": "DEFER",
+      "reason": "Workflow, not a Core. Needs J-2 human path."
+    },
+    {
+      "id": "StateSnapshot",
+      "phase": "J",
+      "stage": "Specification",
+      "problem": "Single status string hides facet divergence.",
+      "idea": "Record 7 facets plus mode source around Agent actions.",
+      "trigger": "Any live UR command",
+      "existing_capability": "J-1 JSON shape; ResearchRecord",
+      "reuse_potential": "HIGH",
+      "implementation_cost": "LOW",
+      "risk": "LOW",
+      "decision": "RECORD",
+      "reason": "Keep as record format. Do not create Snapshot Core."
+    },
+    {
+      "id": "CycleController",
+      "phase": "J",
+      "stage": "Candidate",
+      "problem": "Repeat N times becomes a language for-loop.",
+      "idea": "Choose cycle layer 0-4 explicitly.",
+      "trigger": "Tool requirement containing repeat/cycle/loop of a robot program",
+      "existing_capability": "none on UR Dashboard",
+      "reuse_potential": "MEDIUM",
+      "implementation_cost": "HIGH",
+      "risk": "MEDIUM",
+      "decision": "DEFER",
+      "reason": "Common on Yaskawa/FANUC/KUKA; UR 5.15.2 first-class cycle unknown."
+    },
+    {
+      "id": "IndustrialRobotControlCore",
+      "phase": "J",
+      "stage": "Proposal",
+      "problem": "Temptation to encode the model as C3 immediately.",
+      "idea": "New experimental Core for all vendors.",
+      "trigger": "Repeated live failures across vendors",
+      "existing_capability": "ResearchRecord + this spec draft",
+      "reuse_potential": "LOW",
+      "implementation_cost": "HIGH",
+      "risk": "HIGH",
+      "decision": "REJECT",
+      "reason": "C1 record is enough. No measured need for a new C3 module."
+    }
+  ],
+  "phase_results": {
+    "J-1": "PASS_AGENT",
+    "J-2": "NOT_PASS_INCOMPLETE",
+    "J-3": "RESEARCH_ONLY",
+    "J-4": "PARTIAL_STATE_D_AND_MODE_SOURCE",
+    "J-5": "NOT_RUN",
+    "J-6": "KNOWN_FROM_I_LIVE_ONLY",
+    "J-7": "NOT_RUN",
+    "J-8": "SKIPPED_J2_NOT_PASS",
+    "J-9": "SPEC_DEFINED_NOT_MEASURED"
+  },
+  "c3_decision": "NONE",
+  "production_changes": 0
+}

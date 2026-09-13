@@ -1,0 +1,43 @@
+{
+  "baseline_run": "20260909T055809Z",
+  "grounded_run": "20260909T061247Z",
+  "prompt_delta": "Grill Prompt へ【Grounding】段落のみ追加。経路・Goal・Need生成・System First/Retry・Tool公開集合は未変更。",
+  "need_same": true,
+  "system_first_same_label": "UNRESOLVED",
+  "baseline_grill_visible": "gridの構造（例: 行数、列数、ヘッダー…）とデータ種類（例: 売上、ユーザー、製品一覧）。ヘッダー例「商品名」「価格」「在庫数」。",
+  "grounded_grill_visible": "場所とアクセス方法が不明。次に確認: 場所、形式、アクセス方法。例としてファイル/DB/UI/CSV/Excel/API を列挙。",
+  "previous_completions": {
+    "商品名": "absent_in_grounded",
+    "価格": "absent_in_grounded",
+    "在庫数": "absent_in_grounded",
+    "売上": "absent_in_grounded",
+    "ユーザー": "absent_in_grounded",
+    "製品一覧": "absent_in_grounded",
+    "行数": "absent_in_grounded",
+    "列数": "absent_in_grounded",
+    "ヘッダー": "absent_in_grounded"
+  },
+  "unknown_held_as_unknown": true,
+  "extra_info_as_next_check": true,
+  "residual_examples": ["ファイル", "データベース", "UI", "CSV", "Excel", "API"],
+  "grounding_label": "GROUNDED",
+  "grounding_note": "表スキーマの未確認補完は消えた。CSV/Excel等は『例』かつ『次の確認』であり確認済み事実としては扱っていない。",
+  "system_impact": {
+    "baseline": {
+      "required_capabilities": ["workspace_file_list"],
+      "executable_tool": "list_files",
+      "next_action": {"tool": "list_files", "arguments": {"path": "."}},
+      "stop": "BLOCKED execute_exposed_tool does not expose list_files"
+    },
+    "grounded": {
+      "required_capabilities": ["workspace_file_search"],
+      "selected_tool": "search_files",
+      "next_action": null,
+      "stop": "tool_selected_arguments_incomplete"
+    }
+  },
+  "elapsed_s": {
+    "baseline": 50.696,
+    "grounded": 60.452
+  }
+}

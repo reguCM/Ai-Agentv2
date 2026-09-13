@@ -1,0 +1,122 @@
+{
+  "handoff_version": "0.1",
+  "handoff_id": "gh-20260910T094912Z-session-start-skill",
+  "status": "ready",
+  "provisional": true,
+  "created_at": "2026-09-10T09:49:12+00:00",
+  "source": {
+    "skills": [
+      "write-prd",
+      "tech-spec",
+      "planning-and-task-breakdown",
+      "goal-handoff"
+    ],
+    "documents": {
+      "prd": "docs/prds/dev-session-start-skill.md",
+      "tech_spec": "docs/tech-specs/dev-session-start-skill.md",
+      "plan": "tasks/plan.md",
+      "task_list": "tasks/todo.md"
+    },
+    "git": {
+      "branch": "dev/current",
+      "head": "8077707",
+      "worktree": "D:/AI-Agent-worktrees/dev-current"
+    }
+  },
+  "goal": {
+    "summary": "Add a thin session-start Development Skill that tells Cursor/Codex to read and follow AI_DEVELOPMENT_SESSION_START_POLICY.md for work resumption, register it provisionally in registry/skills.json, and keep Production Runtime disconnected.",
+    "original_request_excerpt": "Handoff を「使う」1 回を試しに試行する"
+  },
+  "scope": {
+    "in_scope": [
+      "Create .agents/skills/session-start/SKILL.md",
+      "Register session-start in registry/skills.json",
+      "Update PROVENANCE and registry validation test expectations"
+    ],
+    "non_goals": [
+      "Modify imported Skill bodies",
+      "Connect Handoff or session-start to Production Chat / Mission Memory",
+      "Change AI_DEVELOPMENT_SESSION_START_POLICY.md prose"
+    ],
+    "affected_paths": [
+      ".agents/skills/session-start/",
+      "registry/skills.json",
+      ".agents/skills/PROVENANCE.md",
+      "tests/registry/test_skills_registry.py"
+    ]
+  },
+  "acceptance_criteria": [
+    {
+      "id": "A1",
+      "statement": "session-start SKILL.md exists and references Session Start Policy without copying full policy text",
+      "verification": "Read .agents/skills/session-start/SKILL.md and confirm required references"
+    },
+    {
+      "id": "A2",
+      "statement": "registry/skills.json lists session-start as provisional utility skill",
+      "verification": "Validate registry/skills.json against skills.schema.json"
+    },
+    {
+      "id": "A3",
+      "statement": "Registry validation tests pass after skill registration",
+      "verification": "Run tests/registry/test_skills_registry.py"
+    }
+  ],
+  "implementation_tasks": [
+    {
+      "id": "T1",
+      "title": "Create session-start SKILL.md",
+      "acceptance": [
+        "Skill defines triggers, light check, full sync escalation, and canonical doc references",
+        "Skill does not duplicate policy prose verbatim"
+      ],
+      "verification": [
+        "Manual read of .agents/skills/session-start/SKILL.md"
+      ],
+      "dependencies": [],
+      "size": "S",
+      "maps_to_acceptance": ["A1"]
+    },
+    {
+      "id": "T2",
+      "title": "Register session-start in Skill registry",
+      "acceptance": [
+        "registry/skills.json includes session-start with status provisional and runtime_connected false",
+        "PROVENANCE.md records local provisional skill"
+      ],
+      "verification": [
+        "Validate registry/skills.json",
+        "Run tests/registry/test_skills_registry.py"
+      ],
+      "dependencies": ["T1"],
+      "size": "S",
+      "maps_to_acceptance": ["A2", "A3"]
+    }
+  ],
+  "test_plan": {
+    "pytest": [
+      "tests/registry/test_skills_registry.py",
+      "tests/ai_tool/policy/test_policy_distribution.py"
+    ],
+    "e2e": [],
+    "manual": [
+      "Confirm Handoff instance validates against registry/schema/goal_handoff.schema.json",
+      "Human reviews docs/handoffs/gh-20260910T094912Z-session-start-skill.json before status=ready"
+    ]
+  },
+  "human_gates": [
+    "git_push"
+  ],
+  "risks": [
+    {
+      "statement": "Skill and Policy drift if session-start paraphrases policy incorrectly",
+      "impact": "medium",
+      "mitigation": "Keep Skill as read-and-follow instructions with explicit canonical paths only"
+    }
+  ],
+  "open_questions": [],
+  "runtime_boundary": {
+    "production_connected": false,
+    "notes": "Dev Handoff trial packet. Production Chat / Mission Memory / Goal Completion Gate do not consume this file in v0. Implementation starts only after human sets status to ready."
+  }
+}

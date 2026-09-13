@@ -1,0 +1,42 @@
+{
+  "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\ngridの構造と内容を確認する。\n\nGrill:\n**掘り下げた未解決点:**  \ngridの構造と内容を確認するためには、gridが存在する場所（例: ファイル形式、データベース、UIコンポーネントなど）や、アクセス可能なインターフェース（例: API、ファイルパス、ユーザーインターフェース）が不明です。  \n\n**次の確認が必要な情報:**  \n- gridが存在する具体的な場所（例: どのファイル、どのデータベース、どのアプリケーション内のか）  \n- gridの形式（例: CSV、Excel、データベーステーブル、UIグリッドなど）  \n- gridにアクセスするための方法（例: ファイルパス、APIエンドポイント、ユーザー操作手順など）  \n\n**理由:**  \ngridの構造と内容を確認するには、gridがどこに存在し、どのような形式で構成されているかを把握する必要があります。これがないと、gridを検索・解析する手段が確定できません。\n",
+  "required_capabilities": [
+    "workspace_file_search"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_search",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "search_files"
+      ],
+      "selected_tool": "search_files",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "search_files"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null
+    }
+  ],
+  "tool_expectation": {
+    "generated": false,
+    "required_capability": null,
+    "expected_tool": null,
+    "expected_arguments": null,
+    "reason": null,
+    "level": "none",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "PARTIAL",
+  "action": null,
+  "stopped_at": "tool_selected_arguments_incomplete"
+}

@@ -1,0 +1,1474 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-08-19T06:00:56.278327+00:00",
+      "note": "Judge missing 後の Research 再調査。A/B/C/FAIL。④本体は回さない。",
+      "contract_phase": "research_followup_v1",
+      "pass_criterion": "A",
+      "case": "research_followup_after_verify_fail",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": true,
+      "ok": true,
+      "grades": {
+        "A": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get freephysicalmemory,totalphysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "OS get FreePhysicalMemory,TotalPhysicalMemory /format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.1,
+            "llm_seconds": 6.1,
+            "machine_seconds": 0.0,
+            "research_seconds": 6.1,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"OS get FreePhysicalMemory,TotalPhysicalMemory /format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get freephysicalmemory,totalphysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "OS get FreePhysicalMemory,TotalPhysicalMemory /format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.9,
+            "llm_seconds": 0.9,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.9,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"OS get FreePhysicalMemory,TotalPhysicalMemory /format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get freephysicalmemory,totalphysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "OS get FreePhysicalMemory,TotalPhysicalMemory /format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.9,
+            "llm_seconds": 0.9,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.9,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"OS get FreePhysicalMemory,TotalPhysicalMemory /format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T06:06:19.482553+00:00",
+      "note": "Judge missing 後の Research 再調査。A/B/C/FAIL。④本体は回さない。",
+      "contract_phase": "research_followup_v1",
+      "pass_criterion": "A",
+      "case": "research_followup_after_verify_fail",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "C": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 7.2,
+            "llm_seconds": 7.2,
+            "machine_seconds": 0.0,
+            "research_seconds": 7.2,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"powershell\",\"args\":[\"-NoProfile\",\"-NonInteractive\",\"-Command\",\"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\"question\":\"total physical memory is still unconfirmed\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.8,
+            "llm_seconds": 1.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 1.8,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"powershell\",\"args\":[\"-NoProfile\",\"-NonInteractive\",\"-Command\",\"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.8,
+            "llm_seconds": 1.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 1.8,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"powershell\",\"args\":[\"-NoProfile\",\"-NonInteractive\",\"-Command\",\"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T06:17:00.289009+00:00",
+      "note": "Judge missing 後の Research 再調査。同一固定 search_results + 機械フィルタ。④本体は回さない。",
+      "contract_phase": "research_followup_v2",
+      "pass_criterion": "A",
+      "baseline": "research/llm_benchmarks/research_followup_baseline_c.json",
+      "query_snapshot": "research/llm_benchmarks/research_followup_query_snapshot.json",
+      "case": "research_followup_after_verify_fail",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "filter": {
+        "keywords": [
+          "total physical memory",
+          "Windows",
+          "physical memory",
+          "memory",
+          "powershell",
+          "wmic"
+        ],
+        "kept_count": 0,
+        "dropped_count": 5,
+        "dropped_titles": [
+          "About the Exchange Online PowerShell V3 module",
+          "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+          "Set up a Dev Drive on Windows 11",
+          "Detect and Remediate RC4 Usage in Kerberos",
+          "Enable memory integrity"
+        ]
+      },
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "C": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.7,
+            "llm_seconds": 6.7,
+            "machine_seconds": 0.0,
+            "research_seconds": 6.7,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"command\": \"powershell\",\n      \"args\": [\"-NoProfile\", \"-NonInteractive\", \"-Command\", \"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.7,
+            "llm_seconds": 1.7,
+            "machine_seconds": 0.0,
+            "research_seconds": 1.7,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"command\": \"powershell\",\n      \"args\": [\"-NoProfile\", \"-NonInteractive\", \"-Command\", \"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.7,
+            "llm_seconds": 1.7,
+            "machine_seconds": 0.0,
+            "research_seconds": 1.7,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"command\": \"powershell\",\n      \"args\": [\"-NoProfile\", \"-NonInteractive\", \"-Command\", \"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T06:27:16.357256+00:00",
+      "note": "Judge missing 後の Research 再調査。同一固定 search_results + 機械フィルタ。④本体は回さない。",
+      "contract_phase": "research_followup_v3",
+      "pass_criterion": "A",
+      "baseline": "research/llm_benchmarks/research_followup_baseline_c.json",
+      "query_snapshot": "research/llm_benchmarks/research_followup_query_snapshot.json",
+      "case": "research_followup_after_verify_fail",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "filter": {
+        "keywords": [
+          "total physical memory",
+          "Windows",
+          "physical memory",
+          "memory",
+          "powershell",
+          "wmic"
+        ],
+        "kept_count": 0,
+        "dropped_count": 5,
+        "dropped_titles": [
+          "About the Exchange Online PowerShell V3 module",
+          "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+          "Set up a Dev Drive on Windows 11",
+          "Detect and Remediate RC4 Usage in Kerberos",
+          "Enable memory integrity"
+        ]
+      },
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "C": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.7,
+            "llm_seconds": 6.7,
+            "machine_seconds": 0.0,
+            "research_seconds": 6.7,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"command\": \"powershell\",\n      \"args\": [\"-NoProfile\", \"-NonInteractive\", \"-Command\", \"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.9,
+            "llm_seconds": 1.9,
+            "machine_seconds": 0.0,
+            "research_seconds": 1.9,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"command\": \"powershell\",\n      \"args\": [\"-NoProfile\", \"-NonInteractive\", \"-Command\", \"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "C",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 1,
+            "different_count": 0,
+            "substantive_count": 0,
+            "fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.9,
+            "llm_seconds": 1.9,
+            "machine_seconds": 0.0,
+            "research_seconds": 1.9,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"command\": \"powershell\",\n      \"args\": [\"-NoProfile\", \"-NonInteractive\", \"-Command\", \"Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T06:29:03.646147+00:00",
+      "note": "Judge missing 後の Research 再調査。同一固定 search_results + 機械フィルタ。④本体は回さない。",
+      "contract_phase": "research_followup_v3",
+      "pass_criterion": "A",
+      "baseline": "research/llm_benchmarks/research_followup_baseline_c.json",
+      "query_snapshot": "research/llm_benchmarks/research_followup_query_snapshot.json",
+      "case": "research_followup_after_verify_fail",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "filter": {
+        "keywords": [
+          "total physical memory",
+          "Windows",
+          "physical memory",
+          "memory",
+          "powershell",
+          "wmic"
+        ],
+        "kept_count": 0,
+        "dropped_count": 5,
+        "dropped_titles": [
+          "About the Exchange Online PowerShell V3 module",
+          "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+          "Set up a Dev Drive on Windows 11",
+          "Detect and Remediate RC4 Usage in Kerberos",
+          "Enable memory integrity"
+        ]
+      },
+      "pass": true,
+      "ok": true,
+      "grades": {
+        "A": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get freephysicalmemory,totalphysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "OS get FreePhysicalMemory,TotalPhysicalMemory /Format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 5.6,
+            "llm_seconds": 5.6,
+            "machine_seconds": 0.0,
+            "research_seconds": 5.6,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"OS get FreePhysicalMemory,TotalPhysicalMemory /Format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get totalphysicalmemory,freephysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "os",
+                  "get",
+                  "TotalPhysicalMemory,FreePhysicalMemory",
+                  "/format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.8,
+            "llm_seconds": 0.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.8,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"os\",\"get\",\"TotalPhysicalMemory,FreePhysicalMemory\",\"/format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get totalphysicalmemory,freephysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "os",
+                  "get",
+                  "TotalPhysicalMemory,FreePhysicalMemory",
+                  "/format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.8,
+            "llm_seconds": 0.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.8,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"os\",\"get\",\"TotalPhysicalMemory,FreePhysicalMemory\",\"/format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T06:41:22.866247+00:00",
+      "note": "Judge missing 後の Research 再調査。同一固定 search_results + 機械フィルタ。④本体は回さない。",
+      "contract_phase": "research_followup_v3",
+      "pass_criterion": "A",
+      "baseline": "research/llm_benchmarks/research_followup_baseline_c.json",
+      "query_snapshot": "research/llm_benchmarks/research_followup_query_snapshot.json",
+      "case": "research_followup_after_verify_fail",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "filter": {
+        "keywords": [
+          "total physical memory",
+          "Windows",
+          "physical memory",
+          "memory",
+          "powershell",
+          "wmic"
+        ],
+        "kept_count": 0,
+        "dropped_count": 5,
+        "dropped_titles": [
+          "About the Exchange Online PowerShell V3 module",
+          "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+          "Set up a Dev Drive on Windows 11",
+          "Detect and Remediate RC4 Usage in Kerberos",
+          "Enable memory integrity"
+        ]
+      },
+      "pass": true,
+      "ok": true,
+      "grades": {
+        "A": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get freephysicalmemory,totalphysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "OS get FreePhysicalMemory,TotalPhysicalMemory /Format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 5.6,
+            "llm_seconds": 5.6,
+            "machine_seconds": 0.0,
+            "research_seconds": 5.6,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"OS get FreePhysicalMemory,TotalPhysicalMemory /Format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get totalphysicalmemory,freephysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "os",
+                  "get",
+                  "TotalPhysicalMemory,FreePhysicalMemory",
+                  "/format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.8,
+            "llm_seconds": 0.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.8,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"os\",\"get\",\"TotalPhysicalMemory,FreePhysicalMemory\",\"/format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get totalphysicalmemory,freephysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "command": "wmic",
+                "args": [
+                  "os",
+                  "get",
+                  "TotalPhysicalMemory,FreePhysicalMemory",
+                  "/format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.8,
+            "llm_seconds": 0.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.8,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"candidates\":[{\"command\":\"wmic\",\"args\":[\"os\",\"get\",\"TotalPhysicalMemory,FreePhysicalMemory\",\"/format:value\"],\"question\":\"total physical memory is still unconfirmed\",\"output_key\":\"status\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T08:40:44.297549+00:00",
+      "note": "Judge missing 後の Research 再調査。同一固定 search_results + 機械フィルタ。④本体は回さない。",
+      "contract_phase": "research_followup_v3",
+      "pass_criterion": "A",
+      "baseline": "research/llm_benchmarks/research_followup_baseline_c.json",
+      "query_snapshot": "research/llm_benchmarks/research_followup_query_snapshot.json",
+      "case": "research_followup_after_verify_fail",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "filter": {
+        "keywords": [
+          "total physical memory",
+          "Windows",
+          "physical memory",
+          "memory",
+          "powershell",
+          "wmic"
+        ],
+        "kept_count": 0,
+        "dropped_count": 5,
+        "dropped_titles": [
+          "About the Exchange Online PowerShell V3 module",
+          "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+          "Set up a Dev Drive on Windows 11",
+          "Detect and Remediate RC4 Usage in Kerberos",
+          "Enable memory integrity"
+        ]
+      },
+      "pass": true,
+      "ok": true,
+      "grades": {
+        "A": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get totalphysicalmemory,freephysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "route": "Using WMIC",
+                "command": "wmic",
+                "args": [
+                  "OS",
+                  "get",
+                  "TotalPhysicalMemory,FreePhysicalMemory",
+                  "/format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.2,
+            "llm_seconds": 6.2,
+            "machine_seconds": 0.0,
+            "research_seconds": 6.2,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"route\": \"Using WMIC\",\n      \"command\": \"wmic\",\n      \"args\": [\"OS\", \"get\", \"TotalPhysicalMemory,FreePhysicalMemory\", \"/format:value\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        },
+        {
+          "n": 2,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get totalphysicalmemory,freephysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "route": "Using WMIC",
+                "command": "wmic",
+                "args": [
+                  "OS",
+                  "get",
+                  "TotalPhysicalMemory,FreePhysicalMemory",
+                  "/format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.4,
+            "llm_seconds": 1.4,
+            "machine_seconds": 0.0,
+            "research_seconds": 1.4,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"route\": \"Using WMIC\",\n      \"command\": \"wmic\",\n      \"args\": [\"OS\", \"get\", \"TotalPhysicalMemory,FreePhysicalMemory\", \"/format:value\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        },
+        {
+          "n": 3,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get totalphysicalmemory,freephysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "route": "Using WMIC",
+                "command": "wmic",
+                "args": [
+                  "OS",
+                  "get",
+                  "TotalPhysicalMemory,FreePhysicalMemory",
+                  "/format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.4,
+            "llm_seconds": 1.4,
+            "machine_seconds": 0.0,
+            "research_seconds": 1.4,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"route\": \"Using WMIC\",\n      \"command\": \"wmic\",\n      \"args\": [\"OS\", \"get\", \"TotalPhysicalMemory,FreePhysicalMemory\", \"/format:value\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T10:50:06.217664+00:00",
+      "note": "Judge missing 後の Research 再調査。同一固定 search_results + 機械フィルタ。④本体は回さない。",
+      "contract_phase": "research_followup_v3",
+      "pass_criterion": "A",
+      "baseline": "research/llm_benchmarks/research_followup_baseline_c.json",
+      "query_snapshot": "research/llm_benchmarks/research_followup_query_snapshot.json",
+      "case": "research_followup_after_verify_fail",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 1,
+      "filter": {
+        "keywords": [
+          "total physical memory",
+          "Windows",
+          "physical memory",
+          "memory",
+          "powershell",
+          "wmic"
+        ],
+        "kept_count": 0,
+        "dropped_count": 5,
+        "dropped_titles": [
+          "About the Exchange Online PowerShell V3 module",
+          "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+          "Set up a Dev Drive on Windows 11",
+          "Detect and Remediate RC4 Usage in Kerberos",
+          "Enable memory integrity"
+        ]
+      },
+      "pass": true,
+      "ok": true,
+      "grades": {
+        "A": 1
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "A",
+            "json_ok": true,
+            "candidate_count": 1,
+            "repeat_count": 0,
+            "different_count": 1,
+            "substantive_count": 1,
+            "fingerprints": [
+              [
+                "wmic",
+                "os get totalphysicalmemory,freephysicalmemory /format:value"
+              ]
+            ],
+            "rejected_fingerprints": [
+              [
+                "powershell",
+                "get-wmiobject -class win32_operatingsystem | select-object -property freephysicalmemory,totalphysicalmemory | foreach-object { [math]::round(($_.freephysicalmemory / $_.totalphysicalmemory) * 100) }"
+              ]
+            ],
+            "error": null
+          },
+          "retried": false,
+          "error": null,
+          "answer": {
+            "candidates": [
+              {
+                "route": "Using WMIC",
+                "command": "wmic",
+                "args": [
+                  "OS",
+                  "get",
+                  "TotalPhysicalMemory,FreePhysicalMemory",
+                  "/format:value"
+                ],
+                "question": "total physical memory is still unconfirmed",
+                "output_key": "status"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.2,
+            "llm_seconds": 6.2,
+            "machine_seconds": 0.0,
+            "research_seconds": 6.2,
+            "judge_seconds": 0.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\n  \"candidates\": [\n    {\n      \"route\": \"Using WMIC\",\n      \"command\": \"wmic\",\n      \"args\": [\"OS\", \"get\", \"TotalPhysicalMemory,FreePhysicalMemory\", \"/format:value\"],\n      \"question\": \"total physical memory is still unconfirmed\",\n      \"output_key\": \"status\"\n    }\n  ]\n}\n```"
+        }
+      ]
+    }
+  ]
+}

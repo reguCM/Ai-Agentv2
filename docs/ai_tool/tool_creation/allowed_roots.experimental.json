@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "status": "experimental",
+  "note": "Tool Creation Layer 実験用 allowlist。本番 registry/tools.json とは独立。変更は人間承認後のみ。",
+  "policy_ref": "docs/ai_tool/tool_creation/ALLOWLIST_POLICY.md",
+  "tool_id": "local:workspace_read_text_scoped",
+  "roots": [
+    {
+      "id": "ai_tool_docs",
+      "path": "docs/ai_tool",
+      "description": "AI-TOOL / Tool Creation ドキュメント"
+    },
+    {
+      "id": "ai_tool_runs",
+      "path": "runs/ai_tool",
+      "description": "AI-TOOL 実験ログ・結果（監査・比較用）"
+    },
+    {
+      "id": "tool_creation_specs",
+      "path": "docs/ai_tool/tool_creation/specs",
+      "description": "Tool Specification ドラフト（自己参照テスト用）"
+    }
+  ],
+  "explicit_denies": [
+  ],
+  "limits": {
+    "max_bytes": 65536,
+    "max_lines_default": 500,
+    "encoding": "utf-8",
+    "encoding_errors": "replace"
+  },
+  "path_rules": {
+    "reject_parent_segments": true,
+    "reject_absolute_outside_repo": true,
+    "reject_symlink_escape": true,
+    "allow_directories": false
+  }
+}

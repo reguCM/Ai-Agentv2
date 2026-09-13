@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "note": "Derived from glossary.json categories, related_terms, and NH13 CASE_RELEVANT_TERMS. Mechanical only.",
+  "always_include": ["Observation", "UNKNOWN"],
+  "hint_to_terms": {
+    "mentions_state_update": ["State", "Goal", "Claim", "Hypothesis", "Validator"],
+    "mentions_reopen": ["REOPEN", "State", "Evidence", "Validator"],
+    "mentions_evidence_id": ["Evidence"],
+    "mentions_content_mismatch": ["Evidence", "INFERENCE", "False Accept"],
+    "mentions_disagreement": ["Small LLM", "Large LLM", "Gate", "Safety"],
+    "mentions_small_unverified": ["Small LLM", "Safety", "Accuracy"],
+    "runtime_none": ["Gate", "HUMAN_REVIEW"],
+    "runtime_observed": ["stdout", "Route"],
+    "code_only_no_runtime": ["INFERENCE"],
+    "mentions_near_exact": ["ACTIVE", "SUPERSEDED", "State", "False Accept"],
+    "mentions_similar_new": ["Goal", "State", "Validator"],
+    "mentions_no_state": ["State", "Validator"]
+  },
+  "keyword_to_terms": {
+    "ranking": ["Ranking", "Filter", "Route", "Mechanical Mapping"],
+    "filter": ["Filter", "Ranking"],
+    "stdout": ["stdout", "LLM handoff"],
+    "handoff": ["LLM handoff", "stdout"],
+    "collect": ["Route", "Filter"],
+    "caller": ["Route", "Observation"],
+    "code_excerpt": ["Observation", "Mechanical Mapping"]
+  },
+  "dependency_expansion": {
+    "REOPEN": ["Evidence", "Validator", "ACTIVE", "SUPERSEDED"],
+    "Evidence": ["INFERENCE"],
+    "State": ["Validator", "ACTIVE", "SUPERSEDED"],
+    "Observation": ["Mechanical Mapping", "Fingerprint"],
+    "stdout": ["LLM handoff"],
+    "Ranking": ["Filter", "Route"]
+  },
+  "minimal_exclude": [
+    "Method Catalog", "Feature", "SUPPORTED", "Shadow Mode", "material_shortage",
+    "high_slots", "Escalation", "Sidecar", "Accuracy", "False Reject"
+  ],
+  "minimal_max_terms": 6
+}

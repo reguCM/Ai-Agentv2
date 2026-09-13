@@ -1,0 +1,199 @@
+{
+  "ok": true,
+  "llm_used": false,
+  "llm_note": "このレコードの provenance に LLM は無い。原因推定に LLM は使っていない。",
+  "research": "NOT_CONNECTED",
+  "record_id": "mr-5056e75f629a",
+  "record": {
+    "record_id": "mr-5056e75f629a",
+    "entity": "RTX 3060",
+    "attribute": "VRAM capacity",
+    "value": "12 GB",
+    "source_url": "https://en.wikipedia.org/wiki/RTX_3060",
+    "source_title": "RTX 3060",
+    "observed_at": "2026-08-30T23:50:02.018778+00:00",
+    "provenance": "web_search → fetch → extract → matrix_write",
+    "ingest_id": "ing-20260830_234959-9e6ae956",
+    "query": "RTX 3060",
+    "excerpt": "RTX 3060 {{short description|Series of GPUs by Nvidia}} {{Use American English|date=January 2023}} {{Use mdy dates|date=January 2023}} {{Infobox graphics proce…"
+  },
+  "cause": "ALIGNED_SOURCE",
+  "traced_at": "2026-08-31T00:32:56.517006+00:00",
+  "events": [
+    {
+      "type": "matrix_record",
+      "timestamp": "2026-08-31T00:32:56.517006+00:00",
+      "status": "success",
+      "record_id": "mr-5056e75f629a",
+      "entity": "RTX 3060",
+      "attribute": "VRAM capacity",
+      "value": "12 GB",
+      "source_url": "https://en.wikipedia.org/wiki/RTX_3060",
+      "source_title": "RTX 3060",
+      "observed_at": "2026-08-30T23:50:02.018778+00:00",
+      "provenance": "web_search → fetch → extract → matrix_write",
+      "ingest_id": "ing-20260830_234959-9e6ae956",
+      "query": "RTX 3060",
+      "correlation_id": "mt-20260831_003256-c1aefa01",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "trace_id": "tr-ef220dd5b12d"
+    },
+    {
+      "type": "search",
+      "timestamp": "2026-08-31T00:32:56.517006+00:00",
+      "status": "observed_from_records",
+      "query": "RTX 3060",
+      "hit_count": 5,
+      "titles": [
+        "RTX 3060",
+        "RTX 5000",
+        "RTX 4000",
+        "RTX 2000",
+        "RTX A6000"
+      ],
+      "urls": [
+        "https://en.wikipedia.org/wiki/RTX_3060",
+        "https://en.wikipedia.org/wiki/RTX_5000",
+        "https://en.wikipedia.org/wiki/RTX_4000",
+        "https://en.wikipedia.org/wiki/RTX_2000",
+        "https://en.wikipedia.org/wiki/RTX_A6000"
+      ],
+      "omitted": [
+        "snippets",
+        "hits_array"
+      ],
+      "note": "ingest 時の hits 配列は未保存。同一 ingest_id の source_url から復元した。",
+      "correlation_id": "mt-20260831_003256-c1aefa01",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "trace_id": "tr-ef220dd5b12d"
+    },
+    {
+      "type": "fetch",
+      "timestamp": "2026-08-31T00:32:56.517006+00:00",
+      "status": "observed_from_record",
+      "url": "https://en.wikipedia.org/wiki/RTX_3060",
+      "excerpt_present": true,
+      "omitted": [
+        "main_text",
+        "wikitext"
+      ],
+      "note": "provenance に fetch がある、または excerpt がある。本文全文は保存されていない。",
+      "correlation_id": "mt-20260831_003256-c1aefa01",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "trace_id": "tr-ef220dd5b12d"
+    },
+    {
+      "type": "extract",
+      "timestamp": "2026-08-31T00:32:56.517006+00:00",
+      "status": "observed_from_record",
+      "entity_from_query": "RTX 3060",
+      "entity_on_record": "RTX 3060",
+      "source_title_entity": "RTX 3060",
+      "entity_source_mismatch": false,
+      "excerpt_contains_value": false,
+      "note": "entity は query 由来。数値の抽出位置は excerpt に無い場合 NOT DETERMINED。",
+      "omitted": [
+        "extract_event"
+      ],
+      "correlation_id": "mt-20260831_003256-c1aefa01",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "trace_id": "tr-ef220dd5b12d"
+    },
+    {
+      "type": "normalize",
+      "timestamp": "2026-08-31T00:32:56.517006+00:00",
+      "status": "NOT OBSERVED",
+      "value": "12 GB",
+      "note": "normalize 専用の保存 Event は無い。Write 時 value が正規化済みかは未記録。",
+      "omitted": [
+        "normalize_event"
+      ],
+      "correlation_id": "mt-20260831_003256-c1aefa01",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "trace_id": "tr-ef220dd5b12d"
+    },
+    {
+      "type": "matrix_write",
+      "timestamp": "2026-08-31T00:32:56.517006+00:00",
+      "status": "observed_from_record",
+      "record_id": "mr-5056e75f629a",
+      "count": 1,
+      "note": "この JSONL 行そのものが write 結果。",
+      "correlation_id": "mt-20260831_003256-c1aefa01",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "trace_id": "tr-ef220dd5b12d"
+    },
+    {
+      "type": "verify_result",
+      "timestamp": "2026-08-31T00:32:56.517006+00:00",
+      "status": "MATCH",
+      "result": "MATCH",
+      "verified_at": "2026-08-31T00:13:43.545073+00:00",
+      "note": "verify.jsonl の既存結果。今回 fetch し直していない。",
+      "correlation_id": "mt-20260831_003256-c1aefa01",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "trace_id": "tr-ef220dd5b12d"
+    }
+  ],
+  "requested_by": "user",
+  "executed_by": "matrix_pipeline",
+  "actor": "matrix_pipeline",
+  "source": "matrix",
+  "correlation_id": "mt-20260831_003256-c1aefa01",
+  "records_unchanged": true,
+  "query": "RTX 3060",
+  "entity": "RTX 3060",
+  "attribute": "VRAM capacity",
+  "value": "12 GB",
+  "source_url": "https://en.wikipedia.org/wiki/RTX_3060",
+  "source_title": "RTX 3060",
+  "source_title_entity": "RTX 3060",
+  "entity_from_query": "RTX 3060",
+  "entity_source_mismatch": false,
+  "excerpt_contains_value": false,
+  "last_verify": "MATCH",
+  "search_hits_from_records": [
+    {
+      "title": "RTX 3060",
+      "url": "https://en.wikipedia.org/wiki/RTX_3060"
+    },
+    {
+      "title": "RTX 5000",
+      "url": "https://en.wikipedia.org/wiki/RTX_5000"
+    },
+    {
+      "title": "RTX 4000",
+      "url": "https://en.wikipedia.org/wiki/RTX_4000"
+    },
+    {
+      "title": "RTX 2000",
+      "url": "https://en.wikipedia.org/wiki/RTX_2000"
+    },
+    {
+      "title": "RTX A6000",
+      "url": "https://en.wikipedia.org/wiki/RTX_A6000"
+    }
+  ],
+  "actual_source_target": "RTX 3060"
+}

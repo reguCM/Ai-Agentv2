@@ -1,0 +1,73 @@
+{
+  "id": "judge_usable_usage_percent",
+  "note": "④ Round 3 実測を保存。Verifier 成功 sample=48。finding.question は followup ラベル（total physical memory...）で sample の種類と一致しない。STATE に使用率/%/0-100 あり。Judge が satisfies_request=true にできるかを見る。",
+  "source_run": "research/llm_benchmarks/research_implement_results.json 2026-08-19T05:32:37Z deepseek_coder_v2_16b",
+  "paused_benchmark": "research_implement",
+  "request": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "proposal": {
+    "name": "get_memory_status",
+    "output": ["status"]
+  },
+  "what_happened": "Round 3 で TotalVisibleMemorySize 式が Verifier 成功し sample=48。Judge は『sample は総物理メモリ』と誤読し satisfies_request=false、missing=used memory is still unconfirmed。",
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "research_result": {
+    "usable_findings": [
+      {
+        "kind": "output",
+        "question": "total physical memory is still unconfirmed",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalVisibleMemorySize) * 100) }"
+          ],
+          "returncode": 0,
+          "sample": ["48"],
+          "stderr": "",
+          "error": null,
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      }
+    ],
+    "reference_findings": [],
+    "insufficient_findings": [],
+    "unresolved": []
+  }
+}

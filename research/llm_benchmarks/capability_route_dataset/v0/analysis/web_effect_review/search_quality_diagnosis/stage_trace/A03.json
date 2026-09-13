@@ -1,0 +1,585 @@
+{
+  "case_id": "A03",
+  "request": "OpenAIについて最近何か大きな発表はありましたか",
+  "query": "OpenAI",
+  "time_sensitive": true,
+  "ts": "2026-08-24T06:06:11.322579+00:00",
+  "raw_api": {
+    "duckduckgo": {
+      "backend": "duckduckgo",
+      "query": "OpenAI",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 0,
+      "snippet_nonempty": 0,
+      "items": []
+    },
+    "wikipedia-ja": {
+      "backend": "wikipedia-ja",
+      "query": "OpenAI",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 5,
+      "snippet_nonempty": 0,
+      "items": [
+        {
+          "api_rank": 0,
+          "title": "OpenAI",
+          "snippet": "",
+          "url": "https://ja.wikipedia.org/wiki/OpenAI",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 1,
+          "title": "OpenAI o1",
+          "snippet": "",
+          "url": "https://ja.wikipedia.org/wiki/OpenAI_o1",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 2,
+          "title": "OpenAI Five",
+          "snippet": "",
+          "url": "https://ja.wikipedia.org/wiki/OpenAI_Five",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 3,
+          "title": "OpenAI Codex",
+          "snippet": "",
+          "url": "https://ja.wikipedia.org/wiki/OpenAI_Codex",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 4,
+          "title": "OpenAI o4-mini",
+          "snippet": "",
+          "url": "https://ja.wikipedia.org/wiki/OpenAI_o4-mini",
+          "kind": "opensearch"
+        }
+      ]
+    },
+    "wikipedia-en": {
+      "backend": "wikipedia-en",
+      "query": "OpenAI",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 5,
+      "snippet_nonempty": 0,
+      "items": [
+        {
+          "api_rank": 0,
+          "title": "OpenAI",
+          "snippet": "",
+          "url": "https://en.wikipedia.org/wiki/OpenAI",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 1,
+          "title": "2026 OpenAI agent cyberattacks",
+          "snippet": "",
+          "url": "https://en.wikipedia.org/wiki/2026_OpenAI_agent_cyberattacks",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 2,
+          "title": "OpenAI Codex (AI agent)",
+          "snippet": "",
+          "url": "https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent)",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 3,
+          "title": "OpenAI o1",
+          "snippet": "",
+          "url": "https://en.wikipedia.org/wiki/OpenAI_o1",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 4,
+          "title": "OpenAI Five",
+          "snippet": "",
+          "url": "https://en.wikipedia.org/wiki/OpenAI_Five",
+          "kind": "opensearch"
+        }
+      ]
+    }
+  },
+  "api_candidate_count": 10,
+  "api_snippet_nonempty": 0,
+  "api_snippet_empty": 10,
+  "pipeline": {
+    "query": "OpenAI",
+    "per_backend": [
+      {
+        "backend": "duckduckgo",
+        "searcher_returned": 0,
+        "accepted": 0,
+        "rejected": 0,
+        "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+      },
+      {
+        "backend": "wikipedia-ja",
+        "searcher_returned": 5,
+        "accepted": 5,
+        "rejected": 0
+      },
+      {
+        "backend": "wikipedia-en",
+        "searcher_returned": 5,
+        "accepted": 5,
+        "rejected": 0
+      }
+    ],
+    "hitize_rows": [
+      {
+        "backend": "wikipedia-ja",
+        "title": "OpenAI",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-ja",
+        "title": "OpenAI o1",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o1",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-ja",
+        "title": "OpenAI Five",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Five",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-ja",
+        "title": "OpenAI Codex",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Codex",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-ja",
+        "title": "OpenAI o4-mini",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o4-mini",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-en",
+        "title": "OpenAI",
+        "url": "https://en.wikipedia.org/wiki/OpenAI",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-en",
+        "title": "2026 OpenAI agent cyberattacks",
+        "url": "https://en.wikipedia.org/wiki/2026_OpenAI_agent_cyberattacks",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-en",
+        "title": "OpenAI Codex (AI agent)",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent)",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-en",
+        "title": "OpenAI o1",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_o1",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-en",
+        "title": "OpenAI Five",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_Five",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      }
+    ],
+    "rejected": [],
+    "counts": {
+      "hit_accepted": 10,
+      "after_unique": 10,
+      "dup_removed": 0,
+      "before_ranking": 10,
+      "after_ranking": 5,
+      "dropped_by_ranking": 5,
+      "dropped_with_snippet": 0
+    },
+    "ranking_mode": "score>0_only",
+    "ranking_rows": [
+      {
+        "ranking_order": 0,
+        "score": 11,
+        "title": "OpenAI",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI",
+        "backend": "wikipedia",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      },
+      {
+        "ranking_order": 1,
+        "score": 11,
+        "title": "OpenAI o1",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o1",
+        "backend": "wikipedia",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      },
+      {
+        "ranking_order": 2,
+        "score": 11,
+        "title": "OpenAI Five",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Five",
+        "backend": "wikipedia",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      },
+      {
+        "ranking_order": 3,
+        "score": 11,
+        "title": "OpenAI Codex",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Codex",
+        "backend": "wikipedia",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      },
+      {
+        "ranking_order": 4,
+        "score": 11,
+        "title": "OpenAI o4-mini",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o4-mini",
+        "backend": "wikipedia",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      },
+      {
+        "ranking_order": 5,
+        "score": 11,
+        "title": "OpenAI",
+        "url": "https://en.wikipedia.org/wiki/OpenAI",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      },
+      {
+        "ranking_order": 6,
+        "score": 11,
+        "title": "2026 OpenAI agent cyberattacks",
+        "url": "https://en.wikipedia.org/wiki/2026_OpenAI_agent_cyberattacks",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      },
+      {
+        "ranking_order": 7,
+        "score": 11,
+        "title": "OpenAI Codex (AI agent)",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent)",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      },
+      {
+        "ranking_order": 8,
+        "score": 11,
+        "title": "OpenAI o1",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_o1",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      },
+      {
+        "ranking_order": 9,
+        "score": 11,
+        "title": "OpenAI Five",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_Five",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      }
+    ],
+    "after_ranking_hits": [
+      {
+        "title": "OpenAI",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI",
+        "backend": "wikipedia",
+        "_from": "wikipedia-ja"
+      },
+      {
+        "title": "OpenAI o1",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o1",
+        "backend": "wikipedia",
+        "_from": "wikipedia-ja"
+      },
+      {
+        "title": "OpenAI Five",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Five",
+        "backend": "wikipedia",
+        "_from": "wikipedia-ja"
+      },
+      {
+        "title": "OpenAI Codex",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Codex",
+        "backend": "wikipedia",
+        "_from": "wikipedia-ja"
+      },
+      {
+        "title": "OpenAI o4-mini",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o4-mini",
+        "backend": "wikipedia",
+        "_from": "wikipedia-ja"
+      }
+    ],
+    "dropped_candidates": [
+      {
+        "ranking_order": 5,
+        "score": 11,
+        "title": "OpenAI",
+        "url": "https://en.wikipedia.org/wiki/OpenAI",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      },
+      {
+        "ranking_order": 6,
+        "score": 11,
+        "title": "2026 OpenAI agent cyberattacks",
+        "url": "https://en.wikipedia.org/wiki/2026_OpenAI_agent_cyberattacks",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      },
+      {
+        "ranking_order": 7,
+        "score": 11,
+        "title": "OpenAI Codex (AI agent)",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_Codex_(AI_agent)",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      },
+      {
+        "ranking_order": 8,
+        "score": 11,
+        "title": "OpenAI o1",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_o1",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      },
+      {
+        "ranking_order": 9,
+        "score": 11,
+        "title": "OpenAI Five",
+        "url": "https://en.wikipedia.org/wiki/OpenAI_Five",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": false,
+        "exclude_reason": "over_return_limit"
+      }
+    ]
+  },
+  "search_web_return": {
+    "hit_count": 5,
+    "hits": [
+      {
+        "title": "OpenAI",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI",
+        "backend": "wikipedia"
+      },
+      {
+        "title": "OpenAI o1",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o1",
+        "backend": "wikipedia"
+      },
+      {
+        "title": "OpenAI Five",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Five",
+        "backend": "wikipedia"
+      },
+      {
+        "title": "OpenAI Codex",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Codex",
+        "backend": "wikipedia"
+      },
+      {
+        "title": "OpenAI o4-mini",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o4-mini",
+        "backend": "wikipedia"
+      }
+    ],
+    "error": null,
+    "candidates_collected": 10
+  },
+  "stored_log": {
+    "hit_count": 5,
+    "hits": [
+      {
+        "title": "OpenAI",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI",
+        "snippet": null
+      },
+      {
+        "title": "OpenAI o1",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o1",
+        "snippet": null
+      },
+      {
+        "title": "OpenAI Five",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Five",
+        "snippet": null
+      },
+      {
+        "title": "OpenAI Codex",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_Codex",
+        "snippet": null
+      },
+      {
+        "title": "OpenAI o4-mini",
+        "url": "https://ja.wikipedia.org/wiki/OpenAI_o4-mini",
+        "snippet": null
+      }
+    ]
+  },
+  "llm_handoff": {
+    "agent_passes_full_return": true,
+    "llm_received_hit_count": 5,
+    "stored_log_hit_count": 5,
+    "count_match_live_vs_stored": true,
+    "backend_in_return": [
+      "wikipedia",
+      "wikipedia",
+      "wikipedia",
+      "wikipedia",
+      "wikipedia"
+    ],
+    "json_bytes": 689,
+    "snippet_lost_in_serialization": false
+  },
+  "extract_probes": [
+    {
+      "title": "OpenAI",
+      "url": "https://ja.wikipedia.org/wiki/OpenAI",
+      "http_status": 200,
+      "error": null,
+      "extract_len": 107,
+      "extract_preview": "OpenAI（オープンエーアイ、オープンAI）は、非営利法人 OpenAI, Inc. と子会社の営利法人 OpenAI Global, LLC などから構成される、人工知能（AI）を開発するアメリカの企業である。",
+      "page_has_usable_text": true,
+      "note": "調査専用extracts。本番search_web未接続。"
+    },
+    {
+      "title": "OpenAI o1",
+      "url": "https://ja.wikipedia.org/wiki/OpenAI_o1",
+      "http_status": 200,
+      "error": null,
+      "extract_len": 514,
+      "extract_preview": "OpenAI o1（オープンエーアイ オーワン）は、2024年9月にOpenAIが発表した論理的思考（reasoning）能力を強化した大規模言語モデルである。o1は回答する前に思考時間をとるため、複雑な論理的思考、科学、数学、プログラミングにおいてより高度な能力を保持する。2024年12月時点では、OpenAI o1、OpenAI o1 pro mode、OpenAI o1-miniの3モデルが公開されている。社内ではコードネーム「Strawberry」と呼ばれ、GPT-4oの後継ではなく、GPT-4oを補完するモデルとして位置付けられている。特に科学、コーディング、数学などの分野において、従来のモデルよりも高度な問題解決能力を示す。2024年9月12日にChatGPTおよびAPIで最初のモデルがプレビューリリースされた。\nOpenAI oシリーズは、一般的に「推論モデル」と呼ばれるシリ",
+      "page_has_usable_text": true,
+      "note": "調査専用extracts。本番search_web未接続。"
+    },
+    {
+      "title": "OpenAI Five",
+      "url": "https://ja.wikipedia.org/wiki/OpenAI_Five",
+      "http_status": 200,
+      "error": null,
+      "extract_len": 547,
+      "extract_preview": "OpenAI Five (オープンエーアイ ファイブ)は、OpenAIによって開発された複雑なゲームをプレイすることが可能なコンピュータプログラムである。5対5のビデオゲームである『Dota 2』をプレイする機能をもつ。2017年に公開され、プロプレイヤーのDendiとの1対1のライブ対戦で披露され、Dendiは敗北した。翌年2018年には、5人チームとしてDota 2をプレイする機能が追加され、プロチームと対戦し勝利する能力を示し始めた。\nOpenAIは、『Dota 2』のような複雑なゲームを機械学習の研究対象に選択することで、現実世界で見られる予測不可能性と連続性をより正確に捉え、より汎用的な問題解決システムを構築できると考えた。OpenAI Fiveで使用されたアルゴリズムとコードは、最終的に同社が開発中の別のニューラルネットワークに流用され、物理的なロボットハンドの制御に利用された",
+      "page_has_usable_text": true,
+      "note": "調査専用extracts。本番search_web未接続。"
+    }
+  ],
+  "machine_observation": {
+    "counts_chain": {
+      "api_raw": 10,
+      "hit_accepted": 10,
+      "after_unique": 10,
+      "after_ranking": 5,
+      "return": 5,
+      "llm_received": 5
+    },
+    "snippet_empty_in_return": 5,
+    "snippet_nonempty_in_return": 0,
+    "dropped_by_ranking": 5,
+    "dropped_with_snippet": 0,
+    "page_has_text_but_snippet_empty_probe": true,
+    "not_auto_usefulness_label": true
+  },
+  "human_review": {
+    "候補の内容": "",
+    "有用候補の番号": "",
+    "rankingで落ちた有用候補": "",
+    "内容の充実度": "",
+    "日本語情報の十分さ": "",
+    "現在性": "",
+    "LLMに十分な情報が渡ったか": "",
+    "主な問題箇所": "",
+    "人間コメント": ""
+  }
+}

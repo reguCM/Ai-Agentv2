@@ -1,0 +1,48 @@
+{
+  "id": "memory_usage",
+  "fixture_kind": "BENCH_FIXTURE_NOT_LIVE_SENSOR",
+  "observation_source": "fixture",
+  "note": "research_implement 用のSTATE固定ケース（メモリ使用率）。実機センサーではない。",
+  "request": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "expected": {
+    "category": "system",
+    "subcategory_contains": "memory",
+    "module_pattern": "tools\\.system\\..+\\..+",
+    "function_present": true,
+    "output_includes": "status",
+    "name_present": true
+  }
+}

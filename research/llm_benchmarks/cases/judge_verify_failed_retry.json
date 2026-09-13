@@ -1,0 +1,73 @@
+{
+  "id": "judge_verify_failed_retry",
+  "note": "④を止めて保存した実測。Verifier は候補を実行できたが sample は空。Judge が JSON で missing を返し、再調査に戻れるかを見る。正解コマンドは書かない。",
+  "source_run": "research/llm_benchmarks/research_implement_results.json 2026-08-19T04:51:21Z deepseek_coder_v2_16b",
+  "paused_benchmark": "research_implement",
+  "request": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "proposal": {
+    "name": "get_memory_status",
+    "output": ["status"]
+  },
+  "what_happened": "Research が TotalPhysicalMemory で使用率を計算する候補を出した。機械が -Command に包んで実行した。プロパティが無く 0 除算。usable_findings は空。Judge は no_json で、missing が無く research_no_next_question。",
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "research_result": {
+    "usable_findings": [],
+    "reference_findings": [],
+    "insufficient_findings": [],
+    "unresolved": [
+      {
+        "kind": "output",
+        "question": "output 'status' の取得方法",
+        "finding": "実環境で確認できなかった。0 で除算しようとしました。",
+        "evidence": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+          ],
+          "returncode": 0,
+          "sample": [],
+          "stderr": "0 で除算しようとしました。",
+          "error": "0 で除算しようとしました。",
+          "output_key": "status"
+        },
+        "confidence": "low",
+        "source": "web"
+      }
+    ]
+  }
+}

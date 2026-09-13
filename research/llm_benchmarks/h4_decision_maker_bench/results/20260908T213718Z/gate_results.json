@@ -1,0 +1,1045 @@
+{
+  "summary": {
+    "model_id": "qwen3_14b",
+    "provider_model": "qwen3:14b",
+    "ids": [
+      "Q9",
+      "Q25",
+      "Q29",
+      "Q14-15",
+      "Q30",
+      "Q7",
+      "Q10",
+      "Q40",
+      "Q47",
+      "Q1"
+    ],
+    "n": 10,
+    "initial_fail": 5,
+    "initial_pass": 2,
+    "initial_unknown": 3,
+    "known_wrong_caught_initial": 4,
+    "retry_performed": 5,
+    "retry_improved_to_pass": 5,
+    "retry_still_fail": 0,
+    "retry_then_unknown": 3,
+    "final_escalate": 6,
+    "final_unknown": 6,
+    "final_adoption_candidate": 4,
+    "final_rejected": 0,
+    "semantic_dangerous_final": 0,
+    "heuristic_only_final": 2,
+    "possible_false_reject": 0,
+    "possible_false_pass": 2,
+    "human_or_strong_needed": 6,
+    "human_or_strong_needed_rate": 0.6,
+    "wall_s_retries_sum": 321.6,
+    "prompt_eval_sum": 14737,
+    "eval_sum": 1229,
+    "wall_s_including_overhead": 165.6
+  },
+  "records": [
+    {
+      "decision_id": "Q9",
+      "initial_first_recommendation": "Merge generic file and registry_read keywords but distinguish via look_first paths.",
+      "initial": {
+        "first_recommendation": "Merge generic file and registry_read keywords but distinguish via look_first paths.",
+        "reason": "Same read_file capability but different meanings. Look_first paths can disambiguate.",
+        "rejected_alternatives": [
+          "Use separate capability IDs",
+          "Ignore look_first paths"
+        ],
+        "known_issues": [
+          "Path ambiguity"
+        ],
+        "concrete_failure_scenarios": [
+          "Misclassifying registry_read as generic file"
+        ],
+        "uncertainty_score": 25,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "FAIL",
+        "semantic_gate_result": "FAIL",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [
+          "merge_push"
+        ],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [
+          {
+            "rule_id": "Q9_merge_file_registry_keywords",
+            "kind": "known_wrong",
+            "forbidden": "Merging generic-file / workspace_file_read keywords with registry_read keywords into one vocabulary."
+          }
+        ],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "first_recommendation adopts forbidden action: Q9_merge_file_registry_keywords"
+        ],
+        "violated_prior_or_known_wrong": [
+          "Merging generic-file / workspace_file_read keywords with registry_read keywords into one vocabulary."
+        ],
+        "retry_payload": {
+          "violated_locked_priors": [],
+          "known_wrong": [
+            "Merging generic-file / workspace_file_read keywords with registry_read keywords into one vocabulary."
+          ],
+          "related_contracts": [
+            "registry_read and workspace_file_read are not the same meaning even if both may use read_file."
+          ],
+          "why_not_adoptable": "first_recommendation adopts forbidden action: Q9_merge_file_registry_keywords"
+        },
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "FAIL",
+      "violated_prior_or_known_wrong": [
+        "Merging generic-file / workspace_file_read keywords with registry_read keywords into one vocabulary."
+      ],
+      "retry_performed": true,
+      "revised_first_recommendation": "Keep registry_read and generic file keywords strictly separate. Use look_first path metadata to trigger registry_read only when the request explicitly references registry-specific paths (e.g., registry/tools.json).",
+      "revised_gate_result": "UNKNOWN",
+      "revised": {
+        "first_recommendation": "Keep registry_read and generic file keywords strictly separate. Use look_first path metadata to trigger registry_read only when the request explicitly references registry-specific paths (e.g., registry/tools.json).",
+        "reason": "Merging keywords violates locked prior that registry_read and workspace_file_read are semantically distinct. Look_first paths provide context for registry_read selection without vocabulary overlap.",
+        "rejected_alternatives": [
+          "Merging generic-file / registry_read keywords into a single vocabulary",
+          "Using observation_source metadata for registry_read selection",
+          "Allowing registry_read to fallback to generic file handling"
+        ],
+        "known_issues": [
+          "Registry-specific path detection requires precise look_first pattern matching",
+          "No explicit registry_read vocabulary exists in tools.json",
+          "Current detect_tool_gap() does not handle registry-specific path matching"
+        ],
+        "concrete_failure_scenarios": [
+          "A request for 'read registry/tools.json' would fail to trigger registry_read without explicit path matching",
+          "Generic file operations might incorrectly consume registry_read capabilities",
+          "Registry-specific tool discovery would require new exclusion tables"
+        ],
+        "uncertainty_score": 75,
+        "need_human": true,
+        "needs_deep_review": true,
+        "result": "UNKNOWN",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [
+          "need_human",
+          "high_uncertainty",
+          "deep_review_important"
+        ],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "escalate:need_human",
+          "escalate:high_uncertainty",
+          "escalate:deep_review_important"
+        ],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "reused_prior_retry",
+        "parse_error": null,
+        "retry_count": 0,
+        "error_class": null
+      },
+      "final_adoption_status": "escalate_strong_or_human",
+      "heuristic_dangerous": [],
+      "heuristic_only_dangerous": [],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 75,
+      "need_human": true,
+      "needs_deep_review": true,
+      "wall_ms": 54655.0,
+      "prompt_eval_count": 2462,
+      "eval_count": 305,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "FAIL",
+      "initial_escalation": [],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [
+        "need_human",
+        "high_uncertainty",
+        "deep_review_important"
+      ],
+      "retry_source": "reused_prior_retry",
+      "final_agreement_vs_hidden": {
+        "overlap": 0.375,
+        "label": "agreeish",
+        "marker_hits": 1,
+        "markers": [
+          "look_first",
+          "prefer"
+        ]
+      },
+      "quality_flag": null
+    },
+    {
+      "decision_id": "Q25",
+      "initial_first_recommendation": "Stop silent read of look_first[0]. Require path for file-read next_action.",
+      "initial": {
+        "first_recommendation": "Stop silent read of look_first[0]. Require path for file-read next_action.",
+        "reason": "Silent read may auto-execute tools.json. Require path to prevent misclassification.",
+        "rejected_alternatives": [
+          "Keep silent read",
+          "Allow pathless read"
+        ],
+        "known_issues": [
+          "Potential for pathless read errors"
+        ],
+        "concrete_failure_scenarios": [
+          "Auto-executing tools.json without path"
+        ],
+        "uncertainty_score": 20,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "UNKNOWN",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [
+          "deep_review_important"
+        ],
+        "heuristic_dangerous": [
+          "look_first0_default"
+        ],
+        "heuristic_only_dangerous": [
+          "look_first0_default"
+        ],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "escalate:deep_review_important"
+        ],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "UNKNOWN",
+      "violated_prior_or_known_wrong": [],
+      "retry_performed": false,
+      "revised_first_recommendation": null,
+      "revised_gate_result": null,
+      "revised": null,
+      "final_adoption_status": "escalate_strong_or_human",
+      "heuristic_dangerous": [
+        "look_first0_default"
+      ],
+      "heuristic_only_dangerous": [
+        "look_first0_default"
+      ],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 20,
+      "need_human": false,
+      "needs_deep_review": true,
+      "wall_ms": 0.0,
+      "prompt_eval_count": null,
+      "eval_count": null,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "PASS",
+      "initial_escalation": [
+        "deep_review_important"
+      ],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [
+        "deep_review_important"
+      ],
+      "retry_source": null,
+      "final_agreement_vs_hidden": {
+        "overlap": 0.571,
+        "label": "agreeish",
+        "marker_hits": 2,
+        "markers": [
+          "look_first",
+          "[0]"
+        ]
+      },
+      "quality_flag": null
+    },
+    {
+      "decision_id": "Q29",
+      "initial_first_recommendation": "Skip next_action if search_files has no query. Do not use text[:80].",
+      "initial": {
+        "first_recommendation": "Skip next_action if search_files has no query. Do not use text[:80].",
+        "reason": "Long text may cause irrelevant hits. Machine extraction is preferred but not always possible.",
+        "rejected_alternatives": [
+          "Use text[:80] as query",
+          "Always inject next_action"
+        ],
+        "known_issues": [
+          "Missed search opportunities"
+        ],
+        "concrete_failure_scenarios": [
+          "Missing relevant search results"
+        ],
+        "uncertainty_score": 20,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "PASS",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [
+          "search_text_slice"
+        ],
+        "heuristic_only_dangerous": [
+          "search_text_slice"
+        ],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "PASS",
+      "violated_prior_or_known_wrong": [],
+      "retry_performed": false,
+      "revised_first_recommendation": null,
+      "revised_gate_result": null,
+      "revised": null,
+      "final_adoption_status": "adoption_candidate",
+      "heuristic_dangerous": [
+        "search_text_slice"
+      ],
+      "heuristic_only_dangerous": [
+        "search_text_slice"
+      ],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 20,
+      "need_human": false,
+      "needs_deep_review": true,
+      "wall_ms": 0.0,
+      "prompt_eval_count": null,
+      "eval_count": null,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "PASS",
+      "initial_escalation": [],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [],
+      "retry_source": null,
+      "final_agreement_vs_hidden": {
+        "overlap": 0.5,
+        "label": "agreeish",
+        "marker_hits": 0,
+        "markers": []
+      },
+      "quality_flag": null
+    },
+    {
+      "decision_id": "Q14-15",
+      "initial_first_recommendation": "Select first candidate tool ([0]) and mark as RESOLVED. Same for single candidates.",
+      "initial": {
+        "first_recommendation": "Select first candidate tool ([0]) and mark as RESOLVED. Same for single candidates.",
+        "reason": "Current resolve_capability uses [0]. CPU may have 2 candidates (get_cpu_status vs cpu_status).",
+        "rejected_alternatives": [
+          "Rank candidates",
+          "Reject 2+ candidates"
+        ],
+        "known_issues": [
+          "Potential for suboptimal selection"
+        ],
+        "concrete_failure_scenarios": [
+          "Selecting less appropriate tool"
+        ],
+        "uncertainty_score": 25,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "FAIL",
+        "semantic_gate_result": "FAIL",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [
+          {
+            "rule_id": "Q14_15_rank_by_index",
+            "kind": "known_wrong",
+            "forbidden": "Selecting among 2+ Help-confirmed candidates by list index [0] and marking RESOLVED."
+          }
+        ],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "first_recommendation adopts forbidden action: Q14_15_rank_by_index"
+        ],
+        "violated_prior_or_known_wrong": [
+          "Selecting among 2+ Help-confirmed candidates by list index [0] and marking RESOLVED."
+        ],
+        "retry_payload": {
+          "violated_locked_priors": [],
+          "known_wrong": [
+            "Selecting among 2+ Help-confirmed candidates by list index [0] and marking RESOLVED."
+          ],
+          "related_contracts": [
+            "Do not treat ranking among 2+ candidate tools as H4 Core."
+          ],
+          "why_not_adoptable": "first_recommendation adopts forbidden action: Q14_15_rank_by_index"
+        },
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "FAIL",
+      "violated_prior_or_known_wrong": [
+        "Selecting among 2+ Help-confirmed candidates by list index [0] and marking RESOLVED."
+      ],
+      "retry_performed": true,
+      "revised_first_recommendation": "Reject selecting among 2+ Help-confirmed candidates by index [0]. For single candidates, select and mark RESOLVED. For multiple candidates, leave unresolved (status=AMBIGUOUS) unless a non-index-based disambiguation rule exists in registry/tools.json.",
+      "revised_gate_result": "UNKNOWN",
+      "revised": {
+        "first_recommendation": "Reject selecting among 2+ Help-confirmed candidates by index [0]. For single candidates, select and mark RESOLVED. For multiple candidates, leave unresolved (status=AMBIGUOUS) unless a non-index-based disambiguation rule exists in registry/tools.json.",
+        "reason": "Design constraints forbid ranking among 2+ candidates as H4 Core. Current [0] selection violates Q11-13 (1 res=1 cap) and Q7 (plural forms as primary). Ambiguity must be surfaced, not silently resolved.",
+        "rejected_alternatives": [
+          "Selecting [0] for 2+ candidates",
+          "Ignoring candidate count",
+          "Using non-index-based rules without registry support"
+        ],
+        "known_issues": [
+          "Ambiguous tool selection may fail closed",
+          "No fallback for unresolved ambiguity",
+          "Requires registry/tool.json to define disambiguation rules"
+        ],
+        "concrete_failure_scenarios": [
+          "CPU tools get_cpu_status vs cpu_status both match query → wrong tool selected",
+          "Search returns 2+ valid file-read tools → wrong file read"
+        ],
+        "uncertainty_score": 45,
+        "need_human": true,
+        "needs_deep_review": true,
+        "result": "UNKNOWN",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [
+          "need_human",
+          "deep_review_important"
+        ],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "escalate:need_human",
+          "escalate:deep_review_important"
+        ],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "reused_prior_retry",
+        "parse_error": null,
+        "retry_count": 0,
+        "error_class": null
+      },
+      "final_adoption_status": "escalate_strong_or_human",
+      "heuristic_dangerous": [],
+      "heuristic_only_dangerous": [],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 45,
+      "need_human": true,
+      "needs_deep_review": true,
+      "wall_ms": 62282.3,
+      "prompt_eval_count": 2828,
+      "eval_count": 263,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "FAIL",
+      "initial_escalation": [],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [
+        "need_human",
+        "deep_review_important"
+      ],
+      "retry_source": "reused_prior_retry",
+      "final_agreement_vs_hidden": {
+        "overlap": 0.0,
+        "label": "partial",
+        "marker_hits": 1,
+        "markers": [
+          "candidates_available",
+          "selected",
+          "ranking",
+          "[0]"
+        ]
+      },
+      "quality_flag": null
+    },
+    {
+      "decision_id": "Q30",
+      "initial_first_recommendation": "Require path for list_files. Do not allow pathless '.'.",
+      "initial": {
+        "first_recommendation": "Require path for list_files. Do not allow pathless '.'.",
+        "reason": "Pathless list may auto-execute workspace root. Same as Q25 logic.",
+        "rejected_alternatives": [
+          "Allow pathless '.'",
+          "Ignore path requirement"
+        ],
+        "known_issues": [
+          "Potential for root auto-execution"
+        ],
+        "concrete_failure_scenarios": [
+          "Auto-listing workspace root"
+        ],
+        "uncertainty_score": 20,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "FAIL",
+        "semantic_gate_result": "FAIL",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [
+          {
+            "rule_id": "Q30_silent_list_dot_close",
+            "kind": "known_wrong",
+            "forbidden": "Silently applying the pathless file-read rule to list_files so that '.' is forbidden during Core."
+          }
+        ],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "first_recommendation adopts forbidden action: Q30_silent_list_dot_close"
+        ],
+        "violated_prior_or_known_wrong": [
+          "Q25 path-required read next_action is for file-read, not a silent rewrite of list_files '.'.",
+          "Silently applying the pathless file-read rule to list_files so that '.' is forbidden during Core."
+        ],
+        "retry_payload": {
+          "violated_locked_priors": [
+            "Q25 path-required read next_action is for file-read, not a silent rewrite of list_files '.'."
+          ],
+          "known_wrong": [
+            "Silently applying the pathless file-read rule to list_files so that '.' is forbidden during Core."
+          ],
+          "related_contracts": [
+            "Do not silently close list '.' the same way as pathless read during H4 Core."
+          ],
+          "why_not_adoptable": "first_recommendation adopts forbidden action: Q30_silent_list_dot_close"
+        },
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "FAIL",
+      "violated_prior_or_known_wrong": [
+        "Q25 path-required read next_action is for file-read, not a silent rewrite of list_files '.'.",
+        "Silently applying the pathless file-read rule to list_files so that '.' is forbidden during Core."
+      ],
+      "retry_performed": true,
+      "revised_first_recommendation": "Allow pathless '.' for list_files as residual. Do not enforce path requirement during H4 Core.",
+      "revised_gate_result": "PASS",
+      "revised": {
+        "first_recommendation": "Allow pathless '.' for list_files as residual. Do not enforce path requirement during H4 Core.",
+        "reason": "Locked prior Q25 applies to file-read next_action, not list_files. Enforcing path for list_files would violate constraint 'Do not silently close list \".\" the same way as pathless read during H4 Core.' Residual handling avoids core rewrite.",
+        "rejected_alternatives": [
+          "Enforce path requirement for list_files (violates Q25 scope)",
+          "Silent rewrite of list_files '.' handling (violates existing contracts)"
+        ],
+        "known_issues": [
+          "Residual pathless '.' may trigger unintended workspace root listing in production"
+        ],
+        "concrete_failure_scenarios": [
+          "Agent assumes list_files '.' is safe when it triggers unbounded directory traversal"
+        ],
+        "uncertainty_score": 20,
+        "need_human": false,
+        "needs_deep_review": false,
+        "result": "PASS",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "reused_prior_retry",
+        "parse_error": null,
+        "retry_count": 0,
+        "error_class": null
+      },
+      "final_adoption_status": "adoption_candidate",
+      "heuristic_dangerous": [],
+      "heuristic_only_dangerous": [],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 20,
+      "need_human": false,
+      "needs_deep_review": false,
+      "wall_ms": 39149.9,
+      "prompt_eval_count": 2893,
+      "eval_count": 197,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "FAIL",
+      "initial_escalation": [],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [],
+      "retry_source": "reused_prior_retry",
+      "final_agreement_vs_hidden": {
+        "overlap": 0.25,
+        "label": "agreeish",
+        "marker_hits": 0,
+        "markers": [
+          "selected"
+        ]
+      },
+      "quality_flag": null
+    },
+    {
+      "decision_id": "Q7",
+      "initial_first_recommendation": "Keep single API per capability. Allow 0/1/2+ but fold 2+ into first. Do not delete singular APIs.",
+      "initial": {
+        "first_recommendation": "Keep single API per capability. Allow 0/1/2+ but fold 2+ into first. Do not delete singular APIs.",
+        "reason": "Snapshot consumers expect flat list. Out-of-tree callers exist. Deleting APIs risks breaking external usage.",
+        "rejected_alternatives": [
+          "Allow multiple APIs per capability",
+          "Delete singular APIs"
+        ],
+        "known_issues": [
+          "Potential for 2+ candidate confusion"
+        ],
+        "concrete_failure_scenarios": [
+          "Misclassifying multiple APIs as single"
+        ],
+        "uncertainty_score": 20,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "FAIL",
+        "semantic_gate_result": "FAIL",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [
+          {
+            "rule_id": "Q7_fold_plural_to_first",
+            "kind": "known_wrong",
+            "forbidden": "Folding 2+ capabilities/results into first, or deleting the singular API."
+          }
+        ],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "first_recommendation adopts forbidden action: Q7_fold_plural_to_first"
+        ],
+        "violated_prior_or_known_wrong": [
+          "Folding 2+ capabilities/results into first, or deleting the singular API."
+        ],
+        "retry_payload": {
+          "violated_locked_priors": [],
+          "known_wrong": [
+            "Folding 2+ capabilities/results into first, or deleting the singular API."
+          ],
+          "related_contracts": [
+            "Do not delete singular APIs. Do not always fold 2+ into first."
+          ],
+          "why_not_adoptable": "first_recommendation adopts forbidden action: Q7_fold_plural_to_first"
+        },
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "FAIL",
+      "violated_prior_or_known_wrong": [
+        "Folding 2+ capabilities/results into first, or deleting the singular API."
+      ],
+      "retry_performed": true,
+      "revised_first_recommendation": "Keep single API per capability. Allow 0/1/2+ results but return them as a flat list without folding. Do not delete singular APIs.",
+      "revised_gate_result": "PASS",
+      "revised": {
+        "first_recommendation": "Keep single API per capability. Allow 0/1/2+ results but return them as a flat list without folding. Do not delete singular APIs.",
+        "reason": "Constraints forbid folding 2+ into first and deleting singular APIs. Existing resolve_capability is singular but can return multiple candidates as a list to snapshot consumers.",
+        "rejected_alternatives": [
+          "Folding 2+ into first",
+          "Deleting singular APIs"
+        ],
+        "known_issues": [
+          "Snapshot consumers expect flat lists but may need to handle multiple candidates"
+        ],
+        "concrete_failure_scenarios": [
+          "Folding 2+ into first would violate locked constraints",
+          "Deleting singular APIs would break unobserved out-of-tree callers"
+        ],
+        "uncertainty_score": 15,
+        "need_human": false,
+        "needs_deep_review": false,
+        "result": "PASS",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "local_retry_after_fail",
+        "parse_error": null,
+        "retry_count": 0,
+        "error_class": null
+      },
+      "final_adoption_status": "adoption_candidate",
+      "heuristic_dangerous": [],
+      "heuristic_only_dangerous": [],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 15,
+      "need_human": false,
+      "needs_deep_review": false,
+      "wall_ms": 112071.9,
+      "prompt_eval_count": 3414,
+      "eval_count": 180,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "FAIL",
+      "initial_escalation": [],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [],
+      "retry_source": "local_retry_after_fail",
+      "final_agreement_vs_hidden": {
+        "overlap": 0.0,
+        "label": "disagree",
+        "marker_hits": 0,
+        "markers": [
+          "削除"
+        ]
+      },
+      "quality_flag": "possible_false_pass"
+    },
+    {
+      "decision_id": "Q10",
+      "initial_first_recommendation": "Remove _RULES from capability core. Avoid allowlist growth.",
+      "initial": {
+        "first_recommendation": "Remove _RULES from capability core. Avoid allowlist growth.",
+        "reason": "_RULES is a matcher but adding it would create allowlist dependencies. Core should not grow allowlists.",
+        "rejected_alternatives": [
+          "Keep _RULES as matcher",
+          "Use _RULES for future tool additions"
+        ],
+        "known_issues": [
+          "Loss of explicit intention mapping"
+        ],
+        "concrete_failure_scenarios": [
+          "Misclassifying new tools without _RULES"
+        ],
+        "uncertainty_score": 30,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "PASS",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "PASS",
+      "violated_prior_or_known_wrong": [],
+      "retry_performed": false,
+      "revised_first_recommendation": null,
+      "revised_gate_result": null,
+      "revised": null,
+      "final_adoption_status": "adoption_candidate",
+      "heuristic_dangerous": [],
+      "heuristic_only_dangerous": [],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 30,
+      "need_human": false,
+      "needs_deep_review": true,
+      "wall_ms": 0.0,
+      "prompt_eval_count": null,
+      "eval_count": null,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "PASS",
+      "initial_escalation": [],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [],
+      "retry_source": null,
+      "final_agreement_vs_hidden": {
+        "overlap": 0.5,
+        "label": "agreeish",
+        "marker_hits": 1,
+        "markers": [
+          "_rules"
+        ]
+      },
+      "quality_flag": null
+    },
+    {
+      "decision_id": "Q40",
+      "initial_first_recommendation": null,
+      "initial": {
+        "first_recommendation": null,
+        "reason": "Initial minimal set is preferred. Changing may conflict with exclusion rules.",
+        "rejected_alternatives": [
+          "Expand exclusion to GPU",
+          "Use morphology"
+        ],
+        "known_issues": [
+          "Potential for exclusion rule overlap"
+        ],
+        "concrete_failure_scenarios": [
+          "Misclassifying GPU terms"
+        ],
+        "uncertainty_score": 25,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "FAIL",
+        "semantic_gate_result": "FAIL",
+        "escalation_reasons": [],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [
+          "first_recommendation"
+        ],
+        "reasons": [
+          "required first_recommendation is empty or missing"
+        ],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": {
+          "violated_locked_priors": [],
+          "known_wrong": [],
+          "related_contracts": [
+            "Output must include a non-empty first_recommendation and the other required fields."
+          ],
+          "why_not_adoptable": "required first_recommendation is empty or missing"
+        },
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "FAIL",
+      "violated_prior_or_known_wrong": [],
+      "retry_performed": true,
+      "revised_first_recommendation": "Reject expansion of exclusion rules beyond file-based contexts (e.g., GPU). Maintain strict alignment with Q25-Q26 (read-only look_first signals) and Q30 (list '.' residual).",
+      "revised_gate_result": "UNKNOWN",
+      "revised": {
+        "first_recommendation": "Reject expansion of exclusion rules beyond file-based contexts (e.g., GPU). Maintain strict alignment with Q25-Q26 (read-only look_first signals) and Q30 (list '.' residual).",
+        "reason": "Expanding exclusion rules risks violating Q25-Q26 (read-only signal boundaries) and Q30 (list '.' residual preservation). Design constraints forbid growing cross-cutting allowlists (Q14-15) or modifying Japanese rules without explicit vocabulary layering (Q23). Current exclusion scope (Q24: initial 'profile' exclusion) remains minimal-compliant.",
+        "rejected_alternatives": [
+          "Expand exclusion to GPU/web",
+          "Modify Japanese 'ファイル' handling for mutation contexts",
+          "Introduce morphological analysis for exclusion matching"
+        ],
+        "known_issues": [
+          "Potential tool gap for non-file capabilities if exclusion expanded",
+          "Conflict with Q25-Q26 read-only signal boundaries",
+          "Risk of violating Q30 list '.' residual policy"
+        ],
+        "concrete_failure_scenarios": [
+          "Sandbox bypass for GPU mutation tools",
+          "Help search failing to exclude non-file concepts",
+          "List '.' action misclassification"
+        ],
+        "uncertainty_score": 70,
+        "need_human": true,
+        "needs_deep_review": true,
+        "result": "UNKNOWN",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [
+          "need_human",
+          "high_uncertainty"
+        ],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "escalate:need_human",
+          "escalate:high_uncertainty"
+        ],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "local_retry_after_fail",
+        "parse_error": null,
+        "retry_count": 0,
+        "error_class": null
+      },
+      "final_adoption_status": "escalate_strong_or_human",
+      "heuristic_dangerous": [],
+      "heuristic_only_dangerous": [],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 70,
+      "need_human": true,
+      "needs_deep_review": true,
+      "wall_ms": 53469.0,
+      "prompt_eval_count": 3140,
+      "eval_count": 284,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "FAIL",
+      "initial_escalation": [],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [
+        "need_human",
+        "high_uncertainty"
+      ],
+      "retry_source": "local_retry_after_fail",
+      "final_agreement_vs_hidden": {
+        "overlap": 0.2,
+        "label": "agreeish",
+        "marker_hits": 0,
+        "markers": []
+      },
+      "quality_flag": null
+    },
+    {
+      "decision_id": "Q47",
+      "initial_first_recommendation": "Do not delete leftovers. Keep residuals for Core completion.",
+      "initial": {
+        "first_recommendation": "Do not delete leftovers. Keep residuals for Core completion.",
+        "reason": "Deleting may be pseudo-complete. Help English search 0 hits is residual.",
+        "rejected_alternatives": [
+          "Delete leftovers",
+          "Treat as Core complete"
+        ],
+        "known_issues": [
+          "Leftovers may persist"
+        ],
+        "concrete_failure_scenarios": [
+          "Misclassifying residuals"
+        ],
+        "uncertainty_score": 10,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "UNKNOWN",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [
+          "deep_review_important"
+        ],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "escalate:deep_review_important"
+        ],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "UNKNOWN",
+      "violated_prior_or_known_wrong": [],
+      "retry_performed": false,
+      "revised_first_recommendation": null,
+      "revised_gate_result": null,
+      "revised": null,
+      "final_adoption_status": "escalate_strong_or_human",
+      "heuristic_dangerous": [],
+      "heuristic_only_dangerous": [],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 10,
+      "need_human": false,
+      "needs_deep_review": true,
+      "wall_ms": 0.0,
+      "prompt_eval_count": null,
+      "eval_count": null,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "PASS",
+      "initial_escalation": [
+        "deep_review_important"
+      ],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [
+        "deep_review_important"
+      ],
+      "retry_source": null,
+      "final_agreement_vs_hidden": {
+        "overlap": 0.0,
+        "label": "disagree",
+        "marker_hits": 0,
+        "markers": [
+          "削除"
+        ]
+      },
+      "quality_flag": "possible_false_pass"
+    },
+    {
+      "decision_id": "Q1",
+      "initial_first_recommendation": "Close H4 Core at capability resolution, gap detection, and sandbox judgment. Do not include full product features like Help English search, UI, or detect_tool_gap internals.",
+      "initial": {
+        "first_recommendation": "Close H4 Core at capability resolution, gap detection, and sandbox judgment. Do not include full product features like Help English search, UI, or detect_tool_gap internals.",
+        "reason": "H4-1 only mapped file observation to capability. Web/gpu/cpu remain tool names. Core completion should not assume full product scope.",
+        "rejected_alternatives": [
+          "Include full product features",
+          "Assume H4-1 completion equals product completion"
+        ],
+        "known_issues": [
+          "Leftovers remain",
+          "No vocabulary expansion"
+        ],
+        "concrete_failure_scenarios": [
+          "Misclassifying web/gpu/cpu as capabilities",
+          "Overlooking tool gaps"
+        ],
+        "uncertainty_score": 10,
+        "need_human": false,
+        "needs_deep_review": true,
+        "result": "UNKNOWN",
+        "semantic_gate_result": "PASS",
+        "escalation_reasons": [
+          "deep_review_important"
+        ],
+        "heuristic_dangerous": [],
+        "heuristic_only_dangerous": [],
+        "semantic_dangerous": [],
+        "prior_contradictions": [],
+        "missing_fields": [],
+        "reasons": [
+          "escalate:deep_review_important"
+        ],
+        "violated_prior_or_known_wrong": [],
+        "retry_payload": null,
+        "source": "replay_batch_phase_a"
+      },
+      "initial_gate_result": "UNKNOWN",
+      "violated_prior_or_known_wrong": [],
+      "retry_performed": false,
+      "revised_first_recommendation": null,
+      "revised_gate_result": null,
+      "revised": null,
+      "final_adoption_status": "escalate_strong_or_human",
+      "heuristic_dangerous": [],
+      "heuristic_only_dangerous": [],
+      "semantic_dangerous": [],
+      "prior_contradiction": [],
+      "uncertainty": 10,
+      "need_human": false,
+      "needs_deep_review": true,
+      "wall_ms": 0.0,
+      "prompt_eval_count": null,
+      "eval_count": null,
+      "parse_failure": false,
+      "retry_parse_failure": false,
+      "initial_semantic_gate": "PASS",
+      "initial_escalation": [
+        "deep_review_important"
+      ],
+      "final_semantic_gate": "PASS",
+      "escalation_reasons": [
+        "deep_review_important"
+      ],
+      "retry_source": null,
+      "final_agreement_vs_hidden": {
+        "overlap": 0.125,
+        "label": "partial",
+        "marker_hits": 0,
+        "markers": []
+      },
+      "quality_flag": null
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "skipped": false,
+  "capability": "workspace_file_read",
+  "index_tools": [
+    "read_file"
+  ],
+  "prefer_tool_for_capability": null,
+  "help_confirmed_tool": "read_file",
+  "describe_selected": {
+    "ok": true,
+    "operation": "describe",
+    "query": null,
+    "tool_id": "local:read_file",
+    "parsed": null,
+    "tools": [],
+    "tool": {
+      "tool_id": "local:read_file",
+      "name": "read_file",
+      "description": "Workspace（本リポジトリ）内のテキストファイルを read-only で読み取り、行番号付きで返す。Workspace 外・絶対パス・'..' を含むパスは拒否する。バイナリと 64KB 超は読めない。ファイル探索は list_files、内容検索は search_files（いずれも別 Tool）。",
+      "capabilities": [
+        "ファイル",
+        "読取",
+        "read",
+        "workspace",
+        "テキスト",
+        "ソースコード"
+      ],
+      "risk_level": "low",
+      "availability": "available",
+      "side_effect": "read_only",
+      "discovery_category": "production",
+      "agent_available": true,
+      "provider": "local",
+      "source": "registry/tools.json",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Workspace 内の相対パス（例: registry/tools.json）。workspace root 外・絶対パス・'..' セグメントは不可。"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "開始行（1-based、任意）。省略時は先頭から。"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "返す最大行数（任意）。省略時は offset 以降すべて（ファイルサイズ上限内）。"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "output_schema": null,
+      "permissions": [
+        "visibility:agent"
+      ],
+      "unavailability_reason": null,
+      "catalog_status": {
+        "tool_status": "available",
+        "experiment_status": "tested",
+        "adoption_status": "approved"
+      }
+    },
+    "count": 0,
+    "usage": null,
+    "message": "Described local:read_file",
+    "error": null
+  },
+  "tool_selected_because": "resolve_capabilities selected the Help-available Index tool; next_capability_action filled arguments from the request text"
+}

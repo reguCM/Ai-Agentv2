@@ -1,0 +1,27 @@
+{
+  "label": "classify_q1",
+  "prompt": {
+    "system": "あなたは Goal 具体化の中間判定役です。\n人間へ質問する前に、その Decision が人間の意図を必要とするかを判定します。\nコードは書かない。人間の回答を作らない。JSON のみ返す。\n\n判定の観点:\n- human_intent_required: 人間の好み・完成像・利用体験・要求が必要か\n- human_impact: 決めた結果が人間の使い方・見た目・体験を変えるか (none/low/medium/high)\n- technical_only: 実装手段の差で、Goal 上の人間体験に実質差が小さいか\n\n環境事実として与えられたことは人間に聞かない。\nGoal が技術手段の選定を AI に任せているなら、それは判定材料になる。Q番号ルールにはしない。\n矛盾チェック: 既存 Goal / Environment / 既知の確定仕様と recommendation が矛盾しないか。\n",
+    "user": "# Goal\nこのPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。\n\n# Environment facts (already known; do not ask)\n{\n  \"os\": \"Windows-10-10.0.26200-SP0\",\n  \"python\": \"3.10.11\",\n  \"workspace\": \"AI-Agent development worktree (not a blank game project)\",\n  \"local_llm\": \"Ollama is used by this experiment runner\",\n  \"note\": \"A simple Tetris that runs on this PC. Do not ask OS/runtime facts already listed.\"\n}\n\n# Current system state\n{\n  \"goal\": \"このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。\",\n  \"environment_facts\": {\n    \"os\": \"Windows-10-10.0.26200-SP0\",\n    \"python\": \"3.10.11\",\n    \"workspace\": \"AI-Agent development worktree (not a blank game project)\",\n    \"local_llm\": \"Ollama is used by this experiment runner\",\n    \"note\": \"A simple Tetris that runs on this PC. Do not ask OS/runtime facts already listed.\"\n  },\n  \"human_requirements\": [\n    {\n      \"id\": \"goal_text\",\n      \"text\": \"このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。\",\n      \"source\": \"parent_run.goal\"\n    }\n  ],\n  \"confirmed_decisions\": [],\n  \"assumptions\": [],\n  \"unresolved\": [],\n  \"delegated\": []\n}\n\n# Pending decision (from a previous Grill turn)\n{\n  \"source_turn\": 1,\n  \"focus_item\": {\n    \"id\": \"lib_choice\",\n    \"title\": \"ゲーム開発に使用するPythonライブラリの選定\",\n    \"why_now\": \"テトリスの実装に必要な基本的な技術スタックを確定させる必要がある\"\n  },\n  \"question\": \"テトリスの実装に使用するPythonのゲーム開発ライブラリをどう選ぶべきか？\",\n  \"options\": [\n    {\n      \"id\": \"A\",\n      \"label\": \"Pygame\",\n      \"description\": \"2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適\"\n    },\n    {\n      \"id\": \"B\",\n      \"label\": \"Panda3D\",\n      \"description\": \"3Dゲーム開発に強みがあるが、2Dゲームでも使用可能\"\n    },\n    {\n      \"id\": \"C\",\n      \"label\": \"自作実装\",\n      \"description\": \"pygameなどのライブラリを使わず、標準ライブラリのみで実装\"\n    }\n  ],\n  \"recommendation\": {\n    \"id\": \"A\",\n    \"reason\": \"テトリスの実装に必要な機能が豊富で、学習コストが低い\"\n  },\n  \"recommended_option\": {\n    \"id\": \"A\",\n    \"label\": \"Pygame\",\n    \"description\": \"2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適\"\n  }\n}\n\nこの pending decision は人間へ聞くべきか、AI だけで決めてよいか判定せよ。\nAI で決めてよいなら recommendation を採用候補として adopt に書け。\nQ番号や特定ライブラリ名を正解として扱うな。中身を見て判定せよ。\n出力JSONの形:\n{\n  \"human_intent_required\": false,\n  \"human_impact\": \"none|low|medium|high\",\n  \"technical_only\": true,\n  \"classification\": \"ai_decidable|human_required|mixed\",\n  \"next_action\": \"adopt_recommendation|ask_human|abstain\",\n  \"reason\": \"判定理由\",\n  \"contradicts_goal_or_env\": false,\n  \"recommendation_ok_to_adopt\": true,\n  \"adopt\": {\n    \"id\": \"short_id\",\n    \"title\": \"仕様項目名\",\n    \"value\": \"確定する値\",\n    \"reason\": \"採用理由\"\n  }\n}"
+  },
+  "raw_response": "{\n  \"human_intent_required\": false,\n  \"human_impact\": \"low\",\n  \"technical_only\": true,\n  \"classification\": \"ai_decidable\",\n  \"next_action\": \"adopt_recommendation\",\n  \"reason\": \"Pygameは2Dゲーム開発に特化しており、テトリスのようなシンプルなゲームに最適な技術選択である。環境要件(Windows 10/Python 3.10)と互換性があり、既知の確定仕様と矛盾しない。\",\n  \"contradicts_goal_or_env\": false,\n  \"recommendation_ok_to_adopt\": true,\n  \"adopt\": {\n    \"id\": \"lib_choice\",\n    \"title\": \"ゲーム開発に使用するPythonライブラリの選定\",\n    \"value\": \"Pygame\",\n    \"reason\": \"2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適\"\n  }\n}",
+  "elapsed_s": 41.59,
+  "error": null,
+  "parse_error": null,
+  "parsed": {
+    "human_intent_required": false,
+    "human_impact": "low",
+    "technical_only": true,
+    "classification": "ai_decidable",
+    "next_action": "adopt_recommendation",
+    "reason": "Pygameは2Dゲーム開発に特化しており、テトリスのようなシンプルなゲームに最適な技術選択である。環境要件(Windows 10/Python 3.10)と互換性があり、既知の確定仕様と矛盾しない。",
+    "contradicts_goal_or_env": false,
+    "recommendation_ok_to_adopt": true,
+    "adopt": {
+      "id": "lib_choice",
+      "title": "ゲーム開発に使用するPythonライブラリの選定",
+      "value": "Pygame",
+      "reason": "2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適"
+    }
+  }
+}

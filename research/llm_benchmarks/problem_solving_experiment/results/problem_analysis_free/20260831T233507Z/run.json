@@ -1,0 +1,40 @@
+{
+  "experiment": "problem_analysis_free",
+  "note": "Free-form Problem Analysis. Categories not listed in prompt. Not FA. Not the tool-using problem-solving loop. Same A-E failures as problem_analysis_standalone.",
+  "at": "2026-08-31T23:35:07.712999+00:00",
+  "model": "deepseek-coder-v2:16b",
+  "prompt_template": "You are analyzing a software failure.\n\nDo not fix the problem yet.\n\nAnalyze the failure carefully.\nDetermine what can be understood from the information currently available, what cannot be determined, and what would need to be understood or investigated before the problem can be safely resolved.\n\nDo not use tools.\nDo not propose code changes yet.\n\nFailure:\n{failure}\n",
+  "compared_to": "results/problem_analysis/20260831T232753Z",
+  "cases": [
+    {
+      "id": "A_index_error",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 3193
+    },
+    {
+      "id": "B_none_attribute",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 2811
+    },
+    {
+      "id": "C_validation_fields",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 2242
+    },
+    {
+      "id": "D_cuda_init",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 3296
+    },
+    {
+      "id": "E_information_poor",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 2994
+    }
+  ]
+}

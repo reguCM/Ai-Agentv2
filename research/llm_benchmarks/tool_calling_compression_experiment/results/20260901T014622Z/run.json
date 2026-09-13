@@ -1,0 +1,89 @@
+{
+  "experiment_id": "tool_calling_compression",
+  "fixture_version": "ticket_stage_v1",
+  "prompt": "Resolve the problem.",
+  "at": "2026-09-01T01:46:23.354225+00:00",
+  "temperature": 0.0,
+  "max_turns_native": 12,
+  "max_turns_text": 1,
+  "models": [
+    "qwen3:14b",
+    "gemma3:12b"
+  ],
+  "paths": [
+    "text",
+    "native"
+  ],
+  "initial_pytest_exit_code": 1,
+  "initial_main_exit_code": 1,
+  "runs": [
+    {
+      "model": "qwen3:14b",
+      "path": "text",
+      "stop_reason": "text_path_single_turn",
+      "turns": 1,
+      "call_ok": true,
+      "parse_status": [
+        "text_path_no_tools_param"
+      ],
+      "tool_calls": [
+        []
+      ]
+    },
+    {
+      "model": "qwen3:14b",
+      "path": "native",
+      "stop_reason": "idle_no_native_tool",
+      "turns": 6,
+      "call_ok": true,
+      "parse_status": [
+        "native_tool_calling",
+        "native_tool_calling",
+        "no_native_tool_call",
+        "native_tool_calling",
+        "no_native_tool_call",
+        "no_native_tool_call"
+      ],
+      "tool_calls": [
+        [
+          "apply_patch"
+        ],
+        [
+          "apply_patch"
+        ],
+        [],
+        [
+          "apply_patch"
+        ],
+        [],
+        []
+      ]
+    },
+    {
+      "model": "gemma3:12b",
+      "path": "text",
+      "stop_reason": "text_path_single_turn",
+      "turns": 1,
+      "call_ok": true,
+      "parse_status": [
+        "text_path_no_tools_param"
+      ],
+      "tool_calls": [
+        []
+      ]
+    },
+    {
+      "model": "gemma3:12b",
+      "path": "native",
+      "stop_reason": "native_tools_unsupported",
+      "turns": 1,
+      "call_ok": false,
+      "parse_status": [
+        "native_tools_unsupported"
+      ],
+      "tool_calls": [
+        []
+      ]
+    }
+  ]
+}

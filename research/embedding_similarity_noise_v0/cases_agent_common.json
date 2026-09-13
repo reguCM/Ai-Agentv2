@@ -1,0 +1,80 @@
+{
+  "note": "Same Human Input Noise types and slot evaluation as cases_agent_slots.json. Domain changed to common AI-Agent requests (read_file / search_files / search_web). Not a Production schema. Not a SELECTED rule.",
+  "gold_label_language": "ja",
+  "slot_schema_status": "PROVISIONAL_NOT_IN_PRODUCTION",
+  "slot_mapping_note": "Goal/Meaning/Focus/Target Role は現行スキーマではない。Goal=達成したいこと、Meaning=要求の意味、Focus=pathまたはTool焦点、Target Role=read_file / search_files / search_web の役割。",
+  "anchors": {
+    "read": {
+      "label": "このファイルを読んで",
+      "clean_query_id": "read_clean",
+      "object_id": "read",
+      "registry_tool": "read_file"
+    },
+    "search": {
+      "label": "リポジトリの中を検索して",
+      "clean_query_id": "search_clean",
+      "object_id": "search",
+      "registry_tool": "search_files"
+    },
+    "web": {
+      "label": "ネットで調べて",
+      "clean_query_id": "web_clean",
+      "object_id": "web",
+      "registry_tool": "search_web"
+    }
+  },
+  "candidates": [
+    {"id": "c_goal_read", "slot_type": "goal", "object_id": "read", "text": "Goal: 指定ファイルを読んで要約する", "kind": "goal_read"},
+    {"id": "c_meaning_read", "slot_type": "meaning", "object_id": "read", "text": "Meaning: ワークスペースのファイルを読む", "kind": "meaning_read"},
+    {"id": "c_focus_read", "slot_type": "focus", "object_id": "read", "text": "Focus path: docs/CURRENT_DEVELOPMENT_STATE.md", "kind": "focus_read"},
+    {"id": "c_role_read", "slot_type": "target_role", "object_id": "read", "text": "Target Role: read_file のワークスペース読取", "kind": "role_read"},
+    {"id": "c_goal_search", "slot_type": "goal", "object_id": "search", "text": "Goal: リポジトリ内を検索して該当箇所を探す", "kind": "goal_search"},
+    {"id": "c_meaning_search", "slot_type": "meaning", "object_id": "search", "text": "Meaning: ワークスペース内を文字列検索する", "kind": "meaning_search"},
+    {"id": "c_focus_search", "slot_type": "focus", "object_id": "search", "text": "Focus path: search_files query in workspace", "kind": "focus_search"},
+    {"id": "c_role_search", "slot_type": "target_role", "object_id": "search", "text": "Target Role: search_files のワークスペース検索", "kind": "role_search"},
+    {"id": "c_goal_web", "slot_type": "goal", "object_id": "web", "text": "Goal: ネットで調べて要点を返す", "kind": "goal_web"},
+    {"id": "c_meaning_web", "slot_type": "meaning", "object_id": "web", "text": "Meaning: ウェブを検索する", "kind": "meaning_web"},
+    {"id": "c_focus_web", "slot_type": "focus", "object_id": "web", "text": "Focus: search_web の検索クエリ", "kind": "focus_web"},
+    {"id": "c_role_web", "slot_type": "target_role", "object_id": "web", "text": "Target Role: search_web のネット検索", "kind": "role_web"},
+    {"id": "c_goal_weather", "slot_type": "goal", "object_id": "unrelated", "text": "Goal: 今日の天気を調べる", "kind": "wrong_goal"},
+    {"id": "c_meaning_cpu", "slot_type": "meaning", "object_id": "unrelated", "text": "Meaning: CPU温度の取得方法", "kind": "wrong_meaning"},
+    {"id": "c_meaning_create", "slot_type": "meaning", "object_id": "unrelated", "text": "Meaning: 新しいファイルを作る", "kind": "wrong_related_file"},
+    {"id": "c_focus_license", "slot_type": "focus", "object_id": "unrelated", "text": "Focus path: LICENSE", "kind": "wrong_focus"},
+    {"id": "c_role_followup", "slot_type": "target_role", "object_id": "unrelated", "text": "Target Role: followup_investigation の追加調査", "kind": "wrong_role"}
+  ],
+  "queries": [
+    {"id": "read_clean", "anchor_id": "read", "noise_type": "clean", "text": "このファイルを読んで", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "ノイズなし。読取のMeaning"},
+    {"id": "read_typo", "anchor_id": "read", "noise_type": "typo", "text": "このふぁいるを読んで", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "ファイルをひらがなで打った"},
+    {"id": "read_conversion", "anchor_id": "read", "noise_type": "conversion", "text": "このファイルを呼んで", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "よんで→呼んで"},
+    {"id": "read_missing_char", "anchor_id": "read", "noise_type": "missing_char", "text": "このファイルを読", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "んでが抜けた"},
+    {"id": "read_particle", "anchor_id": "read", "noise_type": "particle_drop", "text": "このファイル読んで", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "を 抜け"},
+    {"id": "read_colloquial", "anchor_id": "read", "noise_type": "colloquial", "text": "このファイルのやつ読んで", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "口語のやつ"},
+    {"id": "read_filler", "anchor_id": "read", "noise_type": "filler", "text": "えっとこのファイルを読んで", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "フィラー えっと"},
+    {"id": "read_restatement", "anchor_id": "read", "noise_type": "restatement", "text": "いや検索じゃなくてこのファイルを読んで", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "言い直し。否定語に検索が含まれる"},
+    {"id": "read_asr", "anchor_id": "read", "noise_type": "asr_like", "text": "このファいるを呼んで", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "ファイル+読んで の音声認識風"},
+    {"id": "read_demonstrative", "anchor_id": "read", "noise_type": "demonstrative", "text": "そっちのファイル", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "指示語。ファイルは残っている"},
+    {"id": "read_compound", "anchor_id": "read", "noise_type": "compound", "text": "えっとこのファイルを呼んでくれるやつ", "gold_id": "c_meaning_read", "intended_slot_id": "c_meaning_read", "note": "フィラー+変換ミス+口語"},
+    {"id": "search_clean", "anchor_id": "search", "noise_type": "clean", "text": "リポジトリの中を検索して", "gold_id": "c_meaning_search", "intended_slot_id": "c_meaning_search", "note": "ノイズなし。検索のMeaning"},
+    {"id": "search_typo", "anchor_id": "search", "noise_type": "typo", "text": "りぽじとりの中を検索して", "gold_id": "c_meaning_search", "intended_slot_id": "c_meaning_search", "note": "リポジトリをひらがなで打った"},
+    {"id": "search_conversion", "anchor_id": "search", "noise_type": "conversion", "text": "リポジトリの中を件作して", "gold_id": "c_meaning_search", "intended_slot_id": "c_meaning_search", "note": "けんさく→件作"},
+    {"id": "search_missing_char", "anchor_id": "search", "noise_type": "missing_char", "text": "リポジトリの中を検", "gold_id": "c_meaning_search", "intended_slot_id": "c_meaning_search", "note": "索してが抜けた"},
+    {"id": "search_particle", "anchor_id": "search", "noise_type": "particle_drop", "text": "リポジトリ中を検索して", "gold_id": "c_meaning_search", "intended_slot_id": "c_meaning_search", "note": "の 抜け"},
+    {"id": "search_colloquial", "anchor_id": "search", "noise_type": "colloquial", "text": "中を探してるほう", "gold_id": "c_role_search", "intended_slot_id": "c_role_search", "note": "口語。どの経路かの Target Role"},
+    {"id": "search_filler", "anchor_id": "search", "noise_type": "filler", "text": "あのーリポジトリの中を検索してなんですけど", "gold_id": "c_meaning_search", "intended_slot_id": "c_meaning_search", "note": "フィラー+なんですけど"},
+    {"id": "search_restatement", "anchor_id": "search", "noise_type": "restatement", "text": "ネットじゃなくてリポジトリの中を検索して", "gold_id": "c_meaning_search", "intended_slot_id": "c_meaning_search", "note": "言い直し。否定語にネットが含まれる"},
+    {"id": "search_asr", "anchor_id": "search", "noise_type": "asr_like", "text": "リポジ鳥の中を件作して", "gold_id": "c_meaning_search", "intended_slot_id": "c_meaning_search", "note": "リポジトリ+検索 の音声認識風"},
+    {"id": "search_demonstrative", "anchor_id": "search", "noise_type": "demonstrative", "text": "ローカルのほう", "gold_id": "c_role_search", "intended_slot_id": "c_role_search", "note": "指示語的なほう。Target Role"},
+    {"id": "search_compound", "anchor_id": "search", "noise_type": "compound", "text": "あの実際フォルダで探してるほう", "gold_id": "c_role_search", "intended_slot_id": "c_role_search", "note": "フィラー+口語+指示語。Target Role"},
+    {"id": "web_clean", "anchor_id": "web", "noise_type": "clean", "text": "ネットで調べて", "gold_id": "c_meaning_web", "intended_slot_id": "c_meaning_web", "note": "ノイズなし。ネット検索のMeaning"},
+    {"id": "web_typo", "anchor_id": "web", "noise_type": "typo", "text": "ねっとで調べて", "gold_id": "c_meaning_web", "intended_slot_id": "c_meaning_web", "note": "ネットをひらがなで打った"},
+    {"id": "web_conversion", "anchor_id": "web", "noise_type": "conversion", "text": "熱っとで調べて", "gold_id": "c_meaning_web", "intended_slot_id": "c_meaning_web", "note": "ネット→熱っと"},
+    {"id": "web_missing_char", "anchor_id": "web", "noise_type": "missing_char", "text": "ネットで調", "gold_id": "c_meaning_web", "intended_slot_id": "c_meaning_web", "note": "べてが抜けた"},
+    {"id": "web_particle", "anchor_id": "web", "noise_type": "particle_drop", "text": "ネット調べて", "gold_id": "c_meaning_web", "intended_slot_id": "c_meaning_web", "note": "で 抜け"},
+    {"id": "web_colloquial", "anchor_id": "web", "noise_type": "colloquial", "text": "ネットのやつ", "gold_id": "c_role_web", "intended_slot_id": "c_role_web", "note": "口語のやつ。Target Role"},
+    {"id": "web_filler", "anchor_id": "web", "noise_type": "filler", "text": "まあネットで調べてかな", "gold_id": "c_meaning_web", "intended_slot_id": "c_meaning_web", "note": "フィラー まあ+かな"},
+    {"id": "web_restatement", "anchor_id": "web", "noise_type": "restatement", "text": "ローカルじゃなくてネットで調べて", "gold_id": "c_meaning_web", "intended_slot_id": "c_meaning_web", "note": "言い直し。否定語にローカルが含まれる"},
+    {"id": "web_asr", "anchor_id": "web", "noise_type": "asr_like", "text": "熱斗で調べて", "gold_id": "c_meaning_web", "intended_slot_id": "c_meaning_web", "note": "ネットの音声認識風誤変換"},
+    {"id": "web_demonstrative", "anchor_id": "web", "noise_type": "demonstrative", "text": "ネットのほう", "gold_id": "c_role_web", "intended_slot_id": "c_role_web", "note": "指示語 ほう。Target Role"},
+    {"id": "web_compound", "anchor_id": "web", "noise_type": "compound", "text": "まあねっとで調べるのも", "gold_id": "c_role_web", "intended_slot_id": "c_role_web", "note": "フィラー+ひらがな+末尾切れ。Target Role"}
+  ]
+}

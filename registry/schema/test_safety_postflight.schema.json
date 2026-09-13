@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/test_safety_postflight.schema.json",
+  "title": "Test Safety Postflight Result (S5c)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "postflight_status",
+    "required_checks",
+    "completed_checks",
+    "warnings",
+    "unexpected_changes"
+  ],
+  "properties": {
+    "postflight_status": {
+      "type": "string",
+      "enum": ["PASS", "INCOMPLETE", "FAILED"]
+    },
+    "required_checks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "completed_checks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unexpected_changes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "summary": {
+    "n": 1,
+    "ids": [
+      "Q31"
+    ],
+    "AUTO": 0,
+    "REVIEW": 1,
+    "HUMAN": 0,
+    "auto_ids": [],
+    "review_ids": [
+      "Q31"
+    ],
+    "human_ids": [],
+    "semantic_dangerous_count": 1,
+    "parse_failure": 0,
+    "missing_output": 0
+  },
+  "records": [
+    {
+      "decision_id": "Q31",
+      "first_recommendation": "Inject only [0] next_action. Inject none if multiple.",
+      "semantic_gate": "FAIL",
+      "semantic_dangerous": [
+        {
+          "rule_id": "cardinality_index_or_head_select",
+          "kind": "known_wrong",
+          "forbidden": "Selecting, injecting, or resolving among 2+ candidates by list index [0], first, or head without a unique non-index reason."
+        }
+      ],
+      "route": "REVIEW",
+      "notes": [
+        "semantic_fail_contract_recheck"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false
+    }
+  ],
+  "llm_called": false
+}

@@ -1,0 +1,60 @@
+{
+  "tool_id": "local:cpu_status",
+  "name": "cpu_status",
+  "version": "1.0.0",
+  "description": "CPUの基本状態を取得する。個別メトリクスの取得可否は未確認。",
+  "provider": "local",
+  "source": "registry/tools.json",
+  "capability": ["CPU", "状態"],
+  "purpose": "Windows CIM から CPU LoadPercentage を取得する",
+  "allowed_operations": ["read", "execute"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": { "type": "string" }
+    },
+    "required": ["status"]
+  },
+  "success_format": "{\"status\": \"<LoadPercentage>\"}",
+  "error_format": {
+    "status": "error"
+  },
+  "side_effect": "execute",
+  "required_permission": ["visibility:agent"],
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "external_service_access": ["powershell", "Win32_Processor"],
+  "risk_level": "low",
+  "expected_failure": ["powershell non-zero exit", "non-Windows"],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "Windows only",
+    "LoadPercentage のみ",
+    "observation_source フィールドを実装が返さない"
+  ],
+  "cost": "free",
+  "tool_status": "available",
+  "catalog_hints": {
+    "experiment_status": "unknown",
+    "adoption_status": "approved"
+  },
+  "contract": {
+    "can": ["invoke_powershell_cim_query", "return_load_percentage_string"],
+    "cannot": ["write_files", "network_access"],
+    "must": ["return_dict_with_status_key"],
+    "must_not": ["raise_on_powershell_failure"]
+  },
+  "provider_specific": {
+    "module": "tools.system.cpu.cpu_status",
+    "function": "cpu_status",
+    "registry_visibility": "agent",
+    "registry_output": ["status"]
+  }
+}

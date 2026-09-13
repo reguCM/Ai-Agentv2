@@ -1,0 +1,61 @@
+{
+  "id": "insufficient_research_memory_capacity",
+  "class": "research_misses_request",
+  "wired_into_repair": false,
+  "note": "Verifier はコマンドが実行できたことだけを high にする。要求はメモリ使用率だが、sample は搭載容量の Sum。意図的な失敗ケース。正解コマンドはここに書かない。",
+  "source_runs": "research/llm_benchmarks/environment_results.json の qwen3_8b 3回（research 先行後）。temperature=0 で同一。",
+  "request": "Windowsのメモリ使用率を取得するToolを追加してください",
+  "proposal_name": "get_memory_status",
+  "what_research_found": "Win32_PhysicalMemory の Capacity 合計",
+  "why_insufficient": "sample は Count/Sum/Property: Capacity。使用中の割合ではない。",
+  "research_result": {
+    "usable_findings": [
+      {
+        "kind": "output",
+        "question": "output 'status' の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum"
+          ],
+          "returncode": 0,
+          "sample": [
+            "Count    : 2",
+            "Average  :",
+            "Sum      : 68719476736",
+            "Maximum  :",
+            "Minimum  :",
+            "Property : Capacity"
+          ],
+          "stderr": "",
+          "error": null,
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      }
+    ],
+    "reference_findings": [],
+    "unresolved": []
+  },
+  "observed_implementation": {
+    "diagnosis": "code_received",
+    "notes": [
+      "powershell コマンドの出力解析は簡略化しています",
+      "実際のメモリ状態取得にはさらに処理が必要"
+    ],
+    "return_shape": {
+      "status": {
+        "total": 68719476736,
+        "used": 68719476736,
+        "free": 0,
+        "usage_rate": 100
+      }
+    },
+    "validator_code": "unconfirmed_looks_complete"
+  }
+}

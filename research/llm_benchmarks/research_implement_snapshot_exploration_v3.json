@@ -1,0 +1,288 @@
+{
+  "note": "④本体 探索再起動 v3 後の実行記録。results.json から要約を凍結（上書きしない）。",
+  "recorded_at": "2026-08-19T06:40:00Z",
+  "benchmark": "python -m research.llm_benchmarks.research_implement",
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "changes": [
+    "exploration_hints / empty_search_restart",
+    "exploration_retry_needed（空候補・拒否候補のみでも再試行）",
+    "run_research に exploration_retry_extra 配線"
+  ],
+  "runs": [
+    {
+      "timestamp": "2026-08-19T06:33:19.870032+00:00",
+      "fail_stage": "research",
+      "error": "stagnation",
+      "pipeline_first_fail": "usable_finding",
+      "pipeline_stages_ok": {
+        "state_held": true,
+        "candidates_generated": true,
+        "verifier_ran": true,
+        "verifier_failure_detected": true,
+        "judge_a_quality": true,
+        "research_retried": true,
+        "usable_finding": false,
+        "judge_adopted": false,
+        "implementation_code": false,
+        "tool_runs": false
+      },
+      "usable_count": 0,
+      "research_rounds": 3,
+      "rounds_detail": [
+        {
+          "round": 1,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        },
+        {
+          "round": 2,
+          "candidates": 0,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        },
+        {
+          "round": 3,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T06:37:36.923261+00:00",
+      "fail_stage": "judge",
+      "error": "max_research_rounds",
+      "pipeline_first_fail": "judge_adopted",
+      "pipeline_stages_ok": {
+        "state_held": true,
+        "candidates_generated": true,
+        "verifier_ran": true,
+        "verifier_failure_detected": true,
+        "judge_a_quality": true,
+        "research_retried": true,
+        "usable_finding": true,
+        "judge_adopted": false,
+        "implementation_code": false,
+        "tool_runs": false
+      },
+      "usable_count": 1,
+      "research_rounds": 10,
+      "rounds_detail": [
+        {
+          "round": 1,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        },
+        {
+          "round": 2,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        },
+        {
+          "round": 3,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memoryの正確な値を確認する必要があります。"
+          ]
+        },
+        {
+          "round": 4,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        },
+        {
+          "round": 5,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memoryの正確な値"
+          ]
+        },
+        {
+          "round": 6,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memoryの正確な値"
+          ]
+        },
+        {
+          "round": 7,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "B",
+          "missing": [
+            "memory usage rate"
+          ]
+        },
+        {
+          "round": 8,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        },
+        {
+          "round": 9,
+          "candidates": 0,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        },
+        {
+          "round": 10,
+          "candidates": 1,
+          "verify_fail": null,
+          "judge_grade": "A",
+          "missing": [
+            "total physical memory is still unconfirmed"
+          ]
+        }
+      ]
+    }
+  ],
+  "latest": {
+    "timestamp": "2026-08-19T06:37:36.923261+00:00",
+    "fail_stage": "judge",
+    "error": "max_research_rounds",
+    "pipeline_first_fail": "judge_adopted",
+    "pipeline_stages_ok": {
+      "state_held": true,
+      "candidates_generated": true,
+      "verifier_ran": true,
+      "verifier_failure_detected": true,
+      "judge_a_quality": true,
+      "research_retried": true,
+      "usable_finding": true,
+      "judge_adopted": false,
+      "implementation_code": false,
+      "tool_runs": false
+    },
+    "usable_count": 1,
+    "research_rounds": 10,
+    "rounds_detail": [
+      {
+        "round": 1,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memory is still unconfirmed"
+        ]
+      },
+      {
+        "round": 2,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memory is still unconfirmed"
+        ]
+      },
+      {
+        "round": 3,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memoryの正確な値を確認する必要があります。"
+        ]
+      },
+      {
+        "round": 4,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memory is still unconfirmed"
+        ]
+      },
+      {
+        "round": 5,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memoryの正確な値"
+        ]
+      },
+      {
+        "round": 6,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memoryの正確な値"
+        ]
+      },
+      {
+        "round": 7,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "B",
+        "missing": [
+          "memory usage rate"
+        ]
+      },
+      {
+        "round": 8,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memory is still unconfirmed"
+        ]
+      },
+      {
+        "round": 9,
+        "candidates": 0,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memory is still unconfirmed"
+        ]
+      },
+      {
+        "round": 10,
+        "candidates": 1,
+        "verify_fail": null,
+        "judge_grade": "A",
+        "missing": [
+          "total physical memory is still unconfirmed"
+        ]
+      }
+    ]
+  },
+  "source": "research/llm_benchmarks/research_implement_results.json"
+}

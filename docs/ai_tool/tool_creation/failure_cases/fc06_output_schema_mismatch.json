@@ -1,0 +1,39 @@
+{
+  "tool_id": "local:output_mismatch",
+  "name": "output_mismatch",
+  "version": "1.0.0",
+  "description": "output_schema does not match recorded implementation sample",
+  "provider": "local",
+  "source": "test",
+  "capability": ["GPU"],
+  "purpose": "failure case 06 — semantic output check",
+  "allowed_operations": ["read"],
+  "prohibited_operations": ["write"],
+  "input_schema": { "type": "object", "additionalProperties": false },
+  "output_schema": {
+    "type": "object",
+    "required": ["only_wrong_field"],
+    "properties": {
+      "only_wrong_field": { "type": "string" }
+    }
+  },
+  "error_format": { "error": "string" },
+  "side_effect": "read_only",
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "risk_level": "low",
+  "cost": "free",
+  "tool_status": "available",
+  "contract": {
+    "can": ["read"],
+    "cannot": ["write"],
+    "must": ["return_dict"],
+    "must_not": ["fabricate"]
+  },
+  "provider_specific": {
+    "module": "tools.system.gpu.gpu_status",
+    "function": "get_gpu_status"
+  },
+  "output_validation_fixture": "fixtures/get_gpu_status_sample_keys.json"
+}

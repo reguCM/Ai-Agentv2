@@ -1,0 +1,39 @@
+まだ何も調査していない。
+
+具体化:
+**次に知る必要があること:**  
+gridのデータが保存されている場所や、アクセス可能なシステム（例: データベース、ファイル、APIなど）を特定する。  
+
+**理由:**  
+gridの構造と内容を把握するためには、まずその存在場所や取得方法を明確にすることが前提となるため、この確認が次のステップの基盤となる。
+
+具体化:
+**不足していること:**  
+gridの定義や範囲（例: 特定のシステム内での役割、関連する業務プロセス、データの種類など）を明確にする。  
+
+**理由:**  
+"grid"という語は文脈によって意味が大きく異なるため（例: データ構造、UI要素、ネットワーク構成など）、その具体的な定義や対象となる領域を特定しないと、後続の調査が誤った方向に進む可能性がある。この明確化が、データの存在場所や構造の特定の前提となる。
+
+確認済みEvidence:
+観測ヒット:
+research/grill_observation_v0/medium_task_reality_v0/workspace/collision.py:1: """Collision: out of 10x20 grid or overlap with occupied cells.
+research/grill_observation_v0/medium_task_reality_v0/workspace/collision.py:15: def empty_grid() -> list[list[int]]:
+research/grill_observation_v0/medium_task_reality_v0/workspace/collision.py:29: def collides(piece: dict[str, Any], grid: list[list[int]]) -> bool:
+research/grill_observation_v0/medium_task_reality_v0/workspace/collision.py:33:         if grid[y][x]:
+research/grill_observation_v0/medium_task_reality_v0/workspace/game_over.py:13: def is_game_over(kind: str, grid: list[list[int]]) -> bool:
+research/grill_observation_v0/medium_task_reality_v0/workspace/game_over.py:14:     return collides(spawn(kind), grid)
+research/grill_observation_v0/medium_task_reality_v0/workspace/line_clear.py:10: def clear_full_lines(grid: list[list[int]]) -> tuple[list[list[int]], int]:
+research/grill_observation_v0/medium_task_reality_v0/workspace/line_clear.py:11:     if not grid:
+research/grill_observation_v0/medium_task_reality_v0/workspace/line_clear.py:13:     width = len(grid[0])
+research/grill_observation_v0/medium_task_reality_v0/workspace/line_clear.py:14:     kept = [list(row) for row in grid if not all(cell for cell in row)]
+research/grill_observation_v0/medium_task_reality_v0/workspace/line_clear.py:15:     cleared = len(grid) - len(kept)
+research/grill_observation_v0/medium_task_reality_v0/workspace/line_clear.py:16:     while len(kept) < len(grid):
+research/grill_observation_v0/medium_task_reality_v0/workspace/movement.py:17: def try_move(piece: dict[str, Any], grid: list[list[int]], dx: int, dy: int) -> bool:
+research/grill_observation_v0/medium_task_reality_v0/workspace/movement.py:24:     if collides(candidate, grid):
+research/grill_observation_v0/medium_task_reality_v0/workspace/movement.py:31: def try_rotate(piece: dict[str, Any], grid: list[list[int]]) -> bool:
+research/grill_observation_v0/medium_task_reality_v0/workspace/movement.py:38:     if collides(candidate, grid):
+research/grill_observation_v0/medium_task_reality_v0/workspace/tetromino.py:1: """Tetromino shapes, rotation, and top-of-grid spawn.
+research/grill_observation_v0/medium_task_reality_v0/workspace/tetromino.py:4: Spec: 2D arrays; rotate by transpose and reverse; initial y is top of grid.
+research/grill_observation_v0/medium_task_reality_v0/workspace/window_loop.py:5: It does not implement tetromino, grid, collision, or scoring.
+research/grill_observation_v0/medium_task_reality_v0/workspace/window_loop.py:30:     global grid, score
+research/grill_observation_v0/medium_task_reality_v0/workspace/window_loop.py:32:     grid, lines_cleared = clear_full_lines(grid)

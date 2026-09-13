@@ -1,0 +1,59 @@
+{
+  "experiment_id": "kss11_20260820_151041",
+  "purpose": "KSS-1.1 decision evidence observability (not routing)",
+  "formalize_phase5_1": false,
+  "auto_routing": false,
+  "common_env": {
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+    "AI_AGENT_KSS1_OBS": "0",
+    "AI_AGENT_KSS11_OBS": "1"
+  },
+  "existing_to_obs_mapping": {
+    "verified.results[].confidence": "verify_confidence_label",
+    "usable_findings / reference / unresolved": "finding_bucket_counts",
+    "evaluate_research_progress.action": "progress_action",
+    "evaluate_research_progress.reason": "progress_reason",
+    "judgment.satisfies_request": "judge_satisfies_request",
+    "judgment.missing": "judge_missing",
+    "live_skip / llm judge": "judge_source",
+    "gj_trigger.would_skip / triggers": "gj_would_skip / gj_triggers",
+    "escalation.reason / routine": "escalation_reason / escalation_routine",
+    "filter_rejected_candidates": "candidates_rejected_count",
+    "hit_score / kept hits": "web_hit_scores / web_kept_count",
+    "validate_tool_spec / completeness": "proposal_spec_status / proposal_completeness_ok",
+    "fail_stage": "fail_stage",
+    "assess_information_gain.no_gain": "no_gain",
+    "KSS-0 known_coverage": "kss0_known_coverage",
+    "KSS-1 llm self confidence": "llm_self_confidence (auxiliary_only)",
+    "MAX_RESEARCH_ROUNDS / MAX_STAGNATION": "threshold_refs.max_rounds / max_stagnation",
+    "VERIFY high/low only": "verify_confidence_numeric = missing",
+    "HELP / human escalate": "missing (enum only)"
+  },
+  "missing_fields": [
+    "llm_judge_confidence_numeric",
+    "progress_decision_confidence",
+    "proposal_decision_confidence",
+    "verify_confidence_numeric",
+    "help_escalation_decision",
+    "partial_llm_judgment",
+    "judge_accept_weights",
+    "official_source_reliability_numeric_table",
+    "composite_web_confidence",
+    "composite_decision_confidence"
+  ],
+  "cases": [
+    "memory_usage",
+    "cpu_temperature",
+    "disk_usage",
+    "gpu_usage",
+    "gpu_vram_usage"
+  ],
+  "trials": 1
+}

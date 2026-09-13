@@ -1,0 +1,188 @@
+{
+  "case_id": "A06",
+  "request": "Python 3.13で追加された主な変更点を教えて",
+  "query": "Python 3.13",
+  "time_sensitive": false,
+  "ts": "2026-08-24T06:05:10.844517+00:00",
+  "raw_api": {
+    "duckduckgo": {
+      "backend": "duckduckgo",
+      "query": "Python 3.13",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 0,
+      "snippet_nonempty": 0,
+      "items": []
+    },
+    "wikipedia-ja": {
+      "backend": "wikipedia-ja",
+      "query": "Python 3.13",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 0,
+      "snippet_nonempty": 0,
+      "items": []
+    },
+    "wikipedia-en": {
+      "backend": "wikipedia-en",
+      "query": "Python 3.13",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 1,
+      "snippet_nonempty": 0,
+      "items": [
+        {
+          "api_rank": 0,
+          "title": "Python 3.0",
+          "snippet": "",
+          "url": "https://en.wikipedia.org/wiki/Python_3.0",
+          "kind": "opensearch"
+        }
+      ]
+    }
+  },
+  "api_candidate_count": 1,
+  "api_snippet_nonempty": 0,
+  "api_snippet_empty": 1,
+  "pipeline": {
+    "query": "Python 3.13",
+    "per_backend": [
+      {
+        "backend": "duckduckgo",
+        "searcher_returned": 0,
+        "accepted": 0,
+        "rejected": 0
+      },
+      {
+        "backend": "wikipedia-ja",
+        "searcher_returned": 0,
+        "accepted": 0,
+        "rejected": 0
+      },
+      {
+        "backend": "wikipedia-en",
+        "searcher_returned": 1,
+        "accepted": 1,
+        "rejected": 0
+      }
+    ],
+    "hitize_rows": [
+      {
+        "backend": "wikipedia-en",
+        "title": "Python 3.0",
+        "url": "https://en.wikipedia.org/wiki/Python_3.0",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      }
+    ],
+    "rejected": [],
+    "counts": {
+      "hit_accepted": 1,
+      "after_unique": 1,
+      "dup_removed": 0,
+      "before_ranking": 1,
+      "after_ranking": 1,
+      "dropped_by_ranking": 0,
+      "dropped_with_snippet": 0
+    },
+    "ranking_mode": "score>0_only",
+    "ranking_rows": [
+      {
+        "ranking_order": 0,
+        "score": 3,
+        "title": "Python 3.0",
+        "url": "https://en.wikipedia.org/wiki/Python_3.0",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      }
+    ],
+    "after_ranking_hits": [
+      {
+        "title": "Python 3.0",
+        "snippet": "",
+        "url": "https://en.wikipedia.org/wiki/Python_3.0",
+        "backend": "wikipedia-en",
+        "_from": "wikipedia-en"
+      }
+    ],
+    "dropped_candidates": []
+  },
+  "search_web_return": {
+    "hit_count": 1,
+    "hits": [
+      {
+        "title": "Python 3.0",
+        "snippet": "",
+        "url": "https://en.wikipedia.org/wiki/Python_3.0",
+        "backend": "wikipedia-en"
+      }
+    ],
+    "error": null,
+    "candidates_collected": 1
+  },
+  "stored_log": {
+    "hit_count": 1,
+    "hits": [
+      {
+        "title": "Python 3.0",
+        "url": "https://en.wikipedia.org/wiki/Python_3.0",
+        "snippet": null
+      }
+    ]
+  },
+  "llm_handoff": {
+    "agent_passes_full_return": true,
+    "llm_received_hit_count": 1,
+    "stored_log_hit_count": 1,
+    "count_match_live_vs_stored": true,
+    "backend_in_return": [
+      "wikipedia-en"
+    ],
+    "json_bytes": 233,
+    "snippet_lost_in_serialization": false
+  },
+  "extract_probes": [
+    {
+      "title": "Python 3.0",
+      "url": "https://en.wikipedia.org/wiki/Python_3.0",
+      "http_status": 200,
+      "error": null,
+      "extract_len": 0,
+      "extract_preview": "",
+      "page_has_usable_text": false,
+      "note": "調査専用extracts。本番search_web未接続。"
+    }
+  ],
+  "machine_observation": {
+    "counts_chain": {
+      "api_raw": 1,
+      "hit_accepted": 1,
+      "after_unique": 1,
+      "after_ranking": 1,
+      "return": 1,
+      "llm_received": 1
+    },
+    "snippet_empty_in_return": 1,
+    "snippet_nonempty_in_return": 0,
+    "dropped_by_ranking": 0,
+    "dropped_with_snippet": 0,
+    "page_has_text_but_snippet_empty_probe": false,
+    "not_auto_usefulness_label": true
+  },
+  "human_review": {
+    "候補の内容": "",
+    "有用候補の番号": "",
+    "rankingで落ちた有用候補": "",
+    "内容の充実度": "",
+    "日本語情報の十分さ": "",
+    "現在性": "",
+    "LLMに十分な情報が渡ったか": "",
+    "主な問題箇所": "",
+    "人間コメント": ""
+  }
+}

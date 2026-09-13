@@ -1,0 +1,72 @@
+{
+  "experiment": "problem_analysis_context_split",
+  "model": "deepseek-coder-v2:16b",
+  "case_id": "B_none_attribute",
+  "condition": "F5",
+  "input": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"data_loader\",\n  \"status\": \"fail\",\n  \"error_type\": \"AttributeError\",\n  \"error\": \"'NoneType' object has no attribute 'items'\"\n}\n\nconversation:\nUser:\nデータを読み込めるToolを作ってください。\n\nAssistant:\ndata_loader Toolを作成しました。\n\nUser:\n実行してください。\n\nAssistant:\ndata_loaderを実行します。\n",
+  "raw_output": "このツールは、データを読み込むためのものです。しかし、現在のステータスは「fail」で、エラータイプが「AttributeError」で、エラーメッセージが「'NoneType' object has no attribute 'items'」となっています。これは、None型のオブジェクトにitems属性がないために発生しているエラーです。\n\nこのエラーの原因を特定するために、以下の点を確認してください：\n1. データの読み込み先が正しいかどうか。\n2. データの形式が正しいかどうか。\n3. データの読み込みコードにバグがないかどうか。\n\n具体的なエラーの原因が特定できない場合は、エラーメッセージをもとに修正を加えてください。",
+  "timestamp": "2026-09-01T00:16:59.401393+00:00",
+  "call_ok": true,
+  "error": null,
+  "temperature": 0.0,
+  "failure": {
+    "tool_name": "data_loader",
+    "status": "fail",
+    "error_type": "AttributeError",
+    "error": "'NoneType' object has no attribute 'items'"
+  },
+  "prompt_header": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.",
+  "notes": [
+    "context_split",
+    "no_analysis_taxonomy",
+    "no_tools",
+    "no_invented_traceback_or_source",
+    "f5_conversation_from_previous_fixture"
+  ],
+  "observability": {
+    "experiment_start": "2026-09-01T00:16:59.401393+00:00",
+    "experiment_end": "2026-09-01T00:17:02.455526+00:00",
+    "stop_reason": "single_turn",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"data_loader\",\n  \"status\": \"fail\",\n  \"error_type\": \"AttributeError\",\n  \"error\": \"'NoneType' object has no attribute 'items'\"\n}\n\nconversation:\nUser:\nデータを読み込めるToolを作ってください。\n\nAssistant:\ndata_loader Toolを作成しました。\n\nUser:\n実行してください。\n\nAssistant:\ndata_loaderを実行します。\n"
+      }
+    ],
+    "chat_kwargs": {
+      "model": "deepseek-coder-v2:16b",
+      "tools": "not_used",
+      "keep_alive": "5m",
+      "options": {
+        "num_predict": 2048,
+        "temperature": 0.0,
+        "num_ctx": 4096
+      },
+      "timeout_seconds": 90,
+      "tool_presentation": "none",
+      "kwargs_source": {
+        "harness_chat_call": [
+          "model",
+          "messages"
+        ],
+        "llm_chat_setdefault": [
+          "options",
+          "keep_alive"
+        ],
+        "not_passed": [
+          "tools"
+        ]
+      }
+    },
+    "tools_used": false,
+    "extras": {
+      "traceback_included": false,
+      "source_included": false,
+      "conversation_included": true,
+      "traceback_recorded": false,
+      "source_recorded": false,
+      "conversation_provenance": "problem_analysis_context_cases.py (previous context experiment fixture, not live chat)"
+    },
+    "thinking_observed": false
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "phase": "G2",
+  "status": "COMPLETE",
+  "machine_contract_path": "ai_tool/policy/git_governance.json",
+  "schema_path": "ai_tool/policy/git_governance.schema.json",
+  "loader_module": "ai_tool/policy/git_governance_contract.py",
+  "contract_version": "2026-09-12.1",
+  "schema_version": "1",
+  "manifest_ref": "development_policy.json distribution.git_governance_ref",
+  "semantic_sources": [
+    { "path": "docs/GIT_OPERATION_POLICY.md", "role": "primary" },
+    { "path": "docs/AI_DEVELOPMENT_SESSION_START_POLICY.md", "role": "supplementary" }
+  ],
+  "actions_count": 21,
+  "human_decisions_encoded": {
+    "commit_option": "C",
+    "commit": "TASK_AUTHORIZATION_REQUIRED",
+    "push": "HUMAN_APPROVAL_REQUIRED",
+    "force_push": "AGENT_ALWAYS_BLOCK",
+    "force_push_with_lease": "AGENT_ALWAYS_BLOCK",
+    "reset_hard": "HUMAN_APPROVAL_REQUIRED",
+    "clean": "HUMAN_APPROVAL_REQUIRED",
+    "rebase": "HUMAN_APPROVAL_REQUIRED",
+    "worktree_remove": "HUMAN_APPROVAL_REQUIRED",
+    "amend": "HUMAN_APPROVAL_REQUIRED",
+    "amend_after_hook_failure": "AGENT_ALWAYS_BLOCK"
+  },
+  "still_undecided_rules": [
+    { "action_id": "stash", "approval_class": "UNDECIDED", "reason": "Not in GIT_OPERATION_POLICY.md or G2 Human Decision" }
+  ],
+  "guidance_only_from_git_markdown": [
+    "add_all",
+    "commit_message"
+  ],
+  "not_connected_enforcement": {
+    "AUTO_COMMIT_ALLOWED_runtime": "NOT_CONNECTED",
+    "commit_required_conditions": "NOT_CONNECTED",
+    "agent_shell_git_cli": "NOT_CONNECTED"
+  },
+  "validator_bindings_partial_or_connected": [
+    { "action_id": "push", "validators": ["pre-push", "git_guard"], "enforcement_status": "PARTIAL" },
+    { "action_id": "force_push", "validators": ["pre-push"], "enforcement_status": "PARTIAL" },
+    { "action_id": "reset_hard", "validators": ["git_guard"], "enforcement_status": "PARTIAL" },
+    { "action_id": "remote_push_restricted", "validators": ["git_guard"], "enforcement_status": "CONNECTED" },
+    { "action_id": "stage_deny_path_globs", "validators": ["pre-commit"], "enforcement_status": "PARTIAL" }
+  ],
+  "policy_drift_documented": [
+    "commit_auto (GIT §4 vs Option C)",
+    "force_push (GIT §6 human-if-needed vs AGENT_ALWAYS_BLOCK)",
+    "reset_hard_clean (GIT §6 vs HUMAN_APPROVAL_REQUIRED on agent path)",
+    "amend (not in GIT markdown; G2 canonical intent)"
+  ],
+  "tests": {
+    "semantic_invariant_tests": "tests/ai_tool/policy/test_git_governance.py",
+    "schema_validation": "via git_governance_contract.validate_git_governance_contract",
+    "policy_regression": "tests/ai_tool/policy/test_development_policy.py PASS",
+    "policy_distribution_regression": "tests/ai_tool/policy/test_policy_distribution.py PASS"
+  },
+  "existing_behavior_changed": false,
+  "unchanged_by_g2": [
+    "Cursor User Rules",
+    ".cursor/rules/*",
+    "AGENTS.md",
+    "D:/AI-Agent/.git/hooks/*",
+    "tools/git_guard/guard.py",
+    "tools/git_guard/configs/*",
+    "Production Runtime",
+    "GoalContract / TaskRuntime",
+    "docs/GIT_OPERATION_POLICY.md"
+  ],
+  "next_phases": {
+    "G3_adapter_alignment": "PENDING",
+    "G4_enforcement_alignment": "PENDING",
+    "G5_drift_distribution_tests": "PENDING",
+    "G6_system_asset_index_update": "PENDING"
+  }
+}

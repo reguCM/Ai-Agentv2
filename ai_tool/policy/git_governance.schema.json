@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ai-agent:git-governance:v1",
+  "title": "Git Governance Machine Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "contract_version",
+    "role",
+    "policy_id",
+    "semantic_sources",
+    "approval_class_enum",
+    "authorization",
+    "actions",
+    "human_decision_g2",
+    "human_decision_g4_1",
+    "adapters"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string", "minLength": 1 },
+    "contract_version": { "type": "string", "minLength": 1 },
+    "role": { "const": "git_governance_machine_contract" },
+    "policy_id": { "type": "string", "minLength": 1 },
+    "semantic_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "role": { "enum": ["primary", "supplementary"] }
+        }
+      }
+    },
+    "approval_class_enum": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "ALLOW",
+          "TASK_AUTHORIZATION_REQUIRED",
+          "HUMAN_APPROVAL_REQUIRED",
+          "AGENT_ALWAYS_BLOCK",
+          "GUIDANCE_ONLY",
+          "UNDECIDED"
+        ]
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "required": [
+        "auto_commit_token",
+        "agent_default_auto_commit",
+        "runtime_binding"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "auto_commit_token": { "const": "AUTO_COMMIT_ALLOWED" },
+        "agent_default_auto_commit": { "const": false },
+        "runtime_binding": { "const": "NOT_CONNECTED" },
+        "note": { "type": "string" }
+      }
+    },
+    "policy_drift_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["topic", "machine_contract_authority"],
+        "properties": {
+          "topic": { "type": "string" },
+          "git_operation_policy": { "type": "string" },
+          "human_decision_g2": { "type": "string" },
+          "human_decision_g4_1": { "type": "string" },
+          "machine_contract_authority": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "human_decision_g2": {
+      "type": "object",
+      "required": ["phase", "commit_option", "encoded_in_contract"],
+      "additionalProperties": false,
+      "properties": {
+        "phase": { "const": "G2" },
+        "commit_option": { "const": "C" },
+        "encoded_in_contract": { "const": true }
+      }
+    },
+    "human_decision_g4_1": {
+      "type": "object",
+      "required": ["phase", "reset_hard", "human_direct_operation", "encoded_in_contract"],
+      "additionalProperties": false,
+      "properties": {
+        "phase": { "const": "G4.1" },
+        "reset_hard": { "const": "AGENT_ALWAYS_BLOCK" },
+        "human_direct_operation": { "const": "OUTSIDE_AGENT_CONTRACT" },
+        "encoded_in_contract": { "const": true }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["action_id", "approval_class"],
+        "additionalProperties": false,
+        "properties": {
+          "action_id": { "type": "string", "minLength": 1 },
+          "approval_class": {
+            "type": "string",
+            "enum": [
+              "ALLOW",
+              "TASK_AUTHORIZATION_REQUIRED",
+              "HUMAN_APPROVAL_REQUIRED",
+              "AGENT_ALWAYS_BLOCK",
+              "GUIDANCE_ONLY",
+              "UNDECIDED"
+            ]
+          },
+          "human_direct_operation": {
+            "type": "string",
+            "enum": ["OUTSIDE_AGENT_CONTRACT", "NOT_APPLICABLE"]
+          },
+          "required_conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["condition_id", "enforcement_status"],
+              "additionalProperties": false,
+              "properties": {
+                "condition_id": { "type": "string", "minLength": 1 },
+                "enforcement_status": {
+                  "type": "string",
+                  "enum": ["CONNECTED", "PARTIAL", "NOT_CONNECTED", "NOT_IMPLEMENTED"]
+                }
+              }
+            }
+          },
+          "validator_bindings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["validator_ref", "enforcement_status"],
+              "additionalProperties": false,
+              "properties": {
+                "validator_ref": { "type": "string", "minLength": 1 },
+                "hook_or_tool": { "type": "string" },
+                "enforcement_status": {
+                  "type": "string",
+                  "enum": ["CONNECTED", "PARTIAL", "NOT_CONNECTED", "NOT_IMPLEMENTED"]
+                },
+                "notes": { "type": "string" }
+              }
+            }
+          },
+          "semantic_source_refs": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "notes": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "adapters": {
+      "type": "object",
+      "required": ["schema_version", "phase", "consumers"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "type": "string", "minLength": 1 },
+        "phase": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" },
+        "consumers": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "required": ["adapter", "mode", "required_references"],
+            "additionalProperties": false,
+            "properties": {
+              "adapter": { "type": "string", "minLength": 1 },
+              "mode": {
+                "type": "string",
+                "enum": ["reference", "human_sync_checklist", "loader"]
+              },
+              "scope": { "type": "string" },
+              "required_references": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string", "minLength": 1 }
+              },
+              "note": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

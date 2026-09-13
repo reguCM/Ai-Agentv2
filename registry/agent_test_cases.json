@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "test_case_id": "E2E-1A",
+      "name": "Current time Goal Acceptance plumbing",
+      "prompt": "実行環境の現在時刻を get_system_time で実測し、\n取得した日時とタイムゾーンを根拠付きで回答してください。",
+      "expected": {
+        "expected_tool": "get_system_time",
+        "tool_required": true,
+        "evidence_required": true,
+        "task_completion_required": true,
+        "goal_completion_required": true,
+        "final_answer_required": true
+      }
+    },
+    {
+      "test_case_id": "P216-GIT-PLAN",
+      "name": "Git read-only Tool implementation plan",
+      "prompt": "Final Goal:\nGitのread-only Toolとして git_status、git_diff、git_branch_info を追加するための実装計画を、現在の実プロジェクト構造に基づいて完成させる。\n\n条件:\n- 実装・ファイル変更なし\n- 必要情報はToolで確認\n- Evidenceのみ根拠\n- Tool成功だけでTask完了としない\n- 同一Failureを無意味に繰り返さない\n- 無関係ResultはEvidence不採用\n- Tool不足はTool Gap\n- 必要ならReplan",
+      "expected": {
+        "tool_required": true,
+        "file_change_allowed": false
+      }
+    }
+  ]
+}

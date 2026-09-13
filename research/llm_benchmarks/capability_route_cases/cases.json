@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "description": "Intentional diversity cases for PROJECT_AGENT capability_route log collection. Not a capability grade. Ordinary usage logs are also valid.",
+  "cases": [
+    {
+      "id": "web_unneeded_cpu",
+      "category": "web_unneeded",
+      "request": "CPU使用率を教えて",
+      "see": "AgentがWeb不要と判断するか／cpu_status等で完結するか"
+    },
+    {
+      "id": "web_needed_news",
+      "category": "web_needed_clear",
+      "request": "今日のニュースの主な見出しを、Web検索して根拠URL付きで教えて",
+      "see": "Web判断→検索→回答"
+    },
+    {
+      "id": "web_needed_ambiguous",
+      "category": "web_needed_ambiguous",
+      "request": "WindowsのCPU温度取得って最近どうなってる？",
+      "see": "判断の難しいケース"
+    },
+    {
+      "id": "web_word_but_explain_tool",
+      "category": "web_unneeded_with_web_words",
+      "request": "このプロジェクトのWeb検索Toolの仕組みを、registryと実装ファイルを読んで説明して。ネット検索は不要です。",
+      "see": "ヒューリスティックの誤判定（検索語を含むがWeb不要）"
+    },
+    {
+      "id": "agent_file_read",
+      "category": "agent_tool_complete",
+      "request": "registry/tools.json を読んで、visibilityがagentのTool名を一覧して",
+      "see": "既存File Toolで解決できるか"
+    },
+    {
+      "id": "needs_new_tool_hint",
+      "category": "tool_gap_candidate",
+      "request": "新しいToolを作って、キーボードのバッテリー残量を取得する機能を実装して",
+      "see": "needs_new_tool の出方（観測のみ。Pipelineは起動しない）"
+    },
+    {
+      "id": "composite_file_and_web",
+      "category": "composite",
+      "request": "docs/v1_basic_specification.md のV1目的をファイルから確認し、同じテーマの一般的な説明をWebでも調べて比較して",
+      "see": "複数Toolの組み合わせ"
+    },
+    {
+      "id": "fail_empty_hits",
+      "category": "failure_path",
+      "request": "Web検索で「zxqwv-nonexistent-topic-9f3a2b1c」の公式発表日を探し、根拠URLだけ答えて。無ければ確認できなかったと書いて",
+      "see": "empty_hits等の扱いとStage2 pattern"
+    }
+  ]
+}

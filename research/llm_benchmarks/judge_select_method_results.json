@@ -1,0 +1,91 @@
+{
+  "case": "judge_select_method_power_watt",
+  "contract_phase": "verify_gap_adopt_v5",
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "repeat": 3,
+  "pass_count": 3,
+  "total": 3,
+  "summary": "CORRECT 3/3",
+  "trials": [
+    {
+      "n": 1,
+      "ok": true,
+      "grade": "CORRECT",
+      "accepted": true,
+      "mentions": {},
+      "accepted_labels": [],
+      "reason": "",
+      "missing": [],
+      "decisions": [
+        {
+          "key": "request.metric",
+          "value": "消費電力"
+        },
+        {
+          "key": "status.meaning",
+          "value": "現在の消費電力"
+        },
+        {
+          "key": "status.unit",
+          "value": "W"
+        }
+      ],
+      "error": null,
+      "seconds": 6.7
+    },
+    {
+      "n": 2,
+      "ok": true,
+      "grade": "CORRECT",
+      "accepted": true,
+      "mentions": {},
+      "accepted_labels": [],
+      "reason": "",
+      "missing": [],
+      "decisions": [
+        {
+          "key": "status.meaning",
+          "value": "現在の消費電力"
+        },
+        {
+          "key": "status.unit",
+          "value": "W"
+        },
+        {
+          "key": "status.range",
+          "value": "0-100"
+        }
+      ],
+      "error": null,
+      "seconds": 1.6
+    },
+    {
+      "n": 3,
+      "ok": true,
+      "grade": "CORRECT",
+      "accepted": true,
+      "mentions": {},
+      "accepted_labels": [],
+      "reason": "",
+      "missing": [],
+      "decisions": [
+        {
+          "key": "status.meaning",
+          "value": "現在の消費電力"
+        },
+        {
+          "key": "status.unit",
+          "value": "W"
+        },
+        {
+          "key": "status.range",
+          "value": "0-100"
+        }
+      ],
+      "error": null,
+      "seconds": 1.6
+    }
+  ],
+  "ts": "2026-08-19T08:23:34.488436+00:00"
+}

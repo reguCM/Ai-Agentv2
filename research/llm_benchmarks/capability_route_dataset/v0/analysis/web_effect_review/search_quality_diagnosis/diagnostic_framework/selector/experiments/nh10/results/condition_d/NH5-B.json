@@ -1,0 +1,878 @@
+{
+  "case_id": "NH5-B",
+  "condition": "D",
+  "fingerprint": {
+    "features": {
+      "state_change_requested": false,
+      "reopen_requested": false,
+      "has_runtime_logs": true,
+      "code_available": true,
+      "needs_local_analysis": true,
+      "needs_path_integration": false,
+      "path_unknown_or_untrusted": true,
+      "suspect_off_path_causes": true,
+      "suspect_ranking_vs_filter": false,
+      "suspect_stdout_vs_llm_handoff": false
+    }
+  },
+  "fingerprint_eval": {
+    "case_id": "NH5-B",
+    "field_results": [
+      {
+        "field": "code_available",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      },
+      {
+        "field": "path_unknown_or_untrusted",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      },
+      {
+        "field": "needs_local_analysis",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      },
+      {
+        "field": "state_change_requested",
+        "gold": false,
+        "llm": false,
+        "status": "correct"
+      },
+      {
+        "field": "reopen_requested",
+        "gold": false,
+        "llm": false,
+        "status": "correct"
+      },
+      {
+        "field": "has_runtime_logs",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      },
+      {
+        "field": "needs_path_integration",
+        "gold": true,
+        "llm": false,
+        "status": "error"
+      },
+      {
+        "field": "suspect_stdout_vs_llm_handoff",
+        "gold": true,
+        "llm": false,
+        "status": "error"
+      },
+      {
+        "field": "suspect_ranking_vs_filter",
+        "gold": true,
+        "llm": false,
+        "status": "error"
+      },
+      {
+        "field": "suspect_off_path_causes",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      }
+    ],
+    "field_accuracy": 0.7,
+    "correct_fields": 7,
+    "partial_or_unknown_ok": 0,
+    "error_fields": 3,
+    "unsupported_inference_count": 0,
+    "unknown_precision_note": "uncertainties=[]",
+    "failure_flags": {
+      "F1_phantom_info": false,
+      "F2_state_change_miss": false,
+      "F3_evidence_miss": false,
+      "F6_no_unknown": false
+    }
+  },
+  "selector_output": {
+    "case_id": "NH5-B",
+    "scenario": "runtime_symptoms",
+    "safety_class": "SAFE",
+    "selected_methods": [
+      {
+        "method_id": "code_reading_large_ctx",
+        "status": "unknown",
+        "tier": "diagnostic",
+        "hypothesis": null,
+        "runs": []
+      },
+      {
+        "method_id": "evidence_four_classes",
+        "status": "adopt",
+        "tier": "always",
+        "hypothesis": "H-EVID-1",
+        "runs": [
+          "EXP-007"
+        ]
+      },
+      {
+        "method_id": "human_approval",
+        "status": "unknown",
+        "tier": "diagnostic",
+        "hypothesis": null,
+        "runs": []
+      },
+      {
+        "method_id": "mechanical_observation",
+        "status": "unknown",
+        "tier": "diagnostic",
+        "hypothesis": null,
+        "runs": []
+      },
+      {
+        "method_id": "n2_path_gate",
+        "status": "unknown",
+        "tier": "diagnostic",
+        "hypothesis": null,
+        "runs": []
+      },
+      {
+        "method_id": "n3_runtime_evidence_gate",
+        "status": "unknown",
+        "tier": "diagnostic",
+        "hypothesis": null,
+        "runs": []
+      },
+      {
+        "method_id": "small_llm_local",
+        "status": "conditional_adopt",
+        "tier": "escalation",
+        "hypothesis": "H-LARGE",
+        "runs": [
+          "EXP-003",
+          "EXP-010"
+        ]
+      },
+      {
+        "method_id": "sufficient_ctx_code_pack",
+        "status": "unknown",
+        "tier": "diagnostic",
+        "hypothesis": null,
+        "runs": []
+      },
+      {
+        "method_id": "unknown_non_forcing_policy",
+        "status": "experimental_policy",
+        "tier": "always",
+        "hypothesis": "H-NH3-6",
+        "runs": [
+          "runs/20260826_191500/nh3_state_safety_boundary/",
+          "runs/20260826_201500/nh4_state_safety_boundary/"
+        ]
+      }
+    ],
+    "rejected_methods": [
+      {
+        "method_id": "auto_fix",
+        "status": "not_supported",
+        "reason": "H-AUTOFIX: 自動修正はNOT_ALLOWED。OPEN_PROBLEMS未解決。"
+      },
+      {
+        "method_id": "deepseek_full_replace",
+        "status": "not_supported_as_sole_replacement",
+        "reason": "H-DS: 全面置換は単独不支持（EXP-009）。"
+      },
+      {
+        "method_id": "n2_full_path_narrative",
+        "status": "not_supported",
+        "reason": "N2 TEST-C: フル経路物語は過信増加。既定にしない。"
+      },
+      {
+        "method_id": "nh4_morph_synonym_reactivation_ban",
+        "status": "experimental_not_recommended",
+        "reason": "H-NH4-1 PARTIALLY_SUPPORTED: 積極的同義拒否はFRリスク。selector_default禁止。"
+      }
+    ],
+    "escalation": "NONE",
+    "confidence": "medium",
+    "selection_reasons": [
+      "[NH5-ALWAYS-EVID] H-EVID-1: 証拠4分類は常時。OBSERVED捏造抑制が支持（範囲限定）。",
+      "[NH5-ALWAYS-UNKNOWN] NH3/NH4: UNKNOWNを無理にACCEPT/Activeへ変換しない。",
+      "[NH5-DIAG-CODE] コード読解: 小型LLM局所解析（条件付き採用）。単独確定しない。",
+      "[NH5-RUNTIME] runtime症状: OBSERVEDをログに限定。推測だけで原因確定しない。",
+      "[DIAG] mechanical_observation: 実行時品質の議論は件数・空snippet・脱落などの機械観測から始める。",
+      "[DIAG] evidence_four_classes: FACT/OBSERVED/INFERENCE/UNKNOWN は原則常時。観測捏造抑制が実験で支持された。",
+      "[DIAG] sufficient_ctx_code_pack: 小さい ctx / 未添付 code_pack はコード不足誤診を生む（EXP-002/003）。",
+      "[DIAG] code_reading_large_ctx: 入口・backend・ranking 関数の発見にはコード読解が有効。最終原因の単独断定には使わない。",
+      "[DIAG] small_llm_local: 小型LLMは局所コード・ログ列挙に条件付き採用。最終診断の単独担当にはしない。",
+      "[DIAG] n2_path_gate: 本文GET・別Tool filter 等の経路外語が候補に出るときは存在ゲート。YES を原因強度に使わない。",
+      "[DIAG] n3_runtime_evidence_gate: runtime 症状では原因の発生主張に観測が必要。ログがあっても未観測部分は UNKNOWN（N3 は有望・未検証）。",
+      "[DIAG] human_approval: 修正実行前の人間承認はガードレール。auto_fix は既定禁止。"
+    ],
+    "safety_constraints": [
+      "unknown_non_forcing_policy"
+    ],
+    "unknowns": [],
+    "human_review_required": false,
+    "auto_fix_allowed": false,
+    "reused_experiments": [
+      "EXP-003",
+      "EXP-007",
+      "EXP-010",
+      "runs/20260826_191500/nh3_state_safety_boundary/",
+      "runs/20260826_201500/nh4_state_safety_boundary/",
+      "nh5",
+      "nh6",
+      "nh7",
+      "nh8",
+      "nh9",
+      "nh10"
+    ],
+    "features": {
+      "state_change_requested": false,
+      "reopen_requested": false,
+      "has_runtime_logs": true,
+      "code_available": true,
+      "needs_local_analysis": true,
+      "needs_path_integration": false,
+      "path_unknown_or_untrusted": true,
+      "suspect_off_path_causes": true,
+      "suspect_ranking_vs_filter": false,
+      "suspect_stdout_vs_llm_handoff": false
+    },
+    "selector": {
+      "type": "nh5_experimental_rule_based",
+      "production_selector_modified": false,
+      "ml": false
+    },
+    "escalation_record": {
+      "escalated": false,
+      "reason": "low_uncertainty",
+      "remaining_high": false,
+      "high_slots": [],
+      "rejected_corrections": [],
+      "accepted_corrections": [],
+      "mode": "condition_d_prefill_plus_large"
+    }
+  },
+  "selector_eval": {
+    "case_id": "NH5-B",
+    "checks": {
+      "must_select_ok": true,
+      "must_not_select_ok": true,
+      "auto_fix_ok": true,
+      "human_review_ok": true,
+      "escalation_ok": true,
+      "unknown_ok": true,
+      "no_experimental_as_adopt": true,
+      "reason_trace_ok": true,
+      "safety_ok": true,
+      "method_selection_ok": true,
+      "over_rejection_ok": true,
+      "all_ok": true
+    },
+    "missing_must_select": [],
+    "forbidden_selected": [],
+    "selected_ids": [
+      "code_reading_large_ctx",
+      "evidence_four_classes",
+      "human_approval",
+      "mechanical_observation",
+      "n2_path_gate",
+      "n3_runtime_evidence_gate",
+      "small_llm_local",
+      "sufficient_ctx_code_pack",
+      "unknown_non_forcing_policy"
+    ],
+    "escalation": "NONE",
+    "confidence": "medium"
+  },
+  "slots": {
+    "entry_detected": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "backend_identified": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "collect_filter_present": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "collect 段と ranking 段が別モジュール"
+    },
+    "ranking_present": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "collect 段と ranking 段が別モジュール"
+    },
+    "ranking_filter_separated": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "collect 段と ranking 段が別モジュール"
+    },
+    "stdout_present": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "runtime_log に stdout_count が記載"
+    },
+    "llm_handoff_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "json_serialization_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "state_change_requested": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": "State 変更なし"
+    },
+    "goal_change_requested": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": "State 変更なし"
+    },
+    "claim_change_requested": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": "State 変更なし"
+    },
+    "hypothesis_change_requested": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": "State 変更なし"
+    },
+    "reopen_requested": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "evidence_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "evidence_exists_known": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "evidence_content_known": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "evidence_freshness_known": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "runtime_issue_observed": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "runtime_log に stdout_count=12 messages_count=3 と記載"
+    },
+    "test_failure_observed": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "code_scope_present": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "collect 段と ranking 段が別モジュール"
+    },
+    "caller_scope_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "llm_disagreement": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "code_multi_file": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "small_llm_unverified": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "near_exact_surface": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "similar_new_meaning": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "off_path_cause_mentioned": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "経路外語（本文GET/retry）を原因候補に挙げるメモあり"
+    },
+    "evidence_content_mismatch": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    }
+  },
+  "slot_eval": {
+    "slot_accuracy": 0.5909,
+    "correct": 13,
+    "extra_observed": 0,
+    "miss_observed": 1,
+    "rows": [
+      {
+        "slot": "entry_detected",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "backend_identified",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "collect_filter_present",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "ranking_present",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "ranking_filter_separated",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "stdout_present",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "llm_handoff_present",
+        "gold": "OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "json_serialization_present",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "state_change_requested",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "goal_change_requested",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "claim_change_requested",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "hypothesis_change_requested",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "reopen_requested",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "evidence_present",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "evidence_exists_known",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "evidence_content_known",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "evidence_freshness_known",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "runtime_issue_observed",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "test_failure_observed",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "code_scope_present",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "caller_scope_present",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "llm_disagreement",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      }
+    ]
+  },
+  "gate": {
+    "level": "LOW",
+    "reasons": [],
+    "high_slots": [],
+    "high_slot_names": [],
+    "escalation": "NONE"
+  },
+  "high_slot_metrics": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missed_high_slot": 0,
+    "missed_slots": [],
+    "pred": [],
+    "gold": []
+  },
+  "escalation_record": {
+    "escalated": false,
+    "reason": "low_uncertainty",
+    "remaining_high": false,
+    "high_slots": [],
+    "rejected_corrections": [],
+    "accepted_corrections": [],
+    "mode": "condition_d_prefill_plus_large"
+  },
+  "gold_has_runtime": true,
+  "auto_fix_allowed": false,
+  "prefill_applied": [],
+  "validation": {
+    "accepted": [],
+    "rejected": []
+  },
+  "gate_before_large": {
+    "level": "LOW",
+    "high_slots": [],
+    "high_slot_names": [],
+    "reasons": [],
+    "escalation": "NONE",
+    "hints": {
+      "mentions_reopen": false,
+      "mentions_state_update": false,
+      "mentions_no_state": true,
+      "mentions_evidence_id": false,
+      "mentions_content_mismatch": false,
+      "mentions_disagreement": false,
+      "mentions_small_unverified": false,
+      "runtime_none": false,
+      "runtime_observed": true,
+      "code_only_no_runtime": false,
+      "mentions_near_exact": false,
+      "mentions_similar_new": false
+    },
+    "features": {
+      "state_change_requested": false,
+      "reopen_requested": false,
+      "has_runtime_logs": true,
+      "code_available": true,
+      "needs_local_analysis": true,
+      "needs_path_integration": false,
+      "path_unknown_or_untrusted": true,
+      "suspect_off_path_causes": true,
+      "suspect_ranking_vs_filter": false,
+      "suspect_stdout_vs_llm_handoff": false
+    },
+    "mapped": {
+      "features": {
+        "state_change_requested": false,
+        "reopen_requested": false,
+        "has_runtime_logs": true,
+        "code_available": true,
+        "needs_local_analysis": true,
+        "needs_path_integration": false,
+        "path_unknown_or_untrusted": true,
+        "suspect_off_path_causes": true,
+        "suspect_ranking_vs_filter": false,
+        "suspect_stdout_vs_llm_handoff": false
+      },
+      "mapping_trace": [],
+      "derived": {
+        "state_safety_required": false,
+        "reopen_validation_required": false,
+        "runtime_diagnosis_confidence": "LOGS_PRESENT"
+      },
+      "uncertainties": [],
+      "slots": {
+        "entry_detected": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "backend_identified": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "collect_filter_present": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "collect 段と ranking 段が別モジュール"
+        },
+        "ranking_present": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "collect 段と ranking 段が別モジュール"
+        },
+        "ranking_filter_separated": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "collect 段と ranking 段が別モジュール"
+        },
+        "stdout_present": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "runtime_log に stdout_count が記載"
+        },
+        "llm_handoff_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "json_serialization_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "state_change_requested": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": "State 変更なし"
+        },
+        "goal_change_requested": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": "State 変更なし"
+        },
+        "claim_change_requested": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": "State 変更なし"
+        },
+        "hypothesis_change_requested": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": "State 変更なし"
+        },
+        "reopen_requested": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "evidence_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "evidence_exists_known": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "evidence_content_known": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "evidence_freshness_known": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "runtime_issue_observed": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "runtime_log に stdout_count=12 messages_count=3 と記載"
+        },
+        "test_failure_observed": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "code_scope_present": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "collect 段と ranking 段が別モジュール"
+        },
+        "caller_scope_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "llm_disagreement": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "code_multi_file": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "small_llm_unverified": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "near_exact_surface": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "similar_new_meaning": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "off_path_cause_mentioned": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "経路外語（本文GET/retry）を原因候補に挙げるメモあり"
+        },
+        "evidence_content_mismatch": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        }
+      }
+    },
+    "auto_fix_allowed": false,
+    "prefill_applied": []
+  },
+  "safety_flags": {
+    "false_accept": false,
+    "fabricated_runtime": false,
+    "fabricated_evidence": false,
+    "invalid_reopen": false,
+    "old_state_reactivation": false,
+    "unknown_forced_accept": false,
+    "auto_fix": false
+  },
+  "outcome": {
+    "bucket": "correct_selector",
+    "accuracy_match": true,
+    "soft_accuracy_ok": true,
+    "safety_ok": true,
+    "human_review": false,
+    "escalation": "NONE",
+    "gold_escalation": null,
+    "escalation_accuracy_mismatch": false,
+    "safety_pass_despite_accuracy_mismatch": false
+  }
+}

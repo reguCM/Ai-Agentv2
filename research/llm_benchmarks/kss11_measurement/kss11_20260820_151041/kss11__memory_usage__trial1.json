@@ -1,0 +1,1563 @@
+{
+  "case": "memory_usage",
+  "trial": 1,
+  "returncode": 0,
+  "timestamp": "2026-08-20T15:11:22.964419+00:00",
+  "experiment": {
+    "AI_AGENT_EXPERIMENT_ID": "kss11_20260820_151041",
+    "AI_AGENT_EXPERIMENT_CONDITION": "kss11_obs",
+    "AI_AGENT_EXPERIMENT_TRIAL": "1",
+    "AI_AGENT_EXPERIMENT_CASE": "memory_usage",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+    "AI_AGENT_KSS1_OBS": "0",
+    "AI_AGENT_KSS11_OBS": "1"
+  },
+  "metrics": {
+    "pass": true,
+    "fail_stage": null,
+    "error": null,
+    "rounds": 1,
+    "llm_calls": 5,
+    "usable_findings": 1,
+    "actual_headroom_min": 2960,
+    "headroom_gate_ok": true,
+    "context_overflow": false,
+    "kss11_obs_rounds": 1,
+    "kss11_history_events": 1,
+    "proposal_evidence": null,
+    "behavior_changed": false,
+    "evidence_summary": {
+      "decision_count": 3,
+      "bundle_count": 1,
+      "decision_source_distribution": {
+        "verifier": 1,
+        "llm_judgment": 1,
+        "deterministic_rule": 1
+      },
+      "evidence_coverage": {
+        "levels": {
+          "high": 1
+        },
+        "rounds_with_evidence_bundle": 1
+      },
+      "provenance_coverage": {
+        "events_with_id_and_type": 3,
+        "events_total": 3,
+        "rate": 1.0
+      },
+      "threshold_coverage": {
+        "events_with_threshold_refs": 2,
+        "events_total": 3,
+        "rate": 0.667
+      },
+      "high_evidence_failure_count": 0,
+      "low_evidence_success_count": 0,
+      "contradictory_evidence_count": "missing",
+      "missing_information_count": 0,
+      "no_gain_round_count": 0,
+      "failure_by_evidence_level": {},
+      "success_by_evidence_level": {
+        "high": 1
+      },
+      "existing_to_obs_mapping": {
+        "verified.results[].confidence": "verify_confidence_label",
+        "usable_findings / reference / unresolved": "finding_bucket_counts",
+        "evaluate_research_progress.action": "progress_action",
+        "evaluate_research_progress.reason": "progress_reason",
+        "judgment.satisfies_request": "judge_satisfies_request",
+        "judgment.missing": "judge_missing",
+        "live_skip / llm judge": "judge_source",
+        "gj_trigger.would_skip / triggers": "gj_would_skip / gj_triggers",
+        "escalation.reason / routine": "escalation_reason / escalation_routine",
+        "filter_rejected_candidates": "candidates_rejected_count",
+        "hit_score / kept hits": "web_hit_scores / web_kept_count",
+        "validate_tool_spec / completeness": "proposal_spec_status / proposal_completeness_ok",
+        "fail_stage": "fail_stage",
+        "assess_information_gain.no_gain": "no_gain",
+        "KSS-0 known_coverage": "kss0_known_coverage",
+        "KSS-1 llm self confidence": "llm_self_confidence (auxiliary_only)",
+        "MAX_RESEARCH_ROUNDS / MAX_STAGNATION": "threshold_refs.max_rounds / max_stagnation",
+        "VERIFY high/low only": "verify_confidence_numeric = missing",
+        "HELP / human escalate": "missing (enum only)"
+      },
+      "missing_fields": [
+        "llm_judge_confidence_numeric",
+        "progress_decision_confidence",
+        "proposal_decision_confidence",
+        "verify_confidence_numeric",
+        "help_escalation_decision",
+        "partial_llm_judgment",
+        "judge_accept_weights",
+        "official_source_reliability_numeric_table",
+        "composite_web_confidence",
+        "composite_decision_confidence"
+      ],
+      "not_for_decision": true,
+      "phase": "kss-1.1"
+    }
+  },
+  "pipeline": {
+    "research": {
+      "usable_findings": [
+        {
+          "kind": "output",
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+          "evidence": {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ],
+            "returncode": 0,
+            "sample": [
+              "FreePhysicalMemory TotalVisibleMemorySize",
+              "------------------ ----------------------",
+              "32227744               66844080"
+            ],
+            "stderr": "",
+            "error": null,
+            "output_key": "status"
+          },
+          "confidence": "high",
+          "source": "web"
+        }
+      ],
+      "reference_findings": [],
+      "unresolved": [],
+      "insufficient_findings": [],
+      "rounds": 1,
+      "stagnation": 0,
+      "stop_reason": "findings_complete",
+      "candidates_error": null
+    },
+    "judgments": [
+      {
+        "round": 1,
+        "satisfies_request": true,
+        "reason": "",
+        "missing": [],
+        "error": null,
+        "judge_grade": "FAIL",
+        "proposed_decisions": [
+          {
+            "key": "status.meaning",
+            "value": "Windowsのメモリ使用率"
+          },
+          {
+            "key": "status.unit",
+            "value": "%"
+          },
+          {
+            "key": "status.range",
+            "value": "0-100"
+          }
+        ]
+      }
+    ],
+    "progress": [
+      {
+        "round": 1,
+        "action": "implement",
+        "reason": "findings_complete",
+        "stagnation": 0,
+        "has_new_finding": true,
+        "missing_same": false,
+        "duplicate_only": false
+      }
+    ],
+    "research_rounds_detail": [
+      {
+        "round": 1,
+        "followup": false,
+        "research_input": {
+          "followup_questions": [],
+          "rejected_commands": [],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 4,
+        "verified_count": 4,
+        "verifier_failure": false,
+        "verified_runs": [
+          {
+            "ok": true,
+            "sample_count": 3,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "ok": true,
+            "sample_count": 3,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "ok": true,
+            "sample_count": 3,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "ok": true,
+            "sample_count": 3,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+            "backend": "learn.microsoft"
+          }
+        ],
+        "satisfies_request": true,
+        "judge_grade": "FAIL",
+        "judge_retry_ok": false,
+        "missing": [],
+        "reason": "",
+        "rule_partial": {
+          "escalation": "usable_needs_goal_check",
+          "routine": false,
+          "applied_ops": [
+            "add_usable"
+          ],
+          "event_ids": [
+            "evt_555af464923e"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": true,
+          "would_skip": false,
+          "live_skipped": false,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [
+            "usable_needs_goal_check",
+            "first_round"
+          ],
+          "skip_triggers": [],
+          "primary_reason": "usable_needs_goal_check",
+          "llm_calls_saved_if_skip": 0,
+          "quality_compare": null
+        },
+        "knowledge_source_observation": {
+          "enabled": true,
+          "round": 1,
+          "known_coverage": {
+            "known_coverage": 0.15,
+            "known_coverage_note": "exploration_signal_not_accuracy",
+            "has_usable_in_state": false,
+            "has_success_in_history": false,
+            "history_fails_only": false,
+            "same_error_class_continuing": false,
+            "stuck_error_class": null,
+            "same_open_question_continuing": false,
+            "command_family_no_gain": false,
+            "no_gain": false,
+            "information_gain": {
+              "has_gain": false,
+              "no_gain": false,
+              "reasons_gain": [],
+              "reasons_stuck": []
+            },
+            "open_question_count": 0,
+            "verify_ok_count": 0,
+            "verify_fail_count": 0,
+            "reasons": [],
+            "estimate_method": "heuristic_v0",
+            "not_for_decision": true
+          },
+          "knowledge_source_selection": {
+            "source_values": {
+              "state": 0.2,
+              "history": 0.2,
+              "external_research": 0.5,
+              "llm_reasoning": 0.30000000000000004,
+              "experiment": 0.2
+            },
+            "source_reasons": {
+              "state": [],
+              "history": [],
+              "external_research": [
+                "no_known_success",
+                "hits_available"
+              ],
+              "llm_reasoning": [
+                "initial_hypothesis"
+              ],
+              "experiment": []
+            },
+            "preferred_source": "external_research",
+            "ranking": [
+              {
+                "source": "external_research",
+                "value": 0.5
+              },
+              {
+                "source": "llm_reasoning",
+                "value": 0.30000000000000004
+              },
+              {
+                "source": "experiment",
+                "value": 0.2
+              },
+              {
+                "source": "history",
+                "value": 0.2
+              },
+              {
+                "source": "state",
+                "value": 0.2
+              }
+            ],
+            "auto_switch": false,
+            "estimate_method": "heuristic_v0",
+            "not_for_decision": true
+          },
+          "external_research_evidence": {
+            "hit_count": 1,
+            "assessed_hits": [
+              {
+                "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                "title": "Windows 回復環境 (Windows RE)",
+                "backend": "learn.microsoft",
+                "source_reliability": {
+                  "category": "official_or_vendor_docs",
+                  "host": "learn.microsoft.com",
+                  "backend": "learn.microsoft",
+                  "numeric_score": null,
+                  "note": "category_only_no_fixed_score"
+                },
+                "evidence_relevance": 0.0,
+                "claim_support": 0.3,
+                "implementation_precedent": {
+                  "exists": false,
+                  "same_platform": true,
+                  "same_environment": null,
+                  "runnable_example": false,
+                  "signals": []
+                },
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true
+              }
+            ],
+            "independent_confirmation": {
+              "unique_hosts": 1,
+              "host_counts": {
+                "learn.microsoft.com": 1
+              },
+              "likely_reprint_heavy": false,
+              "note": "host_diversity_proxy_not_semantic_dedupe"
+            },
+            "implementation_precedent_summary": {
+              "exists": false,
+              "independent_examples": 0,
+              "runnable_example_count": 0
+            },
+            "estimate_method": "heuristic_v0",
+            "not_for_decision": true
+          },
+          "proposal_observations": [
+            {
+              "proposal_id": "cand_0",
+              "action": {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                ],
+                "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+              },
+              "rationale": null,
+              "evidence": {
+                "state": false,
+                "history": false,
+                "external_research": true,
+                "experiment": true
+              },
+              "evidence_sources_used": [
+                "external_research",
+                "llm_reasoning",
+                "experiment"
+              ],
+              "preferred_source_at_proposal": "external_research",
+              "expected_information_gain": 0.35,
+              "success_probability_estimate": 0.25,
+              "evidence_confidence": 0.25,
+              "applicability": 0.4,
+              "implementation_precedent": false,
+              "execution_cost_estimate": "unknown",
+              "risk_estimate": "unknown",
+              "repetition_risk": 0.2,
+              "action_value_composite": 0.265,
+              "estimate_method": "heuristic_v0",
+              "not_for_decision": true
+            },
+            {
+              "proposal_id": "cand_1",
+              "action": {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                ],
+                "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+              },
+              "rationale": null,
+              "evidence": {
+                "state": false,
+                "history": false,
+                "external_research": true,
+                "experiment": true
+              },
+              "evidence_sources_used": [
+                "external_research",
+                "llm_reasoning",
+                "experiment"
+              ],
+              "preferred_source_at_proposal": "external_research",
+              "expected_information_gain": 0.35,
+              "success_probability_estimate": 0.25,
+              "evidence_confidence": 0.25,
+              "applicability": 0.4,
+              "implementation_precedent": false,
+              "execution_cost_estimate": "unknown",
+              "risk_estimate": "unknown",
+              "repetition_risk": 0.2,
+              "action_value_composite": 0.265,
+              "estimate_method": "heuristic_v0",
+              "not_for_decision": true
+            },
+            {
+              "proposal_id": "cand_2",
+              "action": {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                ],
+                "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+              },
+              "rationale": null,
+              "evidence": {
+                "state": false,
+                "history": false,
+                "external_research": true,
+                "experiment": true
+              },
+              "evidence_sources_used": [
+                "external_research",
+                "llm_reasoning",
+                "experiment"
+              ],
+              "preferred_source_at_proposal": "external_research",
+              "expected_information_gain": 0.35,
+              "success_probability_estimate": 0.25,
+              "evidence_confidence": 0.25,
+              "applicability": 0.4,
+              "implementation_precedent": false,
+              "execution_cost_estimate": "unknown",
+              "risk_estimate": "unknown",
+              "repetition_risk": 0.2,
+              "action_value_composite": 0.265,
+              "estimate_method": "heuristic_v0",
+              "not_for_decision": true
+            },
+            {
+              "proposal_id": "cand_3",
+              "action": {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                ],
+                "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+              },
+              "rationale": null,
+              "evidence": {
+                "state": false,
+                "history": false,
+                "external_research": true,
+                "experiment": true
+              },
+              "evidence_sources_used": [
+                "external_research",
+                "llm_reasoning",
+                "experiment"
+              ],
+              "preferred_source_at_proposal": "external_research",
+              "expected_information_gain": 0.35,
+              "success_probability_estimate": 0.25,
+              "evidence_confidence": 0.25,
+              "applicability": 0.4,
+              "implementation_precedent": false,
+              "execution_cost_estimate": "unknown",
+              "risk_estimate": "unknown",
+              "repetition_risk": 0.2,
+              "action_value_composite": 0.265,
+              "estimate_method": "heuristic_v0",
+              "not_for_decision": true
+            }
+          ],
+          "calibration": {
+            "proposals": [
+              {
+                "proposal_id": "cand_0",
+                "action": {
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+                },
+                "rationale": null,
+                "evidence": {
+                  "state": false,
+                  "history": false,
+                  "external_research": true,
+                  "experiment": true
+                },
+                "evidence_sources_used": [
+                  "external_research",
+                  "llm_reasoning",
+                  "experiment"
+                ],
+                "preferred_source_at_proposal": "external_research",
+                "expected_information_gain": 0.35,
+                "success_probability_estimate": 0.25,
+                "evidence_confidence": 0.25,
+                "applicability": 0.4,
+                "implementation_precedent": false,
+                "execution_cost_estimate": "unknown",
+                "risk_estimate": "unknown",
+                "repetition_risk": 0.2,
+                "action_value_composite": 0.265,
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true,
+                "actual_success": true,
+                "actual_error_class": null,
+                "actual_usable_gain": true,
+                "actual_information_gain": true,
+                "coverage_before_no_gain": false,
+                "coverage_after_no_gain": false,
+                "result_linked": true
+              },
+              {
+                "proposal_id": "cand_1",
+                "action": {
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+                },
+                "rationale": null,
+                "evidence": {
+                  "state": false,
+                  "history": false,
+                  "external_research": true,
+                  "experiment": true
+                },
+                "evidence_sources_used": [
+                  "external_research",
+                  "llm_reasoning",
+                  "experiment"
+                ],
+                "preferred_source_at_proposal": "external_research",
+                "expected_information_gain": 0.35,
+                "success_probability_estimate": 0.25,
+                "evidence_confidence": 0.25,
+                "applicability": 0.4,
+                "implementation_precedent": false,
+                "execution_cost_estimate": "unknown",
+                "risk_estimate": "unknown",
+                "repetition_risk": 0.2,
+                "action_value_composite": 0.265,
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true,
+                "actual_success": true,
+                "actual_error_class": null,
+                "actual_usable_gain": true,
+                "actual_information_gain": true,
+                "coverage_before_no_gain": false,
+                "coverage_after_no_gain": false,
+                "result_linked": true
+              },
+              {
+                "proposal_id": "cand_2",
+                "action": {
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+                },
+                "rationale": null,
+                "evidence": {
+                  "state": false,
+                  "history": false,
+                  "external_research": true,
+                  "experiment": true
+                },
+                "evidence_sources_used": [
+                  "external_research",
+                  "llm_reasoning",
+                  "experiment"
+                ],
+                "preferred_source_at_proposal": "external_research",
+                "expected_information_gain": 0.35,
+                "success_probability_estimate": 0.25,
+                "evidence_confidence": 0.25,
+                "applicability": 0.4,
+                "implementation_precedent": false,
+                "execution_cost_estimate": "unknown",
+                "risk_estimate": "unknown",
+                "repetition_risk": 0.2,
+                "action_value_composite": 0.265,
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true,
+                "actual_success": true,
+                "actual_error_class": null,
+                "actual_usable_gain": true,
+                "actual_information_gain": true,
+                "coverage_before_no_gain": false,
+                "coverage_after_no_gain": false,
+                "result_linked": true
+              },
+              {
+                "proposal_id": "cand_3",
+                "action": {
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+                },
+                "rationale": null,
+                "evidence": {
+                  "state": false,
+                  "history": false,
+                  "external_research": true,
+                  "experiment": true
+                },
+                "evidence_sources_used": [
+                  "external_research",
+                  "llm_reasoning",
+                  "experiment"
+                ],
+                "preferred_source_at_proposal": "external_research",
+                "expected_information_gain": 0.35,
+                "success_probability_estimate": 0.25,
+                "evidence_confidence": 0.25,
+                "applicability": 0.4,
+                "implementation_precedent": false,
+                "execution_cost_estimate": "unknown",
+                "risk_estimate": "unknown",
+                "repetition_risk": 0.2,
+                "action_value_composite": 0.265,
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true,
+                "actual_success": true,
+                "actual_error_class": null,
+                "actual_usable_gain": true,
+                "actual_information_gain": true,
+                "coverage_before_no_gain": false,
+                "coverage_after_no_gain": false,
+                "result_linked": true
+              }
+            ],
+            "usable_gain_round": true,
+            "no_gain_before": false,
+            "no_gain_after": false
+          },
+          "research_cost": {
+            "web_hit_count": 1,
+            "candidate_count": 4,
+            "verified_count": 4,
+            "note": "counts_only_llm_cost_in_timing"
+          },
+          "auto_switch": false,
+          "prompt_injected": false,
+          "not_for_decision": true,
+          "phase": "kss-0",
+          "known_coverage_after": {
+            "known_coverage": 0.85,
+            "known_coverage_note": "exploration_signal_not_accuracy",
+            "has_usable_in_state": true,
+            "has_success_in_history": true,
+            "history_fails_only": false,
+            "same_error_class_continuing": false,
+            "stuck_error_class": null,
+            "same_open_question_continuing": false,
+            "command_family_no_gain": false,
+            "no_gain": false,
+            "information_gain": {
+              "has_gain": true,
+              "no_gain": false,
+              "reasons_gain": [
+                "recent_verify_ok",
+                "has_usable_selected"
+              ],
+              "reasons_stuck": []
+            },
+            "open_question_count": 0,
+            "verify_ok_count": 1,
+            "verify_fail_count": 0,
+            "reasons": [
+              "has_selected_usable",
+              "history_has_verify_ok"
+            ],
+            "estimate_method": "heuristic_v0",
+            "not_for_decision": true
+          }
+        },
+        "decision_confidence_observation": {
+          "enabled": false,
+          "phase": "kss-1"
+        },
+        "decision_evidence_observation": {
+          "enabled": true,
+          "phase": "kss-1.1",
+          "not_for_decision": true,
+          "behavior_changed": false,
+          "round": 1,
+          "bundle_id": "decision_b90f7bcf875f",
+          "evidence": {
+            "evidence_count": 4,
+            "successful_evidence_count": 4,
+            "failed_evidence_count": 0,
+            "verify_high_count": 4,
+            "verify_low_count": 0,
+            "verify_other_or_missing_count": 0,
+            "verify_confidence_labels": [
+              "high",
+              "high",
+              "high",
+              "high"
+            ],
+            "verify_confidence_numeric": "missing",
+            "verifier_support": true,
+            "tool_result_support": true,
+            "usable_count": 1,
+            "reference_count": 0,
+            "unresolved_count": 0,
+            "insufficient_count": 0,
+            "finding_bucket_counts": {
+              "usable": 1,
+              "reference": 0,
+              "unresolved": 0,
+              "insufficient": 0
+            },
+            "local_history_support": "missing",
+            "external_source_count": 1,
+            "web_kept_count": 1,
+            "web_dropped_count": "missing",
+            "web_hit_scores": [
+              "missing"
+            ],
+            "source_count": 1,
+            "independent_evidence_count": "missing",
+            "contradictory_evidence_count": "missing",
+            "candidates_in_count": 4,
+            "candidates_out_count": 4,
+            "candidates_rejected_count": 0,
+            "evidence_level": "high",
+            "direct_observation_support": true,
+            "no_gain": false,
+            "kss0_known_coverage": 0.15,
+            "kss0_preferred_source": "external_research"
+          },
+          "escalation": {
+            "reason": "usable_needs_goal_check",
+            "routine": false,
+            "needs_partial_llm": false,
+            "needs_global_judge": null
+          },
+          "llm_self_assessment_auxiliary": {
+            "action_confidence": "missing",
+            "observation_coverage": "missing",
+            "auxiliary_only": true,
+            "not_formal_confidence": true
+          },
+          "decision_events": [
+            {
+              "decision_id": "decision_b90f7bcf875f_verify",
+              "round": 1,
+              "decision_type": "verify_batch",
+              "decision_source": "verifier",
+              "final_decision": "has_high",
+              "evidence_refs": {
+                "evidence_count": 4,
+                "successful_evidence_count": 4,
+                "failed_evidence_count": 0,
+                "verify_high_count": 4,
+                "verify_low_count": 0,
+                "verify_other_or_missing_count": 0,
+                "verify_confidence_labels": [
+                  "high",
+                  "high",
+                  "high",
+                  "high"
+                ],
+                "verify_confidence_numeric": "missing",
+                "verifier_support": true,
+                "tool_result_support": true
+              },
+              "threshold_refs": {
+                "usable_requires": "confidence == high"
+              },
+              "reason_codes": []
+            },
+            {
+              "decision_id": "decision_b90f7bcf875f_judge",
+              "round": 1,
+              "decision_type": "research_judge",
+              "decision_source": "llm_judgment",
+              "judge_source": "llm",
+              "final_decision": true,
+              "judge_satisfies_request": true,
+              "judge_missing": [],
+              "judge_reason": "",
+              "score_refs": {
+                "llm_judge_confidence_numeric": "missing"
+              },
+              "gj_needed": true,
+              "gj_would_skip": false,
+              "gj_triggers": [
+                "usable_needs_goal_check",
+                "first_round"
+              ],
+              "gj_skip_triggers": []
+            },
+            {
+              "decision_id": "decision_b90f7bcf875f_progress",
+              "round": 1,
+              "decision_type": "research_progress",
+              "decision_source": "deterministic_rule",
+              "final_decision": "implement",
+              "progress_action": "implement",
+              "progress_reason": "findings_complete",
+              "progress_stagnation": 0,
+              "progress_has_new_finding": true,
+              "progress_missing_same": false,
+              "progress_duplicate_only": false,
+              "threshold_refs": {
+                "max_research_rounds": 10,
+                "max_stagnation": 3,
+                "verify_timeout": "missing",
+                "verify_confidence_gate": "confidence == 'high' → usable",
+                "progress_implement_if_satisfies_or_missing_resolved": true,
+                "note": "values copied from existing constants/rules; not invented weights"
+              },
+              "score_refs": {
+                "progress_decision_confidence": "missing"
+              }
+            }
+          ],
+          "mapping_note": "see EXISTING_TO_OBS_MAPPING",
+          "missing_fields_policy": "missing_not_zero"
+        }
+      }
+    ],
+    "research_history": [
+      {
+        "id": "evt_555af464923e",
+        "ts": "2026-08-20T15:11:15.202936+00:00",
+        "type": "verify_ok",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+          ]
+        },
+        "result": {
+          "ok": true,
+          "error": "",
+          "stderr": "",
+          "sample": [
+            "FreePhysicalMemory TotalVisibleMemorySize",
+            "------------------ ----------------------",
+            "32227744               66844080"
+          ],
+          "returncode": 0
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+          "confidence": "high",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_b8376fd81d34",
+        "ts": "2026-08-20T15:11:17.394827+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": true,
+          "reason": "",
+          "missing": []
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1
+        }
+      },
+      {
+        "id": "evt_ec98941cbdad",
+        "ts": "2026-08-20T15:11:17.394913+00:00",
+        "type": "knowledge_source_obs",
+        "action": {
+          "kind": "observe"
+        },
+        "result": {
+          "preferred_source": "external_research",
+          "known_coverage": 0.15,
+          "no_gain": false,
+          "source_values": {
+            "state": 0.2,
+            "history": 0.2,
+            "external_research": 0.5,
+            "llm_reasoning": 0.30000000000000004,
+            "experiment": 0.2
+          }
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "not_for_decision": true,
+          "phase": "kss-0"
+        }
+      },
+      {
+        "id": "evt_563eba0b90db",
+        "ts": "2026-08-20T15:11:17.395000+00:00",
+        "type": "decision_evidence_obs",
+        "action": {
+          "kind": "observe"
+        },
+        "result": {
+          "evidence_level": "high",
+          "verify_high_count": 4,
+          "usable_count": 1,
+          "no_gain": false,
+          "progress_action": "implement"
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "bundle_id": "decision_b90f7bcf875f",
+          "not_for_decision": true,
+          "phase": "kss-1.1"
+        }
+      }
+    ],
+    "global_judge_shadow": {
+      "mode": "live_skip",
+      "live_skip_enabled": true,
+      "audit_rate": 3,
+      "rounds_total": 1,
+      "judge_calls_actual": 1,
+      "would_skip_count": 0,
+      "live_skip_count": 0,
+      "audit_count": 0,
+      "llm_calls_saved_estimate": 0,
+      "llm_calls_saved_actual": 0,
+      "quality": {
+        "critical_miss_count": 0,
+        "false_continue_count": 0,
+        "satisfies_match_count": 0,
+        "missing_match_count": 0,
+        "decision_divergence_count": 0,
+        "audit_compared_count": 0
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "mode": "live_skip",
+          "needed": true,
+          "would_skip": false,
+          "triggers": [
+            "usable_needs_goal_check",
+            "first_round"
+          ],
+          "skip_triggers": [],
+          "primary_reason": "usable_needs_goal_check",
+          "escalation_reason": "usable_needs_goal_check",
+          "escalation_routine": false,
+          "llm_calls_saved_if_skip": 0,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "live_skipped": false,
+          "audit_only": false,
+          "llm_called": true,
+          "quality_compare": null,
+          "shadow_judgment": null,
+          "audit_judgment": null
+        }
+      ],
+      "observation": {
+        "judge_reduction_rate": 0.0,
+        "judge_call_rate": 1.0,
+        "rounds": 1,
+        "baseline_rounds": null,
+        "extra_rounds": null,
+        "would_skip_count": 0,
+        "live_skip_count": 0,
+        "audit_count": 0,
+        "critical_miss_count": 0,
+        "decision_divergence_count": 0
+      }
+    },
+    "context_budget_shadow": {
+      "mode": "live",
+      "shadow_enabled": true,
+      "headroom_chars": 800,
+      "calls": [
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 3132,
+          "effective_slack": 2332,
+          "headroom_gate_ok": true,
+          "legacy_chars": 4529,
+          "allocated_chars": 4548,
+          "legacy_actual_headroom": 3151,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 2519,
+            "user": 2010
+          },
+          "allocated_breakdown": {
+            "system": 2519,
+            "user": 2029
+          },
+          "allocated_sections": {
+            "system": 2408,
+            "goal": 162,
+            "current_state": 481,
+            "open_questions": 2,
+            "recent_events": 40,
+            "summary": 19,
+            "action_local": 393,
+            "safety": 921,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 2408,
+              "core": true
+            },
+            "goal": {
+              "chars": 162,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 481,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 2,
+              "core": true,
+              "count": 0
+            },
+            "recent_events": {
+              "chars": 40,
+              "core": false,
+              "retrieve_count": 0
+            },
+            "action_local": {
+              "chars": 393,
+              "core": false,
+              "search_results_count": 1
+            },
+            "safety": {
+              "chars": 921,
+              "core": false
+            },
+            "summary": {
+              "chars": 19,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 0,
+          "usable_findings_count": null,
+          "open_questions_count": 0,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 2408,
+                "core": true
+              },
+              "goal": {
+                "chars": 162,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 481,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 2,
+                "core": true,
+                "count": 0
+              },
+              "recent_events": {
+                "chars": 40,
+                "core": false,
+                "retrieve_count": 0
+              },
+              "action_local": {
+                "chars": 393,
+                "core": false,
+                "search_results_count": 1
+              },
+              "safety": {
+                "chars": 921,
+                "core": false
+              },
+              "summary": {
+                "chars": 19,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 0,
+            "prior_failures_count": 0,
+            "search_results_count": 1,
+            "prior_failures_source": "legacy_trim",
+            "recall_mode": null,
+            "recalled_event_count": 0,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 0,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 3132,
+          "legacy_headroom": 3151
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2960,
+          "effective_slack": 2160,
+          "headroom_gate_ok": true,
+          "legacy_chars": 4720,
+          "allocated_chars": 4720,
+          "legacy_actual_headroom": 2960,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 1213
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 1213
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 663,
+            "summary": 0,
+            "escalation_evidence": 44,
+            "usable_findings": 491,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 663,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 491,
+              "core": true,
+              "count": 1
+            },
+            "escalation_evidence": {
+              "chars": 44,
+              "core": false
+            },
+            "summary": {
+              "chars": 0,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 0
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 0,
+          "usable_findings_count": 1,
+          "open_questions_count": 0,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 663,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 491,
+                "core": true,
+                "count": 1
+              },
+              "escalation_evidence": {
+                "chars": 44,
+                "core": false
+              },
+              "summary": {
+                "chars": 0,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 0
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 0,
+            "omitted_categories": [],
+            "unresolved_in_materials": true,
+            "open_questions_count": 0,
+            "usable_findings_count": 1,
+            "recall_mode": null,
+            "recalled_event_count": 0
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2960,
+          "legacy_headroom": 2960
+        }
+      ],
+      "summary": {
+        "call_count": 2,
+        "legacy_chars_total": 9249,
+        "allocated_chars_total": 9268,
+        "legacy_chars_max": 4720,
+        "allocated_chars_max": 4720,
+        "legacy_overflow_count": 0,
+        "allocated_overflow_count": 0,
+        "reserved_headroom": 800,
+        "actual_headroom_min": 2960,
+        "actual_headroom_max": 3132,
+        "headroom_gate_ok": true,
+        "headroom_violation_count": 0,
+        "reduction_applied_count": 0,
+        "defer_count": 0
+      }
+    },
+    "generated_code": "import subprocess\n\ndef get_memory_status():\n    try:\n        result = subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', 'Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize'],\n                                capture_output=True, text=True)\n        if result.returncode == 0:\n            memory_info = result.stdout.splitlines()\n            free_memory = int(memory_info[1].split()[1])\n            total_memory = int(memory_info[1].split()[3])\n            memory_usage = round((1 - (free_memory / total_memory)) * 100, 2)\n            return {'status': memory_usage}\n        else:\n            return {'status': '未実装'}\n    except Exception as e:\n        return {'status': '未実装'}\n",
+    "repair": "skipped"
+  },
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [
+      {
+        "finding_ref": "evt_555af464923e",
+        "summary": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "source": "rule_partial"
+      }
+    ],
+    "constraints": [],
+    "open_questions": [],
+    "unresolved": [],
+    "research_history": [
+      {
+        "id": "evt_555af464923e",
+        "ts": "2026-08-20T15:11:15.202936+00:00",
+        "type": "verify_ok",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+          ]
+        },
+        "result": {
+          "ok": true,
+          "error": "",
+          "stderr": "",
+          "sample": [
+            "FreePhysicalMemory TotalVisibleMemorySize",
+            "------------------ ----------------------",
+            "32227744               66844080"
+          ],
+          "returncode": 0
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+          "confidence": "high",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_b8376fd81d34",
+        "ts": "2026-08-20T15:11:17.394827+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": true,
+          "reason": "",
+          "missing": []
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1
+        }
+      },
+      {
+        "id": "evt_ec98941cbdad",
+        "ts": "2026-08-20T15:11:17.394913+00:00",
+        "type": "knowledge_source_obs",
+        "action": {
+          "kind": "observe"
+        },
+        "result": {
+          "preferred_source": "external_research",
+          "known_coverage": 0.15,
+          "no_gain": false,
+          "source_values": {
+            "state": 0.2,
+            "history": 0.2,
+            "external_research": 0.5,
+            "llm_reasoning": 0.30000000000000004,
+            "experiment": 0.2
+          }
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "not_for_decision": true,
+          "phase": "kss-0"
+        }
+      },
+      {
+        "id": "evt_563eba0b90db",
+        "ts": "2026-08-20T15:11:17.395000+00:00",
+        "type": "decision_evidence_obs",
+        "action": {
+          "kind": "observe"
+        },
+        "result": {
+          "evidence_level": "high",
+          "verify_high_count": 4,
+          "usable_count": 1,
+          "no_gain": false,
+          "progress_action": "implement"
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "bundle_id": "decision_b90f7bcf875f",
+          "not_for_decision": true,
+          "phase": "kss-1.1"
+        }
+      }
+    ],
+    "banned_actions": []
+  },
+  "timing": {
+    "total_seconds": 40.5,
+    "llm_seconds": 36.5,
+    "machine_seconds": 4.0,
+    "research_seconds": 20.4,
+    "judge_seconds": 2.2,
+    "implementation_seconds": 5.0,
+    "repair_seconds": 0.0,
+    "validation_seconds": 0.4,
+    "llm_calls": 5
+  }
+}

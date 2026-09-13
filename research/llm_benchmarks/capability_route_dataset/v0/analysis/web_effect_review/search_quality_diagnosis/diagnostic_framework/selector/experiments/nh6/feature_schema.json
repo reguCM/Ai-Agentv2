@@ -1,0 +1,25 @@
+{
+  "version": "0.1",
+  "note": "NH5-compatible feature keys only. Do not add new keys without NH5 schema update.",
+  "features": {
+    "code_available": "診断対象のソースコードまたはコード抜粋が材料にある",
+    "path_unknown_or_untrusted": "実行経路が未確定または信頼できない",
+    "needs_local_analysis": "単一ファイルではなく局所コード読解が必要",
+    "state_change_requested": "Goal/Claim/Hypothesisの更新・Active化要求がある",
+    "reopen_requested": "SUPERSEDED等の過去StateをREOPENする要求がある",
+    "has_runtime_logs": "実測runtimeログまたは実行結果が材料にある",
+    "needs_path_integration": "複数ファイル・caller・統合判断が必要",
+    "suspect_stdout_vs_llm_handoff": "stdoutとLLM handoffのどちらが問題か疑わしい",
+    "suspect_ranking_vs_filter": "rankingとfilter/collectの混同が疑われる",
+    "suspect_off_path_causes": "経路外原因候補が挙がっている",
+    "near_exact_reactivation": "過去Stateと句読点/case/Unicode差程度で似ている",
+    "evidence_present": "Evidence IDまたは参照が材料にある",
+    "evidence_suspicious": "Evidenceの信頼性に疑いがある",
+    "evidence_exists": "Evidenceが存在すると記録されている",
+    "evidence_content_mismatch": "Evidenceの内容がClaim/Hypothesisと一致しない",
+    "similar_but_new_goal": "過去Goalに似ているが意味は新しい",
+    "small_llm_output_suspicious": "小型LLMの読解結果が怪しい",
+    "llm_disagreement": "小型LLMと大型LLMの判断が一致しない",
+    "evidence_timestamp_unknown": "Evidenceのtimestamp/freshnessが不明"
+  }
+}

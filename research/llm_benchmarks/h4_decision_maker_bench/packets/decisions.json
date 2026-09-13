@@ -1,0 +1,268 @@
+[
+  {
+    "id": "Q1",
+    "order": 1,
+    "group": "lock",
+    "question": "H4 Core の完了範囲はどこまでか。選択/Gap/expectation/read-only bridge/Sandbox判断までに閉じるか、製品全体（Help英語検索、UI、detect_tool_gap内部、LLM Tool一覧フィルタ、形態素）まで含めるか。",
+    "context": "H4-1 はファイル観測の capability 化のみ。web/gpu/cpu はまだ Tool 名。leftover が多数ある。"
+  },
+  {
+    "id": "Q2",
+    "order": 2,
+    "group": "lock",
+    "question": "web / gpu / cpu を Capability Index に semantic capability として足すか。keywords だけ / IDを足さない、でよいか。",
+    "context": "H4-1 は Index に項目が無いため Help 経路へ載せなかった。Help 正本に載せるには意味単位が必要。"
+  },
+  {
+    "id": "Q3",
+    "order": 3,
+    "group": "lock",
+    "question": "何件の semantic capability を足すか。CPU の get_cpu_status と cpu_status を別 capability にするか同一にするか。Tool 名クローンでよいか。",
+    "context": "legacy cpu_status は Tool 属性。意味単位と Tool 属性を混ぜると後で畳めない。"
+  },
+  {
+    "id": "Q4",
+    "order": 4,
+    "group": "lock",
+    "question": "意図の切り方: CPU観測、URL取得、汎用web検索、GPUプロセス、汎用GPUデバイスをどう分けるか。親capabilityに畳むか。汎用GPUで device+process を両方必須にするか。",
+    "context": "温度とプロセスのように両側 exclusive な要求があり得る。過剰結合は誤家族確定を招く。"
+  },
+  {
+    "id": "Q5-6",
+    "order": 5,
+    "group": "lock",
+    "question": "要求テキストから capability をどう選ぶか。固定意図表、IDF、文字長、「具体語」リスト、keyword逆引きのどれか。共有keywordだけのときと、複数exclusiveが同時ヒットするときをどう扱うか。",
+    "context": "_RULES は Python 正規表現の意図表。Registry keywords が語彙正本。第2語彙化を避ける必要がある。"
+  },
+  {
+    "id": "Q7",
+    "order": 6,
+    "group": "lock",
+    "question": "正本 API を複数 capability にするか。単数 API を即削除するか、残して 0/1/2+ をどう返すか。2+ を first に折るか。",
+    "context": "既存は単数 infer/resolve。out-of-tree caller は NOT_OBSERVED。snapshot 消費者は flat list。"
+  },
+  {
+    "id": "Q8",
+    "order": 7,
+    "group": "lock",
+    "question": "Classifier は file だけ \"file\" in text の特例を残すか、全 Index capability に同じ逆引きを使うか。",
+    "context": "H4-1 はファイル系だけ capability id。二重分類器は allowlist 再発。"
+  },
+  {
+    "id": "Q9",
+    "order": 8,
+    "group": "lock",
+    "question": "汎用 file 語と registry_read をどう分けるか。両方を keyword でマージしてよいか。registry_read はいつ選ぶか。",
+    "context": "同じ read_file でも workspace_file_read と registry_read は意味が違う。look_first パス言及があり得る。"
+  },
+  {
+    "id": "Q10",
+    "order": 9,
+    "group": "lock",
+    "question": "_RULES（Python意図表）を capability 正本に残すか外すか。",
+    "context": "現行 matcher の本体。残すと Tool 追加のたびに表を直す allowlist になる。"
+  },
+  {
+    "id": "Q11-13",
+    "order": 10,
+    "group": "lock",
+    "question": "1 Resolution の粒度、snapshot 形、memory 形、同一task+capability の更新、required 再計算で落ちた分の扱いをどうするか。複合キーやネスト snapshot にするか。",
+    "context": "現行 memory は dict[task_id, 1 Resolution] で上書き。snapshot['capability_resolution'] は flat list。agent_test_runner / run_human_summary がそれを読む。"
+  },
+  {
+    "id": "Q14-15",
+    "order": 11,
+    "group": "lock",
+    "question": "Help確認済み candidate が2+のとき selected_tool をどうするか。[0] で一番それらしいものを選ぶか。status はどうするか。ちょうど1件のときは。",
+    "context": "現行は candidate_tools[0] で RESOLVED。CPU は get_cpu_status と cpu_status の2候補になり得る。"
+  },
+  {
+    "id": "Q16",
+    "order": 12,
+    "group": "lock",
+    "question": "空 tools[] の suggested_minimal_tool / _MINIMAL_TOOLS を実行選択に使ってよいか。正本をどこに置くか。",
+    "context": "_MINIMAL_TOOLS はコード定数。Gap 提案と実行が混同され得る。test_execution 等は tools[] が空。"
+  },
+  {
+    "id": "Q20-A",
+    "order": 13,
+    "group": "lock",
+    "question": "日本語と Latin の一致規則。形態素を Core に入れるか。同一script埋没除外を全面適用するか。Latin 単語境界と日本語 substring の組み合わせか。",
+    "context": "「ログファイルを編集して」は正当 mutation。「プロファイル」は *ファイル 衝突。形態素は Deferred 候補。"
+  },
+  {
+    "id": "Q23",
+    "order": 14,
+    "group": "lock",
+    "question": "mutation の Discovery のため、裸 verb（編集/作成）や日本語「ファイル」単独を Registry keywords に足すか。file付き表層+組合せにするか。",
+    "context": "Help は keyword ⊆ request や query ⊆ metadata のため、裸「編集」は過候補になる。正当日本語 mutation は「ファイルを編集」等の表層がある。"
+  },
+  {
+    "id": "Q24",
+    "order": 15,
+    "group": "lock",
+    "question": "「プロファイルを編集」FP をどう抑えるか。除外表を大きくするか、形態素にするか、同一script除外にするか、初期トークンを何かにするか。除外を Help にもかけるか。",
+    "context": "正当 Xファイルを落とすリスク。除外表は第2語彙になりやすい。Help / relevant_tools は別層。"
+  },
+  {
+    "id": "Q25",
+    "order": 16,
+    "group": "revision",
+    "question": "path 根拠の無い file-read で next_action を出すか。look_first[0]（しばしば registry/tools.json）の黙読を維持するか止めるか。path なし「ファイルを読んで」の機械的成功を残すか。",
+    "context": "誤分類 read が tools.json を自動実行する実害がある。H4-1 の黙読テストは緑を維持したくなる。look_first は Index に残っている。"
+  },
+  {
+    "id": "Q26",
+    "order": 17,
+    "group": "revision",
+    "question": "capability 選択の signal として look_first を全 capability で使ってよいか。read-only / registry_read に限るか。",
+    "context": "write/execution の look_first はほぼ全部 registry/tools.json のコピー。選択に使うと mutation を指名し得る。"
+  },
+  {
+    "id": "Q27",
+    "order": 18,
+    "group": "revision",
+    "question": "write/execution の Index look_first を削除して誤用を防ぐか、残して Classifier が無視するか。",
+    "context": "人間が JSON 案内として読む用途は NOT_OBSERVED。load_workspace_index は欄があればパス実在チェック。削除は canonical 破壊リスク。"
+  },
+  {
+    "id": "Q28",
+    "order": 19,
+    "group": "revision",
+    "question": "_VERIFIED_ROUTES を capability 正本に残すか外すか。概念層の routes はどうするか。",
+    "context": "read next_action が Python 表に依存している。Index との二重定義。"
+  },
+  {
+    "id": "Q29",
+    "order": 20,
+    "group": "revision",
+    "question": "search_files の query が機械抽出できないとき、text[:80] を query にして next_action するか、next_action なしにするか。",
+    "context": "長文を全文検索すると無関係ヒット。機械抽出できる場合は bridge したい。"
+  },
+  {
+    "id": "Q30",
+    "order": 21,
+    "group": "revision",
+    "question": "list_files が selected で path が無いとき next_action path=\".\" を許すか。Q25 と同型で path 必須にして自動実行を閉じるか。Residual として残すか。",
+    "context": "Tool 省略時の意味が workspace root 一覧。誤分類 list が唯一件だと root 一覧が自動実行され得る。実運用実害は NOT_OBSERVED。"
+  },
+  {
+    "id": "Q31",
+    "order": 22,
+    "group": "revision",
+    "question": "同一 Task に next_action が2+あるとき [0] だけ inject するか、どれも inject しないか。",
+    "context": "read+edit が同時に pending されると黙読と mutation が混ざる。"
+  },
+  {
+    "id": "Q32",
+    "order": 23,
+    "group": "revision",
+    "question": "pending inject 可否を {read_file, search_files, list_files} の名集合でよいか。別の正本にするか。",
+    "context": "名集合は Tool 追加のたびに更新が要る。Registry に side_effect がある。"
+  },
+  {
+    "id": "Q33",
+    "order": 24,
+    "group": "revision",
+    "question": "search hit 後の次読取先を read_file 固定にしてよいか。capability/Help 確認 Tool にするか。",
+    "context": "H4-1 は workspace_file_read の Help 確認。observe_tool 内はまだ名固定。"
+  },
+  {
+    "id": "Q34",
+    "order": 25,
+    "group": "revision",
+    "question": "Dedicated Sandbox 起動条件を {create_file, edit_file} 名集合のままにするか。Registry フラグにするか。",
+    "context": "名集合は allowlist 再発。security.dedicated_sandbox_required が Registry にある想定。"
+  },
+  {
+    "id": "Q35",
+    "order": 26,
+    "group": "revision",
+    "question": "同一 Task に mutation Resolution が複数あるとき、1 Resolution に selected を複数入れるか、各 Resolution は selected 高々1か。Sandbox は起動するか。required_mutation_tool() は何を返すか。",
+    "context": "契約上 selected_tool は 0 または 1。どれを正の mutation 名ともしない必要がある。"
+  },
+  {
+    "id": "Q36",
+    "order": 27,
+    "group": "revision",
+    "question": "「検索して」「使用率」だけの横断共有語で web/gpu/cpu を確定してよいか。file対象があるときの「検索」で web_search を足すか。片方へ prefer するか。",
+    "context": "共有 keyword は複数家族に載る。テスト不足で静かに誤家族確定しやすい。"
+  },
+  {
+    "id": "Q37",
+    "order": 28,
+    "group": "revision",
+    "question": "audit 意図（調査/確認等）の降格を _RULES に残すか、Index classifier へ移すか、廃止するか。",
+    "context": "現行は監査で mutation しない。語を Python に残すと第2語彙。"
+  },
+  {
+    "id": "Q38",
+    "order": 29,
+    "group": "revision",
+    "question": "cpu_observation の候補が2件のとき Core で get_cpu_status を選んでよいか。常に selected なしにするか。",
+    "context": "Q14 系の ranking 禁止と衝突し得る。LLM は全 agent Tool を見ている。"
+  },
+  {
+    "id": "Q39",
+    "order": 30,
+    "group": "revision",
+    "question": "time / memory / summary を今回 Index に足すか。",
+    "context": "範囲膨張。H4 Core の完了条件に入っていない。"
+  },
+  {
+    "id": "Q40",
+    "order": 31,
+    "group": "revision",
+    "question": "日本語一致規則を変え、除外を file 以外（GPU等）へ広げてよいか。",
+    "context": "第2語彙化。除外表は初期最小の方針と衝突し得る。"
+  },
+  {
+    "id": "Q41",
+    "order": 32,
+    "group": "revision",
+    "question": "file付き mutation 表層の keywords 最小集合は何か。裸 verb で Discovery を稼ぐか。",
+    "context": "「ファイルを作」「新しいファイル」「ファイルを編集」等。FN（表層に無い正当 mutation）は残る。"
+  },
+  {
+    "id": "Q42",
+    "order": 33,
+    "group": "revision",
+    "question": "除外正本を隠れた Python set にするか、Index classifier に置き schema を上げるか。",
+    "context": "適用点が不明だと Help に漏れたり matcher 以外で効いたりする。"
+  },
+  {
+    "id": "Q43",
+    "order": 34,
+    "group": "revision",
+    "question": "prefer_when_ambiguous をどの capability に置くか。CPU 二本の間にも prefer するか。",
+    "context": "prefer は共有だけのときの tie-break。exclusive が既にあるときは使わない想定が Q5 系。"
+  },
+  {
+    "id": "Q44",
+    "order": 35,
+    "group": "revision",
+    "question": "URL 要求を URL Tool 名表で判定するか。URI 形 + schema の URL 欄で url_fetch するか。",
+    "context": "allowlist 再発を避ける。汎用 web 検索とは分ける必要がある。"
+  },
+  {
+    "id": "Q45",
+    "order": 36,
+    "group": "revision",
+    "question": "search/list に英語 file を足すか。search に日本語「ファイル」必須か。mutation に日本語「ファイル」を足すか。",
+    "context": "Q23 の裸 object 単独 mutation 禁止と矛盾し得る。"
+  },
+  {
+    "id": "Q46",
+    "order": 37,
+    "group": "revision",
+    "question": "概念 look_first の自動読取を capability Q25 と一緒に止めるか。変えないか。",
+    "context": "概念層は categories/concepts。capability look_first と同一視した製品意図は NOT_DETERMINED。"
+  },
+  {
+    "id": "Q47",
+    "order": 38,
+    "group": "revision",
+    "question": "_CAPABILITY_QUERIES や単数 API、Chat UI leftover を削除して Core 完成としてよいか。残すか。",
+    "context": "掃除は偽完了になりやすい。Help 英語検索 0 件は Residual。"
+  }
+]

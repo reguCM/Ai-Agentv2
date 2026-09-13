@@ -1,0 +1,1166 @@
+{
+  "generated_at": "2026-08-24T06:54:08.936325+00:00",
+  "model": "qwen3:8b",
+  "case_analyses": [
+    {
+      "case_id": "A06",
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 1,
+      "returned_count": 1,
+      "non_empty_snippet_count": 0,
+      "ranking_dropped_candidates": 0,
+      "page_has_usable_text": false,
+      "llm_received_count": 1,
+      "llm_received_usable_evidence": "no",
+      "observed_search_outcome": "return_hits_all_snippet_empty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が渡されなかった",
+          "observed_facts": [
+            "return_snippet_nonempty: 0",
+            "api_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "snippet空の候補がLLMに渡されたため、回答に影響"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "APIが有用候補を返していない可能性",
+          "observed_facts": [
+            "api_raw: 1",
+            "hit_accepted: 1",
+            "after_unique: 1",
+            "after_ranking: 1",
+            "return: 1"
+          ],
+          "speculation": [
+            "検索クエリ「Python 3.13」に合致する候補が不足"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が失われていない",
+          "observed_facts": [
+            "ranking_dropped_total: 0",
+            "ranking_dropped_with_snippet: 0"
+          ],
+          "speculation": []
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に失敗していないが情報不足",
+          "observed_facts": [
+            "api_snippet_empty: 1",
+            "return_snippet_empty: 1"
+          ],
+          "speculation": [
+            "取得したページがPython 3.13の情報を持たない可能性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの受け渡しは正常",
+          "observed_facts": [
+            "llm_handoff_count_match: True"
+          ],
+          "speculation": []
+        },
+        "6_ja_en_difference": {
+          "judgment": "言語差による影響は確認されない",
+          "observed_facts": [
+            "language_hint: ja_request_en_query"
+          ],
+          "speculation": []
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリネスの影響はなし",
+          "observed_facts": [
+            "time_sensitive: False"
+          ],
+          "speculation": []
+        }
+      },
+      "suspected_bottlenecks": [
+        "A",
+        "C"
+      ],
+      "suspected_bottleneck_reason": "検索クエリ「Python 3.13」に合致する候補が不足（A）かつ取得したページがPython 3.13の情報を持たない（C）",
+      "_raw": "{\n  \"case_id\": \"A06\",\n  \"request\": \"Python 3.13で追加された主な変更点を教えて\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 1,\n  \"returned_count\": 1,\n  \"non_empty_snippet_count\": 0,\n  \"ranking_dropped_candidates\": 0,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 1,\n  \"llm_received_usable_evidence\": \"no\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_empty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が渡されなかった\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 0\",\n        \"api_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"snippet空の候補がLLMに渡されたため、回答に影響\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"APIが有用候補を返していない可能性\",\n      \"observed_facts\": [\n        \"api_raw: 1\",\n        \"hit_accepted: 1\",\n        \"after_unique: 1\",\n        \"after_ranking: 1\",\n        \"return: 1\"\n      ],\n      \"speculation\": [\n        \"検索クエリ「Python 3.13」に合致する候補が不足\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が失われていない\",\n      \"observed_facts\": [\n        \"ranking_dropped_total: 0\",\n        \"ranking_dropped_with_snippet: 0\"\n      ],\n      \"speculation\": []\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に失敗していないが情報不足\",\n      \"observed_facts\": [\n        \"api_snippet_empty: 1\",\n        \"return_snippet_empty: 1\"\n      ],\n      \"speculation\": [\n        \"取得したページがPython 3.13の情報を持たない可能性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの受け渡しは正常\",\n      \"observed_facts\": [\n        \"llm_handoff_count_match: True\"\n      ],\n      \"speculation\": []\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"言語差による影響は確認されない\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\"\n      ],\n      \"speculation\": []\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリネスの影響はなし\",\n      \"observed_facts\": [\n        \"time_sensitive: False\"\n      ],\n      \"speculation\": []\n    }\n  },\n  \"suspected_bottlenecks\": [\"A\", \"C\"],\n  \"suspected_bottleneck_reason\": \"検索クエリ「Python 3.13」に合致する候補が不足（A）かつ取得したページがPython 3.13の情報を持たない（C）\"\n}"
+    },
+    {
+      "case_id": "E04",
+      "request": "日本の運転免許は一般にどう取得されるか教えて",
+      "language": "ja",
+      "api_candidate_count": 2,
+      "returned_count": 2,
+      "non_empty_snippet_count": 0,
+      "ranking_dropped_candidates": 0,
+      "page_has_usable_text": false,
+      "llm_received_count": 2,
+      "llm_received_usable_evidence": "no",
+      "observed_search_outcome": "return_hits_all_snippet_empty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が届いていない",
+          "observed_facts": [
+            "return_snippet_nonempty: 0",
+            "api_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "snippet空候補がLLMに渡された可能性",
+            "ページ本文が存在しても抽出失敗の可能性"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "API候補に有用情報が含まれていない",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0"
+          ],
+          "speculation": [
+            "WikipediaのAPIが本文を取得できない可能性",
+            "検索対象の性質（免許取得手順）がsnippetに反映されない可能性"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が失われていない",
+          "observed_facts": [
+            "ranking_dropped_total: 0",
+            "ranking_dropped_with_snippet: 0"
+          ],
+          "speculation": []
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に失敗",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "Wikipediaのページ構造がsnippet取得を妨げる可能性",
+            "APIの取得処理が本文を抜き取れない可能性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの情報伝達に問題なし",
+          "observed_facts": [
+            "llm_received_hit_count: 2",
+            "llm_handoff_count_match: True"
+          ],
+          "speculation": [
+            "LLMが空のsnippetを処理する仕様の可能性"
+          ]
+        },
+        "6_ja_en_difference": {
+          "judgment": "言語差の影響なし",
+          "observed_facts": [
+            "language_hint: ja",
+            "search_query: 普通自動車免許"
+          ],
+          "speculation": []
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリーアクセスの影響なし",
+          "observed_facts": [
+            "time_sensitive: False"
+          ],
+          "speculation": []
+        }
+      },
+      "suspected_bottlenecks": [
+        "C",
+        "D"
+      ],
+      "suspected_bottleneck_reason": "snippet空候補がLLMに渡され、コンテンツ取得処理で本文が抜き取れなかったため",
+      "_raw": "{\n  \"case_id\": \"E04\",\n  \"request\": \"日本の運転免許は一般にどう取得されるか教えて\",\n  \"language\": \"ja\",\n  \"api_candidate_count\": 2,\n  \"returned_count\": 2,\n  \"non_empty_snippet_count\": 0,\n  \"ranking_dropped_candidates\": 0,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 2,\n  \"llm_received_usable_evidence\": \"no\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_empty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が届いていない\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 0\",\n        \"api_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"snippet空候補がLLMに渡された可能性\",\n        \"ページ本文が存在しても抽出失敗の可能性\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"API候補に有用情報が含まれていない\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\"\n      ],\n      \"speculation\": [\n        \"WikipediaのAPIが本文を取得できない可能性\",\n        \"検索対象の性質（免許取得手順）がsnippetに反映されない可能性\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が失われていない\",\n      \"observed_facts\": [\n        \"ranking_dropped_total: 0\",\n        \"ranking_dropped_with_snippet: 0\"\n      ],\n      \"speculation\": []\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に失敗\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"Wikipediaのページ構造がsnippet取得を妨げる可能性\",\n        \"APIの取得処理が本文を抜き取れない可能性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの情報伝達に問題なし\",\n      \"observed_facts\": [\n        \"llm_received_hit_count: 2\",\n        \"llm_handoff_count_match: True\"\n      ],\n      \"speculation\": [\n        \"LLMが空のsnippetを処理する仕様の可能性\"\n      ]\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"言語差の影響なし\",\n      \"observed_facts\": [\n        \"language_hint: ja\",\n        \"search_query: 普通自動車免許\"\n      ],\n      \"speculation\": []\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリーアクセスの影響なし\",\n      \"observed_facts\": [\n        \"time_sensitive: False\"\n      ],\n      \"speculation\": []\n    }\n  },\n  \"suspected_bottlenecks\": [\"C\", \"D\"],\n  \"suspected_bottleneck_reason\": \"snippet空候補がLLMに渡され、コンテンツ取得処理で本文が抜き取れなかったため\"\n}"
+    },
+    {
+      "case_id": "C03",
+      "request": "RTX 3060って今どういう扱いですか？",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 5,
+      "returned_count": 5,
+      "non_empty_snippet_count": 0,
+      "ranking_dropped_candidates": 0,
+      "page_has_usable_text": false,
+      "llm_received_count": 5,
+      "llm_received_usable_evidence": "no",
+      "observed_search_outcome": "return_hits_all_snippet_empty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が届いていない",
+          "observed_facts": [
+            "llm_received_usable_evidence: no",
+            "return_snippet_nonempty: 0",
+            "api_snippet_nonempty: 0"
+          ],
+          "speculation": [
+            "snippet空の候補がLLMに渡された可能性",
+            "Wikipediaの抽出処理が失敗している可能性"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "APIが有用候補を返したが内容取得失敗",
+          "observed_facts": [
+            "api_candidate_count: 5",
+            "api_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "Wikipediaのページが非表示または構造変更された可能性",
+            "APIが非英語コンテンツを取得できない可能性"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が失われていない",
+          "observed_facts": [
+            "ranking_dropped_total: 0",
+            "ranking_dropped_with_snippet: 0"
+          ],
+          "speculation": []
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得が失敗している",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "WikipediaのAPIがコンテンツを取得できない可能性",
+            "ページが非公開または構造変更された可能性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの受け渡しは正常",
+          "observed_facts": [
+            "llm_handoff_count_match: True",
+            "llm_received_hit_count: 5"
+          ],
+          "speculation": []
+        },
+        "6_ja_en_difference": {
+          "judgment": "日本語対応が不十分",
+          "observed_facts": [
+            "language_hint: ja_request_en_query",
+            "api_candidate_count: 5（すべて英語）"
+          ],
+          "speculation": [
+            "日本語コンテンツが不足している可能性",
+            "英語ページの日本語翻訳が不足している可能性"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリー性が影響していない",
+          "observed_facts": [
+            "time_sensitive: True",
+            "api_candidate_count: 5（最新情報が含まれる可能性）"
+          ],
+          "speculation": []
+        }
+      },
+      "suspected_bottlenecks": [
+        "C",
+        "その他"
+      ],
+      "suspected_bottleneck_reason": "Wikipediaのコンテンツ取得失敗と日本語対応不足が原因",
+      "_raw": "{\n  \"case_id\": \"C03\",\n  \"request\": \"RTX 3060って今どういう扱いですか？\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 5,\n  \"returned_count\": 5,\n  \"non_empty_snippet_count\": 0,\n  \"ranking_dropped_candidates\": 0,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 5,\n  \"llm_received_usable_evidence\": \"no\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_empty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が届いていない\",\n      \"observed_facts\": [\n        \"llm_received_usable_evidence: no\",\n        \"return_snippet_nonempty: 0\",\n        \"api_snippet_nonempty: 0\"\n      ],\n      \"speculation\": [\n        \"snippet空の候補がLLMに渡された可能性\",\n        \"Wikipediaの抽出処理が失敗している可能性\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"APIが有用候補を返したが内容取得失敗\",\n      \"observed_facts\": [\n        \"api_candidate_count: 5\",\n        \"api_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"Wikipediaのページが非表示または構造変更された可能性\",\n        \"APIが非英語コンテンツを取得できない可能性\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が失われていない\",\n      \"observed_facts\": [\n        \"ranking_dropped_total: 0\",\n        \"ranking_dropped_with_snippet: 0\"\n      ],\n      \"speculation\": []\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得が失敗している\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"WikipediaのAPIがコンテンツを取得できない可能性\",\n        \"ページが非公開または構造変更された可能性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの受け渡しは正常\",\n      \"observed_facts\": [\n        \"llm_handoff_count_match: True\",\n        \"llm_received_hit_count: 5\"\n      ],\n      \"speculation\": []\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"日本語対応が不十分\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\",\n        \"api_candidate_count: 5（すべて英語）\"\n      ],\n      \"speculation\": [\n        \"日本語コンテンツが不足している可能性\",\n        \"英語ページの日本語翻訳が不足している可能性\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリー性が影響していない\",\n      \"observed_facts\": [\n        \"time_sensitive: True\",\n        \"api_candidate_count: 5（最新情報が含まれる可能性）\"\n      ],\n      \"speculation\": []\n    }\n  },\n  \"suspected_bottlenecks\": [\"C\", \"その他\"],\n  \"suspected_bottleneck_reason\": \"Wikipediaのコンテンツ取得失敗と日本語対応不足が原因\"\n}"
+    },
+    {
+      "case_id": "P02b",
+      "request": "今のRTX 3060の立ち位置を教えて",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 5,
+      "returned_count": 5,
+      "non_empty_snippet_count": 0,
+      "ranking_dropped_candidates": 0,
+      "page_has_usable_text": false,
+      "llm_received_count": 5,
+      "llm_received_usable_evidence": "no",
+      "observed_search_outcome": "return_hits_all_snippet_empty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が届いていない",
+          "observed_facts": [
+            "return_snippet_nonempty: 0",
+            "llm_received_usable_evidence: no"
+          ],
+          "speculation": [
+            "snippet空の候補がLLMに渡された可能性",
+            "ページ本文が存在しても抽出失敗の可能性"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "APIが有用候補を返した可能性",
+          "observed_facts": [
+            "api_candidate_count: 5",
+            "api_snippet_nonempty: 0"
+          ],
+          "speculation": [
+            "Wikipediaのページが存在するがsnippet取得失敗",
+            "検索APIが非日本語コンテンツを優先している可能性"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が失われていない",
+          "observed_facts": [
+            "ranking_dropped_candidates: 0",
+            "return_hits_all_snippet_empty"
+          ],
+          "speculation": [
+            "ランキングロジックがsnippet空の候補を優先している可能性"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に失敗している",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "Wikipediaページの本文取得処理が失敗",
+            "snippet取得APIの制限が発生"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの受け渡しに問題はない",
+          "observed_facts": [
+            "llm_handoff_count_match: True",
+            "agent_passes_full_return: True"
+          ],
+          "speculation": [
+            "LLMがsnippet空の候補を無視している可能性"
+          ]
+        },
+        "6_ja_en_difference": {
+          "judgment": "日本語/英語差異が影響している可能性",
+          "observed_facts": [
+            "language_hint: ja_request_en_query"
+          ],
+          "speculation": [
+            "英語コンテンツが日本語検索に不適切",
+            "日本語のRTX 3060情報が取得できていない"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリネスが影響している可能性",
+          "observed_facts": [
+            "time_sensitive: True"
+          ],
+          "speculation": [
+            "最新情報が取得できていない可能性"
+          ]
+        }
+      },
+      "suspected_bottlenecks": [
+        "C",
+        "その他"
+      ],
+      "suspected_bottleneck_reason": "snippet取得失敗とWikipediaページの本文取得失敗が主な原因。検索APIが英語コンテンツを返している可能性と、タイムリネスに応じた最新情報取得の不足が推測される。",
+      "_raw": "{\n  \"case_id\": \"P02b\",\n  \"request\": \"今のRTX 3060の立ち位置を教えて\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 5,\n  \"returned_count\": 5,\n  \"non_empty_snippet_count\": 0,\n  \"ranking_dropped_candidates\": 0,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 5,\n  \"llm_received_usable_evidence\": \"no\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_empty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が届いていない\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 0\",\n        \"llm_received_usable_evidence: no\"\n      ],\n      \"speculation\": [\n        \"snippet空の候補がLLMに渡された可能性\",\n        \"ページ本文が存在しても抽出失敗の可能性\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"APIが有用候補を返した可能性\",\n      \"observed_facts\": [\n        \"api_candidate_count: 5\",\n        \"api_snippet_nonempty: 0\"\n      ],\n      \"speculation\": [\n        \"Wikipediaのページが存在するがsnippet取得失敗\",\n        \"検索APIが非日本語コンテンツを優先している可能性\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が失われていない\",\n      \"observed_facts\": [\n        \"ranking_dropped_candidates: 0\",\n        \"return_hits_all_snippet_empty\"\n      ],\n      \"speculation\": [\n        \"ランキングロジックがsnippet空の候補を優先している可能性\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に失敗している\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"Wikipediaページの本文取得処理が失敗\",\n        \"snippet取得APIの制限が発生\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの受け渡しに問題はない\",\n      \"observed_facts\": [\n        \"llm_handoff_count_match: True\",\n        \"agent_passes_full_return: True\"\n      ],\n      \"speculation\": [\n        \"LLMがsnippet空の候補を無視している可能性\"\n      ]\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"日本語/英語差異が影響している可能性\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\"\n      ],\n      \"speculation\": [\n        \"英語コンテンツが日本語検索に不適切\",\n        \"日本語のRTX 3060情報が取得できていない\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリネスが影響している可能性\",\n      \"observed_facts\": [\n        \"time_sensitive: True\"\n      ],\n      \"speculation\": [\n        \"最新情報が取得できていない可能性\"\n      ]\n    }\n  },\n  \"suspected_bottlenecks\": [\"C\", \"その他\"],\n  \"suspected_bottleneck_reason\": \"snippet取得失敗とWikipediaページの本文取得失敗が主な原因。検索APIが英語コンテンツを返している可能性と、タイムリネスに応じた最新情報取得の不足が推測される。\"\n}"
+    },
+    {
+      "case_id": "C02",
+      "request": "Ollamaについて詳しく教えて",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 18,
+      "returned_count": 3,
+      "non_empty_snippet_count": 1,
+      "ranking_dropped_candidates": 11,
+      "page_has_usable_text": false,
+      "llm_received_count": 3,
+      "llm_received_usable_evidence": "partial",
+      "observed_search_outcome": "return_hits_partial_snippet",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が部分的に提供された",
+          "observed_facts": [
+            "return_snippet_nonempty: 1",
+            "llm_received_hit_count: 3",
+            "json_bytes: 830"
+          ],
+          "speculation": [
+            "非空スニペットは1件のみで情報量が限られている可能性"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "API候補に有用な情報が存在した",
+          "observed_facts": [
+            "api_snippet_nonempty: 8",
+            "duckduckgo候補にOllamaの説明あり"
+          ],
+          "speculation": [
+            "日本語Wikipediaの空スニペットが有用性を低下させた可能性"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が脱落した",
+          "observed_facts": [
+            "ranking_dropped_with_snippet: 4",
+            "非空スニペットの候補が0スコアで脱落"
+          ],
+          "speculation": [
+            "スコアリングロジックが日本語コンテンツを優先していない可能性"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に問題なし",
+          "observed_facts": [
+            "extract_probe_page_has_usable_text: False",
+            "Wikipedia抽出結果が空"
+          ],
+          "speculation": [
+            "日本語ページの本文取得が失敗している可能性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの受け渡しに問題なし",
+          "observed_facts": [
+            "llm_handoff_count_match: True",
+            "agent_passes_full_return: True"
+          ],
+          "speculation": []
+        },
+        "6_ja_en_difference": {
+          "judgment": "日本語/英語差が影響している",
+          "observed_facts": [
+            "language_hint: ja_request_en_query",
+            "日本語Wikipediaのスニペットが空"
+          ],
+          "speculation": [
+            "英語コンテンツが優先され日本語情報が不足している可能性"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリネスに影響なし",
+          "observed_facts": [
+            "time_sensitive: False"
+          ],
+          "speculation": []
+        }
+      },
+      "suspected_bottlenecks": [
+        "A",
+        "B",
+        "その他"
+      ],
+      "suspected_bottleneck_reason": "日本語コンテンツの取得失敗とランキングロジックの言語優先度不足が原因",
+      "_raw": "{\n  \"case_id\": \"C02\",\n  \"request\": \"Ollamaについて詳しく教えて\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 18,\n  \"returned_count\": 3,\n  \"non_empty_snippet_count\": 1,\n  \"ranking_dropped_candidates\": 11,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 3,\n  \"llm_received_usable_evidence\": \"partial\",\n  \"observed_search_outcome\": \"return_hits_partial_snippet\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が部分的に提供された\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 1\",\n        \"llm_received_hit_count: 3\",\n        \"json_bytes: 830\"\n      ],\n      \"speculation\": [\n        \"非空スニペットは1件のみで情報量が限られている可能性\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"API候補に有用な情報が存在した\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 8\",\n        \"duckduckgo候補にOllamaの説明あり\"\n      ],\n      \"speculation\": [\n        \"日本語Wikipediaの空スニペットが有用性を低下させた可能性\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が脱落した\",\n      \"observed_facts\": [\n        \"ranking_dropped_with_snippet: 4\",\n        \"非空スニペットの候補が0スコアで脱落\"\n      ],\n      \"speculation\": [\n        \"スコアリングロジックが日本語コンテンツを優先していない可能性\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に問題なし\",\n      \"observed_facts\": [\n        \"extract_probe_page_has_usable_text: False\",\n        \"Wikipedia抽出結果が空\"\n      ],\n      \"speculation\": [\n        \"日本語ページの本文取得が失敗している可能性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの受け渡しに問題なし\",\n      \"observed_facts\": [\n        \"llm_handoff_count_match: True\",\n        \"agent_passes_full_return: True\"\n      ],\n      \"speculation\": []\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"日本語/英語差が影響している\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\",\n        \"日本語Wikipediaのスニペットが空\"\n      ],\n      \"speculation\": [\n        \"英語コンテンツが優先され日本語情報が不足している可能性\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリネスに影響なし\",\n      \"observed_facts\": [\n        \"time_sensitive: False\"\n      ],\n      \"speculation\": []\n    }\n  },\n  \"suspected_bottlenecks\": [\"A\", \"B\", \"その他\"],\n  \"suspected_bottleneck_reason\": \"日本語コンテンツの取得失敗とランキングロジックの言語優先度不足が原因\"\n}"
+    },
+    {
+      "case_id": "A03",
+      "request": "OpenAIについて最近何か大きな発表はありましたか",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 10,
+      "returned_count": 5,
+      "non_empty_snippet_count": 0,
+      "ranking_dropped_candidates": 5,
+      "page_has_usable_text": true,
+      "llm_received_count": 5,
+      "llm_received_usable_evidence": "no",
+      "observed_search_outcome": "return_hits_all_snippet_empty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が届いていない",
+          "observed_facts": [
+            "return_snippet_nonempty: 0",
+            "llm_received_usable_evidence: no"
+          ],
+          "speculation": [
+            "snippet空の候補がLLMに渡された可能性",
+            "内容取得プロセスで本文が取得されていない可能性"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "API候補に有用なコンテンツが含まれていた可能性",
+          "observed_facts": [
+            "extract_probe_page_has_usable_text: True",
+            "api_snippet_nonempty: 0"
+          ],
+          "speculation": [
+            "snippet取得処理が失敗した可能性",
+            "API候補の本文取得が不完全だった可能性"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用な候補が失われた可能性",
+          "observed_facts": [
+            "ranking_dropped_candidates: 5",
+            "ranking_dropped_with_snippet: 0"
+          ],
+          "speculation": [
+            "ランキング基準がコンテンツに依存していない可能性",
+            "有用な候補が過剰表示制限で除外された可能性"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に失敗している可能性",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0"
+          ],
+          "speculation": [
+            "本文取得プロセスのエラー",
+            "snippet抽出処理の不完全性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの情報伝達に問題がある",
+          "observed_facts": [
+            "llm_received_usable_evidence: no",
+            "agent_passes_full_return: True"
+          ],
+          "speculation": [
+            "空のsnippetがLLMに渡された可能性",
+            "内容取得後の情報伝達が不完全だった可能性"
+          ]
+        },
+        "6_ja_en_difference": {
+          "judgment": "言語差による影響は限定的",
+          "observed_facts": [
+            "language_hint: ja_request_en_query",
+            "api_candidate_count: 10"
+          ],
+          "speculation": [
+            "英語コンテンツが優先されても有用な情報が得られなかった可能性"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリーアクセスが影響している可能性",
+          "observed_facts": [
+            "time_sensitive: True",
+            "observed_search_outcome: return_hits_all_snippet_empty"
+          ],
+          "speculation": [
+            "最新情報が取得できていない可能性",
+            "タイムリーアクセスがsnippet取得に影響した可能性"
+          ]
+        }
+      },
+      "suspected_bottlenecks": [
+        "C",
+        "その他"
+      ],
+      "suspected_bottleneck_reason": "snippet取得プロセスの失敗と、タイムリーアクセスが影響した可能性",
+      "_raw": "{\n  \"case_id\": \"A03\",\n  \"request\": \"OpenAIについて最近何か大きな発表はありましたか\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 10,\n  \"returned_count\": 5,\n  \"non_empty_snippet_count\": 0,\n  \"ranking_dropped_candidates\": 5,\n  \"page_has_usable_text\": true,\n  \"llm_received_count\": 5,\n  \"llm_received_usable_evidence\": \"no\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_empty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が届いていない\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 0\",\n        \"llm_received_usable_evidence: no\"\n      ],\n      \"speculation\": [\n        \"snippet空の候補がLLMに渡された可能性\",\n        \"内容取得プロセスで本文が取得されていない可能性\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"API候補に有用なコンテンツが含まれていた可能性\",\n      \"observed_facts\": [\n        \"extract_probe_page_has_usable_text: True\",\n        \"api_snippet_nonempty: 0\"\n      ],\n      \"speculation\": [\n        \"snippet取得処理が失敗した可能性\",\n        \"API候補の本文取得が不完全だった可能性\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用な候補が失われた可能性\",\n      \"observed_facts\": [\n        \"ranking_dropped_candidates: 5\",\n        \"ranking_dropped_with_snippet: 0\"\n      ],\n      \"speculation\": [\n        \"ランキング基準がコンテンツに依存していない可能性\",\n        \"有用な候補が過剰表示制限で除外された可能性\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に失敗している可能性\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\"\n      ],\n      \"speculation\": [\n        \"本文取得プロセスのエラー\",\n        \"snippet抽出処理の不完全性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの情報伝達に問題がある\",\n      \"observed_facts\": [\n        \"llm_received_usable_evidence: no\",\n        \"agent_passes_full_return: True\"\n      ],\n      \"speculation\": [\n        \"空のsnippetがLLMに渡された可能性\",\n        \"内容取得後の情報伝達が不完全だった可能性\"\n      ]\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"言語差による影響は限定的\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\",\n        \"api_candidate_count: 10\"\n      ],\n      \"speculation\": [\n        \"英語コンテンツが優先されても有用な情報が得られなかった可能性\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリーアクセスが影響している可能性\",\n      \"observed_facts\": [\n        \"time_sensitive: True\",\n        \"observed_search_outcome: return_hits_all_snippet_empty\"\n      ],\n      \"speculation\": [\n        \"最新情報が取得できていない可能性\",\n        \"タイムリーアクセスがsnippet取得に影響した可能性\"\n      ]\n    }\n  },\n  \"suspected_bottlenecks\": [\"C\", \"その他\"],\n  \"suspected_bottleneck_reason\": \"snippet取得プロセスの失敗と、タイムリーアクセスが影響した可能性\"\n}"
+    },
+    {
+      "case_id": "A04",
+      "request": "今のNVIDIAの株価の雰囲気を教えて",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 21,
+      "returned_count": 5,
+      "non_empty_snippet_count": 3,
+      "ranking_dropped_candidates": 9,
+      "page_has_usable_text": true,
+      "llm_received_count": 5,
+      "llm_received_usable_evidence": "partial",
+      "observed_search_outcome": "return_hits_partial_snippet",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が部分的に届いた",
+          "observed_facts": [
+            "return_snippet_nonempty: 3",
+            "return_snippet_empty: 2",
+            "llm_received_hit_count: 5"
+          ],
+          "speculation": [
+            "空のsnippetは株価情報に直接関係しない可能性",
+            "LLMが株価雰囲気を推測するための文脈が不足している"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "API候補に有用な情報が含まれていた",
+          "observed_facts": [
+            "api_snippet_nonempty: 11",
+            "search_web return hitsに英語Wikipediaが含まれる"
+          ],
+          "speculation": [
+            "日本語Wikipedia候補が検索APIで取得できなかった可能性",
+            "株価関連情報が英語ページに集中している"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が脱落した可能性",
+          "observed_facts": [
+            "ranking_dropped_with_snippet: 2",
+            "ranking_dropped_total: 9"
+          ],
+          "speculation": [
+            "株価関連情報を持つ候補がランキングで優先順位を失った",
+            "英語ページが日本語ページよりも優先された可能性"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に不完全な部分がある",
+          "observed_facts": [
+            "api_snippet_empty: 10",
+            "extract_probe_page_has_usable_text: True"
+          ],
+          "speculation": [
+            "日本語Wikipediaページのsnippet取得が失敗した",
+            "コンテンツ取得処理がページ構造に依存している可能性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの情報伝達に不完全な部分がある",
+          "observed_facts": [
+            "llm_handoff_count_match: True",
+            "llm_received_usable_evidence: partial"
+          ],
+          "speculation": [
+            "空のsnippetがLLMの文脈理解に影響を与えた",
+            "株価情報に直接関係する文脈が不足している"
+          ]
+        },
+        "6_ja_en_difference": {
+          "judgment": "日本語/英語の検索差異が影響している",
+          "observed_facts": [
+            "language_hint: ja_request_en_query",
+            "search_web return hitsに英語ページが含まれる"
+          ],
+          "speculation": [
+            "日本語検索で株価情報が取得できなかった可能性",
+            "英語ページが株価関連情報に特化している"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリーな情報取得が不十分",
+          "observed_facts": [
+            "time_sensitive: True",
+            "search_web return hitsに時系列情報が含まれていない"
+          ],
+          "speculation": [
+            "株価雰囲気に関する最新情報が取得できていない",
+            "金融情報専門サイトが検索候補から除外されている"
+          ]
+        }
+      },
+      "suspected_bottlenecks": [
+        "B",
+        "C",
+        "その他"
+      ],
+      "suspected_bottleneck_reason": "ランキングで株価関連情報を持つ候補が脱落し、日本語ページのコンテンツ取得が不完全。また、検索クエリの言語設定が株価情報取得に影響している可能性",
+      "_raw": "{\n  \"case_id\": \"A04\",\n  \"request\": \"今のNVIDIAの株価の雰囲気を教えて\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 21,\n  \"returned_count\": 5,\n  \"non_empty_snippet_count\": 3,\n  \"ranking_dropped_candidates\": 9,\n  \"page_has_usable_text\": true,\n  \"llm_received_count\": 5,\n  \"llm_received_usable_evidence\": \"partial\",\n  \"observed_search_outcome\": \"return_hits_partial_snippet\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が部分的に届いた\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 3\",\n        \"return_snippet_empty: 2\",\n        \"llm_received_hit_count: 5\"\n      ],\n      \"speculation\": [\n        \"空のsnippetは株価情報に直接関係しない可能性\",\n        \"LLMが株価雰囲気を推測するための文脈が不足している\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"API候補に有用な情報が含まれていた\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 11\",\n        \"search_web return hitsに英語Wikipediaが含まれる\"\n      ],\n      \"speculation\": [\n        \"日本語Wikipedia候補が検索APIで取得できなかった可能性\",\n        \"株価関連情報が英語ページに集中している\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が脱落した可能性\",\n      \"observed_facts\": [\n        \"ranking_dropped_with_snippet: 2\",\n        \"ranking_dropped_total: 9\"\n      ],\n      \"speculation\": [\n        \"株価関連情報を持つ候補がランキングで優先順位を失った\",\n        \"英語ページが日本語ページよりも優先された可能性\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に不完全な部分がある\",\n      \"observed_facts\": [\n        \"api_snippet_empty: 10\",\n        \"extract_probe_page_has_usable_text: True\"\n      ],\n      \"speculation\": [\n        \"日本語Wikipediaページのsnippet取得が失敗した\",\n        \"コンテンツ取得処理がページ構造に依存している可能性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの情報伝達に不完全な部分がある\",\n      \"observed_facts\": [\n        \"llm_handoff_count_match: True\",\n        \"llm_received_usable_evidence: partial\"\n      ],\n      \"speculation\": [\n        \"空のsnippetがLLMの文脈理解に影響を与えた\",\n        \"株価情報に直接関係する文脈が不足している\"\n      ]\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"日本語/英語の検索差異が影響している\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\",\n        \"search_web return hitsに英語ページが含まれる\"\n      ],\n      \"speculation\": [\n        \"日本語検索で株価情報が取得できなかった可能性\",\n        \"英語ページが株価関連情報に特化している\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリーな情報取得が不十分\",\n      \"observed_facts\": [\n        \"time_sensitive: True\",\n        \"search_web return hitsに時系列情報が含まれていない\"\n      ],\n      \"speculation\": [\n        \"株価雰囲気に関する最新情報が取得できていない\",\n        \"金融情報専門サイトが検索候補から除外されている\"\n      ]\n    }\n  },\n  \"suspected_bottlenecks\": [\"B\", \"C\", \"その他\"],\n  \"suspected_bottleneck_reason\": \"ランキングで株価関連情報を持つ候補が脱落し、日本語ページのコンテンツ取得が不完全。また、検索クエリの言語設定が株価情報取得に影響している可能性\"\n}"
+    },
+    {
+      "case_id": "C04",
+      "request": "ローカルLLMの事情、最近どう？",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 10,
+      "returned_count": 2,
+      "non_empty_snippet_count": 1,
+      "ranking_dropped_candidates": 4,
+      "page_has_usable_text": true,
+      "llm_received_count": 2,
+      "llm_received_usable_evidence": "partial",
+      "observed_search_outcome": "return_hits_partial_snippet",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が部分的に提供された",
+          "observed_facts": [
+            "return_snippet_nonempty: 1",
+            "return_snippet_empty: 1",
+            "llm_received_hit_count: 2"
+          ],
+          "speculation": [
+            "空のsnippet候補がLLMに渡された可能性",
+            "LLMが部分的な情報のみで推論を実行している"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "API候補に有用な情報が含まれていた",
+          "observed_facts": [
+            "api_snippet_nonempty: 8",
+            "extract_probe_page_has_usable_text: True"
+          ],
+          "speculation": [
+            "Wikipediaのページが有効なテキストを含むがsnippetが空だった",
+            "検索APIが日本語対応していない可能性"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用な候補が除外された可能性",
+          "observed_facts": [
+            "ranking_dropped_with_snippet: 4",
+            "ranking_dropped_total: 4"
+          ],
+          "speculation": [
+            "エネルギー関連の候補が不適切なスコアで除外された",
+            "日本語対応の候補がランキングで優先されなかった"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得で空のsnippetが発生",
+          "observed_facts": [
+            "api_snippet_empty: 2",
+            "return_snippet_empty: 1"
+          ],
+          "speculation": [
+            "Wikipediaのページがsnippet取得に失敗した",
+            "コンテンツ取得処理が言語設定を無視している"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの情報伝達に不完全な点がある",
+          "observed_facts": [
+            "llm_received_usable_evidence: partial",
+            "llm_handoff_count_match: True"
+          ],
+          "speculation": [
+            "空のsnippet候補がLLMに渡された可能性",
+            "日本語対応の情報がLLMに届いていない"
+          ]
+        },
+        "6_ja_en_difference": {
+          "judgment": "日本語と英語の差異が影響している",
+          "observed_facts": [
+            "language_hint: ja_request_en_query",
+            "search_query: large language model"
+          ],
+          "speculation": [
+            "日本語のローカルLLMに関する情報が英語候補に含まれていない",
+            "日本語対応の検索結果が除外された可能性"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリネスの影響は不明",
+          "observed_facts": [
+            "time_sensitive: True"
+          ],
+          "speculation": [
+            "最新情報が検索候補に含まれていない可能性",
+            "タイムリネスフィルターが不適切に動作している"
+          ]
+        }
+      },
+      "suspected_bottlenecks": [
+        "A",
+        "B",
+        "C",
+        "その他"
+      ],
+      "suspected_bottleneck_reason": "API候補に日本語対応の情報が不足し、ランキングで除外された。コンテンツ取得処理が英語ページのみ取得している可能性。言語設定が検索結果に正しく反映されていない。",
+      "_raw": "{\n  \"case_id\": \"C04\",\n  \"request\": \"ローカルLLMの事情、最近どう？\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 10,\n  \"returned_count\": 2,\n  \"non_empty_snippet_count\": 1,\n  \"ranking_dropped_candidates\": 4,\n  \"page_has_usable_text\": true,\n  \"llm_received_count\": 2,\n  \"llm_received_usable_evidence\": \"partial\",\n  \"observed_search_outcome\": \"return_hits_partial_snippet\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が部分的に提供された\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 1\",\n        \"return_snippet_empty: 1\",\n        \"llm_received_hit_count: 2\"\n      ],\n      \"speculation\": [\n        \"空のsnippet候補がLLMに渡された可能性\",\n        \"LLMが部分的な情報のみで推論を実行している\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"API候補に有用な情報が含まれていた\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 8\",\n        \"extract_probe_page_has_usable_text: True\"\n      ],\n      \"speculation\": [\n        \"Wikipediaのページが有効なテキストを含むがsnippetが空だった\",\n        \"検索APIが日本語対応していない可能性\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用な候補が除外された可能性\",\n      \"observed_facts\": [\n        \"ranking_dropped_with_snippet: 4\",\n        \"ranking_dropped_total: 4\"\n      ],\n      \"speculation\": [\n        \"エネルギー関連の候補が不適切なスコアで除外された\",\n        \"日本語対応の候補がランキングで優先されなかった\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得で空のsnippetが発生\",\n      \"observed_facts\": [\n        \"api_snippet_empty: 2\",\n        \"return_snippet_empty: 1\"\n      ],\n      \"speculation\": [\n        \"Wikipediaのページがsnippet取得に失敗した\",\n        \"コンテンツ取得処理が言語設定を無視している\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの情報伝達に不完全な点がある\",\n      \"observed_facts\": [\n        \"llm_received_usable_evidence: partial\",\n        \"llm_handoff_count_match: True\"\n      ],\n      \"speculation\": [\n        \"空のsnippet候補がLLMに渡された可能性\",\n        \"日本語対応の情報がLLMに届いていない\"\n      ]\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"日本語と英語の差異が影響している\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\",\n        \"search_query: large language model\"\n      ],\n      \"speculation\": [\n        \"日本語のローカルLLMに関する情報が英語候補に含まれていない\",\n        \"日本語対応の検索結果が除外された可能性\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリネスの影響は不明\",\n      \"observed_facts\": [\n        \"time_sensitive: True\"\n      ],\n      \"speculation\": [\n        \"最新情報が検索候補に含まれていない可能性\",\n        \"タイムリネスフィルターが不適切に動作している\"\n      ]\n    }\n  },\n  \"suspected_bottlenecks\": [\"A\", \"B\", \"C\", \"その他\"],\n  \"suspected_bottleneck_reason\": \"API候補に日本語対応の情報が不足し、ランキングで除外された。コンテンツ取得処理が英語ページのみ取得している可能性。言語設定が検索結果に正しく反映されていない。\"\n}"
+    },
+    {
+      "case_id": "B05",
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 3,
+      "returned_count": 3,
+      "non_empty_snippet_count": 0,
+      "ranking_dropped_candidates": 0,
+      "page_has_usable_text": false,
+      "llm_received_count": 3,
+      "llm_received_usable_evidence": "no",
+      "observed_search_outcome": "return_hits_all_snippet_empty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が届いていない",
+          "observed_facts": [
+            "return_snippet_nonempty: 0",
+            "api_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "URL先に本文が存在する可能性があるが、取得処理で本文が取得されていない"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "API候補が有用でない可能性",
+          "observed_facts": [
+            "api_snippet_empty: 3",
+            "return_snippet_empty: 3",
+            "search_query: Python tuple"
+          ],
+          "speculation": [
+            "検索クエリがタプルに特化しているため、リストとタプルの比較に必要な情報が含まれていない"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が失われていない",
+          "observed_facts": [
+            "ranking_dropped_total: 0",
+            "ranking_dropped_with_snippet: 0"
+          ],
+          "speculation": [
+            "ランキングが機能しているが、候補自体が有用でないため問題が生じている"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に失敗している",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "Wikipediaの抽出処理で本文が取得できていない可能性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの受け渡しに問題がない",
+          "observed_facts": [
+            "llm_handoff_count_match: True",
+            "agent_passes_full_return: True"
+          ],
+          "speculation": []
+        },
+        "6_ja_en_difference": {
+          "judgment": "日本語と英語の差異が影響している可能性",
+          "observed_facts": [
+            "language_hint: ja_request_en_query",
+            "search_query: Python tuple"
+          ],
+          "speculation": [
+            "英語のWikipedia候補が日本語の質問に不適切である"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリネスの影響はなし",
+          "observed_facts": [
+            "time_sensitive: False"
+          ],
+          "speculation": []
+        }
+      },
+      "suspected_bottlenecks": [
+        "C",
+        "A",
+        "その他"
+      ],
+      "suspected_bottleneck_reason": "検索結果のコンテンツ取得失敗（C）と、検索クエリがタプルに特化しているため有用候補が不足（A）、および日本語対応の検索結果が不足している（その他）",
+      "_raw": "{\n  \"case_id\": \"B05\",\n  \"request\": \"Pythonのリストとタプルの違いを簡単に説明して\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 3,\n  \"returned_count\": 3,\n  \"non_empty_snippet_count\": 0,\n  \"ranking_dropped_candidates\": 0,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 3,\n  \"llm_received_usable_evidence\": \"no\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_empty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が届いていない\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 0\",\n        \"api_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"URL先に本文が存在する可能性があるが、取得処理で本文が取得されていない\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"API候補が有用でない可能性\",\n      \"observed_facts\": [\n        \"api_snippet_empty: 3\",\n        \"return_snippet_empty: 3\",\n        \"search_query: Python tuple\"\n      ],\n      \"speculation\": [\n        \"検索クエリがタプルに特化しているため、リストとタプルの比較に必要な情報が含まれていない\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が失われていない\",\n      \"observed_facts\": [\n        \"ranking_dropped_total: 0\",\n        \"ranking_dropped_with_snippet: 0\"\n      ],\n      \"speculation\": [\n        \"ランキングが機能しているが、候補自体が有用でないため問題が生じている\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に失敗している\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"Wikipediaの抽出処理で本文が取得できていない可能性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの受け渡しに問題がない\",\n      \"observed_facts\": [\n        \"llm_handoff_count_match: True\",\n        \"agent_passes_full_return: True\"\n      ],\n      \"speculation\": []\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"日本語と英語の差異が影響している可能性\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\",\n        \"search_query: Python tuple\"\n      ],\n      \"speculation\": [\n        \"英語のWikipedia候補が日本語の質問に不適切である\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリネスの影響はなし\",\n      \"observed_facts\": [\n        \"time_sensitive: False\"\n      ],\n      \"speculation\": []\n    }\n  },\n  \"suspected_bottlenecks\": [\"C\", \"A\", \"その他\"],\n  \"suspected_bottleneck_reason\": \"検索結果のコンテンツ取得失敗（C）と、検索クエリがタプルに特化しているため有用候補が不足（A）、および日本語対応の検索結果が不足している（その他）\"\n}"
+    },
+    {
+      "case_id": "WB02",
+      "request": "Dockerコンテナの基本的な考え方を教えて",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 14,
+      "returned_count": 5,
+      "non_empty_snippet_count": 5,
+      "ranking_dropped_candidates": 1,
+      "page_has_usable_text": false,
+      "llm_received_count": 5,
+      "llm_received_usable_evidence": "yes",
+      "observed_search_outcome": "return_hits_all_snippet_nonempty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が受け渡された",
+          "observed_facts": [
+            "return_snippet_nonempty: 5",
+            "llm_received_hit_count: 5",
+            "snippet_len: 400-267 (return hits)"
+          ],
+          "speculation": [
+            "snippet内容がDockerコンテナの基本概念を含む可能性"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "API候補に有用な情報が含まれていた",
+          "observed_facts": [
+            "api_snippet_nonempty: 12",
+            "return_hits_all_snippet_nonempty"
+          ],
+          "speculation": [
+            "DuckDuckGo候補がDockerコンテナの説明を含む"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が失われた可能性",
+          "observed_facts": [
+            "ranking_dropped_total: 1",
+            "ranking_dropped_with_snippet: 0"
+          ],
+          "speculation": [
+            "過剰なリターン制限で有用候補が除外された"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に問題はなかった",
+          "observed_facts": [
+            "api_snippet_nonempty: 12",
+            "return_snippet_nonempty: 5"
+          ],
+          "speculation": [
+            "Wikipediaのextractが空だがsnippetは生成可能"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの受け渡しに問題はなかった",
+          "observed_facts": [
+            "llm_handoff_count_match: True",
+            "agent_passes_full_return: True"
+          ],
+          "speculation": []
+        },
+        "6_ja_en_difference": {
+          "judgment": "言語差による影響は限定的",
+          "observed_facts": [
+            "search_query: Docker (software) (英語)",
+            "return_hits: 英語コンテンツ"
+          ],
+          "speculation": [
+            "日本語リクエストに対応するコンテンツが不足"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリネスの影響はなかった",
+          "observed_facts": [
+            "time_sensitive: False"
+          ],
+          "speculation": []
+        }
+      },
+      "suspected_bottlenecks": [
+        "C (コンテンツ取得: Wikipediaページの実際のテキスト不足)",
+        "B (ランキング: リターン制限による有用候補の除外)"
+      ],
+      "suspected_bottleneck": "C",
+      "_raw": "{\n  \"case_id\": \"WB02\",\n  \"request\": \"Dockerコンテナの基本的な考え方を教えて\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 14,\n  \"returned_count\": 5,\n  \"non_empty_snippet_count\": 5,\n  \"ranking_dropped_candidates\": 1,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 5,\n  \"llm_received_usable_evidence\": \"yes\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_nonempty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が受け渡された\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 5\",\n        \"llm_received_hit_count: 5\",\n        \"snippet_len: 400-267 (return hits)\"\n      ],\n      \"speculation\": [\n        \"snippet内容がDockerコンテナの基本概念を含む可能性\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"API候補に有用な情報が含まれていた\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 12\",\n        \"return_hits_all_snippet_nonempty\"\n      ],\n      \"speculation\": [\n        \"DuckDuckGo候補がDockerコンテナの説明を含む\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が失われた可能性\",\n      \"observed_facts\": [\n        \"ranking_dropped_total: 1\",\n        \"ranking_dropped_with_snippet: 0\"\n      ],\n      \"speculation\": [\n        \"過剰なリターン制限で有用候補が除外された\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に問題はなかった\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 12\",\n        \"return_snippet_nonempty: 5\"\n      ],\n      \"speculation\": [\n        \"Wikipediaのextractが空だがsnippetは生成可能\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの受け渡しに問題はなかった\",\n      \"observed_facts\": [\n        \"llm_handoff_count_match: True\",\n        \"agent_passes_full_return: True\"\n      ],\n      \"speculation\": []\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"言語差による影響は限定的\",\n      \"observed_facts\": [\n        \"search_query: Docker (software) (英語)\",\n        \"return_hits: 英語コンテンツ\"\n      ],\n      \"speculation\": [\n        \"日本語リクエストに対応するコンテンツが不足\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリネスの影響はなかった\",\n      \"observed_facts\": [\n        \"time_sensitive: False\"\n      ],\n      \"speculation\": []\n    }\n  },\n  \"suspected_bottlenecks\": [\n    \"C (コンテンツ取得: Wikipediaページの実際のテキスト不足)\",\n    \"B (ランキング: リターン制限による有用候補の除外)\"\n  ],\n  \"suspected_bottleneck\": \"C\"\n}"
+    },
+    {
+      "case_id": "P02a",
+      "request": "RTX 3060について教えて",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 5,
+      "returned_count": 5,
+      "non_empty_snippet_count": 0,
+      "ranking_dropped_candidates": 0,
+      "page_has_usable_text": false,
+      "llm_received_count": 5,
+      "llm_received_usable_evidence": "no",
+      "observed_search_outcome": "return_hits_all_snippet_empty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が届いていない",
+          "observed_facts": [
+            "return_snippet_nonempty: 0",
+            "api_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "Wikipediaのページが日本語でないため情報が抽出できない可能性",
+            "snippet取得処理がページ本文を正しく取得していない可能性"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "APIが有用候補を返していない",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "api_candidate_count: 5",
+            "all candidates are Wikipedia English pages"
+          ],
+          "speculation": [
+            "検索クエリが英語で実行され、日本語対応リソースが不足している可能性",
+            "WikipediaのAPIが日本語コンテンツを提供していない可能性"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が失われていない",
+          "observed_facts": [
+            "ranking_dropped_total: 0",
+            "ranking_dropped_with_snippet: 0"
+          ],
+          "speculation": [
+            "ランキングロジックが空スニペットを除外していない可能性",
+            "候補絞り込みがスニペット内容を考慮していない可能性"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得が失敗している",
+          "observed_facts": [
+            "extract_probe_page_has_usable_text: False",
+            "api_snippet_empty: 5",
+            "return_snippet_empty: 5"
+          ],
+          "speculation": [
+            "Wikipediaページの本文取得処理が機能していない可能性",
+            "スニペット抽出処理がページ本文を正しく解析していない可能性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの情報伝達が不十分",
+          "observed_facts": [
+            "llm_received_usable_evidence: no",
+            "llm_received_hit_count: 5",
+            "json_bytes: 770"
+          ],
+          "speculation": [
+            "空スニペットをLLMに渡すことで回答品質が低下している可能性",
+            "LLMが空データを無視している可能性"
+          ]
+        },
+        "6_ja_en_difference": {
+          "judgment": "日本語/英語の差異が影響している",
+          "observed_facts": [
+            "language_hint: ja_request_en_query",
+            "all candidates are Wikipedia English pages"
+          ],
+          "speculation": [
+            "日本語対応リソースが不足している可能性",
+            "英語ページの内容が日本語ユーザーにとって不適切な可能性"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリネスの影響なし",
+          "observed_facts": [
+            "time_sensitive: False"
+          ],
+          "speculation": []
+        }
+      },
+      "suspected_bottlenecks": [
+        "C",
+        "その他"
+      ],
+      "suspected_bottleneck_reason": "スニペット取得処理がWikipediaページの本文を正しく取得できず、日本語対応リソース不足が原因で有用な情報が得られなかった",
+      "_raw": "{\n  \"case_id\": \"P02a\",\n  \"request\": \"RTX 3060について教えて\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 5,\n  \"returned_count\": 5,\n  \"non_empty_snippet_count\": 0,\n  \"ranking_dropped_candidates\": 0,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 5,\n  \"llm_received_usable_evidence\": \"no\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_empty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が届いていない\",\n      \"observed_facts\": [\n        \"return_snippet_nonempty: 0\",\n        \"api_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"Wikipediaのページが日本語でないため情報が抽出できない可能性\",\n        \"snippet取得処理がページ本文を正しく取得していない可能性\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"APIが有用候補を返していない\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"api_candidate_count: 5\",\n        \"all candidates are Wikipedia English pages\"\n      ],\n      \"speculation\": [\n        \"検索クエリが英語で実行され、日本語対応リソースが不足している可能性\",\n        \"WikipediaのAPIが日本語コンテンツを提供していない可能性\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が失われていない\",\n      \"observed_facts\": [\n        \"ranking_dropped_total: 0\",\n        \"ranking_dropped_with_snippet: 0\"\n      ],\n      \"speculation\": [\n        \"ランキングロジックが空スニペットを除外していない可能性\",\n        \"候補絞り込みがスニペット内容を考慮していない可能性\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得が失敗している\",\n      \"observed_facts\": [\n        \"extract_probe_page_has_usable_text: False\",\n        \"api_snippet_empty: 5\",\n        \"return_snippet_empty: 5\"\n      ],\n      \"speculation\": [\n        \"Wikipediaページの本文取得処理が機能していない可能性\",\n        \"スニペット抽出処理がページ本文を正しく解析していない可能性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの情報伝達が不十分\",\n      \"observed_facts\": [\n        \"llm_received_usable_evidence: no\",\n        \"llm_received_hit_count: 5\",\n        \"json_bytes: 770\"\n      ],\n      \"speculation\": [\n        \"空スニペットをLLMに渡すことで回答品質が低下している可能性\",\n        \"LLMが空データを無視している可能性\"\n      ]\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"日本語/英語の差異が影響している\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\",\n        \"all candidates are Wikipedia English pages\"\n      ],\n      \"speculation\": [\n        \"日本語対応リソースが不足している可能性\",\n        \"英語ページの内容が日本語ユーザーにとって不適切な可能性\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリネスの影響なし\",\n      \"observed_facts\": [\n        \"time_sensitive: False\"\n      ],\n      \"speculation\": []\n    }\n  },\n  \"suspected_bottlenecks\": [\"C\", \"その他\"],\n  \"suspected_bottleneck_reason\": \"スニペット取得処理がWikipediaページの本文を正しく取得できず、日本語対応リソース不足が原因で有用な情報が得られなかった\"\n}"
+    },
+    {
+      "case_id": "E02",
+      "request": "ChatGPTの有料プランの違いを教えて",
+      "language": "ja_request_en_query",
+      "api_candidate_count": 2,
+      "returned_count": 2,
+      "non_empty_snippet_count": 0,
+      "ranking_dropped_candidates": 0,
+      "page_has_usable_text": false,
+      "llm_received_count": 2,
+      "llm_received_usable_evidence": "no",
+      "observed_search_outcome": "return_hits_all_snippet_empty",
+      "judgments": {
+        "1_llm_usable_info": {
+          "judgment": "LLMに有用な情報が届いていない",
+          "observed_facts": [
+            "llm_received_hit_count: 2",
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "snippet空候補がLLMに渡された可能性",
+            "ページ本文が存在しても抽出失敗の可能性"
+          ]
+        },
+        "2_api_had_useful_candidates": {
+          "judgment": "API候補に有用なコンテンツが含まれていない",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "Wikipediaの記事が非公開/非表示の可能性",
+            "APIが非英語コンテンツを返さない可能性"
+          ]
+        },
+        "3_ranking_lost_useful": {
+          "judgment": "ランキングで有用候補が失われていない",
+          "observed_facts": [
+            "ranking_dropped_total: 0",
+            "ranking_dropped_with_snippet: 0"
+          ],
+          "speculation": [
+            "候補数が極端に少なかった可能性"
+          ]
+        },
+        "4_content_fetch_failed": {
+          "judgment": "コンテンツ取得に失敗している",
+          "observed_facts": [
+            "api_snippet_nonempty: 0",
+            "return_snippet_nonempty: 0",
+            "extract_probe_page_has_usable_text: False"
+          ],
+          "speculation": [
+            "Wikipediaの記事が非公開/非表示の可能性",
+            "APIが非英語コンテンツを返さない可能性"
+          ]
+        },
+        "5_llm_handoff_problem": {
+          "judgment": "LLMへの受け渡しに問題がない",
+          "observed_facts": [
+            "llm_handoff_count_match: True"
+          ],
+          "speculation": [
+            "LLMが空snippetを処理する仕様の可能性"
+          ]
+        },
+        "6_ja_en_difference": {
+          "judgment": "日本語/英語の差異が影響している可能性",
+          "observed_facts": [
+            "language_hint: ja_request_en_query",
+            "search_query: ChatGPT Plus (英語)"
+          ],
+          "speculation": [
+            "日本語検索で英語コンテンツが取得できない可能性"
+          ]
+        },
+        "7_timeliness_if_applicable": {
+          "judgment": "タイムリネスの影響はなさそう",
+          "observed_facts": [
+            "time_sensitive: False"
+          ],
+          "speculation": []
+        }
+      },
+      "suspected_bottlenecks": [
+        "C",
+        "A"
+      ],
+      "suspected_bottleneck_reason": "Wikipediaの記事が非公開/非表示でsnippet取得失敗（C）と、検索APIが英語コンテンツのみを返すため有用候補不足（A）",
+      "_raw": "{\n  \"case_id\": \"E02\",\n  \"request\": \"ChatGPTの有料プランの違いを教えて\",\n  \"language\": \"ja_request_en_query\",\n  \"api_candidate_count\": 2,\n  \"returned_count\": 2,\n  \"non_empty_snippet_count\": 0,\n  \"ranking_dropped_candidates\": 0,\n  \"page_has_usable_text\": false,\n  \"llm_received_count\": 2,\n  \"llm_received_usable_evidence\": \"no\",\n  \"observed_search_outcome\": \"return_hits_all_snippet_empty\",\n  \"judgments\": {\n    \"1_llm_usable_info\": {\n      \"judgment\": \"LLMに有用な情報が届いていない\",\n      \"observed_facts\": [\n        \"llm_received_hit_count: 2\",\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"snippet空候補がLLMに渡された可能性\",\n        \"ページ本文が存在しても抽出失敗の可能性\"\n      ]\n    },\n    \"2_api_had_useful_candidates\": {\n      \"judgment\": \"API候補に有用なコンテンツが含まれていない\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"Wikipediaの記事が非公開/非表示の可能性\",\n        \"APIが非英語コンテンツを返さない可能性\"\n      ]\n    },\n    \"3_ranking_lost_useful\": {\n      \"judgment\": \"ランキングで有用候補が失われていない\",\n      \"observed_facts\": [\n        \"ranking_dropped_total: 0\",\n        \"ranking_dropped_with_snippet: 0\"\n      ],\n      \"speculation\": [\n        \"候補数が極端に少なかった可能性\"\n      ]\n    },\n    \"4_content_fetch_failed\": {\n      \"judgment\": \"コンテンツ取得に失敗している\",\n      \"observed_facts\": [\n        \"api_snippet_nonempty: 0\",\n        \"return_snippet_nonempty: 0\",\n        \"extract_probe_page_has_usable_text: False\"\n      ],\n      \"speculation\": [\n        \"Wikipediaの記事が非公開/非表示の可能性\",\n        \"APIが非英語コンテンツを返さない可能性\"\n      ]\n    },\n    \"5_llm_handoff_problem\": {\n      \"judgment\": \"LLMへの受け渡しに問題がない\",\n      \"observed_facts\": [\n        \"llm_handoff_count_match: True\"\n      ],\n      \"speculation\": [\n        \"LLMが空snippetを処理する仕様の可能性\"\n      ]\n    },\n    \"6_ja_en_difference\": {\n      \"judgment\": \"日本語/英語の差異が影響している可能性\",\n      \"observed_facts\": [\n        \"language_hint: ja_request_en_query\",\n        \"search_query: ChatGPT Plus (英語)\"\n      ],\n      \"speculation\": [\n        \"日本語検索で英語コンテンツが取得できない可能性\"\n      ]\n    },\n    \"7_timeliness_if_applicable\": {\n      \"judgment\": \"タイムリネスの影響はなさそう\",\n      \"observed_facts\": [\n        \"time_sensitive: False\"\n      ],\n      \"speculation\": []\n    }\n  },\n  \"suspected_bottlenecks\": [\"C\", \"A\"],\n  \"suspected_bottleneck_reason\": \"Wikipediaの記事が非公開/非表示でsnippet取得失敗（C）と、検索APIが英語コンテンツのみを返すため有用候補不足（A）\"\n}"
+    }
+  ],
+  "synthesis": {
+    "A_overall_summary": "コンテンツ取得(C)の問題が多数ケースで顕著で、API候補生成(A)の不足や言語差(ja-en)が根因として浮かび上がっている。部分的な情報取得が可能なケースではランキング(B)の影響が確認された。",
+    "B_bottleneck_ranking": [
+      {
+        "category": "C",
+        "rank": 1,
+        "strength": "strong",
+        "reason": "10/12ケースでsnippet空または取得失敗が観測され、LLMへの情報伝達が不十分な状態が継続"
+      },
+      {
+        "category": "A",
+        "rank": 2,
+        "strength": "moderate",
+        "reason": "4ケースでAPI候補数が極端に少なく、有用コンテンツの取得が困難な状況"
+      },
+      {
+        "category": "その他",
+        "rank": 3,
+        "strength": "weak",
+        "reason": "言語差(ja-en)が3ケースで影響を及ぼしている可能性"
+      }
+    ],
+    "C_evidence_by_pattern": {
+      "snippet_empty_but_candidates_exist": "WB02ケースでWikipediaページの実際のテキスト不足が原因",
+      "ranking_dropped_candidates": "C02/C04ケースでランキングプロセスで有用候補が除外された可能性",
+      "page_has_usable_text_but_snippet_empty": "WB02ケースでコンテンツ取得が不完全",
+      "few_api_candidates": "ollamaケースを除き、多数のケースでAPI候補数が極端に少ない",
+      "ja_en_difference": "P02b/B05ケースで日本語/英語検索結果の質差が顕著",
+      "time_sensitive_queries": "タイムリネス影響は全ケースで観測されない"
+    },
+    "D_fix_now_vs_investigate": {
+      "fix_now": [
+        "コンテンツ取得プロセスの異常検出",
+        "ja/en検索結果の差異分析"
+      ],
+      "investigate_more": [
+        "API候補生成アルゴリズムの検証",
+        "ランキングロジックの影響範囲分析"
+      ]
+    },
+    "E_one_next_investigation": "コンテンツ取得プロセスでsnippet空のケースが実際にページテキストを含んでいる可能性を検証する",
+    "F_human_must_decide": [
+      "日本語/英語検索結果の品質基準設定",
+      "API候補生成の優先順位策定"
+    ],
+    "_raw": "{\n  \"A_overall_summary\": \"コンテンツ取得(C)の問題が多数ケースで顕著で、API候補生成(A)の不足や言語差(ja-en)が根因として浮かび上がっている。部分的な情報取得が可能なケースではランキング(B)の影響が確認された。\",\n  \"B_bottleneck_ranking\": [\n    {\"category\": \"C\", \"rank\": 1, \"strength\": \"strong\", \"reason\": \"10/12ケースでsnippet空または取得失敗が観測され、LLMへの情報伝達が不十分な状態が継続\"},\n    {\"category\": \"A\", \"rank\": 2, \"strength\": \"moderate\", \"reason\": \"4ケースでAPI候補数が極端に少なく、有用コンテンツの取得が困難な状況\"},\n    {\"category\": \"その他\", \"rank\": 3, \"strength\": \"weak\", \"reason\": \"言語差(ja-en)が3ケースで影響を及ぼしている可能性\"}\n  ],\n  \"C_evidence_by_pattern\": {\n    \"snippet_empty_but_candidates_exist\": \"WB02ケースでWikipediaページの実際のテキスト不足が原因\",\n    \"ranking_dropped_candidates\": \"C02/C04ケースでランキングプロセスで有用候補が除外された可能性\",\n    \"page_has_usable_text_but_snippet_empty\": \"WB02ケースでコンテンツ取得が不完全\",\n    \"few_api_candidates\": \"ollamaケースを除き、多数のケースでAPI候補数が極端に少ない\",\n    \"ja_en_difference\": \"P02b/B05ケースで日本語/英語検索結果の質差が顕著\",\n    \"time_sensitive_queries\": \"タイムリネス影響は全ケースで観測されない\"\n  },\n  \"D_fix_now_vs_investigate\": {\n    \"fix_now\": [\"コンテンツ取得プロセスの異常検出\", \"ja/en検索結果の差異分析\"],\n    \"investigate_more\": [\"API候補生成アルゴリズムの検証\", \"ランキングロジックの影響範囲分析\"]\n  },\n  \"E_one_next_investigation\": \"コンテンツ取得プロセスでsnippet空のケースが実際にページテキストを含んでいる可能性を検証する\",\n  \"F_human_must_decide\": [\"日本語/英語検索結果の品質基準設定\", \"API候補生成の優先順位策定\"]\n}"
+  }
+}

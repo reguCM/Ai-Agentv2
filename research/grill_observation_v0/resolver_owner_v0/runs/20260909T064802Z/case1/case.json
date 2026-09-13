@@ -1,0 +1,149 @@
+{
+  "case": "Case 1",
+  "goal": "registry/tools.json を読んで、内容を確認してほしい。",
+  "unknown": "registry/tools.json の内容が未確認である。",
+  "initial_state": "まだ何も調査していない。",
+  "selection_evidence": "tests/ai_tool/chat_interface/test_h4_selection_core.py の test_registry_tools_json_read_bridges_that_path / test_registry_path_read_injects_single_pending_action と、本実験前の system_resolve 実測で executable_action を確認済み。path は Canonical Workspace 実在ファイル。",
+  "expected_label_before_run": "SYSTEM_RESOLVABLE",
+  "grill_called": false,
+  "grills": [],
+  "system_retry": null,
+  "second_grill": false,
+  "production_contract": false,
+  "need_llm": null,
+  "system_first_input": "Goal:\nregistry/tools.json を読んで、内容を確認してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\nNext need:\nregistry/tools.json の内容が未確認である。\n",
+  "system_first": {
+    "label": "RESOLVED",
+    "stopped_at": "executable_action",
+    "required_capabilities": [
+      "workspace_file_read"
+    ],
+    "resolutions": [
+      {
+        "required_capability": "workspace_file_read",
+        "source_task_id": "T1",
+        "status": "RESOLVED",
+        "capability_index_checked": true,
+        "registry_checked": true,
+        "candidate_tools": [
+          "read_file"
+        ],
+        "selected_tool": "read_file",
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [
+          "read_file"
+        ],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": {
+          "tool": "read_file",
+          "arguments": {
+            "path": "registry/tools.json"
+          }
+        }
+      }
+    ],
+    "action": {
+      "tool": "read_file",
+      "arguments": {
+        "path": "registry/tools.json"
+      }
+    },
+    "selected_capability": "workspace_file_read",
+    "selected_tool": "read_file",
+    "next_action": {
+      "tool": "read_file",
+      "arguments": {
+        "path": "registry/tools.json"
+      }
+    },
+    "request_text": "Goal:\nregistry/tools.json を読んで、内容を確認してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\nNext need:\nregistry/tools.json の内容が未確認である。\n"
+  },
+  "system_stopped_reason": "executable_action",
+  "help_index": {
+    "skipped": false,
+    "capability": "workspace_file_read",
+    "index_tools": [
+      "read_file"
+    ],
+    "prefer_tool_for_capability": null,
+    "help_confirmed_tool": "read_file",
+    "describe_selected": {
+      "ok": true,
+      "operation": "describe",
+      "query": null,
+      "tool_id": "local:read_file",
+      "parsed": null,
+      "tools": [],
+      "tool": {
+        "tool_id": "local:read_file",
+        "name": "read_file",
+        "description": "Workspace（本リポジトリ）内のテキストファイルを read-only で読み取り、行番号付きで返す。Workspace 外・絶対パス・'..' を含むパスは拒否する。バイナリと 64KB 超は読めない。ファイル探索は list_files、内容検索は search_files（いずれも別 Tool）。",
+        "capabilities": [
+          "ファイル",
+          "読取",
+          "read",
+          "workspace",
+          "テキスト",
+          "ソースコード"
+        ],
+        "risk_level": "low",
+        "availability": "available",
+        "side_effect": "read_only",
+        "discovery_category": "production",
+        "agent_available": true,
+        "provider": "local",
+        "source": "registry/tools.json",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Workspace 内の相対パス（例: registry/tools.json）。workspace root 外・絶対パス・'..' セグメントは不可。"
+            },
+            "offset": {
+              "type": "integer",
+              "description": "開始行（1-based、任意）。省略時は先頭から。"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "返す最大行数（任意）。省略時は offset 以降すべて（ファイルサイズ上限内）。"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        },
+        "output_schema": null,
+        "permissions": [
+          "visibility:agent"
+        ],
+        "unavailability_reason": null,
+        "catalog_status": {
+          "tool_status": "available",
+          "experiment_status": "tested",
+          "adoption_status": "approved"
+        }
+      },
+      "count": 0,
+      "usage": null,
+      "message": "Described local:read_file",
+      "error": null
+    },
+    "tool_selected_because": "resolve_capabilities selected the Help-available Index tool; next_capability_action filled arguments from the request text"
+  },
+  "capability": "workspace_file_read",
+  "selected_tool": "read_file",
+  "next_action": {
+    "tool": "read_file",
+    "arguments": {
+      "path": "registry/tools.json"
+    }
+  },
+  "final_unresolved": null,
+  "final_label": "SYSTEM_RESOLVABLE",
+  "classification_reason": "System First だけで read_file の実行可能 Action に到達した。Grill は呼ばない。"
+}

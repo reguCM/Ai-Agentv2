@@ -1,0 +1,126 @@
+{
+  "summary": {
+    "n": 5,
+    "ids": [
+      "Q8",
+      "Q16",
+      "Q27",
+      "Q31",
+      "Q2"
+    ],
+    "AUTO": 3,
+    "REVIEW": 2,
+    "HUMAN": 0,
+    "auto_ids": [
+      "Q8",
+      "Q16",
+      "Q27"
+    ],
+    "review_ids": [
+      "Q31",
+      "Q2"
+    ],
+    "human_ids": [],
+    "semantic_dangerous_count": 1,
+    "parse_failure": 0,
+    "missing_output": 0
+  },
+  "records": [
+    {
+      "decision_id": "Q8",
+      "first_recommendation": "Use same inverse lookup for all Index capabilities, not just file.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 15,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q16",
+      "first_recommendation": "Do not use _MINIMAL_TOOLS for execution selection. Keep as Gap proposal only.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q27",
+      "first_recommendation": "Leave write/execution look_first in Index but have Classifier ignore it.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "destructive",
+        "irreversible"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q31",
+      "first_recommendation": "Inject only [0] next_action. Inject none if multiple.",
+      "semantic_gate": "FAIL",
+      "semantic_dangerous": [
+        {
+          "rule_id": "cardinality_index_or_head_select",
+          "kind": "known_wrong",
+          "forbidden": "Selecting, injecting, or resolving among 2+ candidates by list index [0], first, or head without a unique non-index reason."
+        }
+      ],
+      "route": "REVIEW",
+      "notes": [
+        "semantic_fail_contract_recheck"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q2",
+      "first_recommendation": "Add web/gpu/cpu as semantic capabilities with keywords only. Do not add IDs.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "decision_polarity_not_closed"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    }
+  ],
+  "llm_called": false
+}

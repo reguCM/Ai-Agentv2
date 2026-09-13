@@ -1,0 +1,41 @@
+{
+  "schema_version": "1",
+  "verification_id": "ve_20260911T214247530080Z_cursor_dev_rule",
+  "asset_id": "cursor_dev_rule",
+  "verified_at": "2026-09-11T21:42:47.531583+00:00",
+  "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+  "verification_method": "phase2a2_baseline_enrollment",
+  "resolved_watch_paths": [
+    ".cursor/rules/agent-development-policy.mdc",
+    "ai_tool/policy/development_policy.json"
+  ],
+  "watch_snapshots": [
+    {
+      "path": ".cursor/rules/agent-development-policy.mdc",
+      "existence": true,
+      "content_fingerprint": "sha256:54081181f3ca81cddaaa4206d0044949ded4946e3a1e5d6f2d8f5f0af504d300",
+      "git_state_if_available": {
+        "path": ".cursor/rules/agent-development-policy.mdc",
+        "tracked": true,
+        "porcelain": null
+      }
+    },
+    {
+      "path": "ai_tool/policy/development_policy.json",
+      "existence": true,
+      "content_fingerprint": "sha256:34c9ac87159846d5a41afe87566e8e71c42542eaf3daad3408df043ce28b2e1d",
+      "git_state_if_available": {
+        "path": "ai_tool/policy/development_policy.json",
+        "tracked": true,
+        "porcelain": null
+      }
+    }
+  ],
+  "source_audit": {
+    "verification_method": "cursor_development_governance_audit_read_only",
+    "verified_at": "2026-09-11T21:19:00+09:00",
+    "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+    "label": "cursor_development_governance_audit_read_only"
+  },
+  "enrollment_phase": "2A.2"
+}

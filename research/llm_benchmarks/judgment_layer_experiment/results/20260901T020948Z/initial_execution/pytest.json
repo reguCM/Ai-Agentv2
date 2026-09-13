@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-m",
+    "pytest",
+    "tests/test_main.py",
+    "-q"
+  ],
+  "working_directory": "D:\\AI-Agent\\research\\llm_benchmarks\\judgment_layer_experiment\\results\\20260901T020948Z\\fixture",
+  "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n_____________________________ test_assemble_pack ______________________________\n\n    def test_assemble_pack():\n>       pack = assemble_pack()\n\ntests\\test_main.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\nmain.py:9: in assemble_pack\n    \"bin\": pick_bin(bins, 2),\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nbins = ['empty'], index = 2\n\n    def pick_bin(bins, index):\n>       return bins[index]\nE       IndexError: list index out of range\n\nhelper.py:10: IndexError\n=========================== short test summary info ===========================\nFAILED tests/test_main.py::test_assemble_pack - IndexError: list index out of...\n1 failed in 0.08s\n",
+  "stderr": "",
+  "exit_code": 1,
+  "traceback": "",
+  "execution_time": 0.589995699992869
+}

@@ -1,0 +1,17 @@
+{
+  "note": "契約修正前の baseline。missing の質 C 3/3。retry 3/3。④には戻さない。",
+  "contract_phase": "before_missing_not_echo",
+  "pass_criterion": "A",
+  "case": "judge_verify_failed_retry",
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "repeat": 3,
+  "grades": {
+    "C": 3
+  },
+  "retry_ok": 3,
+  "summary": "Verifier エラー文を missing にそのままコピー。reason は空。",
+  "missing_example": [
+    "実環境で確認できなかった。0 で除算しようとしました。"
+  ]
+}

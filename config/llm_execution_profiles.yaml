@@ -1,0 +1,39 @@
+# LLM Execution Profile v0（暫定 Default）
+# Model 接続パラメータは config/llm_models.yaml（profile id）が正本。
+# 本ファイルは think 等の実行モードのみを定義し、Model Registry とは分離する。
+#
+# 将来 E2E で計測して確定する項目:
+# - 総実行時間 / thinking token / content token / empty response
+# - Tool 成功率 / JSON schema 成功率 / Retry 回数 / Goal・E2E 成功率
+
+version: 0.1
+status: provisional
+
+profiles:
+  human_intent:
+    description: 初回 Human 入力 / Goal 解釈
+    think: true
+
+  fast_tool:
+    description: 通常 Tool 選択 / Tool 結果処理 / 通常 Continuation
+    think: false
+
+  structured_output:
+    description: Structured Output / JSON / Schema 生成
+    think: false
+
+  deep_reasoning:
+    description: Recovery / Replan / Critic / 横断故障予測
+    think: true
+
+  vision_reasoning:
+    description: Vision（画像入力の有無で think を切替）
+    think_when_images: true
+    think_when_no_images: false
+
+# Production Agent Turn の LLM phase → profile id
+agent_turn_phase_profiles:
+  agent_initial_llm: human_intent
+  agent_post_tool_llm: fast_tool
+  local_review_llm: deep_reasoning
+  final_synthesis_llm: deep_reasoning

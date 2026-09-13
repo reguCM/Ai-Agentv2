@@ -1,0 +1,38 @@
+{
+  "phase": "G3",
+  "status": "COMPLETE",
+  "contract_version": "2026-09-12.2",
+  "adapter_registry": "ai_tool/policy/git_governance.json adapters.consumers",
+  "adapters_aligned": [
+    ".cursor/rules/git-governance-adapter.mdc",
+    ".cursor/rules/agent-development-policy.mdc",
+    "AGENTS.md",
+    "tools/git_guard/POLICY.md",
+    "docs/adapters/GIT_GOVERNANCE_CURSOR_HOST.md"
+  ],
+  "semantic_source_updated": "docs/GIT_OPERATION_POLICY.md section 4 (Option C + amend)",
+  "manifest_consumer_refs_updated": true,
+  "host_user_rules": {
+    "mode": "human_sync_checklist",
+    "checklist": "docs/adapters/GIT_GOVERNANCE_CURSOR_HOST.md",
+    "enforcement": "NOT_CONNECTED"
+  },
+  "unchanged_by_g3": [
+    "tools/git_guard/guard.py",
+    "tools/git_guard/configs/*",
+    "D:/AI-Agent/.git/hooks/*",
+    "Cursor User Rules (host)",
+    "Production Runtime"
+  ],
+  "tests": [
+    "tests/ai_tool/policy/test_git_governance.py",
+    "tests/ai_tool/policy/test_git_governance_adapters.py",
+    "tests/ai_tool/policy/test_policy_distribution.py"
+  ],
+  "existing_hook_guard_behavior_changed": false,
+  "next_phases": {
+    "G4_enforcement_alignment": "PENDING",
+    "G5_drift_distribution_tests": "PENDING",
+    "G6_system_asset_index_update": "PENDING"
+  }
+}

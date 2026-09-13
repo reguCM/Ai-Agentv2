@@ -1,0 +1,67 @@
+{
+  "note": "Independent embedding similarity cases. Not a Production threshold and not a SELECTED rule.",
+  "queries": [
+    {
+      "id": "q_board",
+      "text": "テトリスの盤面",
+      "expected_near": ["c_board_en"]
+    },
+    {
+      "id": "q_runtime",
+      "text": "実際のゲームで使っている方",
+      "expected_near": ["c_runtime_en"]
+    },
+    {
+      "id": "q_research",
+      "text": "研究用のもの",
+      "expected_near": ["c_research_en"]
+    },
+    {
+      "id": "q_runtime_ja",
+      "text": "実行時に動いている実装",
+      "expected_near": ["c_runtime_en", "c_runtime_code"]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "c_board_en",
+      "text": "game board state",
+      "kind": "near_en"
+    },
+    {
+      "id": "c_runtime_en",
+      "text": "runtime implementation",
+      "kind": "near_en"
+    },
+    {
+      "id": "c_research_en",
+      "text": "research experiment",
+      "kind": "near_en"
+    },
+    {
+      "id": "c_runtime_code",
+      "text": "production runtime path",
+      "kind": "near_code"
+    },
+    {
+      "id": "c_research_code",
+      "text": "research/ experiment harness",
+      "kind": "near_code"
+    },
+    {
+      "id": "c_unrelated_cpu",
+      "text": "CPU温度の取得方法",
+      "kind": "unrelated"
+    },
+    {
+      "id": "c_unrelated_weather",
+      "text": "今日の天気と降水確率",
+      "kind": "unrelated"
+    },
+    {
+      "id": "c_unrelated_license",
+      "text": "MIT license text for a Python package",
+      "kind": "unrelated"
+    }
+  ]
+}

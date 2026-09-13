@@ -1,0 +1,358 @@
+{
+  "kind": "web_effect_llm_eval_pilot",
+  "ts": "2026-08-24T04:01:21.664660+00:00",
+  "case_count": 11,
+  "model": "qwen3:8b",
+  "not_connected_to_agent_gate_pipeline": true,
+  "human_review_not_inferred": true,
+  "evaluations": [
+    {
+      "case_id": "B05",
+      "observation_id": "webeffect-hits-B05",
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nPythonのリストとタプルの違いを簡単に説明して\n\n### Webなし回答\n\nPythonのリストとタプルの主な違いは以下の通りです：\n\n1. **変更可能（ミュータブル） vs 変更不可（イミュータブル）**  \n   - リスト：要素の追加・削除・変更が可能（`append()`や`remove()`など）  \n   - タプル：作成後は要素を変更できず、不変なデータを保持するのに適しています  \n\n2. **構文**  \n   - リスト：`[]`で表す（例: `[1, 2, 3]`）  \n   - タプル：`()`で表す（例: `(1, 2, 3)`）  \n   - タプルの括弧は省略可能（例: `1, 2, 3`）  \n\n3. **使用目的**  \n   - リスト：動的なデータ（例: ユーザー入力、リスト操作）  \n   - タプル：固定データ（例: 日付、座標、設定値）  \n\n4. **辞書のキーとしての利用**  \n   - タプルはハッシュ化可能（辞書のキーとして使用可能）  \n   - リストはハッシュ化不可（辞書のキーとして使用不可）  \n\n5. **パフォーマンス**  \n   - タプルはリストより高速でメモリ効率が良い（不変性による）  \n\n要するに、**変更が必要なデータにはリスト、変更不要なデータにはタプル**が適しています。\n\n### 検索クエリ\n\nPython tuple\n\n### 検索結果\n\n#### 検索結果 1 / 3\nタイトル: Python implementations\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Python_implementations\n本文:\n【本文なし】\n\n#### 検索結果 2 / 3\nタイトル: Python Unleashed\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Python_Unleashed\n本文:\n【本文なし】\n\n#### 検索結果 3 / 3\nタイトル: Python (nuclear primary)\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Python_(nuclear_primary)\n本文:\n【本文なし】\n\n### Webあり回答\n\nPythonのリストとタプルの主な違いは以下の通りです：\n\n1. **変更可能（ミュータブル）か**  \n   - リスト：要素の追加・削除・変更が可能（ミュータブル）  \n   - タプル：作成後は要素を変更できない（イミュータブル）  \n\n2. **構文**  \n   - リスト：`[ ]` で表す例: `my_list = [1, 2, 3]`  \n   - タプル：`( )` で表す例: `my_tuple = (1, 2, 3)`  \n\n3. **用途**  \n   - リスト：動的なデータの集まり（例: ユーザー入力の集計）  \n   - タプル：固定のデータ（例: 日付、座標、設定値）  \n\n4. **パフォーマンス**  \n   - タプルはリストより高速で、メモリ効率が良い（特に大規模なデータ処理で有用）。  \n\nこの違いを活用して、データの性質に応じて適切なデータ型を選択しましょう。",
+      "llm": {
+        "q1_search_usefulness": "○ 有用",
+        "q1_reason": "Webなし回答と内容がほぼ一致し、必要情報は網羅しているが若干簡潔",
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "検索結果が本文なしで利用不可だったため回答品質に変化なし",
+        "q3_result_used_in_answer": "△ 利用したか不明",
+        "q3_reason": "検索結果が本文なしで利用不可だったため明確な利用状況不明",
+        "q4_without_sufficient": "○ ほぼ十分",
+        "q4_reason": "基本的な違いを網羅しており実用上十分な説明",
+        "q5_preference": "WEBなし",
+        "q5_reason": "検索結果が本文なしで有用性が担保できないため",
+        "q6_search_result_issues": [
+          "本文なし",
+          "検索結果が少ない"
+        ],
+        "q6_reason": "全検索結果が本文なしで情報量が極めて不足",
+        "q7_web_caused_issues": [
+          "検索結果を十分利用していない"
+        ],
+        "q7_reason": "検索結果が本文なしで利用不可だったため",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "C02",
+      "observation_id": "webeffect-hits-C02",
+      "request": "Ollamaについて詳しく教えて",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nOllamaについて詳しく教えて\n\n### Webなし回答\n\nOllamaは、大規模言語モデル（LLM）の開発と提供を行う企業です。主な特徴と機能は以下の通りです：\n\n1. **モデルラインナップ**  \n   - **Llamaシリーズ**：Metaが開発したLlamaモデル（Llama、Llama 2など）をベースにしたローカル実行可能なバージョンを提供。  \n   - **他社モデルのサポート**：Mistral、MixtralなどのモデルもOllamaプラットフォームで利用可能（一部はライセンス制約あり）。  \n\n2. **ローカル実行環境**  \n   - モデルをローカルマシンにインストールし、プライバシーを確保しながら運用可能。  \n   - コマンドラインインターフェース（CLI）やWebインターフェース（Ollama Web）で操作可能。  \n\n3. **ライセンス情報**  \n   - Llama 2などのモデルはApache 2.0ライセンスで提供され、商用利用が可能。  \n   - 各モデルのライセンス条件は公式ドキュメントで確認が必要。  \n\n4. **用途例**  \n   - データ分析、チャットボット開発、自然言語処理（NLP）タスクなど、幅広い分野での利用が可能。  \n\n**注意点**：  \n- 一部モデルは特定の制限（例：商用利用不可、特定地域での利用制限）がある場合あり。  \n- モデルのバージョンやパラメータ数（例：7B、13Bなど）は、Ollama公式リリース情報を参照することを推奨。  \n\n不明点については「未確認」として明記しています。\n\n### 検索クエリ\n\nOllama\n\n### 検索結果\n\n#### 検索結果 1 / 3\nタイトル: Ollama\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Ollama\n本文:\nOllama is an open-source software platform developed by Jeffrey Morgan and Michael Chiang in 2023 for running and managing large language models on local computers and through hosted cloud models. It provides a command-line interface, a native GUI, a local REST API, model-management tools, and integrations for using open-weight models with coding assistants and other applications.\n\n#### 検索結果 2 / 3\nタイトル: Ollama\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/Ollama\n本文:\n【本文なし】\n\n#### 検索結果 3 / 3\nタイトル: Ollamalitzli\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Ollamalitzli\n本文:\n【本文なし】\n\n### Webあり回答\n\nOllamaは、Jeffrey MorganとMichael Chiangが2023年に開発したオープンソースソフトウェアプラットフォームで、ローカルコンピュータやホストされたクラウドモデル上で大規模言語モデルを実行・管理するためのツールです。主な機能には、コマンドラインインターフェース（CLI）、ネイティブGUI、ローカルREST API、モデル管理ツール、およびコードアシスタントなどのアプリケーションとの統合が含まれます。詳しくは、[Ollama（英語版）](https://en.wikipedia.org/wiki/Ollama) を参照してください。",
+      "llm": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webあり回答が検索結果から開発者情報やCLI/GUIなどの詳細を追加し、情報量が大幅に増加",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webなし回答にない「Jeffrey Morgan/Michael Chiangの開発者情報」「CLI/GUI/REST APIなどの機能詳細」を検索結果から追加",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "検索結果の英語Wikipedia情報を直接引用して開発者情報や機能説明を補完",
+        "q4_without_sufficient": "◎ 十分",
+        "q4_reason": "開発者情報・機能詳細・利用方法まで網羅し、質問への回答が十分",
+        "q5_preference": "WEBあり",
+        "q5_reason": "検索結果を活用した追加情報により回答の信頼性と詳細度が向上",
+        "q6_search_result_issues": [
+          "日本語情報不足",
+          "質問と無関係"
+        ],
+        "q6_reason": "日本語Wikipedia本文なし＋第三検索結果のOllamalitzliが質問と無関係",
+        "q7_web_caused_issues": [
+          "問題なし"
+        ],
+        "q7_reason": "検索結果の情報が自然に統合され、回答の質が向上",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "C03",
+      "observation_id": "webeffect-hits-C03",
+      "request": "RTX 3060って今どういう扱いですか？",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nRTX 3060って今どういう扱いですか？\n\n### Webなし回答\n\nRTX 3060は、2020年9月に発売されたNVIDIAのAmpereアーキテクチャ搭載の中〜上位グレードGPUです。12GBのGDDR6メモリを搭載し、1080pゲームやコンテンツ制作などに適していますが、最新のRTX 40シリーズ（例：RTX 4060）に比べると性能や効率が劣ります。現在の扱いとしては、価格が比較的安価で入手可能ですが、需要が高いため在庫が限られている可能性があります。また、新作ゲームの性能要件が高まっているため、最新タイトルでは高設定での動作が難しい場合があります。用途に応じて検討すると良いでしょう。\n\n### 検索クエリ\n\nGeForce RTX 3060\n\n### 検索結果\n\n#### 検索結果 1 / 5\nタイトル: GeForce RTX 3060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_3060\n本文:\n【本文なし】\n\n#### 検索結果 2 / 5\nタイトル: GeForce RTX 5070\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_5070\n本文:\n【本文なし】\n\n#### 検索結果 3 / 5\nタイトル: GeForce RTX 4050\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_4050\n本文:\n【本文なし】\n\n#### 検索結果 4 / 5\nタイトル: GeForce RTX 2060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_2060\n本文:\n【本文なし】\n\n#### 検索結果 5 / 5\nタイトル: GeForce GTX 1060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_GTX_1060\n本文:\n【本文なし】\n\n### Webあり回答\n\nGeForce RTX 3060は、現在でも中〜上位のゲーム用途向けGPUとして扱われていますが、最新の情報や性能比較については検索結果に明確な記載が見られませんでした。最新モデル（例: RTX 4050やRTX 5070）と比較した場合の性能や価格帯については、公式情報や信頼できるレビューを参照することをお勧めします。  \n（※ 検索結果のRTX 3060ページの詳細は空欄のため、具体的な評価は確認できませんでした）",
+      "llm": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "回答はRTX 3060の基本スペックと市場状況を説明しており、質問への直接的な回答を提供",
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "Webあり回答は検索結果の不足を明記したが、質的内容の差異は限定的",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q3_reason": "検索結果本文が全て「本文なし」で、回答に具体的な情報が反映されていない",
+        "q4_without_sufficient": "△ 不足がある",
+        "q4_reason": "最新モデルとの比較や価格帯など、詳細な情報が不足している",
+        "q5_preference": "WEBなし",
+        "q5_reason": "検索結果が不足していたため、Webなし回答の方が情報の信頼性が高い",
+        "q6_search_result_issues": [
+          "本文なし",
+          "情報が古い可能性"
+        ],
+        "q6_reason": "検索結果の本文が空欄で、Wikipediaの情報が古く不正確な可能性あり",
+        "q7_web_caused_issues": [
+          "検索結果を十分利用していない"
+        ],
+        "q7_reason": "検索結果が空欄だったにもかかわらず、回答に明確な情報が反映されていない",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "A04",
+      "observation_id": "webeffect-hits-A04",
+      "request": "今のNVIDIAの株価の雰囲気を教えて",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\n今のNVIDIAの株価の雰囲気を教えて\n\n### Webなし回答\n\nNVIDIAの株価は、2023年現在、AI分野の成長とデータセンター需要の高まりを背景に、強い上昇トレンドを維持しています。特に、生成AIや大規模モデルの普及により、GPU需要が急増しており、株価は過去最高値を更新する動きを見せています。ただし、市場の過熱や競合企業の動向、半導体供給の安定性など、リスク要因も存在します。投資判断には最新情報の確認を推奨します。\n\n### 検索クエリ\n\nNVIDIA\n\n### 検索結果\n\n#### 検索結果 1 / 5\nタイトル: Nvidia\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Nvidia\n本文:\nNvidia Corporation is an American multinational technology company headquartered in Santa Clara, California. The company develops graphics processing units, systems on chips, and application programming interfaces for data science, high-performance computing, artificial intelligence, and mobile and automotive applications. Founded in 1993 by Jensen Huang, Chris Malachowsky, and Curtis Priem, Nvidi\n\n#### 検索結果 2 / 5\nタイトル: Nvidia Category\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/c/Nvidia\n本文:\nNvidia Category\n\n#### 検索結果 3 / 5\nタイトル: Nvidia Parabricks – GPU-accelerated genomics toolkit.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Nvidia_Parabricks\n本文:\nNvidia Parabricks – GPU-accelerated genomics toolkit.\n\n#### 検索結果 4 / 5\nタイトル: NVIDIA\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/NVIDIA\n本文:\n【本文なし】\n\n#### 検索結果 5 / 5\nタイトル: NVIDIA GeForce\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/NVIDIA_GeForce\n本文:\n【本文なし】\n\n### Webあり回答\n\n現在のNVIDIAの株価に関する情報は検索結果に含まれていません。上記の検索結果は、NVIDIA社の概要や製品情報、関連カテゴリなどについてのみ記載されています。株価や市場の動向については、金融情報サイトや証券取引所のデータをご確認ください。",
+      "llm": {
+        "q1_search_usefulness": "○ 有用",
+        "q1_reason": "Webなし回答はAI分野の成長を背景に株価が上昇していると述べているが、具体的な数値や最新情報は含まれていない",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webあり回答は検索結果に株価情報が含まれていないことを明示し、正確な情報提供を図っている",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "Webあり回答は検索結果の内容をもとに株価情報の不足を説明している",
+        "q4_without_sufficient": "◎ 十分",
+        "q4_reason": "Webあり回答は検索結果に株価情報が存在しないことを正直に伝え、代替情報源を提示している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "Webあり回答が検索結果の制約を正直に伝えているため信頼性が高い",
+        "q6_search_result_issues": [
+          "本文なし",
+          "日本語情報不足",
+          "検索結果が少ない"
+        ],
+        "q6_reason": "検索結果4・5が本文なし、検索結果2・3がカテゴリ情報のみで実質的な情報が不足している",
+        "q7_web_caused_issues": [
+          "問題なし"
+        ],
+        "q7_reason": "Webあり回答が検索結果の制約を正直に伝えているため問題がない",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "A06",
+      "observation_id": "webeffect-hits-A06",
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nPython 3.13で追加された主な変更点を教えて\n\n### Webなし回答\n\nPython 3.13 で追加された主な変更点は以下の通りです：\n\n1. **asyncio の改善**  \n   - TCP/UDP ソケットの非同期サポートが強化され、`asyncio` でのネットワーク通信の効率が向上。  \n   - `asyncio` のタイムアウト処理がより柔軟に設定可能に。\n\n2. **標準ライブラリの拡張**  \n   - `socket` モジュールで IPv6 のサポートが改善され、複雑なネットワーク設定の簡略化。  \n   - `pathlib` に `Path.read_text()` と `Path.write_text()` の拡張機能が追加（未確認）。\n\n3. **パフォーマンス最適化**  \n   - インタプリタ内部のメモリ管理が改善され、大規模なデータ処理時の速度向上。  \n   - グローバルインタプリタロック（GIL）の非同期処理における影響が軽減（未確認）。\n\n4. **型ヒントの拡張**  \n   - `typing` モジュールで `TypedDict` のサブクラス化が可能に（未確認）。  \n   - `ParamSpec` と `Concatenate` の使用例が明確化。\n\n5. **非推奨機能の削除**  \n   - `distutils` モジュールの一部機能が非推奨となり、`setuptools` への移行が推奨。  \n   - `sys._getframe()` の使用が非推奨（3.10 で警告が開始）。\n\n6. **その他の変更**  \n   - `unittest` モジュールで非同期テストのサポートが拡充。  \n   - `zoneinfo` モジュールの動作が安定化（3.9 から存在）。\n\n※ 一部の変更点は公式ドキュメントの確認が必要です。詳細は Python 3.13 のリリースノートを参照してください。\n\n### 検索クエリ\n\nPython 3.13\n\n### 検索結果\n\n#### 検索結果 1 / 1\nタイトル: Python 3.0\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Python_3.0\n本文:\n【本文なし】\n\n### Webあり回答\n\nPython 3.13に関する具体的な変更点についての情報は、提供された検索結果には含まれていません。現在の資料ではPython 3.0に関する情報しか得られませんでした。Python 3.13の詳細な変更内容については、公式ドキュメントやリリースノートをご確認ください。",
+      "llm": {
+        "q1_search_usefulness": "× ほぼ無用",
+        "q1_reason": "検索結果がPython 3.0に関する情報で、質問のPython 3.13とは無関係",
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "Webあり回答は検索結果の不足を明示したが、質問への回答は依然として不十分",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q3_reason": "検索結果にPython 3.13の情報が含まれず、回答に利用されていない",
+        "q4_without_sufficient": "× 明確に不足",
+        "q4_reason": "検索結果が不足しているため、具体的な変更点の記載ができない",
+        "q5_preference": "WEBなし",
+        "q5_reason": "検索結果が質問と関係ないため、Web情報を活用する意義が薄い",
+        "q6_search_result_issues": [
+          "情報が古い可能性",
+          "検索結果が少ない"
+        ],
+        "q6_reason": "検索結果がPython 3.0の情報で、質問のPython 3.13に該当しない",
+        "q7_web_caused_issues": [
+          "検索結果を十分利用していない",
+          "情報不足"
+        ],
+        "q7_reason": "検索結果が不適切なため、回答が不十分なままとなった",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "C05",
+      "observation_id": "webeffect-hits-C05",
+      "request": "この手のエージェントって今どこまで実用的なの",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nこの手のエージェントって今どこまで実用的なの\n\n### Webなし回答\n\n現在のAIエージェントは、特定のタスクや業務フローの自動化、情報収集・分析、チャットサポートなど、すでにいくつかの実用シーンで活用されています。例えば、カスタマーサポートのチャットボット、デスクトップアプリケーションの自動化ツール、データ解析の補助などです。ただし、複雑な意思決定や創造性を要する作業、人間同士の対話の代替としての信頼性などはまだ限界があり、完全な代替には至っていません。また、セキュリティやプライバシーの懸念、システムとの連携の難しさなども課題です。技術の進化に伴い今後さらに実用性が高まる可能性はありますが、現時点では特定の用途に特化したツールとして位置づけられています。\n\n### 検索クエリ\n\nAI agent\n\n### 検索結果\n\n#### 検索結果 1 / 5\nタイトル: AI agent\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/AI_agent\n本文:\nAn AI agent or agentic AI is an artificial intelligence program that can pursue goals, use software or other tools, and take actions with some level of autonomy. Agentic AI contrasts with tool AI, which performs a narrow, specified task such as answering questions or traditional machine learning algorithms. While there is no universally agreed-upon definition of an AI agent, common attributes of A\n\n#### 検索結果 2 / 5\nタイトル: Rational agent - A rational agent or rational being is a person or entity that always aims to perform optimal actions based on given premises and information. A rational agent can be anything that mak\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Rational_agent\n本文:\nRational agent - A rational agent or rational being is a person or entity that always aims to perform optimal actions based on given premises and information. A rational agent can be anything that makes decisions, typically a person, firm, machine, or software.\n\n#### 検索結果 3 / 5\nタイトル: Robotic process automation - Robotic process automation is a form of business process automation that is based on software robots or artificial intelligence agents. RPA should not be confused with art\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Robotic_process_automation\n本文:\nRobotic process automation - Robotic process automation is a form of business process automation that is based on software robots or artificial intelligence agents. RPA should not be confused with artificial intelligence as it is based on automation technology following a predefined workflow.\n\n#### 検索結果 4 / 5\nタイトル: Software agent - In computer science, a software agent is a computer program that acts for a user or another program in a relationship of agency. The term agent is derived from the Latin agere: an agr\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Software_agent\n本文:\nSoftware agent - In computer science, a software agent is a computer program that acts for a user or another program in a relationship of agency. The term agent is derived from the Latin agere: an agreement to act on one's behalf.\n\n#### 検索結果 5 / 5\nタイトル: AIR AGENCY\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/AIR_AGENCY\n本文:\n【本文なし】\n\n### Webあり回答\n\nAI Agentは、特定の目標を追求し、ソフトウェアやツールを活用して自律的に行動できるプログラムとして定義されています。これに対し、単純なタスク（例：質問応答）を処理する「ツールAI」と区別されます。現状では、以下のような実用性が確認されています：\n\n1. **業務自動化**：ロボティックプロセスオートメーション（RPA）では、AI Agentが既存のワークフローに基づいた業務を自動化しており、繰り返し作業の効率化に貢献しています（例：データ入力、書類処理）。\n2. **ソフトウェアの代理行動**：ユーザーまたは他のプログラムの代わりに動作する「ソフトウェアエージェント」は、システム管理や情報収集など、特定のタスクを自動化する用途で利用されています。\n3. **意思決定支援**：論理的エージェント（Rational Agent）として、与えられた情報に基づいて最適な行動を推奨する用途も存在します（例：金融リスク評価、戦略立案）。\n\nただし、AI Agentは完全な自律性を持つわけではなく、設計された制約や環境に依存するため、現時点では「人間の補助ツール」としての位置づけが一般的です。今後の技術進化により、より高度な自律性や柔軟性が期待されていますが、現状では特定の分野での実用化が進んでいます。",
+      "llm": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webあり回答が検索結果の具体例（RPA、Rational Agentなど）を活用して詳細な実用例を提示",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webなし回答の抽象的説明から、検索結果の具体例をもとに実用シーンを明確化",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "検索結果のRPA・Software agent・Rational Agent概念を直接活用して回答構成",
+        "q4_without_sufficient": "◎ 十分",
+        "q4_reason": "RPA業務自動化・論理的エージェントの具体例を含む十分な情報量",
+        "q5_preference": "WEBあり",
+        "q5_reason": "検索結果を活用した具体例が説得力ある実用性説明を可能にする",
+        "q6_search_result_issues": [
+          "本文なし",
+          "日本語情報不足",
+          "検索結果が少ない"
+        ],
+        "q6_reason": "5番目の日本語Wikipedia記事が本文なし、英語記事のみで日本語情報不足、検索結果全体が少ない",
+        "q7_web_caused_issues": [
+          "問題なし"
+        ],
+        "q7_reason": "検索結果を適切に活用した回答構成で問題なし",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "WB01",
+      "observation_id": "webeffect-hits-WB01",
+      "request": "Gitとは何かを初心者向けに説明して",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nGitとは何かを初心者向けに説明して\n\n### Webなし回答\n\nGitは、プログラマがコードの変更履歴を管理し、複数人で同じプロジェクトを協力して作業できるようにするためのツールです。例えば、文章を何度も編集するときのように、コードの「バージョン」（変更前の状態）を保存し、必要に応じて過去のバージョンに戻すことができます。また、チームで作業する際には、誰がどの部分を修正したかを記録し、衝突した編集を解決する機能も備えています。Gitはオープンソースで、ソフトウェア開発だけでなく、テキストファイルの管理にも利用されます。\n\n### 検索クエリ\n\nGit\n\n### 検索結果\n\n#### 検索結果 1 / 5\nタイトル: Git A distributed version control software system that is capable of managing versions of source...\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Git\n本文:\nGit A distributed version control software system that is capable of managing versions of source...\n\n#### 検索結果 2 / 5\nタイトル: Git (pronoun) A pronoun in Old English.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Git_(pronoun)\n本文:\nGit (pronoun) A pronoun in Old English.\n\n#### 検索結果 3 / 5\nタイトル: Git (slang) A term of insult denoting an unpleasant, silly, incompetent, annoying, senile, elderly or...\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Git_(slang)\n本文:\nGit (slang) A term of insult denoting an unpleasant, silly, incompetent, annoying, senile, elderly or...\n\n#### 検索結果 4 / 5\nタイトル: Git\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/Git\n本文:\n【本文なし】\n\n#### 検索結果 5 / 5\nタイトル: GitHub\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/GitHub\n本文:\n【本文なし】\n\n### Webあり回答\n\nGitは、ソースコードのバージョン管理を行うためのツールで、複数の開発者が同じプロジェクトを協力して作業できるようにします。変更履歴を記録し、過去のバージョンに戻すなど、コードの管理を効率的に行えるように設計されています。詳しくは[Git](https://duckduckgo.com/Git)をご参照ください。",
+      "llm": {
+        "q1_search_usefulness": "× ほぼ無用",
+        "q1_reason": "検索結果の本文が全て空または不適切で、有用な情報が得られなかった",
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "Webあり回答は短縮されただけで、質的な改善は見られず",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q3_reason": "検索結果の内容を活用せず、リンクのみを追加した",
+        "q4_without_sufficient": "△ 不足がある",
+        "q4_reason": "回答が極めて簡潔すぎて説明が不十分",
+        "q5_preference": "WEBなし",
+        "q5_reason": "Webあり回答のリンク先が不適切なため信頼性が欠如",
+        "q6_search_result_issues": [
+          "質問と無関係",
+          "英語のみ",
+          "日本語情報不足"
+        ],
+        "q6_reason": "検索結果に不適切な意味の条目や空本文あり",
+        "q7_web_caused_issues": [
+          "検索結果を十分利用していない",
+          "回答が曖昧になった"
+        ],
+        "q7_reason": "不適切な検索結果を参照せず、簡潔すぎて説明不足",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "WB02",
+      "observation_id": "webeffect-hits-WB02",
+      "request": "Dockerコンテナの基本的な考え方を教えて",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nDockerコンテナの基本的な考え方を教えて\n\n### Webなし回答\n\nDockerコンテナは、アプリケーションとその依存関係を含む「軽量な仮想環境」です。以下が基本的な考え方です：\n\n1. **コンテナの特徴**  \n   - **一貫性**: ローカル環境と本番環境で同じ動作を保証します。  \n   - **軽量性**: 仮想マシン（VM）よりリソースを効率的に使用します。  \n   - **隔離性**: 各コンテナは独立して動作し、互いの影響を最小限に抑えます。  \n\n2. **Dockerの主要コンポーネント**  \n   - **イメージ（Image）**: コンテナのテンプレート。コード、ライブラリ、設定ファイルなどを含みます。  \n   - **コンテナ（Container）**: イメージを実行した実行中のプロセス。  \n   - **Dockerfile**: イメージを作成するためのスクリプト。`FROM`、`RUN`、`CMD`などの指令で構成されます。  \n   - **Docker Hub**: イメージを保存・共有するリポジトリ（例: `nginx`、`python`など）。  \n\n3. **基本的な動作フロー**  \n   - `docker pull`でイメージを取得 → `docker run`でコンテナを起動 → ログやポートの確認 → `docker stop`で停止。  \n\n4. **メリット**  \n   - デプロイの簡素化、開発環境の再現性、リソースの効率的な利用が可能。  \n\nこのように、Dockerは「環境依存の問題」を解決するためのツールとして、開発・運用の効率化に貢献します。\n\n### 検索クエリ\n\nDocker (software)\n\n### 検索結果\n\n#### 検索結果 1 / 5\nタイトル: Docker (software)\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Docker_(software)\n本文:\nDocker is a set of products that uses operating system-level virtualization to deliver software in packages called containers. Docker automates the deployment of applications within lightweight containers, enabling them to run consistently across different computing environments. The core software that runs and manages these containers is called Docker Engine. Docker was first released in 2013 and\n\n#### 検索結果 2 / 5\nタイトル: DevOps - DevOps is the integration and automation of software development and information technology operations. DevOps encompasses the tasks necessary for software development and can lead to both sh\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/DevOps\n本文:\nDevOps - DevOps is the integration and automation of software development and information technology operations. DevOps encompasses the tasks necessary for software development and can lead to both shortening development time and improving the development life cycle.\n\n#### 検索結果 3 / 5\nタイトル: DevOps toolchain - A DevOps toolchain is a set or combination of tools that aid in the delivery, development, and management of software applications throughout the systems development life cycle, as\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/DevOps_toolchain\n本文:\nDevOps toolchain - A DevOps toolchain is a set or combination of tools that aid in the delivery, development, and management of software applications throughout the systems development life cycle, as coordinated by an organization that uses DevOps practices.\n\n#### 検索結果 4 / 5\nタイトル: Kubernetes - Kubernetes, also known as K8s, is an open-source container orchestration system for automating software deployment, scaling, and management.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Kubernetes\n本文:\nKubernetes - Kubernetes, also known as K8s, is an open-source container orchestration system for automating software deployment, scaling, and management.\n\n#### 検索結果 5 / 5\nタイトル: Microservices - In software engineering, a microservice architecture is an architectural pattern that organizes an application into a collection of loosely coupled, fine-grained services that communic\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Microservices\n本文:\nMicroservices - In software engineering, a microservice architecture is an architectural pattern that organizes an application into a collection of loosely coupled, fine-grained services that communicate through lightweight protocols.\n\n### Webあり回答\n\nDockerは、オペレーティングシステムレベルの仮想化技術を活用し、ソフトウェアを「コンテナ」と呼ばれるパッケージ形式で配信するツールです。コンテナは軽量で、アプリケーションを一貫して動作させる環境を提供します。Dockerはアプリケーションのデプロイを自動化し、異なるコンピューティング環境でも一貫した動作を実現します。このプロセスを管理するコアソフトウェアは「Docker Engine」と呼ばれ、2013年に初めてリリースされました。",
+      "llm": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webあり回答が検索結果のDocker Engineやリリース年などの具体的な情報を含むため",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webなし回答に比べて検索結果の詳細な情報を加えて説明が深化している",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "検索結果1のDocker Engineとリリース年を直接回答に反映している",
+        "q4_without_sufficient": "◎ 十分",
+        "q4_reason": "コンテナの基本概念とDockerの役割を網羅的に説明している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "検索結果を活用したより正確な情報提供が可能",
+        "q6_search_result_issues": [
+          "質問と無関係",
+          "検索結果が少ない"
+        ],
+        "q6_reason": "検索結果2-5はDevOps/Kubernetes/マイクロサービスなど質問と関係ない内容",
+        "q7_web_caused_issues": [
+          "問題なし"
+        ],
+        "q7_reason": "検索結果を適切に活用した回答になっている",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "WB04",
+      "observation_id": "webeffect-hits-WB04",
+      "request": "JSONとは何か、何に使うかを教えて",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nJSONとは何か、何に使うかを教えて\n\n### Webなし回答\n\nJSON（JavaScript Object Notation）は、データを軽量で効率的に伝達するための形式です。主にサーバーとクライアント（例：Webアプリケーション）間でデータをやり取りする際に使われます。  \n\n### 主な用途  \n1. **API通信**：Webサービスでデータを送受信する際（例：ユーザー情報、商品データなど）。  \n2. **設定ファイル**：アプリケーションの設定を簡潔に記述するため（例：`config.json`）。  \n3. **データ共有**：異なるプログラミング言語間でのデータ交換に適しています（例：PythonからJavaScriptへのデータ転送）。  \n4. **クライアントサイドストレージ**：ブラウザでローカルにデータを保存する場合（例：`localStorage`）。  \n\n### 特徴  \n- **読みやすさ**：人間が読みやすく、構文がシンプル。  \n- **軽量性**：XMLなどに比べてデータサイズが小さい。  \n- **汎用性**：JavaScriptだけでなく、Python、Javaなど多くの言語で扱える。  \n\nJSONは、現代のWeb開発やデータ処理で広く利用される標準的なフォーマットです。\n\n### 検索クエリ\n\nJSON\n\n### 検索結果\n\n#### 検索結果 1 / 5\nタイトル: JSON\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/JSON\n本文:\nJSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays. It is a commonly used data format with diverse uses in electronic data interchange, including that of web applications with servers. JSON is a programming language-independent data format. It was derived from JavaScript, but ma\n\n#### 検索結果 2 / 5\nタイトル: JSON Category\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/c/JSON\n本文:\nJSON Category\n\n#### 検索結果 3 / 5\nタイトル: BSON - BSON is a computer data interchange format extending JSON. It is a binary form for representing simple or complex data structures including associative arrays, integer indexed arrays, and a sui\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/BSON\n本文:\nBSON - BSON is a computer data interchange format extending JSON. It is a binary form for representing simple or complex data structures including associative arrays, integer indexed arrays, and a suite of fundamental scalar types.\n\n#### 検索結果 4 / 5\nタイトル: Jackson (API) - In computing, Jackson is a high-performance JSON processor for Java. Its developers extol the combination of fast, correct, lightweight, and ergonomic attributes of the library.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Jackson_(API)\n本文:\nJackson (API) - In computing, Jackson is a high-performance JSON processor for Java. Its developers extol the combination of fast, correct, lightweight, and ergonomic attributes of the library.\n\n#### 検索結果 5 / 5\nタイトル: jaql – a functional data processing and query language most commonly used for JSON query processing.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/jaql\n本文:\njaql – a functional data processing and query language most commonly used for JSON query processing.\n\n### Webあり回答\n\nJSON（JavaScript Object Notation）は、人間が読みやすく、機械が解析しやすい形式でデータを表現するオープン標準のデータ交換フォーマットです。名前と値のペア、配列などの構造を用いてデータを格納・伝達します。ウェブアプリケーションにおけるクライアントとサーバー間のデータ通信、APIでのデータ交換、設定ファイルなどに幅広く利用され、プログラミング言語に依存しない設計のため、多様な環境での使用が可能です。  \n参考: [JSON](https://en.wikipedia.org/wiki/JSON)",
+      "llm": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webなし回答がJSONの定義・用途・特徴を網羅的に説明",
+        "q2_web_improvement": "○ 改善",
+        "q2_reason": "Webあり回答が参考リンクを追加するなど補完的",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "Webあり回答がWikipediaリンクを明示的に引用",
+        "q4_without_sufficient": "◎ 十分",
+        "q4_reason": "Webなし回答が基本的な情報網羅を達成",
+        "q5_preference": "WEBなし",
+        "q5_reason": "Webなし回答が自立的で補足情報不要",
+        "q6_search_result_issues": [
+          "本文なし",
+          "日本語情報不足",
+          "検索結果が少ない"
+        ],
+        "q6_reason": "検索結果2/5が本文なし、結果5が英語のみ、日本語情報が不足",
+        "q7_web_caused_issues": [
+          "問題なし"
+        ],
+        "q7_reason": "Webあり回答が追加リンクを含むが情報過剰ではない",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "WB07",
+      "observation_id": "webeffect-hits-WB07",
+      "request": "CUDAとは何かを説明して",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nCUDAとは何かを説明して\n\n### Webなし回答\n\nCUDA（Compute Unified Device Architecture）は、NVIDIAが開発した並列計算プラットフォームおよびプログラミングモデルです。GPU（グラフィック処理単位）の計算能力を一般用途の計算（GPGPU: General-Purpose computing on Graphics Processing Units）に活用することを目的としており、複数のコアを同時に動かして大規模なデータ処理を高速化します。  \n\nCUDAは、NVIDIAのGPU上で実行可能なコードを書くためのツールキットやライブラリを提供し、機械学習、科学計算、大規模データ分析など、高性能な計算ニーズに応じたアプリケーション開発を支援します。また、CUDAはNVIDIAのハードウェアに特化しており、他社のGPUでは利用できません。\n\n### 検索クエリ\n\nCUDA\n\n### 検索結果\n\n#### 検索結果 1 / 5\nタイトル: Emilce Cuda An Argentine Catholic theologian, university professor, and Roman Curia official.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Emilce_Cuda\n本文:\nEmilce Cuda An Argentine Catholic theologian, university professor, and Roman Curia official.\n\n#### 検索結果 2 / 5\nタイトル: CUDA A proprietary parallel computing platform and application programming interface developed by...\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/CUDA\n本文:\nCUDA A proprietary parallel computing platform and application programming interface developed by...\n\n#### 検索結果 3 / 5\nタイトル: Barracuda Networks Barracuda Networks, Inc. provides security, networking and storage products based on network...\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Barracuda_Networks\n本文:\nBarracuda Networks Barracuda Networks, Inc. provides security, networking and storage products based on network...\n\n#### 検索結果 4 / 5\nタイトル: Plymouth Barracuda A two-door pony car that was manufactured by Chrysler Corporation from 1964 through 1974 model...\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Plymouth_Barracuda\n本文:\nPlymouth Barracuda A two-door pony car that was manufactured by Chrysler Corporation from 1964 through 1974 model...\n\n#### 検索結果 5 / 5\nタイトル: CUDA\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/CUDA\n本文:\n【本文なし】\n\n### Webあり回答\n\nCUDA（Compute Unified Device Architecture）は、NVIDIAが開発した専用の並列計算プラットフォームおよびアプリケーションプログラミングインターフェース（API）です。GPU（グラフィックス処理単位）を用いた高速な並列処理を可能にし、機械学習、科学技術計算、コンピューティング分野での高性能なアプリケーション開発を支援します。  \n詳細については、[CUDA](https://ja.wikipedia.org/wiki/CUDA)（Wikipedia）を参照してください。",
+      "llm": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webなし回答がすでにCUDAの定義と用途を十分に説明している",
+        "q2_web_improvement": "○ 改善",
+        "q2_reason": "Webあり回答がWikipediaリンクを追加したが、検索結果の実質的な情報は利用されていない",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "Wikipediaリンクを回答に明示的に含んでいる",
+        "q4_without_sufficient": "◎ 十分",
+        "q4_reason": "NVIDIAのCUDAの定義・用途・特徴を網羅的に説明している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "追加情報の参照先を明示的に提示している",
+        "q6_search_result_issues": [
+          "日本語情報不足",
+          "検索結果が少ない"
+        ],
+        "q6_reason": "検索結果の4件は関連性が低く、Wikipediaページは本文なし",
+        "q7_web_caused_issues": [
+          "検索結果を十分利用していない"
+        ],
+        "q7_reason": "検索結果の実質的な情報は利用せずリンクのみを追加している",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    },
+    {
+      "case_id": "WB12",
+      "observation_id": "webeffect-hits-WB12",
+      "request": "Linuxとは何かを概要で教えて",
+      "model": "qwen3:8b",
+      "evaluation_card": "### 質問\n\nLinuxとは何かを概要で教えて\n\n### Webなし回答\n\nLinuxは、オープンソースのオペレーティングシステム（OS）のカーネルとして知られ、コンピュータのハードウェアとソフトウェアを管理する基盤となるプログラムです。1991年にリーナス・トーバルト氏によって開発が始まり、現在では世界中で広く利用されています。Linuxは、GNUプロジェクトが提供するツールやライブラリと組み合わせることで、完全なOSとして機能します。この組み合わせを「Linux系OS」と呼び、Ubuntu、Fedora、Debianなどのディストリビューションが代表的です。Linuxはサーバー、ワークステーション、エミベッドドシステムなど、多様な用途に適しており、安定性・セキュリティ・カスタマイズ性が特徴です。\n\n### 検索クエリ\n\nLinux\n\n### 検索結果\n\n#### 検索結果 1 / 5\nタイトル: Linux A family of open-source Unix-like operating systems based on the Linux kernel, an operating...\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Linux\n本文:\nLinux A family of open-source Unix-like operating systems based on the Linux kernel, an operating...\n\n#### 検索結果 2 / 5\nタイトル: Linux kernel A free and open-source, monolithic, modular, multitasking, Unix-like operating system kernel.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Linux_kernel\n本文:\nLinux kernel A free and open-source, monolithic, modular, multitasking, Unix-like operating system kernel.\n\n#### 検索結果 3 / 5\nタイトル: 9885 Linux An asteroid.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/9885_Linux\n本文:\n9885 Linux An asteroid.\n\n#### 検索結果 4 / 5\nタイトル: Linux distribution An operating system made from a software collection that includes the Linux kernel, and often a...\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Linux_distribution\n本文:\nLinux distribution An operating system made from a software collection that includes the Linux kernel, and often a...\n\n#### 検索結果 5 / 5\nタイトル: Linux\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/Linux\n本文:\n【本文なし】\n\n### Webあり回答\n\nLinuxは、Linuxカーネルを基盤としており、オープンソースのUnix系オペレーティングシステムのファミリです。このカーネルは、モノリシックでモジュール化可能であり、マルチタスク処理をサポートしています。Linuxは、カーネルに加えてその他のソフトウェアを組み合わせることで、さまざまなLinuxディストリビューション（OSのバージョン）として提供されます。詳しくは、[Linux](https://duckduckgo.com/Linux)や[Linuxディストリビューション](https://duckduckgo.com/Linux_distribution)を参照してください。",
+      "llm": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webあり回答がカーネルの特性やディストリビューションの詳細を追加し、説明がより具体的になった",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webなし回答にない「モノリシック」「モジュール化可能」「マルチタスク処理」などの技術的詳細を追加",
+        "q3_result_used_in_answer": "○ 一部利用している",
+        "q3_reason": "検索結果の「Linuxディストリビューション」項目を引用し、ディストリビューションの説明を加えたが、他の結果の詳細は活用していない",
+        "q4_without_sufficient": "○ ほぼ十分",
+        "q4_reason": "Webなし回答より詳細な説明を加えたが、歴史的背景や具体的な用途例は記載していない",
+        "q5_preference": "WEBあり",
+        "q5_reason": "技術的詳細の追加により説明の質が向上している",
+        "q6_search_result_issues": [
+          "質問と無関係",
+          "本文なし"
+        ],
+        "q6_reason": "検索結果3が小惑星に関する無関係な情報、検索結果5が本文なし",
+        "q7_web_caused_issues": [
+          "検索結果を十分利用していない",
+          "情報が増えて改善"
+        ],
+        "q7_reason": "検索結果の内容を十分に活用せず、一部のみを引用したが、追加情報により説明が改善",
+        "not_agent_judgment": true,
+        "not_auto_improvement_recommendation": true
+      },
+      "human_available": false
+    }
+  ]
+}

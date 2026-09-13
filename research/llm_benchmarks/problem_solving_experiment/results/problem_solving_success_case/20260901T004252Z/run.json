@@ -1,0 +1,33 @@
+{
+  "experiment": "problem_solving_success_case",
+  "note": "Cross-file investigation chain. LLM is not given helper.py or config.py initially. Mapping is experiment-side and not a schema. Repair is not executed.",
+  "at": "2026-09-01T00:42:52.932939+00:00",
+  "prompt_header": "Analyze the problem below.\n\nDo not fix the problem yet.",
+  "max_turns": 6,
+  "models": [
+    "deepseek-coder-v2:16b",
+    "qwen3:14b"
+  ],
+  "models_run": [
+    {
+      "model": "deepseek-coder-v2:16b",
+      "call_ok": true,
+      "error": null,
+      "turns": 1,
+      "tool_turns": 0,
+      "files_read": [],
+      "stop_reason": "no_mappable_request"
+    },
+    {
+      "model": "qwen3:14b",
+      "call_ok": true,
+      "error": null,
+      "turns": 5,
+      "tool_turns": 4,
+      "files_read": [
+        "research/llm_benchmarks/problem_solving_experiment/fixtures/cross_file_index_error/helper.py"
+      ],
+      "stop_reason": "no_mappable_request"
+    }
+  ]
+}

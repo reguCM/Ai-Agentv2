@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "default_policy": "require_confirm",
+  "auto_allow": [
+    "cpu_status",
+    "get_gpu_processes",
+    "get_gpu_status",
+    "list_files",
+    "read_file",
+    "search_files",
+    "search_web"
+  ],
+  "history": [
+    {
+      "ts": "2026-08-21T00:00:00+00:00",
+      "action": "promote",
+      "tool_name": "*",
+      "note": "collection campaign: human-promoted agent public tools for non-interactive log gathering (not AI_AGENT_TOOL_GATE=off)"
+    }
+  ],
+  "note": "PROJECT_AGENT collection only. Do not use as default production trust. Gate remains on; tools are explicitly auto_allow."
+}

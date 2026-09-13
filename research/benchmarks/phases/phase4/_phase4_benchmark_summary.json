@@ -1,0 +1,632 @@
+[
+  {
+    "case": "memory_usage",
+    "pass": true,
+    "fail_stage": null,
+    "error": null,
+    "stop_reason": "findings_complete",
+    "rounds": 3,
+    "context_overflow": false,
+    "llm_calls": 9,
+    "usable_findings": 1,
+    "insufficient_findings": 0,
+    "result": true,
+    "context_budget_mode": "shadow",
+    "legacy_chars_total": 32095,
+    "allocated_chars_total": 31538,
+    "legacy_chars_max": 5993,
+    "allocated_chars_max": 6077,
+    "allocated_headroom_min": 803,
+    "legacy_overflow_count": 0,
+    "allocated_overflow_count": 0,
+    "reduction_applied_count": 0,
+    "defer_count": 0,
+    "p35_baseline": {
+      "rounds": 8,
+      "llm_calls": 14,
+      "legacy_overflow": false,
+      "legacy_chars_max_est": null
+    },
+    "sample_calls": [
+      {
+        "builder": "build_web_candidate_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 3826,
+        "allocated_chars": 3962,
+        "legacy_headroom": 3854,
+        "allocated_headroom": 2918,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 1816,
+          "user": 2010
+        },
+        "allocated_breakdown": {
+          "system": 1816,
+          "user": 2146
+        },
+        "allocated_sections": {
+          "system": 1705,
+          "goal": 162,
+          "current_state": 481,
+          "open_questions": 2,
+          "recent_events": 40,
+          "summary": 19,
+          "action_local": 393,
+          "safety": 921,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "recent_limit": 3,
+          "search_limit": 3,
+          "prior_failures_source": "legacy_trim"
+        }
+      },
+      {
+        "builder": "build_research_judge_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 5439,
+        "allocated_chars": 4605,
+        "legacy_headroom": 2241,
+        "allocated_headroom": 2275,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 3507,
+          "user": 1932
+        },
+        "allocated_breakdown": {
+          "system": 3507,
+          "user": 1098
+        },
+        "allocated_sections": {
+          "system": 3507,
+          "goal_state": 660,
+          "summary": 275,
+          "escalation_evidence": 28,
+          "usable_findings": 22,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "insufficient_keep": 5,
+          "unresolved_in_materials": false
+        }
+      },
+      {
+        "builder": "build_web_candidate_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 5587,
+        "allocated_chars": 5405,
+        "legacy_headroom": 2093,
+        "allocated_headroom": 1475,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 1816,
+          "user": 3771
+        },
+        "allocated_breakdown": {
+          "system": 1816,
+          "user": 3589
+        },
+        "allocated_sections": {
+          "system": 1705,
+          "goal": 243,
+          "current_state": 697,
+          "open_questions": 218,
+          "recent_events": 466,
+          "summary": 180,
+          "action_local": 658,
+          "safety": 1217,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "recent_limit": 3,
+          "search_limit": 3,
+          "prior_failures_source": "retriever"
+        }
+      }
+    ]
+  },
+  {
+    "case": "cpu_temperature",
+    "pass": false,
+    "fail_stage": "judge",
+    "error": "max_research_rounds",
+    "stop_reason": "max_research_rounds",
+    "rounds": 10,
+    "context_overflow": false,
+    "llm_calls": 23,
+    "usable_findings": 0,
+    "insufficient_findings": 2,
+    "result": false,
+    "context_budget_mode": "shadow",
+    "legacy_chars_total": 125341,
+    "allocated_chars_total": 124151,
+    "legacy_chars_max": 6792,
+    "allocated_chars_max": 6877,
+    "allocated_headroom_min": 3,
+    "legacy_overflow_count": 0,
+    "allocated_overflow_count": 0,
+    "reduction_applied_count": 0,
+    "defer_count": 0,
+    "p35_baseline": {
+      "rounds": 10,
+      "llm_calls": 18,
+      "legacy_overflow": false,
+      "legacy_chars_max_est": null
+    },
+    "sample_calls": [
+      {
+        "builder": "build_web_candidate_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 4287,
+        "allocated_chars": 4423,
+        "legacy_headroom": 3393,
+        "allocated_headroom": 2457,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 1816,
+          "user": 2471
+        },
+        "allocated_breakdown": {
+          "system": 1816,
+          "user": 2607
+        },
+        "allocated_sections": {
+          "system": 1705,
+          "goal": 156,
+          "current_state": 478,
+          "open_questions": 2,
+          "recent_events": 40,
+          "summary": 19,
+          "action_local": 911,
+          "safety": 873,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "recent_limit": 3,
+          "search_limit": 3,
+          "prior_failures_source": "legacy_trim"
+        }
+      },
+      {
+        "builder": "build_research_judge_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 5301,
+        "allocated_chars": 4601,
+        "legacy_headroom": 2379,
+        "allocated_headroom": 2279,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 3507,
+          "user": 1794
+        },
+        "allocated_breakdown": {
+          "system": 3507,
+          "user": 1094
+        },
+        "allocated_sections": {
+          "system": 3507,
+          "goal_state": 656,
+          "summary": 275,
+          "escalation_evidence": 28,
+          "usable_findings": 22,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "insufficient_keep": 5,
+          "unresolved_in_materials": false
+        }
+      },
+      {
+        "builder": "build_web_candidate_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 6059,
+        "allocated_chars": 5738,
+        "legacy_headroom": 1621,
+        "allocated_headroom": 1142,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 1816,
+          "user": 4243
+        },
+        "allocated_breakdown": {
+          "system": 1816,
+          "user": 3922
+        },
+        "allocated_sections": {
+          "system": 1705,
+          "goal": 359,
+          "current_state": 794,
+          "open_questions": 318,
+          "recent_events": 470,
+          "summary": 180,
+          "action_local": 960,
+          "safety": 1031,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "recent_limit": 3,
+          "search_limit": 3,
+          "prior_failures_source": "retriever"
+        }
+      }
+    ]
+  },
+  {
+    "case": "disk_usage",
+    "pass": false,
+    "fail_stage": "research",
+    "error": "stagnation",
+    "stop_reason": "stagnation",
+    "rounds": 8,
+    "context_overflow": false,
+    "llm_calls": 15,
+    "usable_findings": 0,
+    "insufficient_findings": 0,
+    "result": false,
+    "context_budget_mode": "shadow",
+    "legacy_chars_total": 72913,
+    "allocated_chars_total": 71558,
+    "legacy_chars_max": 6355,
+    "allocated_chars_max": 6747,
+    "allocated_headroom_min": 133,
+    "legacy_overflow_count": 0,
+    "allocated_overflow_count": 0,
+    "reduction_applied_count": 0,
+    "defer_count": 0,
+    "p35_baseline": {
+      "rounds": 8,
+      "llm_calls": 16,
+      "legacy_overflow": false,
+      "legacy_chars_max_est": null
+    },
+    "sample_calls": [
+      {
+        "builder": "build_web_candidate_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 3896,
+        "allocated_chars": 4032,
+        "legacy_headroom": 3784,
+        "allocated_headroom": 2848,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 1816,
+          "user": 2080
+        },
+        "allocated_breakdown": {
+          "system": 1816,
+          "user": 2216
+        },
+        "allocated_sections": {
+          "system": 1705,
+          "goal": 158,
+          "current_state": 483,
+          "open_questions": 2,
+          "recent_events": 40,
+          "summary": 19,
+          "action_local": 163,
+          "safety": 1223,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "recent_limit": 3,
+          "search_limit": 3,
+          "prior_failures_source": "legacy_trim"
+        }
+      },
+      {
+        "builder": "build_research_judge_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 5199,
+        "allocated_chars": 4608,
+        "legacy_headroom": 2481,
+        "allocated_headroom": 2272,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 3507,
+          "user": 1692
+        },
+        "allocated_breakdown": {
+          "system": 3507,
+          "user": 1101
+        },
+        "allocated_sections": {
+          "system": 3507,
+          "goal_state": 663,
+          "summary": 275,
+          "escalation_evidence": 28,
+          "usable_findings": 22,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "insufficient_keep": 5,
+          "unresolved_in_materials": false
+        }
+      },
+      {
+        "builder": "build_web_candidate_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 5655,
+        "allocated_chars": 5570,
+        "legacy_headroom": 2025,
+        "allocated_headroom": 1310,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 1816,
+          "user": 3839
+        },
+        "allocated_breakdown": {
+          "system": 1816,
+          "user": 3754
+        },
+        "allocated_sections": {
+          "system": 1705,
+          "goal": 347,
+          "current_state": 792,
+          "open_questions": 311,
+          "recent_events": 326,
+          "summary": 85,
+          "action_local": 896,
+          "safety": 1180,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "recent_limit": 3,
+          "search_limit": 3,
+          "prior_failures_source": "retriever"
+        }
+      }
+    ]
+  },
+  {
+    "case": "gpu_usage",
+    "pass": false,
+    "fail_stage": "proposal",
+    "error": "proposal_validation_ng",
+    "stop_reason": null,
+    "rounds": null,
+    "context_overflow": false,
+    "llm_calls": 2,
+    "usable_findings": 0,
+    "insufficient_findings": 0,
+    "result": false,
+    "context_budget_mode": null,
+    "legacy_chars_total": null,
+    "allocated_chars_total": null,
+    "legacy_chars_max": null,
+    "allocated_chars_max": null,
+    "allocated_headroom_min": null,
+    "legacy_overflow_count": null,
+    "allocated_overflow_count": null,
+    "reduction_applied_count": null,
+    "defer_count": null,
+    "p35_baseline": {
+      "rounds": null,
+      "llm_calls": 2,
+      "legacy_overflow": false,
+      "legacy_chars_max_est": null
+    },
+    "sample_calls": []
+  },
+  {
+    "case": "gpu_vram_usage",
+    "pass": false,
+    "fail_stage": "research",
+    "error": "max_research_rounds",
+    "stop_reason": "max_research_rounds",
+    "rounds": 10,
+    "context_overflow": false,
+    "llm_calls": 18,
+    "usable_findings": 0,
+    "insufficient_findings": 0,
+    "result": false,
+    "context_budget_mode": "shadow",
+    "legacy_chars_total": 88445,
+    "allocated_chars_total": 85327,
+    "legacy_chars_max": 6447,
+    "allocated_chars_max": 6199,
+    "allocated_headroom_min": 681,
+    "legacy_overflow_count": 0,
+    "allocated_overflow_count": 0,
+    "reduction_applied_count": 0,
+    "defer_count": 0,
+    "p35_baseline": {
+      "rounds": 8,
+      "llm_calls": 14,
+      "legacy_overflow": false,
+      "legacy_chars_max_est": null
+    },
+    "sample_calls": [
+      {
+        "builder": "build_web_candidate_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 4280,
+        "allocated_chars": 4416,
+        "legacy_headroom": 3400,
+        "allocated_headroom": 2464,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 1816,
+          "user": 2464
+        },
+        "allocated_breakdown": {
+          "system": 1816,
+          "user": 2600
+        },
+        "allocated_sections": {
+          "system": 1705,
+          "goal": 165,
+          "current_state": 484,
+          "open_questions": 2,
+          "recent_events": 40,
+          "summary": 19,
+          "action_local": 889,
+          "safety": 873,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "recent_limit": 3,
+          "search_limit": 3,
+          "prior_failures_source": "legacy_trim"
+        }
+      },
+      {
+        "builder": "build_research_judge_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 4914,
+        "allocated_chars": 4619,
+        "legacy_headroom": 2766,
+        "allocated_headroom": 2261,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 3507,
+          "user": 1407
+        },
+        "allocated_breakdown": {
+          "system": 3507,
+          "user": 1112
+        },
+        "allocated_sections": {
+          "system": 3507,
+          "goal_state": 674,
+          "summary": 275,
+          "escalation_evidence": 28,
+          "usable_findings": 22,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "insufficient_keep": 5,
+          "unresolved_in_materials": false
+        }
+      },
+      {
+        "builder": "build_web_candidate_messages",
+        "mode": "shadow",
+        "budget_total": 7680,
+        "budget_effective": 6880,
+        "headroom_reserved": 800,
+        "legacy_chars": 5520,
+        "allocated_chars": 5383,
+        "legacy_headroom": 2160,
+        "allocated_headroom": 1497,
+        "legacy_overflow": false,
+        "allocated_overflow": false,
+        "legacy_breakdown": {
+          "system": 1816,
+          "user": 3704
+        },
+        "allocated_breakdown": {
+          "system": 1816,
+          "user": 3567
+        },
+        "allocated_sections": {
+          "system": 1705,
+          "goal": 364,
+          "current_state": 804,
+          "open_questions": 322,
+          "recent_events": 246,
+          "summary": 180,
+          "action_local": 938,
+          "safety": 907,
+          "extra": 0
+        },
+        "reduction_level": 0,
+        "defer": false,
+        "overflow_action": null,
+        "allocation_meta": {
+          "source": "allocated",
+          "recent_limit": 3,
+          "search_limit": 3,
+          "prior_failures_source": "retriever"
+        }
+      }
+    ]
+  }
+]

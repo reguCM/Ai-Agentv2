@@ -1,0 +1,112 @@
+{
+  "closure_id": "test_safety_s8_1_human_decision_closure",
+  "closed_at": "2026-09-12",
+  "amendment_note": "2026-09-12 final D1/D8 consistency sync",
+  "s8_architecture_approved": true,
+  "s8_1_code_changes": false,
+  "final_status": {
+    "S8_ARCHITECTURE_STATUS": "CLOSED_SINGLE_OPTION",
+    "S8_1_HUMAN_DECISIONS": "CLOSED",
+    "IMPLEMENTATION_READY": true,
+    "READY_FOR_S9_IMPLEMENTATION": true,
+    "AUTO_START_S9": false
+  },
+  "s9_entry_allowed": true,
+  "auto_start_s9": false,
+  "implementation_ready": true,
+  "decisions": {
+    "d1_tool_name_schema": {
+      "option": "A",
+      "tool_name": "run_test_plan",
+      "arguments_field": "arguments.test_plan",
+      "normative_plan_schema": "registry/schema/test_safety_evaluation.schema.json#/$defs/test_plan",
+      "prefer_ref_single_canonical": true,
+      "s9_verify_external_ref_resolution": true,
+      "if_external_ref_unsupported_no_silent_duplicate": true,
+      "bridge_test_plan_inference": "FORBIDDEN",
+      "s8_1_external_ref_resolution": "NOT_VERIFIED"
+    },
+    "d6_agent_tool_gate": {
+      "option": "A",
+      "run_test_plan_in_repo_default_auto_allow": true,
+      "skip_agent_tool_gate": false,
+      "auto_allow_still_requires_test_safety_every_execution": true,
+      "bridge_enabled_together_with_run_test_plan": true,
+      "direct_pytest_or_shell_fallback": "FORBIDDEN"
+    },
+    "d2_observe_tool_api": {
+      "option": "A",
+      "single_action_id_authority": "allocate_action_id_on_orchestrator",
+      "predetermined_action_id_on_observe_tool": true,
+      "same_id_to_safety_bridge": true,
+      "split_record_test_action": false
+    },
+    "d3_should_execute": {
+      "option": "A",
+      "should_execute_unchanged": true,
+      "evidence_gain_only_when_d4_predicate_holds": true,
+      "non_gain_does_not_trigger_automatic_retry": true,
+      "retry_requires_explicit_new_tool_call": true
+    },
+    "d8_evidence_persistence": {
+      "option": "A",
+      "packet_type": "TEST_SAFETY_EXPLICIT_RUN",
+      "full_packet_under_runs": true,
+      "full_packet_audit_canonical": true,
+      "evidence_record_path_plus_structured_summary": true,
+      "llm_never_full_packet_each_turn": true,
+      "traceable_action_id_to_runs_path": true,
+      "runs_not_git_commit_target": true
+    },
+    "d4_completion_condition": {
+      "option": "A",
+      "condition_id": "test_run_closed",
+      "condition_id_alone_insufficient": true,
+      "normative_predicate_authoritative": {
+        "executor_called": true,
+        "test_failed": false,
+        "run_closed": true
+      },
+      "run_closed_semantics": "test_safety_lifecycle_closed_not_synonymous_with_test_pass_alone",
+      "support_only_after_predicate_verified_on_persisted_evidence": true
+    },
+    "d5_human_approval_resume": {
+      "option": "A",
+      "bridge_optional_authorization_packet": true,
+      "cli_parity_authorization_json": true,
+      "same_action_id_continuation": true,
+      "no_duplicate_action_record_on_resume": true,
+      "global_pending_store": false,
+      "out_of_scope_not_connected": {
+        "who_generates_human_approved_AUTHORIZED_packet": "NOT_CONNECTED",
+        "human_approval_runtime_ui": "deferred_s9_plus"
+      }
+    },
+    "d7_goal_handoff_adapter": {
+      "option": "A",
+      "s9_mode": "PRESTRUCTURED_TEST_PLAN_ONLY",
+      "bridge_plan_inference": "FORBIDDEN",
+      "handoff_to_test_plan_conversion": "separate_module_s9_plus",
+      "in_s9_initial_wedge": false
+    }
+  },
+  "s8_fixed_not_reopened": [
+    "run_test_plan_tool",
+    "execute_test_plan_action",
+    "thin_runtime_bridge",
+    "reuse_s7a_safety_stack",
+    "no_bridge_test_plan_inference"
+  ],
+  "s9_initial_wedge_excludes": [
+    "goal_handoff_auto_adapter",
+    "ci_shell_intercept",
+    "test_execution_type_enum",
+    "human_approval_packet_generation_ui",
+    "test_safety_stack_edits"
+  ],
+  "evidence_refs": [
+    "reports/TEST_SAFETY_S8_RUNTIME_BRIDGE_ARCHITECTURE.md",
+    "reports/TEST_SAFETY_S8_1_HUMAN_DECISION_CLOSURE.md",
+    "reports/TEST_SAFETY_S7_APPLICATION_VERIFICATION.md"
+  ]
+}

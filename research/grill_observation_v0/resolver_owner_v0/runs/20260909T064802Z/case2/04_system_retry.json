@@ -1,0 +1,42 @@
+{
+  "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\ngridの構造と内容を確認する。\n\nGrill:\n**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）\n",
+  "required_capabilities": [
+    "workspace_file_search"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_search",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "search_files"
+      ],
+      "selected_tool": "search_files",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "search_files"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null
+    }
+  ],
+  "tool_expectation": {
+    "generated": false,
+    "required_capability": null,
+    "expected_tool": null,
+    "expected_arguments": null,
+    "reason": null,
+    "level": "none",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "PARTIAL",
+  "action": null,
+  "stopped_at": "tool_selected_arguments_incomplete"
+}

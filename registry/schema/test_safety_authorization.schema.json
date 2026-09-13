@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/test_safety_authorization.schema.json",
+  "title": "Test Safety Authorization Packet (S5a binding)",
+  "description": "Authoritative safety authorization bound to action_id and plan_fingerprint. Does not execute pytest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_type",
+    "binder_id",
+    "authorization_id",
+    "authorization_binding_key",
+    "execution_authoritative",
+    "execution_connected",
+    "action_id",
+    "plan_fingerprint",
+    "evaluation_ref",
+    "gate_decision",
+    "authorization",
+    "issued_at",
+    "reasons",
+    "required_postflight"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "packet_type": { "const": "TEST_SAFETY_AUTHORIZATION" },
+    "binder_id": { "type": "string" },
+    "authorization_id": { "type": "string", "minLength": 1 },
+    "authorization_binding_key": { "type": "string" },
+    "execution_authoritative": { "const": true },
+    "execution_connected": { "const": false },
+    "action_id": { "type": "string" },
+    "plan_fingerprint": { "type": "string" },
+    "evaluation_ref": { "$ref": "#/$defs/evaluation_ref" },
+    "gate_decision": { "type": "string", "enum": ["PASS", "BLOCKED"] },
+    "authorization": { "type": "string", "enum": ["AUTHORIZED", "DENIED"] },
+    "issued_at": { "type": "string" },
+    "reasons": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reason": { "type": ["string", "null"] },
+    "required_postflight": { "$ref": "#/$defs/required_postflight" }
+  },
+  "$defs": {
+    "evaluation_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "packet_type", "validator_id", "generated_at"],
+      "properties": {
+        "schema_version": { "type": "string" },
+        "packet_type": { "type": "string" },
+        "validator_id": { "type": "string" },
+        "generated_at": { "type": "string" },
+        "reference_case_id": { "type": "string" }
+      }
+    },
+    "required_postflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["postflight_git_check_required"],
+      "properties": {
+        "postflight_git_check_required": { "type": "boolean" }
+      }
+    }
+  }
+}

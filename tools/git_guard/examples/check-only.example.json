@@ -1,0 +1,39 @@
+{
+  "repo": ".",
+  "allow_branches": [
+    "dev/*",
+    "stabilize/*",
+    "wip/*",
+    "sandbox/*",
+    "promote/*",
+    "feature/*",
+    "fix/*"
+  ],
+  "require_clean": true,
+  "ignore_untracked": [
+    ".pytest_cache/**",
+    "**/__pycache__/**",
+    "*.pyc",
+    ".tmp/**",
+    "tmp/**",
+    "pytest-temp/**",
+    "**/.pytest_cache/**"
+  ],
+  "forbid_staged": true,
+  "remotes": [
+    {
+      "name": "origin",
+      "url_must_contain": "github.com/reguCM/Ai-Agent",
+      "forbid_push": true
+    }
+  ],
+  "forbid_actions": [
+    "force_push",
+    "reset_hard"
+  ],
+  "human_gate_actions": [
+    "push",
+    "merge_ff",
+    "merge"
+  ]
+}

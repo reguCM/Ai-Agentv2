@@ -1,0 +1,27 @@
+{
+  "tool_id": "local:missing_risk",
+  "name": "missing_risk",
+  "version": "1.0.0",
+  "description": "risk_level omitted",
+  "provider": "local",
+  "source": "test",
+  "capability": ["test"],
+  "purpose": "failure case 05",
+  "allowed_operations": ["read"],
+  "prohibited_operations": [],
+  "input_schema": { "type": "object" },
+  "output_schema": { "type": "object" },
+  "error_format": {},
+  "side_effect": "read_only",
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "cost": "free",
+  "tool_status": "available",
+  "contract": {
+    "can": ["x"],
+    "cannot": ["y"],
+    "must": ["z"],
+    "must_not": ["w"]
+  }
+}

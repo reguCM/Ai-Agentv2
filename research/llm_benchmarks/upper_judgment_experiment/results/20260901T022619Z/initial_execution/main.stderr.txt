@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\AI-Agent\research\llm_benchmarks\upper_judgment_experiment\results\20260901T022619Z\fixture\main.py", line 19, in <module>
+    main()
+  File "D:\AI-Agent\research\llm_benchmarks\upper_judgment_experiment\results\20260901T022619Z\fixture\main.py", line 15, in main
+    print(json.dumps(assemble_shipment()))
+  File "D:\AI-Agent\research\llm_benchmarks\upper_judgment_experiment\results\20260901T022619Z\fixture\main.py", line 9, in assemble_shipment
+    "lane": pick_lane(lanes, 2),
+  File "D:\AI-Agent\research\llm_benchmarks\upper_judgment_experiment\results\20260901T022619Z\fixture\helper.py", line 10, in pick_lane
+    return lanes[index]
+IndexError: list index out of range

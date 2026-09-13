@@ -1,0 +1,1403 @@
+{
+  "version": "0.1",
+  "kind": "diagnostic_framework_glossary",
+  "note": "Definitions derived from knowledge_base and NH1-NH12 experiments. Status reflects project adoption level, not truth of the method.",
+  "status_vocabulary": {
+    "adopt": "KB/method_catalog で採用と記録された手法・ラベル体系",
+    "experimental": "実験で有望だが本番未接続",
+    "experimental_not_recommended": "実験済みだが単独採用非推奨",
+    "unknown": "意味・境界が未確定または文脈依存",
+    "proposed": "設計案のみ、実装・検証なし"
+  },
+  "scope_vocabulary": {
+    "CURRENT": "コード・実験に実在する",
+    "EXPERIMENTAL": "実験領域のみ",
+    "PROPOSED": "DIAGNOSTIC_WORKFLOW 等の仮案",
+    "UNKNOWN": "未確定"
+  },
+  "pipeline_experimental": [
+    "問題材料",
+    "Mechanical Compression (NH12-2)",
+    "Mechanical Prefill (NH10)",
+    "Observation LLM → Fixed Slots (NH9)",
+    "Mechanical Mapping (NH7)",
+    "Fingerprint / features (NH5)",
+    "Gate (NH8-NH11)",
+    "Large LLM slot audit (NH9-NH10)",
+    "Mechanical Validator",
+    "Selector (NH5)",
+    "HUMAN_REVIEW"
+  ],
+  "terms": [
+    {
+      "term": "Observation",
+      "aliases": [
+        "観測",
+        "Fixed Observation"
+      ],
+      "category": "diagnostic",
+      "human_definition": "ログ・コード・実測結果などから読み取った観測事実。NH9以降は固定スロットに構造化して記録する。",
+      "program_definition": "NH9 fixed_slots: dict[slot_name -> {status, value, confidence, evidence_reference}]. status in OBSERVED|NOT_OBSERVED|UNKNOWN. 生成: LLM (small_observe.md) または機械 mapping (NH12-2 B). 消費: map_slots_to_features, prefill.",
+      "llm_definition": "材料に根拠がある事実のみを slot に記録。原因・修正・手法名は書かない。Fingerprint を直接出力しない。",
+      "role": "Fingerprint 生成の入力。Safety の根拠境界。",
+      "related_terms": [
+        "Fingerprint",
+        "Fixed Slot",
+        "Mechanical Mapping",
+        "Evidence"
+      ],
+      "distinguish_from": [
+        "Fingerprint",
+        "Inference",
+        "Evidence (4-class label)"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "FINDINGS.md",
+        "NH7 EXPERIMENT_REPORT"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh9/fixed_slots.py",
+        "selector/experiments/nh9/slots.json"
+      ],
+      "experiment_refs": [
+        "NH7",
+        "NH9",
+        "NH10",
+        "NH11",
+        "NH12-2"
+      ],
+      "evolution": "NH6: LLM直 fingerprint → NH7: Observation分離 → NH9: Fixed slots"
+    },
+    {
+      "term": "Fingerprint",
+      "aliases": [
+        "問題指紋",
+        "features"
+      ],
+      "category": "diagnostic",
+      "human_definition": "問題の性質を Selector が判断できるよう、観測を機械的に特徴量辞書へ変換したもの。例: suspect_ranking_vs_filter, reopen_requested。",
+      "program_definition": "NH5/NH6 feature_schema.json の boolean/enum keys。map_slots_to_features() 出力 features 辞書。LLM は直接生成しない（NH7設計）。",
+      "llm_definition": "Observation から機械 Mapping でのみ得る特徴集合。LLM が fingerprint を推測・改変してはいけない。",
+      "role": "Selector 入力。",
+      "related_terms": [
+        "Observation",
+        "Mechanical Mapping",
+        "Selector",
+        "Feature"
+      ],
+      "distinguish_from": [
+        "Observation",
+        "Problem Fingerprint (LLM直出し NH6)"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH7 SUPPORTED in sim"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh6/feature_schema.json",
+        "selector/experiments/nh9/fixed_slots.py::map_slots_to_features"
+      ],
+      "experiment_refs": [
+        "NH5",
+        "NH6",
+        "NH7"
+      ],
+      "evolution": "NH5 gold features → NH6 LLM直出し(精度低) → NH7 mechanical mapping"
+    },
+    {
+      "term": "Evidence",
+      "aliases": [
+        "証拠"
+      ],
+      "category": "diagnostic",
+      "human_definition": "文脈により3系統: (A)主張ラベル4分類の OBSERVED 等 (B) State管理の Evidence オブジェクト E-xx (C) slot 内 evidence_reference 文字列。",
+      "program_definition": "(A) 診断出力ラベル (B) NH3 validator: evidence_id, exists, content (C) slot.evidence_reference e.g. prefill:runtime_log",
+      "llm_definition": "Evidence ID や内容を捏造しない。材料に無い証拠を invent しない。",
+      "role": "主張の根拠・REOPEN 検証・slot 引用。",
+      "related_terms": [
+        "FACT",
+        "OBSERVED",
+        "Claim",
+        "Validator"
+      ],
+      "distinguish_from": [
+        "Observation",
+        "Fingerprint"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "FINDINGS F004",
+        "method_catalog evidence_four_classes"
+      ],
+      "implementation_refs": [
+        "knowledge_base/method_catalog.json"
+      ],
+      "experiment_refs": [
+        "EXP-007",
+        "NH3",
+        "NH4"
+      ],
+      "evolution": "EXP-007 4分類 → NH3 evidence existence check"
+    },
+    {
+      "term": "FACT",
+      "aliases": [],
+      "category": "evidence_boundary",
+      "human_definition": "コード・仕様から直接確認できる事実。主張・ログラベル体系（4分類）の一つ。",
+      "program_definition": "診断出力・レポートでの existence_status / 分類ラベル。NH12-2 compression slot status=FACT とは別体系。",
+      "llm_definition": "コードに書いてあることのみ FACT。推測は INFERENCE または UNKNOWN。",
+      "role": "捏造抑制・根拠の強さ表現。",
+      "related_terms": [
+        "OBSERVED",
+        "INFERENCE",
+        "UNKNOWN"
+      ],
+      "distinguish_from": [
+        "OBSERVED (slot status)",
+        "PRESENT (compression)"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "FINDINGS F004"
+      ],
+      "implementation_refs": [
+        "knowledge_base/method_catalog.json::evidence_four_classes"
+      ],
+      "experiment_refs": [
+        "EXP-007"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "OBSERVED",
+      "aliases": [],
+      "category": "evidence_boundary",
+      "human_definition": "(A) 4分類: ログ・実測から直接確認 (B) Fixed slot status: その slot が材料で確認された。同名だが別体系。",
+      "program_definition": "(A) ラベル文字列 (B) slots[name].status=='OBSERVED'",
+      "llm_definition": "材料に [OBSERVED] 行や明示記述がある場合のみ slot OBSERVED。無ければ UNKNOWN。",
+      "role": "観測の有無を機械化。",
+      "related_terms": [
+        "FACT",
+        "NOT_OBSERVED",
+        "UNKNOWN"
+      ],
+      "distinguish_from": [
+        "INFERENCE",
+        "Fingerprint"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "FINDINGS F004"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh9/fixed_slots.py"
+      ],
+      "experiment_refs": [
+        "EXP-007",
+        "NH9"
+      ],
+      "evolution": "4分類 OBSERVED と slot OBSERVED が共存 — 混同注意"
+    },
+    {
+      "term": "INFERENCE",
+      "aliases": [
+        "推論"
+      ],
+      "category": "evidence_boundary",
+      "human_definition": "材料から推論した主張。4分類の一つ。確定事実ではない。",
+      "program_definition": "診断レポート・LLM出力の分類ラベル。",
+      "llm_definition": "推論は INFERENCE と明示。OBSERVED と混同しない。",
+      "role": "推論と事実の分離。",
+      "related_terms": [
+        "FACT",
+        "OBSERVED",
+        "UNKNOWN"
+      ],
+      "distinguish_from": [
+        "Observation"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "FINDINGS F004"
+      ],
+      "implementation_refs": [
+        "knowledge_base/method_catalog.json"
+      ],
+      "experiment_refs": [
+        "EXP-007"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "UNKNOWN",
+      "aliases": [],
+      "category": "evidence_boundary",
+      "human_definition": "(A) 4分類: 材料不足で断定不可 (B) slot status: 未記載 (C) Gate level UNKNOWN (D) compression status UNKNOWN。",
+      "program_definition": "複数 JSON フィールドで同名。文脈で disambiguate。",
+      "llm_definition": "無理に埋めない。UNKNOWN のまま Gate/escalation に渡す。",
+      "role": "過剰推測防止。",
+      "related_terms": [
+        "Gate",
+        "HUMAN_REVIEW",
+        "material_shortage"
+      ],
+      "distinguish_from": [
+        "NOT_OBSERVED",
+        "ABSENT"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "NH8-NH11"
+      ],
+      "implementation_refs": [
+        "shadow_gate.py",
+        "fixed_slots.py::empty_slot"
+      ],
+      "experiment_refs": [
+        "EXP-007",
+        "NH8",
+        "NH11"
+      ],
+      "evolution": "Gate UNKNOWN は missing context 等"
+    },
+    {
+      "term": "Claim",
+      "aliases": [
+        "主張"
+      ],
+      "category": "state",
+      "human_definition": "State 内の検証可能な主張単位。Goal/Hypothesis と並ぶ Cognitive State 要素。",
+      "program_definition": "NH1-NH4 実験: claim id, status 遷移。本番 State Manager とは experimental 隔離。",
+      "llm_definition": "Claim 更新は Validator 経由。勝手に SUPERSEDED/ACTIVE を切り替えない。",
+      "role": "State 更新対象。",
+      "related_terms": [
+        "Goal",
+        "Hypothesis",
+        "State",
+        "Evidence"
+      ],
+      "distinguish_from": [
+        "Hypothesis",
+        "Goal",
+        "Observation"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH2 generalization"
+      ],
+      "implementation_refs": [
+        "runs/20260826_190000/nh2_state_transition_generalization/"
+      ],
+      "experiment_refs": [
+        "NH1",
+        "NH2",
+        "NH3"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Hypothesis",
+      "aliases": [
+        "仮説"
+      ],
+      "category": "state",
+      "human_definition": "検証中の仮説。State 遷移実験で Goal/Claim と同様に扱う。",
+      "program_definition": "NH2 transition rules。feature reopen_requested 等と接続。",
+      "llm_definition": "Hypothesis を事実として記述しない。",
+      "role": "診断・State 更新の対象。",
+      "related_terms": [
+        "Claim",
+        "Goal",
+        "HYPOTHESIS_STATUS"
+      ],
+      "distinguish_from": [
+        "Claim",
+        "Finding"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH2"
+      ],
+      "implementation_refs": [
+        "feature_schema.json::state_change_requested"
+      ],
+      "experiment_refs": [
+        "NH2",
+        "NH3"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Goal",
+      "aliases": [
+        "目標"
+      ],
+      "category": "state",
+      "human_definition": "Cognitive State の目標。更新・再Active・SUPERSEDED 実験の中心。",
+      "program_definition": "NH1-NH4: goal id, status ACTIVE/SUPERSEDED, update request pipeline。",
+      "llm_definition": "Goal 変更要求は state_change_requested slot にのみ反映。",
+      "role": "State 管理の主要エンティティ。",
+      "related_terms": [
+        "Claim",
+        "Change Request",
+        "SUPERSEDED"
+      ],
+      "distinguish_from": [
+        "Claim",
+        "problem_summary"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH1",
+        "H-REQ-1"
+      ],
+      "implementation_refs": [
+        "runs/20260826_172800/goal_update_experiment/"
+      ],
+      "experiment_refs": [
+        "NH1",
+        "NH2",
+        "goal_update_experiment"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Selector",
+      "aliases": [
+        "選択器",
+        "DiagnosticSelector"
+      ],
+      "category": "selector",
+      "human_definition": "問題指紋(features)から診断手法を選ぶルールエンジン。LLM 自律選択ではない（現状）。",
+      "program_definition": "本番: selector/selector.py + rules.json。実験: nh5_selector.NH5Selector。出力: selected_methods, rejected_methods, escalation, human_review_required。",
+      "llm_definition": "手法 ID を選ぶのは Selector の役割。LLM は手法を名指ししない（shadow observe prompt）。",
+      "role": "診断方法の選択。",
+      "related_terms": [
+        "Fingerprint",
+        "Method Catalog",
+        "Gate"
+      ],
+      "distinguish_from": [
+        "Validator",
+        "Gate",
+        "Large LLM"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH5 10/10 sim",
+        "SELF_DIAGNOSIS_SELECTOR.md"
+      ],
+      "implementation_refs": [
+        "selector/selector.py",
+        "selector/experiments/nh5/nh5_selector.py"
+      ],
+      "experiment_refs": [
+        "NH5",
+        "NH6-NH12"
+      ],
+      "evolution": "ルールベース暫定。LLM Selector は未検証 H-SEL"
+    },
+    {
+      "term": "Feature",
+      "aliases": [
+        "特徴量"
+      ],
+      "category": "selector",
+      "human_definition": "Fingerprint を構成する個別キー。例: code_available, suspect_ranking_vs_filter。",
+      "program_definition": "feature_schema.json keys。boolean 中心。",
+      "llm_definition": "Feature は Mapping 出力。LLM が個別 feature を invent しない。",
+      "role": "Selector マッチング入力。",
+      "related_terms": [
+        "Fingerprint",
+        "Rule"
+      ],
+      "distinguish_from": [
+        "Fixed Slot",
+        "compression slot"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH6 feature_schema"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh6/feature_schema.json"
+      ],
+      "experiment_refs": [
+        "NH5",
+        "NH6"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Method Catalog",
+      "aliases": [
+        "method_catalog",
+        "診断手法カタログ"
+      ],
+      "category": "selector",
+      "human_definition": "診断手法の登録簿。各手法の status, when_to_use, supporting_experiments を保持。",
+      "program_definition": "knowledge_base/method_catalog.json。methods[].id, status, helps_with, ...",
+      "llm_definition": "catalog に無い手法を invent しない。",
+      "role": "Selector・KB の共通参照。",
+      "related_terms": [
+        "Selector",
+        "Rule",
+        "Reuse"
+      ],
+      "distinguish_from": [
+        "method_registry (NH5)"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "knowledge_base/README"
+      ],
+      "implementation_refs": [
+        "knowledge_base/method_catalog.json"
+      ],
+      "experiment_refs": [
+        "NH5"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Gate",
+      "aliases": [
+        "ゲート",
+        "Uncertainty Gate",
+        "Shadow Gate"
+      ],
+      "category": "escalation",
+      "human_definition": "エスカレーション・不確実性を機械判定する層。N2(経路存在)/NH8(不確実性)/NH10-NH11(high_slots) など複数種。",
+      "program_definition": "出力例: level LOW|MEDIUM|HIGH|UNKNOWN, escalation LARGE_LLM|HUMAN_REVIEW|NONE, high_slots[]。",
+      "llm_definition": "Gate は機械。LLM が gate 結果を上書きしない。",
+      "role": "Large/HUMAN への振り分け。",
+      "related_terms": [
+        "Escalation",
+        "high_slots",
+        "Validator"
+      ],
+      "distinguish_from": [
+        "Validator",
+        "Selector",
+        "N2 path gate"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH8-NH11",
+        "EXP-008 N2"
+      ],
+      "implementation_refs": [
+        "shadow_gate.py",
+        "high_slot_gate.py",
+        "uncertainty_gate.py"
+      ],
+      "experiment_refs": [
+        "EXP-008",
+        "NH8",
+        "NH9",
+        "NH10",
+        "NH11"
+      ],
+      "evolution": "NH8 LOW/HIGH → NH10 reason→high_slots → NH11 MEDIUM/Shadow"
+    },
+    {
+      "term": "Escalation",
+      "aliases": [
+        "エスカレーション"
+      ],
+      "category": "escalation",
+      "human_definition": "小型LLMだけでは不十分と判断し、Large LLM または HUMAN_REVIEW へ上げること。",
+      "program_definition": "Gate.escalation, Selector.escalation 値: LARGE_LLM, HUMAN_REVIEW, NONE。",
+      "llm_definition": "escalation は記録のみ。LLM が自己昇格しない。",
+      "role": "コストと Safety のトレードオフ制御。",
+      "related_terms": [
+        "Gate",
+        "Large LLM",
+        "HUMAN_REVIEW",
+        "missed_escalation"
+      ],
+      "distinguish_from": [
+        "Selector selection"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH8-NH12"
+      ],
+      "implementation_refs": [
+        "run_experiment.py escalation_metrics"
+      ],
+      "experiment_refs": [
+        "NH8",
+        "NH9",
+        "NH11",
+        "NH12"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Small LLM",
+      "aliases": [
+        "小型LLM",
+        "qwen3:8b"
+      ],
+      "category": "escalation",
+      "human_definition": "Observation slot 抽出など局所判断に使う小モデル。常時 Large は使わない設計。",
+      "program_definition": "run_experiment --small-model。Ollama chat。",
+      "llm_definition": "Observation のみ。診断全体・修正・auto_fix は行わない。",
+      "role": "Observation 生成。",
+      "related_terms": [
+        "Large LLM",
+        "Observation"
+      ],
+      "distinguish_from": [
+        "Large LLM"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH8",
+        "MODEL_COMPARISON"
+      ],
+      "implementation_refs": [
+        "runs/*/run_experiment.py"
+      ],
+      "experiment_refs": [
+        "NH7",
+        "NH8",
+        "NH11"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Large LLM",
+      "aliases": [
+        "大型LLM",
+        "qwen3:14b"
+      ],
+      "category": "escalation",
+      "human_definition": "Gate が LARGE_LLM のときのみ、HIGH slot の再観測・訂正に限定して呼ぶモデル。",
+      "program_definition": "large_slot_audit.md prompt。validate_large_slots で範囲制限。",
+      "llm_definition": "全体診断・root_cause・fix_plan を出力しない。allowed slots のみ訂正。",
+      "role": "限定的 slot 監査。",
+      "related_terms": [
+        "Escalation",
+        "high_slots",
+        "Gate"
+      ],
+      "distinguish_from": [
+        "Small LLM",
+        "Selector"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH9-NH11 unnecessary_large=0 目標"
+      ],
+      "implementation_refs": [
+        "prompts/large_slot_audit.md",
+        "fixed_slots.py::validate_large_slots"
+      ],
+      "experiment_refs": [
+        "NH8",
+        "NH9",
+        "NH10",
+        "NH11"
+      ],
+      "evolution": "全体診断から slot 訂正へ役割縮小 (NH9)"
+    },
+    {
+      "term": "HUMAN_REVIEW",
+      "aliases": [
+        "Human Review",
+        "人間レビュー"
+      ],
+      "category": "escalation",
+      "human_definition": "自動判断を止め人間確認へ送るエスカレーション先。Safety 上の成功停止であり Accuracy failure ではない。",
+      "program_definition": "bucket safe_HUMAN_REVIEW, selector.human_review_required, gate.escalation=HUMAN_REVIEW。",
+      "llm_definition": "HUMAN_REVIEW は提案のみ。人間承認なしに本番変更しない。",
+      "role": "最終安全弁。",
+      "related_terms": [
+        "Gate",
+        "Safety",
+        "Accuracy"
+      ],
+      "distinguish_from": [
+        "unsafe_automatic_selection",
+        "incorrect_automatic"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH11-3",
+        "NH10 Safety/Accuracy分離"
+      ],
+      "implementation_refs": [
+        "evaluation/human_review_metrics.json"
+      ],
+      "experiment_refs": [
+        "NH8",
+        "NH9",
+        "NH10",
+        "NH11"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Mechanical Mapping",
+      "aliases": [
+        "機械的マッピング"
+      ],
+      "category": "diagnostic",
+      "human_definition": "Fixed Observation slots を Fingerprint(features) へ決定的に変換する処理。LLM を使わない。",
+      "program_definition": "fixed_slots.map_slots_to_features() → {features, mapping_trace, derived, uncertainties, slots}。",
+      "llm_definition": "Mapping は機械のみ。LLM は features を直接出力しない。",
+      "role": "Observation と Selector の橋。",
+      "related_terms": [
+        "Observation",
+        "Fingerprint",
+        "Fixed Slot"
+      ],
+      "distinguish_from": [
+        "Mechanical Prefill",
+        "LLM inference"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH7 SUPPORTED"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh9/fixed_slots.py"
+      ],
+      "experiment_refs": [
+        "NH7",
+        "NH9"
+      ],
+      "evolution": "NH7 で確立"
+    },
+    {
+      "term": "Mechanical Prefill",
+      "aliases": [
+        "機械プリフィル"
+      ],
+      "category": "diagnostic",
+      "human_definition": "材料(runtime_log, code_excerpt 等)からルールで slot を事前設定し、LLM の取りこぼしを減らす。",
+      "program_definition": "mechanical_prefill.apply_mechanical_prefill() → {slots, applied, hints}。prefill_rule, evidence_reference 付与。",
+      "llm_definition": "Prefill は機械。LLM は prefill 済み slot を尊重。",
+      "role": "Observation 前後の穴埋め。",
+      "related_terms": [
+        "Fixed Slot",
+        "high_slots",
+        "Gate"
+      ],
+      "distinguish_from": [
+        "Mechanical Mapping",
+        "Mechanical Compression"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH10 ADOPT CANDIDATE",
+        "NH11"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh10/mechanical_prefill.py"
+      ],
+      "experiment_refs": [
+        "NH10",
+        "NH11",
+        "NH12-2"
+      ],
+      "evolution": "NH10 reason→high_slots 連携"
+    },
+    {
+      "term": "Fixed Slot",
+      "aliases": [
+        "固定スロット",
+        "Fixed Observation Slot"
+      ],
+      "category": "diagnostic",
+      "human_definition": "NH9 で定義された固定観測スキーマ(28 slots)。LLM はこの schema のみ埋める。",
+      "program_definition": "slots.json: slots[], core_slots[]。各 slot: status, value, confidence, evidence_reference。",
+      "llm_definition": "schema 外のキーを追加しない。UNKNOWN 許可。",
+      "role": "Observation 構造化。",
+      "related_terms": [
+        "Observation",
+        "high_slots"
+      ],
+      "distinguish_from": [
+        "compression slot (NH12-2)",
+        "Fingerprint feature"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH9",
+        "NH12-2"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh9/slots.json"
+      ],
+      "experiment_refs": [
+        "NH9",
+        "NH10",
+        "NH11",
+        "NH12-2"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Mechanical Compression",
+      "aliases": [
+        "ログ圧縮",
+        "Mechanical Log Compression"
+      ],
+      "category": "diagnostic",
+      "human_definition": "LLM 前にログから観測事実のみを10 compression slots へ機械抽出。原因推測禁止。",
+      "program_definition": "nh12_2/mechanical_compression.compress_materials()。status: FACT|PRESENT|ABSENT|UNKNOWN。",
+      "llm_definition": "圧縮結果を観測として扱い、原因を足さない。",
+      "role": "material_shortage 削減。",
+      "related_terms": [
+        "Fixed Slot",
+        "Observation",
+        "material_shortage"
+      ],
+      "distinguish_from": [
+        "Mechanical Prefill",
+        "Mechanical Mapping"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH12-2 SUPPORTED",
+        "shortage 29→0"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh12_2/mechanical_compression.py"
+      ],
+      "experiment_refs": [
+        "NH12-2"
+      ],
+      "evolution": "NH12-2 新規"
+    },
+    {
+      "term": "Validator",
+      "aliases": [
+        "検証器",
+        "Mechanical Validator"
+      ],
+      "category": "safety",
+      "human_definition": "実行可能性・安全性を機械検証。State 遷移・shadow safety・large slot 範囲など文脈で複数実装。",
+      "program_definition": "shadow_validator.validate_shadow_safety(), NH3 state validators。出力 violations[], ok。",
+      "llm_definition": "Validator は機械。LLM が検証をパスしたと偽装しない。",
+      "role": "auto_fix 防止・捏造検出。",
+      "related_terms": [
+        "Gate",
+        "Selector",
+        "Safety"
+      ],
+      "distinguish_from": [
+        "Gate",
+        "Selector",
+        "Judge (research pipeline)"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH3-NH4",
+        "NH11"
+      ],
+      "implementation_refs": [
+        "selector/experiments/nh11/shadow_validator.py"
+      ],
+      "experiment_refs": [
+        "NH3",
+        "NH11"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Safety",
+      "aliases": [
+        "安全性"
+      ],
+      "category": "evaluation",
+      "human_definition": "unsafe_accept=0, auto_fix=0, fabricated_evidence=0 等。Accuracy より優先する評価軸。",
+      "program_definition": "safety_metrics.json keys。bucket unsafe_automatic_selection。",
+      "llm_definition": "Safety を犠牲にした精度向上は失敗。",
+      "role": "実験合格の第一条件。",
+      "related_terms": [
+        "Accuracy",
+        "HUMAN_REVIEW",
+        "False Accept"
+      ],
+      "distinguish_from": [
+        "Accuracy",
+        "Selector gold match"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH10 H-NH10-4",
+        "NH11"
+      ],
+      "implementation_refs": [
+        "evaluation/safety_metrics.json"
+      ],
+      "experiment_refs": [
+        "NH10",
+        "NH11",
+        "NH12"
+      ],
+      "evolution": "NH10 で Accuracy と明示分離"
+    },
+    {
+      "term": "Accuracy",
+      "aliases": [
+        "精度",
+        "Selector accuracy"
+      ],
+      "category": "evaluation",
+      "human_definition": "Selector gold 一致・fingerprint accuracy 等。Safety とは独立。safe_HUMAN_REVIEW は Accuracy 低下でも Safety 成功。",
+      "program_definition": "correct_automatic_selection, selector strict/soft, fingerprint accuracy %。",
+      "llm_definition": "Accuracy 追求のため UNKNOWN を埋めない。",
+      "role": "第二評価軸。",
+      "related_terms": [
+        "Safety",
+        "False Reject"
+      ],
+      "distinguish_from": [
+        "Safety"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH9-I",
+        "NH10"
+      ],
+      "implementation_refs": [
+        "nh10/CASES.md"
+      ],
+      "experiment_refs": [
+        "NH9",
+        "NH10"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "False Accept",
+      "aliases": [
+        "誤受理",
+        "unsafe accept",
+        "FA"
+      ],
+      "category": "evaluation",
+      "human_definition": "危険な判断を自動で受け入れたこと。State 実験では危険な Goal 更新。Shadow では unsafe_automatic_selection。",
+      "program_definition": "safety_metrics.unsafe_accept, state experiment FA count。",
+      "llm_definition": "不確実時に自動承認しない。",
+      "role": "Safety 核心指標。",
+      "related_terms": [
+        "False Reject",
+        "Safety",
+        "HUMAN_REVIEW"
+      ],
+      "distinguish_from": [
+        "False Reject",
+        "incorrect_automatic (gold mismatch)"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH1-NH4",
+        "NH11 unsafe=0"
+      ],
+      "implementation_refs": [
+        "HYPOTHESIS_STATUS NH3"
+      ],
+      "experiment_refs": [
+        "NH1",
+        "NH2",
+        "NH3"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "False Reject",
+      "aliases": [
+        "誤拒否",
+        "FR"
+      ],
+      "category": "evaluation",
+      "human_definition": "安全な更新・判断を機械が誤って拒否したこと。State 遷移実験で計測。",
+      "program_definition": "NH1-NH4 evaluation FR metrics。",
+      "llm_definition": "過剰拒否と Safety のバランス。",
+      "role": "Validator 調整指標。",
+      "related_terms": [
+        "False Accept",
+        "Accuracy"
+      ],
+      "distinguish_from": [
+        "False Accept",
+        "safe_HUMAN_REVIEW"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH1",
+        "NH4"
+      ],
+      "implementation_refs": [],
+      "experiment_refs": [
+        "NH1",
+        "NH2",
+        "NH4"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "ACTIVE",
+      "aliases": [],
+      "category": "state",
+      "human_definition": "Goal/Claim/Hypothesis が現在有効な状態。NH1-NH2 遷移ルールの一部。",
+      "program_definition": "State transition target status。exact 再Active 禁止実験あり。",
+      "llm_definition": "ACTIVE 化は Validator 条件を満たす場合のみ。",
+      "role": "State ライフサイクル。",
+      "related_terms": [
+        "SUPERSEDED",
+        "REOPEN"
+      ],
+      "distinguish_from": [
+        "SUPPORTED (hypothesis eval)",
+        "gate LOW"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH1",
+        "NH2"
+      ],
+      "implementation_refs": [
+        "runs/20260826_183500/nh1_state_transition_constraints/"
+      ],
+      "experiment_refs": [
+        "NH1",
+        "NH2"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "SUPERSEDED",
+      "aliases": [],
+      "category": "state",
+      "human_definition": "過去値として置換済みの State。exact 再Active を機械拒否する実験 (NH1)。",
+      "program_definition": "Transition rule: NO_REACTIVATE_SUPERSEDED_VALUE。",
+      "llm_definition": "SUPERSEDED を勝手に ACTIVE に戻さない。",
+      "role": "履歴保護。",
+      "related_terms": [
+        "REOPEN",
+        "ACTIVE"
+      ],
+      "distinguish_from": [
+        "REOPEN",
+        "deprecated method"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH1 Strong Support"
+      ],
+      "implementation_refs": [
+        "NH1 TRANSITION_RULES.md"
+      ],
+      "experiment_refs": [
+        "NH1",
+        "NH2"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "REOPEN",
+      "aliases": [
+        "再開"
+      ],
+      "category": "state",
+      "human_definition": "SUPERSEDED 等を evidence+reason 付きで再活性化する action。条件 D のみ許可など。",
+      "program_definition": "action=reopen, feature reopen_requested, NH3 evidence existence check。",
+      "llm_definition": "REOPEN は evidence 必須。捏造 evidence で REOPEN しない。",
+      "role": "例外付き再活性化。",
+      "related_terms": [
+        "SUPERSEDED",
+        "Evidence",
+        "Validator"
+      ],
+      "distinguish_from": [
+        "ACTIVE",
+        "state_change_requested"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH2",
+        "NH3-3"
+      ],
+      "implementation_refs": [
+        "feature_schema.json::reopen_requested"
+      ],
+      "experiment_refs": [
+        "NH2",
+        "NH3"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Route",
+      "aliases": [
+        "経路",
+        "execution path"
+      ],
+      "category": "search_web",
+      "human_definition": "search_web 内の処理経路。API→collect→ranking→return→handoff。",
+      "program_definition": "route_decomposition, stage_trace, capability_route.jsonl。",
+      "llm_definition": "経路は OBSERVED 材料からのみ記述。",
+      "role": "search_web 診断の骨格。",
+      "related_terms": [
+        "Collect",
+        "Ranking",
+        "Filter",
+        "LLM handoff"
+      ],
+      "distinguish_from": [
+        "capability route (agent tool choice)"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "EXP-006",
+        "FINDINGS"
+      ],
+      "implementation_refs": [
+        "search_path_trace/"
+      ],
+      "experiment_refs": [
+        "EXP-006",
+        "NH11"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Ranking",
+      "aliases": [
+        "ランキング"
+      ],
+      "category": "search_web",
+      "human_definition": "hit 集合をスコア等で並べ替え・件数制限する段階。collect/filter と混同されやすい。",
+      "program_definition": "stages.after_ranking, hits_after_ranking.json, case_trace ranking後。",
+      "llm_definition": "ranking と filter を混同しない。",
+      "role": "脱落原因の切り分け。",
+      "related_terms": [
+        "Filter",
+        "Collect",
+        "Snippet"
+      ],
+      "distinguish_from": [
+        "Filter",
+        "Collect"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "EXP-007",
+        "C02 case"
+      ],
+      "implementation_refs": [
+        "search_path_trace/examples/"
+      ],
+      "experiment_refs": [
+        "EXP-006",
+        "EXP-007",
+        "NH11"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Filter",
+      "aliases": [
+        "フィルタ",
+        "collect/filter"
+      ],
+      "category": "search_web",
+      "human_definition": "API 生結果から hit 化・重複除去・score フィルタ等。ranking より前段。",
+      "program_definition": "collect_filter_present slot, stages hit_accepted, unique。",
+      "llm_definition": "collect と ranking のどちらで落ちたか材料ベースで述べる。",
+      "role": "件数減少の説明。",
+      "related_terms": [
+        "Ranking",
+        "Collect"
+      ],
+      "distinguish_from": [
+        "Ranking"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "EXP-007"
+      ],
+      "implementation_refs": [
+        "suspect_ranking_vs_filter feature"
+      ],
+      "experiment_refs": [
+        "EXP-007"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "LLM handoff",
+      "aliases": [
+        "handoff",
+        "LLM受領"
+      ],
+      "category": "search_web",
+      "human_definition": "search_web 結果を Agent が messages へ JSON 渡しする段階。stdout 表示とは別。",
+      "program_definition": "stages llm_handoff_live_return, llm_handoff_stored_log, feature suspect_stdout_vs_llm_handoff。",
+      "llm_definition": "handoff と stdout を混同しない。",
+      "role": "Agent へのデータ渡し。",
+      "related_terms": [
+        "stdout",
+        "Snippet",
+        "Route"
+      ],
+      "distinguish_from": [
+        "stdout",
+        "Large LLM output"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "NH11 cases",
+        "WB02"
+      ],
+      "implementation_refs": [
+        "case_trace.csv"
+      ],
+      "experiment_refs": [
+        "NH11"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "stdout",
+      "aliases": [],
+      "category": "search_web",
+      "human_definition": "コンソール表示用の要約。診断上は LLM handoff 本体と区別する。",
+      "program_definition": "slot stdout_present, drop_notes, 表示ラベル『検索結果N』。",
+      "llm_definition": "stdout の有無だけで内容充足と判断しない。",
+      "role": "表示と実データの分離。",
+      "related_terms": [
+        "LLM handoff",
+        "Snippet"
+      ],
+      "distinguish_from": [
+        "LLM handoff",
+        "LLM output"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "A06 case",
+        "NH11"
+      ],
+      "implementation_refs": [
+        "slots.json::stdout_present"
+      ],
+      "experiment_refs": [
+        "NH11"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Sidecar",
+      "aliases": [
+        "サイドカー"
+      ],
+      "category": "diagnostic",
+      "human_definition": "本処理に並行して付ける補助観測（test result, runtime, evidence content 等）。NH3-NH4。",
+      "program_definition": "NH4 minimal sidecar set: test + runtime + evidence_content。",
+      "llm_definition": "sidecar は観測補助。本筋を置き換えない。",
+      "role": "Validator 判断材料の補完。",
+      "related_terms": [
+        "Validator",
+        "Evidence",
+        "Observation"
+      ],
+      "distinguish_from": [
+        "Mechanical Prefill"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH3-5",
+        "NH4-3"
+      ],
+      "implementation_refs": [],
+      "experiment_refs": [
+        "NH3",
+        "NH4"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "SUPPORTED",
+      "aliases": [
+        "支持"
+      ],
+      "category": "experiment",
+      "human_definition": "仮説・手法が実験範囲で再現された評価。State ACTIVE とは無関係。",
+      "program_definition": "HYPOTHESIS_STATUS 表のラベル。EXPERIMENT_REPORT 判定。",
+      "llm_definition": "SUPPORTED は実験結論。本番採用を意味しない。",
+      "role": "仮説評価。",
+      "related_terms": [
+        "PARTIALLY_SUPPORTED",
+        "UNSUPPORTED",
+        "experimental"
+      ],
+      "distinguish_from": [
+        "ACTIVE",
+        "adopt"
+      ],
+      "status": "adopt",
+      "scope": "CURRENT",
+      "evidence": [
+        "HYPOTHESIS_STATUS.md"
+      ],
+      "implementation_refs": [
+        "knowledge_base/HYPOTHESIS_STATUS.md"
+      ],
+      "experiment_refs": [
+        "NH1-NH12"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "Shadow Mode",
+      "aliases": [
+        "Shadow",
+        "シャドウモード"
+      ],
+      "category": "experiment",
+      "human_definition": "入力→診断→記録のみ。本番 Agent/Tool/State を変更・実行しない実験モード。",
+      "program_definition": "shadow_mode: true, production_mutations: 0, auto_fix NOT_ALLOWED。",
+      "llm_definition": "Shadow では修正提案を実行しない。",
+      "role": "実ログ検証の安全枠。",
+      "related_terms": [
+        "Safety",
+        "HUMAN_REVIEW"
+      ],
+      "distinguish_from": [
+        "production",
+        "auto_fix"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH11",
+        "NH12"
+      ],
+      "implementation_refs": [
+        "runs/20260827_195500/nh11_real_shadow/"
+      ],
+      "experiment_refs": [
+        "NH11",
+        "NH12-1",
+        "NH12-2"
+      ],
+      "evolution": null
+    },
+    {
+      "term": "material_shortage",
+      "aliases": [
+        "材料不足"
+      ],
+      "category": "evaluation",
+      "human_definition": "診断に必要な trace/log が不足し信頼度が低い状態。NH12-1 で29/30、NH12-2 compression で0。",
+      "program_definition": "record.material_shortage, materials.material_gaps[], compression core_unknown heuristic。",
+      "llm_definition": "材料不足時は UNKNOWN と escalation を優先。",
+      "role": "Gate/escalation の入力品質指標。",
+      "related_terms": [
+        "UNKNOWN",
+        "Mechanical Compression",
+        "Gate"
+      ],
+      "distinguish_from": [
+        "parse_fail",
+        "Safety failure"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH12-1",
+        "NH12-2"
+      ],
+      "implementation_refs": [
+        "nh12_2/mechanical_compression.py"
+      ],
+      "experiment_refs": [
+        "NH12-1",
+        "NH12-2"
+      ],
+      "evolution": "NH12-2 で指標定義を compression 側に移行"
+    },
+    {
+      "term": "high_slots",
+      "aliases": [
+        "HIGH slots"
+      ],
+      "category": "escalation",
+      "human_definition": "Gate が要確認とマークした slot 名と理由のリスト。Large LLM の訂正範囲。",
+      "program_definition": "gate.high_slots[]: {slot, reason, evidence, source}。high_slot_names[]。",
+      "llm_definition": "high_slots 以外を Large が変更しない。",
+      "role": "限定エスカレーション。",
+      "related_terms": [
+        "Gate",
+        "Large LLM",
+        "Mechanical Prefill"
+      ],
+      "distinguish_from": [
+        "Fixed Slot 全体",
+        "gate HIGH level"
+      ],
+      "status": "experimental",
+      "scope": "EXPERIMENTAL",
+      "evidence": [
+        "NH10",
+        "NH11"
+      ],
+      "implementation_refs": [
+        "high_slot_gate.py",
+        "shadow_gate.py"
+      ],
+      "experiment_refs": [
+        "NH10",
+        "NH11"
+      ],
+      "evolution": "NH10 mechanical prefill 連携"
+    }
+  ],
+  "term_count": 40,
+  "generated_by": "build_glossary.py"
+}

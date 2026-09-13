@@ -1,0 +1,24 @@
+﻿note: 実行前ガードにはまだ使わない。参照は tools.system.llm_failure_memory。
+wired_into_repair: false
+patterns:
+  - id: powershell_table_fixed_index
+    models: [deepseek_coder_v2_16b]
+    repair_types: [unparsed_output, subprocess_result_handling]
+    failure_pattern: runtime_exception_after_repair
+    class: llm_prior
+    reproducible_at_temperature_0: true
+    symptom: "lines[1] / split(': ') / split('\\t')[1] で IndexError。コマンドは維持する。"
+    generated_code_markers:
+      - "splitlines()[1]"
+      - "split('\\n')[1]"
+      - "split(': ')"
+      - "split('\\t')[1]"
+  - id: stub_echo_ignores_findings
+    models: [deepseek_coder_v2_16b]
+    repair_types: [stub_value]
+    failure_pattern: stub_not_implemented
+    class: llm_prior
+    reproducible_at_temperature_0: true
+    symptom: "usable_findings があるのに code が return {'status': '未実装'} のまま。"
+    generated_code_markers:
+      - "未実装"

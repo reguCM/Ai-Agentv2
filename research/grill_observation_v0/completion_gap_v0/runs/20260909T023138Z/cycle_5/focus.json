@@ -1,0 +1,17 @@
+{
+  "gap": "ゲームオーバーの判定条件",
+  "minimum_focus": [
+    "spawn at top",
+    "collides at spawn => game over"
+  ],
+  "assets": [
+    "spec ゲームオーバー判定",
+    "tetromino.spawn",
+    "collision.collides"
+  ],
+  "vertical_map": false,
+  "horizontal_map": false,
+  "focus_expanded": true,
+  "expand_reason": "判定は生成済みピースの初期位置と衝突APIだけで足りるため spawn と collides のみ参照",
+  "minimum_sufficient_focus": "game_over.py is_game_over; no lock/restart/draw/input"
+}

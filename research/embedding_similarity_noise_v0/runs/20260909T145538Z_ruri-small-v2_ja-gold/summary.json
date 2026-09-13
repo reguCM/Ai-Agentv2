@@ -1,0 +1,364 @@
+{
+  "all_noisy": {
+    "n": 30,
+    "gold_top_n": 23,
+    "gold_not_top_n": 7,
+    "gold_top_rate": 0.7667,
+    "mean_gold_rank": 1.333,
+    "mean_gap_vs_second": 0.054435,
+    "mean_delta_vs_clean": -0.053751,
+    "failed_query_ids": [
+      "runtime_colloquial",
+      "runtime_demonstrative",
+      "runtime_compound",
+      "research_typo",
+      "research_conversion",
+      "research_asr",
+      "research_compound"
+    ]
+  },
+  "by_noise_type": {
+    "clean": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.115815,
+      "mean_delta_vs_clean": null,
+      "failed_query_ids": []
+    },
+    "typo": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": 0.055103,
+      "mean_delta_vs_clean": -0.050748,
+      "failed_query_ids": [
+        "research_typo"
+      ]
+    },
+    "conversion": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": 0.036169,
+      "mean_delta_vs_clean": -0.081076,
+      "failed_query_ids": [
+        "research_conversion"
+      ]
+    },
+    "missing_char": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.045326,
+      "mean_delta_vs_clean": -0.070279,
+      "failed_query_ids": []
+    },
+    "particle_drop": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.107741,
+      "mean_delta_vs_clean": -0.010029,
+      "failed_query_ids": []
+    },
+    "colloquial": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": 0.051339,
+      "mean_delta_vs_clean": -0.047396,
+      "failed_query_ids": [
+        "runtime_colloquial"
+      ]
+    },
+    "filler": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.104396,
+      "mean_delta_vs_clean": -0.011165,
+      "failed_query_ids": []
+    },
+    "restatement": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.067693,
+      "mean_delta_vs_clean": -0.027059,
+      "failed_query_ids": []
+    },
+    "asr_like": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 2.0,
+      "mean_gap_vs_second": 0.0391,
+      "mean_delta_vs_clean": -0.071372,
+      "failed_query_ids": [
+        "research_asr"
+      ]
+    },
+    "demonstrative": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.667,
+      "mean_gap_vs_second": 0.052217,
+      "mean_delta_vs_clean": -0.063508,
+      "failed_query_ids": [
+        "runtime_demonstrative"
+      ]
+    },
+    "compound": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 1.667,
+      "mean_gap_vs_second": -0.01473,
+      "mean_delta_vs_clean": -0.104875,
+      "failed_query_ids": [
+        "runtime_compound",
+        "research_compound"
+      ]
+    }
+  },
+  "by_anchor": {
+    "board": {
+      "n": 10,
+      "gold_top_n": 10,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.089575,
+      "mean_delta_vs_clean": -0.016566,
+      "failed_query_ids": []
+    },
+    "research": {
+      "n": 10,
+      "gold_top_n": 6,
+      "gold_not_top_n": 4,
+      "gold_top_rate": 0.6,
+      "mean_gold_rank": 1.6,
+      "mean_gap_vs_second": 0.038892,
+      "mean_delta_vs_clean": -0.068708,
+      "failed_query_ids": [
+        "research_typo",
+        "research_conversion",
+        "research_asr",
+        "research_compound"
+      ]
+    },
+    "runtime": {
+      "n": 10,
+      "gold_top_n": 7,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.7,
+      "mean_gold_rank": 1.4,
+      "mean_gap_vs_second": 0.03484,
+      "mean_delta_vs_clean": -0.075978,
+      "failed_query_ids": [
+        "runtime_colloquial",
+        "runtime_demonstrative",
+        "runtime_compound"
+      ]
+    }
+  },
+  "noise_types_with_gold_not_top": [
+    "typo",
+    "conversion",
+    "colloquial",
+    "asr_like",
+    "demonstrative",
+    "compound"
+  ],
+  "failed_queries": [
+    {
+      "query_id": "runtime_colloquial",
+      "noise_type": "colloquial",
+      "anchor_id": "runtime",
+      "query_text": "実際に動いてるほう",
+      "gold_rank": 2,
+      "gold_cosine": 0.784885,
+      "top_id": "c_board",
+      "top_cosine": 0.831482,
+      "gap_vs_second": -0.046597,
+      "delta_vs_clean": -0.142525,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 1,
+          "cosine": 0.831482
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_demonstrative",
+      "noise_type": "demonstrative",
+      "anchor_id": "runtime",
+      "query_text": "実際に使ってる方",
+      "gold_rank": 3,
+      "gold_cosine": 0.766473,
+      "top_id": "c_research",
+      "top_cosine": 0.79472,
+      "gap_vs_second": -0.028247,
+      "delta_vs_clean": -0.160937,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "rank": 1,
+          "cosine": 0.79472
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 2,
+          "cosine": 0.786568
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_compound",
+      "noise_type": "compound",
+      "anchor_id": "runtime",
+      "query_text": "あの実際ゲームで使ってるほう",
+      "gold_rank": 2,
+      "gold_cosine": 0.770417,
+      "top_id": "c_board",
+      "top_cosine": 0.856142,
+      "gap_vs_second": -0.085725,
+      "delta_vs_clean": -0.156993,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 1,
+          "cosine": 0.856142
+        }
+      ]
+    },
+    {
+      "query_id": "research_typo",
+      "noise_type": "typo",
+      "anchor_id": "research",
+      "query_text": "けんきゅう用のもの",
+      "gold_rank": 2,
+      "gold_cosine": 0.797986,
+      "top_id": "c_board",
+      "top_cosine": 0.802349,
+      "gap_vs_second": -0.004363,
+      "delta_vs_clean": -0.0965,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 1,
+          "cosine": 0.802349
+        }
+      ]
+    },
+    {
+      "query_id": "research_conversion",
+      "noise_type": "conversion",
+      "anchor_id": "research",
+      "query_text": "兼休用のもの",
+      "gold_rank": 2,
+      "gold_cosine": 0.762695,
+      "top_id": "c_board",
+      "top_cosine": 0.777738,
+      "gap_vs_second": -0.015043,
+      "delta_vs_clean": -0.131791,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 1,
+          "cosine": 0.777738
+        }
+      ]
+    },
+    {
+      "query_id": "research_asr",
+      "noise_type": "asr_like",
+      "anchor_id": "research",
+      "query_text": "兼急用のもの",
+      "gold_rank": 4,
+      "gold_cosine": 0.750439,
+      "top_id": "c_board",
+      "top_cosine": 0.787205,
+      "gap_vs_second": -0.036766,
+      "delta_vs_clean": -0.144047,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 1,
+          "cosine": 0.787205
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "rank": 2,
+          "cosine": 0.752413
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "rank": 3,
+          "cosine": 0.75142
+        }
+      ]
+    },
+    {
+      "query_id": "research_compound",
+      "noise_type": "compound",
+      "anchor_id": "research",
+      "query_text": "まあけんきゅう用のも",
+      "gold_rank": 2,
+      "gold_cosine": 0.792163,
+      "top_id": "c_board",
+      "top_cosine": 0.802488,
+      "gap_vs_second": -0.010325,
+      "delta_vs_clean": -0.102323,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 1,
+          "cosine": 0.802488
+        }
+      ]
+    }
+  ]
+}

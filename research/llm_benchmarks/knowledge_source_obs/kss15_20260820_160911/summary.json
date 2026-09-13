@@ -1,0 +1,161 @@
+{
+  "experiment_id": "kss15_20260820_160911",
+  "phase": "kss-1.5",
+  "measurement_ok": true,
+  "measurement_invalid": false,
+  "invalid_run_count": 1,
+  "invalid_runs_excluded": [
+    "D:\\AI-Agent\\research\\llm_benchmarks\\knowledge_source_obs\\kss15_20260820_160149"
+  ],
+  "not_for_decision": true,
+  "routing_implemented": false,
+  "environment": {
+    "ok": true,
+    "python_executable": "D:\\AI-Agent\\.venv\\Scripts\\python.exe",
+    "python_version": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "ollama_available": true,
+    "ollama_version": "missing",
+    "ollama_file": "D:\\AI-Agent\\.venv\\Lib\\site-packages\\ollama\\__init__.py",
+    "project_root": "D:\\AI-Agent",
+    "working_directory": "D:\\AI-Agent",
+    "feature_flags": {
+      "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+      "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+      "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+      "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+      "AI_AGENT_MEMORY_JUDGE": "0",
+      "AI_AGENT_MEMORY_RECALL": "0",
+      "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+      "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+      "AI_AGENT_KSS1_OBS": "0",
+      "AI_AGENT_KSS11_OBS": "1",
+      "AI_AGENT_KSS12_OBS": "1",
+      "AI_AGENT_KSS13_OBS": "1",
+      "AI_AGENT_KSS14_OBS": "1",
+      "AI_AGENT_KSS15_OBS": "1",
+      "AI_AGENT_KSS14_ANSWER_JUDGE": "0"
+    },
+    "web_search_module": "tools.system.tool_builder.research.web",
+    "stdout": "preflight_ok\n800"
+  },
+  "run_stats": {
+    "cases_total": 5,
+    "cases_completed": 5,
+    "cases_failed": 4,
+    "cases_valid_for_measurement": 4,
+    "searches_observed": 46,
+    "hits_observed": 192,
+    "kept_hits": 183,
+    "dropped_hits": 9
+  },
+  "metrics": {
+    "label_source": "heuristic_pending_human_audit",
+    "human_labels_filled": 0,
+    "total_searches": 46,
+    "total_hits": 192,
+    "kept_hits": 183,
+    "dropped_hits": 9,
+    "failed_runs": 3,
+    "successful_runs": 1,
+    "kept_with_direct": 0,
+    "kept_with_core": 141,
+    "kept_with_lead": 0,
+    "dropped_with_direct": 0,
+    "dropped_with_core": 7,
+    "dropped_with_lead": 0,
+    "dropped_answer_presence_unknown": 0,
+    "failed_runs_with_answer_in_dropped": 1,
+    "failed_runs_with_answer_in_kept": 3,
+    "failed_runs_with_no_answer_found": 0,
+    "four_group_counts": {
+      "kept_no_answer": 42,
+      "dropped_answer": 7,
+      "kept_answer": 141,
+      "dropped_no_answer": 2
+    },
+    "drop_reason_x_answer_presence": {
+      "irrelevant_token:dev drive|core": 5,
+      "not_relevant_low_score|related": 2,
+      "not_relevant_low_score|core": 2
+    },
+    "dropped_answer_rate": 0.778,
+    "failed_runs_with_recoverable_dropped_info": 1,
+    "lead_continuation": {
+      "cases_with_lead": 0,
+      "lead_then_success": 0,
+      "lead_then_fail": 0,
+      "no_lead_success": 1,
+      "no_lead_fail": 3,
+      "tracks": [],
+      "note": "counts only; do not claim causation"
+    },
+    "llm_judge_agreement": {
+      "status": "deferred_until_human_labels",
+      "agreement_rate": "missing"
+    }
+  },
+  "per_case": [
+    {
+      "case": "memory_usage",
+      "pass": true,
+      "fail_stage": null,
+      "stop_reason": "findings_complete",
+      "live_search_executed": true,
+      "dropped_hits_state": "positive",
+      "valid_for_kss15_measurement": true,
+      "error": null
+    },
+    {
+      "case": "cpu_temperature",
+      "pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "live_search_executed": true,
+      "dropped_hits_state": "zero",
+      "valid_for_kss15_measurement": true,
+      "error": null
+    },
+    {
+      "case": "disk_usage",
+      "pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "live_search_executed": true,
+      "dropped_hits_state": "positive",
+      "valid_for_kss15_measurement": true,
+      "error": null
+    },
+    {
+      "case": "gpu_usage",
+      "pass": false,
+      "fail_stage": "proposal",
+      "stop_reason": null,
+      "live_search_executed": false,
+      "dropped_hits_state": "missing",
+      "valid_for_kss15_measurement": false,
+      "error": null
+    },
+    {
+      "case": "gpu_vram_usage",
+      "pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "live_search_executed": true,
+      "dropped_hits_state": "zero",
+      "valid_for_kss15_measurement": true,
+      "error": null
+    }
+  ],
+  "human_audit_bucket_counts": {
+    "kept_other": 30,
+    "B_success_dropped": 1,
+    "D_failed_kept_answerish": 30,
+    "A_failed_dropped": 8
+  },
+  "routing_readiness_reason": "Need filled human labels + more trials; no routing.",
+  "missing_items": [
+    "human_answer_presence (until worksheet filled)",
+    "llm_human_agreement (deferred)",
+    "full page text beyond snippet"
+  ]
+}

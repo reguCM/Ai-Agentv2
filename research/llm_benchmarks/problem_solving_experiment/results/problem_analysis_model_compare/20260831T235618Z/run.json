@@ -1,0 +1,93 @@
+{
+  "experiment": "problem_analysis_model_compare",
+  "note": "Minimal-prompt Problem Analysis model compare. Not FA. Prompt identical for both models. Tools not used. Thinking not requested.",
+  "at": "2026-08-31T23:56:18.482080+00:00",
+  "prompt_template": "Analyze the failure.\n\nDo not fix the problem.\nDo not use tools.\n\nFailure:\n{failure}\n",
+  "models": [
+    "deepseek-coder-v2:16b",
+    "qwen3:14b"
+  ],
+  "compared_to_3c": "results/problem_analysis_minimal/20260831T234044Z",
+  "models_run": [
+    {
+      "model": "deepseek-coder-v2:16b",
+      "cases": [
+        {
+          "id": "A_index_error",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 1903,
+          "thinking_observed": false
+        },
+        {
+          "id": "B_none_attribute",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 2337,
+          "thinking_observed": false
+        },
+        {
+          "id": "C_validation_fields",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 2168,
+          "thinking_observed": false
+        },
+        {
+          "id": "D_cuda_init",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 2721,
+          "thinking_observed": false
+        },
+        {
+          "id": "E_information_poor",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 2377,
+          "thinking_observed": false
+        }
+      ]
+    },
+    {
+      "model": "qwen3:14b",
+      "cases": [
+        {
+          "id": "A_index_error",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 1251,
+          "thinking_observed": true
+        },
+        {
+          "id": "B_none_attribute",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 1156,
+          "thinking_observed": true
+        },
+        {
+          "id": "C_validation_fields",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 480,
+          "thinking_observed": true
+        },
+        {
+          "id": "D_cuda_init",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 1649,
+          "thinking_observed": true
+        },
+        {
+          "id": "E_information_poor",
+          "call_ok": true,
+          "timeout": null,
+          "raw_chars": 1042,
+          "thinking_observed": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "checks": [
+    {
+      "name": "get_current_failure",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "ok",
+        "source",
+        "test_result",
+        "tool_name",
+        "validation"
+      ],
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "error",
+        "limit",
+        "lines",
+        "offset",
+        "ok",
+        "path",
+        "returned_lines",
+        "size_bytes",
+        "total_lines",
+        "truncated"
+      ],
+      "error": null
+    },
+    {
+      "name": "search_files",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "base",
+        "error",
+        "files_scanned",
+        "glob",
+        "match_count",
+        "matches",
+        "ok",
+        "query",
+        "truncated"
+      ],
+      "error": null
+    },
+    {
+      "name": "list_files",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "base",
+        "count",
+        "entries",
+        "error",
+        "glob",
+        "ok",
+        "recursive",
+        "root",
+        "truncated"
+      ],
+      "error": null
+    },
+    {
+      "name": "get_execution_environment",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "architecture",
+        "cwd",
+        "language",
+        "ok",
+        "platform",
+        "python_executable",
+        "python_full_version",
+        "python_version",
+        "virtual_env"
+      ],
+      "error": null
+    },
+    {
+      "name": "get_gpu_status",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "error",
+        "gpu",
+        "observation_source",
+        "ok",
+        "source",
+        "status",
+        "temperature",
+        "utilization",
+        "vram_total",
+        "vram_used"
+      ],
+      "error": null
+    },
+    {
+      "name": "get_gpu_processes",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "error",
+        "observation_source",
+        "ok",
+        "processes",
+        "source",
+        "status"
+      ],
+      "error": null
+    },
+    {
+      "name": "read_git_diff",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "branch",
+        "commands",
+        "commits",
+        "counts",
+        "diff",
+        "diff_error",
+        "diff_stat",
+        "diff_stat_error",
+        "diff_truncated",
+        "files",
+        "files_truncated",
+        "head",
+        "kind",
+        "log_error",
+        "note",
+        "ok",
+        "read_only",
+        "status",
+        "status_code",
+        "status_error"
+      ],
+      "error": null
+    },
+    {
+      "name": "request_human_help",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "help_requested",
+        "ok",
+        "questions",
+        "reason"
+      ],
+      "error": null
+    },
+    {
+      "name": "experiment_test_source",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "error",
+        "error_type",
+        "ok",
+        "return_value",
+        "status",
+        "traceback"
+      ],
+      "error": "list index out of range"
+    },
+    {
+      "name": "read_pdf",
+      "callable": true,
+      "ok_or_expected": true,
+      "result_keys": [
+        "error",
+        "hint",
+        "ok",
+        "path"
+      ],
+      "error": "pdf_library_not_installed"
+    }
+  ]
+}

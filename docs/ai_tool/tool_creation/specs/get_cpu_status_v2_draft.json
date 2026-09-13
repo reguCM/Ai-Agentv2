@@ -1,0 +1,137 @@
+{
+  "tool_id": "local:get_cpu_status",
+  "name": "get_cpu_status",
+  "version": "2.0.0-draft",
+  "description": "【新Tool案・未実装】Windows CIM から CPU 一般メトリクス（model, cores, threads, load, clock）を返す。cpu_status Legacy Tool とは別ID。温度は CIM だけでは UNSUPPORTED。",
+  "provider": "local",
+  "source": "docs/ai_tool/tool_creation/specs/get_cpu_status_v2_draft.json",
+  "capability": ["CPU", "model", "cores", "load", "observation"],
+  "purpose": "Windows Win32_Processor CIM から CPU デバイスレベル情報を構造化 dict で返す — cpu_status の LoadPercentage Legacy 互換を壊さず拡張する新 Tool 候補",
+  "allowed_operations": ["read", "execute"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "model": {},
+      "physical_cores": {},
+      "logical_processors": {},
+      "load_percentage": {},
+      "max_clock_mhz": {},
+      "current_clock_mhz": {},
+      "architecture": {},
+      "ok": { "type": "boolean" },
+      "status": {},
+      "error": {},
+      "observation_source": { "const": "real" },
+      "source": {}
+    },
+    "required": [
+      "model",
+      "physical_cores",
+      "logical_processors",
+      "load_percentage",
+      "max_clock_mhz",
+      "current_clock_mhz",
+      "architecture",
+      "ok",
+      "status",
+      "error",
+      "observation_source",
+      "source"
+    ]
+  },
+  "supported_environment": {
+    "os": ["Windows"],
+    "requirements": ["PowerShell", "CIM Win32_Processor"],
+    "implementation_status": "NOT_IMPLEMENTED — specification draft only"
+  },
+  "environment_dependencies": {
+    "provider_strategy": "A — Windows CIM provider",
+    "relationship_to_cpu_status": "cpu_status remains Legacy LoadPercentage-only; this tool adds structured CPU metrics"
+  },
+  "field_capability": {
+    "model": { "tier": "REQUIRED_when_implemented", "evidence": "PROBED on audit host (12th Gen i5-12400)", "implementation": "NOT_IMPLEMENTED" },
+    "physical_cores": { "tier": "REQUIRED_when_implemented", "evidence": "PROBED (6)", "implementation": "NOT_IMPLEMENTED" },
+    "logical_processors": { "tier": "REQUIRED_when_implemented", "evidence": "PROBED (12)", "implementation": "NOT_IMPLEMENTED" },
+    "load_percentage": { "tier": "REQUIRED_when_implemented", "evidence": "PROBED + IMPLEMENTED in cpu_status separately", "implementation": "NOT_IMPLEMENTED here" },
+    "max_clock_mhz": { "tier": "OPTIONAL", "evidence": "PROBED (2500)", "implementation": "NOT_IMPLEMENTED" },
+    "current_clock_mhz": { "tier": "OPTIONAL", "evidence": "PROBED", "note": "ENVIRONMENT_DEPENDENT snapshot", "implementation": "NOT_IMPLEMENTED" },
+    "architecture": { "tier": "OPTIONAL", "evidence": "PROBED", "implementation": "NOT_IMPLEMENTED" },
+    "temperature": { "tier": "UNSUPPORTED", "evidence": "NOT PROBED via CIM — separate cpu_temperature tool candidate" }
+  },
+  "observation_semantics": {
+    "observed": "CIM numeric/string fields when implemented",
+    "unknown": "field-level unknown string when query partial failure",
+    "unsupported": "temperature — not in scope",
+    "unavailable": "PowerShell/CIM failure"
+  },
+  "unknown_semantics": {
+    "rule": "Per-field unknown — do not fabricate cores/model"
+  },
+  "unsupported_semantics": {
+    "temperature": "Requires hardware-specific provider — out of scope for get_cpu_status v2"
+  },
+  "unavailable_semantics": {
+    "non_windows": "ok=false, status=unavailable"
+  },
+  "error_semantics": {
+    "aligned_with_gpu_tools": "ok/status/error pattern for cross-tool consistency (future)"
+  },
+  "success_format": "ok=true, structured CPU fields, status=ok",
+  "error_format": {
+    "ok": false,
+    "status": "error|unavailable",
+    "error": "string"
+  },
+  "side_effect": "execute",
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "risk_level": "low",
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "NOT_IMPLEMENTED — draft spec only",
+    "New Tool ID requires Registry + Agent HR",
+    "Temperature explicitly excluded — cpu_temperature split candidate"
+  ],
+  "cost": "free",
+  "tool_status": "unavailable",
+  "safety_boundary": {
+    "network_access": false,
+    "subprocess": "local PowerShell CIM read only"
+  },
+  "compatibility_notes": {
+    "cpu_status_unchanged": "Legacy cpu_status {status} contract preserved",
+    "new_registry_entry": "Human Review required before registration"
+  },
+  "implementation_notes": {
+    "proposed_module": "tools.system.cpu.get_cpu_status",
+    "proposed_query": "Get-CimInstance Win32_Processor | Select Name,NumberOfCores,NumberOfLogicalProcessors,MaxClockSpeed,CurrentClockSpeed,Architecture,LoadPercentage"
+  },
+  "validation_requirements": [
+    "validate_tool_spec_file ACCEPT (structure only)",
+    "implementation tests deferred until HR approval"
+  ],
+  "agent_usage": {
+    "use_for": ["CPU model", "core count", "thread count", "CPU load % structured"],
+    "do_not_use_for": ["GPU", "CPU temperature", "Legacy-only LoadPercentage string in status key — use cpu_status if only load needed"],
+    "llm_rules": ["Use cpu_status for minimal legacy load string", "Use get_cpu_status when structured CPU info needed (post-implementation)"]
+  },
+  "contract": {
+    "can": ["structured_cpu_metrics_when_implemented"],
+    "cannot": ["replace_cpu_status", "guarantee_temperature"],
+    "must": ["new_tool_id", "hr_before_registry"],
+    "must_not": ["break_cpu_status_output"]
+  },
+  "provider_specific": {
+    "implementation_status": "NOT_IMPLEMENTED",
+    "proposal": "SPLIT from cpu_status extension"
+  }
+}

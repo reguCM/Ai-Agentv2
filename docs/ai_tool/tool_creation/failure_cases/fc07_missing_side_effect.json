@@ -1,0 +1,27 @@
+{
+  "tool_id": "local:missing_side_effect",
+  "name": "missing_side_effect",
+  "version": "1.0.0",
+  "description": "side_effect key removed",
+  "provider": "local",
+  "source": "test",
+  "capability": ["test"],
+  "purpose": "failure case 07",
+  "allowed_operations": ["read"],
+  "prohibited_operations": [],
+  "input_schema": { "type": "object" },
+  "output_schema": { "type": "object" },
+  "error_format": {},
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "risk_level": "low",
+  "cost": "free",
+  "tool_status": "available",
+  "contract": {
+    "can": ["x"],
+    "cannot": ["y"],
+    "must": ["z"],
+    "must_not": ["w"]
+  }
+}

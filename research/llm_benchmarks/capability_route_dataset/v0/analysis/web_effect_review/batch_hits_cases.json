@@ -1,0 +1,192 @@
+{
+  "version": "web_effect_hits_batch_v1",
+  "purpose": "Pairs where search_web returns hits>0 so humans can judge WEB effect on final answers.",
+  "constraints": [
+    "No local tools",
+    "Same request for without/with",
+    "No auto labels",
+    "No heuristic/Gate/Pipeline changes"
+  ],
+  "cases": [
+    {
+      "id": "B05",
+      "band": "W1",
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "seed_queries": ["Python list vs tuple", "Python tuple"]
+    },
+    {
+      "id": "C02",
+      "band": "W1",
+      "request": "Ollamaについて詳しく教えて",
+      "seed_queries": ["Ollama", "Ollama LLM"]
+    },
+    {
+      "id": "C03",
+      "band": "W1",
+      "request": "RTX 3060って今どういう扱いですか？",
+      "seed_queries": ["GeForce RTX 3060", "RTX 3060"]
+    },
+    {
+      "id": "P02a",
+      "band": "W1",
+      "request": "RTX 3060について教えて",
+      "seed_queries": ["GeForce RTX 3060"]
+    },
+    {
+      "id": "P02b",
+      "band": "W0",
+      "request": "今のRTX 3060の立ち位置を教えて",
+      "seed_queries": ["GeForce RTX 3060", "NVIDIA RTX 3060"]
+    },
+    {
+      "id": "A06",
+      "band": "W0",
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "seed_queries": ["Python 3.13", "Python 3.13 new features"]
+    },
+    {
+      "id": "E02",
+      "band": "W0",
+      "request": "ChatGPTの有料プランの違いを教えて",
+      "seed_queries": ["ChatGPT Plus", "ChatGPT", "OpenAI ChatGPT pricing"]
+    },
+    {
+      "id": "A03",
+      "band": "W0",
+      "request": "OpenAIについて最近何か大きな発表はありましたか",
+      "seed_queries": ["OpenAI", "OpenAI announcement"]
+    },
+    {
+      "id": "A04",
+      "band": "W0",
+      "request": "今のNVIDIAの株価の雰囲気を教えて",
+      "seed_queries": ["NVIDIA", "Nvidia"]
+    },
+    {
+      "id": "C04",
+      "band": "W1",
+      "request": "ローカルLLMの事情、最近どう？",
+      "seed_queries": ["large language model", "Ollama", "local LLM"]
+    },
+    {
+      "id": "C05",
+      "band": "W1",
+      "request": "この手のエージェントって今どこまで実用的なの",
+      "seed_queries": ["AI agent", "autonomous agent LLM"]
+    },
+    {
+      "id": "E05",
+      "band": "W0",
+      "request": "Appleの次の大型発表イベントはいつと言われているか教えて",
+      "seed_queries": ["Apple Event", "Apple"]
+    },
+    {
+      "id": "E03",
+      "band": "W0",
+      "request": "東京都のごみ分別の基本ルールを教えて",
+      "seed_queries": ["東京都 ごみ 分別", "Tokyo waste sorting"]
+    },
+    {
+      "id": "E04",
+      "band": "W1",
+      "request": "日本の運転免許は一般にどう取得されるか教えて",
+      "seed_queries": ["普通自動車免許", "Japan driving license"]
+    },
+    {
+      "id": "WB01",
+      "band": "W1",
+      "request": "Gitとは何かを初心者向けに説明して",
+      "seed_queries": ["Git", "Git version control"]
+    },
+    {
+      "id": "WB02",
+      "band": "W1",
+      "request": "Dockerコンテナの基本的な考え方を教えて",
+      "seed_queries": ["Docker (software)", "Docker"]
+    },
+    {
+      "id": "WB03",
+      "band": "W1",
+      "request": "HTTPとHTTPSの違いを短く説明して",
+      "seed_queries": ["HTTPS", "HTTP"]
+    },
+    {
+      "id": "WB04",
+      "band": "W1",
+      "request": "JSONとは何か、何に使うかを教えて",
+      "seed_queries": ["JSON", "JSON format"]
+    },
+    {
+      "id": "WB05",
+      "band": "W1",
+      "request": "Transformer（機械学習）の概要を教えて",
+      "seed_queries": ["Transformer (machine learning model)", "Transformer neural network"]
+    },
+    {
+      "id": "WB06",
+      "band": "W1",
+      "request": "PyTorchとTensorFlowの違いをざっくり教えて",
+      "seed_queries": ["PyTorch", "TensorFlow"]
+    },
+    {
+      "id": "WB07",
+      "band": "W1",
+      "request": "CUDAとは何かを説明して",
+      "seed_queries": ["CUDA", "CUDA NVIDIA"]
+    },
+    {
+      "id": "WB08",
+      "band": "W1",
+      "request": "Kubernetesの役割を初心者向けに教えて",
+      "seed_queries": ["Kubernetes"]
+    },
+    {
+      "id": "WB09",
+      "band": "W1",
+      "request": "SQLiteの特徴を教えて",
+      "seed_queries": ["SQLite"]
+    },
+    {
+      "id": "WB10",
+      "band": "W1",
+      "request": "Markdown記法とは何かを短く説明して",
+      "seed_queries": ["Markdown"]
+    },
+    {
+      "id": "WB11",
+      "band": "W1",
+      "request": "Unicodeとは何かを教えて",
+      "seed_queries": ["Unicode"]
+    },
+    {
+      "id": "WB12",
+      "band": "W1",
+      "request": "Linuxとは何かを概要で教えて",
+      "seed_queries": ["Linux"]
+    },
+    {
+      "id": "WB13",
+      "band": "W1",
+      "request": "REST APIの基本を説明して",
+      "seed_queries": ["REST", "Representational state transfer"]
+    },
+    {
+      "id": "WB14",
+      "band": "W1",
+      "request": "Wikipediaとは何かを短く説明して",
+      "seed_queries": ["Wikipedia"]
+    },
+    {
+      "id": "WB15",
+      "band": "W1",
+      "request": "DuckDuckGoとは何かを教えて",
+      "seed_queries": ["DuckDuckGo"]
+    },
+    {
+      "id": "WB16",
+      "band": "W0",
+      "request": "大規模言語モデル（LLM）とは何かを説明して",
+      "seed_queries": ["large language model", "Large language model"]
+    }
+  ]
+}

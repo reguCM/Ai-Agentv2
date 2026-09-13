@@ -1,0 +1,42 @@
+{
+  "upgrade_bundle_id": "h4_false_auto_v0",
+  "note": "Evidence ids are reproduction cases only. Routing rules must not key off these ids.",
+  "cases": [
+    {
+      "case_id": "h4-cardinality-index-select",
+      "source": "h4_decision_maker_bench",
+      "source_test": "unused_replay_false_auto",
+      "source_failure": "false_AUTO",
+      "observed_failure": "Local adopted index/head selection among 2+ candidates and Gate 2 routed AUTO.",
+      "expected_invariant": "Adopting first/[0]/head among 2+ without a unique non-index reason is semantic FAIL. Mention-as-forbidden is not FAIL.",
+      "evidence": ["saved recommendation containing Inject only [0]"],
+      "target_layer": "adoption_gate",
+      "upgrade_type": "adoption_gate",
+      "severity": "high",
+      "status": "open",
+      "canary_id": "Q31",
+      "expected_after": {
+        "route_not": "AUTO",
+        "semantic_gate": "FAIL"
+      }
+    },
+    {
+      "case_id": "h4-decision-polarity-unclosed",
+      "source": "h4_decision_maker_bench",
+      "source_test": "unused_replay_false_auto",
+      "source_failure": "false_AUTO",
+      "observed_failure": "Recommendation mixed add-as-capability with keywords-only / do-not-add-IDs and still routed AUTO.",
+      "expected_invariant": "When the question offers both poles of add/remove/keep/include and the rec asserts both, do not AUTO.",
+      "evidence": ["saved mixed add + keywords only recommendation"],
+      "target_layer": "adoption_gate",
+      "upgrade_type": "adoption_gate",
+      "severity": "medium",
+      "status": "open",
+      "canary_id": "Q2",
+      "expected_after": {
+        "route_not": "AUTO",
+        "route": "REVIEW"
+      }
+    }
+  ]
+}

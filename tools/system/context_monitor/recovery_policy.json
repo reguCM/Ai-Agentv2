@@ -1,0 +1,128 @@
+{
+  "version": 4,
+  "description": "Recovery Strategy Policy (P2-13): Evidence ranking + Context Expansion Gate",
+  "automatic_recovery_enabled": false,
+  "max_recovery_attempts": 1,
+  "max_context_changes_per_session": 1,
+  "context_ladder": [4096, 8192, 16384, 32768],
+  "model_context_limits": {
+    "qwen3:14b": 40960,
+    "qwen3_14b": 40960
+  },
+  "pc_context_limit": 32768,
+  "compare_strategies": [
+    "retry_same_context",
+    "reduce_tool_result",
+    "narrow_search_scope",
+    "increase_context",
+    "retry_with_explicit_tool_instruction"
+  ],
+  "situation_thresholds": {
+    "large_result_match_count": 30,
+    "large_payload_bytes": 8000,
+    "note": "閾値は状況フラグ用。VRAM禁止閾値ではない"
+  },
+  "ranking_signals": {
+    "retry_same_context": {
+      "base_score": 10,
+      "timeout_retry_penalty": -20,
+      "flag_adjustments": {},
+      "evidence_adjustments": {
+        "success_rate_gte_0_5": 10,
+        "success_rate_eq_0": -15
+      }
+    },
+    "reduce_tool_result": {
+      "base_score": 20,
+      "flag_adjustments": {
+        "large_tool_result": 25,
+        "truncated_result": 15,
+        "timeout_failure": 20,
+        "large_payload": 10
+      },
+      "evidence_adjustments": {
+        "success_rate_gte_0_5": 20,
+        "success_rate_eq_0": -10,
+        "avg_latency_over_60s": -5
+      }
+    },
+    "narrow_search_scope": {
+      "base_score": 15,
+      "flag_adjustments": {
+        "large_tool_result": 10,
+        "truncated_result": 5
+      },
+      "evidence_adjustments": {
+        "success_rate_gte_0_5": 15,
+        "success_rate_eq_0": -15
+      }
+    },
+    "increase_context": {
+      "base_score": 15,
+      "flag_adjustments": {
+        "context_limit_failure": 25,
+        "tool_call_not_generated": 10
+      },
+      "evidence_adjustments": {
+        "success_rate_gte_0_5": 20,
+        "success_rate_eq_0": -25,
+        "increase_failed_with_large_result": -25,
+        "avg_latency_over_60s": -15
+      }
+    },
+    "retry_with_explicit_tool_instruction": {
+      "base_score": 18,
+      "flag_adjustments": {
+        "tool_call_not_generated": 25,
+        "timeout_failure": 5
+      },
+      "evidence_adjustments": {
+        "success_rate_gte_0_5": 15,
+        "success_rate_eq_0": -10,
+        "avg_latency_over_60s": -10
+      }
+    }
+  },
+  "strategy_params": {
+    "reduce_tool_result": {
+      "max_matches": 10,
+      "description": "検索結果を上位 N 件に削減して LLM へ再投入"
+    },
+    "narrow_search_scope": {
+      "search_paths": ["registry", "tools/system", "tools/system/gpu"],
+      "query": "read_file"
+    },
+    "increase_context": {
+      "step_from_configured": true
+    },
+    "retry_with_explicit_tool_instruction": {
+      "instruction": "前の検索結果を踏まえ、Native Tool Call として read_file を呼び出してください。テキストでのコード生成や説明だけでは不十分です。"
+    }
+  },
+  "increase_context_failure_types": [
+    "TOOL_CALL_NOT_GENERATED",
+    "CONTEXT_LIMIT",
+    "TIMEOUT"
+  ],
+  "gpu_safety": {
+    "require_observation_for_execution": true,
+    "block_if_status_unavailable": true,
+    "block_if_vram_total_unknown": true,
+    "note": "VRAM 固定閾値は設けない。gpu_vram_tight_observation は ranking の観測フラグのみ"
+  },
+  "gpu_ranking_observation": {
+    "vram_free_tight_mib": 600,
+    "increase_context_score_delta_on_tight": -10,
+    "note": "禁止ではなく優先度調整。固定Policyではない"
+  },
+  "evidence_confidence": {
+    "high_min_candidate_observations": 10,
+    "medium_min_candidate_observations": 5,
+    "low_min_candidate_observations": 1,
+    "improvement_rate_threshold": 0.15
+  },
+  "context_expansion_gate": {
+    "max_expansions_per_cycle": 1,
+    "note": "increase_context is last-resort; requires normal recovery attempted + task unresolved"
+  }
+}

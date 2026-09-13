@@ -1,0 +1,33 @@
+{
+  "note": "固定回帰基準。Verifier 失敗後 missing の質 A 3/3。上書きしない。契約変更時は judge_regression で確認。",
+  "frozen_at": "2026-08-19T05:48:18Z",
+  "source_run": "research/llm_benchmarks/judge_verify_retry_results.json verify_gap_adopt_v5 session",
+  "contract_phase": "verify_gap_adopt_v5",
+  "pass_criterion": "A",
+  "case": "judge_verify_failed_retry",
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "repeat": 3,
+  "pass": true,
+  "grades": {
+    "A": 3
+  },
+  "trial_grades": ["A", "A", "A"],
+  "retry_ok": 3,
+  "summary": "usable_findings 空 + unresolved 除算失敗。missing は計測対象 gap（total/used physical memory）。",
+  "missing_examples": [
+    ["total physical memory is still unconfirmed"],
+    [
+      "total physical memory is still unconfirmed",
+      "used memory is still unconfirmed"
+    ],
+    [
+      "total physical memory is still unconfirmed",
+      "used memory is still unconfirmed"
+    ]
+  ],
+  "forbidden_missing_patterns": [
+    "正しい方法",
+    "コマンドやスクリプト"
+  ]
+}

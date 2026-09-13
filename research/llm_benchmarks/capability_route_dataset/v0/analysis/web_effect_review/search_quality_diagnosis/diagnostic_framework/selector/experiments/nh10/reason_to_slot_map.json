@@ -1,0 +1,40 @@
+{
+  "version": "0.1",
+  "note": "NH8 gate reasons → explicit high_slots. Does not invent causes; only marks slots needing confirmation.",
+  "reason_to_slots": {
+    "parse_or_empty": ["entry_detected"],
+    "feature_name_hallucination": ["entry_detected"],
+    "state_hint_missing_in_fingerprint": ["state_change_requested", "goal_change_requested"],
+    "reopen_hint_missing_in_fingerprint": ["reopen_requested"],
+    "evidence_id_hint_missing": ["evidence_present", "evidence_exists_known"],
+    "content_mismatch_hint_missing": ["evidence_content_mismatch", "evidence_content_known"],
+    "disagreement_hint_missing": ["llm_disagreement"],
+    "small_llm_unverified_hint_missing": ["small_llm_unverified"],
+    "runtime_none_but_logs_true": ["runtime_issue_observed", "stdout_present"],
+    "runtime_observed_but_logs_false": ["stdout_present", "runtime_issue_observed"],
+    "near_exact_and_similar_new": ["near_exact_surface", "similar_new_meaning"],
+    "insufficient_runtime_with_code_only": ["runtime_issue_observed", "code_scope_present"],
+    "mapping_reopen_ambiguity": ["reopen_requested"],
+    "disagreement_in_inference_bucket": ["llm_disagreement"],
+    "sparse_fingerprint_insufficient_info": ["code_scope_present", "runtime_issue_observed", "caller_scope_present"],
+    "code_excerpt_missed": ["code_scope_present"],
+    "prefill_forced_high": ["code_scope_present"]
+  },
+  "evidence_keys": {
+    "state_change_requested": ["state_context", "problem_summary", "state_history"],
+    "goal_change_requested": ["state_context", "problem_summary", "state_history"],
+    "reopen_requested": ["state_context", "problem_summary", "state_history", "evidence"],
+    "evidence_present": ["evidence", "problem_summary"],
+    "evidence_exists_known": ["evidence"],
+    "evidence_content_known": ["evidence"],
+    "evidence_content_mismatch": ["evidence", "problem_summary"],
+    "stdout_present": ["runtime_log"],
+    "runtime_issue_observed": ["runtime_log"],
+    "llm_disagreement": ["prior_analysis", "problem_summary"],
+    "small_llm_unverified": ["prior_analysis"],
+    "code_scope_present": ["code_excerpt"],
+    "caller_scope_present": ["code_excerpt", "prior_analysis"],
+    "near_exact_surface": ["state_history", "state_context"],
+    "similar_new_meaning": ["state_history", "state_context"]
+  }
+}

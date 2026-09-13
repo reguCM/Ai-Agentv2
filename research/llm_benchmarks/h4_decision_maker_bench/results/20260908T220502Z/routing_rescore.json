@@ -1,0 +1,236 @@
+{
+  "summary": {
+    "source_dir": "D:\\AI-Agent-worktrees\\current-dev\\research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T213718Z",
+    "n": 10,
+    "AUTO": 6,
+    "REVIEW": 4,
+    "HUMAN": 0,
+    "auto_ids": [
+      "Q29",
+      "Q30",
+      "Q10",
+      "Q40",
+      "Q47",
+      "Q1"
+    ],
+    "review_ids": [
+      "Q9",
+      "Q25",
+      "Q14-15",
+      "Q7"
+    ],
+    "human_ids": [],
+    "semantic_dangerous_remaining": 0,
+    "human_intervention_rate": 0.0,
+    "auto_plus_review_rate": 1.0,
+    "note": "Offline rescore only. No new LLM calls. HUMAN is residual value judgment after Gate + Strong/Critic review, not Local need_human."
+  },
+  "records": [
+    {
+      "decision_id": "Q9",
+      "previous_final": "escalate_strong_or_human",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 75,
+      "uncertainty_reason": "No existing registry_read vocabulary or path patterns are defined in current tool registries",
+      "first_recommendation": "Keep registry_read and generic file keywords strictly separate. Use look_first path metadata to trigger registry_read only when the request explicitly references registry-specific paths (e.g., registry/tools.json).",
+      "route": "REVIEW",
+      "attributes": [
+        "compatibility",
+        "safety"
+      ],
+      "notes": [
+        "unresolved_artifact_or_api_adjustment"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q25",
+      "previous_final": "escalate_strong_or_human",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "uncertainty_reason": "Uncertainty about pathless read impact",
+      "first_recommendation": "Stop silent read of look_first[0]. Require path for file-read next_action.",
+      "route": "REVIEW",
+      "attributes": [
+        "safety"
+      ],
+      "notes": [
+        "safety_behavior_change_unverified"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q29",
+      "previous_final": "adoption_candidate",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "uncertainty_reason": "Uncertainty about query extraction reliability",
+      "first_recommendation": "Skip next_action if search_files has no query. Do not use text[:80].",
+      "route": "AUTO",
+      "attributes": [],
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q14-15",
+      "previous_final": "escalate_strong_or_human",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 45,
+      "uncertainty_reason": "No registry-based disambiguation rules exist yet; requires new tool.json vocabulary",
+      "first_recommendation": "Reject selecting among 2+ Help-confirmed candidates by index [0]. For single candidates, select and mark RESOLVED. For multiple candidates, leave unresolved (status=AMBIGUOUS) unless a non-index-based disambiguation rule exists in registry/tools.json.",
+      "route": "REVIEW",
+      "attributes": [
+        "compatibility",
+        "safety"
+      ],
+      "notes": [
+        "unresolved_artifact_or_api_adjustment"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q30",
+      "previous_final": "adoption_candidate",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": false,
+      "needs_deep_review": false,
+      "uncertainty": 20,
+      "uncertainty_reason": "Residual handling may require future out-of-core resolution",
+      "first_recommendation": "Allow pathless '.' for list_files as residual. Do not enforce path requirement during H4 Core.",
+      "route": "AUTO",
+      "attributes": [
+        "safety"
+      ],
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q7",
+      "previous_final": "adoption_candidate",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": false,
+      "needs_deep_review": false,
+      "uncertainty": 15,
+      "uncertainty_reason": "Existing resolve_capability may need adjustment to return lists without changing its singular API contract",
+      "first_recommendation": "Keep single API per capability. Allow 0/1/2+ results but return them as a flat list without folding. Do not delete singular APIs.",
+      "route": "REVIEW",
+      "attributes": [
+        "compatibility",
+        "destructive",
+        "irreversible"
+      ],
+      "notes": [
+        "api_cardinality_not_uniquely_settled"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q10",
+      "previous_final": "adoption_candidate",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 30,
+      "uncertainty_reason": "Uncertainty about future tool addition needs",
+      "first_recommendation": "Remove _RULES from capability core. Avoid allowlist growth.",
+      "route": "AUTO",
+      "attributes": [
+        "compatibility"
+      ],
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q40",
+      "previous_final": "escalate_strong_or_human",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 70,
+      "uncertainty_reason": "Ambiguity in whether GPU/web exclusions require new semantic capabilities (Q2-3) vs. staying within current vocabulary boundaries",
+      "first_recommendation": "Reject expansion of exclusion rules beyond file-based contexts (e.g., GPU). Maintain strict alignment with Q25-Q26 (read-only look_first signals) and Q30 (list '.' residual).",
+      "route": "AUTO",
+      "attributes": [
+        "compatibility"
+      ],
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q47",
+      "previous_final": "escalate_strong_or_human",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 10,
+      "uncertainty_reason": "Uncertainty about residual impact",
+      "first_recommendation": "Do not delete leftovers. Keep residuals for Core completion.",
+      "route": "AUTO",
+      "attributes": [
+        "compatibility",
+        "destructive",
+        "irreversible"
+      ],
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    },
+    {
+      "decision_id": "Q1",
+      "previous_final": "escalate_strong_or_human",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 10,
+      "uncertainty_reason": "Uncertainty about future product scope and leftover handling",
+      "first_recommendation": "Close H4 Core at capability resolution, gap detection, and sandbox judgment. Do not include full product features like Help English search, UI, or detect_tool_gap internals.",
+      "route": "AUTO",
+      "attributes": [
+        "destructive",
+        "irreversible",
+        "safety"
+      ],
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "why_human": null,
+      "value_judgment": false
+    }
+  ]
+}

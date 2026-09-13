@@ -1,0 +1,41 @@
+{
+  "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n具体化:\n**次に知る必要があること:**  \ngridのデータが保存されている場所や、アクセス可能なシステム（例: データベース、ファイル、APIなど）を特定する。  \n\n**理由:**  \ngridの構造と内容を把握するためには、まずその存在場所や取得方法を明確にすることが前提となるため、この確認が次のステップの基盤となる。\n\nNext need:\ngridの構造と内容を把握する必要がある。\n",
+  "required_capabilities": [
+    "workspace_file_search"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_search",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "search_files"
+      ],
+      "selected_tool": "search_files",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "search_files"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null
+    }
+  ],
+  "tool_expectation": {
+    "generated": false,
+    "required_capability": null,
+    "expected_tool": null,
+    "expected_arguments": null,
+    "reason": null,
+    "level": "none",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "PARTIAL",
+  "action": null
+}

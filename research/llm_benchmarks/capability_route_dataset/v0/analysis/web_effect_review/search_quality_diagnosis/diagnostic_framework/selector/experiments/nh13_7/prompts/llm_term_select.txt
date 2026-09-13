@@ -1,0 +1,15 @@
+You select glossary terms needed to observe this diagnostic case. You do NOT diagnose yet.
+
+Given case materials and the term list below, output JSON only:
+{{"selected_terms": ["Term1", "Term2"]}}
+
+Rules:
+- Pick only terms that help fill observation slots for THIS case.
+- Use exact term names from the list.
+- Prefer 2-6 terms when possible; do not select all terms.
+- Do not invent term names.
+
+Available terms:
+{term_list}
+
+Output JSON only, no explanation.

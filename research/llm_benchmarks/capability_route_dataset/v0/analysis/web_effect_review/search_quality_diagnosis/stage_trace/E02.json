@@ -1,0 +1,244 @@
+{
+  "case_id": "E02",
+  "request": "ChatGPTの有料プランの違いを教えて",
+  "query": "ChatGPT Plus",
+  "time_sensitive": false,
+  "ts": "2026-08-24T06:07:13.394979+00:00",
+  "raw_api": {
+    "duckduckgo": {
+      "backend": "duckduckgo",
+      "query": "ChatGPT Plus",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 0,
+      "snippet_nonempty": 0,
+      "items": []
+    },
+    "wikipedia-ja": {
+      "backend": "wikipedia-ja",
+      "query": "ChatGPT Plus",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 0,
+      "snippet_nonempty": 0,
+      "items": []
+    },
+    "wikipedia-en": {
+      "backend": "wikipedia-en",
+      "query": "ChatGPT Plus",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 2,
+      "snippet_nonempty": 0,
+      "items": [
+        {
+          "api_rank": 0,
+          "title": "ChatGPT Plus",
+          "snippet": "",
+          "url": "https://en.wikipedia.org/wiki/ChatGPT_Plus",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 1,
+          "title": "ChatGPT psychosis",
+          "snippet": "",
+          "url": "https://en.wikipedia.org/wiki/ChatGPT_psychosis",
+          "kind": "opensearch"
+        }
+      ]
+    }
+  },
+  "api_candidate_count": 2,
+  "api_snippet_nonempty": 0,
+  "api_snippet_empty": 2,
+  "pipeline": {
+    "query": "ChatGPT Plus",
+    "per_backend": [
+      {
+        "backend": "duckduckgo",
+        "searcher_returned": 0,
+        "accepted": 0,
+        "rejected": 0
+      },
+      {
+        "backend": "wikipedia-ja",
+        "searcher_returned": 0,
+        "accepted": 0,
+        "rejected": 0
+      },
+      {
+        "backend": "wikipedia-en",
+        "searcher_returned": 2,
+        "accepted": 2,
+        "rejected": 0
+      }
+    ],
+    "hitize_rows": [
+      {
+        "backend": "wikipedia-en",
+        "title": "ChatGPT Plus",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_Plus",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-en",
+        "title": "ChatGPT psychosis",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_psychosis",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      }
+    ],
+    "rejected": [],
+    "counts": {
+      "hit_accepted": 2,
+      "after_unique": 2,
+      "dup_removed": 0,
+      "before_ranking": 2,
+      "after_ranking": 2,
+      "dropped_by_ranking": 0,
+      "dropped_with_snippet": 0
+    },
+    "ranking_mode": "score>0_only",
+    "ranking_rows": [
+      {
+        "ranking_order": 0,
+        "score": 14,
+        "title": "ChatGPT Plus",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_Plus",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      },
+      {
+        "ranking_order": 1,
+        "score": 3,
+        "title": "ChatGPT psychosis",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_psychosis",
+        "backend": "wikipedia-en",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      }
+    ],
+    "after_ranking_hits": [
+      {
+        "title": "ChatGPT Plus",
+        "snippet": "",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_Plus",
+        "backend": "wikipedia-en",
+        "_from": "wikipedia-en"
+      },
+      {
+        "title": "ChatGPT psychosis",
+        "snippet": "",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_psychosis",
+        "backend": "wikipedia-en",
+        "_from": "wikipedia-en"
+      }
+    ],
+    "dropped_candidates": []
+  },
+  "search_web_return": {
+    "hit_count": 2,
+    "hits": [
+      {
+        "title": "ChatGPT Plus",
+        "snippet": "",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_Plus",
+        "backend": "wikipedia-en"
+      },
+      {
+        "title": "ChatGPT psychosis",
+        "snippet": "",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_psychosis",
+        "backend": "wikipedia-en"
+      }
+    ],
+    "error": null,
+    "candidates_collected": 2
+  },
+  "stored_log": {
+    "hit_count": 2,
+    "hits": [
+      {
+        "title": "ChatGPT Plus",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_Plus",
+        "snippet": null
+      },
+      {
+        "title": "ChatGPT psychosis",
+        "url": "https://en.wikipedia.org/wiki/ChatGPT_psychosis",
+        "snippet": null
+      }
+    ]
+  },
+  "llm_handoff": {
+    "agent_passes_full_return": true,
+    "llm_received_hit_count": 2,
+    "stored_log_hit_count": 2,
+    "count_match_live_vs_stored": true,
+    "backend_in_return": [
+      "wikipedia-en",
+      "wikipedia-en"
+    ],
+    "json_bytes": 370,
+    "snippet_lost_in_serialization": false
+  },
+  "extract_probes": [
+    {
+      "title": "ChatGPT Plus",
+      "url": "https://en.wikipedia.org/wiki/ChatGPT_Plus",
+      "http_status": 200,
+      "error": null,
+      "extract_len": 0,
+      "extract_preview": "",
+      "page_has_usable_text": false,
+      "note": "調査専用extracts。本番search_web未接続。"
+    },
+    {
+      "title": "ChatGPT psychosis",
+      "url": "https://en.wikipedia.org/wiki/ChatGPT_psychosis",
+      "http_status": 200,
+      "error": null,
+      "extract_len": 0,
+      "extract_preview": "",
+      "page_has_usable_text": false,
+      "note": "調査専用extracts。本番search_web未接続。"
+    }
+  ],
+  "machine_observation": {
+    "counts_chain": {
+      "api_raw": 2,
+      "hit_accepted": 2,
+      "after_unique": 2,
+      "after_ranking": 2,
+      "return": 2,
+      "llm_received": 2
+    },
+    "snippet_empty_in_return": 2,
+    "snippet_nonempty_in_return": 0,
+    "dropped_by_ranking": 0,
+    "dropped_with_snippet": 0,
+    "page_has_text_but_snippet_empty_probe": false,
+    "not_auto_usefulness_label": true
+  },
+  "human_review": {
+    "候補の内容": "",
+    "有用候補の番号": "",
+    "rankingで落ちた有用候補": "",
+    "内容の充実度": "",
+    "日本語情報の十分さ": "",
+    "現在性": "",
+    "LLMに十分な情報が渡ったか": "",
+    "主な問題箇所": "",
+    "人間コメント": ""
+  }
+}

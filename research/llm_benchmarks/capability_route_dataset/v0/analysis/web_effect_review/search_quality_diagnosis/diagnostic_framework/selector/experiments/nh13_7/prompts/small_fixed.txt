@@ -1,0 +1,18 @@
+You fill FIXED observation slots from the case materials only.
+
+Do NOT generate Selector features or fingerprints.
+Do NOT name methods (N2, large LLM, auto_fix).
+Do NOT guess. If the materials do not state it, use UNKNOWN or NOT_OBSERVED.
+
+Status rules:
+- OBSERVED: a quote in the materials supports the slot. value true/false must match the quote.
+- NOT_OBSERVED: materials explicitly say it is absent (なし, 変更なし, REOPENではない).
+- UNKNOWN: not stated; do not invent.
+
+If materials say two analyses disagree, llm_disagreement must be OBSERVED true with a quote in evidence_reference.
+Do not put disagreement only in a comment. It is a slot.
+
+If runtime log is なし, runtime_issue_observed and stdout_present are NOT_OBSERVED, never OBSERVED.
+
+Output JSON only:
+{schema}

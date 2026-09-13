@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/skills.schema.json",
+  "title": "Skill registry",
+  "description": "Machine-readable catalog of adopted development Skills. Skill bodies live under .agents/skills/**/SKILL.md and are not duplicated here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "skills",
+    "alias_index",
+    "compositions",
+    "output_contracts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1",
+      "description": "Registry format version. Not a Skill version."
+    },
+    "note": {
+      "type": "string",
+      "description": "Human note. Not consumed by runtime."
+    },
+    "provenance_reference": {
+      "type": "string",
+      "description": "Path to adoption provenance for imported Skill bodies."
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/skill_entry" }
+    },
+    "alias_index": {
+      "type": "object",
+      "description": "External namespace alias -> local skill id. Unlisted aliases are not adopted.",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "compositions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/composition_entry" }
+    },
+    "output_contracts": {
+      "type": "object",
+      "description": "Named machine contracts produced by Skills.",
+      "additionalProperties": { "$ref": "#/$defs/output_contract_entry" }
+    }
+  },
+  "$defs": {
+    "skill_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "skill_status": {
+      "type": "string",
+      "enum": ["adopted", "provisional", "experimental", "retired"]
+    },
+    "skill_phase": {
+      "type": "string",
+      "enum": ["design", "analysis", "planning", "handoff", "utility"]
+    },
+    "consumer_id": {
+      "type": "string",
+      "enum": ["cursor", "codex", "local_agent"]
+    },
+    "artifact_kind": {
+      "type": "string",
+      "enum": [
+        "ambiguity_report",
+        "prd",
+        "knowledge_map",
+        "tech_spec",
+        "implementation_plan",
+        "task_list",
+        "goal_handoff_packet",
+        "session_sync_report"
+      ]
+    },
+    "skill_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "path",
+        "status",
+        "phase",
+        "description",
+        "consumers",
+        "outputs"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/skill_id" },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repository-relative path to SKILL.md."
+        },
+        "status": { "$ref": "#/$defs/skill_status" },
+        "phase": { "$ref": "#/$defs/skill_phase" },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "consumers": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/consumer_id" },
+          "uniqueItems": true
+        },
+        "invokes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/skill_id" },
+          "uniqueItems": true,
+          "description": "Other local skill ids this skill may call."
+        },
+        "invoked_by": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/skill_id" },
+          "uniqueItems": true
+        },
+        "inputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/artifact_kind" },
+          "uniqueItems": true,
+          "description": "Expected upstream artifacts, if any."
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/artifact_kind" },
+          "uniqueItems": true
+        },
+        "output_contract": {
+          "type": "string",
+          "description": "Key in output_contracts when this skill emits a machine contract."
+        },
+        "default_output_path": {
+          "type": "string",
+          "description": "Default repository-relative output path pattern. Braces may name fields, e.g. docs/handoffs/{handoff_id}.json"
+        },
+        "provenance_row": {
+          "type": "string",
+          "description": "Optional pointer into provenance_reference table row id."
+        },
+        "runtime_connected": {
+          "type": "boolean",
+          "const": false,
+          "description": "Production Runtime must remain false until an explicit CONNECTED integration exists."
+        }
+      }
+    },
+    "composition_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "steps", "terminal_output"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "description": { "type": "string", "minLength": 1 },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/skill_id" }
+        },
+        "terminal_output": { "$ref": "#/$defs/artifact_kind" },
+        "status": {
+          "type": "string",
+          "enum": ["standard", "provisional", "experimental"]
+        }
+      }
+    },
+    "output_contract_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_path", "description", "status"],
+      "properties": {
+        "schema_path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repository-relative JSON Schema path."
+        },
+        "description": { "type": "string", "minLength": 1 },
+        "status": {
+          "type": "string",
+          "enum": ["provisional", "adopted", "retired"]
+        },
+        "example_path": {
+          "type": "string",
+          "description": "Optional repository-relative example instance."
+        },
+        "spec_path": {
+          "type": "string",
+          "description": "Optional human-readable spec companion."
+        }
+      }
+    }
+  }
+}

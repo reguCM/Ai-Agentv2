@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/test_safety_evaluation.schema.json",
+  "title": "Test Safety Evaluation Packet (Validator output; not a Gate)",
+  "description": "S2 prototype: READ-ONLY evaluation from a declared test plan. recommended_gate_decision is advisory until a Gate is connected.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_type",
+    "generated_at",
+    "validator_id",
+    "test_plan",
+    "evaluation"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "packet_type": { "const": "TEST_SAFETY_EVALUATION" },
+    "generated_at": { "type": "string" },
+    "validator_id": { "type": "string" },
+    "reference_case_id": { "type": "string" },
+    "test_plan": { "$ref": "#/$defs/test_plan" },
+    "evaluation": { "$ref": "#/$defs/evaluation" },
+    "readonly_observations": { "$ref": "#/$defs/readonly_observations" }
+  },
+  "$defs": {
+    "risk_level": {
+      "type": "string",
+      "enum": ["LEVEL_1", "LEVEL_2", "LEVEL_3"]
+    },
+    "dimension_state": {
+      "type": "string",
+      "enum": ["NONE", "CONTROLLED", "PRESENT", "UNKNOWN"]
+    },
+    "safety_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "llm",
+        "gpu",
+        "network",
+        "subprocess",
+        "long_running_process",
+        "tool_execution",
+        "filesystem_write",
+        "repository_outside_write",
+        "git_operation",
+        "external_service",
+        "credentials",
+        "shared_resource"
+      ],
+      "properties": {
+        "llm": { "$ref": "#/$defs/dimension_state" },
+        "gpu": { "$ref": "#/$defs/dimension_state" },
+        "network": { "$ref": "#/$defs/dimension_state" },
+        "subprocess": { "$ref": "#/$defs/dimension_state" },
+        "long_running_process": { "$ref": "#/$defs/dimension_state" },
+        "tool_execution": { "$ref": "#/$defs/dimension_state" },
+        "filesystem_write": { "$ref": "#/$defs/dimension_state" },
+        "repository_outside_write": { "$ref": "#/$defs/dimension_state" },
+        "git_operation": { "$ref": "#/$defs/dimension_state" },
+        "external_service": { "$ref": "#/$defs/dimension_state" },
+        "credentials": { "$ref": "#/$defs/dimension_state" },
+        "shared_resource": { "$ref": "#/$defs/dimension_state" }
+      }
+    },
+    "test_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan_id", "commands"],
+      "properties": {
+        "plan_id": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "commands": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "declared_primary_risk_level": { "$ref": "#/$defs/risk_level" },
+        "declared_write_scope": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "declared_dimensions": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/dimension_state" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "relevant_unknown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimension", "observation", "relevant_to_plan", "safety_verifiable"],
+      "properties": {
+        "dimension": { "type": "string" },
+        "observation": { "type": "string" },
+        "relevant_to_plan": { "type": "boolean" },
+        "safety_verifiable": { "type": "boolean" },
+        "would_block_if_gate_connected": { "type": "boolean" }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_risk_level",
+        "safety_dimensions",
+        "warnings",
+        "recommended_gate_decision",
+        "gate_blocked_reasons",
+        "postflight_git_check_required",
+        "human_approval_required"
+      ],
+      "properties": {
+        "primary_risk_level": { "$ref": "#/$defs/risk_level" },
+        "also_applies_risk_levels": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/risk_level" }
+        },
+        "safety_dimensions": { "$ref": "#/$defs/safety_dimensions" },
+        "relevant_unknowns": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/relevant_unknown" }
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "recommended_gate_decision": {
+          "type": "string",
+          "enum": ["PASS", "BLOCKED"]
+        },
+        "gate_blocked_reasons": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "postflight_git_check_required": { "type": "boolean" },
+        "human_approval_required": { "type": "boolean" },
+        "human_approval_reason": { "type": "string" }
+      }
+    },
+    "readonly_observations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "git": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "host_process_note": { "type": "string" }
+      }
+    }
+  }
+}

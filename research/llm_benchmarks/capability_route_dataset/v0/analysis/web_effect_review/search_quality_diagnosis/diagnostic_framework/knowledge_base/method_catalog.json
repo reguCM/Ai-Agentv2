@@ -1,0 +1,628 @@
+{
+  "version": "0.1",
+  "kind": "diagnostic_method_catalog",
+  "note": "Registered from existing experiments. Not a production Tool change. Status is not a production adopt decision.",
+  "methods": [
+    {
+      "id": "mechanical_observation",
+      "name": "機械的観測",
+      "status": "adopt",
+      "helps_with": [
+        "counts",
+        "empty_snippets",
+        "ranking_drop",
+        "backend_split"
+      ],
+      "does_not_help": [
+        "path_attribution",
+        "cause_strength"
+      ],
+      "when_to_use": "any_runtime_quality_or_behavior_issue",
+      "when_not_to_use": [],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-001"
+      ],
+      "findings": [],
+      "reusable_as": "inputs_not_llm_conclusions"
+    },
+    {
+      "id": "evidence_four_classes",
+      "name": "FACT/OBSERVED/INFERENCE/UNKNOWN",
+      "status": "adopt",
+      "helps_with": [
+        "invented_observed_suppression"
+      ],
+      "does_not_help": [
+        "cause_correctness"
+      ],
+      "when_to_use": "always",
+      "when_not_to_use": [],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-007"
+      ],
+      "findings": [
+        "F004"
+      ],
+      "reusable_as": "labeling_protocol"
+    },
+    {
+      "id": "sufficient_ctx_code_pack",
+      "name": "十分な num_ctx と code_pack 添付",
+      "status": "adopt",
+      "helps_with": [
+        "false_missing_code_diagnosis"
+      ],
+      "does_not_help": [
+        "path_connection_errors"
+      ],
+      "when_to_use": "any_code_reading_or_llm_diagnosis",
+      "when_not_to_use": [
+        "tiny_ctx_profiles_as_full_diagnosis"
+      ],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-002",
+        "EXP-003"
+      ],
+      "findings": [
+        "F002"
+      ],
+      "reusable_as": "harness_constraint"
+    },
+    {
+      "id": "code_reading_large_ctx",
+      "name": "コード読解（大コンテキスト）",
+      "status": "conditional_adopt",
+      "helps_with": [
+        "entry_discovery",
+        "backend_discovery",
+        "rank_function_discovery"
+      ],
+      "does_not_help": [
+        "stdout_vs_llm_handoff",
+        "existence_equals_cause"
+      ],
+      "when_to_use": "code_available_and_path_unknown",
+      "when_not_to_use": [
+        "as_sole_final_cause_verdict"
+      ],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-003"
+      ],
+      "findings": [
+        "F001",
+        "F003"
+      ],
+      "reusable_as": "local_analysis"
+    },
+    {
+      "id": "specification_map",
+      "name": "全体仕様書（設計地図）",
+      "status": "partially_effective_alone_insufficient",
+      "helps_with": [
+        "narrative_path",
+        "intent_sharing"
+      ],
+      "does_not_help": [
+        "implementation_line_attribution",
+        "stdout_vs_llm"
+      ],
+      "when_to_use": "need_entry_overview",
+      "when_not_to_use": [
+        "as_sole_evidence_for_line_numbers",
+        "spec_with_answer_leakage"
+      ],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-004",
+        "EXP-005"
+      ],
+      "findings": [
+        "F007"
+      ],
+      "reusable_as": "map_only"
+    },
+    {
+      "id": "route_decomposition",
+      "name": "route decomposition（表示と LLM を分離）",
+      "status": "conditional_adopt",
+      "helps_with": [
+        "stdout_vs_llm_connection_tests"
+      ],
+      "does_not_help": [
+        "caller_errors",
+        "cause_overconfidence"
+      ],
+      "when_to_use": "handoff_or_display_uncertain",
+      "when_not_to_use": [
+        "bundling_collect_and_rank_in_one_pack"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "EXP-006"
+      ],
+      "findings": [
+        "F006"
+      ],
+      "reusable_as": "input_design"
+    },
+    {
+      "id": "collect_rank_split",
+      "name": "collect / ranking 分離パック",
+      "status": "conditional_adopt",
+      "helps_with": [
+        "stage_identity_confusion",
+        "score_gt_0_ownership"
+      ],
+      "does_not_help": [
+        "post_return_cut_overclaim"
+      ],
+      "when_to_use": "candidate_count_or_drop_stage_uncertain",
+      "when_not_to_use": [
+        "mixed_collect_rank_pack_when_confusion_already_seen"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "EXP-007",
+        "EXP-006"
+      ],
+      "findings": [
+        "F008"
+      ],
+      "reusable_as": "input_design"
+    },
+    {
+      "id": "n1_single_edge",
+      "name": "N1 1接続ずつの Yes/No",
+      "status": "unverified_promising",
+      "helps_with": [
+        "hypothesized_misconnection_reduction"
+      ],
+      "does_not_help": [
+        "untested"
+      ],
+      "when_to_use": "caller_path_complex",
+      "when_not_to_use": [
+        "as_proven_gate"
+      ],
+      "confidence": "low",
+      "supporting_experiments": [],
+      "findings": [],
+      "reusable_as": "optional_followup"
+    },
+    {
+      "id": "n2_path_gate",
+      "name": "N2 経路存在ゲート",
+      "status": "conditional_adopt",
+      "helps_with": [
+        "off_path_module_filter"
+      ],
+      "does_not_help": [
+        "on_path_wrong_causation",
+        "cause_strength"
+      ],
+      "when_to_use": "off_path_tokens_in_candidates",
+      "when_not_to_use": [
+        "as_cause_intensity",
+        "full_path_narrative_bundle"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "EXP-008"
+      ],
+      "findings": [
+        "F005"
+      ],
+      "reusable_as": "safety_gate"
+    },
+    {
+      "id": "n2_full_path_narrative",
+      "name": "N2 + フル経路物語",
+      "status": "not_supported",
+      "helps_with": [],
+      "does_not_help": [
+        "overconfidence_increase_reported"
+      ],
+      "when_to_use": [],
+      "when_not_to_use": [
+        "default_n2_mode"
+      ],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-008"
+      ],
+      "findings": [
+        "F005"
+      ],
+      "reusable_as": "negative_result"
+    },
+    {
+      "id": "n3_runtime_evidence_gate",
+      "name": "N3 ログなし runtime 原因の断定禁止",
+      "status": "unverified_promising",
+      "helps_with": [
+        "hypothesized_unobserved_runtime_assertion_stop"
+      ],
+      "does_not_help": [
+        "coarse_logs_may_stop_true_causes"
+      ],
+      "when_to_use": "runtime_symptom_diagnosis",
+      "when_not_to_use": [
+        "as_proven_complete_gate"
+      ],
+      "confidence": "low",
+      "supporting_experiments": [
+        "EXP-007"
+      ],
+      "findings": [
+        "F004"
+      ],
+      "reusable_as": "optional_gate"
+    },
+    {
+      "id": "material_compression",
+      "name": "材料圧縮（機械要約ログ）",
+      "status": "unverified_promising",
+      "helps_with": [
+        "hypothesized_small_ctx_log_fit"
+      ],
+      "does_not_help": [
+        "untested"
+      ],
+      "when_to_use": "long_logs_and_small_ctx_model",
+      "when_not_to_use": [
+        "forcing_full_logs_into_overflowing_ctx"
+      ],
+      "confidence": "low",
+      "supporting_experiments": [
+        "EXP-009"
+      ],
+      "findings": [
+        "F009"
+      ],
+      "reusable_as": "optional_harness"
+    },
+    {
+      "id": "small_llm_local",
+      "name": "小型LLM局所解析",
+      "status": "conditional_adopt",
+      "helps_with": [
+        "entry_discovery",
+        "log_enumeration",
+        "primary_candidates"
+      ],
+      "does_not_help": [
+        "path_connection",
+        "existence_equals_cause",
+        "cite_line_drift"
+      ],
+      "when_to_use": "local_code_or_log_analysis",
+      "when_not_to_use": [
+        "sole_final_verdict",
+        "auto_fix_permission"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "EXP-003",
+        "EXP-006",
+        "EXP-007",
+        "EXP-010"
+      ],
+      "findings": [
+        "F001",
+        "F011"
+      ],
+      "reusable_as": "local_analyzer"
+    },
+    {
+      "id": "deepseek_full_replace",
+      "name": "DeepSeek への診断LLM全面置換",
+      "status": "not_supported_as_sole_replacement",
+      "helps_with": [
+        "occasional_short_yes_no_connection"
+      ],
+      "does_not_help": [
+        "long_prompt_diagnosis",
+        "log_alignment",
+        "shared_failure_modes"
+      ],
+      "when_to_use": [],
+      "when_not_to_use": [
+        "as_default_diagnostic_llm"
+      ],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-009"
+      ],
+      "findings": [
+        "F009"
+      ],
+      "reusable_as": "negative_result"
+    },
+    {
+      "id": "deepseek_short_yes_no",
+      "name": "DeepSeek 短文 Yes/No（試行余地）",
+      "status": "alone_insufficient",
+      "helps_with": [
+        "short_connection_probes"
+      ],
+      "does_not_help": [
+        "full_cause_diagnosis"
+      ],
+      "when_to_use": "optional_short_edge_probe",
+      "when_not_to_use": [
+        "long_unadapted_prompts"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "EXP-009"
+      ],
+      "findings": [
+        "F009"
+      ],
+      "reusable_as": "optional_probe"
+    },
+    {
+      "id": "large_llm_escalation",
+      "name": "大型LLM全体統合・監査",
+      "status": "promising_conditional",
+      "helps_with": [
+        "path_integration",
+        "false_cause_rejection",
+        "unknown_use",
+        "counterevidence"
+      ],
+      "does_not_help": [
+        "general_self_diagnosis_proof",
+        "safe_auto_fix"
+      ],
+      "when_to_use": "structured_facts_ready_need_integration",
+      "when_not_to_use": [
+        "raw_unstructured_logs_only",
+        "auto_fix_without_approval"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "EXP-010"
+      ],
+      "findings": [
+        "F010"
+      ],
+      "reusable_as": "integrator"
+    },
+    {
+      "id": "small_then_large_pipeline",
+      "name": "小型→大型二段階",
+      "status": "unverified_promising_hypothesis",
+      "helps_with": [
+        "hypothesized_role_split"
+      ],
+      "does_not_help": [
+        "pipeline_ab_untested"
+      ],
+      "when_to_use": "future_default_architecture_candidate",
+      "when_not_to_use": [
+        "as_proven_spec"
+      ],
+      "confidence": "low",
+      "supporting_experiments": [
+        "EXP-010"
+      ],
+      "findings": [
+        "F011"
+      ],
+      "reusable_as": "architecture_hypothesis"
+    },
+    {
+      "id": "human_approval",
+      "name": "人間確認（修正実行前）",
+      "status": "adopt",
+      "helps_with": [
+        "unsafe_auto_fix_stop"
+      ],
+      "does_not_help": [],
+      "when_to_use": "before_any_code_change",
+      "when_not_to_use": [],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-002",
+        "EXP-010"
+      ],
+      "findings": [
+        "F010"
+      ],
+      "reusable_as": "guardrail"
+    },
+    {
+      "id": "auto_fix",
+      "name": "自動修正の実行",
+      "status": "not_supported",
+      "helps_with": [],
+      "does_not_help": [
+        "insufficient_evidence",
+        "open_problems_unclosed"
+      ],
+      "when_to_use": [],
+      "when_not_to_use": [
+        "default_self_diagnosis_output"
+      ],
+      "confidence": "high",
+      "supporting_experiments": [
+        "EXP-002",
+        "EXP-010"
+      ],
+      "findings": [
+        "F010"
+      ],
+      "reusable_as": "negative_result"
+    },
+    {
+      "id": "nh3_normalized_reactivation_ban",
+      "name": "Normalized near-exact再Active禁止",
+      "status": "experimental",
+      "helps_with": [
+        "near_exact_state_reactivation"
+      ],
+      "does_not_help": [
+        "semantic_paraphrase_without_normalization"
+      ],
+      "when_to_use": "state_change_request_validation",
+      "when_not_to_use": [
+        "production_until_promoted"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "NH3-20260826_191500"
+      ],
+      "findings": [
+        "F-NH3-1"
+      ],
+      "reusable_as": "mechanical_validator_rule"
+    },
+    {
+      "id": "nh3_evidence_existence_check",
+      "name": "REOPEN Evidence実在確認",
+      "status": "experimental",
+      "helps_with": [
+        "fabricated_evidence_reopen"
+      ],
+      "does_not_help": [
+        "content_mismatch_alone"
+      ],
+      "when_to_use": "reopen_requests",
+      "when_not_to_use": [
+        "production_until_promoted"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "NH3-20260826_191500"
+      ],
+      "findings": [
+        "F-NH3-2"
+      ],
+      "reusable_as": "mechanical_validator_rule"
+    },
+    {
+      "id": "nh3_evidence_content_match",
+      "name": "REOPEN Evidence内容照合",
+      "status": "experimental",
+      "helps_with": [
+        "mismatched_or_stale_evidence"
+      ],
+      "does_not_help": [
+        "unsigned_store_trust"
+      ],
+      "when_to_use": "reopen_after_existence_check",
+      "when_not_to_use": [
+        "production_until_promoted"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "NH3-20260826_191500"
+      ],
+      "findings": [
+        "F-NH3-2"
+      ],
+      "reusable_as": "mechanical_validator_rule"
+    },
+    {
+      "id": "nh3_sidecar_observation_gate",
+      "name": "Sidecar観測ゲート（実験）",
+      "status": "experimental",
+      "helps_with": [
+        "test_fail_block",
+        "fabricated_flag",
+        "runtime_contradiction"
+      ],
+      "does_not_help": [
+        "missing_observation_coverage"
+      ],
+      "when_to_use": "validator_with_mock_or_sidecar_feeds",
+      "when_not_to_use": [
+        "production_until_promoted"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "NH3-20260826_191500"
+      ],
+      "findings": [],
+      "reusable_as": "mechanical_validator_input"
+    },
+    {
+      "id": "nh4_evidence_freshness_gate",
+      "name": "REOPEN Evidence freshness/timestamp gate",
+      "status": "experimental",
+      "helps_with": [
+        "stale_evidence_reopen"
+      ],
+      "does_not_help": [
+        "missing_timestamps_without_unknown_policy"
+      ],
+      "when_to_use": "reopen_after_content_match",
+      "when_not_to_use": [
+        "production_until_promoted",
+        "as_confirmed_catalog_entry"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "NH4-20260826_201500"
+      ],
+      "findings": [
+        "F-NH4-2"
+      ],
+      "reusable_as": "mechanical_validator_rule"
+    },
+    {
+      "id": "nh4_sidecar_minimal_tre",
+      "name": "Sidecar最小セット (test+runtime+evidence_status)",
+      "status": "experimental",
+      "helps_with": [
+        "test_fail",
+        "runtime_contradiction",
+        "fabricated_evidence_flag"
+      ],
+      "does_not_help": [
+        "hash_or_exec_without_extension"
+      ],
+      "when_to_use": "validator_sidecar_ablation_candidate",
+      "when_not_to_use": [
+        "production_until_promoted"
+      ],
+      "confidence": "medium",
+      "supporting_experiments": [
+        "NH4-20260826_201500"
+      ],
+      "findings": [
+        "F-NH4-3"
+      ],
+      "reusable_as": "mechanical_validator_input"
+    },
+    {
+      "id": "nh4_morph_synonym_reactivation_ban",
+      "name": "形態素/同義再Active禁止",
+      "status": "experimental_not_recommended",
+      "helps_with": [
+        "synonym_reactivation"
+      ],
+      "does_not_help": [
+        "preserving_legitimate_near_new_goals"
+      ],
+      "when_to_use": "research_only",
+      "when_not_to_use": [
+        "selector_default",
+        "production"
+      ],
+      "confidence": "low",
+      "supporting_experiments": [
+        "NH4-20260826_201500"
+      ],
+      "findings": [
+        "F-NH4-1"
+      ],
+      "reusable_as": "negative_result"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+---
+description: Standard aliases for max:grill-me, max:write-prd, and max:tech-spec after skill adoption. Do not substitute other max:* or bugbook:* names.
+alwaysApply: true
+---
+
+# Skill Namespace Compatibility Adapter
+
+正式採用済みの標準開発資産。imported Skill 本文は変更しない。評価専用ではない。
+
+**alias 正本:** `registry/skills.json` の `alias_index`。下表は Cursor 向けミラー。差分が出たら Registry を先に更新し、本 Adapter を追随する。
+
+imported Skill が次の名前を invoke / 利用可能判定する場合、未導入とは扱わず、対応する local Skill の `SKILL.md` を Read してその Skill として処理する。これら 3 件については `not available` fallback（self-review 等）を使わない。
+
+| alias | local skill | SKILL.md |
+|---|---|---|
+| `max:grill-me` | `grill-me` | `.agents/skills/grill-me/SKILL.md` |
+| `max:write-prd` | `write-prd` | `.agents/skills/write-prd/SKILL.md` |
+| `max:tech-spec` | `tech-spec` | `.agents/skills/tech-spec/SKILL.md` |
+
+上記以外の `max:*` / `bugbook:*` 等は代替しない。未導入として扱う。

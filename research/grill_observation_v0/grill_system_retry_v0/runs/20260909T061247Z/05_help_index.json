@@ -1,0 +1,69 @@
+{
+  "skipped": false,
+  "capability": "workspace_file_search",
+  "index_tools": [
+    "search_files"
+  ],
+  "prefer_tool_for_capability": null,
+  "help_confirmed_tool": "search_files",
+  "describe_selected": {
+    "ok": true,
+    "operation": "describe",
+    "query": null,
+    "tool_id": "local:search_files",
+    "parsed": null,
+    "tools": [],
+    "tool": {
+      "tool_id": "local:search_files",
+      "name": "search_files",
+      "description": "Workspace（本リポジトリ）内の256 KiB以下のテキストファイルを通常の文字列検索する（read-only）。指定 path 以下を再帰走査し、一致行の path・行番号・抜粋を返す。正規表現ではなく部分文字列一致。Workspace 外・絶対パス・'..' は不可。ディレクトリ一覧は list_files、ファイル読取は read_file。",
+      "capabilities": [
+        "検索",
+        "search",
+        "grep",
+        "workspace",
+        "文字列",
+        "コード",
+        "file"
+      ],
+      "risk_level": "low",
+      "availability": "available",
+      "side_effect": "read_only",
+      "discovery_category": "production",
+      "agent_available": true,
+      "provider": "local",
+      "source": "registry/tools.json",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "検索する通常の文字列（部分一致。正規表現ではない）。"
+          },
+          "path": {
+            "type": "string",
+            "description": "検索起点の Workspace 内相対パス。省略時は workspace root（.）。ディレクトリ以下を再帰検索。"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "output_schema": null,
+      "permissions": [
+        "visibility:agent"
+      ],
+      "unavailability_reason": null,
+      "catalog_status": {
+        "tool_status": "available",
+        "experiment_status": "tested",
+        "adoption_status": "approved"
+      }
+    },
+    "count": 0,
+    "usage": null,
+    "message": "Described local:search_files",
+    "error": null
+  },
+  "tool_selected_because": "resolve_capabilities selected the Help-available Index tool; next_capability_action filled arguments from the request text"
+}

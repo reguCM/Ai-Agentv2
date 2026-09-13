@@ -1,0 +1,136 @@
+{
+  "runs": [
+    {
+      "note": "同じ Judge 材料の再現観察。契約は変えていない。",
+      "timestamp": "2026-08-18T14:40:27.226523+00:00",
+      "case": "judge_status_vs_usage",
+      "profile": "qwen3_8b",
+      "model": "qwen3:8b",
+      "temperature": 0,
+      "repeat": 5,
+      "accept": 0,
+      "reject": 5,
+      "counts": {
+        "reject": 5
+      },
+      "trials": [
+        {
+          "n": 1,
+          "label": "reject",
+          "satisfies_request": false,
+          "reason": "要求されたoutput 'status'はメモリ使用率の取得ではなく、OS情報の取得方法を示すものであり、メモリ使用率の数値を返すものではない",
+          "missing": [
+            "メモリ使用率（使用中の割合）の取得方法"
+          ],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": false,\n  \"reason\": \"要求されたoutput 'status'はメモリ使用率の取得ではなく、OS情報の取得方法を示すものであり、メモリ使用率の数値を返すものではない\",\n  \"missing\": [\"メモリ使用率（使用中の割合）の取得方法\"]\n}"
+        },
+        {
+          "n": 2,
+          "label": "reject",
+          "satisfies_request": false,
+          "reason": "取得した値はメモリ使用率の数値（44.29%）だが、要求されたoutput 'status'（例: 'OK', 'High Usage'など）と形式が一致しない",
+          "missing": [
+            "メモリ使用率を基にしたstatus判定基準の定義"
+          ],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": false,\n  \"reason\": \"取得した値はメモリ使用率の数値（44.29%）だが、要求されたoutput 'status'（例: 'OK', 'High Usage'など）と形式が一致しない\",\n  \"missing\": [\"メモリ使用率を基にしたstatus判定基準の定義\"]\n}"
+        },
+        {
+          "n": 3,
+          "label": "reject",
+          "satisfies_request": false,
+          "reason": "取得した値はメモリ使用率の数値（44.29%）だが、要求されたoutput 'status'（例: 'OK', 'High Usage'など）と形式が一致しない",
+          "missing": [
+            "メモリ使用率を基にしたstatus判定基準の定義"
+          ],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": false,\n  \"reason\": \"取得した値はメモリ使用率の数値（44.29%）だが、要求されたoutput 'status'（例: 'OK', 'High Usage'など）と形式が一致しない\",\n  \"missing\": [\"メモリ使用率を基にしたstatus判定基準の定義\"]\n}"
+        },
+        {
+          "n": 4,
+          "label": "reject",
+          "satisfies_request": false,
+          "reason": "取得した値はメモリ使用率の数値（44.29%）だが、要求されたoutput 'status'（例: 'OK', 'High Usage'など）と形式が一致しない",
+          "missing": [
+            "メモリ使用率を基にしたstatus判定基準の定義"
+          ],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": false,\n  \"reason\": \"取得した値はメモリ使用率の数値（44.29%）だが、要求されたoutput 'status'（例: 'OK', 'High Usage'など）と形式が一致しない\",\n  \"missing\": [\"メモリ使用率を基にしたstatus判定基準の定義\"]\n}"
+        },
+        {
+          "n": 5,
+          "label": "reject",
+          "satisfies_request": false,
+          "reason": "取得した値はメモリ使用率の数値（44.29%）だが、要求されたoutput 'status'（例: 'OK', 'High Usage'など）と形式が一致しない",
+          "missing": [
+            "メモリ使用率を基にしたstatus判定基準の定義"
+          ],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": false,\n  \"reason\": \"取得した値はメモリ使用率の数値（44.29%）だが、要求されたoutput 'status'（例: 'OK', 'High Usage'など）と形式が一致しない\",\n  \"missing\": [\"メモリ使用率を基にしたstatus判定基準の定義\"]\n}"
+        }
+      ]
+    },
+    {
+      "note": "同じ Judge 材料の再現観察。契約は変えていない。",
+      "timestamp": "2026-08-18T14:46:31.275123+00:00",
+      "case": "judge_status_vs_usage",
+      "profile": "qwen3_8b",
+      "model": "qwen3:8b",
+      "temperature": 0,
+      "repeat": 5,
+      "accept": 5,
+      "reject": 0,
+      "counts": {
+        "accept": 5
+      },
+      "trials": [
+        {
+          "n": 1,
+          "label": "accept",
+          "satisfies_request": true,
+          "reason": "PowerShellコマンドがメモリ使用率（使用中の割合）を数値で取得できており、サンプル値が要求に合致しています",
+          "missing": [],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": true,\n  \"reason\": \"PowerShellコマンドがメモリ使用率（使用中の割合）を数値で取得できており、サンプル値が要求に合致しています\",\n  \"missing\": []\n}"
+        },
+        {
+          "n": 2,
+          "label": "accept",
+          "satisfies_request": true,
+          "reason": "",
+          "missing": [],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": true,\n  \"reason\": \"\",\n  \"missing\": []\n}"
+        },
+        {
+          "n": 3,
+          "label": "accept",
+          "satisfies_request": true,
+          "reason": "",
+          "missing": [],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": true,\n  \"reason\": \"\",\n  \"missing\": []\n}"
+        },
+        {
+          "n": 4,
+          "label": "accept",
+          "satisfies_request": true,
+          "reason": "",
+          "missing": [],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": true,\n  \"reason\": \"\",\n  \"missing\": []\n}"
+        },
+        {
+          "n": 5,
+          "label": "accept",
+          "satisfies_request": true,
+          "reason": "",
+          "missing": [],
+          "error": null,
+          "llm_text": "{\n  \"satisfies_request\": true,\n  \"reason\": \"\",\n  \"missing\": []\n}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1565 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-08-19T05:39:14.644531+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "missing_gap_v2",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_usage_percent",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "MISREJECT": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "reason": "The sample provided does not contain the memory usage rate as requested. The usable findings indicate that total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "The sample provided does not contain the memory usage rate as requested. The usable findings indicate that total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.",
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.3,
+            "llm_seconds": 6.3,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 6.3,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"The sample provided does not contain the memory usage rate as requested. The usable findings indicate that total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.\",\"missing\":[\"total physical memory is still unconfirmed\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "reason": "The sample provided does not contain the memory usage rate directly. The command used to retrieve the memory information does return values, but it does not directly provide the memory usage rate in the format requested. The sample indicates that the total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "The sample provided does not contain the memory usage rate directly. The command used to retrieve the memory information does return values, but it does not directly provide the memory usage rate in the format requested. The sample indicates that the total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.",
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.5,
+            "llm_seconds": 1.5,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 1.5,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"The sample provided does not contain the memory usage rate directly. The command used to retrieve the memory information does return values, but it does not directly provide the memory usage rate in the format requested. The sample indicates that the total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.\",\"missing\":[\"total physical memory is still unconfirmed\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "reason": "The sample provided does not contain the memory usage rate directly. The command used to retrieve the memory information does return values, but it does not directly provide the memory usage rate in the format requested. The sample indicates that the total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "The sample provided does not contain the memory usage rate directly. The command used to retrieve the memory information does return values, but it does not directly provide the memory usage rate in the format requested. The sample indicates that the total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.",
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.5,
+            "llm_seconds": 1.5,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 1.5,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"The sample provided does not contain the memory usage rate directly. The command used to retrieve the memory information does return values, but it does not directly provide the memory usage rate in the format requested. The sample indicates that the total physical memory is still unconfirmed, which means the current candidate does not satisfy the request for the memory usage rate.\",\"missing\":[\"total physical memory is still unconfirmed\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T05:39:49.643082+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "sample_usage_percent_v1",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_usage_percent",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "MISREJECT": 1,
+        "FAIL": 2
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "reason": "The sample provided does not directly give the memory usage rate of Windows. The command used to retrieve the memory information is correct, but the sample values are not indicative of the memory usage rate. The command returns the free physical memory and total visible memory size, but it does not directly calculate the usage rate. Therefore, the current candidate does not satisfy the request for obtaining the memory usage rate of Windows.",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "The sample provided does not directly give the memory usage rate of Windows. The command used to retrieve the memory information is correct, but the sample values are not indicative of the memory usage rate. The command returns the free physical memory and total visible memory size, but it does not directly calculate the usage rate. Therefore, the current candidate does not satisfy the request for obtaining the memory usage rate of Windows.",
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "proposed_decisions": []
+          },
+          "timing": {
+            "total_seconds": 6.1,
+            "llm_seconds": 6.1,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 6.1,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"The sample provided does not directly give the memory usage rate of Windows. The command used to retrieve the memory information is correct, but the sample values are not indicative of the memory usage rate. The command returns the free physical memory and total visible memory size, but it does not directly calculate the usage rate. Therefore, the current candidate does not satisfy the request for obtaining the memory usage rate of Windows.\", \"missing\":[\"total physical memory is still unconfirmed\"],\"proposed_decisions\":[]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "FAIL",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": false,
+            "missing": [
+              "実環境で取得できたメモリ使用率の具体的な数値が必要です。"
+            ],
+            "reason": "実環境で取得できたメモリ使用率のサンプルが不足しており、具体的な数値が得られていません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "実環境で取得できたメモリ使用率のサンプルが不足しており、具体的な数値が得られていません。",
+            "missing": [
+              "実環境で取得できたメモリ使用率の具体的な数値が必要です。"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.5,
+            "llm_seconds": 1.5,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 1.5,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"実環境で取得できたメモリ使用率のサンプルが不足しており、具体的な数値が得られていません。\",\"missing\":[\"実環境で取得できたメモリ使用率の具体的な数値が必要です。\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "FAIL",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": false,
+            "missing": [
+              "実環境で取得できたメモリ使用率の具体的な数値が必要です。"
+            ],
+            "reason": "実環境で取得できたメモリ使用率のサンプルが不足しており、具体的な数値が得られていません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "実環境で取得できたメモリ使用率のサンプルが不足しており、具体的な数値が得られていません。",
+            "missing": [
+              "実環境で取得できたメモリ使用率の具体的な数値が必要です。"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.4,
+            "llm_seconds": 1.4,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 1.4,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"実環境で取得できたメモリ使用率のサンプルが不足しており、具体的な数値が得られていません。\",\"missing\":[\"実環境で取得できたメモリ使用率の具体的な数値が必要です。\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T05:41:07.878845+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "sample_usage_percent_v2",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_usage_percent",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "FAIL": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "FAIL",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": false,
+            "missing": [
+              "実環境で取得できたメモリ使用率を確認してください。"
+            ],
+            "reason": "usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現時点では具体的なメモリ使用率を提案することができません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現時点では具体的なメモリ使用率を提案することができません。",
+            "missing": [
+              "実環境で取得できたメモリ使用率を確認してください。"
+            ],
+            "proposed_decisions": []
+          },
+          "timing": {
+            "total_seconds": 7.3,
+            "llm_seconds": 7.3,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 7.3,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現時点では具体的なメモリ使用率を提案することができません。\",\"missing\":[\"実環境で取得できたメモリ使用率を確認してください。\"],\"proposed_decisions\":[]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "FAIL",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": false,
+            "missing": [
+              "実環境で取得できたメモリ使用率を確認してください。"
+            ],
+            "reason": "usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現状では具体的なメモリ使用率を提案することができません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現状では具体的なメモリ使用率を提案することができません。",
+            "missing": [
+              "実環境で取得できたメモリ使用率を確認してください。"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 2.6,
+            "llm_seconds": 2.6,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 2.6,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現状では具体的なメモリ使用率を提案することができません。\",\"missing\":[\"実環境で取得できたメモリ使用率を確認してください。\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "FAIL",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": false,
+            "missing": [
+              "実環境で取得できたメモリ使用率を確認してください。"
+            ],
+            "reason": "usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現状では具体的なメモリ使用率を提案することができません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現状では具体的なメモリ使用率を提案することができません。",
+            "missing": [
+              "実環境で取得できたメモリ使用率を確認してください。"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 2.6,
+            "llm_seconds": 2.6,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 2.6,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findings の sample に 0-100 の数値があるが、STATE status.meaning が使用率系であることを確認する必要があります。具体的には、実環境で取得できたメモリ使用率がまだ確認されていないため、現状では具体的なメモリ使用率を提案することができません。\",\"missing\":[\"実環境で取得できたメモリ使用率を確認してください。\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T05:41:47.158320+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "sample_usage_percent_v3",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_usage_percent",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "ACCEPT": 1,
+        "MISREJECT": 2
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率"
+              },
+              {
+                "key": "status.unit",
+                "value": "%"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100"
+              }
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.unit",
+                "value": "%",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100",
+                "source": "user",
+                "confidence": "confirmed"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.1,
+            "llm_seconds": 6.1,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 6.1,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"status.meaning\",\"value\":\"Windowsのメモリ使用率\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.unit\",\"value\":\"%\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.range\",\"value\":\"0-100\",\"source\":\"user\",\"confidence\":\"confirmed\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ],
+            "reason": "usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly related to the memory usage rate of Windows. The sample is from a command that returns the free physical memory and total visible memory size, which needs to be converted to a usage rate to satisfy the request. Therefore, the current candidate does not satisfy the request for memory usage rate.",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly related to the memory usage rate of Windows. The sample is from a command that returns the free physical memory and total visible memory size, which needs to be converted to a usage rate to satisfy the request. Therefore, the current candidate does not satisfy the request for memory usage rate.",
+            "missing": [
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.8,
+            "llm_seconds": 1.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 1.8,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly related to the memory usage rate of Windows. The sample is from a command that returns the free physical memory and total visible memory size, which needs to be converted to a usage rate to satisfy the request. Therefore, the current candidate does not satisfy the request for memory usage rate.\",\"missing\":[\"total physical memory is still unconfirmed\",\"used memory is still unconfirmed\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ],
+            "reason": "usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly related to the memory usage rate of Windows. The sample is from a command that returns the free physical memory and total visible memory size, which needs to be converted to a usage rate to satisfy the request. Therefore, the current candidate does not satisfy the request for memory usage rate.",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly related to the memory usage rate of Windows. The sample is from a command that returns the free physical memory and total visible memory size, which needs to be converted to a usage rate to satisfy the request. Therefore, the current candidate does not satisfy the request for memory usage rate.",
+            "missing": [
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.8,
+            "llm_seconds": 1.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 1.8,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly related to the memory usage rate of Windows. The sample is from a command that returns the free physical memory and total visible memory size, which needs to be converted to a usage rate to satisfy the request. Therefore, the current candidate does not satisfy the request for memory usage rate.\",\"missing\":[\"total physical memory is still unconfirmed\",\"used memory is still unconfirmed\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T05:42:21.582227+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "sample_usage_percent_v4",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_usage_percent",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": true,
+      "ok": true,
+      "grades": {
+        "ACCEPT": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率"
+              },
+              {
+                "key": "status.unit",
+                "value": "%"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100"
+              }
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.unit",
+                "value": "%",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100",
+                "source": "user",
+                "confidence": "confirmed"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.1,
+            "llm_seconds": 6.1,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 6.1,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"status.meaning\",\"value\":\"Windowsのメモリ使用率\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.unit\",\"value\":\"%\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.range\",\"value\":\"0-100\",\"source\":\"user\",\"confidence\":\"confirmed\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率"
+              },
+              {
+                "key": "status.unit",
+                "value": "%"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100"
+              }
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.unit",
+                "value": "%",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100",
+                "source": "user",
+                "confidence": "confirmed"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.3,
+            "llm_seconds": 1.3,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 1.3,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"status.meaning\",\"value\":\"Windowsのメモリ使用率\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.unit\",\"value\":\"%\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.range\",\"value\":\"0-100\",\"source\":\"user\",\"confidence\":\"confirmed\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率"
+              },
+              {
+                "key": "status.unit",
+                "value": "%"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100"
+              }
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.unit",
+                "value": "%",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100",
+                "source": "user",
+                "confidence": "confirmed"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 1.3,
+            "llm_seconds": 1.3,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 1.3,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"status.meaning\",\"value\":\"Windowsのメモリ使用率\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.unit\",\"value\":\"%\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.range\",\"value\":\"0-100\",\"source\":\"user\",\"confidence\":\"confirmed\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T05:47:34.472173+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "sample_usage_percent_v4",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_usage_percent",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "MISREJECT": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "reason": "The sample provided is not in the expected format for a memory usage rate calculation. The usable_findings sample has a numeric value in the range of 0-100, but it does not represent a memory usage rate. The STATE status.meaning is Windowsのメモリ使用率, status.unit is %, and status.range is 0-100, which indicates that the sample should be interpreted as a memory usage rate. However, the sample provided is not in the expected format for a memory usage rate calculation.",
+            "satisfies_request": false,
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率"
+              },
+              {
+                "key": "status.unit",
+                "value": "%"
+              }
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "The sample provided is not in the expected format for a memory usage rate calculation. The usable_findings sample has a numeric value in the range of 0-100, but it does not represent a memory usage rate. The STATE status.meaning is Windowsのメモリ使用率, status.unit is %, and status.range is 0-100, which indicates that the sample should be interpreted as a memory usage rate. However, the sample provided is not in the expected format for a memory usage rate calculation.",
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率"
+              },
+              {
+                "key": "status.unit",
+                "value": "%"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 9.6,
+            "llm_seconds": 9.6,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 9.6,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not interpreted as a memory usage rate. The STATE status.meaning is Windowsのメモリ使用率, status.unit is %, and status.range is 0-100, which indicates that the sample should be interpreted as a memory usage rate. However, the sample provided is not in the expected format for a memory usage rate calculation. Therefore, the current candidate does not satisfy the request for a memory usage rate tool.\",\"missing\":[\"total physical memory is still unconfirmed\"],\"proposed_decisions\":[{\"key\":\"status.meaning\",\"value\":\"Windowsのメモリ使用率\"},{\"key\":\"status.unit\",\"value\":\"%\"}],\"reason\":\"The sample provided is not in the expected format for a memory usage rate calculation. The usable_findings sample has a numeric value in the range of 0-100, but it does not represent a memory usage rate. The STATE status.meaning is Windowsのメモリ使用率, status.unit is %, and status.range is 0-100, which indicates that the sample should be interpreted as a memory usage rate. However, the sample provided is not in the expected format for a memory usage rate calculation.\"}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "reason": "usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly the memory usage rate. The command output is a calculation result of memory usage rate, which should satisfy the request if the calculation is correct. However, since the sample is not directly the memory usage rate, the request is not fully satisfied.",
+            "satisfies_request": false,
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率"
+              },
+              {
+                "key": "status.unit",
+                "value": "%"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100"
+              }
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly the memory usage rate. The command output is a calculation result of memory usage rate, which should satisfy the request if the calculation is correct. However, since the sample is not directly the memory usage rate, the request is not fully satisfied.",
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.unit",
+                "value": "%",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100",
+                "source": "user",
+                "confidence": "confirmed"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 2.6,
+            "llm_seconds": 2.6,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 2.6,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly the memory usage rate. The command output is a calculation result of memory usage rate, which should satisfy the request if the calculation is correct. However, since the sample is not directly the memory usage rate, the request is not fully satisfied.\",\"missing\":[\"total physical memory is still unconfirmed\"],\"proposed_decisions\":[{\"key\":\"status.meaning\",\"value\":\"Windowsのメモリ使用率\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.unit\",\"value\":\"%\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.range\",\"value\":\"0-100\",\"source\":\"user\",\"confidence\":\"confirmed\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "reason": "usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly the memory usage rate. The command output is a calculation result of memory usage rate, which should satisfy the request if the calculation is correct. However, since the sample is not directly the memory usage rate, the request is not fully satisfied.",
+            "satisfies_request": false,
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率"
+              },
+              {
+                "key": "status.unit",
+                "value": "%"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100"
+              }
+            ],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly the memory usage rate. The command output is a calculation result of memory usage rate, which should satisfy the request if the calculation is correct. However, since the sample is not directly the memory usage rate, the request is not fully satisfied.",
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "status.meaning",
+                "value": "Windowsのメモリ使用率",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.unit",
+                "value": "%",
+                "source": "user",
+                "confidence": "confirmed"
+              },
+              {
+                "key": "status.range",
+                "value": "0-100",
+                "source": "user",
+                "confidence": "confirmed"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 2.6,
+            "llm_seconds": 2.6,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 2.6,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findings sample has numeric value(s) in 0-100: 48.0, but the sample is not directly the memory usage rate. The command output is a calculation result of memory usage rate, which should satisfy the request if the calculation is correct. However, since the sample is not directly the memory usage rate, the request is not fully satisfied.\",\"missing\":[\"total physical memory is still unconfirmed\"],\"proposed_decisions\":[{\"key\":\"status.meaning\",\"value\":\"Windowsのメモリ使用率\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.unit\",\"value\":\"%\",\"source\":\"user\",\"confidence\":\"confirmed\"},{\"key\":\"status.range\",\"value\":\"0-100\",\"source\":\"user\",\"confidence\":\"confirmed\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T05:48:06.664251+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "verify_gap_adopt_v5",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_usage_percent",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": true,
+      "ok": true,
+      "grades": {
+        "ACCEPT": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": "Windowsのメモリ使用率は48.0%です。"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.0,
+            "llm_seconds": 6.0,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 6.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"Windowsのメモリ使用率は48.0%です。\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": "Windowsのメモリ使用率は48.0%です。"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.8,
+            "llm_seconds": 0.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 0.8,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"Windowsのメモリ使用率は48.0%です。\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": "Windowsのメモリ使用率は48.0%です。"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.9,
+            "llm_seconds": 0.9,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 0.9,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"Windowsのメモリ使用率は48.0%です。\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T06:43:12.735191+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "verify_gap_adopt_v5",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_usage_percent",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": true,
+      "ok": true,
+      "grades": {
+        "ACCEPT": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": "Windowsのメモリ使用率は48.0%です。"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.0,
+            "llm_seconds": 6.0,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 6.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"Windowsのメモリ使用率は48.0%です。\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": "Windowsのメモリ使用率は48.0%です。"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.9,
+            "llm_seconds": 0.9,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 0.9,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"Windowsのメモリ使用率は48.0%です。\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": true,
+          "pass": true,
+          "held": {
+            "ok": true,
+            "grade": "ACCEPT",
+            "json_ok": true,
+            "accepted": true,
+            "misreject": false,
+            "missing": [],
+            "reason": "",
+            "satisfies_request": true,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": true,
+            "reason": "",
+            "missing": [],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": "Windowsのメモリ使用率は48.0%です。"
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 0.8,
+            "llm_seconds": 0.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 0.8,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":true,\"reason\":\"\",\"missing\":[],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"Windowsのメモリ使用率は48.0%です。\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T06:53:35.065739+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "verify_gap_adopt_v5",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_from_research_implement_round7",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 3,
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "MISREJECT": 3
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "使用中のメモリ容量（使用率）が未確認です。具体的なコマンドやスクリプトが必要です。"
+            ],
+            "reason": "usable_findingsにはtotal physical memoryの正確な値が実環境で取得できたが、この値はメモリの総容量を示すものであり、使用率を直接示すものではありません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findingsにはtotal physical memoryの正確な値が実環境で取得できたが、この値はメモリの総容量を示すものであり、使用率を直接示すものではありません。",
+            "missing": [
+              "使用中のメモリ容量（使用率）が未確認です。具体的なコマンドやスクリプトが必要です。"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 7.0,
+            "llm_seconds": 7.0,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 7.0,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findingsにはtotal physical memoryの正確な値が実環境で取得できたが、この値はメモリの総容量を示すものであり、使用率を直接示すものではありません。\",\"missing\":[\"使用中のメモリ容量（使用率）が未確認です。具体的なコマンドやスクリプトが必要です。\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        },
+        {
+          "n": 2,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "使用中の物理メモリの量を取得する方法を確認してください。"
+            ],
+            "reason": "usable_findingsにはtotal physical memoryの正確な値が取得できたが、これは物理メモリの容量であり、使用率を直接計算するためには使用中の物理メモリの量が必要です。使用中の物理メモリの量を取得する方法が明確ではありません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findingsにはtotal physical memoryの正確な値が取得できたが、これは物理メモリの容量であり、使用率を直接計算するためには使用中の物理メモリの量が必要です。使用中の物理メモリの量を取得する方法が明確ではありません。",
+            "missing": [
+              "使用中の物理メモリの量を取得する方法を確認してください。"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 2.3,
+            "llm_seconds": 2.3,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 2.3,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findingsにはtotal physical memoryの正確な値が取得できたが、これは物理メモリの容量であり、使用率を直接計算するためには使用中の物理メモリの量が必要です。使用中の物理メモリの量を取得する方法が明確ではありません。\",\"missing\":[\"使用中の物理メモリの量を取得する方法を確認してください。\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        },
+        {
+          "n": 3,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "使用中の物理メモリの量を取得する方法を確認してください。"
+            ],
+            "reason": "usable_findingsにはtotal physical memoryの正確な値が取得できたが、これは物理メモリの容量であり、使用率を直接計算するためには使用中の物理メモリの量が必要です。使用中の物理メモリの量を取得する方法が明確ではありません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findingsにはtotal physical memoryの正確な値が取得できたが、これは物理メモリの容量であり、使用率を直接計算するためには使用中の物理メモリの量が必要です。使用中の物理メモリの量を取得する方法が明確ではありません。",
+            "missing": [
+              "使用中の物理メモリの量を取得する方法を確認してください。"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 2.3,
+            "llm_seconds": 2.3,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 2.3,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findingsにはtotal physical memoryの正確な値が取得できたが、これは物理メモリの容量であり、使用率を直接計算するためには使用中の物理メモリの量が必要です。使用中の物理メモリの量を取得する方法が明確ではありません。\",\"missing\":[\"使用中の物理メモリの量を取得する方法を確認してください。\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-19T10:50:27.847132+00:00",
+      "note": "usable finding があるとき Judge が採用できるか。ACCEPT/MISREJECT/FAIL。④本体は回さない。",
+      "contract_phase": "verify_gap_adopt_v5",
+      "pass_criterion": "ACCEPT",
+      "case": "judge_usable_from_research_implement_round7",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "repeat": 1,
+      "pass": false,
+      "ok": false,
+      "grades": {
+        "MISREJECT": 1
+      },
+      "trials": [
+        {
+          "n": 1,
+          "ok": false,
+          "pass": false,
+          "held": {
+            "ok": false,
+            "grade": "MISREJECT",
+            "json_ok": true,
+            "accepted": false,
+            "misreject": true,
+            "missing": [
+              "使用中のメモリ容量（使用率）が未確認です。具体的なコマンドやスクリプトが必要です。"
+            ],
+            "reason": "usable_findingsにはtotal physical memoryの正確な値が実環境で取得できたが、この値はメモリの総容量を示すものであり、使用率を直接示すものではありません。",
+            "satisfies_request": false,
+            "proposed_decisions": [],
+            "error": null
+          },
+          "error": null,
+          "answer": {
+            "satisfies_request": false,
+            "reason": "usable_findingsにはtotal physical memoryの正確な値が実環境で取得できたが、この値はメモリの総容量を示すものであり、使用率を直接示すものではありません。",
+            "missing": [
+              "使用中のメモリ容量（使用率）が未確認です。具体的なコマンドやスクリプトが必要です。"
+            ],
+            "proposed_decisions": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ]
+          },
+          "timing": {
+            "total_seconds": 6.8,
+            "llm_seconds": 6.8,
+            "machine_seconds": 0.0,
+            "research_seconds": 0.0,
+            "judge_seconds": 6.8,
+            "implementation_seconds": 0.0,
+            "repair_seconds": 0.0,
+            "validation_seconds": 0.0,
+            "llm_calls": 1
+          },
+          "llm_text": " ```json\n{\"satisfies_request\":false,\"reason\":\"usable_findingsにはtotal physical memoryの正確な値が実環境で取得できたが、この値はメモリの総容量を示すものであり、使用率を直接示すものではありません。\",\"missing\":[\"使用中のメモリ容量（使用率）が未確認です。具体的なコマンドやスクリプトが必要です。\"],\"proposed_decisions\":[{\"key\":\"\",\"value\":\"\"}]}\n```"
+        }
+      ]
+    }
+  ]
+}

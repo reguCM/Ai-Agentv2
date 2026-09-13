@@ -1,0 +1,29 @@
+{
+  "tested_at": "2026-08-21T16:20:00+00:00",
+  "tool": "tools.system.network.general_web_search.general_web_search",
+  "note": "PROJECT_AGENT経由ではなく検索実装の基礎確認。能力合否ではない。判断ロジックは未変更。",
+  "queries": [
+    {
+      "query": "Python programming language",
+      "hit_count": 3,
+      "error": null,
+      "backends_tried": ["duckduckgo", "wikipedia-ja", "wikipedia-en"],
+      "observation": "英語の一般語は hits を返すことがある"
+    },
+    {
+      "query": "今日の天気 東京",
+      "hit_count": 0,
+      "error": "検索結果がありません",
+      "backends_tried": ["duckduckgo", "wikipedia-ja", "wikipedia-en"],
+      "observation": "時事・天気系の日本語クエリは空になりやすい"
+    },
+    {
+      "query": "zxqwv-nonexistent-topic-9f3a2b1c",
+      "hit_count": 0,
+      "error": "検索結果がありません",
+      "backends_tried": ["duckduckgo", "wikipedia-ja", "wikipedia-en"],
+      "observation": "存在しない話題は empty/error 系"
+    }
+  ],
+  "implication_for_dataset": "Web判断と検索成功は分離して観測する。検索失敗が多くても判断観測の価値は残る。"
+}

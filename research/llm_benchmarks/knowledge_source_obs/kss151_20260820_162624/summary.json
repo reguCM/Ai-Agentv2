@@ -1,0 +1,92 @@
+{
+  "experiment_id": "kss151_20260820_162624",
+  "phase": "kss-1.5.1",
+  "human_audit_status": "pending",
+  "routing_ready": false,
+  "source_experiment_id": "kss15_20260820_160911",
+  "source_immutable": true,
+  "frozen_observation": {
+    "cases_total": 5,
+    "cases_completed": 5,
+    "cases_failed": 4,
+    "cases_valid_for_measurement": 4,
+    "searches_observed": 46,
+    "hits_observed": 192,
+    "kept_hits": 183,
+    "dropped_hits": 9,
+    "successful_runs": 1,
+    "failed_runs": 3,
+    "dropped_with_core": 7,
+    "dropped_with_direct": 0,
+    "dropped_with_lead": 0,
+    "failed_runs_with_answer_in_dropped": 1,
+    "failed_runs_with_answer_in_kept": 3,
+    "failed_runs_with_no_answer_found": 0,
+    "heuristic_dropped_answer_rate_observed": 0.778,
+    "note": "heuristic_dropped_answer_rate is NOT ground truth; do not treat 0.778 as confirmed precision"
+  },
+  "audit_scope": {
+    "dropped_total": 9,
+    "failed_kept_core_unique": 12,
+    "loss_forms": 4,
+    "dropped_by_case": {
+      "disk_usage": 8,
+      "memory_usage": 1
+    },
+    "kept_unique_by_case": {
+      "cpu_temperature": 5,
+      "disk_usage": 2,
+      "gpu_vram_usage": 5
+    }
+  },
+  "report_counts": {
+    "dropped_total": 9,
+    "human_direct": "missing",
+    "human_core": "missing",
+    "human_related": "missing",
+    "human_none": "missing",
+    "human_misleading": "missing",
+    "human_unknown": "missing",
+    "kept_audited": 12,
+    "kept_direct": "missing",
+    "kept_core": "missing",
+    "kept_related": "missing",
+    "kept_none": "missing",
+    "kept_misleading": "missing",
+    "kept_unknown": "missing",
+    "failure_loss_stage_counts": {
+      "SEARCH_MISS": "missing",
+      "DROP_ERROR": "missing",
+      "CANDIDATE_MISS": "missing",
+      "VERIFY_ERROR": "missing",
+      "USABLE_CONVERSION_ERROR": "missing",
+      "JUDGE_ERROR": "missing",
+      "PROGRESS_ERROR": "missing",
+      "PROPOSAL_ERROR": "missing",
+      "UNKNOWN": "missing"
+    },
+    "heuristic_calibration": {
+      "status": "pending_human_labels",
+      "note": "small-n; do not claim true precision",
+      "confusion_matrix": "missing",
+      "heuristic_direct_precision": "missing",
+      "heuristic_core_precision": "missing",
+      "heuristic_answer_presence_precision": "missing",
+      "heuristic_false_negative_rate": "missing",
+      "heuristic_false_positive_rate": "missing"
+    }
+  },
+  "files": [
+    "ground_truth_template.json",
+    "human_audit_worksheet.md",
+    "report.md",
+    "manifest.json"
+  ],
+  "non_goals": [
+    "routing",
+    "confidence thresholds",
+    "web force / retry",
+    "treat heuristic rate 0.778 as confirmed",
+    "answer_present = success"
+  ]
+}

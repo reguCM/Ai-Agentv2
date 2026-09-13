@@ -1,0 +1,284 @@
+{
+  "generated_at": "2026-09-02T08:24:24Z",
+  "total_observations": 47,
+  "evaluation_state": "ready_for_review",
+  "evaluation_state_label": "レビュー可能なデータ量",
+  "global_metrics": {
+    "observation_count": 47,
+    "success_count": 27,
+    "failure_count": 20,
+    "success_rate": 0.5745,
+    "timeout_count": 5,
+    "timeout_rate": 0.1064,
+    "native_tool_call_count": 37,
+    "native_tool_call_rate": 0.7872,
+    "avg_elapsed_ms": 40910.8,
+    "avg_vram_free_before_mib": 873.2,
+    "avg_vram_free_after_mib": 447.2
+  },
+  "by_context_size": {
+    "8192": {
+      "observation_count": 3,
+      "success_count": 2,
+      "failure_count": 1,
+      "success_rate": 0.6667,
+      "timeout_count": 0,
+      "timeout_rate": 0.0,
+      "native_tool_call_count": 2,
+      "native_tool_call_rate": 0.6667,
+      "avg_elapsed_ms": null,
+      "avg_vram_free_before_mib": null,
+      "avg_vram_free_after_mib": null,
+      "evaluation_state": "insufficient_data"
+    },
+    "16384": {
+      "observation_count": 23,
+      "success_count": 9,
+      "failure_count": 14,
+      "success_rate": 0.3913,
+      "timeout_count": 5,
+      "timeout_rate": 0.2174,
+      "native_tool_call_count": 19,
+      "native_tool_call_rate": 0.8261,
+      "avg_elapsed_ms": 27348.3,
+      "avg_vram_free_before_mib": 873.2,
+      "avg_vram_free_after_mib": 447.2,
+      "evaluation_state": "ready_for_review"
+    },
+    "32768": {
+      "observation_count": 21,
+      "success_count": 16,
+      "failure_count": 5,
+      "success_rate": 0.7619,
+      "timeout_count": 0,
+      "timeout_rate": 0.0,
+      "native_tool_call_count": 16,
+      "native_tool_call_rate": 0.7619,
+      "avg_elapsed_ms": 55765.0,
+      "avg_vram_free_before_mib": null,
+      "avg_vram_free_after_mib": null,
+      "evaluation_state": "ready_for_review"
+    }
+  },
+  "by_task_type": {
+    "large_result": {
+      "observation_count": 6,
+      "success_count": 5,
+      "failure_count": 1,
+      "success_rate": 0.8333,
+      "timeout_count": 0,
+      "timeout_rate": 0.0,
+      "native_tool_call_count": 5,
+      "native_tool_call_rate": 0.8333,
+      "avg_elapsed_ms": 41136.2,
+      "avg_vram_free_before_mib": 423.7,
+      "avg_vram_free_after_mib": 423.0
+    },
+    "list_read": {
+      "observation_count": 12,
+      "success_count": 8,
+      "failure_count": 4,
+      "success_rate": 0.6667,
+      "timeout_count": 0,
+      "timeout_rate": 0.0,
+      "native_tool_call_count": 8,
+      "native_tool_call_rate": 0.6667,
+      "avg_elapsed_ms": 34880.9,
+      "avg_vram_free_before_mib": 459.2,
+      "avg_vram_free_after_mib": 484.7
+    },
+    "multi_read": {
+      "observation_count": 6,
+      "success_count": 2,
+      "failure_count": 4,
+      "success_rate": 0.3333,
+      "timeout_count": 0,
+      "timeout_rate": 0.0,
+      "native_tool_call_count": 2,
+      "native_tool_call_rate": 0.3333,
+      "avg_elapsed_ms": 48092.7,
+      "avg_vram_free_before_mib": 557.2,
+      "avg_vram_free_after_mib": 551.2
+    },
+    "search_read": {
+      "observation_count": 23,
+      "success_count": 12,
+      "failure_count": 11,
+      "success_rate": 0.5217,
+      "timeout_count": 5,
+      "timeout_rate": 0.2174,
+      "native_tool_call_count": 22,
+      "native_tool_call_rate": 0.9565,
+      "avg_elapsed_ms": 42306.6,
+      "avg_vram_free_before_mib": 1382.9,
+      "avg_vram_free_after_mib": 390.3
+    }
+  },
+  "cross_analysis": {
+    "context_x_vram_free_before": [
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 10364,
+        "elapsed_ms": 28953,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 409,
+        "elapsed_ms": 38482,
+        "timeout": true,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 342,
+        "elapsed_ms": 16463,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 347,
+        "elapsed_ms": 42253,
+        "timeout": true,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 347,
+        "elapsed_ms": 15662,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 348,
+        "elapsed_ms": 42912,
+        "timeout": true,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 354,
+        "elapsed_ms": 15751,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 355,
+        "elapsed_ms": 41509,
+        "timeout": true,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 480,
+        "elapsed_ms": 15164,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 483,
+        "elapsed_ms": 39992,
+        "timeout": true,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 419,
+        "elapsed_ms": 36398,
+        "timeout": false,
+        "success": true
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 426,
+        "elapsed_ms": 12792,
+        "timeout": false,
+        "success": true
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 426,
+        "elapsed_ms": 11722,
+        "timeout": false,
+        "success": true
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 417,
+        "elapsed_ms": 19696,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 426,
+        "elapsed_ms": 18089,
+        "timeout": false,
+        "success": true
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 426,
+        "elapsed_ms": 41646,
+        "timeout": false,
+        "success": true
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 459,
+        "elapsed_ms": 20732,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 459,
+        "elapsed_ms": 17615,
+        "timeout": false,
+        "success": true
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 568,
+        "elapsed_ms": 44761,
+        "timeout": false,
+        "success": true
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 570,
+        "elapsed_ms": 49955,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 553,
+        "elapsed_ms": 8662,
+        "timeout": false,
+        "success": true
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 553,
+        "elapsed_ms": 41980,
+        "timeout": false,
+        "success": false
+      },
+      {
+        "context_size": 16384,
+        "vram_free_before_mib": 553,
+        "elapsed_ms": 7823,
+        "timeout": false,
+        "success": true
+      }
+    ]
+  },
+  "policy_version": 1,
+  "note": "評価は集計時に再計算。観測 JSONL は変更しない。"
+}

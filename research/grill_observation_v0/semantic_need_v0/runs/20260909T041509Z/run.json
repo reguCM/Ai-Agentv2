@@ -1,0 +1,34 @@
+{
+  "experiment": "semantic_need_v0",
+  "run_id": "20260909T041509Z",
+  "model_id": "qwen3_14b",
+  "model": "qwen3:14b",
+  "profile": {
+    "context_limit": 16384,
+    "num_predict": 2048,
+    "temperature": 0,
+    "hard_timeout_seconds": 300
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "Goal:\n\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\n\nまだ何も調査していない。\n\n質問:\n\nこのGoalを満たすために、\n今の時点で次に満たす必要があることを1つだけ答えてください。\n\n具体的なTool名、関数名、Capability ID、実装方法ではなく、\n「何を知る・確認する・行う必要があるか」\nという意味レベルで答えてください。\n\n一度に1つだけ答えてください。\n"
+    }
+  ],
+  "elapsed_s": 23.531,
+  "error": null,
+    "verdict": "PARTIAL",
+    "verdict_reason": "Goalと未調査Stateに対し、意味レベルで1文だけ返した。Tool名の推測、コード着手、未確認要約、人間への質問、全工程列挙、無関係な技術選択は無い。ただし次Needとして「所在・関連箇所の特定」ではなく「構造と内容の確認」を選んでおり、未調査時点の最初の不足からは一段先。『構造』と『内容』を同時に含む。",
+    "observed_failures": {
+      "guessed_tool_name": false,
+      "started_writing_code": false,
+      "planned_multiple_steps": false,
+      "summarized_unseen_grid": false,
+      "asked_human_unnecessary_question": false,
+      "answered_full_pipeline": false,
+      "unrelated_tech_choice": false
+    },
+    "qwen_answer": "gridの構造と内容を確認する必要があります。",
+    "observer_note": "Cursor did not rewrite or re-prompt Qwen. Expected locate-need was not sent to the model. Stop after this one case.",
+    "note": "One case. No tools. No Help. Production unchanged. Stop after save."
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ai-agent:policy-audit-certificate:v1",
+  "title": "Generic Policy Audit Certificate",
+  "type": "object",
+  "required": ["certificate_type", "policy_id", "policy_path", "declared_scope", "policy_sha256", "audit_rules_id", "audit_rules_version", "audit_result", "findings", "exceptions", "audited_at", "audit_method", "auditor", "working_tree_state", "provenance"],
+  "properties": {
+    "certificate_type": { "const": "GENERIC_POLICY_AUDIT_CERTIFICATE" },
+    "policy_id": { "type": "string", "minLength": 1 },
+    "policy_path": { "type": "string", "minLength": 1 },
+    "declared_scope": { "enum": ["GENERIC", "PROJECT_SPECIFIC", "ADAPTER"] },
+    "policy_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+    "audit_rules_id": { "type": "string", "minLength": 1 },
+    "audit_rules_version": { "type": "string", "minLength": 1 },
+    "audit_result": { "enum": ["AUDITED_CLEAN", "AUDITED_WITH_FINDINGS", "AUDITED_WITH_EXCEPTIONS", "REVIEW_REQUIRED"] },
+    "findings": { "type": "array", "items": { "type": "object" } },
+    "exceptions": { "type": "array", "items": { "type": "object" } },
+    "audited_at": { "type": "string", "format": "date-time" },
+    "audit_method": { "type": "string", "minLength": 1 },
+    "auditor": {
+      "type": "object",
+      "required": ["role"],
+      "properties": { "role": { "type": "string" }, "id": { "type": ["string", "null"] } },
+      "additionalProperties": false
+    },
+    "git_revision": { "type": ["string", "null"] },
+    "working_tree_state": {
+      "type": "object",
+      "required": ["dirty", "scope_note"],
+      "properties": { "dirty": { "type": "boolean" }, "scope_note": { "type": "string" } },
+      "additionalProperties": false
+    },
+    "report_reference": { "type": ["string", "null"] },
+    "provenance": { "type": "object", "additionalProperties": true }
+  },
+  "additionalProperties": false
+}

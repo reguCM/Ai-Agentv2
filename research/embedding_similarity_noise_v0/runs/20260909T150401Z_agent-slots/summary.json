@@ -1,0 +1,700 @@
+{
+  "all_noisy": {
+    "n": 30,
+    "gold_top_n": 15,
+    "gold_not_top_n": 15,
+    "gold_top_rate": 0.5,
+    "mean_gold_rank": 2.233,
+    "mean_gap_vs_second": 0.033815,
+    "mean_delta_vs_clean": -0.0931,
+    "failed_query_ids": [
+      "board_typo",
+      "board_asr",
+      "board_compound",
+      "runtime_colloquial",
+      "runtime_demonstrative",
+      "runtime_compound",
+      "research_typo",
+      "research_conversion",
+      "research_missing_char",
+      "research_particle",
+      "research_filler",
+      "research_restatement",
+      "research_asr",
+      "research_demonstrative",
+      "research_compound"
+    ]
+  },
+  "by_noise_type": {
+    "clean": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": 0.080024,
+      "mean_delta_vs_clean": null,
+      "failed_query_ids": [
+        "research_clean"
+      ]
+    },
+    "typo": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 2.667,
+      "mean_gap_vs_second": 0.032325,
+      "mean_delta_vs_clean": -0.110637,
+      "failed_query_ids": [
+        "board_typo",
+        "research_typo"
+      ]
+    },
+    "conversion": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 4.0,
+      "mean_gap_vs_second": 0.042578,
+      "mean_delta_vs_clean": -0.100802,
+      "failed_query_ids": [
+        "research_conversion"
+      ]
+    },
+    "missing_char": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 2.0,
+      "mean_gap_vs_second": 0.093086,
+      "mean_delta_vs_clean": -0.045333,
+      "failed_query_ids": [
+        "research_missing_char"
+      ]
+    },
+    "particle_drop": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": 0.079408,
+      "mean_delta_vs_clean": 0.006285,
+      "failed_query_ids": [
+        "research_particle"
+      ]
+    },
+    "colloquial": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": -0.012578,
+      "mean_delta_vs_clean": -0.08565,
+      "failed_query_ids": [
+        "runtime_colloquial"
+      ]
+    },
+    "filler": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": 0.094695,
+      "mean_delta_vs_clean": -0.06125,
+      "failed_query_ids": [
+        "research_filler"
+      ]
+    },
+    "restatement": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": 0.064461,
+      "mean_delta_vs_clean": -0.067133,
+      "failed_query_ids": [
+        "research_restatement"
+      ]
+    },
+    "asr_like": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 2.667,
+      "mean_gap_vs_second": 0.025968,
+      "mean_delta_vs_clean": -0.101128,
+      "failed_query_ids": [
+        "board_asr",
+        "research_asr"
+      ]
+    },
+    "demonstrative": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 1.667,
+      "mean_gap_vs_second": -0.022481,
+      "mean_delta_vs_clean": -0.102532,
+      "failed_query_ids": [
+        "runtime_demonstrative",
+        "research_demonstrative"
+      ]
+    },
+    "compound": {
+      "n": 3,
+      "gold_top_n": 0,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.0,
+      "mean_gold_rank": 4.0,
+      "mean_gap_vs_second": -0.059309,
+      "mean_delta_vs_clean": -0.262824,
+      "failed_query_ids": [
+        "board_compound",
+        "runtime_compound",
+        "research_compound"
+      ]
+    }
+  },
+  "by_anchor": {
+    "board": {
+      "n": 10,
+      "gold_top_n": 7,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.7,
+      "mean_gold_rank": 1.3,
+      "mean_gap_vs_second": 0.010145,
+      "mean_delta_vs_clean": -0.028539,
+      "failed_query_ids": [
+        "board_typo",
+        "board_asr",
+        "board_compound"
+      ]
+    },
+    "research": {
+      "n": 10,
+      "gold_top_n": 1,
+      "gold_not_top_n": 9,
+      "gold_top_rate": 0.1,
+      "mean_gold_rank": 4.0,
+      "mean_gap_vs_second": -0.042175,
+      "mean_delta_vs_clean": -0.14151,
+      "failed_query_ids": [
+        "research_typo",
+        "research_conversion",
+        "research_missing_char",
+        "research_particle",
+        "research_filler",
+        "research_restatement",
+        "research_asr",
+        "research_demonstrative",
+        "research_compound"
+      ]
+    },
+    "runtime": {
+      "n": 10,
+      "gold_top_n": 7,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.7,
+      "mean_gold_rank": 1.4,
+      "mean_gap_vs_second": 0.133475,
+      "mean_delta_vs_clean": -0.109252,
+      "failed_query_ids": [
+        "runtime_colloquial",
+        "runtime_demonstrative",
+        "runtime_compound"
+      ]
+    }
+  },
+  "noise_types_with_gold_not_top": [
+    "typo",
+    "conversion",
+    "missing_char",
+    "particle_drop",
+    "colloquial",
+    "filler",
+    "restatement",
+    "asr_like",
+    "demonstrative",
+    "compound"
+  ],
+  "failed_queries": [
+    {
+      "query_id": "board_typo",
+      "noise_type": "typo",
+      "anchor_id": "board",
+      "query_text": "テとりすの盤面",
+      "gold_rank": 2,
+      "gold_cosine": 0.6058,
+      "top_id": "c_goal_board",
+      "top_cosine": 0.624747,
+      "gap_vs_second": -0.018947,
+      "delta_vs_clean": -0.048532,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_board",
+          "text": "Goal: 盤面の内容を読んで要約する",
+          "kind": "goal_board",
+          "rank": 1,
+          "cosine": 0.624747
+        }
+      ]
+    },
+    {
+      "query_id": "board_asr",
+      "noise_type": "asr_like",
+      "anchor_id": "board",
+      "query_text": "手取り巣の盤面",
+      "gold_rank": 2,
+      "gold_cosine": 0.602407,
+      "top_id": "c_goal_board",
+      "top_cosine": 0.631432,
+      "gap_vs_second": -0.029025,
+      "delta_vs_clean": -0.051925,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_board",
+          "text": "Goal: 盤面の内容を読んで要約する",
+          "kind": "goal_board",
+          "rank": 1,
+          "cosine": 0.631432
+        }
+      ]
+    },
+    {
+      "query_id": "board_compound",
+      "noise_type": "compound",
+      "anchor_id": "board",
+      "query_text": "えっとテトリスの番面のやつ",
+      "gold_rank": 2,
+      "gold_cosine": 0.595035,
+      "top_id": "c_goal_board",
+      "top_cosine": 0.603893,
+      "gap_vs_second": -0.008858,
+      "delta_vs_clean": -0.059297,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_board",
+          "text": "Goal: 盤面の内容を読んで要約する",
+          "kind": "goal_board",
+          "rank": 1,
+          "cosine": 0.603893
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_colloquial",
+      "noise_type": "colloquial",
+      "anchor_id": "runtime",
+      "query_text": "実際に動いてるほう",
+      "gold_rank": 2,
+      "gold_cosine": 0.557301,
+      "top_id": "c_meaning_runtime",
+      "top_cosine": 0.640264,
+      "gap_vs_second": -0.082963,
+      "delta_vs_clean": -0.259437,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_runtime",
+          "text": "Meaning: 実行時に動いている実装",
+          "kind": "meaning_runtime",
+          "rank": 1,
+          "cosine": 0.640264
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_demonstrative",
+      "noise_type": "demonstrative",
+      "anchor_id": "runtime",
+      "query_text": "実際に使ってる方",
+      "gold_rank": 2,
+      "gold_cosine": 0.528447,
+      "top_id": "c_meaning_runtime",
+      "top_cosine": 0.597457,
+      "gap_vs_second": -0.06901,
+      "delta_vs_clean": -0.288291,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_runtime",
+          "text": "Meaning: 実行時に動いている実装",
+          "kind": "meaning_runtime",
+          "rank": 1,
+          "cosine": 0.597457
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_compound",
+      "noise_type": "compound",
+      "anchor_id": "runtime",
+      "query_text": "あの実際ゲームで使ってるほう",
+      "gold_rank": 3,
+      "gold_cosine": 0.463107,
+      "top_id": "c_meaning_board",
+      "top_cosine": 0.529294,
+      "gap_vs_second": -0.066187,
+      "delta_vs_clean": -0.353631,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_board",
+          "text": "Meaning: ゲームの盤面状態",
+          "kind": "meaning_board",
+          "rank": 1,
+          "cosine": 0.529294
+        },
+        {
+          "candidate_id": "c_meaning_runtime",
+          "text": "Meaning: 実行時に動いている実装",
+          "kind": "meaning_runtime",
+          "rank": 2,
+          "cosine": 0.521847
+        }
+      ]
+    },
+    {
+      "query_id": "research_typo",
+      "noise_type": "typo",
+      "anchor_id": "research",
+      "query_text": "けんきゅう用のもの",
+      "gold_rank": 5,
+      "gold_cosine": 0.49422,
+      "top_id": "c_meaning_research",
+      "top_cosine": 0.562899,
+      "gap_vs_second": -0.068679,
+      "delta_vs_clean": -0.225549,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_research",
+          "text": "Meaning: 研究用の実験",
+          "kind": "meaning_research",
+          "rank": 1,
+          "cosine": 0.562899
+        },
+        {
+          "candidate_id": "c_goal_board",
+          "text": "Goal: 盤面の内容を読んで要約する",
+          "kind": "goal_board",
+          "rank": 2,
+          "cosine": 0.544355
+        },
+        {
+          "candidate_id": "c_meaning_board",
+          "text": "Meaning: ゲームの盤面状態",
+          "kind": "meaning_board",
+          "rank": 3,
+          "cosine": 0.535939
+        },
+        {
+          "candidate_id": "c_goal_weather",
+          "text": "Goal: 今日の天気を調べる",
+          "kind": "wrong_goal",
+          "rank": 4,
+          "cosine": 0.49466
+        }
+      ]
+    },
+    {
+      "query_id": "research_conversion",
+      "noise_type": "conversion",
+      "anchor_id": "research",
+      "query_text": "兼休用のもの",
+      "gold_rank": 10,
+      "gold_cosine": 0.460836,
+      "top_id": "c_goal_board",
+      "top_cosine": 0.532651,
+      "gap_vs_second": -0.071815,
+      "delta_vs_clean": -0.258933,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_board",
+          "text": "Goal: 盤面の内容を読んで要約する",
+          "kind": "goal_board",
+          "rank": 1,
+          "cosine": 0.532651
+        },
+        {
+          "candidate_id": "c_meaning_score",
+          "text": "Meaning: ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "rank": 2,
+          "cosine": 0.51576
+        },
+        {
+          "candidate_id": "c_meaning_board",
+          "text": "Meaning: ゲームの盤面状態",
+          "kind": "meaning_board",
+          "rank": 3,
+          "cosine": 0.511241
+        },
+        {
+          "candidate_id": "c_role_runtime",
+          "text": "Target Role: 実行時の本番経路",
+          "kind": "role_runtime",
+          "rank": 4,
+          "cosine": 0.499386
+        },
+        {
+          "candidate_id": "c_meaning_runtime",
+          "text": "Meaning: 実行時に動いている実装",
+          "kind": "meaning_runtime",
+          "rank": 5,
+          "cosine": 0.487752
+        },
+        {
+          "candidate_id": "c_role_board",
+          "text": "Target Role: 盤面の観測データ",
+          "kind": "role_board",
+          "rank": 6,
+          "cosine": 0.486429
+        },
+        {
+          "candidate_id": "c_goal_research",
+          "text": "Goal: 研究用コードを読んで要約する",
+          "kind": "goal_research",
+          "rank": 7,
+          "cosine": 0.477956
+        },
+        {
+          "candidate_id": "c_meaning_research",
+          "text": "Meaning: 研究用の実験",
+          "kind": "meaning_research",
+          "rank": 8,
+          "cosine": 0.477049
+        },
+        {
+          "candidate_id": "c_role_followup",
+          "text": "Target Role: followup_investigation の追加調査",
+          "kind": "wrong_role",
+          "rank": 9,
+          "cosine": 0.473223
+        }
+      ]
+    },
+    {
+      "query_id": "research_missing_char",
+      "noise_type": "missing_char",
+      "anchor_id": "research",
+      "query_text": "究用のもの",
+      "gold_rank": 4,
+      "gold_cosine": 0.623813,
+      "top_id": "c_meaning_research",
+      "top_cosine": 0.63715,
+      "gap_vs_second": -0.013337,
+      "delta_vs_clean": -0.095956,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_research",
+          "text": "Meaning: 研究用の実験",
+          "kind": "meaning_research",
+          "rank": 1,
+          "cosine": 0.63715
+        },
+        {
+          "candidate_id": "c_goal_board",
+          "text": "Goal: 盤面の内容を読んで要約する",
+          "kind": "goal_board",
+          "rank": 2,
+          "cosine": 0.634413
+        },
+        {
+          "candidate_id": "c_goal_research",
+          "text": "Goal: 研究用コードを読んで要約する",
+          "kind": "goal_research",
+          "rank": 3,
+          "cosine": 0.630088
+        }
+      ]
+    },
+    {
+      "query_id": "research_particle",
+      "noise_type": "particle_drop",
+      "anchor_id": "research",
+      "query_text": "研究用もの",
+      "gold_rank": 2,
+      "gold_cosine": 0.711771,
+      "top_id": "c_meaning_research",
+      "top_cosine": 0.743193,
+      "gap_vs_second": -0.031422,
+      "delta_vs_clean": -0.007998,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_research",
+          "text": "Meaning: 研究用の実験",
+          "kind": "meaning_research",
+          "rank": 1,
+          "cosine": 0.743193
+        }
+      ]
+    },
+    {
+      "query_id": "research_filler",
+      "noise_type": "filler",
+      "anchor_id": "research",
+      "query_text": "まあ研究用のものかな",
+      "gold_rank": 2,
+      "gold_cosine": 0.583811,
+      "top_id": "c_meaning_research",
+      "top_cosine": 0.611788,
+      "gap_vs_second": -0.027977,
+      "delta_vs_clean": -0.135958,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_research",
+          "text": "Meaning: 研究用の実験",
+          "kind": "meaning_research",
+          "rank": 1,
+          "cosine": 0.611788
+        }
+      ]
+    },
+    {
+      "query_id": "research_restatement",
+      "noise_type": "restatement",
+      "anchor_id": "research",
+      "query_text": "本番じゃなくて研究用のもの",
+      "gold_rank": 2,
+      "gold_cosine": 0.629912,
+      "top_id": "c_meaning_research",
+      "top_cosine": 0.660495,
+      "gap_vs_second": -0.030583,
+      "delta_vs_clean": -0.089857,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_research",
+          "text": "Meaning: 研究用の実験",
+          "kind": "meaning_research",
+          "rank": 1,
+          "cosine": 0.660495
+        }
+      ]
+    },
+    {
+      "query_id": "research_asr",
+      "noise_type": "asr_like",
+      "anchor_id": "research",
+      "query_text": "兼急用のもの",
+      "gold_rank": 5,
+      "gold_cosine": 0.507719,
+      "top_id": "c_goal_board",
+      "top_cosine": 0.575285,
+      "gap_vs_second": -0.067566,
+      "delta_vs_clean": -0.21205,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_board",
+          "text": "Goal: 盤面の内容を読んで要約する",
+          "kind": "goal_board",
+          "rank": 1,
+          "cosine": 0.575285
+        },
+        {
+          "candidate_id": "c_goal_research",
+          "text": "Goal: 研究用コードを読んで要約する",
+          "kind": "goal_research",
+          "rank": 2,
+          "cosine": 0.541542
+        },
+        {
+          "candidate_id": "c_role_runtime",
+          "text": "Target Role: 実行時の本番経路",
+          "kind": "role_runtime",
+          "rank": 3,
+          "cosine": 0.532162
+        },
+        {
+          "candidate_id": "c_goal_runtime",
+          "text": "Goal: 実行時コードを読んで要約する",
+          "kind": "goal_runtime",
+          "rank": 4,
+          "cosine": 0.522247
+        }
+      ]
+    },
+    {
+      "query_id": "research_demonstrative",
+      "noise_type": "demonstrative",
+      "anchor_id": "research",
+      "query_text": "研究用のほう",
+      "gold_rank": 2,
+      "gold_cosine": 0.709471,
+      "top_id": "c_meaning_research",
+      "top_cosine": 0.722481,
+      "gap_vs_second": -0.01301,
+      "delta_vs_clean": -0.010298,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_research",
+          "text": "Meaning: 研究用の実験",
+          "kind": "meaning_research",
+          "rank": 1,
+          "cosine": 0.722481
+        }
+      ]
+    },
+    {
+      "query_id": "research_compound",
+      "noise_type": "compound",
+      "anchor_id": "research",
+      "query_text": "まあけんきゅう用のも",
+      "gold_rank": 7,
+      "gold_cosine": 0.344226,
+      "top_id": "c_meaning_research",
+      "top_cosine": 0.447107,
+      "gap_vs_second": -0.102881,
+      "delta_vs_clean": -0.375543,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_research",
+          "text": "Meaning: 研究用の実験",
+          "kind": "meaning_research",
+          "rank": 1,
+          "cosine": 0.447107
+        },
+        {
+          "candidate_id": "c_meaning_board",
+          "text": "Meaning: ゲームの盤面状態",
+          "kind": "meaning_board",
+          "rank": 2,
+          "cosine": 0.440321
+        },
+        {
+          "candidate_id": "c_goal_board",
+          "text": "Goal: 盤面の内容を読んで要約する",
+          "kind": "goal_board",
+          "rank": 3,
+          "cosine": 0.382153
+        },
+        {
+          "candidate_id": "c_meaning_runtime",
+          "text": "Meaning: 実行時に動いている実装",
+          "kind": "meaning_runtime",
+          "rank": 4,
+          "cosine": 0.364387
+        },
+        {
+          "candidate_id": "c_meaning_cpu",
+          "text": "Meaning: CPU温度の取得方法",
+          "kind": "wrong_meaning",
+          "rank": 5,
+          "cosine": 0.353882
+        },
+        {
+          "candidate_id": "c_goal_weather",
+          "text": "Goal: 今日の天気を調べる",
+          "kind": "wrong_goal",
+          "rank": 6,
+          "cosine": 0.344647
+        }
+      ]
+    }
+  ]
+}

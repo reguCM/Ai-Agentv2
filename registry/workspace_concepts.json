@@ -1,0 +1,199 @@
+{
+  "schema_version": 2,
+  "classifier": {
+    "match_exclusions": {
+      "japanese_file_object_tokens": ["プロファイル"],
+      "applies_to": [
+        "h4_required_capabilities_matcher.file_object",
+        "h4_required_capabilities_matcher.file_anchored_mutation_phrase"
+      ],
+      "does_not_apply_to": ["help_search", "tool_builder_search", "relevant_tools", "is_agent_task"]
+    },
+    "audit_intent": ["調査", "確認", "存在", "利用可能", "どこまで", "定義", "inspect", "audit", "check", "available"],
+    "audit_demotes_capabilities": [
+      "workspace_file_write",
+      "workspace_file_edit",
+      "workspace_file_create",
+      "command_execution",
+      "python_execution",
+      "test_execution",
+      "tool_validation",
+      "tool_registration"
+    ]
+  },
+  "capabilities": {
+    "workspace_file_read": {
+      "description": "Workspace内テキストファイルのread-only読取",
+      "tools": ["read_file"],
+      "look_first": ["registry/tools.json"],
+      "prefer_when_ambiguous": true
+    },
+    "workspace_file_search": {
+      "description": "Workspace内テキストのread-only検索",
+      "tools": ["search_files"],
+      "look_first": ["registry/tools.json"]
+    },
+    "workspace_file_list": {
+      "description": "Workspace内ディレクトリのread-only一覧取得",
+      "tools": ["list_files"],
+      "look_first": ["registry/tools.json"]
+    },
+    "workspace_file_write": {
+      "description": "Workspace内ファイルへの書込",
+      "tools": [],
+      "look_first": ["registry/tools.json"],
+      "suggested_minimal_tool": "write_file"
+    },
+    "workspace_file_edit": {
+      "description": "Workspace内既存ファイルの安全な編集",
+      "tools": ["edit_file"],
+      "look_first": ["registry/tools.json"]
+    },
+    "workspace_file_create": {
+      "description": "Workspace内への新規ファイル作成",
+      "tools": ["create_file"],
+      "look_first": ["registry/tools.json"]
+    },
+    "command_execution": {
+      "description": "ローカルcommandまたはshellの実行",
+      "tools": [],
+      "look_first": ["registry/tools.json"],
+      "suggested_minimal_tool": "run_command"
+    },
+    "python_execution": {
+      "description": "Pythonコードの実行",
+      "tools": [],
+      "look_first": ["registry/tools.json"],
+      "suggested_minimal_tool": "run_python"
+    },
+    "test_execution": {
+      "description": "pytest等の開発テスト実行",
+      "tools": [],
+      "look_first": ["registry/tools.json"],
+      "suggested_minimal_tool": "run_tests"
+    },
+    "registry_read": {
+      "description": "Tool Registry正本のread-only確認",
+      "tools": ["read_file"],
+      "look_first": ["registry/tools.json"]
+    },
+    "tool_validation": {
+      "description": "Tool実装またはTool Resultの検証",
+      "tools": [],
+      "look_first": ["registry/tools.json"],
+      "suggested_minimal_tool": "validate_tool"
+    },
+    "tool_registration": {
+      "description": "検証済みToolのRegistry登録",
+      "tools": [],
+      "look_first": ["registry/tools.json"],
+      "suggested_minimal_tool": "register_tool"
+    },
+    "web_search": {
+      "description": "Web上の情報探索（Discovery）。URL本文取得は含まない",
+      "tools": ["search_web"],
+      "look_first": [],
+      "prefer_when_ambiguous": true
+    },
+    "url_fetch": {
+      "description": "既知HTTP/HTTPS URLからのread-only本文取得",
+      "tools": ["read_url_text"],
+      "look_first": []
+    },
+    "gpu_device_observation": {
+      "description": "GPU装置の温度・VRAM・使用率などのread-only観測",
+      "tools": ["get_gpu_status"],
+      "look_first": [],
+      "prefer_when_ambiguous": true
+    },
+    "gpu_process_observation": {
+      "description": "GPUを使用中のプロセスのread-only観測",
+      "tools": ["get_gpu_processes"],
+      "look_first": []
+    },
+    "cpu_observation": {
+      "description": "CPU状態のread-only観測。構造化Toolとlegacy Toolは同一capability",
+      "tools": ["get_cpu_status", "cpu_status"],
+      "look_first": []
+    }
+  },
+  "categories": {
+    "runtime": {
+      "description": "Goal、Task、Evidence、Progress、Stagnation、Tool Gapを扱うAgent Runtime状態",
+      "look_first": [
+        "tools/ai/task_runtime.py",
+        "ai_tool/chat_interface/task_orchestration.py",
+        "ai_tool/chat_interface/agent_turn.py"
+      ]
+    },
+    "tool_registry": {
+      "description": "Agentへ公開するTool、schema、visibilityの正本",
+      "look_first": ["registry/tools.json"]
+    },
+    "test_runner": {
+      "description": "Agent Test Runner、Run結果、評価、集計",
+      "look_first": ["ai_tool/agent_test_runner.py"]
+    },
+    "local_review": {
+      "description": "Local Review Assistant、追加Task、Review検証",
+      "look_first": [
+        "ai_tool/chat_interface/local_review.py",
+        "ai_tool/chat_interface/task_orchestration.py"
+      ]
+    },
+    "requirement": {
+      "description": "Requirement DecompositionとCompletion Condition生成",
+      "look_first": ["ai_tool/chat_interface/requirement_decomposition.py"]
+    }
+  },
+  "concepts": {
+    "tool_gap": {
+      "category": "runtime",
+      "look_first": [
+        "tools/ai/task_runtime.py",
+        "ai_tool/chat_interface/task_orchestration.py"
+      ],
+      "search_terms": ["ToolGapCandidate", "detect_tool_gap", "tool_gaps"]
+    },
+    "tool_gap_count": {
+      "category": "test_runner",
+      "look_first": [
+        "ai_tool/agent_test_runner.py",
+        "tools/ai/task_runtime.py"
+      ],
+      "search_terms": ["tool_gap_count", "tool_gaps", "detect_tool_gap"]
+    },
+    "completion_coverage": {
+      "category": "runtime",
+      "look_first": [
+        "tools/ai/task_runtime.py",
+        "ai_tool/agent_test_runner.py"
+      ],
+      "search_terms": ["condition_status", "support_completion_conditions", "completion_coverage"]
+    },
+    "evidence": {
+      "category": "runtime",
+      "look_first": [
+        "tools/ai/task_runtime.py",
+        "ai_tool/chat_interface/task_orchestration.py"
+      ],
+      "search_terms": ["EvidenceRecord", "add_evidence", "evidence_gain"]
+    },
+    "stagnation": {
+      "category": "runtime",
+      "look_first": [
+        "ai_tool/chat_interface/agent_turn.py",
+        "tools/ai/task_runtime.py"
+      ],
+      "search_terms": ["stagnation_count", "STAGNATION", "is_stagnating"]
+    },
+    "local_review": {
+      "category": "local_review",
+      "look_first": [
+        "ai_tool/chat_interface/local_review.py",
+        "ai_tool/chat_interface/task_orchestration.py"
+      ],
+      "search_terms": ["validate_review", "local_reviews", "LOCAL_REVIEW_VALIDATED"]
+    }
+  }
+}

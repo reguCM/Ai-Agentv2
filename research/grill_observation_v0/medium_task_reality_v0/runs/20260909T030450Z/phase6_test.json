@@ -1,0 +1,18 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "test_window_loop_gap.py",
+    "test_medium_task_v0.py",
+    "-q"
+  ],
+  "returncode": 2,
+  "stdout": "\n=================================== ERRORS ====================================\n_ ERROR collecting research/grill_observation_v0/medium_task_reality_v0/tests/test_medium_task_v0.py _\nImportError while importing test module 'D:\\AI-Agent-worktrees\\current-dev\\research\\grill_observation_v0\\medium_task_reality_v0\\tests\\test_medium_task_v0.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nC:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\lib\\importlib\\__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\nresearch\\grill_observation_v0\\medium_task_reality_v0\\tests\\test_medium_task_v0.py:2: in <module>\n    from workspace.window_loop import update, grid, score\nE   ModuleNotFoundError: No module named 'workspace'\n=========================== short test summary info ===========================\nERROR research/grill_observation_v0/medium_task_reality_v0/tests/test_medium_task_v0.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.68s\n",
+  "stderr": "",
+  "passed": false,
+  "files": [
+    "test_window_loop_gap.py",
+    "test_medium_task_v0.py"
+  ]
+}

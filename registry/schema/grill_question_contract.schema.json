@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/grill_question_contract.schema.json",
+  "title": "Grill question contract",
+  "description": "Shared grill question payload for Initial / Boundary / Goal-meaning grills. Not Human Approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "question_id",
+    "question",
+    "answer_type",
+    "options",
+    "recommended_option_id",
+    "recommendation_reason",
+    "grill_reason"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "0.1"
+    },
+    "question_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9_:-]{0,127}$"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "answer_type": {
+      "type": "string",
+      "enum": ["single_choice", "freeform_with_recommendation"]
+    },
+    "options": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/option" }
+    },
+    "recommended_option_id": {
+      "type": "string"
+    },
+    "recommendation_reason": {
+      "type": "string"
+    },
+    "grill_reason": {
+      "type": "string",
+      "enum": [
+        "initial_grill",
+        "boundary_grill",
+        "goal_gap_grill",
+        "goal_completion_human",
+        "decision_change_confirmation",
+        "requirement_resolution"
+      ]
+    },
+    "dimension": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "decision_key": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "Semantic identity of the spec decision (e.g. acceptance:output_format). Distinct from question_id."
+    },
+    "decision_subject": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "Human-readable subject for the decision_key."
+    }
+  },
+  "$defs": {
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_:-]{0,63}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "selection_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question_id",
+        "selected_option_id",
+        "selected_label",
+        "selection_policy",
+        "human_response_kind",
+        "auto_selected"
+      ],
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selected_option_id": {
+          "type": ["string", "null"]
+        },
+        "selected_label": {
+          "type": ["string", "null"]
+        },
+        "selection_policy": {
+          "type": "string",
+          "enum": ["test_auto_recommendation", "human_ui"]
+        },
+        "human_response_kind": {
+          "type": "string",
+          "enum": ["simulated_human", "human_ui"]
+        },
+        "auto_selected": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "handoff_version": "0.1",
+  "handoff_id": "gh-20260910T091500Z-goal-completion-gate-followup",
+  "status": "draft",
+  "provisional": true,
+  "created_at": "2026-09-10T09:15:00+09:00",
+  "source": {
+    "skills": [
+      "write-prd",
+      "graph-engineering",
+      "tech-spec",
+      "planning-and-task-breakdown",
+      "goal-handoff"
+    ],
+    "documents": {
+      "prd": "docs/prds/example-feature.md",
+      "tech_spec": "docs/tech-specs/example-feature.md",
+      "plan": "tasks/plan.md",
+      "task_list": "tasks/todo.md"
+    },
+    "git": {
+      "branch": "dev/current",
+      "head": "531cdd4",
+      "worktree": "D:/AI-Agent-worktrees/dev-current"
+    }
+  },
+  "goal": {
+    "summary": "Extend the development Skill registry so Cursor/Codex can resolve adopted skills and emit a validated Goal Handoff Packet before implementation starts.",
+    "original_request_excerpt": "registry/skills.json の具体スキーマ案と goal-handoff の Output Contract 草案まで落とし込んでください"
+  },
+  "scope": {
+    "in_scope": [
+      "Add registry/skills.json and JSON Schemas",
+      "Add goal-handoff Skill and example packet",
+      "Document GOAL_HANDOFF_V0"
+    ],
+    "non_goals": [
+      "Production Runtime consumption of handoff packets",
+      "Modifying imported Skill bodies under .agents/skills except goal-handoff"
+    ],
+    "affected_paths": [
+      "registry/",
+      ".agents/skills/goal-handoff/",
+      "docs/specs/GOAL_HANDOFF_V0.md",
+      "docs/handoffs/"
+    ]
+  },
+  "acceptance_criteria": [
+    {
+      "id": "A1",
+      "statement": "registry/skills.json validates against registry/schema/skills.schema.json",
+      "verification": "Run registry validation test or jsonschema validator"
+    },
+    {
+      "id": "A2",
+      "statement": "Example handoff validates against registry/schema/goal_handoff.schema.json",
+      "verification": "Run registry validation test or jsonschema validator"
+    }
+  ],
+  "implementation_tasks": [
+    {
+      "id": "T1",
+      "title": "Add skill registry schemas and catalog",
+      "acceptance": [
+        "skills.schema.json defines skill, composition, and output_contract shapes",
+        "skills.json lists adopted skills and goal-handoff"
+      ],
+      "verification": [
+        "Validate registry/skills.json with skills.schema.json"
+      ],
+      "dependencies": [],
+      "size": "S",
+      "maps_to_acceptance": ["A1"]
+    },
+    {
+      "id": "T2",
+      "title": "Add goal-handoff contract and example packet",
+      "acceptance": [
+        "goal_handoff.schema.json exists",
+        "docs/specs/GOAL_HANDOFF_V0.md documents field semantics",
+        "Example packet is present under docs/handoffs/examples/"
+      ],
+      "verification": [
+        "Validate example against goal_handoff.schema.json"
+      ],
+      "dependencies": ["T1"],
+      "size": "S",
+      "maps_to_acceptance": ["A2"]
+    }
+  ],
+  "test_plan": {
+    "pytest": [
+      "tests/registry/test_skills_registry.py"
+    ],
+    "e2e": [],
+    "manual": [
+      "Human reviews docs/specs/GOAL_HANDOFF_V0.md and example packet"
+    ]
+  },
+  "human_gates": [
+    "git_push",
+    "merge_to_stable"
+  ],
+  "risks": [
+    {
+      "statement": "Cursor adapter still reads .mdc alias table instead of registry/skills.json",
+      "impact": "medium",
+      "mitigation": "Document dual source until adapter migration; keep alias_index aligned with skill-namespace-compat.mdc"
+    }
+  ],
+  "open_questions": [],
+  "runtime_boundary": {
+    "production_connected": false,
+    "notes": "Dev Handoff Packet only. Production Chat / Mission Memory / Goal Completion Gate do not consume this file in v0."
+  }
+}

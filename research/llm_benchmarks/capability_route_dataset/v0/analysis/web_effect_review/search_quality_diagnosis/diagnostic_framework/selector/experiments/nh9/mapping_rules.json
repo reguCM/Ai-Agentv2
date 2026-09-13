@@ -1,0 +1,99 @@
+{
+  "version": "0.1",
+  "note": "Mechanical only. OBSERVED true can set features. UNKNOWN never sets dangerous features true. INFERENCE is not a slot status. LLM does not choose methods.",
+  "status_semantics": {
+    "OBSERVED": "quote in materials; value true/false must match quote",
+    "NOT_OBSERVED": "materials explicitly say absent (なし, 変更なし, REOPENではない)",
+    "UNKNOWN": "not stated; do not invent"
+  },
+  "slot_to_feature": [
+    {
+      "when": "any of state_change_requested|goal_change_requested|claim_change_requested|hypothesis_change_requested|reopen_requested is OBSERVED true",
+      "set": {"state_change_requested": true}
+    },
+    {
+      "when": "all of state/goal/claim/hypothesis are NOT_OBSERVED or OBSERVED false",
+      "set": {"state_change_requested": false}
+    },
+    {
+      "when": "reopen_requested OBSERVED true",
+      "set": {"reopen_requested": true}
+    },
+    {
+      "when": "stdout_present OBSERVED true OR runtime_issue_observed OBSERVED true",
+      "set": {"has_runtime_logs": true}
+    },
+    {
+      "when": "stdout_present and runtime_issue_observed both NOT_OBSERVED or OBSERVED false",
+      "set": {"has_runtime_logs": false}
+    },
+    {
+      "when": "code_scope_present OBSERVED true",
+      "set": {"code_available": true}
+    },
+    {
+      "when": "code_multi_file OBSERVED true",
+      "set": {"needs_path_integration": true, "needs_local_analysis": true}
+    },
+    {
+      "when": "near_exact_surface OBSERVED true",
+      "set": {"near_exact_reactivation": true}
+    },
+    {
+      "when": "similar_new_meaning OBSERVED true",
+      "set": {"similar_but_new_goal": true}
+    },
+    {
+      "when": "evidence_present OBSERVED true",
+      "set": {"evidence_present": true}
+    },
+    {
+      "when": "evidence_exists_known OBSERVED true",
+      "set": {"evidence_exists": true}
+    },
+    {
+      "when": "evidence_content_mismatch OBSERVED true OR evidence_content_known OBSERVED false",
+      "set": {"evidence_content_mismatch": true, "evidence_suspicious": true}
+    },
+    {
+      "when": "small_llm_unverified OBSERVED true",
+      "set": {"small_llm_output_suspicious": true}
+    },
+    {
+      "when": "llm_disagreement OBSERVED true",
+      "set": {"llm_disagreement": true}
+    },
+    {
+      "when": "stdout_present OBSERVED true AND llm_handoff_present OBSERVED true",
+      "set": {"suspect_stdout_vs_llm_handoff": true}
+    },
+    {
+      "when": "ranking_filter_separated NOT_OBSERVED/false AND ranking_present and collect_filter_present OBSERVED true",
+      "set": {"suspect_ranking_vs_filter": true}
+    },
+    {
+      "when": "off_path_cause_mentioned OBSERVED true",
+      "set": {"suspect_off_path_causes": true}
+    },
+    {
+      "when": "evidence_present OBSERVED true AND evidence_freshness_known UNKNOWN",
+      "set": {"evidence_timestamp_unknown": true}
+    }
+  ],
+  "derived_flags": {
+    "state_safety_required": "any state/goal/claim/hypothesis/reopen OBSERVED true",
+    "reopen_validation_required": "reopen OBSERVED true AND (evidence_exists_known not OBSERVED true OR evidence_content_known not OBSERVED)",
+    "runtime_diagnosis_confidence": "HIGH_RISK if runtime_issue UNKNOWN and code OBSERVED; NO_LOGS if has_runtime_logs false; else LOGS_PRESENT"
+  },
+  "safety_locks": {
+    "runtime_log_なし": "force has_runtime_logs=false regardless of LLM slots"
+  },
+  "unknown_never_sets_true": [
+    "state_change_requested",
+    "reopen_requested",
+    "has_runtime_logs",
+    "evidence_present",
+    "llm_disagreement",
+    "near_exact_reactivation"
+  ]
+}

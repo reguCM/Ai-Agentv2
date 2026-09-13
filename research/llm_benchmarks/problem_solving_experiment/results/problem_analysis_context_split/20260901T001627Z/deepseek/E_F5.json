@@ -1,0 +1,72 @@
+{
+  "experiment": "problem_analysis_context_split",
+  "model": "deepseek-coder-v2:16b",
+  "case_id": "E_information_poor",
+  "condition": "F5",
+  "input": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"unknown_tool\",\n  \"status\": \"fail\",\n  \"error_type\": \"RuntimeError\",\n  \"error\": \"operation failed\"\n}\n\nconversation:\nUser:\n必要な処理を実行できるToolを作ってください。\n\nAssistant:\nunknown_tool を作成しました。\n\nUser:\n実行してください。\n\nAssistant:\nunknown_toolを実行します。\n",
+  "raw_output": "この問題は、何らかのツールが失敗したことを示すエラーメッセージを含むJSONオブジェクトです。具体的には、以下のような内容です。\n\n```json\n{\n  \"tool_name\": \"unknown_tool\",\n  \"status\": \"fail\",\n  \"error_type\": \"RuntimeError\",\n  \"error\": \"operation failed\"\n}\n```\n\nこの問題を分析すると、以下の点がわかります：\n\n1. **ツールの名前**: `unknown_tool`\n   - これは、問題の原因となったツールの名前を示しています。\n\n2. **ステータス**: `fail`\n   - これは、ツールの実行が失敗したことを示しています。\n\n3. **エラータイプ**: `RuntimeError`\n   - これは、エラーのタイプがランタイムエラーであることを示しています。\n\n4. **エラーメッセージ**: `operation failed`\n   - これは、具体的なエラーメッセージです。この場合、操作が失敗したことを示しています。\n\nこの問題は、ツールの実行に失敗したことを示すものです。具体的な原因は不明ですが、ツールの実行が失敗していることは確かです。",
+  "timestamp": "2026-09-01T00:17:39.805675+00:00",
+  "call_ok": true,
+  "error": null,
+  "temperature": 0.0,
+  "failure": {
+    "tool_name": "unknown_tool",
+    "status": "fail",
+    "error_type": "RuntimeError",
+    "error": "operation failed"
+  },
+  "prompt_header": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.",
+  "notes": [
+    "context_split",
+    "no_analysis_taxonomy",
+    "no_tools",
+    "no_invented_traceback_or_source",
+    "f5_conversation_from_previous_fixture"
+  ],
+  "observability": {
+    "experiment_start": "2026-09-01T00:17:39.805675+00:00",
+    "experiment_end": "2026-09-01T00:17:44.118149+00:00",
+    "stop_reason": "single_turn",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"unknown_tool\",\n  \"status\": \"fail\",\n  \"error_type\": \"RuntimeError\",\n  \"error\": \"operation failed\"\n}\n\nconversation:\nUser:\n必要な処理を実行できるToolを作ってください。\n\nAssistant:\nunknown_tool を作成しました。\n\nUser:\n実行してください。\n\nAssistant:\nunknown_toolを実行します。\n"
+      }
+    ],
+    "chat_kwargs": {
+      "model": "deepseek-coder-v2:16b",
+      "tools": "not_used",
+      "keep_alive": "5m",
+      "options": {
+        "num_predict": 2048,
+        "temperature": 0.0,
+        "num_ctx": 4096
+      },
+      "timeout_seconds": 90,
+      "tool_presentation": "none",
+      "kwargs_source": {
+        "harness_chat_call": [
+          "model",
+          "messages"
+        ],
+        "llm_chat_setdefault": [
+          "options",
+          "keep_alive"
+        ],
+        "not_passed": [
+          "tools"
+        ]
+      }
+    },
+    "tools_used": false,
+    "extras": {
+      "traceback_included": false,
+      "source_included": false,
+      "conversation_included": true,
+      "traceback_recorded": false,
+      "source_recorded": false,
+      "conversation_provenance": "problem_analysis_context_cases.py (previous context experiment fixture, not live chat)"
+    },
+    "thinking_observed": false
+  }
+}

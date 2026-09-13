@@ -1,0 +1,75 @@
+{
+  "experiment": "resolver_owner_v0",
+  "run_id": "20260909T064802Z",
+  "model": "qwen3:14b",
+  "production_modified": false,
+  "router_implemented": false,
+  "labels_are_research_only": true,
+  "case4": {
+    "case": "Case 4",
+    "expected_label": "SYSTEM_GAP",
+    "status": "NOT_AVAILABLE",
+    "reason": "Canonical Index で tools[] が空の Capability は存在する (workspace_file_write / command_execution / python_execution / test_execution / tool_validation / tool_registration)。しかし現行 required_capabilities は Registry keyword 逆引きのため、空 tools[] の Capability へ自然言語リクエストを束縛できない。pytestを実行する / Pythonを実行して / コマンドを実行して 等の実測は no_required_capability であり、必要能力が System 上で明確になっていない。推測で SYSTEM_GAP ケースを作らない。",
+    "canonical_empty_tools": [
+      "workspace_file_write",
+      "command_execution",
+      "python_execution",
+      "test_execution",
+      "tool_validation",
+      "tool_registration"
+    ]
+  },
+  "cases": [
+    {
+      "case": "Case 1",
+      "goal": "registry/tools.json を読んで、内容を確認してほしい。",
+      "grill_called": false,
+      "second_grill": false,
+      "system_first_stopped_at": "executable_action",
+      "system_retry_stopped_at": null,
+      "capability": "workspace_file_read",
+      "selected_tool": "read_file",
+      "next_action": {
+        "tool": "read_file",
+        "arguments": {
+          "path": "registry/tools.json"
+        }
+      },
+      "final_label": "SYSTEM_RESOLVABLE",
+      "classification_reason": "System First だけで read_file の実行可能 Action に到達した。Grill は呼ばない。"
+    },
+    {
+      "case": "Case 2",
+      "goal": "gridを検索して、その内容を要約してほしい。",
+      "grill_called": true,
+      "second_grill": true,
+      "system_first_stopped_at": "no_required_capability",
+      "system_retry_stopped_at": "executable_action",
+      "capability": "workspace_file_read",
+      "selected_tool": "read_file",
+      "next_action": {
+        "tool": "search_files",
+        "arguments": {
+          "query": "ID",
+          "path": "."
+        }
+      },
+      "final_label": "AI_RESOLVABLE",
+      "classification_reason": "System First では Action 化できず、Grounded Grill 後の System Retry で Action 化した。"
+    },
+    {
+      "case": "Case 3",
+      "goal": "来週の人間レビュー資料は、詳細な技術解説を優先するか、結論だけ短くまとめた報告を優先するか、好みを決めてほしい。",
+      "grill_called": true,
+      "second_grill": false,
+      "system_first_stopped_at": "tool_selected_arguments_incomplete",
+      "system_retry_stopped_at": "tool_selected_arguments_incomplete",
+      "capability": "workspace_file_read",
+      "selected_tool": "read_file",
+      "next_action": null,
+      "final_label": "HUMAN_REQUIRED",
+      "classification_reason": "System First でも Grill 後 System Retry でも Action 化できず、残った Unknown は追加観測ではなくユーザーの好み・価値判断そのもの。"
+    }
+  ],
+  "elapsed_s": 108.445
+}

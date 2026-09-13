@@ -1,0 +1,65 @@
+{
+  "kind": "observer_coverage_at_stage2_stop",
+  "note": "Qwen COMPLETE is a Gap Grill judgment. It is not product-complete and not E2E.",
+  "qwen_classification": "COMPLETE",
+  "unresolved_errors": [],
+  "spec_items": [
+    {
+      "item": "Python",
+      "status": "PRESENT",
+      "evidence": "workspace/*.py"
+    },
+    {
+      "item": "Pygame window 300x600 + QUIT loop skeleton",
+      "status": "PRESENT",
+      "evidence": "window_loop.py"
+    },
+    {
+      "item": "テトロミノ形状・初期配置・rotate(reverse+transpose)",
+      "status": "PRESENT",
+      "evidence": "tetromino.py + test_tetromino_gap.py"
+    },
+    {
+      "item": "衝突判定",
+      "status": "PRESENT",
+      "evidence": "collision.py + test_collision_gap.py"
+    },
+    {
+      "item": "ラインクリアとスコア加算",
+      "status": "PRESENT",
+      "evidence": "line_clear.py + test_line_clear_gap.py; score += cleared count, no point table"
+    },
+    {
+      "item": "落下・移動・回転",
+      "status": "PARTIAL",
+      "evidence": "movement.py try_move/try_rotate/fall_due + tests; not wired into window_loop; no keyboard"
+    },
+    {
+      "item": "落下速度 get_ticks 500ms",
+      "status": "PARTIAL",
+      "evidence": "FALL_INTERVAL_MS=500 and fall_due(now_ms); pygame.time.get_ticks not called in workspace"
+    },
+    {
+      "item": "ゲームオーバー判定",
+      "status": "PRESENT",
+      "evidence": "game_over.py is_game_over + tests; not wired into loop"
+    },
+    {
+      "item": "スコア表示・レベルアップ",
+      "status": "OUT_OF_SPEC_FOR_NOW",
+      "evidence": "spec says 後で"
+    }
+  ],
+  "not_connected": [
+    "window_loop.update/draw do not call movement, collision, line_clear, or game_over",
+    "no piece lock into grid",
+    "no keyboard mapping",
+    "no grid/piece rendering",
+    "pygame.time.get_ticks not used in the loop",
+    "no Stage 2 E2E"
+  ],
+  "tests_at_stop": {
+    "budget": "per-gap only; full suite and E2E not run in Stage 2",
+    "cycle_tests_all_passed": true
+  }
+}

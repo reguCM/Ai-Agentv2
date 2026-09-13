@@ -1,0 +1,243 @@
+{
+  "phase": "G5",
+  "status": "COMPLETE",
+  "contract_version": "2026-09-12.3",
+  "overall_verdict": "CONSISTENT_WITH_KNOWN_GAPS",
+  "semantic_source_status": {
+    "ok": true,
+    "anchors_checked": [
+      "ai_tool/policy/git_governance.json",
+      "AUTO_COMMIT_ALLOWED",
+      "Machine Contract Reference"
+    ],
+    "missing_anchors": [],
+    "drift_kind": null
+  },
+  "manifest_status": {
+    "ok": true,
+    "issues": []
+  },
+  "adapter_status": {
+    "ok": true,
+    "consumers": {
+      "cursor_git": ".cursor/rules/git-governance-adapter.mdc",
+      "cursor_development": ".cursor/rules/agent-development-policy.mdc",
+      "codex": "AGENTS.md",
+      "git_guard_policy": "tools/git_guard/POLICY.md",
+      "cursor_host_user_rules": "docs/adapters/GIT_GOVERNANCE_CURSOR_HOST.md"
+    }
+  },
+  "guard_config_status": {
+    "contract_version": "2026-09-12.3",
+    "configs_checked": [
+      "tools/git_guard/configs/ai-agent.pre-commit.json",
+      "tools/git_guard/configs/ai-agent.pre-push.json"
+    ],
+    "findings": [
+      {
+        "config": "pre-commit",
+        "field": "forbid_actions",
+        "item": "reset_hard",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-commit",
+        "field": "forbid_actions",
+        "item": "force_push_with_lease",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-commit",
+        "field": "forbid_actions",
+        "item": "force_push",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-push",
+        "field": "forbid_actions",
+        "item": "reset_hard",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-push",
+        "field": "forbid_actions",
+        "item": "force_push_with_lease",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-push",
+        "field": "forbid_actions",
+        "item": "force_push",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-push",
+        "field": "human_gate_actions",
+        "item": "push",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-push",
+        "field": "human_gate_actions",
+        "item": "force_push",
+        "classification": "MATCH",
+        "note": "redundant_with_forbid_actions"
+      },
+      {
+        "config": "pre-commit",
+        "field": "deny_path_globs",
+        "item": "**/secrets/**",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-commit",
+        "field": "deny_path_globs",
+        "item": "**/credentials.json",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-commit",
+        "field": "deny_path_globs",
+        "item": ".env",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-commit",
+        "field": "deny_path_globs",
+        "item": "**/.env",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-commit",
+        "field": "deny_path_globs",
+        "item": "**/*.pem",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-commit",
+        "field": "remotes",
+        "item": "origin.url_must_contain",
+        "classification": "MATCH"
+      },
+      {
+        "config": "pre-push",
+        "field": "remotes",
+        "item": "origin.url_must_contain",
+        "classification": "MATCH"
+      }
+    ],
+    "config_drifts": [],
+    "config_alignment_ok": true,
+    "ok": true
+  },
+  "hook_deployment_status": {
+    "mode": "live_read_only",
+    "hooks": {
+      "pre-commit": {
+        "path": "D:\\AI-Agent\\.git\\hooks\\pre-commit",
+        "exists": true,
+        "thin_adapter": true,
+        "references_in_repo_guard": true,
+        "config_pattern_ok": true
+      },
+      "pre-push": {
+        "path": "D:\\AI-Agent\\.git\\hooks\\pre-push",
+        "exists": true,
+        "thin_adapter": true,
+        "references_in_repo_guard": true,
+        "config_pattern_ok": true
+      }
+    },
+    "observed": true,
+    "ok": true
+  },
+  "host_adapter_status": {
+    "ok": true,
+    "verification_status": "HOST_ADAPTER_NOT_VERIFIED",
+    "note": "Host User Rules are not observable from repository CI",
+    "missing_in_checklist": [],
+    "drift_kind": null
+  },
+  "known_enforcement_gaps": {
+    "commit": {
+      "status": "KNOWN",
+      "classification": "RUNTIME_NOT_CONNECTED",
+      "note": "AUTO_COMMIT_ALLOWED not bound; hooks do not gate commit"
+    },
+    "amend": {
+      "status": "KNOWN",
+      "classification": "ENFORCEMENT_SCOPE_GAP",
+      "note": "No git_guard action gate; adapter/policy only"
+    },
+    "amend_after_hook_failure": {
+      "status": "KNOWN",
+      "classification": "CONTRACT_ONLY",
+      "note": "Agent block via adapters; not shell-enforced"
+    },
+    "clean": {
+      "status": "KNOWN",
+      "classification": "RAW_CLI_ENFORCEMENT_GAP",
+      "note": "No guard mapping"
+    },
+    "rebase": {
+      "status": "KNOWN",
+      "classification": "RAW_CLI_ENFORCEMENT_GAP",
+      "note": "No guard mapping"
+    },
+    "worktree_remove": {
+      "status": "KNOWN",
+      "classification": "RAW_CLI_ENFORCEMENT_GAP",
+      "note": "No guard mapping"
+    },
+    "branch_delete": {
+      "status": "KNOWN",
+      "classification": "ENFORCEMENT_SCOPE_GAP",
+      "note": "Human approval in policy; no guard gate"
+    },
+    "merge_to_main": {
+      "status": "KNOWN",
+      "classification": "ENFORCEMENT_SCOPE_GAP",
+      "note": "No guard mapping"
+    }
+  },
+  "enforcement_coverage": {
+    "actions_total": 21,
+    "by_actual_result": {
+      "CONTRACT_DEFINED": 1,
+      "GUIDANCE_ONLY": 4,
+      "CONTRACT_ONLY": 1,
+      "PARTIALLY_ENFORCED": 6,
+      "NOT_CONNECTED": 6,
+      "NOT_APPLICABLE": 3
+    },
+    "priority_unconnected": [
+      "commit",
+      "amend",
+      "amend_after_hook_failure",
+      "clean",
+      "rebase",
+      "worktree_remove",
+      "branch_delete",
+      "merge_to_main"
+    ]
+  },
+  "human_decisions_protected": [
+    "commit",
+    "push",
+    "force_push",
+    "force_push_with_lease",
+    "reset_hard",
+    "clean",
+    "rebase",
+    "worktree_remove",
+    "amend",
+    "amend_after_hook_failure"
+  ],
+  "g4_1_reset_hard": "AGENT_ALWAYS_BLOCK",
+  "negative_drift_tests": "tests/ai_tool/policy/test_git_governance_drift.py",
+  "regression_tests": [
+    "tests/ai_tool/policy/test_git_governance.py",
+    "tests/tools/test_git_guard_governance_alignment.py",
+    "tests/ai_tool/policy/test_policy_distribution.py"
+  ]
+}

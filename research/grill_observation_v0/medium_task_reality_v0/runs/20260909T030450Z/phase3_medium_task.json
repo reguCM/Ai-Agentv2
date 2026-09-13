@@ -1,0 +1,31 @@
+{
+  "model": "qwen3:14b",
+  "label": "phase3_medium_task",
+  "parsed": {
+    "medium_task": {
+      "name": "ScoreIntegration",
+      "purpose": "ラインクリア後のスコア加算処理の統合",
+      "components": [
+        "LineClear",
+        "Score"
+      ]
+    },
+    "expected_for_task": [
+      "LineClear → Scoreの依存関係"
+    ],
+    "actual_for_task": [
+      "add_score関数の実装存在"
+    ],
+    "delta": [
+      "Scoreコンポーネントの明示的記述不足"
+    ],
+    "gap": {
+      "name": "ScoreDependencyGap",
+      "why": "LineClearコンポーネントがScoreコンポーネントへの依存関係を明示的に持たないが、add_score関数の実装が存在する"
+    }
+  },
+  "parse_error": null,
+  "elapsed_s": 35.361,
+  "error": null,
+  "num_predict": 2048
+}

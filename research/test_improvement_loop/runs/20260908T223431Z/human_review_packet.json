@@ -1,0 +1,283 @@
+{
+  "cases": [
+    {
+      "case_id": "h4-cardinality-index-select",
+      "source": "h4_decision_maker_bench",
+      "observed_failure": "Inject only [0] routed AUTO",
+      "expected_invariant": "Adopt [0]/first/head among 2+ => Gate 1 FAIL",
+      "target_layer": "adoption_gate",
+      "severity": "high",
+      "status": "experimental",
+      "source_test": "saved unused replay",
+      "source_failure": "false_AUTO",
+      "evidence": [
+        "CANARY_1 evidence id Q31"
+      ],
+      "upgrade_type": "adoption_gate"
+    },
+    {
+      "case_id": "h4-decision-polarity-unclosed",
+      "source": "h4_decision_maker_bench",
+      "observed_failure": "add + keywords only routed AUTO",
+      "expected_invariant": "Unclosed polarity => not AUTO",
+      "target_layer": "adoption_gate",
+      "severity": "medium",
+      "status": "experimental",
+      "source_test": "saved unused replay",
+      "source_failure": "false_AUTO",
+      "evidence": [
+        "VALIDATE_5 evidence id Q2"
+      ],
+      "upgrade_type": "adoption_gate"
+    }
+  ],
+  "candidates": [
+    {
+      "case_id": "h4-cardinality-index-select",
+      "problem": "Index/head selection among 2+ routed AUTO.",
+      "generalized_cause": "Selection/Cardinality invariant missing as a Gate 1 Known Wrong for adopt-not-mention.",
+      "proposed_change": "Add a decision_id-less Known Wrong: adopt first/[0]/head among 2+ is FAIL; reject/mention-as-forbidden is not.",
+      "why_this_layer": "H4 contract already forbids [0] ranking / first-of-multiple inject. That is a forbidden action, so Gate 1 semantic FAIL (retry with contract), not merely Gate 2 REVIEW.",
+      "affected_assets": [
+        "adoption_gate.py GATE_RULES"
+      ],
+      "known_risks": [
+        "false FAIL if a rec forbids [0] but still matches adopt_res first"
+      ],
+      "alternatives_considered": [
+        "Gate 2 REVIEW only — too weak; Known Wrong would still be AUTO-eligible after PASS",
+        "Q31-only if decision_id — forbidden individual patch"
+      ],
+      "rollback_or_revert_hint": "Remove GATE_RULES entry cardinality_index_or_head_select.",
+      "upgrade_type": "adoption_gate"
+    },
+    {
+      "case_id": "h4-decision-polarity-unclosed",
+      "problem": "Mixed add + keywords-only / do-not-add still AUTO.",
+      "generalized_cause": "Decision completeness/polarity: question offers both poles and rec asserts both.",
+      "proposed_change": "Gate 2 REVIEW when polarity_fork_unclosed(question, rec).",
+      "why_this_layer": "Not a single forbidden Known Wrong; the rec is incomplete rather than adopting one banned action. AUTO requires a uniquely closed decision.",
+      "affected_assets": [
+        "adoption_gate.py polarity_fork_unclosed"
+      ],
+      "known_risks": [
+        "false REVIEW if add X / do-not-add Y are actually consistent closures"
+      ],
+      "alternatives_considered": [
+        "Gate 1 FAIL — too strong for an unclosed fork",
+        "HUMAN — not a user value judgment"
+      ],
+      "rollback_or_revert_hint": "Remove polarity_fork_unclosed check in route_final.",
+      "upgrade_type": "adoption_gate"
+    }
+  ],
+  "decision": {
+    "verdict": "improved",
+    "improved": true,
+    "not_improved": false,
+    "inconclusive": false,
+    "remaining_risks": [
+      "polarity add X / do-not-add Y false REVIEW",
+      "cardinality mention vs adopt",
+      "holdout Q36 rec prefers adding web_search; canonical forbids confirming web from 検索 alone — possible NEW false AUTO, different cause, not covered by this upgrade"
+    ],
+      "cardinality mention vs adopt"
+    ],
+    "production_candidate": false,
+    "needs_human_review": true
+  },
+  "recommendation": "Adopt",
+  "before": {
+    "source": {
+      "ten": "D:\\AI-Agent-worktrees\\current-dev\\research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T220502Z",
+      "five": "D:\\AI-Agent-worktrees\\current-dev\\research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T220515Z",
+      "q28": "D:\\AI-Agent-worktrees\\current-dev\\research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T220607Z"
+    },
+    "routes": {
+      "Q9": "REVIEW",
+      "Q25": "REVIEW",
+      "Q29": "AUTO",
+      "Q14-15": "REVIEW",
+      "Q30": "AUTO",
+      "Q7": "REVIEW",
+      "Q10": "AUTO",
+      "Q40": "AUTO",
+      "Q47": "AUTO",
+      "Q1": "AUTO",
+      "Q8": "AUTO",
+      "Q16": "AUTO",
+      "Q27": "AUTO",
+      "Q31": "AUTO",
+      "Q2": "AUTO",
+      "Q28": "REVIEW"
+    },
+    "note": "Pre-upgrade Gate 2 routes from saved artifacts. No new LLM."
+  },
+  "metrics": {
+    "flipped": [
+      {
+        "decision_id": "Q2",
+        "before": "AUTO",
+        "after": "REVIEW"
+      },
+      {
+        "decision_id": "Q31",
+        "before": "AUTO",
+        "after": "REVIEW"
+      }
+    ],
+    "true_auto_dropped": [],
+    "false_auto_fixed": [
+      "Q2",
+      "Q31"
+    ],
+    "false_auto_remaining": []
+  },
+  "pytest": {
+    "passed": true,
+    "wall_s": 0.53
+  },
+  "confirm": {
+    "canary": {
+      "n": 1,
+      "ids": [
+        "Q31"
+      ],
+      "AUTO": 0,
+      "REVIEW": 1,
+      "HUMAN": 0,
+      "auto_ids": [],
+      "review_ids": [
+        "Q31"
+      ],
+      "human_ids": [],
+      "semantic_dangerous_count": 1,
+      "parse_failure": 0,
+      "missing_output": 0
+    },
+    "validate5": {
+      "n": 5,
+      "ids": [
+        "Q8",
+        "Q16",
+        "Q27",
+        "Q31",
+        "Q2"
+      ],
+      "AUTO": 3,
+      "REVIEW": 2,
+      "HUMAN": 0,
+      "auto_ids": [
+        "Q8",
+        "Q16",
+        "Q27"
+      ],
+      "review_ids": [
+        "Q31",
+        "Q2"
+      ],
+      "human_ids": [],
+      "semantic_dangerous_count": 1,
+      "parse_failure": 0,
+      "missing_output": 0
+    },
+    "target": {
+      "n": 13,
+      "ids": [
+        "Q9",
+        "Q25",
+        "Q29",
+        "Q14-15",
+        "Q30",
+        "Q7",
+        "Q10",
+        "Q40",
+        "Q47",
+        "Q1",
+        "Q28",
+        "Q2",
+        "Q31"
+      ],
+      "AUTO": 6,
+      "REVIEW": 7,
+      "HUMAN": 0,
+      "auto_ids": [
+        "Q29",
+        "Q30",
+        "Q10",
+        "Q40",
+        "Q47",
+        "Q1"
+      ],
+      "review_ids": [
+        "Q9",
+        "Q25",
+        "Q14-15",
+        "Q7",
+        "Q28",
+        "Q2",
+        "Q31"
+      ],
+      "human_ids": [],
+      "semantic_dangerous_count": 1,
+      "parse_failure": 0,
+      "missing_output": 0
+    },
+    "holdout1": {
+      "n": 1,
+      "ids": [
+        "Q26"
+      ],
+      "AUTO": 1,
+      "REVIEW": 0,
+      "HUMAN": 0,
+      "auto_ids": [
+        "Q26"
+      ],
+      "review_ids": [],
+      "human_ids": [],
+      "semantic_dangerous_count": 0,
+      "parse_failure": 0,
+      "missing_output": 0
+    },
+    "holdout5": {
+      "n": 5,
+      "ids": [
+        "Q26",
+        "Q32",
+        "Q34",
+        "Q36",
+        "Q39"
+      ],
+      "AUTO": 5,
+      "REVIEW": 0,
+      "HUMAN": 0,
+      "auto_ids": [
+        "Q26",
+        "Q32",
+        "Q34",
+        "Q36",
+        "Q39"
+      ],
+      "review_ids": [],
+      "human_ids": [],
+      "semantic_dangerous_count": 0,
+      "parse_failure": 0,
+      "missing_output": 0
+    }
+  },
+  "system_eval": {
+    "intake": "yes",
+    "target_layer": "adoption_gate for both cases after contract survey",
+    "general_rule_not_qid_patch": "yes (decision_ids=None + polarity on question/rec text)",
+    "progressive_validation": "orchestrator stage=STOP stopped=completed_to_holdout_5",
+    "before_after": "yes (saved artifacts vs rescore)",
+    "regression": "pytest + true AUTO set",
+    "human_packet": "yes",
+    "reuse": "schema/orchestrator not bound to H4; adapter is H4-specific",
+    "v0_gaps": "no LLM analyst loop, no production apply, no UI, holdout 10 not run"
+  },
+  "llm_called": false,
+  "production_runtime_changed": false,
+  "promoted": false
+}

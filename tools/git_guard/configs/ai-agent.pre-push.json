@@ -1,0 +1,20 @@
+{
+  "repo": ".",
+  "push_safety": "v2.1",
+  "remotes": [
+    {
+      "name": "origin",
+      "url_must_contain": "github.com/reguCM/Ai-Agent"
+    }
+  ],
+  "forbid_actions": [
+    "force_push",
+    "force_push_with_lease",
+    "reset_hard"
+  ],
+  "human_gate_actions": [
+    "force_push",
+    "merge",
+    "merge_ff"
+  ]
+}

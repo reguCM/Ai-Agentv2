@@ -1,0 +1,2762 @@
+{
+  "case": "memory_usage",
+  "pass": true,
+  "fail_stage": null,
+  "stop_reason": "findings_complete",
+  "request": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "rounds": [
+    {
+      "round": 1,
+      "web_hit_partition": {
+        "enabled": true,
+        "phase": "kss-1.5",
+        "not_for_decision": true,
+        "behavior_changed": false,
+        "round_id": "missing",
+        "searches": [
+          {
+            "search_id": "search_f0536f8b07",
+            "query": "wmic powershell Windows memory usage percent PowerShell",
+            "round_id": "missing",
+            "records": [
+              {
+                "search_id": "search_f0536f8b07",
+                "round_id": "missing",
+                "item_id": 1,
+                "query": "wmic powershell Windows memory usage percent PowerShell",
+                "hit_id": "hit_139673eb1341",
+                "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                "title": "Windows 回復環境 (Windows RE)",
+                "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+                "source": "learn.microsoft",
+                "domain": "learn.microsoft.com",
+                "kept": true,
+                "drop_reason": "kept",
+                "position_rank": 1,
+                "existing_hit_score": 1,
+                "candidate_link": {
+                  "linked": true,
+                  "candidate_index": 3,
+                  "token_overlap": 1,
+                  "command": "powershell"
+                }
+              },
+              {
+                "search_id": "search_f0536f8b07",
+                "round_id": "missing",
+                "item_id": 1,
+                "query": "wmic powershell Windows memory usage percent PowerShell",
+                "hit_id": "hit_91903a1d4dfe",
+                "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+                "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+                "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+                "source": "learn.microsoft",
+                "domain": "learn.microsoft.com",
+                "kept": false,
+                "drop_reason": "irrelevant_token:dev drive",
+                "position_rank": 2,
+                "existing_hit_score": 1,
+                "candidate_link": {
+                  "linked": false
+                }
+              }
+            ],
+            "kept_count": 1,
+            "dropped_count": 1,
+            "ranked_input_count": 2,
+            "filter_kept_count": 1,
+            "filter_dropped_irrelevant_count": 1,
+            "filter_truncated_relevant_count": 0,
+            "behavior_changed": false,
+            "not_for_decision": true,
+            "phase": "kss-1.5"
+          }
+        ],
+        "records": [
+          {
+            "search_id": "search_f0536f8b07",
+            "round_id": "missing",
+            "item_id": 1,
+            "query": "wmic powershell Windows memory usage percent PowerShell",
+            "hit_id": "hit_139673eb1341",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "source": "learn.microsoft",
+            "domain": "learn.microsoft.com",
+            "kept": true,
+            "drop_reason": "kept",
+            "position_rank": 1,
+            "existing_hit_score": 1,
+            "candidate_link": {
+              "linked": true,
+              "candidate_index": 3,
+              "token_overlap": 1,
+              "command": "powershell"
+            },
+            "heuristic_answer_presence": "related",
+            "heuristic_reasons": [
+              "weak_overlap:['windows']"
+            ],
+            "human_answer_presence": "missing",
+            "human_rationale": "missing",
+            "llm_answer_presence": "missing",
+            "llm_human_agreement": "missing"
+          },
+          {
+            "search_id": "search_f0536f8b07",
+            "round_id": "missing",
+            "item_id": 1,
+            "query": "wmic powershell Windows memory usage percent PowerShell",
+            "hit_id": "hit_91903a1d4dfe",
+            "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+            "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+            "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+            "source": "learn.microsoft",
+            "domain": "learn.microsoft.com",
+            "kept": false,
+            "drop_reason": "irrelevant_token:dev drive",
+            "position_rank": 2,
+            "existing_hit_score": 1,
+            "candidate_link": {
+              "linked": false
+            },
+            "heuristic_answer_presence": "core",
+            "heuristic_reasons": [
+              "core_hint:memory usage"
+            ],
+            "human_answer_presence": "missing",
+            "human_rationale": "missing",
+            "llm_answer_presence": "missing",
+            "llm_human_agreement": "missing"
+          }
+        ],
+        "kept_hits": [
+          {
+            "search_id": "search_f0536f8b07",
+            "round_id": "missing",
+            "item_id": 1,
+            "query": "wmic powershell Windows memory usage percent PowerShell",
+            "hit_id": "hit_139673eb1341",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "source": "learn.microsoft",
+            "domain": "learn.microsoft.com",
+            "kept": true,
+            "drop_reason": "kept",
+            "position_rank": 1,
+            "existing_hit_score": 1,
+            "candidate_link": {
+              "linked": true,
+              "candidate_index": 3,
+              "token_overlap": 1,
+              "command": "powershell"
+            },
+            "heuristic_answer_presence": "related",
+            "heuristic_reasons": [
+              "weak_overlap:['windows']"
+            ],
+            "human_answer_presence": "missing",
+            "human_rationale": "missing",
+            "llm_answer_presence": "missing",
+            "llm_human_agreement": "missing"
+          }
+        ],
+        "dropped_hits": [
+          {
+            "search_id": "search_f0536f8b07",
+            "round_id": "missing",
+            "item_id": 1,
+            "query": "wmic powershell Windows memory usage percent PowerShell",
+            "hit_id": "hit_91903a1d4dfe",
+            "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+            "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+            "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+            "source": "learn.microsoft",
+            "domain": "learn.microsoft.com",
+            "kept": false,
+            "drop_reason": "irrelevant_token:dev drive",
+            "position_rank": 2,
+            "existing_hit_score": 1,
+            "candidate_link": {
+              "linked": false
+            },
+            "heuristic_answer_presence": "core",
+            "heuristic_reasons": [
+              "core_hint:memory usage"
+            ],
+            "human_answer_presence": "missing",
+            "human_rationale": "missing",
+            "llm_answer_presence": "missing",
+            "llm_human_agreement": "missing"
+          }
+        ],
+        "kept_count": 1,
+        "dropped_count": 1,
+        "total_hits": 2,
+        "total_searches": 1,
+        "source": "live_web_exec"
+      },
+      "exploration_value_observation": {
+        "enabled": true,
+        "phase": "kss-1.3",
+        "not_for_decision": true,
+        "behavior_changed": false,
+        "round_index": 1,
+        "search_volume": {
+          "search_result_count": 2,
+          "kept_hit_count": 1,
+          "dropped_hit_count": 1,
+          "web_hits_saved_count": 1
+        },
+        "information_novelty": {
+          "new_url_count": 1,
+          "new_source_count": 1,
+          "new_term_count": 47,
+          "new_reference_count": 0,
+          "new_command_key_count": 2,
+          "new_entity_count": "missing",
+          "new_information_count": 1,
+          "new_information_flag": true
+        },
+        "exploration_leads": {
+          "candidate_count": 4,
+          "linked_candidate_count": 4,
+          "candidate_to_hit_link_count": 4,
+          "zero_overlap_count": 0,
+          "link_coverage": 1.0,
+          "link_metric_source": "web_decision_link"
+        },
+        "evidence_strength": {
+          "evidence_level": "high",
+          "verify_high_count": 4,
+          "verify_low_count": 0,
+          "usable_count": 1,
+          "hit_scores": [
+            1
+          ],
+          "hit_score_missing_count": 0
+        },
+        "information_gain_existing": {
+          "has_gain": true,
+          "no_gain": false,
+          "reasons_gain": [
+            "recent_verify_ok",
+            "has_usable_selected"
+          ],
+          "reasons_stuck": []
+        },
+        "no_gain_existing": false,
+        "duplicate_or_repeated": {
+          "progress_duplicate_only": false,
+          "repeated_url_count": 0,
+          "repeated_term_count": "missing",
+          "duplicate_or_repeated_count": 0
+        },
+        "previous_round_similarity": {
+          "token_jaccard": 0.0,
+          "url_jaccard": 0.0,
+          "method": "set_jaccard_mechanical",
+          "note": "not semantic similarity"
+        },
+        "exploration_signal": {
+          "has_new_url": true,
+          "has_new_source": true,
+          "has_new_term": true,
+          "has_new_command_key": true,
+          "has_linked_candidate": true,
+          "has_information_gain_existing": true,
+          "progress_has_new_finding": true,
+          "composite_score": "missing"
+        },
+        "observation_quality": {
+          "fields_present": 8,
+          "fields_tracked": 8,
+          "coverage": 1.0,
+          "missing_fields": [
+            "new_entity_count",
+            "exploration_value_score",
+            "semantic_novelty",
+            "embedding_similarity"
+          ]
+        },
+        "progress_action": "implement",
+        "progress_reason": "findings_complete",
+        "progress_stagnation": 0,
+        "run_linkage": {
+          "case_id": "memory_usage",
+          "research_run_id": "kss15_20260820_160911",
+          "round_index": 1,
+          "final_pass": true,
+          "fail_stage": "missing",
+          "fail_reason": "findings_complete",
+          "total_rounds": 1,
+          "next_round_exists": false,
+          "next_round_gain": "missing",
+          "eventually_succeeded": true
+        },
+        "missing_fields_policy": "missing_not_zero",
+        "available_vs_missing_note": {
+          "AVAILABLE": [
+            "kept_hit_count",
+            "candidate_count",
+            "new_url/source/term counts (set-diff)",
+            "link_coverage (KSS-1.2)",
+            "information_gain_existing / no_gain_existing",
+            "token/url jaccard",
+            "evidence_level (KSS-1.1)"
+          ],
+          "MISSING_unless_web_exec": [
+            "search_result_count",
+            "dropped_hit_count"
+          ],
+          "ALWAYS_MISSING": [
+            "new_entity_count",
+            "exploration_value_score",
+            "semantic_novelty",
+            "embedding_similarity"
+          ]
+        }
+      },
+      "information_loss_observation": {
+        "enabled": true,
+        "phase": "kss-1.4",
+        "not_for_decision": true,
+        "behavior_changed": false,
+        "round_index": 1,
+        "chain": [
+          {
+            "stage": "web_search",
+            "count": 2,
+            "available": true,
+            "provenance": "web_exec_stats.search_result_count",
+            "rejection": 1,
+            "failure_reason": "missing"
+          },
+          {
+            "stage": "web_hit",
+            "count": 1,
+            "available": true,
+            "provenance": "web_hits / kept_hit_count",
+            "rejection": "missing",
+            "failure_reason": "missing"
+          },
+          {
+            "stage": "kept_hit",
+            "count": 1,
+            "available": true,
+            "provenance": "filter_relevant_hits kept",
+            "rejection": 1,
+            "failure_reason": "missing"
+          },
+          {
+            "stage": "candidate",
+            "count": 4,
+            "available": true,
+            "provenance": "LLM candidates after reject filter",
+            "rejection": 0,
+            "failure_reason": "missing"
+          },
+          {
+            "stage": "candidate_hit_link",
+            "count": 4,
+            "available": true,
+            "provenance": "KSS-1.2 token_overlap",
+            "rejection": 0,
+            "failure_reason": "missing"
+          },
+          {
+            "stage": "verification",
+            "count": 4,
+            "available": true,
+            "provenance": "research_verifier / verify_high",
+            "rejection": 0,
+            "failure_reason": "missing"
+          },
+          {
+            "stage": "usable_finding",
+            "count": 1,
+            "available": true,
+            "provenance": "pack usable_findings / evidence.usable_count",
+            "rejection": "missing",
+            "failure_reason": "missing"
+          },
+          {
+            "stage": "judge",
+            "count": 1,
+            "available": true,
+            "provenance": "judgment.satisfies_request",
+            "rejection": "missing",
+            "failure_reason": "missing"
+          },
+          {
+            "stage": "progress",
+            "count": "missing",
+            "available": true,
+            "provenance": "evaluate_research_progress",
+            "rejection": "missing",
+            "failure_reason": "findings_complete"
+          }
+        ],
+        "stage_flags": {
+          "web_hit_available": true,
+          "web_hit_kept": true,
+          "candidate_available": true,
+          "candidate_linked": true,
+          "candidate_verified": true,
+          "usable_finding_available": true,
+          "judge_satisfied": true,
+          "progress_action": "implement"
+        },
+        "counts": {
+          "search_result_count": 2,
+          "kept_hit_count": 1,
+          "dropped_hit_count": 1,
+          "candidate_count": 4,
+          "linked_candidate_count": 4,
+          "zero_overlap_count": 0,
+          "link_coverage": 1.0,
+          "verify_ok_count": 4,
+          "verify_fail_count": 0,
+          "verify_high_count": 4,
+          "verify_low_count": 0,
+          "usable_count": 1,
+          "new_source_count": 1,
+          "new_term_count": 47,
+          "new_url_count": 1
+        },
+        "current_round_gain": true,
+        "no_gain_existing": false,
+        "information_gain_existing": {
+          "has_gain": true,
+          "no_gain": false,
+          "reasons_gain": [
+            "recent_verify_ok",
+            "has_usable_selected"
+          ],
+          "reasons_stuck": []
+        },
+        "first_loss_point": {
+          "stage": "none_detected",
+          "observational_label": "missing",
+          "count": "missing",
+          "note": "no clear zero/False along chain for this round"
+        },
+        "web_vs_llm_hypothesis": {
+          "labels": [
+            "none"
+          ],
+          "not_blame_assignment": true,
+          "note": "hypothesis classification for analysis only"
+        },
+        "progress_action": "implement",
+        "progress_reason": "findings_complete",
+        "run_linkage": {
+          "case_id": "memory_usage",
+          "research_run_id": "kss15_20260820_160911",
+          "round_index": 1,
+          "final_pass": true,
+          "fail_stage": "missing",
+          "fail_reason": "findings_complete",
+          "total_rounds": 1,
+          "next_round_exists": false,
+          "next_round_gain": "missing",
+          "eventually_succeeded": true
+        },
+        "should_continue_web": "missing",
+        "confidence_score": "missing",
+        "missing_fields_policy": "missing_not_zero",
+        "web_answer_presence_audit": {
+          "enabled": true,
+          "phase": "kss-1.4",
+          "not_for_decision": true,
+          "behavior_changed": false,
+          "judge_family": "web_answer_presence",
+          "not_llm_self_confidence": true,
+          "partition_source": "live_web_exec",
+          "partition_note": null,
+          "kept_answer_presence": [
+            {
+              "search_id": "search_f0536f8b07",
+              "round_id": "missing",
+              "item_id": 1,
+              "query": "wmic powershell Windows memory usage percent PowerShell",
+              "hit_id": "hit_139673eb1341",
+              "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "title": "Windows 回復環境 (Windows RE)",
+              "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+              "source": "learn.microsoft",
+              "domain": "learn.microsoft.com",
+              "kept": true,
+              "drop_reason": "kept",
+              "position_rank": 1,
+              "existing_hit_score": 1,
+              "candidate_link": {
+                "linked": true,
+                "candidate_index": 3,
+                "token_overlap": 1,
+                "command": "powershell"
+              },
+              "heuristic_answer_presence": "none",
+              "heuristic_reasons": [
+                "no_core_lead_or_overlap"
+              ],
+              "human_answer_presence": "missing",
+              "human_rationale": "missing",
+              "llm_answer_presence": "missing",
+              "llm_human_agreement": "missing",
+              "dropped": false,
+              "answer_presence": "related",
+              "answer_presence_method": "web_answer_presence_heuristic",
+              "answer_presence_reasons": [
+                "weak_overlap:['windows']"
+              ],
+              "exploratory_useful_candidate": false,
+              "web_answer_presence_judge": "missing"
+            }
+          ],
+          "dropped_answer_presence": [
+            {
+              "search_id": "search_f0536f8b07",
+              "round_id": "missing",
+              "item_id": 1,
+              "query": "wmic powershell Windows memory usage percent PowerShell",
+              "hit_id": "hit_91903a1d4dfe",
+              "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+              "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+              "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+              "source": "learn.microsoft",
+              "domain": "learn.microsoft.com",
+              "kept": false,
+              "drop_reason": "irrelevant_token:dev drive",
+              "position_rank": 2,
+              "existing_hit_score": 1,
+              "candidate_link": {
+                "linked": false
+              },
+              "heuristic_answer_presence": "core",
+              "heuristic_reasons": [
+                "core_hint:memory usage"
+              ],
+              "human_answer_presence": "missing",
+              "human_rationale": "missing",
+              "llm_answer_presence": "missing",
+              "llm_human_agreement": "missing",
+              "dropped": true,
+              "answer_presence": "core",
+              "answer_presence_method": "web_answer_presence_heuristic",
+              "answer_presence_reasons": [
+                "core_hint:memory usage"
+              ],
+              "exploratory_useful_candidate": false,
+              "web_answer_presence_judge": "missing"
+            }
+          ],
+          "aggregates": {
+            "total_web_hits": 2,
+            "kept_hits": 1,
+            "dropped_hits": 1,
+            "direct_in_kept": 0,
+            "core_in_kept": 0,
+            "lead_in_kept": 0,
+            "related_in_kept": 1,
+            "none_in_kept": 0,
+            "unknown_in_kept": 0,
+            "direct_in_dropped": 0,
+            "core_in_dropped": 1,
+            "lead_in_dropped": 0,
+            "related_in_dropped": 0,
+            "none_in_dropped": 0,
+            "unknown_in_dropped": 0,
+            "unknown_count": 0,
+            "answer_in_any_hit": true,
+            "answer_in_kept_hit": false,
+            "answer_in_dropped_hit": true,
+            "answer_presence_unknown": false,
+            "valuable_dropped_not_kept": true,
+            "discard_reason_x_answer_presence": {
+              "missing|core": 1
+            },
+            "method": "web_answer_presence_heuristic",
+            "llm_judge_used": false,
+            "not_llm_self_confidence": true,
+            "not_for_decision": true
+          },
+          "lead_present": false,
+          "exploratory_useful_round_candidate": false,
+          "routing_hint": "missing",
+          "human_audit_samples": [
+            {
+              "case_id": "memory_usage",
+              "bucket": "kept",
+              "dropped": false,
+              "title": "Windows 回復環境 (Windows RE)",
+              "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of p",
+              "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "discard_reason": null,
+              "heuristic_answer_presence": "related",
+              "human_answer_presence": "missing",
+              "llm_judge_answer_presence": "missing"
+            },
+            {
+              "case_id": "memory_usage",
+              "bucket": "dropped",
+              "dropped": true,
+              "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+              "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead",
+              "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+              "discard_reason": null,
+              "heuristic_answer_presence": "core",
+              "human_answer_presence": "missing",
+              "llm_judge_answer_presence": "missing"
+            }
+          ]
+        },
+        "next_round_gain": "missing",
+        "eventual_success": true
+      },
+      "candidate_count": 4,
+      "satisfies_request": true
+    }
+  ],
+  "metrics": {
+    "pass": true,
+    "fail_stage": null,
+    "rounds": 1,
+    "llm_calls": 5,
+    "actual_headroom_min": 2960,
+    "headroom_gate_ok": true,
+    "live_search_executed": true,
+    "searches_observed": 1,
+    "hits_observed": 2,
+    "kept_hits": 1,
+    "dropped_hits": 1,
+    "dropped_hits_state": "positive",
+    "dropped_observed": true,
+    "valid_for_kss15_measurement": true,
+    "behavior_changed": false
+  },
+  "pipeline": {
+    "research": {
+      "usable_findings": [
+        {
+          "kind": "output",
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+          "evidence": {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ],
+            "returncode": 0,
+            "sample": [
+              "FreePhysicalMemory TotalVisibleMemorySize",
+              "------------------ ----------------------",
+              "32252432               66844080"
+            ],
+            "stderr": "",
+            "error": null,
+            "output_key": "status"
+          },
+          "confidence": "high",
+          "source": "web"
+        }
+      ],
+      "reference_findings": [],
+      "unresolved": [],
+      "insufficient_findings": [],
+      "rounds": 1,
+      "stagnation": 0,
+      "stop_reason": "findings_complete",
+      "candidates_error": null
+    },
+    "judgments": [
+      {
+        "round": 1,
+        "satisfies_request": true,
+        "reason": "",
+        "missing": [],
+        "error": null,
+        "judge_grade": "FAIL",
+        "proposed_decisions": [
+          {
+            "key": "status.meaning",
+            "value": "Windowsのメモリ使用率"
+          },
+          {
+            "key": "status.unit",
+            "value": "%"
+          },
+          {
+            "key": "status.range",
+            "value": "0-100"
+          }
+        ]
+      }
+    ],
+    "progress": [
+      {
+        "round": 1,
+        "action": "implement",
+        "reason": "findings_complete",
+        "stagnation": 0,
+        "has_new_finding": true,
+        "missing_same": false,
+        "duplicate_only": false
+      }
+    ],
+    "research_rounds_detail": [
+      {
+        "round": 1,
+        "followup": false,
+        "research_input": {
+          "followup_questions": [],
+          "rejected_commands": [],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 4,
+        "verified_count": 4,
+        "verifier_failure": false,
+        "verified_runs": [
+          {
+            "ok": true,
+            "sample_count": 3,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "ok": true,
+            "sample_count": 3,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "ok": true,
+            "sample_count": 3,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "ok": true,
+            "sample_count": 3,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+            "backend": "learn.microsoft",
+            "score": 1
+          }
+        ],
+        "web_decision_link": {
+          "enabled": true,
+          "phase": "kss-1.2",
+          "not_for_decision": true,
+          "behavior_changed": false,
+          "hits_scored": [
+            {
+              "title": "Windows 回復環境 (Windows RE)",
+              "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "backend": "learn.microsoft",
+              "score": 1
+            }
+          ],
+          "candidate_hit_links": [
+            {
+              "candidate_index": 0,
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+              ],
+              "linked": true,
+              "best_hit_index": 0,
+              "token_overlap": 1,
+              "best_hit_score": 1,
+              "best_hit_url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "candidate_token_count": 12,
+              "link_method": "token_overlap_with_existing_hit_score",
+              "not_for_decision": true
+            },
+            {
+              "candidate_index": 1,
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+              ],
+              "linked": true,
+              "best_hit_index": 0,
+              "token_overlap": 1,
+              "best_hit_score": 1,
+              "best_hit_url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "candidate_token_count": 12,
+              "link_method": "token_overlap_with_existing_hit_score",
+              "not_for_decision": true
+            },
+            {
+              "candidate_index": 2,
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+              ],
+              "linked": true,
+              "best_hit_index": 0,
+              "token_overlap": 1,
+              "best_hit_score": 1,
+              "best_hit_url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "candidate_token_count": 12,
+              "link_method": "token_overlap_with_existing_hit_score",
+              "not_for_decision": true
+            },
+            {
+              "candidate_index": 3,
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+              ],
+              "linked": true,
+              "best_hit_index": 0,
+              "token_overlap": 1,
+              "best_hit_score": 1,
+              "best_hit_url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "candidate_token_count": 13,
+              "link_method": "token_overlap_with_existing_hit_score",
+              "not_for_decision": true
+            }
+          ],
+          "link_coverage": 1.0,
+          "candidates_total": 4,
+          "candidates_linked": 4,
+          "candidates_unlinked": 0,
+          "hits_total": 1,
+          "audit_gaps": [
+            "none"
+          ]
+        },
+        "web_hit_partition": {
+          "enabled": true,
+          "phase": "kss-1.5",
+          "not_for_decision": true,
+          "behavior_changed": false,
+          "round_id": "missing",
+          "searches": [
+            {
+              "search_id": "search_f0536f8b07",
+              "query": "wmic powershell Windows memory usage percent PowerShell",
+              "round_id": "missing",
+              "records": [
+                {
+                  "search_id": "search_f0536f8b07",
+                  "round_id": "missing",
+                  "item_id": 1,
+                  "query": "wmic powershell Windows memory usage percent PowerShell",
+                  "hit_id": "hit_139673eb1341",
+                  "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                  "title": "Windows 回復環境 (Windows RE)",
+                  "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+                  "source": "learn.microsoft",
+                  "domain": "learn.microsoft.com",
+                  "kept": true,
+                  "drop_reason": "kept",
+                  "position_rank": 1,
+                  "existing_hit_score": 1,
+                  "candidate_link": {
+                    "linked": true,
+                    "candidate_index": 3,
+                    "token_overlap": 1,
+                    "command": "powershell"
+                  }
+                },
+                {
+                  "search_id": "search_f0536f8b07",
+                  "round_id": "missing",
+                  "item_id": 1,
+                  "query": "wmic powershell Windows memory usage percent PowerShell",
+                  "hit_id": "hit_91903a1d4dfe",
+                  "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+                  "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+                  "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+                  "source": "learn.microsoft",
+                  "domain": "learn.microsoft.com",
+                  "kept": false,
+                  "drop_reason": "irrelevant_token:dev drive",
+                  "position_rank": 2,
+                  "existing_hit_score": 1,
+                  "candidate_link": {
+                    "linked": false
+                  }
+                }
+              ],
+              "kept_count": 1,
+              "dropped_count": 1,
+              "ranked_input_count": 2,
+              "filter_kept_count": 1,
+              "filter_dropped_irrelevant_count": 1,
+              "filter_truncated_relevant_count": 0,
+              "behavior_changed": false,
+              "not_for_decision": true,
+              "phase": "kss-1.5"
+            }
+          ],
+          "records": [
+            {
+              "search_id": "search_f0536f8b07",
+              "round_id": "missing",
+              "item_id": 1,
+              "query": "wmic powershell Windows memory usage percent PowerShell",
+              "hit_id": "hit_139673eb1341",
+              "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "title": "Windows 回復環境 (Windows RE)",
+              "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+              "source": "learn.microsoft",
+              "domain": "learn.microsoft.com",
+              "kept": true,
+              "drop_reason": "kept",
+              "position_rank": 1,
+              "existing_hit_score": 1,
+              "candidate_link": {
+                "linked": true,
+                "candidate_index": 3,
+                "token_overlap": 1,
+                "command": "powershell"
+              },
+              "heuristic_answer_presence": "none",
+              "heuristic_reasons": [
+                "no_core_lead_or_overlap"
+              ],
+              "human_answer_presence": "missing",
+              "human_rationale": "missing",
+              "llm_answer_presence": "missing",
+              "llm_human_agreement": "missing"
+            },
+            {
+              "search_id": "search_f0536f8b07",
+              "round_id": "missing",
+              "item_id": 1,
+              "query": "wmic powershell Windows memory usage percent PowerShell",
+              "hit_id": "hit_91903a1d4dfe",
+              "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+              "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+              "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+              "source": "learn.microsoft",
+              "domain": "learn.microsoft.com",
+              "kept": false,
+              "drop_reason": "irrelevant_token:dev drive",
+              "position_rank": 2,
+              "existing_hit_score": 1,
+              "candidate_link": {
+                "linked": false
+              },
+              "heuristic_answer_presence": "core",
+              "heuristic_reasons": [
+                "core_hint:memory usage"
+              ],
+              "human_answer_presence": "missing",
+              "human_rationale": "missing",
+              "llm_answer_presence": "missing",
+              "llm_human_agreement": "missing"
+            }
+          ],
+          "kept_hits": [
+            {
+              "search_id": "search_f0536f8b07",
+              "round_id": "missing",
+              "item_id": 1,
+              "query": "wmic powershell Windows memory usage percent PowerShell",
+              "hit_id": "hit_139673eb1341",
+              "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+              "title": "Windows 回復環境 (Windows RE)",
+              "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+              "source": "learn.microsoft",
+              "domain": "learn.microsoft.com",
+              "kept": true,
+              "drop_reason": "kept",
+              "position_rank": 1,
+              "existing_hit_score": 1,
+              "candidate_link": {
+                "linked": true,
+                "candidate_index": 3,
+                "token_overlap": 1,
+                "command": "powershell"
+              },
+              "heuristic_answer_presence": "none",
+              "heuristic_reasons": [
+                "no_core_lead_or_overlap"
+              ],
+              "human_answer_presence": "missing",
+              "human_rationale": "missing",
+              "llm_answer_presence": "missing",
+              "llm_human_agreement": "missing"
+            }
+          ],
+          "dropped_hits": [
+            {
+              "search_id": "search_f0536f8b07",
+              "round_id": "missing",
+              "item_id": 1,
+              "query": "wmic powershell Windows memory usage percent PowerShell",
+              "hit_id": "hit_91903a1d4dfe",
+              "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+              "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+              "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+              "source": "learn.microsoft",
+              "domain": "learn.microsoft.com",
+              "kept": false,
+              "drop_reason": "irrelevant_token:dev drive",
+              "position_rank": 2,
+              "existing_hit_score": 1,
+              "candidate_link": {
+                "linked": false
+              },
+              "heuristic_answer_presence": "core",
+              "heuristic_reasons": [
+                "core_hint:memory usage"
+              ],
+              "human_answer_presence": "missing",
+              "human_rationale": "missing",
+              "llm_answer_presence": "missing",
+              "llm_human_agreement": "missing"
+            }
+          ],
+          "kept_count": 1,
+          "dropped_count": 1,
+          "total_hits": 2,
+          "total_searches": 1,
+          "source": "live_web_exec"
+        },
+        "satisfies_request": true,
+        "judge_grade": "FAIL",
+        "judge_retry_ok": false,
+        "missing": [],
+        "reason": "",
+        "rule_partial": {
+          "escalation": "usable_needs_goal_check",
+          "routine": false,
+          "applied_ops": [
+            "add_usable"
+          ],
+          "event_ids": [
+            "evt_03d015565efc"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": true,
+          "would_skip": false,
+          "live_skipped": false,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [
+            "usable_needs_goal_check",
+            "first_round"
+          ],
+          "skip_triggers": [],
+          "primary_reason": "usable_needs_goal_check",
+          "llm_calls_saved_if_skip": 0,
+          "quality_compare": null
+        },
+        "knowledge_source_observation": {
+          "enabled": true,
+          "round": 1,
+          "known_coverage": {
+            "known_coverage": 0.15,
+            "known_coverage_note": "exploration_signal_not_accuracy",
+            "has_usable_in_state": false,
+            "has_success_in_history": false,
+            "history_fails_only": false,
+            "same_error_class_continuing": false,
+            "stuck_error_class": null,
+            "same_open_question_continuing": false,
+            "command_family_no_gain": false,
+            "no_gain": false,
+            "information_gain": {
+              "has_gain": false,
+              "no_gain": false,
+              "reasons_gain": [],
+              "reasons_stuck": []
+            },
+            "open_question_count": 0,
+            "verify_ok_count": 0,
+            "verify_fail_count": 0,
+            "reasons": [],
+            "estimate_method": "heuristic_v0",
+            "not_for_decision": true
+          },
+          "knowledge_source_selection": {
+            "source_values": {
+              "state": 0.2,
+              "history": 0.2,
+              "external_research": 0.5,
+              "llm_reasoning": 0.30000000000000004,
+              "experiment": 0.2
+            },
+            "source_reasons": {
+              "state": [],
+              "history": [],
+              "external_research": [
+                "no_known_success",
+                "hits_available"
+              ],
+              "llm_reasoning": [
+                "initial_hypothesis"
+              ],
+              "experiment": []
+            },
+            "preferred_source": "external_research",
+            "ranking": [
+              {
+                "source": "external_research",
+                "value": 0.5
+              },
+              {
+                "source": "llm_reasoning",
+                "value": 0.30000000000000004
+              },
+              {
+                "source": "experiment",
+                "value": 0.2
+              },
+              {
+                "source": "history",
+                "value": 0.2
+              },
+              {
+                "source": "state",
+                "value": 0.2
+              }
+            ],
+            "auto_switch": false,
+            "estimate_method": "heuristic_v0",
+            "not_for_decision": true
+          },
+          "external_research_evidence": {
+            "hit_count": 1,
+            "assessed_hits": [
+              {
+                "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                "title": "Windows 回復環境 (Windows RE)",
+                "backend": "learn.microsoft",
+                "source_reliability": {
+                  "category": "official_or_vendor_docs",
+                  "host": "learn.microsoft.com",
+                  "backend": "learn.microsoft",
+                  "numeric_score": null,
+                  "note": "category_only_no_fixed_score"
+                },
+                "evidence_relevance": 0.0,
+                "claim_support": 0.3,
+                "implementation_precedent": {
+                  "exists": false,
+                  "same_platform": true,
+                  "same_environment": null,
+                  "runnable_example": false,
+                  "signals": []
+                },
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true
+              }
+            ],
+            "independent_confirmation": {
+              "unique_hosts": 1,
+              "host_counts": {
+                "learn.microsoft.com": 1
+              },
+              "likely_reprint_heavy": false,
+              "note": "host_diversity_proxy_not_semantic_dedupe"
+            },
+            "implementation_precedent_summary": {
+              "exists": false,
+              "independent_examples": 0,
+              "runnable_example_count": 0
+            },
+            "estimate_method": "heuristic_v0",
+            "not_for_decision": true
+          },
+          "proposal_observations": [
+            {
+              "proposal_id": "cand_0",
+              "action": {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                ],
+                "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+              },
+              "rationale": null,
+              "evidence": {
+                "state": false,
+                "history": false,
+                "external_research": true,
+                "experiment": true
+              },
+              "evidence_sources_used": [
+                "external_research",
+                "llm_reasoning",
+                "experiment"
+              ],
+              "preferred_source_at_proposal": "external_research",
+              "expected_information_gain": 0.35,
+              "success_probability_estimate": 0.25,
+              "evidence_confidence": 0.25,
+              "applicability": 0.4,
+              "implementation_precedent": false,
+              "execution_cost_estimate": "unknown",
+              "risk_estimate": "unknown",
+              "repetition_risk": 0.2,
+              "action_value_composite": 0.265,
+              "estimate_method": "heuristic_v0",
+              "not_for_decision": true
+            },
+            {
+              "proposal_id": "cand_1",
+              "action": {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                ],
+                "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+              },
+              "rationale": null,
+              "evidence": {
+                "state": false,
+                "history": false,
+                "external_research": true,
+                "experiment": true
+              },
+              "evidence_sources_used": [
+                "external_research",
+                "llm_reasoning",
+                "experiment"
+              ],
+              "preferred_source_at_proposal": "external_research",
+              "expected_information_gain": 0.35,
+              "success_probability_estimate": 0.25,
+              "evidence_confidence": 0.25,
+              "applicability": 0.4,
+              "implementation_precedent": false,
+              "execution_cost_estimate": "unknown",
+              "risk_estimate": "unknown",
+              "repetition_risk": 0.2,
+              "action_value_composite": 0.265,
+              "estimate_method": "heuristic_v0",
+              "not_for_decision": true
+            },
+            {
+              "proposal_id": "cand_2",
+              "action": {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                ],
+                "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+              },
+              "rationale": null,
+              "evidence": {
+                "state": false,
+                "history": false,
+                "external_research": true,
+                "experiment": true
+              },
+              "evidence_sources_used": [
+                "external_research",
+                "llm_reasoning",
+                "experiment"
+              ],
+              "preferred_source_at_proposal": "external_research",
+              "expected_information_gain": 0.35,
+              "success_probability_estimate": 0.25,
+              "evidence_confidence": 0.25,
+              "applicability": 0.4,
+              "implementation_precedent": false,
+              "execution_cost_estimate": "unknown",
+              "risk_estimate": "unknown",
+              "repetition_risk": 0.2,
+              "action_value_composite": 0.265,
+              "estimate_method": "heuristic_v0",
+              "not_for_decision": true
+            },
+            {
+              "proposal_id": "cand_3",
+              "action": {
+                "command": "powershell",
+                "args": [
+                  "-NoProfile",
+                  "-NonInteractive",
+                  "-Command",
+                  "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                ],
+                "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+              },
+              "rationale": null,
+              "evidence": {
+                "state": false,
+                "history": false,
+                "external_research": true,
+                "experiment": true
+              },
+              "evidence_sources_used": [
+                "external_research",
+                "llm_reasoning",
+                "experiment"
+              ],
+              "preferred_source_at_proposal": "external_research",
+              "expected_information_gain": 0.35,
+              "success_probability_estimate": 0.25,
+              "evidence_confidence": 0.25,
+              "applicability": 0.4,
+              "implementation_precedent": false,
+              "execution_cost_estimate": "unknown",
+              "risk_estimate": "unknown",
+              "repetition_risk": 0.2,
+              "action_value_composite": 0.265,
+              "estimate_method": "heuristic_v0",
+              "not_for_decision": true
+            }
+          ],
+          "calibration": {
+            "proposals": [
+              {
+                "proposal_id": "cand_0",
+                "action": {
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+                },
+                "rationale": null,
+                "evidence": {
+                  "state": false,
+                  "history": false,
+                  "external_research": true,
+                  "experiment": true
+                },
+                "evidence_sources_used": [
+                  "external_research",
+                  "llm_reasoning",
+                  "experiment"
+                ],
+                "preferred_source_at_proposal": "external_research",
+                "expected_information_gain": 0.35,
+                "success_probability_estimate": 0.25,
+                "evidence_confidence": 0.25,
+                "applicability": 0.4,
+                "implementation_precedent": false,
+                "execution_cost_estimate": "unknown",
+                "risk_estimate": "unknown",
+                "repetition_risk": 0.2,
+                "action_value_composite": 0.265,
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true,
+                "actual_success": true,
+                "actual_error_class": null,
+                "actual_usable_gain": true,
+                "actual_information_gain": true,
+                "coverage_before_no_gain": false,
+                "coverage_after_no_gain": false,
+                "result_linked": true
+              },
+              {
+                "proposal_id": "cand_1",
+                "action": {
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+                },
+                "rationale": null,
+                "evidence": {
+                  "state": false,
+                  "history": false,
+                  "external_research": true,
+                  "experiment": true
+                },
+                "evidence_sources_used": [
+                  "external_research",
+                  "llm_reasoning",
+                  "experiment"
+                ],
+                "preferred_source_at_proposal": "external_research",
+                "expected_information_gain": 0.35,
+                "success_probability_estimate": 0.25,
+                "evidence_confidence": 0.25,
+                "applicability": 0.4,
+                "implementation_precedent": false,
+                "execution_cost_estimate": "unknown",
+                "risk_estimate": "unknown",
+                "repetition_risk": 0.2,
+                "action_value_composite": 0.265,
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true,
+                "actual_success": true,
+                "actual_error_class": null,
+                "actual_usable_gain": true,
+                "actual_information_gain": true,
+                "coverage_before_no_gain": false,
+                "coverage_after_no_gain": false,
+                "result_linked": true
+              },
+              {
+                "proposal_id": "cand_2",
+                "action": {
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+                },
+                "rationale": null,
+                "evidence": {
+                  "state": false,
+                  "history": false,
+                  "external_research": true,
+                  "experiment": true
+                },
+                "evidence_sources_used": [
+                  "external_research",
+                  "llm_reasoning",
+                  "experiment"
+                ],
+                "preferred_source_at_proposal": "external_research",
+                "expected_information_gain": 0.35,
+                "success_probability_estimate": 0.25,
+                "evidence_confidence": 0.25,
+                "applicability": 0.4,
+                "implementation_precedent": false,
+                "execution_cost_estimate": "unknown",
+                "risk_estimate": "unknown",
+                "repetition_risk": 0.2,
+                "action_value_composite": 0.265,
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true,
+                "actual_success": true,
+                "actual_error_class": null,
+                "actual_usable_gain": true,
+                "actual_information_gain": true,
+                "coverage_before_no_gain": false,
+                "coverage_after_no_gain": false,
+                "result_linked": true
+              },
+              {
+                "proposal_id": "cand_3",
+                "action": {
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "question": "Windowsのメモリ使用率を取得するために、FreePhysicalMemoryとTotalVisibleMemorySizeを使用して計算する方法を教えてください。"
+                },
+                "rationale": null,
+                "evidence": {
+                  "state": false,
+                  "history": false,
+                  "external_research": true,
+                  "experiment": true
+                },
+                "evidence_sources_used": [
+                  "external_research",
+                  "llm_reasoning",
+                  "experiment"
+                ],
+                "preferred_source_at_proposal": "external_research",
+                "expected_information_gain": 0.35,
+                "success_probability_estimate": 0.25,
+                "evidence_confidence": 0.25,
+                "applicability": 0.4,
+                "implementation_precedent": false,
+                "execution_cost_estimate": "unknown",
+                "risk_estimate": "unknown",
+                "repetition_risk": 0.2,
+                "action_value_composite": 0.265,
+                "estimate_method": "heuristic_v0",
+                "not_for_decision": true,
+                "actual_success": true,
+                "actual_error_class": null,
+                "actual_usable_gain": true,
+                "actual_information_gain": true,
+                "coverage_before_no_gain": false,
+                "coverage_after_no_gain": false,
+                "result_linked": true
+              }
+            ],
+            "usable_gain_round": true,
+            "no_gain_before": false,
+            "no_gain_after": false
+          },
+          "research_cost": {
+            "web_hit_count": 1,
+            "candidate_count": 4,
+            "verified_count": 4,
+            "note": "counts_only_llm_cost_in_timing"
+          },
+          "auto_switch": false,
+          "prompt_injected": false,
+          "not_for_decision": true,
+          "phase": "kss-0",
+          "known_coverage_after": {
+            "known_coverage": 0.85,
+            "known_coverage_note": "exploration_signal_not_accuracy",
+            "has_usable_in_state": true,
+            "has_success_in_history": true,
+            "history_fails_only": false,
+            "same_error_class_continuing": false,
+            "stuck_error_class": null,
+            "same_open_question_continuing": false,
+            "command_family_no_gain": false,
+            "no_gain": false,
+            "information_gain": {
+              "has_gain": true,
+              "no_gain": false,
+              "reasons_gain": [
+                "recent_verify_ok",
+                "has_usable_selected"
+              ],
+              "reasons_stuck": []
+            },
+            "open_question_count": 0,
+            "verify_ok_count": 1,
+            "verify_fail_count": 0,
+            "reasons": [
+              "has_selected_usable",
+              "history_has_verify_ok"
+            ],
+            "estimate_method": "heuristic_v0",
+            "not_for_decision": true
+          }
+        },
+        "decision_confidence_observation": {
+          "enabled": false,
+          "phase": "kss-1"
+        },
+        "decision_evidence_observation": {
+          "enabled": true,
+          "phase": "kss-1.1",
+          "not_for_decision": true,
+          "behavior_changed": false,
+          "round": 1,
+          "bundle_id": "decision_7b03cd61eabe",
+          "evidence": {
+            "evidence_count": 4,
+            "successful_evidence_count": 4,
+            "failed_evidence_count": 0,
+            "verify_high_count": 4,
+            "verify_low_count": 0,
+            "verify_other_or_missing_count": 0,
+            "verify_confidence_labels": [
+              "high",
+              "high",
+              "high",
+              "high"
+            ],
+            "verify_confidence_numeric": "missing",
+            "verifier_support": true,
+            "tool_result_support": true,
+            "usable_count": 1,
+            "reference_count": 0,
+            "unresolved_count": 0,
+            "insufficient_count": 0,
+            "finding_bucket_counts": {
+              "usable": 1,
+              "reference": 0,
+              "unresolved": 0,
+              "insufficient": 0
+            },
+            "local_history_support": "missing",
+            "external_source_count": 1,
+            "web_kept_count": 1,
+            "web_dropped_count": "missing",
+            "web_hit_scores": [
+              1
+            ],
+            "source_count": 1,
+            "independent_evidence_count": "missing",
+            "contradictory_evidence_count": "missing",
+            "candidates_in_count": 4,
+            "candidates_out_count": 4,
+            "candidates_rejected_count": 0,
+            "evidence_level": "high",
+            "direct_observation_support": true,
+            "no_gain": false,
+            "kss0_known_coverage": 0.15,
+            "kss0_preferred_source": "external_research",
+            "web_decision_link": {
+              "enabled": true,
+              "phase": "kss-1.2",
+              "not_for_decision": true,
+              "behavior_changed": false,
+              "hits_scored": [
+                {
+                  "title": "Windows 回復環境 (Windows RE)",
+                  "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                  "backend": "learn.microsoft",
+                  "score": 1
+                }
+              ],
+              "candidate_hit_links": [
+                {
+                  "candidate_index": 0,
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "linked": true,
+                  "best_hit_index": 0,
+                  "token_overlap": 1,
+                  "best_hit_score": 1,
+                  "best_hit_url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                  "candidate_token_count": 12,
+                  "link_method": "token_overlap_with_existing_hit_score",
+                  "not_for_decision": true
+                },
+                {
+                  "candidate_index": 1,
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "linked": true,
+                  "best_hit_index": 0,
+                  "token_overlap": 1,
+                  "best_hit_score": 1,
+                  "best_hit_url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                  "candidate_token_count": 12,
+                  "link_method": "token_overlap_with_existing_hit_score",
+                  "not_for_decision": true
+                },
+                {
+                  "candidate_index": 2,
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "linked": true,
+                  "best_hit_index": 0,
+                  "token_overlap": 1,
+                  "best_hit_score": 1,
+                  "best_hit_url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                  "candidate_token_count": 12,
+                  "link_method": "token_overlap_with_existing_hit_score",
+                  "not_for_decision": true
+                },
+                {
+                  "candidate_index": 3,
+                  "command": "powershell",
+                  "args": [
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-Command",
+                    "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+                  ],
+                  "linked": true,
+                  "best_hit_index": 0,
+                  "token_overlap": 1,
+                  "best_hit_score": 1,
+                  "best_hit_url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                  "candidate_token_count": 13,
+                  "link_method": "token_overlap_with_existing_hit_score",
+                  "not_for_decision": true
+                }
+              ],
+              "link_coverage": 1.0,
+              "candidates_total": 4,
+              "candidates_linked": 4,
+              "candidates_unlinked": 0,
+              "hits_total": 1,
+              "audit_gaps": [
+                "none"
+              ]
+            }
+          },
+          "escalation": {
+            "reason": "usable_needs_goal_check",
+            "routine": false,
+            "needs_partial_llm": false,
+            "needs_global_judge": null
+          },
+          "llm_self_assessment_auxiliary": {
+            "action_confidence": "missing",
+            "observation_coverage": "missing",
+            "auxiliary_only": true,
+            "not_formal_confidence": true
+          },
+          "decision_events": [
+            {
+              "decision_id": "decision_7b03cd61eabe_verify",
+              "round": 1,
+              "decision_type": "verify_batch",
+              "decision_source": "verifier",
+              "final_decision": "has_high",
+              "evidence_refs": {
+                "evidence_count": 4,
+                "successful_evidence_count": 4,
+                "failed_evidence_count": 0,
+                "verify_high_count": 4,
+                "verify_low_count": 0,
+                "verify_other_or_missing_count": 0,
+                "verify_confidence_labels": [
+                  "high",
+                  "high",
+                  "high",
+                  "high"
+                ],
+                "verify_confidence_numeric": "missing",
+                "verifier_support": true,
+                "tool_result_support": true
+              },
+              "threshold_refs": {
+                "usable_requires": "confidence == high"
+              },
+              "reason_codes": []
+            },
+            {
+              "decision_id": "decision_7b03cd61eabe_judge",
+              "round": 1,
+              "decision_type": "research_judge",
+              "decision_source": "llm_judgment",
+              "judge_source": "llm",
+              "final_decision": true,
+              "judge_satisfies_request": true,
+              "judge_missing": [],
+              "judge_reason": "",
+              "score_refs": {
+                "llm_judge_confidence_numeric": "missing"
+              },
+              "gj_needed": true,
+              "gj_would_skip": false,
+              "gj_triggers": [
+                "usable_needs_goal_check",
+                "first_round"
+              ],
+              "gj_skip_triggers": []
+            },
+            {
+              "decision_id": "decision_7b03cd61eabe_progress",
+              "round": 1,
+              "decision_type": "research_progress",
+              "decision_source": "deterministic_rule",
+              "final_decision": "implement",
+              "progress_action": "implement",
+              "progress_reason": "findings_complete",
+              "progress_stagnation": 0,
+              "progress_has_new_finding": true,
+              "progress_missing_same": false,
+              "progress_duplicate_only": false,
+              "threshold_refs": {
+                "max_research_rounds": 10,
+                "max_stagnation": 3,
+                "verify_timeout": "missing",
+                "verify_confidence_gate": "confidence == 'high' → usable",
+                "progress_implement_if_satisfies_or_missing_resolved": true,
+                "note": "values copied from existing constants/rules; not invented weights"
+              },
+              "score_refs": {
+                "progress_decision_confidence": "missing"
+              }
+            }
+          ],
+          "mapping_note": "see EXISTING_TO_OBS_MAPPING",
+          "missing_fields_policy": "missing_not_zero"
+        },
+        "exploration_value_observation": {
+          "enabled": true,
+          "phase": "kss-1.3",
+          "not_for_decision": true,
+          "behavior_changed": false,
+          "round_index": 1,
+          "search_volume": {
+            "search_result_count": 2,
+            "kept_hit_count": 1,
+            "dropped_hit_count": 1,
+            "web_hits_saved_count": 1
+          },
+          "information_novelty": {
+            "new_url_count": 1,
+            "new_source_count": 1,
+            "new_term_count": 47,
+            "new_reference_count": 0,
+            "new_command_key_count": 2,
+            "new_entity_count": "missing",
+            "new_information_count": 1,
+            "new_information_flag": true
+          },
+          "exploration_leads": {
+            "candidate_count": 4,
+            "linked_candidate_count": 4,
+            "candidate_to_hit_link_count": 4,
+            "zero_overlap_count": 0,
+            "link_coverage": 1.0,
+            "link_metric_source": "web_decision_link"
+          },
+          "evidence_strength": {
+            "evidence_level": "high",
+            "verify_high_count": 4,
+            "verify_low_count": 0,
+            "usable_count": 1,
+            "hit_scores": [
+              1
+            ],
+            "hit_score_missing_count": 0
+          },
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "recent_verify_ok",
+              "has_usable_selected"
+            ],
+            "reasons_stuck": []
+          },
+          "no_gain_existing": false,
+          "duplicate_or_repeated": {
+            "progress_duplicate_only": false,
+            "repeated_url_count": 0,
+            "repeated_term_count": "missing",
+            "duplicate_or_repeated_count": 0
+          },
+          "previous_round_similarity": {
+            "token_jaccard": 0.0,
+            "url_jaccard": 0.0,
+            "method": "set_jaccard_mechanical",
+            "note": "not semantic similarity"
+          },
+          "exploration_signal": {
+            "has_new_url": true,
+            "has_new_source": true,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": true,
+            "progress_has_new_finding": true,
+            "composite_score": "missing"
+          },
+          "observation_quality": {
+            "fields_present": 8,
+            "fields_tracked": 8,
+            "coverage": 1.0,
+            "missing_fields": [
+              "new_entity_count",
+              "exploration_value_score",
+              "semantic_novelty",
+              "embedding_similarity"
+            ]
+          },
+          "progress_action": "implement",
+          "progress_reason": "findings_complete",
+          "progress_stagnation": 0,
+          "run_linkage": {
+            "case_id": "memory_usage",
+            "research_run_id": "kss15_20260820_160911",
+            "round_index": 1,
+            "final_pass": true,
+            "fail_stage": "missing",
+            "fail_reason": "findings_complete",
+            "total_rounds": 1,
+            "next_round_exists": false,
+            "next_round_gain": "missing",
+            "eventually_succeeded": true
+          },
+          "missing_fields_policy": "missing_not_zero",
+          "available_vs_missing_note": {
+            "AVAILABLE": [
+              "kept_hit_count",
+              "candidate_count",
+              "new_url/source/term counts (set-diff)",
+              "link_coverage (KSS-1.2)",
+              "information_gain_existing / no_gain_existing",
+              "token/url jaccard",
+              "evidence_level (KSS-1.1)"
+            ],
+            "MISSING_unless_web_exec": [
+              "search_result_count",
+              "dropped_hit_count"
+            ],
+            "ALWAYS_MISSING": [
+              "new_entity_count",
+              "exploration_value_score",
+              "semantic_novelty",
+              "embedding_similarity"
+            ]
+          }
+        },
+        "information_loss_observation": {
+          "enabled": true,
+          "phase": "kss-1.4",
+          "not_for_decision": true,
+          "behavior_changed": false,
+          "round_index": 1,
+          "chain": [
+            {
+              "stage": "web_search",
+              "count": 2,
+              "available": true,
+              "provenance": "web_exec_stats.search_result_count",
+              "rejection": 1,
+              "failure_reason": "missing"
+            },
+            {
+              "stage": "web_hit",
+              "count": 1,
+              "available": true,
+              "provenance": "web_hits / kept_hit_count",
+              "rejection": "missing",
+              "failure_reason": "missing"
+            },
+            {
+              "stage": "kept_hit",
+              "count": 1,
+              "available": true,
+              "provenance": "filter_relevant_hits kept",
+              "rejection": 1,
+              "failure_reason": "missing"
+            },
+            {
+              "stage": "candidate",
+              "count": 4,
+              "available": true,
+              "provenance": "LLM candidates after reject filter",
+              "rejection": 0,
+              "failure_reason": "missing"
+            },
+            {
+              "stage": "candidate_hit_link",
+              "count": 4,
+              "available": true,
+              "provenance": "KSS-1.2 token_overlap",
+              "rejection": 0,
+              "failure_reason": "missing"
+            },
+            {
+              "stage": "verification",
+              "count": 4,
+              "available": true,
+              "provenance": "research_verifier / verify_high",
+              "rejection": 0,
+              "failure_reason": "missing"
+            },
+            {
+              "stage": "usable_finding",
+              "count": 1,
+              "available": true,
+              "provenance": "pack usable_findings / evidence.usable_count",
+              "rejection": "missing",
+              "failure_reason": "missing"
+            },
+            {
+              "stage": "judge",
+              "count": 1,
+              "available": true,
+              "provenance": "judgment.satisfies_request",
+              "rejection": "missing",
+              "failure_reason": "missing"
+            },
+            {
+              "stage": "progress",
+              "count": "missing",
+              "available": true,
+              "provenance": "evaluate_research_progress",
+              "rejection": "missing",
+              "failure_reason": "findings_complete"
+            }
+          ],
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": true,
+            "usable_finding_available": true,
+            "judge_satisfied": true,
+            "progress_action": "implement"
+          },
+          "counts": {
+            "search_result_count": 2,
+            "kept_hit_count": 1,
+            "dropped_hit_count": 1,
+            "candidate_count": 4,
+            "linked_candidate_count": 4,
+            "zero_overlap_count": 0,
+            "link_coverage": 1.0,
+            "verify_ok_count": 4,
+            "verify_fail_count": 0,
+            "verify_high_count": 4,
+            "verify_low_count": 0,
+            "usable_count": 1,
+            "new_source_count": 1,
+            "new_term_count": 47,
+            "new_url_count": 1
+          },
+          "current_round_gain": true,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "recent_verify_ok",
+              "has_usable_selected"
+            ],
+            "reasons_stuck": []
+          },
+          "first_loss_point": {
+            "stage": "none_detected",
+            "observational_label": "missing",
+            "count": "missing",
+            "note": "no clear zero/False along chain for this round"
+          },
+          "web_vs_llm_hypothesis": {
+            "labels": [
+              "none"
+            ],
+            "not_blame_assignment": true,
+            "note": "hypothesis classification for analysis only"
+          },
+          "progress_action": "implement",
+          "progress_reason": "findings_complete",
+          "run_linkage": {
+            "case_id": "memory_usage",
+            "research_run_id": "kss15_20260820_160911",
+            "round_index": 1,
+            "final_pass": true,
+            "fail_stage": "missing",
+            "fail_reason": "findings_complete",
+            "total_rounds": 1,
+            "next_round_exists": false,
+            "next_round_gain": "missing",
+            "eventually_succeeded": true
+          },
+          "should_continue_web": "missing",
+          "confidence_score": "missing",
+          "missing_fields_policy": "missing_not_zero",
+          "web_answer_presence_audit": {
+            "enabled": true,
+            "phase": "kss-1.4",
+            "not_for_decision": true,
+            "behavior_changed": false,
+            "judge_family": "web_answer_presence",
+            "not_llm_self_confidence": true,
+            "partition_source": "live_web_exec",
+            "partition_note": null,
+            "kept_answer_presence": [
+              {
+                "search_id": "search_f0536f8b07",
+                "round_id": "missing",
+                "item_id": 1,
+                "query": "wmic powershell Windows memory usage percent PowerShell",
+                "hit_id": "hit_139673eb1341",
+                "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                "title": "Windows 回復環境 (Windows RE)",
+                "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+                "source": "learn.microsoft",
+                "domain": "learn.microsoft.com",
+                "kept": true,
+                "drop_reason": "kept",
+                "position_rank": 1,
+                "existing_hit_score": 1,
+                "candidate_link": {
+                  "linked": true,
+                  "candidate_index": 3,
+                  "token_overlap": 1,
+                  "command": "powershell"
+                },
+                "heuristic_answer_presence": "none",
+                "heuristic_reasons": [
+                  "no_core_lead_or_overlap"
+                ],
+                "human_answer_presence": "missing",
+                "human_rationale": "missing",
+                "llm_answer_presence": "missing",
+                "llm_human_agreement": "missing",
+                "dropped": false,
+                "answer_presence": "related",
+                "answer_presence_method": "web_answer_presence_heuristic",
+                "answer_presence_reasons": [
+                  "weak_overlap:['windows']"
+                ],
+                "exploratory_useful_candidate": false,
+                "web_answer_presence_judge": "missing"
+              }
+            ],
+            "dropped_answer_presence": [
+              {
+                "search_id": "search_f0536f8b07",
+                "round_id": "missing",
+                "item_id": 1,
+                "query": "wmic powershell Windows memory usage percent PowerShell",
+                "hit_id": "hit_91903a1d4dfe",
+                "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+                "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+                "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+                "source": "learn.microsoft",
+                "domain": "learn.microsoft.com",
+                "kept": false,
+                "drop_reason": "irrelevant_token:dev drive",
+                "position_rank": 2,
+                "existing_hit_score": 1,
+                "candidate_link": {
+                  "linked": false
+                },
+                "heuristic_answer_presence": "core",
+                "heuristic_reasons": [
+                  "core_hint:memory usage"
+                ],
+                "human_answer_presence": "missing",
+                "human_rationale": "missing",
+                "llm_answer_presence": "missing",
+                "llm_human_agreement": "missing",
+                "dropped": true,
+                "answer_presence": "core",
+                "answer_presence_method": "web_answer_presence_heuristic",
+                "answer_presence_reasons": [
+                  "core_hint:memory usage"
+                ],
+                "exploratory_useful_candidate": false,
+                "web_answer_presence_judge": "missing"
+              }
+            ],
+            "aggregates": {
+              "total_web_hits": 2,
+              "kept_hits": 1,
+              "dropped_hits": 1,
+              "direct_in_kept": 0,
+              "core_in_kept": 0,
+              "lead_in_kept": 0,
+              "related_in_kept": 1,
+              "none_in_kept": 0,
+              "unknown_in_kept": 0,
+              "direct_in_dropped": 0,
+              "core_in_dropped": 1,
+              "lead_in_dropped": 0,
+              "related_in_dropped": 0,
+              "none_in_dropped": 0,
+              "unknown_in_dropped": 0,
+              "unknown_count": 0,
+              "answer_in_any_hit": true,
+              "answer_in_kept_hit": false,
+              "answer_in_dropped_hit": true,
+              "answer_presence_unknown": false,
+              "valuable_dropped_not_kept": true,
+              "discard_reason_x_answer_presence": {
+                "missing|core": 1
+              },
+              "method": "web_answer_presence_heuristic",
+              "llm_judge_used": false,
+              "not_llm_self_confidence": true,
+              "not_for_decision": true
+            },
+            "lead_present": false,
+            "exploratory_useful_round_candidate": false,
+            "routing_hint": "missing",
+            "human_audit_samples": [
+              {
+                "case_id": "memory_usage",
+                "bucket": "kept",
+                "dropped": false,
+                "title": "Windows 回復環境 (Windows RE)",
+                "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of p",
+                "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+                "discard_reason": null,
+                "heuristic_answer_presence": "related",
+                "human_answer_presence": "missing",
+                "llm_judge_answer_presence": "missing"
+              },
+              {
+                "case_id": "memory_usage",
+                "bucket": "dropped",
+                "dropped": true,
+                "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+                "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead",
+                "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+                "discard_reason": null,
+                "heuristic_answer_presence": "core",
+                "human_answer_presence": "missing",
+                "llm_judge_answer_presence": "missing"
+              }
+            ]
+          },
+          "next_round_gain": "missing",
+          "eventual_success": true
+        }
+      }
+    ],
+    "research_history": [
+      {
+        "id": "evt_03d015565efc",
+        "ts": "2026-08-20T16:09:48.321449+00:00",
+        "type": "verify_ok",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize"
+          ]
+        },
+        "result": {
+          "ok": true,
+          "error": "",
+          "stderr": "",
+          "sample": [
+            "FreePhysicalMemory TotalVisibleMemorySize",
+            "------------------ ----------------------",
+            "32252432               66844080"
+          ],
+          "returncode": 0
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+          "confidence": "high",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_c8330cb30158",
+        "ts": "2026-08-20T16:09:50.665098+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": true,
+          "reason": "",
+          "missing": []
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1
+        }
+      },
+      {
+        "id": "evt_0412aec5858e",
+        "ts": "2026-08-20T16:09:50.665170+00:00",
+        "type": "knowledge_source_obs",
+        "action": {
+          "kind": "observe"
+        },
+        "result": {
+          "preferred_source": "external_research",
+          "known_coverage": 0.15,
+          "no_gain": false,
+          "source_values": {
+            "state": 0.2,
+            "history": 0.2,
+            "external_research": 0.5,
+            "llm_reasoning": 0.30000000000000004,
+            "experiment": 0.2
+          }
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "not_for_decision": true,
+          "phase": "kss-0"
+        }
+      },
+      {
+        "id": "evt_f3e4a0e13fd5",
+        "ts": "2026-08-20T16:09:50.665260+00:00",
+        "type": "decision_evidence_obs",
+        "action": {
+          "kind": "observe"
+        },
+        "result": {
+          "evidence_level": "high",
+          "verify_high_count": 4,
+          "usable_count": 1,
+          "no_gain": false,
+          "progress_action": "implement"
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "bundle_id": "decision_7b03cd61eabe",
+          "not_for_decision": true,
+          "phase": "kss-1.1"
+        }
+      }
+    ],
+    "global_judge_shadow": {
+      "mode": "live_skip",
+      "live_skip_enabled": true,
+      "audit_rate": 3,
+      "rounds_total": 1,
+      "judge_calls_actual": 1,
+      "would_skip_count": 0,
+      "live_skip_count": 0,
+      "audit_count": 0,
+      "llm_calls_saved_estimate": 0,
+      "llm_calls_saved_actual": 0,
+      "quality": {
+        "critical_miss_count": 0,
+        "false_continue_count": 0,
+        "satisfies_match_count": 0,
+        "missing_match_count": 0,
+        "decision_divergence_count": 0,
+        "audit_compared_count": 0
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "mode": "live_skip",
+          "needed": true,
+          "would_skip": false,
+          "triggers": [
+            "usable_needs_goal_check",
+            "first_round"
+          ],
+          "skip_triggers": [],
+          "primary_reason": "usable_needs_goal_check",
+          "escalation_reason": "usable_needs_goal_check",
+          "escalation_routine": false,
+          "llm_calls_saved_if_skip": 0,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "live_skipped": false,
+          "audit_only": false,
+          "llm_called": true,
+          "quality_compare": null,
+          "shadow_judgment": null,
+          "audit_judgment": null
+        }
+      ],
+      "observation": {
+        "judge_reduction_rate": 0.0,
+        "judge_call_rate": 1.0,
+        "rounds": 1,
+        "baseline_rounds": null,
+        "extra_rounds": null,
+        "would_skip_count": 0,
+        "live_skip_count": 0,
+        "audit_count": 0,
+        "critical_miss_count": 0,
+        "decision_divergence_count": 0
+      }
+    },
+    "context_budget_shadow": {
+      "mode": "live",
+      "shadow_enabled": true,
+      "headroom_chars": 800,
+      "calls": [
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 3132,
+          "effective_slack": 2332,
+          "headroom_gate_ok": true,
+          "legacy_chars": 4529,
+          "allocated_chars": 4548,
+          "legacy_actual_headroom": 3151,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 2519,
+            "user": 2010
+          },
+          "allocated_breakdown": {
+            "system": 2519,
+            "user": 2029
+          },
+          "allocated_sections": {
+            "system": 2408,
+            "goal": 162,
+            "current_state": 481,
+            "open_questions": 2,
+            "recent_events": 40,
+            "summary": 19,
+            "action_local": 393,
+            "safety": 921,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 2408,
+              "core": true
+            },
+            "goal": {
+              "chars": 162,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 481,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 2,
+              "core": true,
+              "count": 0
+            },
+            "recent_events": {
+              "chars": 40,
+              "core": false,
+              "retrieve_count": 0
+            },
+            "action_local": {
+              "chars": 393,
+              "core": false,
+              "search_results_count": 1
+            },
+            "safety": {
+              "chars": 921,
+              "core": false
+            },
+            "summary": {
+              "chars": 19,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 0,
+          "usable_findings_count": null,
+          "open_questions_count": 0,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 2408,
+                "core": true
+              },
+              "goal": {
+                "chars": 162,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 481,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 2,
+                "core": true,
+                "count": 0
+              },
+              "recent_events": {
+                "chars": 40,
+                "core": false,
+                "retrieve_count": 0
+              },
+              "action_local": {
+                "chars": 393,
+                "core": false,
+                "search_results_count": 1
+              },
+              "safety": {
+                "chars": 921,
+                "core": false
+              },
+              "summary": {
+                "chars": 19,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 0,
+            "prior_failures_count": 0,
+            "search_results_count": 1,
+            "prior_failures_source": "legacy_trim",
+            "recall_mode": null,
+            "recalled_event_count": 0,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 0,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 3132,
+          "legacy_headroom": 3151
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2960,
+          "effective_slack": 2160,
+          "headroom_gate_ok": true,
+          "legacy_chars": 4720,
+          "allocated_chars": 4720,
+          "legacy_actual_headroom": 2960,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 1213
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 1213
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 663,
+            "summary": 0,
+            "escalation_evidence": 44,
+            "usable_findings": 491,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 663,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 491,
+              "core": true,
+              "count": 1
+            },
+            "escalation_evidence": {
+              "chars": 44,
+              "core": false
+            },
+            "summary": {
+              "chars": 0,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 0
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 0,
+          "usable_findings_count": 1,
+          "open_questions_count": 0,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 663,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 491,
+                "core": true,
+                "count": 1
+              },
+              "escalation_evidence": {
+                "chars": 44,
+                "core": false
+              },
+              "summary": {
+                "chars": 0,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 0
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 0,
+            "omitted_categories": [],
+            "unresolved_in_materials": true,
+            "open_questions_count": 0,
+            "usable_findings_count": 1,
+            "recall_mode": null,
+            "recalled_event_count": 0
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2960,
+          "legacy_headroom": 2960
+        }
+      ],
+      "summary": {
+        "call_count": 2,
+        "legacy_chars_total": 9249,
+        "allocated_chars_total": 9268,
+        "legacy_chars_max": 4720,
+        "allocated_chars_max": 4720,
+        "legacy_overflow_count": 0,
+        "allocated_overflow_count": 0,
+        "reserved_headroom": 800,
+        "actual_headroom_min": 2960,
+        "actual_headroom_max": 3132,
+        "headroom_gate_ok": true,
+        "headroom_violation_count": 0,
+        "reduction_applied_count": 0,
+        "defer_count": 0
+      }
+    },
+    "generated_code": "import subprocess\n\ndef get_memory_status():\n    try:\n        result = subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', 'Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalVisibleMemorySize'], capture_output=True, text=True)\n        if result.returncode == 0:\n            memory_info = result.stdout.splitlines()\n            free_memory = int(memory_info[1].split()[1])\n            total_memory = int(memory_info[1].split()[3])\n            memory_usage = round((1 - (free_memory / total_memory)) * 100, 2)\n            return {'status': memory_usage}\n        else:\n            return {'status': '未実装'}\n    except Exception as e:\n        return {'status': '未実装'}\n",
+    "repair": "skipped"
+  },
+  "timing": {
+    "total_seconds": 43.5,
+    "llm_seconds": 38.5,
+    "machine_seconds": 5.1,
+    "research_seconds": 22.6,
+    "judge_seconds": 2.3,
+    "implementation_seconds": 5.1,
+    "repair_seconds": 0.0,
+    "validation_seconds": 0.4,
+    "llm_calls": 5
+  },
+  "trial": 1,
+  "returncode": 0
+}

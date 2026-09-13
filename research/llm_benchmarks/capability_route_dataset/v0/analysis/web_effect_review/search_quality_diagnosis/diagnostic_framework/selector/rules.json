@@ -1,0 +1,180 @@
+{
+  "version": "0.1",
+  "kind": "rule_based_method_selector",
+  "note": "Not a trained classifier. Rules come from knowledge_base SELF_DIAGNOSIS_SELECTOR and METHOD_EFFECTIVENESS.",
+  "pipeline_order": [
+    "mechanical_observation",
+    "evidence_four_classes",
+    "sufficient_ctx_code_pack",
+    "specification_map",
+    "route_decomposition",
+    "collect_rank_split",
+    "code_reading_large_ctx",
+    "small_llm_local",
+    "n1_single_edge",
+    "n2_path_gate",
+    "n3_runtime_evidence_gate",
+    "material_compression",
+    "deepseek_short_yes_no",
+    "large_llm_escalation",
+    "small_then_large_pipeline",
+    "human_approval"
+  ],
+  "hard_blocks": [
+    "auto_fix",
+    "deepseek_full_replace",
+    "n2_full_path_narrative"
+  ],
+  "always_select": [
+    {
+      "method_id": "mechanical_observation",
+      "role": "always",
+      "reason": "実行時品質の議論は件数・空snippet・脱落などの機械観測から始める。",
+      "rule_id": "R-ALWAYS-MECH"
+    },
+    {
+      "method_id": "evidence_four_classes",
+      "role": "always",
+      "reason": "FACT/OBSERVED/INFERENCE/UNKNOWN は原則常時。観測捏造抑制が実験で支持された。",
+      "rule_id": "R-ALWAYS-EVID",
+      "finding": "F004"
+    },
+    {
+      "method_id": "human_approval",
+      "role": "always",
+      "reason": "修正実行前の人間承認はガードレール。auto_fix は既定禁止。",
+      "rule_id": "R-ALWAYS-HUMAN"
+    }
+  ],
+  "feature_rules": [
+    {
+      "rule_id": "R-CTX",
+      "when": {"code_available": true},
+      "select": "sufficient_ctx_code_pack",
+      "role": "harness",
+      "reason": "小さい ctx / 未添付 code_pack はコード不足誤診を生む（EXP-002/003）。",
+      "finding": "F002"
+    },
+    {
+      "rule_id": "R-CODE-READ",
+      "when": {"code_available": true, "path_unknown_or_untrusted": true},
+      "select": "code_reading_large_ctx",
+      "role": "local",
+      "reason": "入口・backend・ranking 関数の発見にはコード読解が有効。最終原因の単独断定には使わない。",
+      "finding": "F001"
+    },
+    {
+      "rule_id": "R-LOGS-YES",
+      "when": {"has_runtime_logs": true},
+      "select": "n3_runtime_evidence_gate",
+      "role": "gate",
+      "reason": "runtime 症状では原因の発生主張に観測が必要。ログがあっても未観測部分は UNKNOWN（N3 は有望・未検証）。",
+      "finding": "F004"
+    },
+    {
+      "rule_id": "R-LOGS-NO",
+      "when": {"has_runtime_logs": false},
+      "select": "n3_runtime_evidence_gate",
+      "role": "gate",
+      "reason": "ログ無しでは OBSERVED=なし。runtime 原因の断定禁止。",
+      "finding": "F004"
+    },
+    {
+      "rule_id": "R-HANDOFF",
+      "when": {"suspect_stdout_vs_llm_handoff": true},
+      "select": "route_decomposition",
+      "role": "input_design",
+      "reason": "表示経路と LLM 経路の接続混同は分解パックで改善した事例がある。",
+      "finding": "F006"
+    },
+    {
+      "rule_id": "R-N1",
+      "when": {"suspect_stdout_vs_llm_handoff": true, "caller_complex": true},
+      "select": "n1_single_edge",
+      "role": "optional_unverified",
+      "reason": "caller が複雑なときの 1接続検証は提案のみ。実験未実施のため低信頼で候補化する。",
+      "finding": null
+    },
+    {
+      "rule_id": "R-RANK-FILTER",
+      "when": {"suspect_ranking_vs_filter": true},
+      "select": "collect_rank_split",
+      "role": "input_design",
+      "reason": "候補数変化・脱落段階が疑わしいときは collect と ranking を別パックにする。",
+      "finding": "F008"
+    },
+    {
+      "rule_id": "R-OFFPATH",
+      "when": {"suspect_off_path_causes": true},
+      "select": "n2_path_gate",
+      "role": "safety_gate",
+      "reason": "本文GET・別Tool filter 等の経路外語が候補に出るときは存在ゲート。YES を原因強度に使わない。",
+      "finding": "F005"
+    },
+    {
+      "rule_id": "R-SPEC",
+      "when": {"intent_map_needed": true},
+      "select": "specification_map",
+      "role": "map_only",
+      "reason": "入口・意図の共有には仕様地図が部分的に有効。実装行の最終根拠にはしない。",
+      "finding": "F007"
+    },
+    {
+      "rule_id": "R-SMALL",
+      "when": {"needs_local_analysis": true},
+      "select": "small_llm_local",
+      "role": "local",
+      "reason": "小型LLMは局所コード・ログ列挙に条件付き採用。最終診断の単独担当にはしない。",
+      "finding": "F011"
+    },
+    {
+      "rule_id": "R-LARGE",
+      "when": {"needs_path_integration": true},
+      "select": "large_llm_escalation",
+      "role": "escalation",
+      "reason": "全体の優先順位・偽原因棄却が必要なら構造化後に大型へ。一般化と自動修正は未検証／禁止。",
+      "finding": "F010"
+    },
+    {
+      "rule_id": "R-2STAGE",
+      "when": {"needs_local_analysis": true, "needs_path_integration": true},
+      "select": "small_then_large_pipeline",
+      "role": "architecture_hypothesis",
+      "reason": "小型局所＋大型統合は有望仮説。パイプライン A/B は未実施なので確定仕様にしない。",
+      "finding": "F011"
+    },
+    {
+      "rule_id": "R-COMPRESS",
+      "when": {"long_logs_small_ctx": true},
+      "select": "material_compression",
+      "role": "optional_unverified",
+      "reason": "長いログを小コンテキストモデルへ無理に全文投入しない。圧縮は未検証有望。",
+      "finding": "F009"
+    },
+    {
+      "rule_id": "R-DS-SHORT",
+      "when": {"optional_short_edge_probe": true},
+      "select": "deepseek_short_yes_no",
+      "role": "optional_probe",
+      "reason": "短文接続の試行余地のみ。全面置換ではない。",
+      "finding": "F009"
+    }
+  ],
+  "not_select_reasons": {
+    "auto_fix": "自己検証と大型診断で NOT_ALLOWED。未解決問題が残る間は既定出力にしない。",
+    "deepseek_full_replace": "同一設問の全面置換は ctx 制約と共有失敗モードで不十分（EXP-009）。",
+    "n2_full_path_narrative": "N2 TEST-C で過信増加が報告されたため既定にしない。",
+    "specification_map": "条件が intent_map_needed=false のときは地図も不要。単独の実装帰属手段にはしない。",
+    "material_compression": "long_logs_small_ctx=false なら必須ではない。",
+    "deepseek_short_yes_no": "optional_short_edge_probe=false なら選ばない。",
+    "n1_single_edge": "handoff かつ caller 複雑の条件を満たさない、または未検証のため必須にしない。",
+    "route_decomposition": "handoff 疑いが立っていない。",
+    "collect_rank_split": "ranking/filter 境界の疑いが立っていない。",
+    "n2_path_gate": "経路外語・経路外疑いが立っていない。",
+    "large_llm_escalation": "全体統合の必要が立っていない。",
+    "code_reading_large_ctx": "コードが無い、または経路が既に信頼できる。",
+    "small_llm_local": "局所解析の必要が立っていない。",
+    "n3_runtime_evidence_gate": "runtime 症状でない（このルールセットでは runtime ならほぼ選択）。",
+    "small_then_large_pipeline": "局所と統合の両方が揃っていない、または仮説として明示しない設定。"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "implement_from_verified_memory_finding",
+  "note": "Research/Judge は固定。usable_findings のコマンドAを実装できるかだけを見る。正解を CONTRACT に書かない。",
+  "request": "Windowsのメモリ使用率を取得するToolを追加してください",
+  "proposal": {
+    "name": "get_memory_status",
+    "category": "system",
+    "subcategory": "memory",
+    "description": "Windows のメモリ使用率を取得する",
+    "module": "tools.system.memory.memory_status",
+    "function": "get_memory_status",
+    "input": {},
+    "output": ["status"],
+    "dependencies": ["powershell"],
+    "implementation_notes": []
+  },
+  "research_result": {
+    "usable_findings": [
+      {
+        "kind": "output",
+        "question": "メモリ使用率の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-CimInstance -Class Win32_PerfFormattedData_PerfOS_Memory | Select PercentCommittedBytesInUse"
+          ],
+          "returncode": 0,
+          "sample": [
+            "PercentCommittedBytesInUse",
+            "--------------------------",
+            "39"
+          ],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      }
+    ],
+    "insufficient_findings": [],
+    "unresolved": []
+  }
+}

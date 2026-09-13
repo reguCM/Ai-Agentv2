@@ -1,0 +1,4400 @@
+{
+  "condition": "phase4",
+  "condition_label": "phase4_live",
+  "policy": "handoff_legacy_no_memory_recall",
+  "case": "memory_usage",
+  "trial": 2,
+  "returncode": 0,
+  "timestamp": "2026-08-20T13:13:00.342663+00:00",
+  "experiment": {
+    "AI_AGENT_EXPERIMENT_ID": "controlled_20260820_123732",
+    "AI_AGENT_EXPERIMENT_CONDITION": "phase4",
+    "AI_AGENT_EXPERIMENT_TRIAL": "2",
+    "AI_AGENT_EXPERIMENT_CASE": "memory_usage",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3"
+  },
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "metrics": {
+    "pass": true,
+    "result": true,
+    "fail_stage": null,
+    "error": null,
+    "stop_reason": "findings_complete",
+    "rounds": 6,
+    "llm_calls": 14,
+    "usable_findings": 1,
+    "insufficient_findings": 0,
+    "verify_fail_count": 13,
+    "repeat_same_command_rate": 0.0,
+    "repeat_same_command_count": 0,
+    "repeat_same_error_class_rate": 0.846,
+    "repeat_same_error_class_count": 11,
+    "repeat_same_command_family_rate": 0.0,
+    "repeat_same_command_family_count": 0,
+    "repeated_open_question_rate": 0.333,
+    "repeated_open_question_count": 2,
+    "no_gain": false,
+    "no_gain_loop_rate": 0.333,
+    "information_gain": {
+      "has_gain": true,
+      "no_gain": false,
+      "reasons_gain": [
+        "recent_verify_ok",
+        "has_usable_selected"
+      ],
+      "reasons_stuck": [],
+      "stuck_error_class": null,
+      "stuck_family": null
+    },
+    "pivot_required_count": 0,
+    "repeating_call_count": 0,
+    "recall_mode_counts": {},
+    "usable_increase_after_pivot": false,
+    "verify_ok_after_pivot": false,
+    "pivot_followup": {
+      "pivot_round_count": 0,
+      "usable_increase_after_pivot": false,
+      "verify_ok_after_pivot": false,
+      "note": "no_pivot_observed"
+    },
+    "actual_headroom_min": 1438,
+    "headroom_gate_ok": true,
+    "allocated_chars_max": 6242,
+    "reduction_applied_count": 0,
+    "defer_count": 0,
+    "context_overflow": false,
+    "history_event_count": 23,
+    "primary_waste_event_count": 0,
+    "eval_focus": "no_gain_error_class_family_open_question_loop"
+  },
+  "pipeline": {
+    "research": {
+      "usable_findings": [
+        {
+          "kind": "output",
+          "question": "total physical memory",
+          "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+          "evidence": {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $usage = 100 - ($_.FreePhysicalMemory * 100 / $_.TotalVisibleMemorySize); $usage }"
+            ],
+            "returncode": 0,
+            "sample": [
+              "54.0993787333149"
+            ],
+            "stderr": "",
+            "error": null,
+            "output_key": "status"
+          },
+          "confidence": "high",
+          "source": "web"
+        }
+      ],
+      "reference_findings": [],
+      "unresolved": [
+        {
+          "kind": "output",
+          "question": "used memory",
+          "finding": "実環境で確認できなかった。出力が空、またはエラーに見える",
+          "evidence": {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $total = $_.TotalVisibleMemorySize; $free = $_.FreePhysicalMemory; $usage = 100 - ($free * 100 / $total) }"
+            ],
+            "returncode": 0,
+            "sample": [],
+            "stderr": "",
+            "error": "出力が空、またはエラーに見える",
+            "output_key": "status"
+          },
+          "confidence": "low",
+          "source": "web"
+        }
+      ],
+      "insufficient_findings": [],
+      "rounds": 6,
+      "stagnation": 0,
+      "stop_reason": "findings_complete",
+      "candidates_error": null
+    },
+    "judgments": [
+      {
+        "round": 1,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "missing": [
+          "total physical memory",
+          "used memory"
+        ],
+        "error": null,
+        "judge_grade": "A",
+        "proposed_decisions": []
+      },
+      {
+        "round": 2,
+        "satisfies_request": false,
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "missing": [
+          "output 'status' の取得方法",
+          "total physical memory",
+          "used memory"
+        ],
+        "error": null,
+        "judge_grade": null,
+        "proposed_decisions": []
+      },
+      {
+        "round": 3,
+        "satisfies_request": false,
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "missing": [
+          "output 'status' の取得方法",
+          "total physical memory",
+          "used memory"
+        ],
+        "error": null,
+        "judge_grade": null,
+        "proposed_decisions": []
+      },
+      {
+        "round": 4,
+        "satisfies_request": false,
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "missing": [
+          "output 'status' の取得方法",
+          "total physical memory",
+          "used memory"
+        ],
+        "error": null,
+        "judge_grade": "A",
+        "proposed_decisions": []
+      },
+      {
+        "round": 5,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "missing": [
+          "total physical memory",
+          "used memory"
+        ],
+        "error": null,
+        "judge_grade": "A",
+        "proposed_decisions": []
+      },
+      {
+        "round": 6,
+        "satisfies_request": true,
+        "reason": "",
+        "missing": [],
+        "error": null,
+        "judge_grade": "FAIL",
+        "proposed_decisions": [
+          {
+            "key": "status.meaning",
+            "value": "Windowsのメモリ使用率"
+          },
+          {
+            "key": "status.unit",
+            "value": "%"
+          },
+          {
+            "key": "status.range",
+            "value": "0-100"
+          }
+        ]
+      }
+    ],
+    "progress": [
+      {
+        "round": 1,
+        "action": "continue",
+        "reason": "no_progress",
+        "stagnation": 1,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      },
+      {
+        "round": 2,
+        "action": "continue",
+        "reason": "new_information",
+        "stagnation": 0,
+        "has_new_finding": false,
+        "missing_same": false,
+        "duplicate_only": false
+      },
+      {
+        "round": 3,
+        "action": "continue",
+        "reason": "no_progress",
+        "stagnation": 1,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      },
+      {
+        "round": 4,
+        "action": "continue",
+        "reason": "no_progress",
+        "stagnation": 2,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      },
+      {
+        "round": 5,
+        "action": "continue",
+        "reason": "new_information",
+        "stagnation": 0,
+        "has_new_finding": false,
+        "missing_same": false,
+        "duplicate_only": false
+      },
+      {
+        "round": 6,
+        "action": "implement",
+        "reason": "findings_complete",
+        "stagnation": 0,
+        "has_new_finding": true,
+        "missing_same": false,
+        "duplicate_only": false
+      }
+    ],
+    "research_rounds_detail": [
+      {
+        "round": 1,
+        "followup": false,
+        "research_input": {
+          "followup_questions": [],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+              ]
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 4,
+        "verified_count": 4,
+        "verifier_failure": true,
+        "verified_runs": [
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ]
+          },
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $free = $_.FreePhysicalMemory / 1MB; $usage = 100 - ($free / $total * 100); $usage }"
+            ]
+          },
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $used = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / 1MB; $usage = ($used / $total * 100); $usage }"
+            ]
+          },
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $used = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / 1MB; $usage = ($used / $total * 100); $usage }"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $free = $_.FreePhysicalMemory / 1MB; $usage = 100 - ($free / $total * 100); $usage }"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $used = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / 1MB; $usage = ($used / $total * 100); $usage }"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $used = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / 1MB; $usage = ($used / $total * 100); $usage }"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": "A",
+        "judge_retry_ok": true,
+        "missing": [
+          "total physical memory",
+          "used memory"
+        ],
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "ban_action"
+          ],
+          "event_ids": [
+            "evt_4a47d294ad02"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": true,
+          "would_skip": false,
+          "live_skipped": false,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [
+            "first_round"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "first_round",
+          "llm_calls_saved_if_skip": 0,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 2,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "total physical memory",
+            "used memory"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+              ]
+            }
+          ],
+          "prior_failures": [
+            {
+              "question": "output 'status' の取得方法",
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+              ],
+              "error": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~…",
+              "finding": "実環境で確認できなかった。Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  .…"
+            }
+          ],
+          "judge_reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory)."
+        },
+        "candidate_count": 1,
+        "verified_count": 1,
+        "verifier_failure": true,
+        "verified_runs": [
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "wmic の対象が許可された取得用途ではありません",
+            "confidence": "low",
+            "command": "wmic",
+            "args": [
+              "memorychip",
+              "get",
+              "capacity,dataavailable"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "wmic",
+            "args": [
+              "memorychip",
+              "get",
+              "capacity,dataavailable"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. The base version requires only 512MB of memory. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold th...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          },
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. Windows PE から、次のことができます。 Windowsをインストールする前に、ハード ドライブを設定します。. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) whic...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": null,
+        "judge_retry_ok": null,
+        "missing": [
+          "output 'status' の取得方法",
+          "total physical memory",
+          "used memory"
+        ],
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "ban_action",
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_b3cc4f5c7da3",
+            "evt_b6340bcd48db"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": false,
+          "would_skip": true,
+          "live_skipped": true,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "llm_calls_saved_if_skip": 1,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 3,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ],
+          "rejected_commands": [
+            {
+              "command": "wmic",
+              "args": [
+                "memorychip",
+                "get",
+                "capacity,dataavailable"
+              ]
+            }
+          ],
+          "prior_failures": [
+            {
+              "question": "total physical memory",
+              "command": "wmic",
+              "args": [
+                "memorychip",
+                "get",
+                "capacity,dataavailable"
+              ],
+              "error": "wmic の対象が許可された取得用途ではありません",
+              "finding": "実環境で確認できなかった。wmic の対象が許可された取得用途ではありません"
+            }
+          ],
+          "judge_reason": "live_skip:verify_fail_open_questions_updated"
+        },
+        "candidate_count": 0,
+        "verified_count": 0,
+        "verifier_failure": false,
+        "verified_runs": [],
+        "candidate_keys": [],
+        "web_hits": [
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. The base version requires only 512MB of memory. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold th...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          },
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. Windows PE から、次のことができます。 Windowsをインストールする前に、ハード ドライブを設定します。. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) whic...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": null,
+        "judge_retry_ok": null,
+        "missing": [
+          "output 'status' の取得方法",
+          "total physical memory",
+          "used memory"
+        ],
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "add_open_question",
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_12d8c53c4e17",
+            "evt_d8bc4dd14045",
+            "evt_ec4ae42dadd0"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": false,
+          "would_skip": true,
+          "live_skipped": true,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "llm_calls_saved_if_skip": 1,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 4,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ],
+          "rejected_commands": [],
+          "prior_failures": [],
+          "judge_reason": "live_skip:verify_fail_open_questions_updated"
+        },
+        "candidate_count": 0,
+        "verified_count": 0,
+        "verifier_failure": false,
+        "verified_runs": [],
+        "candidate_keys": [],
+        "web_hits": [
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. The base version requires only 512MB of memory. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold th...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          },
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. Windows PE から、次のことができます。 Windowsをインストールする前に、ハード ドライブを設定します。. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) whic...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": "A",
+        "judge_retry_ok": true,
+        "missing": [
+          "output 'status' の取得方法",
+          "total physical memory",
+          "used memory"
+        ],
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "add_open_question",
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_5bc0f408a9ba",
+            "evt_13973aefcccf",
+            "evt_e4e9c4e1b3d7"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": false,
+          "would_skip": true,
+          "live_skipped": false,
+          "audit_only": true,
+          "mode": "live_skip",
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "llm_calls_saved_if_skip": 1,
+          "quality_compare": {
+            "satisfies_request_match": true,
+            "missing_match": false,
+            "critical_miss": false,
+            "false_continue": false,
+            "shadow_satisfies": false,
+            "actual_satisfies": false,
+            "shadow_missing_count": 3,
+            "actual_missing_count": 2,
+            "decision_divergence": false,
+            "shadow_progress_action": "continue",
+            "actual_progress_action": "continue",
+            "shadow_progress_reason": "no_progress",
+            "actual_progress_reason": "new_information"
+          }
+        }
+      },
+      {
+        "round": 5,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ],
+          "rejected_commands": [],
+          "prior_failures": [],
+          "judge_reason": "live_skip:verify_fail_open_questions_updated"
+        },
+        "candidate_count": 0,
+        "verified_count": 0,
+        "verifier_failure": false,
+        "verified_runs": [],
+        "candidate_keys": [],
+        "web_hits": [
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. The base version requires only 512MB of memory. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold th...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          },
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. Windows PE から、次のことができます。 Windowsをインストールする前に、ハード ドライブを設定します。. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) whic...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": "A",
+        "judge_retry_ok": true,
+        "missing": [
+          "total physical memory",
+          "used memory"
+        ],
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "add_open_question",
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_1d2b86f40a83",
+            "evt_c502da2f88bb",
+            "evt_75e4d9355b0e"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": true,
+          "would_skip": false,
+          "live_skipped": false,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [
+            "stagnation_risk"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "stagnation_risk",
+          "llm_calls_saved_if_skip": 0,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 6,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "total physical memory",
+            "used memory"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $total = $_.TotalVisibleMemorySize; $free = $_.FreePhysicalMemory; $usage = 100 - ($free * 100 / $total) }"
+              ]
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory)."
+        },
+        "candidate_count": 2,
+        "verified_count": 2,
+        "verifier_failure": true,
+        "verified_runs": [
+          {
+            "ok": true,
+            "sample_count": 1,
+            "error": null,
+            "confidence": "high",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $usage = 100 - ($_.FreePhysicalMemory * 100 / $_.TotalVisibleMemorySize); $usage }"
+            ]
+          },
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "出力が空、またはエラーに見える",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $total = $_.TotalVisibleMemorySize; $free = $_.FreePhysicalMemory; $usage = 100 - ($free * 100 / $total) }"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $usage = 100 - ($_.FreePhysicalMemory * 100 / $_.TotalVisibleMemorySize); $usage }"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $total = $_.TotalVisibleMemorySize; $free = $_.FreePhysicalMemory; $usage = 100 - ($free * 100 / $total) }"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. The base version requires only 512MB of memory. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold th...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          },
+          {
+            "title": "Windows 回復環境 (Windows RE)",
+            "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) which can hold the entire Windows RE image (winre.wim) must be available. To optimize ...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference"
+          },
+          {
+            "title": "Windows PE (WinPE)",
+            "snippet": "Windows PE (WinPE) この記事の内容 Windows PE (WinPE) は、デスクトップ エディション、Windows Server、およびその他のWindows オペレーティング システムWindowsインストール、展開、修復するために使用される小規模なオペレーティング システムです。. Windows PE から、次のことができます。 Windowsをインストールする前に、ハード ドライブを設定します。. In order to boot Windows PE directly from memory (also known as RAM disk boot), a contiguous portion of physical memory (RAM) whic...",
+            "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro"
+          }
+        ],
+        "satisfies_request": true,
+        "judge_grade": "FAIL",
+        "judge_retry_ok": false,
+        "missing": [],
+        "reason": "",
+        "rule_partial": {
+          "escalation": "usable_needs_goal_check",
+          "routine": false,
+          "applied_ops": [
+            "add_open_question",
+            "ban_action",
+            "add_usable"
+          ],
+          "event_ids": [
+            "evt_79ce1edd917c",
+            "evt_d308928d636e"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": true,
+          "would_skip": false,
+          "live_skipped": false,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [
+            "usable_needs_goal_check"
+          ],
+          "skip_triggers": [],
+          "primary_reason": "usable_needs_goal_check",
+          "llm_calls_saved_if_skip": 0,
+          "quality_compare": null
+        }
+      }
+    ],
+    "research_history": [
+      {
+        "id": "evt_4a47d294ad02",
+        "ts": "2026-08-20T13:11:07.451661+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "stderr": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "sample": [],
+          "returncode": 1
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で確認できなかった。Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_8dcf5ab1faa6",
+        "ts": "2026-08-20T13:11:09.229386+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+          "missing": [
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1
+        }
+      },
+      {
+        "id": "evt_b3cc4f5c7da3",
+        "ts": "2026-08-20T13:11:29.094723+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "wmic",
+          "args": [
+            "memorychip",
+            "get",
+            "capacity,dataavailable"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "wmic の対象が許可された取得用途ではありません",
+          "stderr": "",
+          "sample": [],
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2,
+          "question": "total physical memory",
+          "finding": "実環境で確認できなかった。wmic の対象が許可された取得用途ではありません",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_b6340bcd48db",
+        "ts": "2026-08-20T13:11:29.094742+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2,
+          "question": "used memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_29a9264ac036",
+        "ts": "2026-08-20T13:11:29.094838+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2
+        }
+      },
+      {
+        "id": "evt_12d8c53c4e17",
+        "ts": "2026-08-20T13:11:50.855319+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "output 'status' の取得方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_d8bc4dd14045",
+        "ts": "2026-08-20T13:11:50.855339+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "total physical memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_ec4ae42dadd0",
+        "ts": "2026-08-20T13:11:50.855347+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "used memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_4802adb21a16",
+        "ts": "2026-08-20T13:11:50.855423+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3
+        }
+      },
+      {
+        "id": "evt_5bc0f408a9ba",
+        "ts": "2026-08-20T13:12:14.225865+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "output 'status' の取得方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_13973aefcccf",
+        "ts": "2026-08-20T13:12:14.225883+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "total physical memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_e4e9c4e1b3d7",
+        "ts": "2026-08-20T13:12:14.225889+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "used memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_2de0a73aa179",
+        "ts": "2026-08-20T13:12:15.800372+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4
+        }
+      },
+      {
+        "id": "evt_1d2b86f40a83",
+        "ts": "2026-08-20T13:12:36.974923+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "output 'status' の取得方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_c502da2f88bb",
+        "ts": "2026-08-20T13:12:36.974941+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "total physical memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_75e4d9355b0e",
+        "ts": "2026-08-20T13:12:36.974949+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "used memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_f71d99bb0dee",
+        "ts": "2026-08-20T13:12:38.576030+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+          "missing": [
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5
+        }
+      },
+      {
+        "id": "evt_87a4ca841641",
+        "ts": "2026-08-20T13:12:38.576058+00:00",
+        "type": "question_resolved",
+        "action": {},
+        "result": {
+          "reason": "missing_resolved",
+          "finding_ref": null
+        },
+        "related_question_ids": [
+          "q_90307dd084"
+        ],
+        "metadata": {}
+      },
+      {
+        "id": "evt_79ce1edd917c",
+        "ts": "2026-08-20T13:12:53.181011+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $total = $_.TotalVisibleMemorySize; $free = $_.FreePhysicalMemory; $usage = 100 - ($free * 100 / $total) }"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "出力が空、またはエラーに見える",
+          "stderr": "",
+          "sample": [],
+          "returncode": 0
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6,
+          "question": "used memory",
+          "finding": "実環境で確認できなかった。出力が空、またはエラーに見える",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_d308928d636e",
+        "ts": "2026-08-20T13:12:53.181033+00:00",
+        "type": "verify_ok",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $usage = 100 - ($_.FreePhysicalMemory * 100 / $_.TotalVisibleMemorySize); $usage }"
+          ]
+        },
+        "result": {
+          "ok": true,
+          "error": "",
+          "stderr": "",
+          "sample": [
+            "54.0993787333149"
+          ],
+          "returncode": 0
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6,
+          "question": "total physical memory",
+          "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+          "confidence": "high",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_2b2de638d366",
+        "ts": "2026-08-20T13:12:55.338866+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": true,
+          "reason": "",
+          "missing": []
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6
+        }
+      },
+      {
+        "id": "evt_0c72aaa655a1",
+        "ts": "2026-08-20T13:12:55.338884+00:00",
+        "type": "question_resolved",
+        "action": {},
+        "result": {
+          "reason": "satisfies_request",
+          "finding_ref": null
+        },
+        "related_question_ids": [
+          "q_8159d01bb0"
+        ],
+        "metadata": {}
+      },
+      {
+        "id": "evt_0a1d619c3e01",
+        "ts": "2026-08-20T13:12:55.338892+00:00",
+        "type": "question_resolved",
+        "action": {},
+        "result": {
+          "reason": "satisfies_request",
+          "finding_ref": null
+        },
+        "related_question_ids": [
+          "q_2dffd2b2d8"
+        ],
+        "metadata": {}
+      }
+    ],
+    "global_judge_shadow": {
+      "mode": "live_skip",
+      "live_skip_enabled": true,
+      "audit_rate": 3,
+      "rounds_total": 6,
+      "judge_calls_actual": 4,
+      "would_skip_count": 3,
+      "live_skip_count": 2,
+      "audit_count": 1,
+      "llm_calls_saved_estimate": 3,
+      "llm_calls_saved_actual": 2,
+      "quality": {
+        "critical_miss_count": 0,
+        "false_continue_count": 0,
+        "satisfies_match_count": 1,
+        "missing_match_count": 0,
+        "decision_divergence_count": 0,
+        "audit_compared_count": 1
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "mode": "live_skip",
+          "needed": true,
+          "would_skip": false,
+          "triggers": [
+            "first_round"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "first_round",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 0,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "live_skipped": false,
+          "audit_only": false,
+          "llm_called": true,
+          "quality_compare": null,
+          "shadow_judgment": null,
+          "audit_judgment": null
+        },
+        {
+          "round": 2,
+          "mode": "live_skip",
+          "needed": false,
+          "would_skip": true,
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 1,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "skip_event_index": 1,
+          "audit_only": false,
+          "live_skipped": true,
+          "llm_called": false,
+          "quality_compare": null,
+          "shadow_judgment": {
+            "satisfies_request": false,
+            "reason": "live_skip:verify_fail_open_questions_updated",
+            "missing": [
+              "output 'status' の取得方法",
+              "total physical memory",
+              "used memory"
+            ],
+            "proposed_decisions": [],
+            "live_skip": true
+          },
+          "audit_judgment": null
+        },
+        {
+          "round": 3,
+          "mode": "live_skip",
+          "needed": false,
+          "would_skip": true,
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 1,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "skip_event_index": 2,
+          "audit_only": false,
+          "live_skipped": true,
+          "llm_called": false,
+          "quality_compare": null,
+          "shadow_judgment": {
+            "satisfies_request": false,
+            "reason": "live_skip:verify_fail_open_questions_updated",
+            "missing": [
+              "output 'status' の取得方法",
+              "total physical memory",
+              "used memory"
+            ],
+            "proposed_decisions": [],
+            "live_skip": true
+          },
+          "audit_judgment": null
+        },
+        {
+          "round": 4,
+          "mode": "live_skip",
+          "needed": false,
+          "would_skip": true,
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 1,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "skip_event_index": 3,
+          "audit_only": true,
+          "live_skipped": false,
+          "llm_called": true,
+          "quality_compare": {
+            "satisfies_request_match": true,
+            "missing_match": false,
+            "critical_miss": false,
+            "false_continue": false,
+            "shadow_satisfies": false,
+            "actual_satisfies": false,
+            "shadow_missing_count": 3,
+            "actual_missing_count": 2,
+            "decision_divergence": false,
+            "shadow_progress_action": "continue",
+            "actual_progress_action": "continue",
+            "shadow_progress_reason": "no_progress",
+            "actual_progress_reason": "new_information"
+          },
+          "shadow_judgment": {
+            "satisfies_request": false,
+            "reason": "live_skip:verify_fail_open_questions_updated",
+            "missing": [
+              "output 'status' の取得方法",
+              "total physical memory",
+              "used memory"
+            ],
+            "proposed_decisions": [],
+            "live_skip": true
+          },
+          "audit_judgment": {
+            "satisfies_request": false,
+            "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+            "missing": [
+              "total physical memory",
+              "used memory"
+            ],
+            "proposed_decisions": []
+          }
+        },
+        {
+          "round": 5,
+          "mode": "live_skip",
+          "needed": true,
+          "would_skip": false,
+          "triggers": [
+            "stagnation_risk"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "stagnation_risk",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 0,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "live_skipped": false,
+          "audit_only": false,
+          "llm_called": true,
+          "quality_compare": null,
+          "shadow_judgment": null,
+          "audit_judgment": null
+        },
+        {
+          "round": 6,
+          "mode": "live_skip",
+          "needed": true,
+          "would_skip": false,
+          "triggers": [
+            "usable_needs_goal_check"
+          ],
+          "skip_triggers": [],
+          "primary_reason": "usable_needs_goal_check",
+          "escalation_reason": "usable_needs_goal_check",
+          "escalation_routine": false,
+          "llm_calls_saved_if_skip": 0,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "live_skipped": false,
+          "audit_only": false,
+          "llm_called": true,
+          "quality_compare": null,
+          "shadow_judgment": null,
+          "audit_judgment": null
+        }
+      ],
+      "observation": {
+        "judge_reduction_rate": 0.333,
+        "judge_call_rate": 0.667,
+        "rounds": 6,
+        "baseline_rounds": null,
+        "extra_rounds": null,
+        "would_skip_count": 3,
+        "live_skip_count": 2,
+        "audit_count": 1,
+        "critical_miss_count": 0,
+        "decision_divergence_count": 0
+      }
+    },
+    "context_budget_shadow": {
+      "mode": "live",
+      "shadow_enabled": true,
+      "headroom_chars": 800,
+      "calls": [
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 3835,
+          "effective_slack": 3035,
+          "headroom_gate_ok": true,
+          "legacy_chars": 3826,
+          "allocated_chars": 3845,
+          "legacy_actual_headroom": 3854,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 2010
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 2029
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 162,
+            "current_state": 481,
+            "open_questions": 2,
+            "recent_events": 40,
+            "summary": 19,
+            "action_local": 393,
+            "safety": 921,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 162,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 481,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 2,
+              "core": true,
+              "count": 0
+            },
+            "recent_events": {
+              "chars": 40,
+              "core": false,
+              "retrieve_count": 0
+            },
+            "action_local": {
+              "chars": 393,
+              "core": false,
+              "search_results_count": 1
+            },
+            "safety": {
+              "chars": 921,
+              "core": false
+            },
+            "summary": {
+              "chars": 19,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 0,
+          "usable_findings_count": null,
+          "open_questions_count": 0,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 162,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 481,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 2,
+                "core": true,
+                "count": 0
+              },
+              "recent_events": {
+                "chars": 40,
+                "core": false,
+                "retrieve_count": 0
+              },
+              "action_local": {
+                "chars": 393,
+                "core": false,
+                "search_results_count": 1
+              },
+              "safety": {
+                "chars": 921,
+                "core": false
+              },
+              "summary": {
+                "chars": 19,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 0,
+            "prior_failures_count": 0,
+            "search_results_count": 1,
+            "prior_failures_source": "legacy_trim",
+            "recall_mode": null,
+            "recalled_event_count": 0,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 0,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 3835,
+          "legacy_headroom": 3854
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 3174,
+          "effective_slack": 2374,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5437,
+          "allocated_chars": 4506,
+          "legacy_actual_headroom": 2243,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 1930
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 999
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 660,
+            "summary": 275,
+            "escalation_evidence": 28,
+            "usable_findings": 22,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 660,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 22,
+              "core": true,
+              "count": 0
+            },
+            "escalation_evidence": {
+              "chars": 28,
+              "core": false
+            },
+            "summary": {
+              "chars": 275,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 1
+            }
+          },
+          "omitted_categories": [
+            "unresolved_duplicate"
+          ],
+          "retrieve_count": 0,
+          "usable_findings_count": 0,
+          "open_questions_count": 1,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 660,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 22,
+                "core": true,
+                "count": 0
+              },
+              "escalation_evidence": {
+                "chars": 28,
+                "core": false
+              },
+              "summary": {
+                "chars": 275,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 1
+              }
+            },
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 0,
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "unresolved_in_materials": false,
+            "open_questions_count": 1,
+            "usable_findings_count": 0,
+            "recall_mode": null,
+            "recalled_event_count": 0
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 3174,
+          "legacy_headroom": 2243
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2010,
+          "effective_slack": 1210,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5981,
+          "allocated_chars": 5670,
+          "legacy_actual_headroom": 1699,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 4165
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 3854
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 281,
+            "current_state": 755,
+            "open_questions": 276,
+            "recent_events": 492,
+            "summary": 180,
+            "action_local": 921,
+            "safety": 1212,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 281,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 755,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 276,
+              "core": true,
+              "count": 3
+            },
+            "recent_events": {
+              "chars": 492,
+              "core": false,
+              "retrieve_count": 1
+            },
+            "action_local": {
+              "chars": 921,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1212,
+              "core": false
+            },
+            "summary": {
+              "chars": 180,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 1,
+          "usable_findings_count": null,
+          "open_questions_count": 3,
+          "recall_mode": null,
+          "recalled_event_count": 1,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 281,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 755,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 276,
+                "core": true,
+                "count": 3
+              },
+              "recent_events": {
+                "chars": 492,
+                "core": false,
+                "retrieve_count": 1
+              },
+              "action_local": {
+                "chars": 921,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1212,
+                "core": false
+              },
+              "summary": {
+                "chars": 180,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 1,
+            "prior_failures_count": 1,
+            "search_results_count": 3,
+            "prior_failures_source": "retriever",
+            "recall_mode": null,
+            "recalled_event_count": 1,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 3,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2010,
+          "legacy_headroom": 1699
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1734,
+          "effective_slack": 934,
+          "headroom_gate_ok": true,
+          "legacy_chars": 6257,
+          "allocated_chars": 5946,
+          "legacy_actual_headroom": 1423,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 4441
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4130
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 281,
+            "current_state": 755,
+            "open_questions": 276,
+            "recent_events": 492,
+            "summary": 180,
+            "action_local": 921,
+            "safety": 1212,
+            "extra": 274
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 281,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 755,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 276,
+              "core": true,
+              "count": 3
+            },
+            "recent_events": {
+              "chars": 492,
+              "core": false,
+              "retrieve_count": 1
+            },
+            "action_local": {
+              "chars": 921,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1212,
+              "core": false
+            },
+            "summary": {
+              "chars": 180,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 1,
+          "usable_findings_count": null,
+          "open_questions_count": 3,
+          "recall_mode": null,
+          "recalled_event_count": 1,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 281,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 755,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 276,
+                "core": true,
+                "count": 3
+              },
+              "recent_events": {
+                "chars": 492,
+                "core": false,
+                "retrieve_count": 1
+              },
+              "action_local": {
+                "chars": 921,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1212,
+                "core": false
+              },
+              "summary": {
+                "chars": 180,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 1,
+            "prior_failures_count": 1,
+            "search_results_count": 3,
+            "prior_failures_source": "retriever",
+            "recall_mode": null,
+            "recalled_event_count": 1,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 3,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1734,
+          "legacy_headroom": 1423
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1438,
+          "effective_slack": 638,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5535,
+          "allocated_chars": 6242,
+          "legacy_actual_headroom": 2145,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3719
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4426
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 381,
+            "current_state": 791,
+            "open_questions": 312,
+            "recent_events": 1212,
+            "summary": 63,
+            "action_local": 974,
+            "safety": 992,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 381,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 791,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 312,
+              "core": true,
+              "count": 3
+            },
+            "recent_events": {
+              "chars": 1212,
+              "core": false,
+              "retrieve_count": 3
+            },
+            "action_local": {
+              "chars": 974,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 992,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 3,
+          "usable_findings_count": null,
+          "open_questions_count": 3,
+          "recall_mode": null,
+          "recalled_event_count": 3,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 381,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 791,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 312,
+                "core": true,
+                "count": 3
+              },
+              "recent_events": {
+                "chars": 1212,
+                "core": false,
+                "retrieve_count": 3
+              },
+              "action_local": {
+                "chars": 974,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 992,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 3,
+            "prior_failures_count": 3,
+            "search_results_count": 3,
+            "prior_failures_source": "retriever",
+            "recall_mode": null,
+            "recalled_event_count": 3,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 3,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1438,
+          "legacy_headroom": 2145
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1498,
+          "effective_slack": 698,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5398,
+          "allocated_chars": 6182,
+          "legacy_actual_headroom": 2282,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3582
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4366
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 381,
+            "current_state": 848,
+            "open_questions": 369,
+            "recent_events": 1166,
+            "summary": 63,
+            "action_local": 974,
+            "safety": 921,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 381,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 848,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 369,
+              "core": true,
+              "count": 3
+            },
+            "recent_events": {
+              "chars": 1166,
+              "core": false,
+              "retrieve_count": 3
+            },
+            "action_local": {
+              "chars": 974,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 921,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 3,
+          "usable_findings_count": null,
+          "open_questions_count": 3,
+          "recall_mode": null,
+          "recalled_event_count": 3,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 381,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 848,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 369,
+                "core": true,
+                "count": 3
+              },
+              "recent_events": {
+                "chars": 1166,
+                "core": false,
+                "retrieve_count": 3
+              },
+              "action_local": {
+                "chars": 974,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 921,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 3,
+            "prior_failures_count": 3,
+            "search_results_count": 3,
+            "prior_failures_source": "retriever",
+            "recall_mode": null,
+            "recalled_event_count": 3,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 3,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1498,
+          "legacy_headroom": 2282
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2856,
+          "effective_slack": 2056,
+          "headroom_gate_ok": true,
+          "legacy_chars": 6021,
+          "allocated_chars": 4824,
+          "legacy_actual_headroom": 1659,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 2514
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 1317
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 978,
+            "summary": 275,
+            "escalation_evidence": 28,
+            "usable_findings": 22,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 978,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 22,
+              "core": true,
+              "count": 0
+            },
+            "escalation_evidence": {
+              "chars": 28,
+              "core": false
+            },
+            "summary": {
+              "chars": 275,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 3
+            }
+          },
+          "omitted_categories": [
+            "unresolved_duplicate"
+          ],
+          "retrieve_count": 0,
+          "usable_findings_count": 0,
+          "open_questions_count": 3,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 978,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 22,
+                "core": true,
+                "count": 0
+              },
+              "escalation_evidence": {
+                "chars": 28,
+                "core": false
+              },
+              "summary": {
+                "chars": 275,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 3
+              }
+            },
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 0,
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "unresolved_in_materials": false,
+            "open_questions_count": 3,
+            "usable_findings_count": 0,
+            "recall_mode": null,
+            "recalled_event_count": 0
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2856,
+          "legacy_headroom": 1659
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1441,
+          "effective_slack": 641,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5455,
+          "allocated_chars": 6239,
+          "legacy_actual_headroom": 2225,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3639
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4423
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 381,
+            "current_state": 905,
+            "open_questions": 426,
+            "recent_events": 1166,
+            "summary": 63,
+            "action_local": 974,
+            "safety": 921,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 381,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 905,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 426,
+              "core": true,
+              "count": 3
+            },
+            "recent_events": {
+              "chars": 1166,
+              "core": false,
+              "retrieve_count": 3
+            },
+            "action_local": {
+              "chars": 974,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 921,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 3,
+          "usable_findings_count": null,
+          "open_questions_count": 3,
+          "recall_mode": null,
+          "recalled_event_count": 3,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 381,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 905,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 426,
+                "core": true,
+                "count": 3
+              },
+              "recent_events": {
+                "chars": 1166,
+                "core": false,
+                "retrieve_count": 3
+              },
+              "action_local": {
+                "chars": 974,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 921,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 3,
+            "prior_failures_count": 3,
+            "search_results_count": 3,
+            "prior_failures_source": "retriever",
+            "recall_mode": null,
+            "recalled_event_count": 3,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 3,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1441,
+          "legacy_headroom": 2225
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2799,
+          "effective_slack": 1999,
+          "headroom_gate_ok": true,
+          "legacy_chars": 6078,
+          "allocated_chars": 4881,
+          "legacy_actual_headroom": 1602,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 2571
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 1374
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 1035,
+            "summary": 275,
+            "escalation_evidence": 28,
+            "usable_findings": 22,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 1035,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 22,
+              "core": true,
+              "count": 0
+            },
+            "escalation_evidence": {
+              "chars": 28,
+              "core": false
+            },
+            "summary": {
+              "chars": 275,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 3
+            }
+          },
+          "omitted_categories": [
+            "unresolved_duplicate"
+          ],
+          "retrieve_count": 0,
+          "usable_findings_count": 0,
+          "open_questions_count": 3,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 1035,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 22,
+                "core": true,
+                "count": 0
+              },
+              "escalation_evidence": {
+                "chars": 28,
+                "core": false
+              },
+              "summary": {
+                "chars": 275,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 3
+              }
+            },
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 0,
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "unresolved_in_materials": false,
+            "open_questions_count": 3,
+            "usable_findings_count": 0,
+            "recall_mode": null,
+            "recalled_event_count": 0
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2799,
+          "legacy_headroom": 1602
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2136,
+          "effective_slack": 1336,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5208,
+          "allocated_chars": 5544,
+          "legacy_actual_headroom": 2472,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3392
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 3728
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 281,
+            "current_state": 798,
+            "open_questions": 319,
+            "recent_events": 614,
+            "summary": 180,
+            "action_local": 921,
+            "safety": 921,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 281,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 798,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 319,
+              "core": true,
+              "count": 2
+            },
+            "recent_events": {
+              "chars": 614,
+              "core": false,
+              "retrieve_count": 3
+            },
+            "action_local": {
+              "chars": 921,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 921,
+              "core": false
+            },
+            "summary": {
+              "chars": 180,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 3,
+          "usable_findings_count": null,
+          "open_questions_count": 2,
+          "recall_mode": null,
+          "recalled_event_count": 3,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 281,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 798,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 319,
+                "core": true,
+                "count": 2
+              },
+              "recent_events": {
+                "chars": 614,
+                "core": false,
+                "retrieve_count": 3
+              },
+              "action_local": {
+                "chars": 921,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 921,
+                "core": false
+              },
+              "summary": {
+                "chars": 180,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 3,
+            "prior_failures_count": 3,
+            "search_results_count": 3,
+            "prior_failures_source": "retriever",
+            "recall_mode": null,
+            "recalled_event_count": 3,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 2,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2136,
+          "legacy_headroom": 2472
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2099,
+          "effective_slack": 1299,
+          "headroom_gate_ok": true,
+          "legacy_chars": 6342,
+          "allocated_chars": 5581,
+          "legacy_actual_headroom": 1338,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 2835
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 2074
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 999,
+            "summary": 553,
+            "escalation_evidence": 28,
+            "usable_findings": 480,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 999,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 480,
+              "core": true,
+              "count": 1
+            },
+            "escalation_evidence": {
+              "chars": 28,
+              "core": false
+            },
+            "summary": {
+              "chars": 553,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 2
+            }
+          },
+          "omitted_categories": [
+            "unresolved_duplicate"
+          ],
+          "retrieve_count": 0,
+          "usable_findings_count": 1,
+          "open_questions_count": 2,
+          "recall_mode": null,
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 999,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 480,
+                "core": true,
+                "count": 1
+              },
+              "escalation_evidence": {
+                "chars": 28,
+                "core": false
+              },
+              "summary": {
+                "chars": 553,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 2
+              }
+            },
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 0,
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "unresolved_in_materials": false,
+            "open_questions_count": 2,
+            "usable_findings_count": 1,
+            "recall_mode": null,
+            "recalled_event_count": 0
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2099,
+          "legacy_headroom": 1338
+        }
+      ],
+      "summary": {
+        "call_count": 11,
+        "legacy_chars_total": 61538,
+        "allocated_chars_total": 59460,
+        "legacy_chars_max": 6342,
+        "allocated_chars_max": 6242,
+        "legacy_overflow_count": 0,
+        "allocated_overflow_count": 0,
+        "reserved_headroom": 800,
+        "actual_headroom_min": 1438,
+        "actual_headroom_max": 3835,
+        "headroom_gate_ok": true,
+        "headroom_violation_count": 0,
+        "reduction_applied_count": 0,
+        "defer_count": 0
+      }
+    },
+    "generated_code": "import subprocess\n\ndef get_memory_status():\n    try:\n        result = subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', 'Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $usage = 100 - ($_.FreePhysicalMemory * 100 / $_.TotalVisibleMemorySize); $usage }'], capture_output=True, text=True)\n        if result.returncode == 0:\n            return {'status': float(result.stdout.strip())}\n        else:\n            return {'status': '未実装'}\n    except Exception as e:\n        return {'status': '未実装'}\n",
+    "repair": "skipped"
+  },
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [
+      {
+        "finding_ref": "evt_d308928d636e",
+        "summary": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "source": "rule_partial"
+      }
+    ],
+    "constraints": [],
+    "open_questions": [],
+    "unresolved": [],
+    "research_history": [
+      {
+        "id": "evt_4a47d294ad02",
+        "ts": "2026-08-20T13:11:07.451661+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "stderr": "Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "sample": [],
+          "returncode": 1
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で確認できなかった。Get-WmiObject : 無効なクエリです \"SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory  ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (:) [Get-WmiObject]、ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_8dcf5ab1faa6",
+        "ts": "2026-08-20T13:11:09.229386+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+          "missing": [
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1
+        }
+      },
+      {
+        "id": "evt_b3cc4f5c7da3",
+        "ts": "2026-08-20T13:11:29.094723+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "wmic",
+          "args": [
+            "memorychip",
+            "get",
+            "capacity,dataavailable"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "wmic の対象が許可された取得用途ではありません",
+          "stderr": "",
+          "sample": [],
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2,
+          "question": "total physical memory",
+          "finding": "実環境で確認できなかった。wmic の対象が許可された取得用途ではありません",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_b6340bcd48db",
+        "ts": "2026-08-20T13:11:29.094742+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2,
+          "question": "used memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_29a9264ac036",
+        "ts": "2026-08-20T13:11:29.094838+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2
+        }
+      },
+      {
+        "id": "evt_12d8c53c4e17",
+        "ts": "2026-08-20T13:11:50.855319+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "output 'status' の取得方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_d8bc4dd14045",
+        "ts": "2026-08-20T13:11:50.855339+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "total physical memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_ec4ae42dadd0",
+        "ts": "2026-08-20T13:11:50.855347+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "used memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_4802adb21a16",
+        "ts": "2026-08-20T13:11:50.855423+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3
+        }
+      },
+      {
+        "id": "evt_5bc0f408a9ba",
+        "ts": "2026-08-20T13:12:14.225865+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "output 'status' の取得方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_13973aefcccf",
+        "ts": "2026-08-20T13:12:14.225883+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "total physical memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_e4e9c4e1b3d7",
+        "ts": "2026-08-20T13:12:14.225889+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "used memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_2de0a73aa179",
+        "ts": "2026-08-20T13:12:15.800372+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4
+        }
+      },
+      {
+        "id": "evt_1d2b86f40a83",
+        "ts": "2026-08-20T13:12:36.974923+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "output 'status' の取得方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_c502da2f88bb",
+        "ts": "2026-08-20T13:12:36.974941+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "total physical memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_75e4d9355b0e",
+        "ts": "2026-08-20T13:12:36.974949+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "used memory",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_f71d99bb0dee",
+        "ts": "2026-08-20T13:12:38.576030+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+          "missing": [
+            "total physical memory",
+            "used memory"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5
+        }
+      },
+      {
+        "id": "evt_87a4ca841641",
+        "ts": "2026-08-20T13:12:38.576058+00:00",
+        "type": "question_resolved",
+        "action": {},
+        "result": {
+          "reason": "missing_resolved",
+          "finding_ref": null
+        },
+        "related_question_ids": [
+          "q_90307dd084"
+        ],
+        "metadata": {}
+      },
+      {
+        "id": "evt_79ce1edd917c",
+        "ts": "2026-08-20T13:12:53.181011+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $total = $_.TotalVisibleMemorySize; $free = $_.FreePhysicalMemory; $usage = 100 - ($free * 100 / $total) }"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "出力が空、またはエラーに見える",
+          "stderr": "",
+          "sample": [],
+          "returncode": 0
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6,
+          "question": "used memory",
+          "finding": "実環境で確認できなかった。出力が空、またはエラーに見える",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_d308928d636e",
+        "ts": "2026-08-20T13:12:53.181033+00:00",
+        "type": "verify_ok",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $usage = 100 - ($_.FreePhysicalMemory * 100 / $_.TotalVisibleMemorySize); $usage }"
+          ]
+        },
+        "result": {
+          "ok": true,
+          "error": "",
+          "stderr": "",
+          "sample": [
+            "54.0993787333149"
+          ],
+          "returncode": 0
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6,
+          "question": "total physical memory",
+          "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+          "confidence": "high",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_2b2de638d366",
+        "ts": "2026-08-20T13:12:55.338866+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": true,
+          "reason": "",
+          "missing": []
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6
+        }
+      },
+      {
+        "id": "evt_0c72aaa655a1",
+        "ts": "2026-08-20T13:12:55.338884+00:00",
+        "type": "question_resolved",
+        "action": {},
+        "result": {
+          "reason": "satisfies_request",
+          "finding_ref": null
+        },
+        "related_question_ids": [
+          "q_8159d01bb0"
+        ],
+        "metadata": {}
+      },
+      {
+        "id": "evt_0a1d619c3e01",
+        "ts": "2026-08-20T13:12:55.338892+00:00",
+        "type": "question_resolved",
+        "action": {},
+        "result": {
+          "reason": "satisfies_request",
+          "finding_ref": null
+        },
+        "related_question_ids": [
+          "q_2dffd2b2d8"
+        ],
+        "metadata": {}
+      }
+    ],
+    "banned_actions": [
+      {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-Command",
+          "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+        ],
+        "event_id": "evt_4a47d294ad02",
+        "reason": "verify_fail"
+      },
+      {
+        "command": "wmic",
+        "args": [
+          "memorychip",
+          "get",
+          "capacity,dataavailable"
+        ],
+        "event_id": "evt_b3cc4f5c7da3",
+        "reason": "verify_fail"
+      },
+      {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-Command",
+          "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $total = $_.TotalVisibleMemorySize; $free = $_.FreePhysicalMemory; $usage = 100 - ($free * 100 / $total) }"
+        ],
+        "event_id": "evt_79ce1edd917c",
+        "reason": "verify_fail"
+      }
+    ]
+  },
+  "timing": {
+    "total_seconds": 140.6,
+    "llm_seconds": 87.2,
+    "machine_seconds": 53.4,
+    "research_seconds": 115.4,
+    "judge_seconds": 7.1,
+    "implementation_seconds": 4.5,
+    "repair_seconds": 0.0,
+    "validation_seconds": 0.4,
+    "llm_calls": 14
+  },
+  "trace": [
+    {
+      "phase": "proposal",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "proposals"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": [
+          "get_memory_status"
+        ]
+      }
+    },
+    {
+      "phase": "proposal_retry",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "proposals"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": [
+          "get_memory_status"
+        ]
+      }
+    },
+    {
+      "phase": "research_1",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "使用率/使用パーセントを直接返すプロパティ/コマンド",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "",
+            "output_key": "status"
+          },
+          {
+            "route": "総容量と空き容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $free = $_.FreePhysicalMemory / 1MB; $usage = 100 - ($free / $total * 100); $usage }"
+            ],
+            "question": "",
+            "output_key": "status"
+          },
+          {
+            "route": "総容量と使用容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $used = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / 1MB; $usage = ($used / $total * 100); $usage }"
+            ],
+            "question": "",
+            "output_key": "status"
+          },
+          {
+            "route": "OSが提供する別のメモリ/CPU統計から計算",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $total = $_.TotalPhysicalMemory / 1MB; $used = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / 1MB; $usage = ($used / $total * 100); $usage }"
+            ],
+            "question": "",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_1",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "satisfies_request",
+          "reason",
+          "missing",
+          "proposed_decisions"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "missing": [
+          "total physical memory",
+          "used memory"
+        ],
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_2",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "使用率/使用パーセントを直接返すプロパティ/コマンド",
+            "command": "wmic",
+            "args": [
+              "memorychip",
+              "get",
+              "capacity,dataavailable"
+            ],
+            "question": "total physical memory",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_2",
+      "error": null,
+      "parsed": null
+    },
+    {
+      "phase": "research_3",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "使用率/使用パーセントを直接返すプロパティ/コマンド",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "output 'status' の取得方法",
+            "output_key": "status"
+          },
+          {
+            "route": "総容量と空き容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "total physical memory",
+            "output_key": "total_physical_memory"
+          },
+          {
+            "route": "総容量と使用容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "used memory",
+            "output_key": "used_memory"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_3",
+      "error": null,
+      "parsed": null
+    },
+    {
+      "phase": "research_4",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "使用率/使用パーセントを直接返すプロパティ/コマンド",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "output 'status' の取得方法",
+            "output_key": "status"
+          },
+          {
+            "route": "総容量と空き容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "total physical memory",
+            "output_key": "total_physical_memory"
+          },
+          {
+            "route": "総容量と使用容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "used memory",
+            "output_key": "used_memory"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_4",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "satisfies_request",
+          "reason",
+          "missing",
+          "proposed_decisions"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "missing": [
+          "total physical memory",
+          "used memory"
+        ],
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_5",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "使用率/使用パーセントを直接返すプロパティ/コマンド",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "output 'status' の取得方法",
+            "output_key": "status"
+          },
+          {
+            "route": "総容量と空き容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "total physical memory",
+            "output_key": "total_physical_memory"
+          },
+          {
+            "route": "総容量と使用容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Query 'SELECT TotalPhysicalMemory, FreePhysicalMemory FROM Win32_ComputerSystem' | ForEach-Object { $usage = ($_.TotalPhysicalMemory - $_.FreePhysicalMemory) / $_.TotalPhysicalMemory * 100; $usage }"
+            ],
+            "question": "used memory",
+            "output_key": "used_memory"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_5",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "satisfies_request",
+          "reason",
+          "missing",
+          "proposed_decisions"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "missing": [
+          "total physical memory",
+          "used memory"
+        ],
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_6",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "使用率/使用パーセントを直接返すプロパティ/コマンド",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $usage = 100 - ($_.FreePhysicalMemory * 100 / $_.TotalVisibleMemorySize); $usage }"
+            ],
+            "question": "total physical memory",
+            "output_key": "status"
+          },
+          {
+            "route": "総容量と空き容量を取得し計算で求める",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize | ForEach-Object { $total = $_.TotalVisibleMemorySize; $free = $_.FreePhysicalMemory; $usage = 100 - ($free * 100 / $total) }"
+            ],
+            "question": "used memory",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_6",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "satisfies_request",
+          "reason",
+          "missing",
+          "proposed_decisions"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": true,
+        "reason": "",
+        "missing": [],
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "implement",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "path",
+          "function",
+          "code",
+          "unimplemented",
+          "notes"
+        ],
+        "path": "tools/system/memory/memory_status.py",
+        "function": "get_memory_status",
+        "unimplemented": [],
+        "notes": [],
+        "code_present": true,
+        "code_chars": 590,
+        "candidates": null,
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    }
+  ],
+  "pass": true,
+  "fail_stage": null,
+  "error": null,
+  "request": "Windowsのメモリ使用率を取得するToolを作ってください。"
+}

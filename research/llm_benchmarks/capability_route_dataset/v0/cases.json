@@ -1,0 +1,318 @@
+{
+  "version": "v0",
+  "purpose": "PROJECT_AGENT judgment-tendency observation. No ground-truth correctness labels. Not for scoring agent quality.",
+  "principles": [
+    "observe before improve",
+    "do not embed gold judgments",
+    "do not change heuristic for collection",
+    "Stage3 misjudgment labels stay null"
+  ],
+  "case_count": 50,
+  "cases": [
+    {
+      "id": "A01",
+      "category": "web_needed_clear",
+      "request": "今日の日本の主なニュースを教えて",
+      "observe_goal": "時事・最新情報でWeb判断が出るか"
+    },
+    {
+      "id": "A02",
+      "category": "web_needed_clear",
+      "request": "現在のドル円の大まかな為替水準について教えて",
+      "observe_goal": "現在価格・相場系"
+    },
+    {
+      "id": "A03",
+      "category": "web_needed_clear",
+      "request": "OpenAIについて最近何か大きな発表はありましたか",
+      "observe_goal": "最近の出来事"
+    },
+    {
+      "id": "A04",
+      "category": "web_needed_clear",
+      "request": "今のNVIDIAの株価の雰囲気を教えて",
+      "observe_goal": "現在の企業状況"
+    },
+    {
+      "id": "A05",
+      "category": "web_needed_clear",
+      "request": "明日の大阪の天気を教えて",
+      "observe_goal": "予報・外部情報"
+    },
+    {
+      "id": "A06",
+      "category": "web_needed_clear",
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "observe_goal": "版固有の外部情報"
+    },
+    {
+      "id": "B01",
+      "category": "web_unneeded_clear",
+      "request": "CPU使用率を教えて",
+      "observe_goal": "ローカル観測Tool"
+    },
+    {
+      "id": "B02",
+      "category": "web_unneeded_clear",
+      "request": "GPUの状態を教えて",
+      "observe_goal": "ローカル観測Tool"
+    },
+    {
+      "id": "B03",
+      "category": "web_unneeded_clear",
+      "request": "registry/tools.json を読んで visibility が agent のTool名を一覧して",
+      "observe_goal": "File Tool"
+    },
+    {
+      "id": "B04",
+      "category": "web_unneeded_clear",
+      "request": "docs/v1_basic_specification.md の冒頭にあるV1の目的を要約して",
+      "observe_goal": "ローカル文書"
+    },
+    {
+      "id": "B05",
+      "category": "web_unneeded_clear",
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "observe_goal": "一般知識"
+    },
+    {
+      "id": "B06",
+      "category": "web_unneeded_clear",
+      "request": "このリポジトリ直下にどんな主要フォルダがあるか list して",
+      "observe_goal": "list_files"
+    },
+    {
+      "id": "C01",
+      "category": "web_needed_ambiguous",
+      "request": "WindowsのCPU温度取得って最近どうなってる？",
+      "observe_goal": "曖昧な『最近』"
+    },
+    {
+      "id": "C02",
+      "category": "web_needed_ambiguous",
+      "request": "Ollamaについて詳しく教えて",
+      "observe_goal": "詳しく＝Webか知識か曖昧"
+    },
+    {
+      "id": "C03",
+      "category": "web_needed_ambiguous",
+      "request": "RTX 3060って今どういう扱いですか？",
+      "observe_goal": "『今』の扱いが曖昧"
+    },
+    {
+      "id": "C04",
+      "category": "web_needed_ambiguous",
+      "request": "ローカルLLMの事情、最近どう？",
+      "observe_goal": "事情が広い"
+    },
+    {
+      "id": "C05",
+      "category": "web_needed_ambiguous",
+      "request": "この手のエージェントって今どこまで実用的なの",
+      "observe_goal": "評価が文脈依存"
+    },
+    {
+      "id": "D01",
+      "category": "web_word_but_unneeded",
+      "request": "このプロジェクトのWeb検索Toolの実装を、ローカルのコードから説明して",
+      "observe_goal": "『Web検索』語＋ローカル説明"
+    },
+    {
+      "id": "D02",
+      "category": "web_word_but_unneeded",
+      "request": "registryにある最新のTool一覧をファイルから確認して",
+      "observe_goal": "『最新』語＋ローカル"
+    },
+    {
+      "id": "D03",
+      "category": "web_word_but_unneeded",
+      "request": "現在のagent公開Toolは何か、tools.jsonを読んで答えて",
+      "observe_goal": "『現在』語＋ローカル"
+    },
+    {
+      "id": "D04",
+      "category": "web_word_but_unneeded",
+      "request": "ニュースという単語がdocsに出てくるか、リポジトリ内を検索して",
+      "observe_goal": "『ニュース』語＋search_files"
+    },
+    {
+      "id": "D05",
+      "category": "web_word_but_unneeded",
+      "request": "検索結果のJSON形式がコード上どうなっているか、実装を読んで説明して",
+      "observe_goal": "『検索結果』語＋read"
+    },
+    {
+      "id": "E01",
+      "category": "web_needed_no_web_words",
+      "request": "岸田政権以降の防衛費議論でよく挙げられる論点を整理して",
+      "observe_goal": "明示語なし・時事"
+    },
+    {
+      "id": "E02",
+      "category": "web_needed_no_web_words",
+      "request": "ChatGPTの有料プランの違いを教えて",
+      "observe_goal": "製品情報・明示『検索』なし"
+    },
+    {
+      "id": "E03",
+      "category": "web_needed_no_web_words",
+      "request": "東京都のごみ分別の基本ルールを教えて",
+      "observe_goal": "地域実務情報"
+    },
+    {
+      "id": "E04",
+      "category": "web_needed_no_web_words",
+      "request": "鉄道の遅延証明書は一般にどう発行されるか教えて",
+      "observe_goal": "実務手続き"
+    },
+    {
+      "id": "E05",
+      "category": "web_needed_no_web_words",
+      "request": "Appleの次の大型発表イベントはいつ頃と言われているか教えて",
+      "observe_goal": "予定・噂の外部情報"
+    },
+    {
+      "id": "F01",
+      "category": "search_hard",
+      "request": "zxqwv-nonexistent-topic-9f3a2b1c の公式発表日を教えて。分からなければその旨を書いて",
+      "observe_goal": "存在しない話題"
+    },
+    {
+      "id": "F02",
+      "category": "search_hard",
+      "request": "架空の企業 Quiblaxor Dynamics の2023年売上を教えて",
+      "observe_goal": "架空固有名詞"
+    },
+    {
+      "id": "F03",
+      "category": "search_hard",
+      "request": "個人ブログ『みどりのティーカップ日記』の第137話の要約を教えて",
+      "observe_goal": "極端にニッチ"
+    },
+    {
+      "id": "F04",
+      "category": "search_hard",
+      "request": "同じ出来事について日本語と英語で報じ方の違いを、根拠を分けて比較して",
+      "observe_goal": "複数情報源照合が重い"
+    },
+    {
+      "id": "F05",
+      "category": "search_hard",
+      "request": "2010年ごろのローカル掲示板にだけ載っていた某ツールの使い方を再現して",
+      "observe_goal": "古い・入手困難"
+    },
+    {
+      "id": "G01",
+      "category": "existing_tool_ok",
+      "request": "GPUを使っているプロセスがあれば一覧して",
+      "observe_goal": "get_gpu_processes"
+    },
+    {
+      "id": "G02",
+      "category": "existing_tool_ok",
+      "request": "config/pipeline.yaml の active_model をファイルから確認して",
+      "observe_goal": "read_file"
+    },
+    {
+      "id": "G03",
+      "category": "existing_tool_ok",
+      "request": "tools/system 配下で execution_identity という名前のファイルを探して",
+      "observe_goal": "search_files"
+    },
+    {
+      "id": "G04",
+      "category": "existing_tool_ok",
+      "request": "CPUの状態を確認して短く報告して",
+      "observe_goal": "cpu_status"
+    },
+    {
+      "id": "G05",
+      "category": "existing_tool_ok",
+      "request": "registry フォルダ直下のファイル名を列挙して",
+      "observe_goal": "list_files"
+    },
+    {
+      "id": "G06",
+      "category": "tool_gap_candidate",
+      "request": "キーボードのバッテリー残量を取得したい",
+      "observe_goal": "観測対象の不足候補"
+    },
+    {
+      "id": "G07",
+      "category": "tool_gap_candidate",
+      "request": "接続中のBluetoothデバイスの電波強度を数値で出したい",
+      "observe_goal": "不足候補"
+    },
+    {
+      "id": "G08",
+      "category": "tool_gap_candidate",
+      "request": "マイク入力のリアルタイム音量ピークを返す機能が欲しい",
+      "observe_goal": "不足候補"
+    },
+    {
+      "id": "G09",
+      "category": "tool_gap_candidate",
+      "request": "母艦のUPS残量パーセントを取得したい",
+      "observe_goal": "不足候補"
+    },
+    {
+      "id": "G10",
+      "category": "tool_gap_candidate",
+      "request": "ファン回転数を読む機能が欲しい",
+      "observe_goal": "不足候補"
+    },
+    {
+      "id": "H01",
+      "category": "composite_multi_tool",
+      "request": "docs/v1_basic_specification.md のV1目的をファイルから確認し、同様のテーマの一般説明も外部情報で補って比較して",
+      "observe_goal": "File→Web寄り"
+    },
+    {
+      "id": "H02",
+      "category": "composite_multi_tool",
+      "request": "GPUの状態を確認したうえで、同世代GPUの一般的な消費電力の目安も調べて並べて",
+      "observe_goal": "GPU→Web"
+    },
+    {
+      "id": "H03",
+      "category": "composite_multi_tool",
+      "request": "agent_tool_gate の実装方針をコードから読み、同様の『デフォルト確認』の一般的な設計議論も参照して整理して",
+      "observe_goal": "File→Web"
+    },
+    {
+      "id": "P01a",
+      "category": "paraphrase",
+      "request": "大阪の明日の天気を教えて",
+      "observe_goal": "言い換え:天気",
+      "group_id": "para_osaka_weather"
+    },
+    {
+      "id": "P01b",
+      "category": "paraphrase",
+      "request": "明日、大阪は雨ですか？",
+      "observe_goal": "言い換え:天気",
+      "group_id": "para_osaka_weather"
+    },
+    {
+      "id": "P01c",
+      "category": "paraphrase",
+      "request": "明日大阪に行くんですが、傘は必要そうですか？",
+      "observe_goal": "言い換え:天気",
+      "group_id": "para_osaka_weather"
+    },
+    {
+      "id": "P02a",
+      "category": "paraphrase",
+      "request": "RTX 3060について教えて",
+      "observe_goal": "言い換え:RTX",
+      "group_id": "para_rtx3060"
+    },
+    {
+      "id": "P02b",
+      "category": "paraphrase",
+      "request": "今のRTX 3060の立ち位置を教えて",
+      "observe_goal": "言い換え:RTX",
+      "group_id": "para_rtx3060"
+    }
+  ]
+}

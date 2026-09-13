@@ -1,0 +1,116 @@
+{
+  "ok": true,
+  "decision": "SUFFICIENT",
+  "question": "RTX 3080のVRAM容量を教えて",
+  "parsed": {
+    "question": "RTX 3080のVRAM容量を教えて",
+    "entities": [
+      "RTX 3080"
+    ],
+    "attribute": "VRAM capacity",
+    "needed": [
+      {
+        "entity": "RTX 3080",
+        "attribute": "VRAM capacity"
+      }
+    ],
+    "parsed": true
+  },
+  "needed": [
+    {
+      "entity": "RTX 3080",
+      "attribute": "VRAM capacity"
+    }
+  ],
+  "records": [
+    {
+      "record_id": "mr-0b782e02598d",
+      "entity": "RTX 3080",
+      "attribute": "VRAM capacity",
+      "value": "12 GB",
+      "source_url": "https://en.wikipedia.org/wiki/RTX_3080",
+      "source_title": "RTX 3080",
+      "observed_at": "2026-08-31T01:13:53.581245+00:00",
+      "provenance": "web_search → fetch → extract → matrix_write",
+      "ingest_id": "ing-20260831_011350-38f06688",
+      "query": "RTX 3080",
+      "excerpt": "RTX 3080 {{short description|Series of GPUs by Nvidia}} {{Use American English|date=January 2023}} {{Use mdy dates|date=January 2023}} {{Infobox graphics proce…",
+      "verification": "MATCH",
+      "verified_at": "2026-08-31T01:13:53.598574+00:00"
+    }
+  ],
+  "answer": "RTX 3080 / VRAM capacity = 12 GB (source: https://en.wikipedia.org/wiki/RTX_3080; verify: MATCH; observed_at: 2026-08-31T01:13:53.581245+00:00)\nMATCH は出典ページ上に記述を確認したことであり、真実性の確定ではない。",
+  "error": null,
+  "web_search_count": 0,
+  "matrix_search_count": 1,
+  "ingest_ids": [],
+  "llm_used": false,
+  "llm_model": null,
+  "llm_summary": null,
+  "llm_missing": [],
+  "research": "NOT_CONNECTED",
+  "chat_path": "NOT_CONNECTED",
+  "events": [
+    {
+      "type": "question",
+      "timestamp": "2026-08-31T01:19:24.223243+00:00",
+      "status": "success",
+      "question": "RTX 3080のVRAM容量を教えて",
+      "correlation_id": "ma-20260831_011924-bd8642ac",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix"
+    },
+    {
+      "type": "matrix_search",
+      "timestamp": "2026-08-31T01:19:24.224246+00:00",
+      "status": "success",
+      "entity": "RTX 3080",
+      "attribute": "VRAM capacity",
+      "hit_count": 1,
+      "correlation_id": "ma-20260831_011924-bd8642ac",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix"
+    },
+    {
+      "type": "sufficient",
+      "timestamp": "2026-08-31T01:19:24.225243+00:00",
+      "status": "SUFFICIENT",
+      "record_count": 1,
+      "correlation_id": "ma-20260831_011924-bd8642ac",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix"
+    },
+    {
+      "type": "answer",
+      "timestamp": "2026-08-31T01:19:24.225243+00:00",
+      "status": "success",
+      "via": "matrix",
+      "correlation_id": "ma-20260831_011924-bd8642ac",
+      "requested_by": "user",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix"
+    }
+  ],
+  "requested_by": "user",
+  "executed_by": "matrix_pipeline",
+  "actor": "matrix_pipeline",
+  "source": "matrix",
+  "correlation_id": "ma-20260831_011924-bd8642ac",
+  "records_fingerprint_before": {
+    "bytes": 20120,
+    "sha256": "d69afc8455cbc127753325616189c74738f1e9fa5e30a9849cff69e530eb4269",
+    "path": "D:\\AI-Agent\\runs\\matrix\\records.jsonl"
+  },
+  "records_fingerprint_after": {
+    "bytes": 20120,
+    "sha256": "d69afc8455cbc127753325616189c74738f1e9fa5e30a9849cff69e530eb4269",
+    "path": "D:\\AI-Agent\\runs\\matrix\\records.jsonl"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "A_value_provenance_v0": {
+    "status": "UNRESOLVED",
+    "value": null,
+    "source_type": "NONE",
+    "source_text": null,
+    "reason": "gridの構造と内容が確認されていない",
+    "grounding_violation": false,
+    "validator": "UNRESOLVED",
+    "verdict": "PARTIAL",
+    "run_id": "20260909T081235Z",
+    "distinction_trace": {
+      "reason_mentions_task_level_gap": true,
+      "reason_mentions_action_input": false,
+      "proposed_action_input_value": false,
+      "note": "観察のみ。Validator の意味判断ではない。"
+    }
+  },
+  "B_value_provenance_slot_v0": {
+    "status": "UNRESOLVED",
+    "value": null,
+    "source_type": "NONE",
+    "source_text": null,
+    "reason": "確認済み情報に検索対象の具体的内容や構造の記述がない",
+    "grounding_violation": false,
+    "validator": "UNRESOLVED",
+    "verdict": "PARTIAL",
+    "run_id": "20260909T081755Z",
+    "distinction_trace": {
+      "reason_mentions_task_level_gap": true,
+      "reason_mentions_action_input": true,
+      "proposed_action_input_value": false,
+      "note": "観察のみ。Validator の意味判断ではない。"
+    }
+  },
+  "C_this_run": {
+    "status": "UNRESOLVED",
+    "value": null,
+    "source_type": "NONE",
+    "source_text": null,
+    "reason": "検索対象を表す文字列の具体的な情報が確認済み情報にない",
+    "grounding_violation": false,
+    "validator": "UNRESOLVED",
+    "verdict": "PARTIAL",
+    "run_id": "20260909T082518Z",
+    "distinction_trace": {
+      "reason_mentions_task_level_gap": false,
+      "reason_mentions_action_input": true,
+      "proposed_action_input_value": false,
+      "note": "観察のみ。Validator の意味判断ではない。"
+    }
+  },
+  "prompt_delta_from_B": "Task-level（Goal最終回答 / これから判明する構造・内容）と、既選択の次調査Actionの入力Parameterを区別する説明だけを追加。正解値・内部引数名・Tool名は未記載。Grounding文面とValidatorは未変更。",
+  "changed_from_B": {
+    "status": {
+      "B": "UNRESOLVED",
+      "C": "UNRESOLVED",
+      "changed": false
+    },
+    "value": {
+      "B": null,
+      "C": null,
+      "changed": false
+    },
+    "source_type": {
+      "B": "NONE",
+      "C": "NONE",
+      "changed": false
+    },
+    "source_text": {
+      "B": null,
+      "C": null,
+      "changed": false
+    },
+    "reason": {
+      "B": "確認済み情報に検索対象の具体的内容や構造の記述がない",
+      "C": "検索対象を表す文字列の具体的な情報が確認済み情報にない",
+      "changed": true
+    },
+    "grounding_violation": {
+      "B": false,
+      "C": false,
+      "changed": false
+    },
+    "validator": {
+      "B": "UNRESOLVED",
+      "C": "UNRESOLVED",
+      "changed": false
+    },
+    "verdict": {
+      "B": "PARTIAL",
+      "C": "PARTIAL",
+      "changed": false
+    }
+  }
+}

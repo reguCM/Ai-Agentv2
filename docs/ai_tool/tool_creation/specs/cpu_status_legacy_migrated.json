@@ -1,0 +1,268 @@
+{
+  "tool_id": "local:cpu_status",
+  "name": "cpu_status",
+  "version": "1.0.0-legacy-migrated",
+  "description": "CPUの基本状態を取得する。個別メトリクスの取得可否は未確認。",
+  "provider": "local",
+  "source": "registry/tools.json",
+  "capability": ["CPU", "状態"],
+  "purpose": "Windows PowerShell CIM (Win32_Processor) から LoadPercentage を取得し、文字列として status キーに返す（Registry 登録 Legacy Tool の現行契約固定）",
+  "current_purpose_as_observed": {
+    "primary": "CPU LoadPercentage（使用率 %）の実測取得",
+    "not_in_scope_of_current_implementation": [
+      "CPU model",
+      "physical cores",
+      "logical processors",
+      "temperature",
+      "frequency",
+      "load average",
+      "observation_source 出力フィールド"
+    ],
+    "note": "Registry description「CPUの基本状態」は広いが、description 末尾「個別メトリクスの取得可否は未確認」と実装（LoadPercentage のみ）は整合。model/cores 未返却は現行仕様違反ではない。"
+  },
+  "allowed_operations": ["read", "execute"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "status": { "type": "string" }
+    },
+    "required": ["status"]
+  },
+  "output_fields": {
+    "status": {
+      "type_success": "string",
+      "type_failure": "string",
+      "unit": "percent",
+      "meaning": "Win32_Processor.LoadPercentage の文字列表現。PowerShell 出力の最終行をそのまま使用。成功時は数値文字列（例 \"56\"）、失敗時はリテラル \"error\"",
+      "observation_source": "powershell Get-CimInstance -ClassName Win32_Processor | Select LoadPercentage",
+      "unknown_condition": "PowerShell 非ゼロ終了時 status=\"error\"（詳細 error キーなし）。LoadPercentage 欠測時は stdout 最終行が空なら \"0\" を返す（実装 lines[-1] or '0'）",
+      "naming_ambiguity": "KNOWN_LIMITATION — キー名 status は general status と load percentage の両方に解釈可能。現行実装は LoadPercentage のみ。"
+    }
+  },
+  "not_provided_fields": {
+    "model": {
+      "status": "NOT_PROVIDED",
+      "note": "Win32_Processor.Name はクエリしていない"
+    },
+    "cores": {
+      "status": "NOT_PROVIDED",
+      "note": "NumberOfCores はクエリしていない"
+    },
+    "threads": {
+      "status": "NOT_PROVIDED",
+      "note": "NumberOfLogicalProcessors はクエリしていない"
+    },
+    "temperature": {
+      "status": "NOT_PROVIDED",
+      "note": "温度センサー/CIM フィールドはクエリしていない。Win32_Processor に温度が無い可能性あり（未検証）"
+    },
+    "observation_source": {
+      "status": "NOT_PROVIDED",
+      "note": "Registry metadata は observation_source=real だが、output に含めない — OBSERVED GAP"
+    },
+    "ok": { "status": "NOT_PROVIDED" },
+    "error": { "status": "NOT_PROVIDED", "note": "失敗時も status=\"error\" のみ。error キーなし" }
+  },
+  "success_format": "{\"status\": \"<LoadPercentage>\"}",
+  "error_format": {
+    "status": "error"
+  },
+  "side_effect": "execute",
+  "required_permission": ["visibility:agent"],
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "external_service_access": ["powershell", "Win32_Processor"],
+  "risk_level": "low",
+  "expected_failure": [
+    "powershell non-zero exit",
+    "non-Windows environment",
+    "powershell not available"
+  ],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "Windows + PowerShell 必須",
+    "LoadPercentage のみ返却（最小 Legacy 契約）",
+    "LoadPercentage は瞬間値 — 独立再観測と完全一致を要求しない",
+    "observation_source 出力フィールドなし（Registry metadata との乖離）",
+    "status キー名が load と general status を兼ねる曖昧さ",
+    "subprocess timeout 未設定（gpu nvidia-smi とは異なる）"
+  ],
+  "cost": "free",
+  "tool_status": "available",
+  "catalog_hints": {
+    "experiment_status": "tested",
+    "adoption_status": "approved"
+  },
+  "contract": {
+    "can": [
+      "invoke_powershell_cim_query_for_load_percentage",
+      "return_dict_with_status_key"
+    ],
+    "cannot": [
+      "write_to_filesystem",
+      "call_network_apis",
+      "fabricate_load_on_powershell_failure"
+    ],
+    "must": [
+      "return_only_status_key_on_success_and_failure",
+      "set_status_error_on_powershell_nonzero_exit"
+    ],
+    "must_not": [
+      "raise_on_powershell_failure",
+      "add_output_keys_without_human_review",
+      "change_status_meaning_from_load_percentage_or_error_literal"
+    ]
+  },
+  "safety_as_observed": {
+    "subprocess": "powershell -NoProfile -NonInteractive -Command Get-CimInstance ...",
+    "read_only": false,
+    "side_effect_class": "execute",
+    "network_access": false,
+    "filesystem_write": false,
+    "agent_tool_gate": "registry risk=low, visibility=agent",
+    "timeout_seconds": null,
+    "note": "CIM read クエリだが subprocess 起動のため side_effect=execute。gate low risk 確認済み（Legacy Audit）。"
+  },
+  "provider_specific": {
+    "module": "tools.system.cpu.cpu_status",
+    "function": "cpu_status",
+    "observation_command": "Get-CimInstance -ClassName Win32_Processor | Select LoadPercentage",
+    "registry_visibility": "agent",
+    "registry_observation_source": "real",
+    "registry_output": ["status"],
+    "registry_name": "cpu_status"
+  },
+  "observation_path_as_implemented": {
+    "steps": [
+      "subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', 'Get-CimInstance -ClassName Win32_Processor | Select LoadPercentage'])",
+      "returncode==0 → parse stdout last line → {'status': value}",
+      "returncode!=0 → {'status': 'error'}"
+    ],
+    "technologies": ["PowerShell", "CIM", "Win32_Processor"],
+    "not_used": ["psutil", "WMI COM directly", "NVML", "network"]
+  },
+  "gpu_comparison_reference": {
+    "purpose": "差異把握のみ — 仕様統一の結論は出さない",
+    "rows": [
+      { "metric": "model", "get_gpu_status": "provided (gpu)", "cpu_status": "NOT_PROVIDED" },
+      { "metric": "cores", "get_gpu_status": "N/A", "cpu_status": "NOT_PROVIDED" },
+      { "metric": "threads", "get_gpu_status": "N/A", "cpu_status": "NOT_PROVIDED" },
+      { "metric": "temperature", "get_gpu_status": "provided", "cpu_status": "NOT_PROVIDED" },
+      { "metric": "utilization", "get_gpu_status": "provided (utilization %)", "cpu_status": "provided (LoadPercentage as status string)" },
+      { "metric": "VRAM", "get_gpu_status": "provided", "cpu_status": "N/A" },
+      { "metric": "observation_source field", "get_gpu_status": "provided (const real)", "cpu_status": "NOT_PROVIDED" },
+      { "metric": "ok/error fields", "get_gpu_status": "provided", "cpu_status": "NOT_PROVIDED" }
+    ]
+  },
+  "observed_gaps": [
+    {
+      "id": "OG-01",
+      "gap": "Registry observation_source=real だが output に observation_source キーなし",
+      "classification": "Registry metadata vs output shape — 仕様変更（output 追加）要 Human Review",
+      "current_spec_violation": false
+    },
+    {
+      "id": "OG-02",
+      "gap": "Registry description「CPU基本状態」は LoadPercentage より広い",
+      "classification": "Documentation ambiguity — description は「未確認」で hedge 済み",
+      "current_spec_violation": false
+    },
+    {
+      "id": "OG-03",
+      "gap": "model/cores/threads/temperature 未返却",
+      "classification": "NOT_PROVIDED by design — 現行実装スコープ外",
+      "current_spec_violation": false
+    },
+    {
+      "id": "OG-04",
+      "gap": "専用契約テスト不足",
+      "classification": "Test repair — 本 Phase で追加可",
+      "current_spec_violation": false
+    }
+  ],
+  "proposed_spec_change": {
+    "status": "DEFERRED — NOT APPLIED THIS PHASE",
+    "requires_human_review": true,
+    "candidates": [
+      { "field": "observation_source", "reason": "Registry metadata と output 統一（get_gpu_status 型）" },
+      { "field": "ok", "reason": "成功/失敗の明示" },
+      { "field": "error", "reason": "失敗理由コード" },
+      { "field": "load or utilization", "reason": "status キー名曖昧さ解消" },
+      { "field": "model", "reason": "CPU 識別 — 独立観測で取得可能" },
+      { "field": "cores", "reason": "Win32_Processor.NumberOfCores" },
+      { "field": "threads", "reason": "Win32_Processor.NumberOfLogicalProcessors" },
+      { "field": "temperature", "reason": "取得経路未確認 — UNKNOWN" }
+    ],
+    "note": "これらは改善提案であり現行仕様ではない。実装変更は本 Phase 禁止。"
+  },
+  "repair_classification": {
+    "documentation": true,
+    "specification": true,
+    "test": true,
+    "implementation": false,
+    "safety": false,
+    "interface": false,
+    "rationale": "LoadPercentage 実測は VALID。不足は文書化・契約テスト・legacy_migrated spec。observation_source 等の output 追加は Interface change で Human Review 要。"
+  },
+  "migration_meta": {
+    "phase": "legacy_to_current_migration_phase2",
+    "legacy_audit_ref": "docs/ai_tool/project_audit/LEGACY_TOOL_AUDIT.md",
+    "recommended_action_at_audit": "REPAIR",
+    "implementation_changed_in_this_phase": false,
+    "registry_changed_in_this_phase": false,
+    "agent_changed_in_this_phase": false
+  },
+  "test_contract_mapping": {
+    "normal": {
+      "N-01": "COVERED — test_success_output_contract_mock",
+      "N-02": "NOT_APPLICABLE — 引数なし",
+      "N-03": "COVERED — test_output_keys_match_spec"
+    },
+    "boundary": "NOT_APPLICABLE — 引数なし",
+    "invalid": "NOT_APPLICABLE — 引数なし",
+    "failure": {
+      "F-02": "COVERED — test_failure_returns_status_error"
+    },
+    "safety": {
+      "S-01": "COVERED — test_no_hardcoded_success_load",
+      "S-04": "COVERED — spec network_access=false"
+    },
+    "live_observation": {
+      "suite": "tests/ai_tool/tool_creation/test_cpu_status_migration.py::test_live_observation_optional",
+      "classification": "local_live_observation",
+      "ci_default": "skip unless Windows+PowerShell"
+    },
+    "contract_tests": "tests/ai_tool/tool_creation/test_cpu_status_migration.py",
+    "legacy_indirect": [
+      "tests/test_f001_summarize_separation.py::test_cpu_status_dict_does_not_raise",
+      "tests/test_pipeline_routing.py::test_registered_cpu_status_is_pass"
+    ]
+  },
+  "registry_alignment": {
+    "registry_name": "cpu_status",
+    "descriptor_fields_observed": [
+      "name",
+      "visibility",
+      "observation_source",
+      "module",
+      "function",
+      "input",
+      "output",
+      "risk",
+      "description"
+    ],
+    "registry_output_documented": true,
+    "registry_output_matches_implementation": true,
+    "observation_source_in_output": false,
+    "note": "Registry output=[status] は実装と一致。observation_source は Registry metadata のみ。"
+  }
+}

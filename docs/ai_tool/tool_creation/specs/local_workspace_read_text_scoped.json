@@ -1,0 +1,116 @@
+{
+  "tool_id": "local:workspace_read_text_scoped",
+  "name": "workspace_read_text_scoped",
+  "version": "0.1.0-draft",
+  "description": "experimental allowlist 内のテキストファイルを読み取る（read-only）。docs/ai_tool・runs/ai_tool・tool_creation/specs のみ。workspace 全体は対象外。",
+  "provider": "local",
+  "source": "docs/ai_tool/tool_creation/specs/local_workspace_read_text_scoped.json",
+  "capability": ["filesystem", "read", "text", "scoped"],
+  "purpose": "Tool Creation Layer 実験用。許可ルート内のテキストファイル内容を安全に取得する",
+  "allowed_operations": ["read"],
+  "prohibited_operations": ["write", "modify", "network", "execute"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "許可ルート内の相対パス（リポジトリ root 基準）"
+      },
+      "offset": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "開始行（1-based、任意）"
+      },
+      "limit": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "返す最大行数（任意）"
+      }
+    },
+    "required": ["path"]
+  },
+  "required": ["path"],
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "ok": { "type": "boolean" },
+      "path": { "type": "string" },
+      "root_id": { "type": "string" },
+      "size_bytes": { "type": "integer" },
+      "total_lines": { "type": "integer" },
+      "offset": { "type": "integer" },
+      "limit": { "type": ["integer", "null"] },
+      "returned_lines": { "type": "integer" },
+      "content": { "type": "string" },
+      "truncated": { "type": "boolean" },
+      "error": { "type": ["string", "null"] }
+    },
+    "required": ["ok", "path", "error"]
+  },
+  "success_format": "ok=true, content にテキスト、metadata 付き",
+  "error_format": {
+    "ok": false,
+    "path": "string",
+    "error": "string",
+    "content": null
+  },
+  "side_effect": "read_only",
+  "required_permission": ["visibility:experimental"],
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "read",
+  "external_service_access": [],
+  "risk_level": "low",
+  "expected_failure": [
+    "path outside allowlist",
+    "path traversal",
+    "file not found",
+    "binary file",
+    "size exceeds max_bytes",
+    "permission denied",
+    "encoding error"
+  ],
+  "retry_policy": "none",
+  "deterministic": true,
+  "known_limitations": [
+    "experimental allowlist のみ（allowed_roots.experimental.json）",
+    "テキストのみ、バイナリ拒否",
+    "本番 read_file の置換ではない",
+    "limit 未指定時 max_lines_default=500（config experimental 値）"
+  ],
+  "cost": "free",
+  "tool_status": "unavailable",
+  "catalog_hints": {
+    "experiment_status": "experimental",
+    "adoption_status": "not_reviewed"
+  },
+  "contract": {
+    "can": [
+      "read_text_file_within_allowlist",
+      "return_structured_error_on_violation"
+    ],
+    "cannot": [
+      "read_outside_allowlist",
+      "write_or_modify_files",
+      "access_network",
+      "read_binary_as_text_without_error"
+    ],
+    "must": [
+      "reject_parent_path_segments",
+      "set_ok_false_on_error",
+      "include_path_in_result"
+    ],
+    "must_not": [
+      "fallback_to_workspace_wide_access",
+      "silently_read_outside_allowlist",
+      "follow_symlink_outside_allowlist"
+    ]
+  },
+  "provider_specific": {
+    "allowlist_config": "docs/ai_tool/tool_creation/allowed_roots.experimental.json",
+    "implementation_module": "ai_tool.experimental.scoped_read.reader",
+    "implementation_function": "workspace_read_text_scoped",
+    "registry_visibility": "experimental"
+  }
+}

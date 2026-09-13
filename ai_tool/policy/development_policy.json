@@ -1,0 +1,183 @@
+{
+  "policy_id": "ai-agent-development-policy",
+  "version": "1.5",
+  "prose_reference": "docs/DEVELOPMENT_TEST_POLICY.md",
+  "role": "machine_contract",
+  "note": "実行時の機械契約兼Policy Manifest。共通文書はdistribution.canonical_files、各環境固有処理はconsumer adapterを参照する。",
+  "distribution": {
+    "schema_version": "1",
+    "policy_version": "2026-09-06.1",
+    "canonical_files": [
+      "ai_tool/policy/development_policy.json",
+      "docs/AI_DEVELOPMENT_SESSION_START_POLICY.md",
+      "docs/DEVELOPMENT_TEST_POLICY.md",
+      "docs/GIT_OPERATION_POLICY.md",
+      "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "docs/SYSTEM_ASSET_INDEX.md",
+      "registry/skills.json",
+      "docs/specs/GOAL_HANDOFF_V0.md"
+    ],
+    "git_governance_ref": {
+      "contract_path": "ai_tool/policy/git_governance.json",
+      "schema_path": "ai_tool/policy/git_governance.schema.json",
+      "role": "machine_contract_subordinate",
+      "note": "Human semantic source remains docs/GIT_OPERATION_POLICY.md; this file is not a semantic substitute."
+    },
+    "consumers": {
+      "codex": {
+        "adapter": "AGENTS.md",
+        "mode": "reference",
+        "required_references": [
+          "ai_tool/policy/development_policy.json",
+          "docs/AI_DEVELOPMENT_SESSION_START_POLICY.md",
+          "docs/DEVELOPMENT_TEST_POLICY.md",
+          "docs/GIT_OPERATION_POLICY.md",
+          "ai_tool/policy/git_governance.json",
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ]
+      },
+      "cursor": {
+        "adapter": ".cursor/rules/agent-development-policy.mdc",
+        "mode": "reference",
+        "required_references": [
+          "ai_tool/policy/development_policy.json",
+          "docs/AI_DEVELOPMENT_SESSION_START_POLICY.md",
+          "docs/DEVELOPMENT_TEST_POLICY.md",
+          "docs/GIT_OPERATION_POLICY.md",
+          "ai_tool/policy/git_governance.json",
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ]
+      },
+      "local_agent": {
+        "adapter": "ai_tool/policy/loader.py",
+        "mode": "loader",
+        "required_references": [
+          "development_policy.json"
+        ]
+      }
+    }
+  },
+  "item_statuses": [
+    "CONNECTED",
+    "PARTIAL",
+    "NOT_IMPLEMENTED",
+    "NOT_CONNECTED",
+    "NOT_OBSERVED",
+    "NOT_DETERMINED",
+    "NEED_HUMAN_DECISION"
+  ],
+  "min_implementation": "purpose_integrity_observability_safety_then_minimize_diff",
+  "not_min_implementation": [
+    "easy_but_incomplete",
+    "easy_but_unconnected",
+    "easy_but_unverifiable"
+  ],
+  "completion": {
+    "specification_complete_requires_all_items_connected": true,
+    "provisional_item_blocks_complete": true,
+    "tests_pass_does_not_imply_specification_complete": true,
+    "code_exists_does_not_imply_connected": true,
+    "connected_requires_generate_to_next_stage": true,
+    "empty_checklist_cannot_complete": true
+  },
+  "human_decision_required_when": [
+    "NEED_HUMAN_DECISION",
+    "needs_human",
+    "architecture_change",
+    "multiple_reasonable_interpretations",
+    "fixes_future_api_or_data",
+    "safety_or_security",
+    "compatibility_break",
+    "inferring_parent_proposal_id_from_chat",
+    "unifying_or_splitting_same_named_ids",
+    "selecting_current_proposal",
+    "definition_boundary_ambiguous",
+    "new_id_versus_existing_id_undecidable",
+    "origin_versus_current_choice",
+    "current_code_drift",
+    "revert_current_toward_origin"
+  ],
+  "concept_definition": {
+    "role": "record_origin_current_provisional_history",
+    "path": "docs/concepts/CONCEPT_DEFINITIONS.md",
+    "project_origin": "PROJECT_SPEC.md",
+    "origin_must_not_be_rewritten": true,
+    "origin_is_not_automatically_obsolete": true,
+    "current_is_not_automatically_truer_than_origin": true,
+    "origin_is_not_automatically_truer_than_current": true,
+    "revert_toward_origin_is_allowed": true,
+    "revert_toward_origin_is_not_automatically_regression": true,
+    "do_not_copy_origin_prose_into_concept_file": true,
+    "missing_origin_is_not_determined": true,
+    "do_not_invent_origin": true,
+    "current_is_not_a_code_substitute": true,
+    "current_code_drift_requires_human": true,
+    "provisional_is_not_current": true,
+    "not_determined_is_a_valid_status": true,
+    "do_not_register_all_concepts_up_front": true,
+    "history_records_why": true
+  },
+  "definition_boundary": {
+    "role": "catch_when_existing_definition_cannot_decide",
+    "not_role": [
+      "define_everything_up_front",
+      "doubt_all_confirmed_facts",
+      "stop_development_on_unknowns_alone",
+      "redesign_all_when_a_definition_expands"
+    ],
+    "clear_definition_may_proceed": true,
+    "minor_ambiguity_may_proceed_as_provisional": true,
+    "provisional_is_not_final_specification": true,
+    "boundary_ambiguity_requires_human": true,
+    "expansion_sign_alone_is_not_stop": true,
+    "do_not_doubt_code_confirmed_facts": true,
+    "do_not_promote_unknown_to_official_specification": true,
+    "missing_early_definition_is_not_automatically_failure": true,
+    "human_question_fields": [
+      "code_facts",
+      "undecidable_from_existing_definition",
+      "options",
+      "impacts",
+      "recommendation_optional"
+    ],
+    "expansion_signs": [
+      "same_field_gains_new_use",
+      "existing_id_used_for_another_stage",
+      "one_field_holds_multiple_meanings",
+      "new_stage_requires_existing_id",
+      "new_process_not_explained_by_existing_definition",
+      "new_id_needed_but_boundary_unclear",
+      "value_used_for_trace_but_identified_unit_unclear"
+    ],
+    "decision_order": [
+      "existing_definition",
+      "safe_provisional",
+      "multiple_interpretations_ask_human",
+      "else_not_determined_or_not_implemented"
+    ]
+  },
+  "forbidden_complete_claims_without_evaluate": true,
+  "spec_proposal_observation": {
+    "role": "provisional_observation",
+    "learning_method": "NOT_DETERMINED",
+    "llm_proposal_is_not_final_specification": true,
+    "parse_success_is_not_specification_valid": true,
+    "pytest_pass_is_not_specification_complete": true,
+    "saved_proposal_is_not_complete": true,
+    "do_not_overwrite_llm_proposals": true,
+    "human_revision_is_append_only": true,
+    "do_not_auto_judge_llm_correctness": true,
+    "audit_reports_are_reference_only": true,
+    "human_revision_is_not_automatically_correct": true,
+    "human_confirmation_is_not_automatically_correct": true,
+    "llm_confirmed_status_is_not_human_confirmation": true,
+    "problem_occurrence_is_not_llm_failure": true,
+    "do_not_auto_select_current_specification": true,
+    "do_not_infer_parent_proposal_id_from_chat": true,
+    "dual_id_issuance_is_not_automatically_a_bug": true,
+    "cursor_completion_claim_is_not_evidence": true,
+    "local_agent_and_cursor_are_not_equivalent": true,
+    "do_not_rewrite_historical_records_to_match_current_design": true,
+    "auto_improvement": "NOT_IMPLEMENTED"
+  }
+}

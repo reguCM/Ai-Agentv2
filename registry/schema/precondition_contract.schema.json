@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/precondition_contract.schema.json",
+  "title": "Precondition contract",
+  "description": "Shared structured preconditions for Goal, Task, Action, Handoff, and future Pending Work. PROVISIONAL v0. existence of a precondition record does not imply satisfaction.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "evaluation_status": {
+      "type": "string",
+      "enum": ["UNKNOWN", "SATISFIED", "UNSATISFIED", "WAITING", "NOT_APPLICABLE"],
+      "description": "Current satisfaction state. UNKNOWN unless explicitly evaluated."
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence_refs"],
+      "properties": {
+        "status": { "$ref": "#/$defs/evaluation_status" },
+        "evidence_refs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true,
+          "description": "Evidence supporting the evaluation status. Empty when UNKNOWN."
+        }
+      }
+    },
+    "precondition_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "precondition_id",
+        "key",
+        "description",
+        "blocking",
+        "source",
+        "evaluation"
+      ],
+      "properties": {
+        "precondition_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^pc-[a-z0-9][a-z0-9_-]{0,62}$",
+          "description": "Record identifier for this precondition instance."
+        },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_]{0,127}$",
+          "description": "Stable machine identity, e.g. tech_spec_exists."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human / LLM readable explanation."
+        },
+        "blocking": {
+          "type": "boolean",
+          "description": "Whether future execution should stop when unsatisfied. v0 does not auto-block."
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Origin of this precondition (skill, boundary, preflight, etc.)."
+        },
+        "evaluation": { "$ref": "#/$defs/evaluation" }
+      }
+    },
+    "preconditions_array": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/precondition_record" },
+      "uniqueItems": false,
+      "description": "Multiple preconditions may coexist. Uniqueness of key is not enforced in v0."
+    }
+  }
+}

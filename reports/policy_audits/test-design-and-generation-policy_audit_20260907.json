@@ -1,0 +1,19 @@
+{
+  "certificate_type": "GENERIC_POLICY_AUDIT_CERTIFICATE",
+  "policy_id": "test-design-and-generation-policy",
+  "policy_path": "docs/TEST_DESIGN_AND_GENERATION_POLICY.md",
+  "declared_scope": "GENERIC",
+  "policy_sha256": "f2ee814708bd87a9d448c499dcfafa6b1d9f439db1aaad88648a9cd34d9c4f8e",
+  "audit_rules_id": "generic-policy-authoring-rules",
+  "audit_rules_version": "1.0.0",
+  "audit_result": "AUDITED_CLEAN",
+  "findings": [{"finding_id": "TDG-001", "result": "REPAIRED", "reason": "Project examples and legacy benchmark state needed explicit non-normative boundaries."}],
+  "exceptions": [],
+  "audited_at": "2026-09-07T10:25:21.2743024+09:00",
+  "audit_method": "manual_static_generic_scope_audit_with_tracked_repair",
+  "auditor": {"role": "development_agent", "id": "codex"},
+  "git_revision": "4da564ee527f27c4cfd717cead62d3519fade693",
+  "working_tree_state": {"dirty": true, "scope_note": "Certificate identifies the audited policy bytes by SHA-256; unrelated dirty changes are excluded."},
+  "report_reference": "reports/policy_audits/generic_policy_baseline_audit_20260907.md",
+  "provenance": {"pre_audit_sha256": "2fd3e71e114c0217a348f18cf26275504d1f9d025621573047438e04329d90b7", "repair_finding_ids": ["TDG-001"]}
+}

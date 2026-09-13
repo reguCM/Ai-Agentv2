@@ -1,0 +1,47 @@
+{
+  "experiment": "medium_task_reality_v0",
+  "run_id": "20260909T030450Z",
+  "parent_completion_gap_run": "20260909T023138Z",
+  "parent_complete_treatment": "valid_in_local_gap_world",
+  "cursor_role": "observer_harness",
+  "game_code_author": "qwen3:14b_local_implementer",
+  "medium_task": {
+    "name": "ScoreIntegration",
+    "purpose": "ラインクリア後のスコア加算処理の統合",
+    "components": [
+      "LineClear",
+      "Score"
+    ]
+  },
+  "gap": {
+    "name": "ScoreDependencyGap",
+    "why": "LineClearコンポーネントがScoreコンポーネントへの依存関係を明示的に持たないが、add_score関数の実装が存在する"
+  },
+  "focus": {
+    "minimum_focus": [
+      "line_clear"
+    ],
+    "vertical_map": false,
+    "horizontal_map": true,
+    "allowed_write": [
+      "workspace/window_loop.py",
+      "tests/test_medium_task_v0.py"
+    ]
+  },
+  "apply_applied": [
+    {
+      "path": "workspace/window_loop.py",
+      "kind": "update"
+    },
+    {
+      "path": "tests/test_medium_task_v0.py",
+      "kind": "file"
+    }
+  ],
+  "test_passed": false,
+  "recheck": "BLOCKED",
+  "next_gap": null,
+  "elapsed_s": 329.076,
+  "stop": "one_pass_complete",
+  "stage3_not_started": true
+}

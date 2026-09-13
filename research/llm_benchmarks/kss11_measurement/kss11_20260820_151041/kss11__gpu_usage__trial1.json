@@ -1,0 +1,156 @@
+{
+  "case": "gpu_usage",
+  "trial": 1,
+  "returncode": 1,
+  "timestamp": "2026-08-20T15:18:02.044792+00:00",
+  "experiment": {
+    "AI_AGENT_EXPERIMENT_ID": "kss11_20260820_151041",
+    "AI_AGENT_EXPERIMENT_CONDITION": "kss11_obs",
+    "AI_AGENT_EXPERIMENT_TRIAL": "1",
+    "AI_AGENT_EXPERIMENT_CASE": "gpu_usage",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+    "AI_AGENT_KSS1_OBS": "0",
+    "AI_AGENT_KSS11_OBS": "1"
+  },
+  "metrics": {
+    "pass": false,
+    "fail_stage": "proposal",
+    "error": "proposal_validation_ng",
+    "rounds": null,
+    "llm_calls": 2,
+    "usable_findings": 0,
+    "actual_headroom_min": null,
+    "headroom_gate_ok": null,
+    "context_overflow": false,
+    "kss11_obs_rounds": 0,
+    "kss11_history_events": 0,
+    "proposal_evidence": null,
+    "behavior_changed": false,
+    "evidence_summary": {
+      "decision_count": 0,
+      "bundle_count": 0,
+      "decision_source_distribution": {},
+      "evidence_coverage": {
+        "levels": {},
+        "rounds_with_evidence_bundle": 0
+      },
+      "provenance_coverage": {
+        "events_with_id_and_type": 0,
+        "events_total": 0,
+        "rate": null
+      },
+      "threshold_coverage": {
+        "events_with_threshold_refs": 0,
+        "events_total": 0,
+        "rate": null
+      },
+      "high_evidence_failure_count": 0,
+      "low_evidence_success_count": 0,
+      "contradictory_evidence_count": "missing",
+      "missing_information_count": 0,
+      "no_gain_round_count": 0,
+      "failure_by_evidence_level": {},
+      "success_by_evidence_level": {},
+      "existing_to_obs_mapping": {
+        "verified.results[].confidence": "verify_confidence_label",
+        "usable_findings / reference / unresolved": "finding_bucket_counts",
+        "evaluate_research_progress.action": "progress_action",
+        "evaluate_research_progress.reason": "progress_reason",
+        "judgment.satisfies_request": "judge_satisfies_request",
+        "judgment.missing": "judge_missing",
+        "live_skip / llm judge": "judge_source",
+        "gj_trigger.would_skip / triggers": "gj_would_skip / gj_triggers",
+        "escalation.reason / routine": "escalation_reason / escalation_routine",
+        "filter_rejected_candidates": "candidates_rejected_count",
+        "hit_score / kept hits": "web_hit_scores / web_kept_count",
+        "validate_tool_spec / completeness": "proposal_spec_status / proposal_completeness_ok",
+        "fail_stage": "fail_stage",
+        "assess_information_gain.no_gain": "no_gain",
+        "KSS-0 known_coverage": "kss0_known_coverage",
+        "KSS-1 llm self confidence": "llm_self_confidence (auxiliary_only)",
+        "MAX_RESEARCH_ROUNDS / MAX_STAGNATION": "threshold_refs.max_rounds / max_stagnation",
+        "VERIFY high/low only": "verify_confidence_numeric = missing",
+        "HELP / human escalate": "missing (enum only)"
+      },
+      "missing_fields": [
+        "llm_judge_confidence_numeric",
+        "progress_decision_confidence",
+        "proposal_decision_confidence",
+        "verify_confidence_numeric",
+        "help_escalation_decision",
+        "partial_llm_judgment",
+        "judge_accept_weights",
+        "official_source_reliability_numeric_table",
+        "composite_web_confidence",
+        "composite_decision_confidence"
+      ],
+      "not_for_decision": true,
+      "phase": "kss-1.1"
+    }
+  },
+  "pipeline": {
+    "research": null,
+    "judgments": [],
+    "progress": [],
+    "research_rounds_detail": [],
+    "research_history": null,
+    "global_judge_shadow": null,
+    "context_budget_shadow": null,
+    "generated_code": null,
+    "repair": "skipped"
+  },
+  "state": {
+    "task": "GPUの使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "GPUの使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "open_questions": [],
+    "unresolved": [],
+    "research_history": [],
+    "banned_actions": []
+  },
+  "timing": {
+    "total_seconds": 13.8,
+    "llm_seconds": 13.8,
+    "machine_seconds": 0.0,
+    "research_seconds": 0.0,
+    "judge_seconds": 0.0,
+    "implementation_seconds": 0.0,
+    "repair_seconds": 0.0,
+    "validation_seconds": 0.0,
+    "llm_calls": 2
+  }
+}

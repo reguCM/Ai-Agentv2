@@ -1,0 +1,29 @@
+﻿#!/bin/sh
+# Git Guard pre-commit sample — copy into .git/hooks/pre-commit (see install-hooks.md)
+#
+# Configure via env:
+#   GIT_GUARD_ROOT   — directory containing guard.py (default: resolve relative to this file is fragile; set explicitly)
+#   GIT_GUARD_CONFIG — path to JSON config (required)
+#   PYTHON           — python executable (default: python)
+
+set -e
+
+if [ -z "$GIT_GUARD_CONFIG" ]; then
+  echo "git-guard pre-commit: set GIT_GUARD_CONFIG to a check-only JSON config" >&2
+  exit 1
+fi
+
+ROOT="${GIT_GUARD_ROOT:-}"
+if [ -z "$ROOT" ]; then
+  # Prefer sibling of hooks/ if this sample was copied from the package
+  HERE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+  if [ -f "$HERE/../guard.py" ]; then
+    ROOT=$(CDPATH= cd -- "$HERE/.." && pwd)
+  else
+    echo "git-guard pre-commit: set GIT_GUARD_ROOT to the _git-guard directory" >&2
+    exit 1
+  fi
+fi
+
+PY="${PYTHON:-python}"
+exec "$PY" "$ROOT/guard.py" --config "$GIT_GUARD_CONFIG"

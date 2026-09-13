@@ -1,0 +1,23 @@
+{
+  "reference_case_id": "irrelevant_unknown_ollama",
+  "description": "Case D — host ollama present but plan does not use LLM/GPU.",
+  "test_plan": {
+    "plan_id": "irrelevant_unknown_ollama",
+    "commands": ["python -m pytest tests/tools/test_test_safety_validator.py -q"],
+    "declared_primary_risk_level": "LEVEL_1",
+    "declared_dimensions": {
+      "llm": "NONE",
+      "gpu": "NONE",
+      "network": "NONE",
+      "subprocess": "CONTROLLED"
+    }
+  },
+  "host_process_notes": ["ollama process present on host (unused by this plan)"],
+  "expectation": {
+    "shadow_gate_decision": "PASS",
+    "human_decision": "PASS",
+    "human_approval_required": false,
+    "warnings_nonempty": true,
+    "reason": "irrelevant host unknown; warning only"
+  }
+}

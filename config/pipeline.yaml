@@ -1,0 +1,70 @@
+# 自己修復パイプラインの仕様。モデル名やプロンプト最適化は書かない。
+# LLM 固有の値は config/llm_models.yaml と docs/llm/ に置く。
+#
+# active_model: Agent 主経路（Native Tool Calling）の暫定既定。
+# 正式採用確定ではない。P1 Model Registry で role/capability 管理へ移行予定。
+# 要件: Ollama tools パラメータ対応（probe_tool_calling で確認）。
+
+# 工程別モデルは未配線。未指定なら active_model。
+# 実装層ベンチは AI_AGENT_MODEL / AI_AGENT_IMPLEMENT_MODELS で上書きする。
+# stage_models:
+#   research: qwen3_8b
+#   judge: qwen3_8b
+#   implement: qwen3_8b
+
+active_model: gemma4_12b
+
+# 事前に決まっている環境。Clarity より前に注入する。LLM は書き換えない。
+# 実装手段の選択は Agent。ユーザーには聞かない。
+project_context:
+  os: Windows
+  runtime: Python
+  llm: Ollama
+  tool_architecture: existing registry/tools
+  implementation_style: follow existing tools
+  implementation_method_selection: Agent
+
+
+max_tool_rounds: 5
+# Chat Agent Loop: progress-sensitive stopping plus an independent safety cap.
+agent_tool_absolute_hard_limit: 20
+agent_stagnation_limit: 3
+agent_same_failure_limit: 3
+agent_no_evidence_limit: 6
+max_repair_rounds: 3
+max_research_rounds: 10
+max_research_stagnation: 3
+max_clarity_rounds: 5
+
+# Clarity の判断。実装は tools.system.tool_builder.clarity.next_clarity_step。
+# Research で曖昧さを解消しない。不明なら ask_user。
+clarity_statuses:
+  - clear
+  - needs_clarification
+  - insufficient_information
+
+clarity_next_steps:
+  - research
+  - ask_user
+
+reject_empty_repair_code: true
+reject_empty_repair_code_message: "code がない repair 案は適用しない"
+
+# Validator の直後に進む分岐。実装は warning_actions.first_pipeline_step。
+pipeline_steps:
+  - pass
+  - repair
+  - research
+  - research_repair
+
+# エージェント状態。実装は warning_actions.finalize_validation_status。
+agent_status:
+  - pass
+  - warning
+  - fail
+  - blocked
+
+# 調査結果を実装根拠にできる条件。モデルに依存しない。
+research_ready_requires:
+  - usable_findings[].evidence.command
+  - usable_findings[].evidence.sample

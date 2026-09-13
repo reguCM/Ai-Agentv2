@@ -1,0 +1,72 @@
+{
+  "experiment": "problem_analysis_context_split",
+  "model": "deepseek-coder-v2:16b",
+  "case_id": "E_information_poor",
+  "condition": "F4",
+  "input": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"unknown_tool\",\n  \"status\": \"fail\",\n  \"error_type\": \"RuntimeError\",\n  \"error\": \"operation failed\"\n}\n\ntraceback:\nNOT_RECORDED\n\nsource:\nNOT_RECORDED\n",
+  "raw_output": "The problem described is a generic failure with an unknown tool. The response indicates that an operation failed due to a RuntimeError, and the error message is \"operation failed.\" There is no specific information about the tool or the source code involved, and the traceback is not recorded. This suggests that the error occurred during execution, but the details are not available.",
+  "timestamp": "2026-09-01T00:17:39.115603+00:00",
+  "call_ok": true,
+  "error": null,
+  "temperature": 0.0,
+  "failure": {
+    "tool_name": "unknown_tool",
+    "status": "fail",
+    "error_type": "RuntimeError",
+    "error": "operation failed"
+  },
+  "prompt_header": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.",
+  "notes": [
+    "context_split",
+    "no_analysis_taxonomy",
+    "no_tools",
+    "no_invented_traceback_or_source",
+    "f5_conversation_from_previous_fixture"
+  ],
+  "observability": {
+    "experiment_start": "2026-09-01T00:17:39.115603+00:00",
+    "experiment_end": "2026-09-01T00:17:39.804625+00:00",
+    "stop_reason": "single_turn",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"unknown_tool\",\n  \"status\": \"fail\",\n  \"error_type\": \"RuntimeError\",\n  \"error\": \"operation failed\"\n}\n\ntraceback:\nNOT_RECORDED\n\nsource:\nNOT_RECORDED\n"
+      }
+    ],
+    "chat_kwargs": {
+      "model": "deepseek-coder-v2:16b",
+      "tools": "not_used",
+      "keep_alive": "5m",
+      "options": {
+        "num_predict": 2048,
+        "temperature": 0.0,
+        "num_ctx": 4096
+      },
+      "timeout_seconds": 90,
+      "tool_presentation": "none",
+      "kwargs_source": {
+        "harness_chat_call": [
+          "model",
+          "messages"
+        ],
+        "llm_chat_setdefault": [
+          "options",
+          "keep_alive"
+        ],
+        "not_passed": [
+          "tools"
+        ]
+      }
+    },
+    "tools_used": false,
+    "extras": {
+      "traceback_included": true,
+      "source_included": true,
+      "conversation_included": false,
+      "traceback_recorded": false,
+      "source_recorded": false,
+      "conversation_provenance": "problem_analysis_context_cases.py (previous context experiment fixture, not live chat)"
+    },
+    "thinking_observed": false
+  }
+}

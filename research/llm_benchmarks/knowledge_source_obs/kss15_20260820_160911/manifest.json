@@ -1,0 +1,62 @@
+{
+  "experiment_id": "kss15_20260820_160911",
+  "purpose": "KSS-1.5 live kept/dropped + human audit dataset",
+  "routing": false,
+  "filter_changed": false,
+  "llm_judge": false,
+  "common_env": {
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+    "AI_AGENT_KSS1_OBS": "0",
+    "AI_AGENT_KSS11_OBS": "1",
+    "AI_AGENT_KSS12_OBS": "1",
+    "AI_AGENT_KSS13_OBS": "1",
+    "AI_AGENT_KSS14_OBS": "1",
+    "AI_AGENT_KSS15_OBS": "1",
+    "AI_AGENT_KSS14_ANSWER_JUDGE": "0"
+  },
+  "cases": [
+    "memory_usage",
+    "cpu_temperature",
+    "disk_usage",
+    "gpu_usage",
+    "gpu_vram_usage"
+  ],
+  "trials": 1,
+  "environment": {
+    "ok": true,
+    "python_executable": "D:\\AI-Agent\\.venv\\Scripts\\python.exe",
+    "python_version": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "ollama_available": true,
+    "ollama_version": "missing",
+    "ollama_file": "D:\\AI-Agent\\.venv\\Lib\\site-packages\\ollama\\__init__.py",
+    "project_root": "D:\\AI-Agent",
+    "working_directory": "D:\\AI-Agent",
+    "feature_flags": {
+      "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+      "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+      "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+      "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+      "AI_AGENT_MEMORY_JUDGE": "0",
+      "AI_AGENT_MEMORY_RECALL": "0",
+      "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+      "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+      "AI_AGENT_KSS1_OBS": "0",
+      "AI_AGENT_KSS11_OBS": "1",
+      "AI_AGENT_KSS12_OBS": "1",
+      "AI_AGENT_KSS13_OBS": "1",
+      "AI_AGENT_KSS14_OBS": "1",
+      "AI_AGENT_KSS15_OBS": "1",
+      "AI_AGENT_KSS14_ANSWER_JUDGE": "0"
+    },
+    "web_search_module": "tools.system.tool_builder.research.web",
+    "stdout": "preflight_ok\n800"
+  },
+  "supersedes_invalid_run": "D:\\AI-Agent\\research\\llm_benchmarks\\knowledge_source_obs\\kss15_20260820_160149"
+}

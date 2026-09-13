@@ -1,0 +1,244 @@
+{
+  "case_id": "E04",
+  "request": "日本の運転免許は一般にどう取得されるか教えて",
+  "query": "普通自動車免許",
+  "time_sensitive": false,
+  "ts": "2026-08-24T06:05:26.149373+00:00",
+  "raw_api": {
+    "duckduckgo": {
+      "backend": "duckduckgo",
+      "query": "普通自動車免許",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 0,
+      "snippet_nonempty": 0,
+      "items": []
+    },
+    "wikipedia-ja": {
+      "backend": "wikipedia-ja",
+      "query": "普通自動車免許",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 2,
+      "snippet_nonempty": 0,
+      "items": [
+        {
+          "api_rank": 0,
+          "title": "普通自動車免許",
+          "snippet": "",
+          "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E5%85%8D%E8%A8%B1",
+          "kind": "opensearch"
+        },
+        {
+          "api_rank": 1,
+          "title": "普通自動車第一種運転免許",
+          "snippet": "",
+          "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E7%AC%AC%E4%B8%80%E7%A8%AE%E9%81%8B%E8%BB%A2%E5%85%8D%E8%A8%B1",
+          "kind": "opensearch"
+        }
+      ]
+    },
+    "wikipedia-en": {
+      "backend": "wikipedia-en",
+      "query": "普通自動車免許",
+      "http_status": 200,
+      "error": null,
+      "raw_count": 0,
+      "snippet_nonempty": 0,
+      "items": []
+    }
+  },
+  "api_candidate_count": 2,
+  "api_snippet_nonempty": 0,
+  "api_snippet_empty": 2,
+  "pipeline": {
+    "query": "普通自動車免許",
+    "per_backend": [
+      {
+        "backend": "duckduckgo",
+        "searcher_returned": 0,
+        "accepted": 0,
+        "rejected": 0
+      },
+      {
+        "backend": "wikipedia-ja",
+        "searcher_returned": 2,
+        "accepted": 2,
+        "rejected": 0
+      },
+      {
+        "backend": "wikipedia-en",
+        "searcher_returned": 0,
+        "accepted": 0,
+        "rejected": 0
+      }
+    ],
+    "hitize_rows": [
+      {
+        "backend": "wikipedia-ja",
+        "title": "普通自動車免許",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E5%85%8D%E8%A8%B1",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      },
+      {
+        "backend": "wikipedia-ja",
+        "title": "普通自動車第一種運転免許",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E7%AC%AC%E4%B8%80%E7%A8%AE%E9%81%8B%E8%BB%A2%E5%85%8D%E8%A8%B1",
+        "snippet": "",
+        "snippet_len": 0,
+        "hitized": true,
+        "reject_reason": ""
+      }
+    ],
+    "rejected": [],
+    "counts": {
+      "hit_accepted": 2,
+      "after_unique": 2,
+      "dup_removed": 0,
+      "before_ranking": 2,
+      "after_ranking": 2,
+      "dropped_by_ranking": 0,
+      "dropped_with_snippet": 0
+    },
+    "ranking_mode": "score>0_only",
+    "ranking_rows": [
+      {
+        "ranking_order": 0,
+        "score": 12,
+        "title": "普通自動車免許",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E5%85%8D%E8%A8%B1",
+        "backend": "wikipedia",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      },
+      {
+        "ranking_order": 1,
+        "score": 1,
+        "title": "普通自動車第一種運転免許",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E7%AC%AC%E4%B8%80%E7%A8%AE%E9%81%8B%E8%BB%A2%E5%85%8D%E8%A8%B1",
+        "backend": "wikipedia",
+        "snippet_len": 0,
+        "has_snippet": false,
+        "adopted": true,
+        "exclude_reason": ""
+      }
+    ],
+    "after_ranking_hits": [
+      {
+        "title": "普通自動車免許",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E5%85%8D%E8%A8%B1",
+        "backend": "wikipedia",
+        "_from": "wikipedia-ja"
+      },
+      {
+        "title": "普通自動車第一種運転免許",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E7%AC%AC%E4%B8%80%E7%A8%AE%E9%81%8B%E8%BB%A2%E5%85%8D%E8%A8%B1",
+        "backend": "wikipedia",
+        "_from": "wikipedia-ja"
+      }
+    ],
+    "dropped_candidates": []
+  },
+  "search_web_return": {
+    "hit_count": 2,
+    "hits": [
+      {
+        "title": "普通自動車免許",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E5%85%8D%E8%A8%B1",
+        "backend": "wikipedia"
+      },
+      {
+        "title": "普通自動車第一種運転免許",
+        "snippet": "",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E7%AC%AC%E4%B8%80%E7%A8%AE%E9%81%8B%E8%BB%A2%E5%85%8D%E8%A8%B1",
+        "backend": "wikipedia"
+      }
+    ],
+    "error": null,
+    "candidates_collected": 2
+  },
+  "stored_log": {
+    "hit_count": 2,
+    "hits": [
+      {
+        "title": "普通自動車免許",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E5%85%8D%E8%A8%B1",
+        "snippet": null
+      },
+      {
+        "title": "普通自動車第一種運転免許",
+        "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E7%AC%AC%E4%B8%80%E7%A8%AE%E9%81%8B%E8%BB%A2%E5%85%8D%E8%A8%B1",
+        "snippet": null
+      }
+    ]
+  },
+  "llm_handoff": {
+    "agent_passes_full_return": true,
+    "llm_received_hit_count": 2,
+    "stored_log_hit_count": 2,
+    "count_match_live_vs_stored": true,
+    "backend_in_return": [
+      "wikipedia",
+      "wikipedia"
+    ],
+    "json_bytes": 543,
+    "snippet_lost_in_serialization": false
+  },
+  "extract_probes": [
+    {
+      "title": "普通自動車免許",
+      "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E5%85%8D%E8%A8%B1",
+      "http_status": 200,
+      "error": null,
+      "extract_len": 0,
+      "extract_preview": "",
+      "page_has_usable_text": false,
+      "note": "調査専用extracts。本番search_web未接続。"
+    },
+    {
+      "title": "普通自動車第一種運転免許",
+      "url": "https://ja.wikipedia.org/wiki/%E6%99%AE%E9%80%9A%E8%87%AA%E5%8B%95%E8%BB%8A%E7%AC%AC%E4%B8%80%E7%A8%AE%E9%81%8B%E8%BB%A2%E5%85%8D%E8%A8%B1",
+      "http_status": 200,
+      "error": null,
+      "extract_len": 0,
+      "extract_preview": "",
+      "page_has_usable_text": false,
+      "note": "調査専用extracts。本番search_web未接続。"
+    }
+  ],
+  "machine_observation": {
+    "counts_chain": {
+      "api_raw": 2,
+      "hit_accepted": 2,
+      "after_unique": 2,
+      "after_ranking": 2,
+      "return": 2,
+      "llm_received": 2
+    },
+    "snippet_empty_in_return": 2,
+    "snippet_nonempty_in_return": 0,
+    "dropped_by_ranking": 0,
+    "dropped_with_snippet": 0,
+    "page_has_text_but_snippet_empty_probe": false,
+    "not_auto_usefulness_label": true
+  },
+  "human_review": {
+    "候補の内容": "",
+    "有用候補の番号": "",
+    "rankingで落ちた有用候補": "",
+    "内容の充実度": "",
+    "日本語情報の十分さ": "",
+    "現在性": "",
+    "LLMに十分な情報が渡ったか": "",
+    "主な問題箇所": "",
+    "人間コメント": ""
+  }
+}

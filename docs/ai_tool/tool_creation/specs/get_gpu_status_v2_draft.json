@@ -1,0 +1,172 @@
+{
+  "tool_id": "local:get_gpu_status",
+  "name": "get_gpu_status",
+  "version": "2.0.0-draft",
+  "description": "現在利用可能なGPU（デフォルト: index 0）の基本状態を nvidia-smi から実測する。GPUモデル・温度・使用率・VRAM合計を返す。GPUプロセス一覧は get_gpu_processes を使う。取得不能時は unknown/unavailable を返し固定値で埋めない。",
+  "provider": "local",
+  "source": "docs/ai_tool/tool_creation/specs/get_gpu_status_v2_draft.json",
+  "capability": ["GPU", "VRAM", "温度", "使用率", "observation"],
+  "purpose": "NVIDIA GPU のデバイスレベルメトリクス（model, temperature, utilization, VRAM used/total）を nvidia-smi --query-gpu から実測して返す",
+  "allowed_operations": ["read"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "gpu": {},
+      "temperature": {},
+      "utilization": {},
+      "vram_used": {},
+      "vram_total": {},
+      "ok": { "type": "boolean" },
+      "status": {},
+      "error": {},
+      "observation_source": { "const": "real" },
+      "source": {}
+    },
+    "required": [
+      "gpu",
+      "temperature",
+      "utilization",
+      "vram_used",
+      "vram_total",
+      "ok",
+      "status",
+      "error",
+      "observation_source",
+      "source"
+    ]
+  },
+  "supported_environment": {
+    "os": ["Windows", "Linux"],
+    "gpu_vendor": ["NVIDIA"],
+    "requirements": [
+      "nvidia-smi executable in PATH",
+      "NVIDIA driver installed"
+    ],
+    "normal_operation_condition": "nvidia-smi --query-gpu=name,temperature.gpu,utilization.gpu,memory.used,memory.total が returncode 0 で非空 rows を返す"
+  },
+  "environment_dependencies": {
+    "provider_strategy": "A — single Tool with internal NVIDIA provider (future: AMD/Intel providers as optional modules; not in v2 baseline)",
+    "multi_gpu": "index 0 only — additional GPUs NOT_PROVIDED in v2 baseline",
+    "non_nvidia": "status=unavailable, fields unknown — no AMD/Intel provider in v2 baseline"
+  },
+  "field_capability": {
+    "gpu": { "tier": "REQUIRED", "evidence": "VERIFIED on audit host WT impl", "failure": "unknown string" },
+    "temperature": { "tier": "REQUIRED", "evidence": "VERIFIED", "failure": "unknown string" },
+    "utilization": { "tier": "REQUIRED", "evidence": "VERIFIED", "note": "snapshot drift ENVIRONMENT_DEPENDENT", "failure": "unknown string" },
+    "vram_used": { "tier": "REQUIRED", "evidence": "VERIFIED", "failure": "unknown string" },
+    "vram_total": { "tier": "REQUIRED", "evidence": "VERIFIED", "failure": "unknown string" },
+    "gpu_count": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED via nvidia-smi count field", "future": "optional v2.1+" },
+    "power.draw": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED", "future": "optional" },
+    "clocks.current.graphics": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED", "future": "optional" },
+    "gpu_uuid": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED", "future": "optional" }
+  },
+  "observation_semantics": {
+    "observed": "数値または GPU 名文字列 — nvidia-smi 実測",
+    "unknown": "フィールド対象だが取得/パース不能 — 文字列 \"unknown\"（0 ではない）",
+    "unsupported": "非 NVIDIA 環境では nvidia-smi provider 自体が unsupported",
+    "unavailable": "nvidia-smi 不在等 — status=unavailable, ok=false"
+  },
+  "unknown_semantics": {
+    "rule": "欠測・[N/A]・パース不能 → \"unknown\" 文字列。LLM は推測値を生成しない。",
+    "not_zero": "unknown を 0 と解釈しない"
+  },
+  "unsupported_semantics": {
+    "rule": "AMD/Intel-only GPU 等、nvidia-smi provider 非適用環境。Tool 全体が unavailable。"
+  },
+  "unavailable_semantics": {
+    "rule": "nvidia-smi_not_found 等。ok=false, status=unavailable, error コード設定, メトリクス unknown"
+  },
+  "error_semantics": {
+    "ok_false": "観測失敗",
+    "status_values": ["ok", "unavailable", "error"],
+    "error_codes": ["nvidia-smi_not_found", "nvidia_smi_timeout", "nvidia_smi_failed", "nvidia_smi_empty"]
+  },
+  "output_fields": {
+    "gpu": { "meaning": "GPU 0 device name", "observation_source": "nvidia-smi name" },
+    "temperature": { "unit": "celsius", "observation_source": "nvidia-smi temperature.gpu" },
+    "utilization": { "unit": "percent", "observation_source": "nvidia-smi utilization.gpu" },
+    "vram_used": { "unit": "mib", "observation_source": "nvidia-smi memory.used" },
+    "vram_total": { "unit": "mib", "observation_source": "nvidia-smi memory.total" }
+  },
+  "not_provided_fields": {
+    "gpu_count": { "status": "NOT_PROVIDED", "note": "multi-GPU count — probe VERIFIED retrievable, NOT_IMPLEMENTED in output" },
+    "per_process_info": { "status": "NOT_PROVIDED", "note": "use get_gpu_processes" }
+  },
+  "success_format": "ok=true, status=ok, metrics measured, error=null",
+  "error_format": {
+    "ok": false,
+    "status": "unavailable|error",
+    "gpu": "unknown",
+    "temperature": "unknown",
+    "utilization": "unknown",
+    "vram_used": "unknown",
+    "vram_total": "unknown",
+    "error": "string",
+    "observation_source": "real",
+    "source": "nvidia-smi|none"
+  },
+  "side_effect": "read_only",
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "external_service_access": ["nvidia-smi"],
+  "risk_level": "low",
+  "expected_failure": ["nvidia-smi_not_found", "nvidia_smi_timeout", "nvidia_smi_failed", "nvidia_smi_empty"],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "GPU index 0 only",
+    "HEAD committed impl returns FIXED_STUB values — WT impl is measured (IMPLEMENTATION_DRIFT)",
+    "utilization/temperature snapshot variance between sequential queries",
+    "Non-NVIDIA GPUs unsupported in v2 baseline"
+  ],
+  "cost": "free",
+  "tool_status": "available",
+  "safety_boundary": {
+    "network_access": false,
+    "filesystem_write": false,
+    "subprocess": "nvidia-smi read-only query only",
+    "ref": "docs/ai_tool/tool_creation/SAFETY_BOUNDARY.md"
+  },
+  "compatibility_notes": {
+    "v1_legacy_migrated": "output keys unchanged from get_gpu_status_legacy_migrated.json",
+    "head_committed_impl": "FIXED_STUB — Human Review must adopt WT measured impl before Implementation Phase",
+    "breaking_change_policy": "Adding optional keys requires HR; changing key meanings forbidden"
+  },
+  "implementation_notes": {
+    "target_module": "tools.system.gpu.gpu_status",
+    "observation_module": "tools.system.gpu.nvidia_smi",
+    "observation_function": "query_gpu_status",
+    "provider": "nvidia_smi internal (strategy A)"
+  },
+  "validation_requirements": [
+    "validate_tool_spec_file ACCEPT",
+    "mock: success returns all required keys, no RTX 3060 hardcoded fallback",
+    "mock: nvidia-smi missing → unavailable, unknown fields",
+    "real_gpu optional: independent nvidia-smi field compare"
+  ],
+  "agent_usage": {
+    "use_for": ["GPU model", "GPU temperature", "GPU utilization percent", "total VRAM used/available"],
+    "do_not_use_for": ["GPU process list", "per-process VRAM", "CPU metrics"],
+    "llm_rules": ["Do not infer values when unknown", "Prefer tool result over guess"]
+  },
+  "contract": {
+    "can": ["read_gpu_device_metrics_via_nvidia_smi", "return_unknown_on_field_failure"],
+    "cannot": ["return_hardcoded_gpu_values", "list_gpu_processes", "network_access"],
+    "must": ["set_observation_source_real", "preserve_output_key_set"],
+    "must_not": ["coerce_unknown_to_zero", "fallback_to_rtx3060_stub"]
+  },
+  "provider_specific": {
+    "module": "tools.system.gpu.gpu_status",
+    "function": "get_gpu_status",
+    "observation_module": "tools.system.gpu.nvidia_smi",
+    "observation_function": "query_gpu_status"
+  }
+}

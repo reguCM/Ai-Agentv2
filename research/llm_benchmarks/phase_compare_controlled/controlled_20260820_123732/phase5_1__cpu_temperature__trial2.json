@@ -1,0 +1,5600 @@
+{
+  "condition": "phase5_1",
+  "condition_label": "phase5_1_pivot_recall",
+  "policy": "error_class_family_open_question_no_gain_pivot",
+  "case": "cpu_temperature",
+  "trial": 2,
+  "returncode": 1,
+  "timestamp": "2026-08-20T13:37:15.185530+00:00",
+  "experiment": {
+    "AI_AGENT_EXPERIMENT_ID": "controlled_20260820_123732",
+    "AI_AGENT_EXPERIMENT_CONDITION": "phase5_1",
+    "AI_AGENT_EXPERIMENT_TRIAL": "2",
+    "AI_AGENT_EXPERIMENT_CASE": "cpu_temperature",
+    "AI_AGENT_MEMORY_RECALL": "1",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "5.1",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3"
+  },
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "metrics": {
+    "pass": false,
+    "result": false,
+    "fail_stage": "research",
+    "error": "stagnation",
+    "stop_reason": "stagnation",
+    "rounds": 8,
+    "llm_calls": 18,
+    "usable_findings": 0,
+    "insufficient_findings": 0,
+    "verify_fail_count": 11,
+    "repeat_same_command_rate": 0.0,
+    "repeat_same_command_count": 0,
+    "repeat_same_error_class_rate": 0.727,
+    "repeat_same_error_class_count": 8,
+    "repeat_same_command_family_rate": 0.2,
+    "repeat_same_command_family_count": 1,
+    "repeated_open_question_rate": 0.625,
+    "repeated_open_question_count": 5,
+    "no_gain": true,
+    "no_gain_loop_rate": 0.625,
+    "information_gain": {
+      "has_gain": false,
+      "no_gain": true,
+      "reasons_gain": [
+        "diverse_error_classes"
+      ],
+      "reasons_stuck": [
+        "same_command_family:powershell/temperature"
+      ],
+      "stuck_error_class": null,
+      "stuck_family": [
+        "powershell",
+        "temperature"
+      ]
+    },
+    "pivot_required_count": 8,
+    "repeating_call_count": 8,
+    "recall_mode_counts": {
+      "fresh": 2,
+      "escalation": 4,
+      "repeating": 8,
+      "related": 2
+    },
+    "usable_increase_after_pivot": false,
+    "verify_ok_after_pivot": false,
+    "pivot_followup": {
+      "pivot_round_count": 0,
+      "usable_increase_after_pivot": false,
+      "verify_ok_after_pivot": false,
+      "note": "no_pivot_observed"
+    },
+    "actual_headroom_min": 1230,
+    "headroom_gate_ok": true,
+    "allocated_chars_max": 6450,
+    "reduction_applied_count": 0,
+    "defer_count": 0,
+    "context_overflow": false,
+    "history_event_count": 20,
+    "primary_waste_event_count": 14,
+    "eval_focus": "no_gain_error_class_family_open_question_loop"
+  },
+  "pipeline": {
+    "research": {
+      "usable_findings": [],
+      "reference_findings": [],
+      "unresolved": [
+        {
+          "kind": "output",
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "実環境で確認できなかった。PowerShell コマンドが許可された取得用途ではありません",
+          "evidence": {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "wmic cpu get Temperature"
+            ],
+            "returncode": null,
+            "sample": [],
+            "stderr": "",
+            "error": "PowerShell コマンドが許可された取得用途ではありません",
+            "output_key": "status"
+          },
+          "confidence": "low",
+          "source": "web"
+        }
+      ],
+      "insufficient_findings": [],
+      "rounds": 8,
+      "stagnation": 3,
+      "stop_reason": "stagnation",
+      "candidates_error": null
+    },
+    "judgments": [
+      {
+        "round": 1,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "error": null,
+        "judge_grade": "B",
+        "proposed_decisions": [
+          {
+            "key": "status.meaning",
+            "value": "WindowsのCPU温度"
+          },
+          {
+            "key": "status.unit",
+            "value": "C"
+          },
+          {
+            "key": "status.range",
+            "value": "0-120"
+          }
+        ]
+      },
+      {
+        "round": 2,
+        "satisfies_request": false,
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "missing": [
+          "output 'status' の取得方法",
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "error": null,
+        "judge_grade": null,
+        "proposed_decisions": []
+      },
+      {
+        "round": 3,
+        "satisfies_request": false,
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "missing": [
+          "output 'status' の取得方法",
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "error": null,
+        "judge_grade": null,
+        "proposed_decisions": []
+      },
+      {
+        "round": 4,
+        "satisfies_request": false,
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "missing": [
+          "output 'status' の取得方法",
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "error": null,
+        "judge_grade": "B",
+        "proposed_decisions": []
+      },
+      {
+        "round": 5,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure.",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "error": null,
+        "judge_grade": "B",
+        "proposed_decisions": []
+      },
+      {
+        "round": 6,
+        "satisfies_request": false,
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "error": null,
+        "judge_grade": null,
+        "proposed_decisions": []
+      },
+      {
+        "round": 7,
+        "satisfies_request": false,
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "error": null,
+        "judge_grade": null,
+        "proposed_decisions": []
+      },
+      {
+        "round": 8,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure.",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "error": null,
+        "judge_grade": "B",
+        "proposed_decisions": []
+      }
+    ],
+    "progress": [
+      {
+        "round": 1,
+        "action": "continue",
+        "reason": "no_progress",
+        "stagnation": 1,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      },
+      {
+        "round": 2,
+        "action": "continue",
+        "reason": "new_information",
+        "stagnation": 0,
+        "has_new_finding": false,
+        "missing_same": false,
+        "duplicate_only": false
+      },
+      {
+        "round": 3,
+        "action": "continue",
+        "reason": "no_progress",
+        "stagnation": 1,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      },
+      {
+        "round": 4,
+        "action": "continue",
+        "reason": "no_progress",
+        "stagnation": 2,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      },
+      {
+        "round": 5,
+        "action": "continue",
+        "reason": "new_information",
+        "stagnation": 0,
+        "has_new_finding": false,
+        "missing_same": false,
+        "duplicate_only": false
+      },
+      {
+        "round": 6,
+        "action": "continue",
+        "reason": "no_progress",
+        "stagnation": 1,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      },
+      {
+        "round": 7,
+        "action": "continue",
+        "reason": "no_progress",
+        "stagnation": 2,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      },
+      {
+        "round": 8,
+        "action": "stop",
+        "reason": "stagnation",
+        "stagnation": 3,
+        "has_new_finding": false,
+        "missing_same": true,
+        "duplicate_only": true
+      }
+    ],
+    "research_rounds_detail": [
+      {
+        "round": 1,
+        "followup": false,
+        "research_input": {
+          "followup_questions": [],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ]
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 3,
+        "verified_count": 3,
+        "verifier_failure": true,
+        "verified_runs": [
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:40\n+ ... ct -Class Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (\\\\MASAKI3060PC\\...DeviceID=\"CPU0\":PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          },
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:46\n+ ... ClassName Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (Win32_Processor...iceID = \"CPU0\"):PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          },
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:40\n+ ... ct -Class Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (\\\\MASAKI3060PC\\...DeviceID=\"CPU0\":PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "システム管理のサンプル スクリプト - PowerShell",
+            "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": "B",
+        "judge_retry_ok": true,
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "ban_action"
+          ],
+          "event_ids": [
+            "evt_1d68b0bacb5a"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": true,
+          "would_skip": false,
+          "live_skipped": false,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [
+            "first_round"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "first_round",
+          "llm_calls_saved_if_skip": 0,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 2,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 2,
+        "verified_count": 2,
+        "verifier_failure": true,
+        "verified_runs": [
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:46\n+ ... ClassName Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (Win32_Processor...iceID = \"CPU0\"):PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          },
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "PowerShell コマンドが許可された取得用途ではありません",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Invoke-Expression 'powershell -NoProfile -NonInteractive -Command Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature'"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          },
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Invoke-Expression 'powershell -NoProfile -NonInteractive -Command Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature'"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "システム管理のサンプル スクリプト - PowerShell",
+            "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": null,
+        "judge_retry_ok": null,
+        "missing": [
+          "output 'status' の取得方法",
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "ban_action"
+          ],
+          "event_ids": [
+            "evt_a7a85a9bdab8"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": false,
+          "would_skip": true,
+          "live_skipped": true,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "llm_calls_saved_if_skip": 1,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 3,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 1,
+        "verified_count": 1,
+        "verifier_failure": true,
+        "verified_runs": [
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "Get-WmiObject : 無効なクラスです \"Win32_Sensor\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq ' ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidType: (:) [Get-WmiObject], ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "システム管理のサンプル スクリプト - PowerShell",
+            "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": null,
+        "judge_retry_ok": null,
+        "missing": [
+          "output 'status' の取得方法",
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "ban_action",
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_1d9ee5a94e8c",
+            "evt_25d7487fb2fe"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": false,
+          "would_skip": true,
+          "live_skipped": true,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "llm_calls_saved_if_skip": 1,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 4,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+              ],
+              "reason": "verify_fail"
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 0,
+        "verified_count": 0,
+        "verifier_failure": false,
+        "verified_runs": [],
+        "candidate_keys": [],
+        "web_hits": [
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "システム管理のサンプル スクリプト - PowerShell",
+            "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": "B",
+        "judge_retry_ok": true,
+        "missing": [
+          "output 'status' の取得方法",
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_851c09404ee5",
+            "evt_f65c5d68e3d0"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": false,
+          "would_skip": true,
+          "live_skipped": false,
+          "audit_only": true,
+          "mode": "live_skip",
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "llm_calls_saved_if_skip": 1,
+          "quality_compare": {
+            "satisfies_request_match": true,
+            "missing_match": false,
+            "critical_miss": false,
+            "false_continue": false,
+            "shadow_satisfies": false,
+            "actual_satisfies": false,
+            "shadow_missing_count": 2,
+            "actual_missing_count": 1,
+            "decision_divergence": false,
+            "shadow_progress_action": "continue",
+            "actual_progress_action": "continue",
+            "shadow_progress_reason": "no_progress",
+            "actual_progress_reason": "new_information"
+          }
+        }
+      },
+      {
+        "round": 5,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+              ],
+              "reason": "verify_fail"
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 1,
+        "verified_count": 1,
+        "verifier_failure": true,
+        "verified_runs": [
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "ノード - MASAKI3060PC\n\nエラー:\n\n説明 = 無効なクエリです",
+            "confidence": "low",
+            "command": "wmic",
+            "args": [
+              "cpu",
+              "get",
+              "Temperature"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "wmic",
+            "args": [
+              "cpu",
+              "get",
+              "Temperature"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "システム管理のサンプル スクリプト - PowerShell",
+            "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": "B",
+        "judge_retry_ok": true,
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "reason": "usable_findings is empty and unresolved has verify failure.",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "ban_action",
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_996ca76aa13e",
+            "evt_75de039cec87"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": true,
+          "would_skip": false,
+          "live_skipped": false,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [
+            "stagnation_risk"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "stagnation_risk",
+          "llm_calls_saved_if_skip": 0,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 6,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "wmic",
+              "args": [
+                "cpu",
+                "get",
+                "Temperature"
+              ],
+              "reason": "verify_fail"
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 0,
+        "verified_count": 0,
+        "verifier_failure": false,
+        "verified_runs": [],
+        "candidate_keys": [],
+        "web_hits": [
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "システム管理のサンプル スクリプト - PowerShell",
+            "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": null,
+        "judge_retry_ok": null,
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_c0e7ec1e00c6"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": false,
+          "would_skip": true,
+          "live_skipped": true,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "llm_calls_saved_if_skip": 1,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 7,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "wmic",
+              "args": [
+                "cpu",
+                "get",
+                "Temperature"
+              ],
+              "reason": "verify_fail"
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 0,
+        "verified_count": 0,
+        "verifier_failure": false,
+        "verified_runs": [],
+        "candidate_keys": [],
+        "web_hits": [
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "システム管理のサンプル スクリプト - PowerShell",
+            "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": null,
+        "judge_retry_ok": null,
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "reason": "live_skip:verify_fail_open_questions_updated",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question"
+          ],
+          "event_ids": [
+            "evt_f22dceb8c74a"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": false,
+          "would_skip": true,
+          "live_skipped": true,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "llm_calls_saved_if_skip": 1,
+          "quality_compare": null
+        }
+      },
+      {
+        "round": 8,
+        "followup": true,
+        "research_input": {
+          "followup_questions": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ],
+          "rejected_commands": [
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "powershell",
+              "args": [
+                "-NoProfile",
+                "-NonInteractive",
+                "-Command",
+                "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+              ],
+              "reason": "verify_fail"
+            },
+            {
+              "command": "wmic",
+              "args": [
+                "cpu",
+                "get",
+                "Temperature"
+              ],
+              "reason": "verify_fail"
+            }
+          ],
+          "prior_failures": [],
+          "judge_reason": ""
+        },
+        "candidate_count": 1,
+        "verified_count": 1,
+        "verifier_failure": true,
+        "verified_runs": [
+          {
+            "ok": false,
+            "sample_count": 0,
+            "error": "PowerShell コマンドが許可された取得用途ではありません",
+            "confidence": "low",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "wmic cpu get Temperature"
+            ]
+          }
+        ],
+        "candidate_keys": [
+          {
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "wmic cpu get Temperature"
+            ]
+          }
+        ],
+        "web_hits": [
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+            "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "Sample scripts for system administration - PowerShell",
+            "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+            "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process"
+          },
+          {
+            "title": "システム管理のサンプル スクリプト - PowerShell",
+            "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration"
+          },
+          {
+            "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+            "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+            "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process"
+          }
+        ],
+        "satisfies_request": false,
+        "judge_grade": "B",
+        "judge_retry_ok": true,
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "reason": "usable_findings is empty and unresolved has verify failure.",
+        "rule_partial": {
+          "escalation": "verify_fail_open_questions_updated",
+          "routine": true,
+          "applied_ops": [
+            "add_open_question",
+            "ban_action"
+          ],
+          "event_ids": [
+            "evt_436872207d04"
+          ]
+        },
+        "global_judge_trigger": {
+          "needed": true,
+          "would_skip": false,
+          "live_skipped": false,
+          "audit_only": false,
+          "mode": "live_skip",
+          "triggers": [
+            "stagnation_risk"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "stagnation_risk",
+          "llm_calls_saved_if_skip": 0,
+          "quality_compare": null
+        }
+      }
+    ],
+    "research_history": [
+      {
+        "id": "evt_1d68b0bacb5a",
+        "ts": "2026-08-20T13:35:23.339277+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:40\n+ ... ct -Class Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (\\\\MASAKI3060PC\\...DeviceID=\"CPU0\":PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "stderr": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:40\n+ ... ct -Class Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (\\\\MASAKI3060PC\\...DeviceID=\"CPU0\":PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "sample": [],
+          "returncode": 1
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で確認できなかった。Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:40\n+ ... ct -Class Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (\\\\MASAKI3060PC\\...DeviceID=\"CPU0\":PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_96ec5350c78e",
+        "ts": "2026-08-20T13:35:26.254087+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1
+        }
+      },
+      {
+        "id": "evt_a7a85a9bdab8",
+        "ts": "2026-08-20T13:35:41.910715+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:46\n+ ... ClassName Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (Win32_Processor...iceID = \"CPU0\"):PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "stderr": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:46\n+ ... ClassName Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (Win32_Processor...iceID = \"CPU0\"):PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "sample": [],
+          "returncode": 1
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "実環境で確認できなかった。Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:46\n+ ... ClassName Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (Win32_Processor...iceID = \"CPU0\"):PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_ec995dd466bd",
+        "ts": "2026-08-20T13:35:41.910924+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2
+        }
+      },
+      {
+        "id": "evt_1d9ee5a94e8c",
+        "ts": "2026-08-20T13:35:56.608198+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "Get-WmiObject : 無効なクラスです \"Win32_Sensor\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq ' ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidType: (:) [Get-WmiObject], ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "stderr": "Get-WmiObject : 無効なクラスです \"Win32_Sensor\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq ' ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidType: (:) [Get-WmiObject], ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "sample": [],
+          "returncode": 1
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で確認できなかった。Get-WmiObject : 無効なクラスです \"Win32_Sensor\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq ' ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidType: (:) [Get-WmiObject], ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_25d7487fb2fe",
+        "ts": "2026-08-20T13:35:56.608229+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_c60e891c6f09",
+        "ts": "2026-08-20T13:35:56.608482+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3
+        }
+      },
+      {
+        "id": "evt_851c09404ee5",
+        "ts": "2026-08-20T13:36:12.323250+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "output 'status' の取得方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_f65c5d68e3d0",
+        "ts": "2026-08-20T13:36:12.323265+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_c535c7b0e7ac",
+        "ts": "2026-08-20T13:36:14.154275+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4
+        }
+      },
+      {
+        "id": "evt_996ca76aa13e",
+        "ts": "2026-08-20T13:36:29.838894+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "wmic",
+          "args": [
+            "cpu",
+            "get",
+            "Temperature"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "ノード - MASAKI3060PC\n\nエラー:\n\n説明 = 無効なクエリです",
+          "stderr": "ノード - MASAKI3060PC\n\nエラー:\n\n説明 = 無効なクエリです",
+          "sample": [],
+          "returncode": 2147749911
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で確認できなかった。ノード - MASAKI3060PC\n\nエラー:\n\n説明 = 無効なクエリです",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_75de039cec87",
+        "ts": "2026-08-20T13:36:29.838914+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_d49c3bf844bb",
+        "ts": "2026-08-20T13:36:31.219525+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure.",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5
+        }
+      },
+      {
+        "id": "evt_61eafb41821a",
+        "ts": "2026-08-20T13:36:31.219551+00:00",
+        "type": "question_resolved",
+        "action": {},
+        "result": {
+          "reason": "missing_resolved",
+          "finding_ref": null
+        },
+        "related_question_ids": [
+          "q_38d1d2f087"
+        ],
+        "metadata": {}
+      },
+      {
+        "id": "evt_c0e7ec1e00c6",
+        "ts": "2026-08-20T13:36:48.562905+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_b3584ededc05",
+        "ts": "2026-08-20T13:36:48.562985+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6
+        }
+      },
+      {
+        "id": "evt_f22dceb8c74a",
+        "ts": "2026-08-20T13:37:01.164145+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 7,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_6bc499e25a10",
+        "ts": "2026-08-20T13:37:01.164208+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 7
+        }
+      },
+      {
+        "id": "evt_436872207d04",
+        "ts": "2026-08-20T13:37:13.754929+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "wmic cpu get Temperature"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "PowerShell コマンドが許可された取得用途ではありません",
+          "stderr": "",
+          "sample": [],
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 8,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "実環境で確認できなかった。PowerShell コマンドが許可された取得用途ではありません",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_ed71eae64d14",
+        "ts": "2026-08-20T13:37:15.068417+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure.",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 8
+        }
+      }
+    ],
+    "global_judge_shadow": {
+      "mode": "live_skip",
+      "live_skip_enabled": true,
+      "audit_rate": 3,
+      "rounds_total": 8,
+      "judge_calls_actual": 4,
+      "would_skip_count": 5,
+      "live_skip_count": 4,
+      "audit_count": 1,
+      "llm_calls_saved_estimate": 5,
+      "llm_calls_saved_actual": 4,
+      "quality": {
+        "critical_miss_count": 0,
+        "false_continue_count": 0,
+        "satisfies_match_count": 1,
+        "missing_match_count": 0,
+        "decision_divergence_count": 0,
+        "audit_compared_count": 1
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "mode": "live_skip",
+          "needed": true,
+          "would_skip": false,
+          "triggers": [
+            "first_round"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "first_round",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 0,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "live_skipped": false,
+          "audit_only": false,
+          "llm_called": true,
+          "quality_compare": null,
+          "shadow_judgment": null,
+          "audit_judgment": null
+        },
+        {
+          "round": 2,
+          "mode": "live_skip",
+          "needed": false,
+          "would_skip": true,
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 1,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "skip_event_index": 1,
+          "audit_only": false,
+          "live_skipped": true,
+          "llm_called": false,
+          "quality_compare": null,
+          "shadow_judgment": {
+            "satisfies_request": false,
+            "reason": "live_skip:verify_fail_open_questions_updated",
+            "missing": [
+              "output 'status' の取得方法",
+              "WindowsのCPU温度を取得するための具体的な方法"
+            ],
+            "proposed_decisions": [],
+            "live_skip": true
+          },
+          "audit_judgment": null
+        },
+        {
+          "round": 3,
+          "mode": "live_skip",
+          "needed": false,
+          "would_skip": true,
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 1,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "skip_event_index": 2,
+          "audit_only": false,
+          "live_skipped": true,
+          "llm_called": false,
+          "quality_compare": null,
+          "shadow_judgment": {
+            "satisfies_request": false,
+            "reason": "live_skip:verify_fail_open_questions_updated",
+            "missing": [
+              "output 'status' の取得方法",
+              "WindowsのCPU温度を取得するための具体的な方法"
+            ],
+            "proposed_decisions": [],
+            "live_skip": true
+          },
+          "audit_judgment": null
+        },
+        {
+          "round": 4,
+          "mode": "live_skip",
+          "needed": false,
+          "would_skip": true,
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 1,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "skip_event_index": 3,
+          "audit_only": true,
+          "live_skipped": false,
+          "llm_called": true,
+          "quality_compare": {
+            "satisfies_request_match": true,
+            "missing_match": false,
+            "critical_miss": false,
+            "false_continue": false,
+            "shadow_satisfies": false,
+            "actual_satisfies": false,
+            "shadow_missing_count": 2,
+            "actual_missing_count": 1,
+            "decision_divergence": false,
+            "shadow_progress_action": "continue",
+            "actual_progress_action": "continue",
+            "shadow_progress_reason": "no_progress",
+            "actual_progress_reason": "new_information"
+          },
+          "shadow_judgment": {
+            "satisfies_request": false,
+            "reason": "live_skip:verify_fail_open_questions_updated",
+            "missing": [
+              "output 'status' の取得方法",
+              "WindowsのCPU温度を取得するための具体的な方法"
+            ],
+            "proposed_decisions": [],
+            "live_skip": true
+          },
+          "audit_judgment": {
+            "satisfies_request": false,
+            "reason": "The request asks for a tool to retrieve CPU temperature on Windows, but the usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request. Do not ask to investigate commands, scripts, or the correct method.",
+            "missing": [
+              "WindowsのCPU温度を取得するための具体的な方法"
+            ],
+            "proposed_decisions": []
+          }
+        },
+        {
+          "round": 5,
+          "mode": "live_skip",
+          "needed": true,
+          "would_skip": false,
+          "triggers": [
+            "stagnation_risk"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "stagnation_risk",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 0,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "live_skipped": false,
+          "audit_only": false,
+          "llm_called": true,
+          "quality_compare": null,
+          "shadow_judgment": null,
+          "audit_judgment": null
+        },
+        {
+          "round": 6,
+          "mode": "live_skip",
+          "needed": false,
+          "would_skip": true,
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 1,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "skip_event_index": 4,
+          "audit_only": false,
+          "live_skipped": true,
+          "llm_called": false,
+          "quality_compare": null,
+          "shadow_judgment": {
+            "satisfies_request": false,
+            "reason": "live_skip:verify_fail_open_questions_updated",
+            "missing": [
+              "WindowsのCPU温度を取得するための具体的な方法"
+            ],
+            "proposed_decisions": [],
+            "live_skip": true
+          },
+          "audit_judgment": null
+        },
+        {
+          "round": 7,
+          "mode": "live_skip",
+          "needed": false,
+          "would_skip": true,
+          "triggers": [],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "verify_fail_open_questions_updated",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 1,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "skip_event_index": 5,
+          "audit_only": false,
+          "live_skipped": true,
+          "llm_called": false,
+          "quality_compare": null,
+          "shadow_judgment": {
+            "satisfies_request": false,
+            "reason": "live_skip:verify_fail_open_questions_updated",
+            "missing": [
+              "WindowsのCPU温度を取得するための具体的な方法"
+            ],
+            "proposed_decisions": [],
+            "live_skip": true
+          },
+          "audit_judgment": null
+        },
+        {
+          "round": 8,
+          "mode": "live_skip",
+          "needed": true,
+          "would_skip": false,
+          "triggers": [
+            "stagnation_risk"
+          ],
+          "skip_triggers": [
+            "routine_verify_fail_only"
+          ],
+          "primary_reason": "stagnation_risk",
+          "escalation_reason": "verify_fail_open_questions_updated",
+          "escalation_routine": true,
+          "llm_calls_saved_if_skip": 0,
+          "live_skip_enabled": true,
+          "audit_rate": 3,
+          "live_skipped": false,
+          "audit_only": false,
+          "llm_called": true,
+          "quality_compare": null,
+          "shadow_judgment": null,
+          "audit_judgment": null
+        }
+      ],
+      "observation": {
+        "judge_reduction_rate": 0.5,
+        "judge_call_rate": 0.5,
+        "rounds": 8,
+        "baseline_rounds": null,
+        "extra_rounds": null,
+        "would_skip_count": 5,
+        "live_skip_count": 4,
+        "audit_count": 1,
+        "critical_miss_count": 0,
+        "decision_divergence_count": 0
+      }
+    },
+    "context_budget_shadow": {
+      "mode": "live",
+      "shadow_enabled": true,
+      "headroom_chars": 800,
+      "calls": [
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 3374,
+          "effective_slack": 2574,
+          "headroom_gate_ok": true,
+          "legacy_chars": 4287,
+          "allocated_chars": 4306,
+          "legacy_actual_headroom": 3393,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 2471
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 2490
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 156,
+            "current_state": 478,
+            "open_questions": 2,
+            "recent_events": 40,
+            "summary": 19,
+            "action_local": 911,
+            "safety": 873,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 156,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 478,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 2,
+              "core": true,
+              "count": 0
+            },
+            "recent_events": {
+              "chars": 40,
+              "core": false,
+              "retrieve_count": 0
+            },
+            "action_local": {
+              "chars": 911,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 873,
+              "core": false
+            },
+            "summary": {
+              "chars": 19,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 0,
+          "usable_findings_count": null,
+          "open_questions_count": 0,
+          "recall_mode": "fresh",
+          "recalled_event_count": 0,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 156,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 478,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 2,
+                "core": true,
+                "count": 0
+              },
+              "recent_events": {
+                "chars": 40,
+                "core": false,
+                "retrieve_count": 0
+              },
+              "action_local": {
+                "chars": 911,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 873,
+                "core": false
+              },
+              "summary": {
+                "chars": 19,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 0,
+            "prior_failures_count": 0,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "fresh",
+            "recalled_event_count": 0,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 0,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 3374,
+          "legacy_headroom": 3393
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2894,
+          "effective_slack": 2094,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5301,
+          "allocated_chars": 4786,
+          "legacy_actual_headroom": 2379,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 1794
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 1279
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 656,
+            "summary": 275,
+            "escalation_evidence": 28,
+            "usable_findings": 22,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 656,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 22,
+              "core": true,
+              "count": 0
+            },
+            "escalation_evidence": {
+              "chars": 28,
+              "core": false
+            },
+            "summary": {
+              "chars": 275,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 1
+            }
+          },
+          "omitted_categories": [
+            "unresolved_duplicate"
+          ],
+          "retrieve_count": 1,
+          "usable_findings_count": 0,
+          "open_questions_count": 1,
+          "recall_mode": "escalation",
+          "recalled_event_count": 1,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 656,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 22,
+                "core": true,
+                "count": 0
+              },
+              "escalation_evidence": {
+                "chars": 28,
+                "core": false
+              },
+              "summary": {
+                "chars": 275,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 1
+              }
+            },
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 1,
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "unresolved_in_materials": false,
+            "open_questions_count": 1,
+            "usable_findings_count": 0,
+            "recall_mode": "escalation",
+            "recalled_event_count": 1
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2894,
+          "legacy_headroom": 2379
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2446,
+          "effective_slack": 1646,
+          "headroom_gate_ok": true,
+          "legacy_chars": 4973,
+          "allocated_chars": 5234,
+          "legacy_actual_headroom": 2707,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3157
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 3418
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 207,
+            "current_state": 679,
+            "open_questions": 203,
+            "recent_events": 500,
+            "summary": 19,
+            "action_local": 946,
+            "safety": 1054,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 207,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 679,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 203,
+              "core": true,
+              "count": 2
+            },
+            "recent_events": {
+              "chars": 500,
+              "core": false,
+              "retrieve_count": 1
+            },
+            "action_local": {
+              "chars": 946,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1054,
+              "core": false
+            },
+            "summary": {
+              "chars": 19,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 1,
+          "usable_findings_count": null,
+          "open_questions_count": 2,
+          "recall_mode": "fresh",
+          "recalled_event_count": 1,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 207,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 679,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 203,
+                "core": true,
+                "count": 2
+              },
+              "recent_events": {
+                "chars": 500,
+                "core": false,
+                "retrieve_count": 1
+              },
+              "action_local": {
+                "chars": 946,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1054,
+                "core": false
+              },
+              "summary": {
+                "chars": 19,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 1,
+            "prior_failures_count": 1,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "fresh",
+            "recalled_event_count": 1,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 2,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2446,
+          "legacy_headroom": 2707
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1702,
+          "effective_slack": 902,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5336,
+          "allocated_chars": 5978,
+          "legacy_actual_headroom": 2344,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3520
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4162
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 307,
+            "current_state": 697,
+            "open_questions": 221,
+            "recent_events": 506,
+            "summary": 63,
+            "action_local": 968,
+            "safety": 1503,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 307,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 697,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 221,
+              "core": true,
+              "count": 2
+            },
+            "recent_events": {
+              "chars": 506,
+              "core": false,
+              "retrieve_count": 1
+            },
+            "action_local": {
+              "chars": 968,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1503,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 1,
+          "usable_findings_count": null,
+          "open_questions_count": 2,
+          "recall_mode": "repeating",
+          "recalled_event_count": 1,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 307,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 697,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 221,
+                "core": true,
+                "count": 2
+              },
+              "recent_events": {
+                "chars": 506,
+                "core": false,
+                "retrieve_count": 1
+              },
+              "action_local": {
+                "chars": 968,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1503,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 1,
+            "prior_failures_count": 1,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "repeating",
+            "recalled_event_count": 1,
+            "pivot_required": true,
+            "stuck_error_class": "type_convert",
+            "omitted_categories": [],
+            "open_questions_count": 2,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1702,
+          "legacy_headroom": 2344
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1667,
+          "effective_slack": 867,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5602,
+          "allocated_chars": 6013,
+          "legacy_actual_headroom": 2078,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3786
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4197
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 307,
+            "current_state": 735,
+            "open_questions": 259,
+            "recent_events": 685,
+            "summary": 19,
+            "action_local": 968,
+            "safety": 1470,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 307,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 735,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 259,
+              "core": true,
+              "count": 2
+            },
+            "recent_events": {
+              "chars": 685,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 968,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1470,
+              "core": false
+            },
+            "summary": {
+              "chars": 19,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 2,
+          "recall_mode": "related",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 307,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 735,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 259,
+                "core": true,
+                "count": 2
+              },
+              "recent_events": {
+                "chars": 685,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 968,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1470,
+                "core": false
+              },
+              "summary": {
+                "chars": 19,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "related",
+            "recalled_event_count": 2,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 2,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1667,
+          "legacy_headroom": 2078
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1391,
+          "effective_slack": 591,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5878,
+          "allocated_chars": 6289,
+          "legacy_actual_headroom": 1802,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 4062
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4473
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 307,
+            "current_state": 735,
+            "open_questions": 259,
+            "recent_events": 685,
+            "summary": 19,
+            "action_local": 968,
+            "safety": 1470,
+            "extra": 274
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 307,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 735,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 259,
+              "core": true,
+              "count": 2
+            },
+            "recent_events": {
+              "chars": 685,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 968,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1470,
+              "core": false
+            },
+            "summary": {
+              "chars": 19,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 2,
+          "recall_mode": "related",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 307,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 735,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 259,
+                "core": true,
+                "count": 2
+              },
+              "recent_events": {
+                "chars": 685,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 968,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1470,
+                "core": false
+              },
+              "summary": {
+                "chars": 19,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "related",
+            "recalled_event_count": 2,
+            "pivot_required": false,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 2,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1391,
+          "legacy_headroom": 1802
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2450,
+          "effective_slack": 1650,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5519,
+          "allocated_chars": 5230,
+          "legacy_actual_headroom": 2161,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 2012
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 1723
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 845,
+            "summary": 275,
+            "escalation_evidence": 28,
+            "usable_findings": 22,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 845,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 22,
+              "core": true,
+              "count": 0
+            },
+            "escalation_evidence": {
+              "chars": 28,
+              "core": false
+            },
+            "summary": {
+              "chars": 275,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 2
+            }
+          },
+          "omitted_categories": [
+            "unresolved_duplicate"
+          ],
+          "retrieve_count": 3,
+          "usable_findings_count": 0,
+          "open_questions_count": 2,
+          "recall_mode": "escalation",
+          "recalled_event_count": 3,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 845,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 22,
+                "core": true,
+                "count": 0
+              },
+              "escalation_evidence": {
+                "chars": 28,
+                "core": false
+              },
+              "summary": {
+                "chars": 275,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 2
+              }
+            },
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 3,
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "unresolved_in_materials": false,
+            "open_questions_count": 2,
+            "usable_findings_count": 0,
+            "recall_mode": "escalation",
+            "recalled_event_count": 3
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2450,
+          "legacy_headroom": 2161
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1506,
+          "effective_slack": 706,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5640,
+          "allocated_chars": 6174,
+          "legacy_actual_headroom": 2040,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3824
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4358
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 307,
+            "current_state": 773,
+            "open_questions": 297,
+            "recent_events": 430,
+            "summary": 63,
+            "action_local": 968,
+            "safety": 1737,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 307,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 773,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 297,
+              "core": true,
+              "count": 2
+            },
+            "recent_events": {
+              "chars": 430,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 968,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1737,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 2,
+          "recall_mode": "repeating",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 307,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 773,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 297,
+                "core": true,
+                "count": 2
+              },
+              "recent_events": {
+                "chars": 430,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 968,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1737,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "repeating",
+            "recalled_event_count": 2,
+            "pivot_required": true,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 2,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1506,
+          "legacy_headroom": 2040
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1230,
+          "effective_slack": 430,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5916,
+          "allocated_chars": 6450,
+          "legacy_actual_headroom": 1764,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 4100
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4634
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 307,
+            "current_state": 773,
+            "open_questions": 297,
+            "recent_events": 430,
+            "summary": 63,
+            "action_local": 968,
+            "safety": 1737,
+            "extra": 274
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 307,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 773,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 297,
+              "core": true,
+              "count": 2
+            },
+            "recent_events": {
+              "chars": 430,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 968,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1737,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 2,
+          "recall_mode": "repeating",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 307,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 773,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 297,
+                "core": true,
+                "count": 2
+              },
+              "recent_events": {
+                "chars": 430,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 968,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1737,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "repeating",
+            "recalled_event_count": 2,
+            "pivot_required": true,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 2,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1230,
+          "legacy_headroom": 1764
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2500,
+          "effective_slack": 1700,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5613,
+          "allocated_chars": 5180,
+          "legacy_actual_headroom": 2067,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 2106
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 1673
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 883,
+            "summary": 275,
+            "escalation_evidence": 28,
+            "usable_findings": 22,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 883,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 22,
+              "core": true,
+              "count": 0
+            },
+            "escalation_evidence": {
+              "chars": 28,
+              "core": false
+            },
+            "summary": {
+              "chars": 275,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 2
+            }
+          },
+          "omitted_categories": [
+            "unresolved_duplicate"
+          ],
+          "retrieve_count": 3,
+          "usable_findings_count": 0,
+          "open_questions_count": 2,
+          "recall_mode": "escalation",
+          "recalled_event_count": 3,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 883,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 22,
+                "core": true,
+                "count": 0
+              },
+              "escalation_evidence": {
+                "chars": 28,
+                "core": false
+              },
+              "summary": {
+                "chars": 275,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 2
+              }
+            },
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 3,
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "unresolved_in_materials": false,
+            "open_questions_count": 2,
+            "usable_findings_count": 0,
+            "recall_mode": "escalation",
+            "recalled_event_count": 3
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2500,
+          "legacy_headroom": 2067
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1693,
+          "effective_slack": 893,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5345,
+          "allocated_chars": 5987,
+          "legacy_actual_headroom": 2335,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3529
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4171
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 207,
+            "current_state": 647,
+            "open_questions": 171,
+            "recent_events": 436,
+            "summary": 78,
+            "action_local": 946,
+            "safety": 1784,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 207,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 647,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 171,
+              "core": true,
+              "count": 1
+            },
+            "recent_events": {
+              "chars": 436,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 946,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1784,
+              "core": false
+            },
+            "summary": {
+              "chars": 78,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 1,
+          "recall_mode": "repeating",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 207,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 647,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 171,
+                "core": true,
+                "count": 1
+              },
+              "recent_events": {
+                "chars": 436,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 946,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1784,
+                "core": false
+              },
+              "summary": {
+                "chars": 78,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "repeating",
+            "recalled_event_count": 2,
+            "pivot_required": true,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 1,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1693,
+          "legacy_headroom": 2335
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1464,
+          "effective_slack": 664,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5574,
+          "allocated_chars": 6216,
+          "legacy_actual_headroom": 2106,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3758
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4400
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 207,
+            "current_state": 647,
+            "open_questions": 171,
+            "recent_events": 436,
+            "summary": 78,
+            "action_local": 946,
+            "safety": 1784,
+            "extra": 227
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 207,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 647,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 171,
+              "core": true,
+              "count": 1
+            },
+            "recent_events": {
+              "chars": 436,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 946,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1784,
+              "core": false
+            },
+            "summary": {
+              "chars": 78,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 1,
+          "recall_mode": "repeating",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 207,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 647,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 171,
+                "core": true,
+                "count": 1
+              },
+              "recent_events": {
+                "chars": 436,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 946,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1784,
+                "core": false
+              },
+              "summary": {
+                "chars": 78,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "repeating",
+            "recalled_event_count": 2,
+            "pivot_required": true,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 1,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1464,
+          "legacy_headroom": 2106
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1689,
+          "effective_slack": 889,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5364,
+          "allocated_chars": 5991,
+          "legacy_actual_headroom": 2316,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3548
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4175
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 207,
+            "current_state": 666,
+            "open_questions": 190,
+            "recent_events": 436,
+            "summary": 63,
+            "action_local": 946,
+            "safety": 1784,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 207,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 666,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 190,
+              "core": true,
+              "count": 1
+            },
+            "recent_events": {
+              "chars": 436,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 946,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1784,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 1,
+          "recall_mode": "repeating",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 207,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 666,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 190,
+                "core": true,
+                "count": 1
+              },
+              "recent_events": {
+                "chars": 436,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 946,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1784,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "repeating",
+            "recalled_event_count": 2,
+            "pivot_required": true,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 1,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1689,
+          "legacy_headroom": 2316
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1460,
+          "effective_slack": 660,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5593,
+          "allocated_chars": 6220,
+          "legacy_actual_headroom": 2087,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3777
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4404
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 207,
+            "current_state": 666,
+            "open_questions": 190,
+            "recent_events": 436,
+            "summary": 63,
+            "action_local": 946,
+            "safety": 1784,
+            "extra": 227
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 207,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 666,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 190,
+              "core": true,
+              "count": 1
+            },
+            "recent_events": {
+              "chars": 436,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 946,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1784,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 1,
+          "recall_mode": "repeating",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 207,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 666,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 190,
+                "core": true,
+                "count": 1
+              },
+              "recent_events": {
+                "chars": 436,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 946,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1784,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "repeating",
+            "recalled_event_count": 2,
+            "pivot_required": true,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 1,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1460,
+          "legacy_headroom": 2087
+        },
+        {
+          "builder": "build_web_candidate_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 1670,
+          "effective_slack": 870,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5383,
+          "allocated_chars": 6010,
+          "legacy_actual_headroom": 2297,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 1816,
+            "user": 3567
+          },
+          "allocated_breakdown": {
+            "system": 1816,
+            "user": 4194
+          },
+          "allocated_sections": {
+            "system": 1705,
+            "goal": 207,
+            "current_state": 685,
+            "open_questions": 209,
+            "recent_events": 436,
+            "summary": 63,
+            "action_local": 946,
+            "safety": 1784,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 1705,
+              "core": true
+            },
+            "goal": {
+              "chars": 207,
+              "core": true,
+              "keys": [
+                "subject",
+                "items",
+                "followup_questions"
+              ]
+            },
+            "current_state": {
+              "chars": 685,
+              "core": true
+            },
+            "open_questions": {
+              "chars": 209,
+              "core": true,
+              "count": 1
+            },
+            "recent_events": {
+              "chars": 436,
+              "core": false,
+              "retrieve_count": 2
+            },
+            "action_local": {
+              "chars": 946,
+              "core": false,
+              "search_results_count": 3
+            },
+            "safety": {
+              "chars": 1784,
+              "core": false
+            },
+            "summary": {
+              "chars": 63,
+              "core": false
+            }
+          },
+          "omitted_categories": [],
+          "retrieve_count": 2,
+          "usable_findings_count": null,
+          "open_questions_count": 1,
+          "recall_mode": "repeating",
+          "recalled_event_count": 2,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 1705,
+                "core": true
+              },
+              "goal": {
+                "chars": 207,
+                "core": true,
+                "keys": [
+                  "subject",
+                  "items",
+                  "followup_questions"
+                ]
+              },
+              "current_state": {
+                "chars": 685,
+                "core": true
+              },
+              "open_questions": {
+                "chars": 209,
+                "core": true,
+                "count": 1
+              },
+              "recent_events": {
+                "chars": 436,
+                "core": false,
+                "retrieve_count": 2
+              },
+              "action_local": {
+                "chars": 946,
+                "core": false,
+                "search_results_count": 3
+              },
+              "safety": {
+                "chars": 1784,
+                "core": false
+              },
+              "summary": {
+                "chars": 63,
+                "core": false
+              }
+            },
+            "omitted_categories": [],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "recent_limit": 3,
+            "search_limit": 3,
+            "retrieve_count": 2,
+            "prior_failures_count": 2,
+            "search_results_count": 3,
+            "prior_failures_source": "memory_recall",
+            "recall_mode": "repeating",
+            "recalled_event_count": 2,
+            "pivot_required": true,
+            "stuck_error_class": null,
+            "omitted_categories": [],
+            "open_questions_count": 1,
+            "usable_findings_count": null
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 1670,
+          "legacy_headroom": 2297
+        },
+        {
+          "builder": "build_research_judge_messages",
+          "mode": "live",
+          "budget_total": 7680,
+          "effective_budget": 6880,
+          "reserved_headroom": 800,
+          "actual_headroom": 2612,
+          "effective_slack": 1812,
+          "headroom_gate_ok": true,
+          "legacy_chars": 5126,
+          "allocated_chars": 5068,
+          "legacy_actual_headroom": 2554,
+          "legacy_overflow": false,
+          "allocated_overflow": false,
+          "legacy_breakdown": {
+            "system": 3507,
+            "user": 1619
+          },
+          "allocated_breakdown": {
+            "system": 3507,
+            "user": 1561
+          },
+          "allocated_sections": {
+            "system": 3507,
+            "goal_state": 776,
+            "summary": 275,
+            "escalation_evidence": 28,
+            "usable_findings": 22,
+            "extra": 0
+          },
+          "category_usage": {
+            "system": {
+              "chars": 3507,
+              "core": true
+            },
+            "goal_state": {
+              "chars": 776,
+              "core": true
+            },
+            "usable_findings": {
+              "chars": 22,
+              "core": true,
+              "count": 0
+            },
+            "escalation_evidence": {
+              "chars": 28,
+              "core": false
+            },
+            "summary": {
+              "chars": 275,
+              "core": false
+            },
+            "open_questions": {
+              "chars": null,
+              "core": true,
+              "count": 1
+            }
+          },
+          "omitted_categories": [
+            "unresolved_duplicate"
+          ],
+          "retrieve_count": 3,
+          "usable_findings_count": 0,
+          "open_questions_count": 1,
+          "recall_mode": "escalation",
+          "recalled_event_count": 3,
+          "reduction_level": 0,
+          "reduction_label": "baseline",
+          "defer": false,
+          "overflow_action": "allocated",
+          "allocation": {
+            "categories": {
+              "system": {
+                "chars": 3507,
+                "core": true
+              },
+              "goal_state": {
+                "chars": 776,
+                "core": true
+              },
+              "usable_findings": {
+                "chars": 22,
+                "core": true,
+                "count": 0
+              },
+              "escalation_evidence": {
+                "chars": 28,
+                "core": false
+              },
+              "summary": {
+                "chars": 275,
+                "core": false
+              },
+              "open_questions": {
+                "chars": null,
+                "core": true,
+                "count": 1
+              }
+            },
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "transport": "single_message",
+            "core_protected": true
+          },
+          "allocation_meta": {
+            "source": "allocated",
+            "reduction_label": "baseline",
+            "insufficient_keep": 5,
+            "retrieve_count": 3,
+            "omitted_categories": [
+              "unresolved_duplicate"
+            ],
+            "unresolved_in_materials": false,
+            "open_questions_count": 1,
+            "usable_findings_count": 0,
+            "recall_mode": "escalation",
+            "recalled_event_count": 3
+          },
+          "budget_effective": 6880,
+          "headroom_reserved": 800,
+          "allocated_headroom": 2612,
+          "legacy_headroom": 2554
+        }
+      ],
+      "summary": {
+        "call_count": 16,
+        "legacy_chars_total": 86450,
+        "allocated_chars_total": 91132,
+        "legacy_chars_max": 5916,
+        "allocated_chars_max": 6450,
+        "legacy_overflow_count": 0,
+        "allocated_overflow_count": 0,
+        "reserved_headroom": 800,
+        "actual_headroom_min": 1230,
+        "actual_headroom_max": 3374,
+        "headroom_gate_ok": true,
+        "headroom_violation_count": 0,
+        "reduction_applied_count": 0,
+        "defer_count": 0
+      }
+    },
+    "generated_code": null,
+    "repair": "skipped"
+  },
+  "state": {
+    "task": "WindowsのCPU温度を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "温度",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "WindowsのCPU温度",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "C",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-120",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "open_questions": [
+      {
+        "id": "q_b9d06567a1",
+        "text": "WindowsのCPU温度を取得するための具体的な方法",
+        "status": "open",
+        "related_events": [
+          "evt_a7a85a9bdab8",
+          "evt_25d7487fb2fe",
+          "evt_f65c5d68e3d0",
+          "evt_75de039cec87",
+          "evt_c0e7ec1e00c6",
+          "evt_f22dceb8c74a",
+          "evt_436872207d04"
+        ]
+      }
+    ],
+    "unresolved": [
+      {
+        "kind": "output",
+        "question": "WindowsのCPU温度を取得するための具体的な方法",
+        "confidence": "low",
+        "source": "state",
+        "finding": "event:evt_436872207d04"
+      }
+    ],
+    "research_history": [
+      {
+        "id": "evt_1d68b0bacb5a",
+        "ts": "2026-08-20T13:35:23.339277+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:40\n+ ... ct -Class Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (\\\\MASAKI3060PC\\...DeviceID=\"CPU0\":PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "stderr": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:40\n+ ... ct -Class Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (\\\\MASAKI3060PC\\...DeviceID=\"CPU0\":PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "sample": [],
+          "returncode": 1
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で確認できなかった。Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:40\n+ ... ct -Class Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (\\\\MASAKI3060PC\\...DeviceID=\"CPU0\":PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_96ec5350c78e",
+        "ts": "2026-08-20T13:35:26.254087+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 1
+        }
+      },
+      {
+        "id": "evt_a7a85a9bdab8",
+        "ts": "2026-08-20T13:35:41.910715+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:46\n+ ... ClassName Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (Win32_Processor...iceID = \"CPU0\"):PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "stderr": "Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:46\n+ ... ClassName Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (Win32_Processor...iceID = \"CPU0\"):PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "sample": [],
+          "returncode": 1
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "実環境で確認できなかった。Select-Object : プロパティ \"Temperature\" が見つかりません。\n発生場所 行:1 文字:46\n+ ... ClassName Win32_Processor | Select-Object -ExpandProperty Temperature\n+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidArgument: (Win32_Processor...iceID = \"CPU0\"):PSObject) [Select-Object]、PSArgument \n   Exception\n    + FullyQualifiedErrorId : ExpandPropertyNotFound,Microsoft.PowerShell.Commands.SelectObjectCommand",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_ec995dd466bd",
+        "ts": "2026-08-20T13:35:41.910924+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 2
+        }
+      },
+      {
+        "id": "evt_1d9ee5a94e8c",
+        "ts": "2026-08-20T13:35:56.608198+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "Get-WmiObject : 無効なクラスです \"Win32_Sensor\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq ' ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidType: (:) [Get-WmiObject], ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "stderr": "Get-WmiObject : 無効なクラスです \"Win32_Sensor\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq ' ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidType: (:) [Get-WmiObject], ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "sample": [],
+          "returncode": 1
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で確認できなかった。Get-WmiObject : 無効なクラスです \"Win32_Sensor\"\n発生場所 行:1 文字:1\n+ Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq ' ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidType: (:) [Get-WmiObject], ManagementException\n    + FullyQualifiedErrorId : GetWMIManagementException,Microsoft.PowerShell.Commands.GetWmiObjectCommand",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_25d7487fb2fe",
+        "ts": "2026-08-20T13:35:56.608229+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_c60e891c6f09",
+        "ts": "2026-08-20T13:35:56.608482+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 3
+        }
+      },
+      {
+        "id": "evt_851c09404ee5",
+        "ts": "2026-08-20T13:36:12.323250+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "output 'status' の取得方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_f65c5d68e3d0",
+        "ts": "2026-08-20T13:36:12.323265+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_c535c7b0e7ac",
+        "ts": "2026-08-20T13:36:14.154275+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "output 'status' の取得方法",
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 4
+        }
+      },
+      {
+        "id": "evt_996ca76aa13e",
+        "ts": "2026-08-20T13:36:29.838894+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "wmic",
+          "args": [
+            "cpu",
+            "get",
+            "Temperature"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "ノード - MASAKI3060PC\n\nエラー:\n\n説明 = 無効なクエリです",
+          "stderr": "ノード - MASAKI3060PC\n\nエラー:\n\n説明 = 無効なクエリです",
+          "sample": [],
+          "returncode": 2147749911
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "output 'status' の取得方法",
+          "finding": "実環境で確認できなかった。ノード - MASAKI3060PC\n\nエラー:\n\n説明 = 無効なクエリです",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_75de039cec87",
+        "ts": "2026-08-20T13:36:29.838914+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_d49c3bf844bb",
+        "ts": "2026-08-20T13:36:31.219525+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure.",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 5
+        }
+      },
+      {
+        "id": "evt_61eafb41821a",
+        "ts": "2026-08-20T13:36:31.219551+00:00",
+        "type": "question_resolved",
+        "action": {},
+        "result": {
+          "reason": "missing_resolved",
+          "finding_ref": null
+        },
+        "related_question_ids": [
+          "q_38d1d2f087"
+        ],
+        "metadata": {}
+      },
+      {
+        "id": "evt_c0e7ec1e00c6",
+        "ts": "2026-08-20T13:36:48.562905+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_b3584ededc05",
+        "ts": "2026-08-20T13:36:48.562985+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 6
+        }
+      },
+      {
+        "id": "evt_f22dceb8c74a",
+        "ts": "2026-08-20T13:37:01.164145+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": null,
+          "args": []
+        },
+        "result": {
+          "ok": false,
+          "error": "",
+          "stderr": "",
+          "sample": null,
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 7,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "Web調査後も取得方法を実環境で確認できなかった",
+          "confidence": "low",
+          "source": "local"
+        }
+      },
+      {
+        "id": "evt_6bc499e25a10",
+        "ts": "2026-08-20T13:37:01.164208+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "live_skip:verify_fail_open_questions_updated",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 7
+        }
+      },
+      {
+        "id": "evt_436872207d04",
+        "ts": "2026-08-20T13:37:13.754929+00:00",
+        "type": "verify_fail",
+        "action": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "wmic cpu get Temperature"
+          ]
+        },
+        "result": {
+          "ok": false,
+          "error": "PowerShell コマンドが許可された取得用途ではありません",
+          "stderr": "",
+          "sample": [],
+          "returncode": null
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 8,
+          "question": "WindowsのCPU温度を取得するための具体的な方法",
+          "finding": "実環境で確認できなかった。PowerShell コマンドが許可された取得用途ではありません",
+          "confidence": "low",
+          "source": "web"
+        }
+      },
+      {
+        "id": "evt_ed71eae64d14",
+        "ts": "2026-08-20T13:37:15.068417+00:00",
+        "type": "judge",
+        "action": {},
+        "result": {
+          "satisfies_request": false,
+          "reason": "usable_findings is empty and unresolved has verify failure.",
+          "missing": [
+            "WindowsのCPU温度を取得するための具体的な方法"
+          ]
+        },
+        "related_question_ids": [],
+        "metadata": {
+          "round": 8
+        }
+      }
+    ],
+    "banned_actions": [
+      {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-Command",
+          "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+        ],
+        "event_id": "evt_1d68b0bacb5a",
+        "reason": "verify_fail"
+      },
+      {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-Command",
+          "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+        ],
+        "event_id": "evt_a7a85a9bdab8",
+        "reason": "verify_fail"
+      },
+      {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-Command",
+          "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+        ],
+        "event_id": "evt_1d9ee5a94e8c",
+        "reason": "verify_fail"
+      },
+      {
+        "command": "wmic",
+        "args": [
+          "cpu",
+          "get",
+          "Temperature"
+        ],
+        "event_id": "evt_996ca76aa13e",
+        "reason": "verify_fail"
+      },
+      {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-Command",
+          "wmic cpu get Temperature"
+        ],
+        "event_id": "evt_436872207d04",
+        "reason": "verify_fail"
+      }
+    ]
+  },
+  "timing": {
+    "total_seconds": 135.9,
+    "llm_seconds": 74.1,
+    "machine_seconds": 61.8,
+    "research_seconds": 116.1,
+    "judge_seconds": 7.4,
+    "implementation_seconds": 0.0,
+    "repair_seconds": 0.0,
+    "validation_seconds": 0.0,
+    "llm_calls": 18
+  },
+  "trace": [
+    {
+      "phase": "proposal",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "proposals"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": [
+          "get_cpu_status"
+        ]
+      }
+    },
+    {
+      "phase": "proposal_retry",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "proposals"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": [
+          "get_cpu_status"
+        ]
+      }
+    },
+    {
+      "phase": "research_1",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "WMI クラスから取得",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          },
+          {
+            "route": "PowerShell コマンドレットから取得",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          },
+          {
+            "route": "外部ツールを使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_1",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "satisfies_request",
+          "reason",
+          "missing",
+          "proposed_decisions"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request (for example total physical memory, used memory).",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_2",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "WMI クラスから直接取得",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          },
+          {
+            "route": "CimInstance を使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          },
+          {
+            "route": "外部ツールを使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Invoke-Expression 'powershell -NoProfile -NonInteractive -Command Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature'"
+            ],
+            "question": "",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_2",
+      "error": null,
+      "parsed": null
+    },
+    {
+      "phase": "research_3",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "WMIクラスから直接取得",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          },
+          {
+            "route": "外部ツールを使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ]
+          },
+          {
+            "route": "温度センサーを使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Sensor | Where-Object {$_.SensorType -eq 'CPU Temperature'} | Select-Object -ExpandProperty Reading"
+            ]
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_3",
+      "error": null,
+      "parsed": null
+    },
+    {
+      "phase": "research_4",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "Using WMI to get CPU temperature",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_4",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "satisfies_request",
+          "reason",
+          "missing",
+          "proposed_decisions"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": false,
+        "reason": "The request asks for a tool to retrieve CPU temperature on Windows, but the usable_findings is empty and unresolved has verify failure. In missing, name unconfirmed measurement targets needed for the request. Do not ask to investigate commands, scripts, or the correct method.",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_5",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "Using WMIC to get CPU temperature",
+            "command": "wmic",
+            "args": [
+              "cpu",
+              "get",
+              "Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_5",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "satisfies_request",
+          "reason",
+          "missing",
+          "proposed_decisions"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure.",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_6",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "Get-CimInstance を使用して CPU 温度を取得",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "WindowsのCPU温度を取得するための具体的な方法",
+            "output_key": "status"
+          },
+          {
+            "route": "WMIC を使用して CPU 温度を取得",
+            "command": "wmic",
+            "args": [
+              "cpu",
+              "get",
+              "Temperature"
+            ],
+            "question": "WindowsのCPU温度を取得するための具体的な方法",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_6",
+      "error": null,
+      "parsed": null
+    },
+    {
+      "phase": "research_7",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "WMIクラスから直接取得",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          },
+          {
+            "route": "外部ツールを使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_7",
+      "error": null,
+      "parsed": null
+    },
+    {
+      "phase": "research_8",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "candidates"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": [
+          {
+            "route": "Get-CimInstance を使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "WindowsのCPU温度を取得するための具体的な方法",
+            "output_key": "status"
+          },
+          {
+            "route": "WMIC を使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "wmic cpu get Temperature"
+            ],
+            "question": "WindowsのCPU温度を取得するための具体的な方法",
+            "output_key": "status"
+          },
+          {
+            "route": "外部ツールを使用",
+            "command": "powershell",
+            "args": [
+              "-NoProfile",
+              "-NonInteractive",
+              "-Command",
+              "Get-WmiObject -Class Win32_Processor | Select-Object -ExpandProperty Temperature"
+            ],
+            "question": "WindowsのCPU温度を取得するための具体的な方法",
+            "output_key": "status"
+          }
+        ],
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": []
+      }
+    },
+    {
+      "phase": "research_judge_8",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "satisfies_request",
+          "reason",
+          "missing",
+          "proposed_decisions"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": false,
+        "reason": "usable_findings is empty and unresolved has verify failure.",
+        "missing": [
+          "WindowsのCPU温度を取得するための具体的な方法"
+        ],
+        "proposal_names": []
+      }
+    }
+  ],
+  "pass": false,
+  "fail_stage": "research",
+  "error": "stagnation",
+  "request": "WindowsのCPU温度を取得するToolを作ってください。"
+}

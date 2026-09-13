@@ -1,0 +1,49 @@
+{
+  "closure_id": "test_safety_s4_1_human_decision_closure",
+  "closed_at": "2026-09-12",
+  "s4_architecture_approved": true,
+  "s4_1_code_changes": false,
+  "s5_entry_allowed": true,
+  "auto_start_s5": false,
+  "decisions": {
+    "safety_authorization_identity": {
+      "binding_fields": ["action_id", "plan_fingerprint", "evaluation_ref", "gate_decision"],
+      "fingerprint_includes_plan_safety_fields": true,
+      "fingerprint_excludes_host_state": true,
+      "stale_pass_invalidation": "fingerprint_mismatch_requires_reevaluation"
+    },
+    "original_action_preservation": {
+      "regenerate_via_llm": false,
+      "carrier": "ActionRecord"
+    },
+    "pass_resume": {
+      "gate_runs_pytest": false,
+      "executor_runs_pytest": true
+    },
+    "blocked_semantics": {
+      "maps_to_test_failed": false,
+      "new_enum_blocked_waiting_for_safety": false
+    },
+    "human_approval_vs_safety_block": {
+      "safety_forbidden": "BLOCKED",
+      "approval_required": "AWAITING_HUMAN_APPROVAL",
+      "approval_runtime_new_ui": false
+    },
+    "fail_safe": {
+      "authorization": "DENIED",
+      "maps_to_test_failed": false
+    },
+    "exactly_once_authorization": true,
+    "postflight_before_run_closure": true,
+    "initial_wedge": "explicit_test_runner_option_a",
+    "option_c": {
+      "lifecycle_adopted": true,
+      "implement_required_first_action_primitive": false
+    }
+  },
+  "s5_phases": ["S5a_authorization_binding", "S5b_runner_wedge", "S5c_lifecycle_negatives"],
+  "evidence_refs": [
+    "reports/TEST_SAFETY_S4_RUNTIME_ARCHITECTURE.md",
+    "reports/TEST_SAFETY_S4_1_HUMAN_DECISION_CLOSURE.md"
+  ]
+}

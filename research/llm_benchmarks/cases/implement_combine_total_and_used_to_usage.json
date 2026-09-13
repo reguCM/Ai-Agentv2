@@ -1,0 +1,87 @@
+{
+  "id": "implement_combine_total_and_used_to_usage",
+  "selection": "combine",
+  "note": "組み合わせ。総メモリと使用済みメモリから使用率を計算する。正解は TotalVisibleMemorySize + CommittedBytes。PercentCommittedBytesInUse は既に計算済みの近道であり、組み合わせではない。正解ラベルは LLM に渡さない。並びは AvailableMBytes, PercentCommittedBytesInUse, TotalVisibleMemorySize, CommittedBytes。",
+  "request": "総メモリと使用済みメモリから使用率を計算してください。",
+  "correct_fragments": ["TotalVisibleMemorySize", "CommittedBytes"],
+  "roles": {
+    "total": "required_total",
+    "used": "required_used",
+    "percent": "shortcut_not_combine",
+    "available": "similar_other_purpose"
+  },
+  "proposal": {
+    "name": "get_memory_status",
+    "category": "system",
+    "subcategory": "memory",
+    "description": "総メモリと使用済みメモリからメモリ使用率を計算する",
+    "module": "tools.system.memory.memory_status",
+    "function": "get_memory_status",
+    "input": {},
+    "output": ["status"],
+    "dependencies": ["powershell"],
+    "implementation_notes": []
+  },
+  "research_result": {
+    "usable_findings": [
+      {
+        "kind": "output",
+        "question": "メモリ関連の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command", "Get-CimInstance -Class Win32_PerfFormattedData_PerfOS_Memory | Select AvailableMBytes"],
+          "returncode": 0,
+          "sample": ["AvailableMBytes", "---------------", "8192"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      },
+      {
+        "kind": "output",
+        "question": "メモリ関連の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command", "Get-CimInstance -Class Win32_PerfFormattedData_PerfOS_Memory | Select PercentCommittedBytesInUse"],
+          "returncode": 0,
+          "sample": ["PercentCommittedBytesInUse", "--------------------------", "43.2"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      },
+      {
+        "kind": "output",
+        "question": "メモリ関連の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command", "Get-CimInstance -Class Win32_OperatingSystem | Select TotalVisibleMemorySize"],
+          "returncode": 0,
+          "sample": ["TotalVisibleMemorySize", "----------------------", "16384000"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      },
+      {
+        "kind": "output",
+        "question": "メモリ関連の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command", "Get-CimInstance -Class Win32_PerfFormattedData_PerfOS_Memory | Select CommittedBytes"],
+          "returncode": 0,
+          "sample": ["CommittedBytes", "--------------", "7516192768"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      }
+    ],
+    "insufficient_findings": [],
+    "unresolved": []
+  }
+}

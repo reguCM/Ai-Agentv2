@@ -1,0 +1,810 @@
+{
+  "kind": "human_10_vs_qwen_eval",
+  "ts": "2026-08-24T04:35:04.557333+00:00",
+  "model": "qwen3:8b",
+  "case_ids": [
+    "B05",
+    "C02",
+    "C03",
+    "P02a",
+    "P02b",
+    "A06",
+    "E02",
+    "A03",
+    "A04",
+    "C04"
+  ],
+  "case_count": 10,
+  "mapping_errors": [],
+  "old_llm_eval_11_not_used": true,
+  "human_not_treated_as_ground_truth": true,
+  "not_connected_to_agent": true,
+  "evaluations": [
+    {
+      "case_id": "B05",
+      "observation_id": "webeffect-hits-B05",
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "answer_without_web": "Pythonのリストとタプルの主な違いは以下の通りです：\n\n1. **変更可能（ミュータブル） vs 変更不可（イミュータブル）**  \n   - リスト：要素の追加・削除・変更が可能（`append()`や`remove()`など）  \n   - タプル：作成後は要素を変更できず、不変なデータを保持するのに適しています  \n\n2. **構文**  \n   - リスト：`[]`で表す（例: `[1, 2, 3]`）  \n   - タプル：`()`で表す（例: `(1, 2, 3)`）  \n   - タプルの括弧は省略可能（例: `1, 2, 3`）  \n\n3. **使用目的**  \n   - リスト：動的なデータ（例: ユーザー入力、リスト操作）  \n   - タプル：固定データ（例: 日付、座標、設定値）  \n\n4. **辞書のキーとしての利用**  \n   - タプルはハッシュ化可能（辞書のキーとして使用可能）  \n   - リストはハッシュ化不可（辞書のキーとして使用不可）  \n\n5. **パフォーマンス**  \n   - タプルはリストより高速でメモリ効率が良い（不変性による）  \n\n要するに、**変更が必要なデータにはリスト、変更不要なデータにはタプル**が適しています。",
+      "answer_with_web": "Pythonのリストとタプルの主な違いは以下の通りです：\n\n1. **変更可能（ミュータブル）か**  \n   - リスト：要素の追加・削除・変更が可能（ミュータブル）  \n   - タプル：作成後は要素を変更できない（イミュータブル）  \n\n2. **構文**  \n   - リスト：`[ ]` で表す例: `my_list = [1, 2, 3]`  \n   - タプル：`( )` で表す例: `my_tuple = (1, 2, 3)`  \n\n3. **用途**  \n   - リスト：動的なデータの集まり（例: ユーザー入力の集計）  \n   - タプル：固定のデータ（例: 日付、座標、設定値）  \n\n4. **パフォーマンス**  \n   - タプルはリストより高速で、メモリ効率が良い（特に大規模なデータ処理で有用）。  \n\nこの違いを活用して、データの性質に応じて適切なデータ型を選択しましょう。",
+      "search_query": "Python tuple",
+      "available_count": 0,
+      "empty_count": 3,
+      "search_card": "検索クエリ: Python tuple\n検索結果件数: 3\n本文あり件数: 0 / 本文なし件数: 3\n日本語結果あり: いいえ\n英語結果あり: いいえ\n\n検索結果 1 / 3\nタイトル: Python implementations\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Python_implementations\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 2 / 3\nタイトル: Python Unleashed\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Python_Unleashed\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 3 / 3\nタイトル: Python (nuclear primary)\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Python_(nuclear_primary)\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "◎ 明確",
+        "Webなし十分性": "◎ 十分",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "◎ 十分",
+        "Web検索による変化": "→ ほとんど変わらない",
+        "人間メモ": ""
+      },
+      "human_comparable": {
+        "human_question_clarity": "◎ 明確",
+        "human_without_sufficiency": "◎ 十分",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "◎ 十分",
+        "human_web_change": "→ ほとんど変わらない",
+        "human_memo": "",
+        "derived_q3_which_better": "ほぼ同等",
+        "derived_q5_adopt": "条件付きでWebなし",
+        "derived_q4_tags": [
+          "ほぼ変化なし"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "× なくてもよい",
+        "q1_reason": "Webなし回答が十分な情報を含んでおり、検索結果が空だったためWebは必要なかった",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "全検索結果が本文なしで取得できず、有用な情報が得られなかった",
+        "q3_which_better": "ほぼ同等",
+        "q3_reason": "Webなし回答が十分な説明を含んでおり、Webあり回答は検索結果の不足により追加情報が得られなかった",
+        "q4_changes": [
+          "検索結果をほぼ利用できていない"
+        ],
+        "q4_reason": "検索結果が空だったため回答に影響を与えなかった",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "検索結果が利用できなかったためWebなし回答を採用",
+        "q6_what_happened": "検索結果が取得できず、Webあり回答は本来の目的（情報補完）を果たせなかった",
+        "q7_next_fixes": [
+          "1. 検索結果の取得エラー原因を調査する",
+          "2. 検索クエリを再検討し、有効な情報源を確保する",
+          "3. 本文取得機能の異常を確認する"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "不一致",
+        "q3_agreement": "完全一致",
+        "q5_agreement": "近似一致",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "同じ問題を指摘",
+        "reason_note": "検索失敗の指摘",
+        "structure_agreement": "一致",
+        "structure_note": "検索失敗の同一性",
+        "fix_agreement": "不一致",
+        "fix_note": "修正策の記載なし",
+        "conclusion_same_cause_different": true,
+        "special_note": "原因一致だが対応策の不一致"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": false,
+        "did_not_infer_search_from_without_web": true,
+        "noticed_time_sensitivity": true,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果が取得できなかったため、Webなし回答を採用した。",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": false,\n  \"did_not_infer_search_from_without_web\": true,\n  \"noticed_time_sensitivity\": true,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果が取得できなかったため、Webなし回答を採用した。\"\n}"
+      }
+    },
+    {
+      "case_id": "C02",
+      "observation_id": "webeffect-hits-C02",
+      "request": "Ollamaについて詳しく教えて",
+      "answer_without_web": "Ollamaは、大規模言語モデル（LLM）の開発と提供を行う企業です。主な特徴と機能は以下の通りです：\n\n1. **モデルラインナップ**  \n   - **Llamaシリーズ**：Metaが開発したLlamaモデル（Llama、Llama 2など）をベースにしたローカル実行可能なバージョンを提供。  \n   - **他社モデルのサポート**：Mistral、MixtralなどのモデルもOllamaプラットフォームで利用可能（一部はライセンス制約あり）。  \n\n2. **ローカル実行環境**  \n   - モデルをローカルマシンにインストールし、プライバシーを確保しながら運用可能。  \n   - コマンドラインインターフェース（CLI）やWebインターフェース（Ollama Web）で操作可能。  \n\n3. **ライセンス情報**  \n   - Llama 2などのモデルはApache 2.0ライセンスで提供され、商用利用が可能。  \n   - 各モデルのライセンス条件は公式ドキュメントで確認が必要。  \n\n4. **用途例**  \n   - データ分析、チャットボット開発、自然言語処理（NLP）タスクなど、幅広い分野での利用が可能。  \n\n**注意点**：  \n- 一部モデルは特定の制限（例：商用利用不可、特定地域での利用制限）がある場合あり。  \n- モデルのバージョンやパラメータ数（例：7B、13Bなど）は、Ollama公式リリース情報を参照することを推奨。  \n\n不明点については「未確認」として明記しています。",
+      "answer_with_web": "Ollamaは、Jeffrey MorganとMichael Chiangが2023年に開発したオープンソースソフトウェアプラットフォームで、ローカルコンピュータやホストされたクラウドモデル上で大規模言語モデルを実行・管理するためのツールです。主な機能には、コマンドラインインターフェース（CLI）、ネイティブGUI、ローカルREST API、モデル管理ツール、およびコードアシスタントなどのアプリケーションとの統合が含まれます。詳しくは、[Ollama（英語版）](https://en.wikipedia.org/wiki/Ollama) を参照してください。",
+      "search_query": "Ollama",
+      "available_count": 1,
+      "empty_count": 2,
+      "search_card": "検索クエリ: Ollama\n検索結果件数: 3\n本文あり件数: 1 / 本文なし件数: 2\n日本語結果あり: いいえ\n英語結果あり: はい\n\n検索結果 1 / 3\nタイトル: Ollama\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Ollama\n言語: en\n内容取得: 内容を取得できました\n日本語要約: Ollamaは、Jeffrey MorganとMichael Chiangが2023年に開発したオープンソースプラットフォームで、ローカルコンピュータとホストされたクラウドモデルで大規模言語モデルを実行・管理できます。CLI、ネイティブGUI、ローカルREST API、モデル管理ツール、コードアシスタントなどのアプリとの統合が含まれます。\n原文:\nOllama is an open-source software platform developed by Jeffrey Morgan and Michael Chiang in 2023 for running and managing large language models on local computers and through hosted cloud models. It provides a command-line interface, a native GUI, a local REST API, model-management tools, and integrations for using open-weight models with coding assistants and other applications.\n\n検索結果 2 / 3\nタイトル: Ollama\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/Ollama\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 3 / 3\nタイトル: Ollamalitzli\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Ollamalitzli\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "◎ 明確",
+        "Webなし十分性": "◎ 十分",
+        "検索結果の有用性": "○ 役立つ",
+        "Webあり十分性": "◎ 十分",
+        "Web検索による変化": "→ ほとんど変わらない",
+        "人間メモ": "おそらく検索結果の内容は役に立つものだが英語なので理解したうえでの回答ではない"
+      },
+      "human_comparable": {
+        "human_question_clarity": "◎ 明確",
+        "human_without_sufficiency": "◎ 十分",
+        "human_search_usefulness": "○ 役立つ",
+        "human_with_sufficiency": "◎ 十分",
+        "human_web_change": "→ ほとんど変わらない",
+        "human_memo": "おそらく検索結果の内容は役に立つものだが英語なので理解したうえでの回答ではない",
+        "derived_q3_which_better": "ほぼ同等",
+        "derived_q5_adopt": "条件付きでWebなし",
+        "derived_q4_tags": [
+          "ほぼ変化なし"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "○ 使う価値が高い",
+        "q1_reason": "Webなし回答は基本的な情報を網羅しているが、検索結果で開発者情報や具体的な機能（CLI/GUIなど）が追加されたため、補完的な価値がある",
+        "q2_search_usefulness": "○ 一部有用",
+        "q2_reason": "1件の英語結果が開発者情報や機能詳細を提供していたが、日本語結果が不足し全体的な有用性は限定的",
+        "q3_which_better": "Webあり",
+        "q3_reason": "検索結果で開発者情報や具体的な機能詳細が追加され、回答の具体性が向上",
+        "q4_changes": [
+          "情報が追加された",
+          "具体性が増えた"
+        ],
+        "q4_reason": "検索結果で開発者情報（Jeffrey Morgan, Michael Chiang）、年次（2023）、CLI/GUIなどの機能詳細が追加",
+        "q5_adopt": "Webあり",
+        "q5_condition": "",
+        "q5_reason": "検索結果で追加された開発者情報や機能詳細が回答の信頼性・具体性を向上",
+        "q6_what_happened": "Webなし回答が基本情報を網羅していたが、検索結果で開発者情報や機能詳細が補完的に追加された",
+        "q7_next_fixes": [
+          "1. ライセンス情報の詳細を公式ドキュメントから確認",
+          "2. 検索結果の日本語化や補完情報の追加",
+          "3. 最新情報の定期的な更新体制の確立"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "完全一致",
+        "q4_agreement": "不一致",
+        "q3_agreement": "不一致",
+        "q5_agreement": "不一致",
+        "llm_q4_bucket": "改善小",
+        "reason_agreement": "一部共通",
+        "reason_note": "人間は英語の検索結果を理解していないため、有用性を認めるが、LLMは追加情報の補完を指摘",
+        "structure_agreement": "不一致",
+        "structure_note": "人間は十分性と変化を、LLMは問題構造と修正点を評価",
+        "fix_agreement": "部分一致",
+        "fix_note": "LLMの2番目の修正（日本語化）は人間のメモに一部関連するが、1番目と3番目は異なる",
+        "conclusion_same_cause_different": true,
+        "special_note": "結論一致だが原因不一致"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": true,
+        "did_not_infer_search_from_without_web": true,
+        "noticed_time_sensitivity": true,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果の内容を正しく活用し、回答の信頼性を高めました",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": true,\n  \"did_not_infer_search_from_without_web\": true,\n  \"noticed_time_sensitivity\": true,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果の内容を正しく活用し、回答の信頼性を高めました\"\n}"
+      }
+    },
+    {
+      "case_id": "C03",
+      "observation_id": "webeffect-hits-C03",
+      "request": "RTX 3060って今どういう扱いですか？",
+      "answer_without_web": "RTX 3060は、2020年9月に発売されたNVIDIAのAmpereアーキテクチャ搭載の中〜上位グレードGPUです。12GBのGDDR6メモリを搭載し、1080pゲームやコンテンツ制作などに適していますが、最新のRTX 40シリーズ（例：RTX 4060）に比べると性能や効率が劣ります。現在の扱いとしては、価格が比較的安価で入手可能ですが、需要が高いため在庫が限られている可能性があります。また、新作ゲームの性能要件が高まっているため、最新タイトルでは高設定での動作が難しい場合があります。用途に応じて検討すると良いでしょう。",
+      "answer_with_web": "GeForce RTX 3060は、現在でも中〜上位のゲーム用途向けGPUとして扱われていますが、最新の情報や性能比較については検索結果に明確な記載が見られませんでした。最新モデル（例: RTX 4050やRTX 5070）と比較した場合の性能や価格帯については、公式情報や信頼できるレビューを参照することをお勧めします。  \n（※ 検索結果のRTX 3060ページの詳細は空欄のため、具体的な評価は確認できませんでした）",
+      "search_query": "GeForce RTX 3060",
+      "available_count": 0,
+      "empty_count": 5,
+      "search_card": "検索クエリ: GeForce RTX 3060\n検索結果件数: 5\n本文あり件数: 0 / 本文なし件数: 5\n日本語結果あり: いいえ\n英語結果あり: いいえ\n\n検索結果 1 / 5\nタイトル: GeForce RTX 3060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_3060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 2 / 5\nタイトル: GeForce RTX 5070\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_5070\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 3 / 5\nタイトル: GeForce RTX 4050\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_4050\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 4 / 5\nタイトル: GeForce RTX 2060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_2060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 5 / 5\nタイトル: GeForce GTX 1060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_GTX_1060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "× 意味が破綻",
+        "Webなし十分性": "× 明確な問題あり",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "× 明確な問題あり",
+        "Web検索による変化": "― 比較不能",
+        "人間メモ": "今ってどうゆう扱い？とは一般的な扱いではなく差分を要求しているということと予想するが、意味がそれでもわからない為、真意の確認が必要かと思われる。\n例えば昔と比べ、今どういう立ち位置か？という意味であればおそらくAI系のコスパがいいとかいう立ち位置の話なのではないでしょうか？"
+      },
+      "human_comparable": {
+        "human_question_clarity": "× 意味が破綻",
+        "human_without_sufficiency": "× 明確な問題あり",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "× 明確な問題あり",
+        "human_web_change": "― 比較不能",
+        "human_memo": "今ってどうゆう扱い？とは一般的な扱いではなく差分を要求しているということと予想するが、意味がそれでもわからない為、真意の確認が必要かと思われる。\n例えば昔と比べ、今どういう立ち位置か？という意味であればおそらくAI系のコスパがいいとかいう立ち位置の話なのではないでしょうか？",
+        "derived_q3_which_better": "どちらも不十分",
+        "derived_q5_adopt": "",
+        "derived_q4_tags": [
+          "検索結果が不足していた"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "△ どちらでもよい",
+        "q1_reason": "Webなし回答が基本的な性能・価格情報を提供しており、最新の市場動向や在庫状況などは含まれていないが、質問の「今どういう扱い」に直接的な回答は含まれている",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "全検索結果が本文なしで取得できず、検索結果自体に有用な情報が存在しないため",
+        "q3_which_better": "Webなし",
+        "q3_reason": "Webあり回答は検索結果不足を明記したが、Webなし回答が既に必要な情報（性能比較・価格帯）を含んでおり、検索結果が補完する価値が低い",
+        "q4_changes": [
+          "検索結果が不足していた"
+        ],
+        "q4_reason": "検索結果が本文なしで取得できなかったため、情報追加や正確性向上が不可能",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "検索結果が不足していたためWebあり回答の信頼性が低く、Webなし回答の既存情報が優先される",
+        "q6_what_happened": "検索結果が本文なしで取得できなかったため、Webあり回答は検索結果の不足を明記したが、Webなし回答の情報が依然として十分な回答を構成していた",
+        "q7_next_fixes": [
+          "1. 検索クエリの言語・地域設定を確認し、日本語コンテンツの取得を優先する",
+          "2. 検索結果の取得エラーを修正し、コンテンツが取得可能な状態にする",
+          "3. Webなし回答の「最新タイトルでの動作」に関する情報に、代替情報（例：2023年のゲーム要件傾向）を追加する"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "完全一致",
+        "q3_agreement": "不一致",
+        "q5_agreement": "",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "一部共通",
+        "reason_note": "検索結果不足の指摘は共通だが、人間は意図の曖昧さを指摘",
+        "structure_agreement": "部分一致",
+        "structure_note": "検索結果不足の現象は共通だが、構造的分析の焦点が異なる",
+        "fix_agreement": "不一致",
+        "fix_note": "人間は真意確認を求める一方LLMは具体的な修正案を提示",
+        "conclusion_same_cause_different": true,
+        "special_note": "検索結果不足の原因一致だが、対応策が異なる"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": false,
+        "did_not_infer_search_from_without_web": false,
+        "noticed_time_sensitivity": true,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果が空だったため、Webなし回答が既存知識で構成されており、検索結果の有用性と回答の良し悪しを混同していない",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": false,\n  \"did_not_infer_search_from_without_web\": false,\n  \"noticed_time_sensitivity\": true,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果が空だったため、Webなし回答が既存知識で構成されており、検索結果の有用性と回答の良し悪しを混同していない\"\n}"
+      }
+    },
+    {
+      "case_id": "P02a",
+      "observation_id": "webeffect-hits-P02a",
+      "request": "RTX 3060について教えて",
+      "answer_without_web": "RTX 3060はNVIDIAが発表したAmpereアーキテクチャに基づくグラフィックカードで、1080pゲームやコンテンツ作成に適した中〜上位性能を提供します。主な特徴は以下の通りです：\n\n1. **性能**  \n   - RTX 3060は約60-70%の性能をRTX 3070に、約1.5倍の性能をRTX 3050に。1080pゲームでは高画質設定でもスムーズに動作します。\n   - レイトレーシング（RTコア）とDLSS（深度学習スーパーリゾルヴァ）をサポートし、リアルタイムな光追やフレームレート向上が可能です。\n\n2. **メモリ**  \n   - 12GBのGDDR6メモリを搭載し、4K解像度での作業や複数のアプリケーション同時起動にも対応。\n\n3. **消費電力**  \n   - 125〜150W程度の消費電力で、中〜大型のPSU（電源ユニット）が必要です。\n\n4. **用途**  \n   - ゲーミング（1080p〜2K）、動画編集、3Dモデリングなど、一般的なクリエイティブタスクに適しています。\n\n5. **バリエーション**  \n   - リファレンスデザイン（NVIDIA製）と、ASUS、MSI、ZOTACなどのメーカーが提供するカスタムモデルが市販されています。\n\n6. **価格帯**  \n   - 価格は地域や販売店によって異なりますが、中〜上位の価格帯に位置します。\n\n注意点として、4Kゲームや複数の高負荷アプリケーションを同時に使用する場合、性能が限られる可能性があります。また、発売当初は供給が不安定だったため、入手には注意が必要です。",
+      "answer_with_web": "GeForce RTX 3060は、NVIDIAが発表したグラフィックボードで、RTX 30シリーズに属します。具体的な性能やスペックについては、提供された検索結果に詳細が含まれていません。公式情報を確認するためには、[GeForce RTX 3060](https://en.wikipedia.org/wiki/GeForce_RTX_3060)のWikipediaページやNVIDIA公式サイトをご参照ください。",
+      "search_query": "GeForce RTX 3060",
+      "available_count": 0,
+      "empty_count": 5,
+      "search_card": "検索クエリ: GeForce RTX 3060\n検索結果件数: 5\n本文あり件数: 0 / 本文なし件数: 5\n日本語結果あり: いいえ\n英語結果あり: いいえ\n\n検索結果 1 / 5\nタイトル: GeForce RTX 3060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_3060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 2 / 5\nタイトル: GeForce RTX 5070\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_5070\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 3 / 5\nタイトル: GeForce RTX 4050\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_4050\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 4 / 5\nタイトル: GeForce RTX 2060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_2060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 5 / 5\nタイトル: GeForce GTX 1060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_GTX_1060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "◎ 明確",
+        "Webなし十分性": "◎ 十分",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "× 明確な問題あり",
+        "Web検索による変化": "× 明確に悪くなった",
+        "人間メモ": "提供する情報がかなりなくなった。まずは検索する能力の向上が必要かと思われる。ただし、WEBなしの解答でも人間への解答は十分の可能性は高いのでもったいない内容"
+      },
+      "human_comparable": {
+        "human_question_clarity": "◎ 明確",
+        "human_without_sufficiency": "◎ 十分",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "× 明確な問題あり",
+        "human_web_change": "× 明確に悪くなった",
+        "human_memo": "提供する情報がかなりなくなった。まずは検索する能力の向上が必要かと思われる。ただし、WEBなしの解答でも人間への解答は十分の可能性は高いのでもったいない内容",
+        "derived_q3_which_better": "Webなし",
+        "derived_q5_adopt": "Webなし",
+        "derived_q4_tags": [
+          "検索結果をほぼ利用できていない",
+          "検索結果が不足していた"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "× なくてもよい",
+        "q1_reason": "Webなし回答が十分な情報を提供しており、検索結果が空だったためWebの必要性が低かった",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "全検索結果が本文なしで取得できず、有用な情報が得られなかった",
+        "q3_which_better": "Webなし",
+        "q3_reason": "Webあり回答は検索結果を活用できず、Webなし回答が既に十分な情報を含んでいた",
+        "q4_changes": [
+          "検索結果が不足していた",
+          "ほぼ変化なし"
+        ],
+        "q4_reason": "検索結果が空だったため情報追加や根拠増加が不可能だった",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "Webあり回答が検索結果を活用できず、Webなし回答が既に十分な情報を含んでいた",
+        "q6_what_happened": "検索結果が空だったためWebあり回答は公式情報取得が困難で、Webなし回答が採用された",
+        "q7_next_fixes": [
+          "1. 検索結果の本文取得エラーの原因を調査する",
+          "2. 検索クエリの精度を向上させる",
+          "3. 英語コンテンツの日本語要約機能を実装する"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "不一致",
+        "q3_agreement": "完全一致",
+        "q5_agreement": "完全一致",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "同じ問題を指摘",
+        "reason_note": "検索失敗の指摘が一致",
+        "structure_agreement": "一致",
+        "structure_note": "検索結果の空欄/無用性の指摘が一致",
+        "fix_agreement": "部分一致",
+        "fix_note": "検索エラー調査とクエリ改善が一致",
+        "conclusion_same_cause_different": true,
+        "special_note": "検索失敗の原因一致だが、対応の結論が異なる"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": false,
+        "did_not_infer_search_from_without_web": true,
+        "noticed_time_sensitivity": false,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果が空だったため、Webなし回答が適切だった",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": false,\n  \"did_not_infer_search_from_without_web\": true,\n  \"noticed_time_sensitivity\": false,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果が空だったため、Webなし回答が適切だった\"\n}"
+      }
+    },
+    {
+      "case_id": "P02b",
+      "observation_id": "webeffect-hits-P02b",
+      "request": "今のRTX 3060の立ち位置を教えて",
+      "answer_without_web": "RTX 3060は、NVIDIAが2020年9月に発表したAmpereアーキテクチャの中堅グリーンズ（中間グリーンズ）モデルで、1080pゲームやコンテンツ作成に適した価格帯のGPUです。性能はRTX 3060 Tiよりもやや低めですが、RTX 3070やRTX 3080などよりはコストパフォーマンスが高く、中古市場や特定の販売チャネルでは依然として需要があります。ただし、最新のRTX 40シリーズ（Adaアーキテクチャ）が登場した現在では、最新ゲームでの性能はやや劣る可能性がありますが、依然として1080pでのゲームや日常用途には十分な性能を提供します。",
+      "answer_with_web": "GeForce RTX 3060は、NVIDIAが2021年に発表した中〜上位クラスのグラフィックカードで、Ampereアーキテクチャを採用しています。現在の立ち位置としては、最新のRTX 40系（例: RTX 4050）やRTX 50系（例: RTX 5070）に比べて性能はやや劣りますが、依然として中〜上位のポジションを維持しています。具体的なベンチマークや価格情報は検索結果に記載されていませんので、最新情報については公式サイトや信頼できるレビューを参照することをお勧めします。",
+      "search_query": "GeForce RTX 3060",
+      "available_count": 0,
+      "empty_count": 5,
+      "search_card": "検索クエリ: GeForce RTX 3060\n検索結果件数: 5\n本文あり件数: 0 / 本文なし件数: 5\n日本語結果あり: いいえ\n英語結果あり: いいえ\n\n検索結果 1 / 5\nタイトル: GeForce RTX 3060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_3060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 2 / 5\nタイトル: GeForce RTX 5070\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_5070\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 3 / 5\nタイトル: GeForce RTX 4050\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_4050\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 4 / 5\nタイトル: GeForce RTX 2060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_RTX_2060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 5 / 5\nタイトル: GeForce GTX 1060\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/GeForce_GTX_1060\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "◎ 明確",
+        "Webなし十分性": "◎ 十分",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "◎ 十分",
+        "Web検索による変化": "→ ほとんど変わらない",
+        "人間メモ": ""
+      },
+      "human_comparable": {
+        "human_question_clarity": "◎ 明確",
+        "human_without_sufficiency": "◎ 十分",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "◎ 十分",
+        "human_web_change": "→ ほとんど変わらない",
+        "human_memo": "",
+        "derived_q3_which_better": "ほぼ同等",
+        "derived_q5_adopt": "条件付きでWebなし",
+        "derived_q4_tags": [
+          "ほぼ変化なし"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "△ どちらでもよい",
+        "q1_reason": "Webなし回答は基本的な情報提供を果たしているが、Webあり回答は2021年発表という正確な年次情報を追加している。ただし検索結果が空だったため、Web検索の必要性は限定的",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "全検索結果が本文なしで、RTX 3060に関する最新情報やベンチマークデータの取得が不可能。検索結果自体に有用性が欠如",
+        "q3_which_better": "Webなし",
+        "q3_reason": "Webなし回答はRTX 3060の基本スペックと市場位置を正確に説明。Webあり回答は検索結果不足により追加情報が得られず、信頼性が低下",
+        "q4_changes": [
+          "検索結果が不足していた"
+        ],
+        "q4_reason": "検索結果が本文なしで、情報追加や正確性向上が不可能。回答構成も変化なし",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "Web検索結果が空だったため、Webなし回答の信頼性が優先される",
+        "q6_what_happened": "Web検索が実行されたが、取得可能なコンテンツが存在せず、検索結果自体に有用性が欠如。Webあり回答は事前に蓄積された知識を再構成した",
+        "q7_next_fixes": [
+          "1. 検索結果の本文取得エラーを修正し、コンテンツが取得可能なURLを優先的に表示",
+          "2. 検索クエリに「2023年現在の立ち位置」といった時間依存性キーワードを追加",
+          "3. 英語コンテンツの日本語要約機能を強化し、翻訳精度を向上"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "不一致",
+        "q3_agreement": "近似一致",
+        "q5_agreement": "近似一致",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "同じ問題を指摘",
+        "reason_note": "検索失敗の指摘が一致",
+        "structure_agreement": "部分一致",
+        "structure_note": "検索結果の有用性の欠如を共有",
+        "fix_agreement": "不一致",
+        "fix_note": "人間は修正策を提示せず",
+        "conclusion_same_cause_different": true,
+        "special_note": "検索失敗の結論一致だが、原因の具体性に差異"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": false,
+        "used_search_body_as_evidence": false,
+        "did_not_infer_search_from_without_web": false,
+        "noticed_time_sensitivity": false,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "Webあり回答の「2021年発表」という情報は誤り（実際は2020年）。検索結果の本文取得エラーにより正確な情報が得られず、Webなし回答の信頼性が優先された。",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": false,\n  \"used_search_body_as_evidence\": false,\n  \"did_not_infer_search_from_without_web\": false,\n  \"noticed_time_sensitivity\": false,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"Webあり回答の「2021年発表」という情報は誤り（実際は2020年）。検索結果の本文取得エラーにより正確な情報が得られず、Webなし回答の信頼性が優先された。\"\n}"
+      }
+    },
+    {
+      "case_id": "A06",
+      "observation_id": "webeffect-hits-A06",
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "answer_without_web": "Python 3.13 で追加された主な変更点は以下の通りです：\n\n1. **asyncio の改善**  \n   - TCP/UDP ソケットの非同期サポートが強化され、`asyncio` でのネットワーク通信の効率が向上。  \n   - `asyncio` のタイムアウト処理がより柔軟に設定可能に。\n\n2. **標準ライブラリの拡張**  \n   - `socket` モジュールで IPv6 のサポートが改善され、複雑なネットワーク設定の簡略化。  \n   - `pathlib` に `Path.read_text()` と `Path.write_text()` の拡張機能が追加（未確認）。\n\n3. **パフォーマンス最適化**  \n   - インタプリタ内部のメモリ管理が改善され、大規模なデータ処理時の速度向上。  \n   - グローバルインタプリタロック（GIL）の非同期処理における影響が軽減（未確認）。\n\n4. **型ヒントの拡張**  \n   - `typing` モジュールで `TypedDict` のサブクラス化が可能に（未確認）。  \n   - `ParamSpec` と `Concatenate` の使用例が明確化。\n\n5. **非推奨機能の削除**  \n   - `distutils` モジュールの一部機能が非推奨となり、`setuptools` への移行が推奨。  \n   - `sys._getframe()` の使用が非推奨（3.10 で警告が開始）。\n\n6. **その他の変更**  \n   - `unittest` モジュールで非同期テストのサポートが拡充。  \n   - `zoneinfo` モジュールの動作が安定化（3.9 から存在）。\n\n※ 一部の変更点は公式ドキュメントの確認が必要です。詳細は Python 3.13 のリリースノートを参照してください。",
+      "answer_with_web": "Python 3.13に関する具体的な変更点についての情報は、提供された検索結果には含まれていません。現在の資料ではPython 3.0に関する情報しか得られませんでした。Python 3.13の詳細な変更内容については、公式ドキュメントやリリースノートをご確認ください。",
+      "search_query": "Python 3.13",
+      "available_count": 0,
+      "empty_count": 1,
+      "search_card": "検索クエリ: Python 3.13\n検索結果件数: 1\n本文あり件数: 0 / 本文なし件数: 1\n日本語結果あり: いいえ\n英語結果あり: いいえ\n\n検索結果 1 / 1\nタイトル: Python 3.0\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Python_3.0\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "◎ 明確",
+        "Webなし十分性": "◎ 十分",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "× 明確な問題あり",
+        "Web検索による変化": "× 明確に悪くなった",
+        "人間メモ": "内容がなくなった。おそらくWEBなしで正確な情報があった可能性は高そう。"
+      },
+      "human_comparable": {
+        "human_question_clarity": "◎ 明確",
+        "human_without_sufficiency": "◎ 十分",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "× 明確な問題あり",
+        "human_web_change": "× 明確に悪くなった",
+        "human_memo": "内容がなくなった。おそらくWEBなしで正確な情報があった可能性は高そう。",
+        "derived_q3_which_better": "Webなし",
+        "derived_q5_adopt": "Webなし",
+        "derived_q4_tags": [
+          "検索結果をほぼ利用できていない",
+          "検索結果が不足していた"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "× なくてもよい",
+        "q1_reason": "検索結果が本文なしで取得できず、Web検索は情報提供に寄与しなかったため",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "検索結果が本文なしで取得できず、有用性が確認できない",
+        "q3_which_better": "Webなし",
+        "q3_reason": "Webあり回答は検索結果不足により追加情報が得られず、Webなし回答が現有知識を基にした回答を提供",
+        "q4_changes": [
+          "検索結果が不足していた"
+        ],
+        "q4_reason": "検索結果が本文なしで取得できなかったため情報追加や鮮度向上が不可能",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "検索結果が不足していたためWebあり回答は採用不可",
+        "q6_what_happened": "Web検索がPython 3.13の変更点情報を提供できず、Webなし回答が現有知識を基にした回答を提供",
+        "q7_next_fixes": [
+          "1. Python 3.13のリリースノートや公式ドキュメントへの直接的な検索を実施",
+          "2. 検索結果の言語フィルタを追加して日本語情報の取得を優先",
+          "3. Webなし回答の未確認項目について信頼性を検証する"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "不一致",
+        "q3_agreement": "完全一致",
+        "q5_agreement": "完全一致",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "一致",
+        "reason_note": "Web検索で情報取得できず",
+        "structure_agreement": "一致",
+        "structure_note": "Web検索で必要な情報取得できず",
+        "fix_agreement": "部分一致",
+        "fix_note": "問題は同じだが対応策が異なる",
+        "conclusion_same_cause_different": true,
+        "special_note": "原因一致だが対応策が異なる"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": true,
+        "did_not_infer_search_from_without_web": true,
+        "noticed_time_sensitivity": true,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果が本文なしで取得できなかったため、Webなし回答が適切だった",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": true,\n  \"did_not_infer_search_from_without_web\": true,\n  \"noticed_time_sensitivity\": true,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果が本文なしで取得できなかったため、Webなし回答が適切だった\"\n}"
+      }
+    },
+    {
+      "case_id": "E02",
+      "observation_id": "webeffect-hits-E02",
+      "request": "ChatGPTの有料プランの違いを教えて",
+      "answer_without_web": "ChatGPTの有料プランについて、以下のような違いがあります（2024年現在の情報に基づく）：\n\n1. **ChatGPT Plus**  \n   - **料金**: 月額20ドル  \n   - **特典**:  \n     - 新機能の優先利用権  \n     - 応答速度の向上  \n     - GPT-3.5モデルへのアクセス（基本モデル）  \n   - **対象**: 個人向けのサブスクリプション  \n\n2. **GPT-4 Turbo（GPT-4の進化版）**  \n   - **料金**: トークンごとの課金（例: 0.03ドル/1,000トークン）  \n   - **特典**:  \n     - 高性能な自然言語処理能力  \n     - 大規模なデータセットに基づく応答  \n   - **対象**: ビジネスや専門用途向け（企業契約も可能）  \n\n3. **Enterpriseプラン**  \n   - **料金**: 定額またはカスタマイズ可能  \n   - **特典**:  \n     - データセキュリティ対策  \n     - プライベートインスタンスの構築  \n     - カスタムモデルの開発支援  \n   - **対象**: 企業や大規模なプロジェクト  \n\n※ OpenAIの公式情報や最新プランは変更される可能性があるため、公式サイトで確認することを推奨します。",
+      "answer_with_web": "ChatGPT Plusは、有料プランの一つで、基本的な機能に加えて優先的なアクセスや応答速度の向上などの特典が提供されることがわかっています。ただし、具体的な料金や詳細な違いについては、公式情報が確認できませんでした。最新の情報は、公式サイトやサポートページをご確認ください。",
+      "search_query": "ChatGPT Plus",
+      "available_count": 0,
+      "empty_count": 2,
+      "search_card": "検索クエリ: ChatGPT Plus\n検索結果件数: 2\n本文あり件数: 0 / 本文なし件数: 2\n日本語結果あり: いいえ\n英語結果あり: いいえ\n\n検索結果 1 / 2\nタイトル: ChatGPT Plus\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/ChatGPT_Plus\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 2 / 2\nタイトル: ChatGPT psychosis\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/ChatGPT_psychosis\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "○ ほぼ明確",
+        "Webなし十分性": "◎ 十分",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "× 明確な問題あり",
+        "Web検索による変化": "× 明確に悪くなった",
+        "人間メモ": "内容がなくなった。ただし、2年前の情報なので、どちらがいいとは言いにくい問題かもしれないが、2年前と表示はされているので参考にはなるため消す必要は感じられない。ただし、現在の価格や詳細は調べないとわからないのは変わらない。"
+      },
+      "human_comparable": {
+        "human_question_clarity": "○ ほぼ明確",
+        "human_without_sufficiency": "◎ 十分",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "× 明確な問題あり",
+        "human_web_change": "× 明確に悪くなった",
+        "human_memo": "内容がなくなった。ただし、2年前の情報なので、どちらがいいとは言いにくい問題かもしれないが、2年前と表示はされているので参考にはなるため消す必要は感じられない。ただし、現在の価格や詳細は調べないとわからないのは変わらない。",
+        "derived_q3_which_better": "Webなし",
+        "derived_q5_adopt": "Webなし",
+        "derived_q4_tags": [
+          "検索結果をほぼ利用できていない",
+          "検索結果が不足していた"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "× なくてもよい",
+        "q1_reason": "Webなし回答が詳細な情報を含んでおり、検索結果が空だったためWebは必要なかった",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "検索結果が本文なしで取得できず、有用性が確認できない",
+        "q3_which_better": "Webなし",
+        "q3_reason": "Webなし回答が具体的な情報提供を試みたが、検索結果が空だったため信頼性が低い",
+        "q4_changes": [
+          "検索結果をほぼ利用できていない"
+        ],
+        "q4_reason": "検索結果が空だったため情報追加や根拠増加は発生しなかった",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "検索結果が空だったためWebあり回答は採用できず、Webなし回答を採用",
+        "q6_what_happened": "検索結果が空だったためWebあり回答は生成できず、Webなし回答が採用された",
+        "q7_next_fixes": [
+          "1. 検索クエリの再検討（英語結果を含むように変更）",
+          "2. 検索結果の内容確認・取得方法の改善",
+          "3. Webなし回答の情報源の信頼性検証"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "不一致",
+        "q3_agreement": "完全一致",
+        "q5_agreement": "完全一致",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "一部共通",
+        "reason_note": "検索失敗の指摘は一致するが、人間は内容の古さを、LLMは検索結果の空きを指摘",
+        "structure_agreement": "不一致",
+        "structure_note": "人間は十分性評価、LLMは検索結果の空きを指摘",
+        "fix_agreement": "不一致",
+        "fix_note": "人間は内容の古さを、LLMは検索クエリ改善を指摘",
+        "conclusion_same_cause_different": true,
+        "special_note": "検索結果の空きが原因でWebなし回答が採用されたが、人間は内容の古さを指摘している"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": false,
+        "did_not_infer_search_from_without_web": true,
+        "noticed_time_sensitivity": true,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果が空だったため、Webなし回答が採用された。検索結果の有用性と回答の良し悪しを混同せず、時間依存情報も確認できず、空検索と不要情報の混同もなかった。",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": false,\n  \"did_not_infer_search_from_without_web\": true,\n  \"noticed_time_sensitivity\": true,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果が空だったため、Webなし回答が採用された。検索結果の有用性と回答の良し悪しを混同せず、時間依存情報も確認できず、空検索と不要情報の混同もなかった。\"\n}"
+      }
+    },
+    {
+      "case_id": "A03",
+      "observation_id": "webeffect-hits-A03",
+      "request": "OpenAIについて最近何か大きな発表はありましたか",
+      "answer_without_web": "OpenAIに関する最近の大きな発表については、私の知識ベースには最新情報が含まれていません。2023年10月現在の情報であれば、GPT-4のさらなる改善や、AIの安全性・信頼性に関する研究の進展が注目されていましたが、具体的な発表内容については確認できません。最新の情報については、公式サイトや信頼できるニュースソースをご確認ください。",
+      "answer_with_web": "OpenAIに関する最近の大きな発表については、提供された検索結果には具体的な情報が含まれていません。Wikipediaの記載内容からは、OpenAI o1やOpenAI Fiveなどのプロジェクトが紹介されていますが、これらが最近の発表であるかどうかは確認できませんでした。最新の情報については、OpenAI公式サイトや信頼できるニュースソースをご確認ください。",
+      "search_query": "OpenAI",
+      "available_count": 0,
+      "empty_count": 5,
+      "search_card": "検索クエリ: OpenAI\n検索結果件数: 5\n本文あり件数: 0 / 本文なし件数: 5\n日本語結果あり: いいえ\n英語結果あり: いいえ\n\n検索結果 1 / 5\nタイトル: OpenAI\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/OpenAI\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 2 / 5\nタイトル: OpenAI o1\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/OpenAI_o1\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 3 / 5\nタイトル: OpenAI Five\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/OpenAI_Five\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 4 / 5\nタイトル: OpenAI Codex\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/OpenAI_Codex\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 5 / 5\nタイトル: OpenAI o4-mini\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/OpenAI_o4-mini\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "◎ 明確",
+        "Webなし十分性": "× 明確な問題あり",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "× 明確な問題あり",
+        "Web検索による変化": "― 比較不能",
+        "人間メモ": "そもそもWEBなし解答が無理なパターン。検索機能がダメなのがずっと続いているため、比較検討も難しい。"
+      },
+      "human_comparable": {
+        "human_question_clarity": "◎ 明確",
+        "human_without_sufficiency": "× 明確な問題あり",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "× 明確な問題あり",
+        "human_web_change": "― 比較不能",
+        "human_memo": "そもそもWEBなし解答が無理なパターン。検索機能がダメなのがずっと続いているため、比較検討も難しい。",
+        "derived_q3_which_better": "どちらも不十分",
+        "derived_q5_adopt": "",
+        "derived_q4_tags": [
+          "検索結果が不足していた"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "× なくてもよい",
+        "q1_reason": "Webなし回答が既に知識ベースの制限を正直に伝えているため、追加検索は必要なかった",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "全検索結果が本文なしで取得できず、有用性が確認できない",
+        "q3_which_better": "Webなし",
+        "q3_reason": "Webあり回答は検索結果の不足を正直に伝えつつも、Webなし回答が知識制限を明示的に伝えている",
+        "q4_changes": [
+          "検索結果が不足していた"
+        ],
+        "q4_reason": "検索結果が本文なしで取得できなかったため情報追加や根拠増加が発生しなかった",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "Web検索が成果を出さなかったため、Webなし回答の誠実な説明を採用",
+        "q6_what_happened": "Web検索が日本語Wikipediaの本文取得に失敗し、最新情報収集が不可能な状態",
+        "q7_next_fixes": [
+          "Wikipedia本文取得のエラー原因を調査",
+          "英語情報源を追加して最新情報収集を試みる",
+          "検索結果の空欄を明確に提示するUI改善"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "完全一致",
+        "q3_agreement": "不一致",
+        "q5_agreement": "",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "一致",
+        "reason_note": "Web検索の失敗を指摘",
+        "structure_agreement": "一致",
+        "structure_note": "Web検索の失敗を同じ現象として認識",
+        "fix_agreement": "部分一致",
+        "fix_note": "UI改善を共通に含むが、他に違いあり",
+        "conclusion_same_cause_different": true,
+        "special_note": "原因一致だが対応策が異なる"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": false,
+        "did_not_infer_search_from_without_web": true,
+        "noticed_time_sensitivity": false,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果の取得失敗により、Webあり回答は制限を正直に伝えつつも、Webなし回答の誠実さを評価。",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": false,\n  \"did_not_infer_search_from_without_web\": true,\n  \"noticed_time_sensitivity\": false,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果の取得失敗により、Webあり回答は制限を正直に伝えつつも、Webなし回答の誠実さを評価。\"\n}"
+      }
+    },
+    {
+      "case_id": "A04",
+      "observation_id": "webeffect-hits-A04",
+      "request": "今のNVIDIAの株価の雰囲気を教えて",
+      "answer_without_web": "NVIDIAの株価は、2023年現在、AI分野の成長とデータセンター需要の高まりを背景に、強い上昇トレンドを維持しています。特に、生成AIや大規模モデルの普及により、GPU需要が急増しており、株価は過去最高値を更新する動きを見せています。ただし、市場の過熱や競合企業の動向、半導体供給の安定性など、リスク要因も存在します。投資判断には最新情報の確認を推奨します。",
+      "answer_with_web": "現在のNVIDIAの株価に関する情報は検索結果に含まれていません。上記の検索結果は、NVIDIA社の概要や製品情報、関連カテゴリなどについてのみ記載されています。株価や市場の動向については、金融情報サイトや証券取引所のデータをご確認ください。",
+      "search_query": "NVIDIA",
+      "available_count": 3,
+      "empty_count": 2,
+      "search_card": "検索クエリ: NVIDIA\n検索結果件数: 5\n本文あり件数: 3 / 本文なし件数: 2\n日本語結果あり: いいえ\n英語結果あり: はい\n\n検索結果 1 / 5\nタイトル: Nvidia\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Nvidia\n言語: en\n内容取得: 内容を取得できました\n日本語要約: Nvidia Corporationはアメリカ合衆国の multinational テクノロジー企業で、本社はカリフォルニア州サンタクララにあります。データサイエンス、高性能コンピューティング、人工知能、モバイルおよび自動車分野向けにグラフィックスプロセスユニット、システムオンチップ、アプリケーションプログラミングインターフェースを開発しています。1993年にジェンセン・ホアン、クリス・マラチョウスキー、カーリス・プライムによって設立され、Nvidi /think。\n原文:\nNvidia Corporation is an American multinational technology company headquartered in Santa Clara, California. The company develops graphics processing units, systems on chips, and application programming interfaces for data science, high-performance computing, artificial intelligence, and mobile and automotive applications. Founded in 1993 by Jensen Huang, Chris Malachowsky, and Curtis Priem, Nvidi\n\n検索結果 2 / 5\nタイトル: Nvidia Category\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/c/Nvidia\n言語: en\n内容取得: 内容を取得できました\n日本語要約: 指定された英語テキストが提供されていません。要約を行うためには、具体的なテキスト内容が必要です。\n原文:\nNvidia Category\n\n検索結果 3 / 5\nタイトル: Nvidia Parabricks – GPU-accelerated genomics toolkit.\nサイト: duckduckgo.com\nURL: https://duckduckgo.com/Nvidia_Parabricks\n言語: en\n内容取得: 内容を取得できました\n日本語要約: NVIDIA パラブリックス – GPUを活用したゲノム解析ツールキット\n原文:\nNvidia Parabricks – GPU-accelerated genomics toolkit.\n\n検索結果 4 / 5\nタイトル: NVIDIA\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/NVIDIA\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】\n\n検索結果 5 / 5\nタイトル: NVIDIA GeForce\nサイト: ja.wikipedia.org\nURL: https://ja.wikipedia.org/wiki/NVIDIA_GeForce\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "◎ 明確",
+        "Webなし十分性": "× 明確な問題あり",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "× 明確な問題あり",
+        "Web検索による変化": "― 比較不能",
+        "人間メモ": "WEBに回答はあるのかもしれないが、質問の要求がかなりあいまいで株価の上下になる要素の抽出を求めている可能性が高い。直近のNVIDIAのニュースの時系列一覧表等が要求されているのかもしれない"
+      },
+      "human_comparable": {
+        "human_question_clarity": "◎ 明確",
+        "human_without_sufficiency": "× 明確な問題あり",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "× 明確な問題あり",
+        "human_web_change": "― 比較不能",
+        "human_memo": "WEBに回答はあるのかもしれないが、質問の要求がかなりあいまいで株価の上下になる要素の抽出を求めている可能性が高い。直近のNVIDIAのニュースの時系列一覧表等が要求されているのかもしれない",
+        "derived_q3_which_better": "どちらも不十分",
+        "derived_q5_adopt": "",
+        "derived_q4_tags": [
+          "検索結果が不足していた"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "○ 使う価値が高い",
+        "q1_reason": "株価の雰囲気を正確に把握するには最新の市場データが必要だったが、検索結果に株価情報は含まれていなかったため、Web検索は必須ではなかった",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "検索結果はNVIDIA社の製品情報や企業概要に限定され、株価や市場動向に関する具体的なデータは含まれていなかった",
+        "q3_which_better": "Webなし",
+        "q3_reason": "Webあり回答は検索結果の不足を正直に伝えたが、Webなし回答は2023年の既知情報に基づいた分析を提供していたため",
+        "q4_changes": [
+          "検索結果が不足していた",
+          "回答構成だけ変化した"
+        ],
+        "q4_reason": "検索結果に株価情報が含まれず、Webあり回答は情報不足を明示したため",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "検索結果に株価情報が含まれなかったため、Webなし回答の既存情報がより信頼性が高い",
+        "q6_what_happened": "検索結果に株価データが含まれず、Webあり回答は情報不足を正直に伝えたが、Webなし回答は既存の2023年情報に基づいた分析を提供した",
+        "q7_next_fixes": [
+          "金融データソースを含む検索クエリを追加する",
+          "検索結果の日本語化を優先する",
+          "株価情報の取得に特化した検索戦略を検討する"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "完全一致",
+        "q3_agreement": "不一致",
+        "q5_agreement": "",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "一部共通",
+        "reason_note": "検索結果の不足と問題の曖昧さを指摘",
+        "structure_agreement": "部分一致",
+        "structure_note": "検索結果の不足と問題の曖昧さを共有",
+        "fix_agreement": "部分一致",
+        "fix_note": "検索戦略の改善を提案",
+        "conclusion_same_cause_different": true,
+        "special_note": "検索不足と問題の曖昧さを共通認識としているが、具体的な原因の指摘が異なっている"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": true,
+        "did_not_infer_search_from_without_web": true,
+        "noticed_time_sensitivity": true,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果に株価情報が無く、Webなし回答が2023年既知情報を活用した分析を提供した点を正しく評価",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": true,\n  \"did_not_infer_search_from_without_web\": true,\n  \"noticed_time_sensitivity\": true,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果に株価情報が無く、Webなし回答が2023年既知情報を活用した分析を提供した点を正しく評価\"\n}"
+      }
+    },
+    {
+      "case_id": "C04",
+      "observation_id": "webeffect-hits-C04",
+      "request": "ローカルLLMの事情、最近どう？",
+      "answer_without_web": "ローカルLLM（大規模言語モデル）の最近の動向について、手元の知識に基づいて説明します。  \n\n**主な特徴と傾向**  \n1. **プライバシーとセキュリティの強化**：企業や機関がデータを外部に持ち出さないため、ローカルでの実行が重視されています。特に金融や医療分野での導入が進んでいます。  \n2. **コストとリソースの課題**：高性能なハードウェア（GPU/TPUなど）や冷却設備が必要で、運用コストが高額です。  \n3. **モデルの軽量化・効率化**：トレーニングコストを抑えるため、より小さなモデルやファインチューニング技術の活用が進んでいます。  \n4. **リアルタイム処理の可能性**：ネットワーク遅延が不要な業務（例：顧客対応）では、ローカル実行が利点となるケースがあります。  \n\n**課題**  \n- モデルの更新やアップグレードが難しい  \n- 大規模なデータセットをローカルで保持・処理する際の管理コスト  \n\n現状では、ローカルLLMは特定のニッチ分野で活用されつつあり、今後はコスト削減技術やクラウドとのハイブリッド利用が注目されています。",
+      "answer_with_web": "ローカルLLM（大規模言語モデル）についての最新情報は、提供された検索結果には含まれていません。検索結果では、LLMの基本的な定義や応用例（チャットボットなど）が説明されていますが、ローカル環境での展開や最近の動向については具体的な情報が得られません。確認できなかったため、ご了承ください。",
+      "search_query": "large language model",
+      "available_count": 1,
+      "empty_count": 1,
+      "search_card": "検索クエリ: large language model\n検索結果件数: 2\n本文あり件数: 1 / 本文なし件数: 1\n日本語結果あり: いいえ\n英語結果あり: はい\n\n検索結果 1 / 2\nタイトル: Large language model\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Large_language_model\n言語: en\n内容取得: 内容を取得できました\n日本語要約: 大規模言語モデル（LLM）は、大量のテキストを学習し、自然言語処理（特に言語生成）に特化したAIモデルです。テキスト生成、要約、翻訳、分析などのタスクを多様な文脈で行えます。チャットボットの基盤となる技術で、チャットGPT、クlaude、Gemini、Grok、DeepSeekなどが代表例です。通常、トランスフォーマーアーキテクチャに基づいています。Generative pre-train /think\n原文:\nA large language model is an AI model trained on a vast amount of text for natural language processing tasks, especially language generation. LLMs can typically generate, summarize, translate, and analyze text in many contexts. They are the basis for many modern chatbots, such as ChatGPT, Claude, Gemini, Grok, and DeepSeek. LLMs are typically based on transformer architecture. Generative pre-train\n\n検索結果 2 / 2\nタイトル: Large language model benchmark\nサイト: en.wikipedia.org\nURL: https://en.wikipedia.org/wiki/Large_language_model_benchmark\n言語: unknown\n内容取得: ページは存在しますが、内容を取得できませんでした\n日本語要約: （要約なし）\n原文:\n【本文なし】",
+      "human_raw": {
+        "質問の明確さ": "◎ 明確",
+        "Webなし十分性": "△ 情報不足",
+        "検索結果の有用性": "― 検索失敗・比較不能",
+        "Webあり十分性": "× 明確な問題あり",
+        "Web検索による変化": "― 比較不能",
+        "人間メモ": "手元の知識の時間要素がないため、最近の知識なのかの判断はつかない。\nやはり、検索が死んでいるのでWEBあり完成解答の"
+      },
+      "human_comparable": {
+        "human_question_clarity": "◎ 明確",
+        "human_without_sufficiency": "△ 情報不足",
+        "human_search_usefulness": "― 検索失敗・比較不能",
+        "human_with_sufficiency": "× 明確な問題あり",
+        "human_web_change": "― 比較不能",
+        "human_memo": "手元の知識の時間要素がないため、最近の知識なのかの判断はつかない。\nやはり、検索が死んでいるのでWEBあり完成解答の",
+        "derived_q3_which_better": "",
+        "derived_q5_adopt": "",
+        "derived_q4_tags": [
+          "検索結果が不足していた"
+        ],
+        "derived_note": "Q3/Q5は人間スキーマからの機械導出。Q1は人間未記入のため空。"
+      },
+      "llm": {
+        "q1_web_need": "○ 使う価値が高い",
+        "q1_reason": "「最近の動向」を特定するには最新情報が必要だが、検索結果は基本的な定義と例のみで最新データを提供せず、Webなし回答が既存知識で十分な範囲をカバー",
+        "q2_search_usefulness": "× ほぼ役に立たない",
+        "q2_reason": "英語結果は日本語要約不可で、本文なしの結果も含むため内容不足。最新動向やローカルLLMの実態に関する具体的情報が得られず、検索結果自体が不十分",
+        "q3_which_better": "Webなし",
+        "q3_reason": "Webあり回答は検索結果の不足を正直に伝えるが、Webなし回答が既存知識で「プライバシー強化」「コスト課題」などの最近の傾向を説明しており、検索結果が補完する情報を持たないため",
+        "q4_changes": [
+          "検索結果が不足していた"
+        ],
+        "q4_reason": "検索結果はLLMの基本定義と例を提供したが、ローカルLLMの最近の動向や実態に関する具体的情報は得られず、Webなし回答の既存知識に依存",
+        "q5_adopt": "Webなし",
+        "q5_condition": "",
+        "q5_reason": "検索結果が最新動向やローカルLLMの実態に関する具体的情報を提供しないため、Webなし回答の既存知識がより信頼性が高い",
+        "q6_what_happened": "検索結果がLLMの基本情報に限定され、ローカルLLMの最近の動向に関する最新データを提供できず、Webなし回答の既存知識が補完情報として機能",
+        "q7_next_fixes": [
+          "1. ローカルLLMの最近の動向をカバーする日本語の最新情報源を検索結果に追加",
+          "2. 検索結果の本文取得エラーを修正し、内容不足を防ぐ",
+          "3. Webなし回答の知識ベースを最新のローカルLLM動向に更新"
+        ]
+      },
+      "comparison": {
+        "q2_agreement": "近似一致",
+        "q4_agreement": "完全一致",
+        "q3_agreement": "",
+        "q5_agreement": "",
+        "llm_q4_bucket": "比較不能",
+        "reason_agreement": "同じ問題を指摘",
+        "reason_note": "検索結果の時間的制約に関する指摘が一致",
+        "structure_agreement": "一致",
+        "structure_note": "検索結果の制約とWebなし回答の知識ベースの問題が共通",
+        "fix_agreement": "不一致",
+        "fix_note": "人間は修正策を提示せず、LLMが具体的な対策を提案",
+        "conclusion_same_cause_different": true,
+        "special_note": "検索結果の時間的制約に関する原因一致だが、対応策の具体性に差異"
+      },
+      "self_check": {
+        "no_confusion_answer_vs_search": true,
+        "used_search_body_as_evidence": false,
+        "did_not_infer_search_from_without_web": true,
+        "noticed_time_sensitivity": true,
+        "did_not_confuse_empty_search_with_unnecessary": true,
+        "self_check_notes": "検索結果の不足を正直に評価し、Webなし回答の既存知識と検索結果の限界を区別",
+        "_raw": "{\n  \"no_confusion_answer_vs_search\": true,\n  \"used_search_body_as_evidence\": false,\n  \"did_not_infer_search_from_without_web\": true,\n  \"noticed_time_sensitivity\": true,\n  \"did_not_confuse_empty_search_with_unnecessary\": true,\n  \"self_check_notes\": \"検索結果の不足を正直に評価し、Webなし回答の既存知識と検索結果の限界を区別\"\n}"
+      }
+    }
+  ]
+}

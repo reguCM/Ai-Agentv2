@@ -1,0 +1,42 @@
+{
+  "request_text": "Goal:\n来週の人間レビュー資料は、詳細な技術解説を優先するか、結論だけ短くまとめた報告を優先するか、好みを決めてほしい。\n\nCurrent State:\nまだ何も調査していない。方針ファイルの指定もない。\n\nNext need:\nレビュー資料の詳しさについてのユーザー好みが未決定である。\n",
+  "required_capabilities": [
+    "workspace_file_read"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_read",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "read_file"
+      ],
+      "selected_tool": "read_file",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "read_file"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null
+    }
+  ],
+  "tool_expectation": {
+    "generated": false,
+    "required_capability": null,
+    "expected_tool": null,
+    "expected_arguments": null,
+    "reason": null,
+    "level": "none",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "PARTIAL",
+  "action": null,
+  "stopped_at": "tool_selected_arguments_incomplete"
+}

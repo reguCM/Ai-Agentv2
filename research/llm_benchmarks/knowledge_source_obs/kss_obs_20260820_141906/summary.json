@@ -1,0 +1,167 @@
+{
+  "experiment_id": "kss_obs_20260820_141906",
+  "formalize_phase5_1": false,
+  "n_records": 5,
+  "per_case": [
+    {
+      "case": "memory_usage",
+      "trial": 1,
+      "metrics": {
+        "pass": true,
+        "fail_stage": null,
+        "error": null,
+        "rounds": 6,
+        "llm_calls": 14,
+        "usable_findings": 2,
+        "actual_headroom_min": 817,
+        "headroom_gate_ok": true,
+        "context_overflow": false,
+        "kss_obs_rounds": 6,
+        "kss_history_events": 6,
+        "preferred_sources": [
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research"
+        ],
+        "known_coverage_mean": 0.025,
+        "proposals_calibrated": 11,
+        "proposals_result_linked": 11,
+        "auto_switch": false,
+        "behavior_changed": false,
+        "note": "observation_only_same_path_as_phase4_live"
+      }
+    },
+    {
+      "case": "cpu_temperature",
+      "trial": 1,
+      "metrics": {
+        "pass": false,
+        "fail_stage": "judge",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 20,
+        "usable_findings": 0,
+        "actual_headroom_min": 1450,
+        "headroom_gate_ok": true,
+        "context_overflow": false,
+        "kss_obs_rounds": 10,
+        "kss_history_events": 10,
+        "preferred_sources": [
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "state",
+          "state",
+          "state"
+        ],
+        "known_coverage_mean": 0.27,
+        "proposals_calibrated": 8,
+        "proposals_result_linked": 8,
+        "auto_switch": false,
+        "behavior_changed": false,
+        "note": "observation_only_same_path_as_phase4_live"
+      }
+    },
+    {
+      "case": "disk_usage",
+      "trial": 1,
+      "metrics": {
+        "pass": false,
+        "fail_stage": "research",
+        "error": "stagnation",
+        "rounds": 8,
+        "llm_calls": 15,
+        "usable_findings": 0,
+        "actual_headroom_min": 1153,
+        "headroom_gate_ok": true,
+        "context_overflow": false,
+        "kss_obs_rounds": 8,
+        "kss_history_events": 8,
+        "preferred_sources": [
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research"
+        ],
+        "known_coverage_mean": 0.019,
+        "proposals_calibrated": 13,
+        "proposals_result_linked": 13,
+        "auto_switch": false,
+        "behavior_changed": false,
+        "note": "observation_only_same_path_as_phase4_live"
+      }
+    },
+    {
+      "case": "gpu_usage",
+      "trial": 1,
+      "metrics": {
+        "pass": false,
+        "fail_stage": "proposal",
+        "error": "proposal_validation_ng",
+        "rounds": null,
+        "llm_calls": 2,
+        "usable_findings": 0,
+        "actual_headroom_min": null,
+        "headroom_gate_ok": null,
+        "context_overflow": false,
+        "kss_obs_rounds": 0,
+        "kss_history_events": 0,
+        "preferred_sources": [],
+        "known_coverage_mean": null,
+        "proposals_calibrated": 0,
+        "proposals_result_linked": 0,
+        "auto_switch": false,
+        "behavior_changed": false,
+        "note": "observation_only_same_path_as_phase4_live"
+      }
+    },
+    {
+      "case": "gpu_vram_usage",
+      "trial": 1,
+      "metrics": {
+        "pass": false,
+        "fail_stage": "research",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 18,
+        "usable_findings": 0,
+        "actual_headroom_min": 1227,
+        "headroom_gate_ok": true,
+        "context_overflow": false,
+        "kss_obs_rounds": 10,
+        "kss_history_events": 10,
+        "preferred_sources": [
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research",
+          "external_research"
+        ],
+        "known_coverage_mean": 0.015,
+        "proposals_calibrated": 8,
+        "proposals_result_linked": 8,
+        "auto_switch": false,
+        "behavior_changed": false,
+        "note": "observation_only_same_path_as_phase4_live"
+      }
+    }
+  ],
+  "measurement_ok": true,
+  "disclaimer": "Observation-only. Do not compare causally to past P4/P5/P5.1 trials. No Decision thresholds applied."
+}

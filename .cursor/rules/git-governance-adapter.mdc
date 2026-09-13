@@ -1,0 +1,43 @@
+---
+description: Git Governance reference adapter (machine contract + semantic GIT policy). Does not replace docs/GIT_OPERATION_POLICY.md.
+alwaysApply: true
+---
+
+# Git Governance Adapter (Cursor)
+
+このファイルは **Adapter** である。Git の意味正本は `docs/GIT_OPERATION_POLICY.md`。
+Agent 向けの承認区分・action ID の機械正本は `ai_tool/policy/git_governance.json`
+（Manifest: `development_policy.json` の `distribution.git_governance_ref`）。
+
+本文をここへ複製しない。矛盾時は Canonical Policy（意味: GIT markdown、機械: git_governance.json）を優先する。
+
+## Commit（Option C）
+
+- デフォルト: Agent は **無条件に auto commit しない**。
+- 例外: Task / Goal / Execution から **`AUTO_COMMIT_ALLOWED`** が明示されている場合のみ、
+  GIT §4 LEVEL 2 の条件を満たすとき commit 可能（Runtime 検証は contract 上 `NOT_CONNECTED` の場合あり）。
+
+## Human Approval / Block（機械契約の要約）
+
+| action_id | approval_class |
+|-----------|----------------|
+| push (SAFE NORMAL via pre-push v2.1), clean, rebase, worktree_remove, amend | HUMAN_APPROVAL_REQUIRED |
+| force_push, force_push_with_lease, reset_hard, amend_after_hook_failure | AGENT_ALWAYS_BLOCK |
+
+`AGENT_ALWAYS_BLOCK` は Human 自身の直接操作を禁止しない（`OUTSIDE_AGENT_CONTRACT`）。
+
+## Host User Rules
+
+Cursor **User Rules**（リポジトリ外）は Host Adapter。手動同期チェックリスト:
+`docs/adapters/GIT_GOVERNANCE_CURSOR_HOST.md`
+
+## Destructive local ops（v2.2）
+
+- `restore` / path `checkout` / `reset` / `clean` / `worktree remove` は **実行前に git_guard を明示呼び出し**（`local_safety v2.2`）してから Agent が実行する。Probe で SAFE と証明できない場合は実行しない。
+- PROJECT_AGENT（`agent.py` `execute_tool`）は `command`/`cmd` 引数の破壊的 git を **v2.2.1 bridge** で実行前評価する（Cursor ターミナル直叩きは RULE_ONLY）。
+- リポジトリ・worktree 配下への **`Remove-Item -Recurse -Force` / `rm -rf` を自動実行しない**。既存 verify worktree が存在する場合は削除せず STOP。整理は `git worktree list` → guard → `git worktree remove`。
+
+## Enforcement
+
+`tools/git_guard` と Git hooks は **Validator / Enforcement Adapter**（G4 で contract 照合）。
+本 Adapter は hook を変更しない。v2.2 の local 操作は hook では止められない（`LOCAL_OPS_ENFORCEMENT.md`）。

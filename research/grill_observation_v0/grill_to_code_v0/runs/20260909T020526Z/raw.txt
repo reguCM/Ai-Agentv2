@@ -1,0 +1,153 @@
+### 1. プロジェクトの初期設定
+**質問:** Pygameをインストールしていますか？  
+**推奨回答:**  
+```bash
+pip install pygame
+```
+
+**コードの開始点:**  
+```python
+import pygame
+import random
+
+# ゲーム初期化
+pygame.init()
+
+# 画面サイズ設定
+SCREEN_WIDTH = 300
+SCREEN_HEIGHT = 600
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("テトリス")
+
+# グリッド設定
+GRID_WIDTH = 10
+GRID_HEIGHT = 20
+BLOCK_SIZE = 30
+```
+
+---
+
+### 2. グリッドの描画
+**質問:** グリッドを描画するためのコードをどのように書くべきですか？  
+**推奨回答:**  
+```python
+def draw_grid():
+    for x in range(GRID_WIDTH):
+        for y in range(GRID_HEIGHT):
+            pygame.draw.rect(screen, (50, 50, 50), (x*BLOCK_SIZE, y*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE), 1)
+
+# ゲームループ内で呼び出す
+draw_grid()
+```
+
+---
+
+### 3. テトロミノの形状定義
+**質問:** テトロミノの形状をどのように定義しますか？  
+**推奨回答:**  
+```python
+# テトロミノの形状（例: I, O, T, S, Z, J, L）
+SHAPES = {
+    'I': [[1,1,1,1]],
+    'O': [[1,1],[1,1]],
+    'T': [[0,1,0],[1,1,1]],
+    'S': [[0,1,1],[1,1,0]],
+    'Z': [[1,1,0],[0,1,1]],
+    'J': [[1,0,0],[1,1,1]],
+    'L': [[0,0,1],[1,1,1]]
+}
+
+# ランダムなテトロミノ生成
+def get_random_tetromino():
+    shape = random.choice(list(SHAPES.keys()))
+    return {
+        'shape': SHAPES[shape],
+        'color': (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+    }
+```
+
+---
+
+### 4. テトロミノの初期配置と移動
+**質問:** テトロミノを画面中央上部に配置する方法は？  
+**推奨回答:**  
+```python
+# テトロミノの初期位置（グリッドの上部中央）
+def create_tetromino():
+    tetromino = get_random_tetromino()
+    return {
+        'x': GRID_WIDTH // 2 - len(tetromino['shape'][0]) // 2,
+        'y': 0,
+        'shape': tetromino['shape'],
+        'color': tetromino['color']
+    }
+
+# テトロミノの描画
+def draw_tetromino(tetromino):
+    for y, row in enumerate(tetromino['shape']):
+        for x, cell in enumerate(row):
+            if cell:
+                pygame.draw.rect(screen, tetromino['color'], 
+                                 (tetromino['x']*BLOCK_SIZE + x*BLOCK_SIZE, 
+                                  tetromino['y']*BLOCK_SIZE + y*BLOCK_SIZE, 
+                                  BLOCK_SIZE, BLOCK_SIZE))
+```
+
+---
+
+### 5. 衝突判定の実装
+**質問:** テトロミノの移動時に衝突を判定するロジックは？  
+**推奨回答:**  
+```python
+def check_collision(tetromino, grid, dx=0, dy=0):
+    for y, row in enumerate(tetromino['shape']):
+        for x, cell in enumerate(row):
+            if cell:
+                nx = tetromino['x'] + x + dx
+                ny = tetromino['y'] + y + dy
+                if nx < 0 or nx >= GRID_WIDTH or ny >= GRID_HEIGHT:
+                    return True
+                if ny >= 0 and grid[ny][nx]:
+                    return True
+    return False
+```
+
+---
+
+### 6. ゲームループの構成
+**質問:** ゲームループ内で処理すべき主なステップは？  
+**推奨回答:**  
+```python
+running = True
+clock = pygame.time.Clock()
+fall_time = 0
+fall_speed = 500  # ミリ秒
+
+current_tetromino = create_tetromino()
+grid = [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+
+while running:
+    screen.fill((0, 0, 0))
+    draw_grid()
+    
+    # イベント処理
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    
+    # キーボード入力処理
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT] and not check_collision(current_tetromino, grid, dx=-1):
+        current_tetromino['x'] -= 1
+    if keys[pygame.K_RIGHT] and not check_collision(current_tetromino, grid, dx=1):
+        current_tetromino['x'] += 1
+    if keys[pygame.K_DOWN] and not check_collision(current_tetromino, grid, dy=1):
+        current_tetromino['y'] += 1
+    if keys[pygame.K_UP]:
+        # 回転処理（行列の転置 + 反転）
+        rotated = [list(row) for row in zip(*current_tetromino['shape'])[::-1]]
+        if not check_collision({'shape': rotated, 'x': current_tetromino['x'], 'y': current_tetromino['y']}, grid):
+            current_tetromino['shape'] = rotated
+    
+    # 自動落下処理
+    fall_time +=

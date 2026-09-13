@@ -1,0 +1,50 @@
+この問題を解決してください。
+
+以下は実際の実行結果です。
+
+pytest
+command: ["C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe", "-m", "pytest", "tests/test_main.py", "-q"]
+exit_code: 1
+stdout:
+F                                                                        [100%]
+================================== FAILURES ===================================
+___________________________ test_assemble_shipment ____________________________
+
+    def test_assemble_shipment():
+>       shipment = assemble_shipment()
+
+tests\test_main.py:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+main.py:9: in assemble_shipment
+    "lane": pick_lane(lanes, 2),
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+lanes = ['north'], index = 2
+
+    def pick_lane(lanes, index):
+>       return lanes[index]
+E       IndexError: list index out of range
+
+helper.py:10: IndexError
+=========================== short test summary info ===========================
+FAILED tests/test_main.py::test_assemble_shipment - IndexError: list index ou...
+1 failed in 0.08s
+stderr:
+
+
+python main.py
+command: ["C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe", "main.py"]
+exit_code: 1
+stdout:
+stderr:
+Traceback (most recent call last):
+  File "D:\AI-Agent\research\llm_benchmarks\upper_judgment_experiment\results\20260901T022619Z\fixture\main.py", line 19, in <module>
+    main()
+  File "D:\AI-Agent\research\llm_benchmarks\upper_judgment_experiment\results\20260901T022619Z\fixture\main.py", line 15, in main
+    print(json.dumps(assemble_shipment()))
+  File "D:\AI-Agent\research\llm_benchmarks\upper_judgment_experiment\results\20260901T022619Z\fixture\main.py", line 9, in assemble_shipment
+    "lane": pick_lane(lanes, 2),
+  File "D:\AI-Agent\research\llm_benchmarks\upper_judgment_experiment\results\20260901T022619Z\fixture\helper.py", line 10, in pick_lane
+    return lanes[index]
+IndexError: list index out of range
+

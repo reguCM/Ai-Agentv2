@@ -1,0 +1,292 @@
+{
+  "tool_id": "local:get_gpu_processes",
+  "name": "get_gpu_processes",
+  "version": "1.0.0-legacy-migrated",
+  "description": "現在GPUを使用しているプロセスを nvidia-smi から実測する。取得不能時は空リストと status/error を返し、固定プロセス一覧へフォールバックしない。",
+  "provider": "local",
+  "source": "registry/tools.json",
+  "capability": ["GPU", "プロセス", "VRAM使用", "observation"],
+  "purpose": "nvidia-smi --query-compute-apps から GPU 使用中プロセス（pid, process_name, used_gpu_memory）を実測して返す（Registry 登録 Legacy Tool の現行契約固定）",
+  "allowed_operations": ["read"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "processes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "pid": {},
+            "name": {},
+            "vram_used": {}
+          },
+          "required": ["pid", "name", "vram_used"]
+        }
+      },
+      "ok": { "type": "boolean" },
+      "status": {},
+      "error": {},
+      "observation_source": { "const": "real" },
+      "source": {}
+    },
+    "required": ["processes", "ok", "status", "error", "observation_source", "source"]
+  },
+  "output_fields": {
+    "processes": {
+      "type": "array",
+      "meaning": "GPU compute アプリのリスト。空配列は「プロセスなし」または失敗時",
+      "observation_source": "nvidia-smi --query-compute-apps",
+      "item_fields": {
+        "pid": {
+          "type_success": "integer",
+          "type_failure_in_item": "string",
+          "meaning": "プロセス ID",
+          "observation_source": "nvidia-smi pid",
+          "unknown_condition": "パース不能時文字列 \"unknown\""
+        },
+        "name": {
+          "type": "string",
+          "meaning": "process_name（フルパスまたは [Insufficient Permissions] 等）",
+          "observation_source": "nvidia-smi process_name",
+          "unknown_condition": "欠測時 \"unknown\""
+        },
+        "vram_used": {
+          "type_success": "integer",
+          "type_failure_in_item": "string",
+          "unit": "mib",
+          "meaning": "used_gpu_memory（プロセス別 VRAM 使用量）",
+          "observation_source": "nvidia-smi used_gpu_memory",
+          "unknown_condition": "[N/A] / n/a / 空 / パース不能 → 文字列 \"unknown\"（0 や推定値で埋めない）",
+          "observation_validity": "PARTIAL — 権限・ドライバ都合で unknown が多い"
+        }
+      }
+    },
+    "ok": {
+      "type": "boolean",
+      "meaning": "観測成功=true（空リスト含む）/ 失敗=false",
+      "observation_source": "DERIVED_VALUE"
+    },
+    "status": {
+      "type": "string",
+      "meaning": "成功 \"ok\"；nvidia-smi 不在 \"unavailable\"；その他 \"error\"",
+      "observation_source": "DERIVED_VALUE"
+    },
+    "error": {
+      "type": "string|null",
+      "meaning": "失敗理由（例: nvidia-smi_not_found, nvidia_smi_timeout）；成功時 null",
+      "observation_source": "DERIVED_VALUE"
+    },
+    "observation_source": {
+      "type": "string",
+      "const": "real",
+      "meaning": "常に \"real\" — 固定 ollama/python リストを返さない契約",
+      "observation_source": "CONFIG_VALUE"
+    },
+    "source": {
+      "type": "string",
+      "meaning": "\"nvidia-smi\" | \"none\"",
+      "observation_source": "DERIVED_VALUE"
+    }
+  },
+  "not_provided_fields": {
+    "gpu_id": {
+      "status": "NOT_PROVIDED",
+      "note": "compute-apps クエリに GPU index フィールドなし。マルチ GPU 時の GPU 識別子は返さない"
+    },
+    "process_count": {
+      "status": "NOT_PROVIDED",
+      "note": "len(processes) で導出可能だが独立キーなし"
+    }
+  },
+  "success_format": "ok=true, processes=[{pid,name,vram_used},...], status=ok, error=null",
+  "error_format": {
+    "ok": false,
+    "processes": [],
+    "status": "error|unavailable",
+    "error": "string",
+    "observation_source": "real",
+    "source": "nvidia-smi|none"
+  },
+  "unknown_semantics": {
+    "vram_used": "nvidia-smi が [N/A] 等を返す場合、整数 0 や推定値に変換せず文字列 \"unknown\" を返す（_safe_int 経由）",
+    "empty_processes_on_success": "rows 空かつ ok=true は「GPU プロセスなし」を意味する（固定リストではない）",
+    "insufficient_permissions_name": "process_name が [Insufficient Permissions] の場合も name としてその文字列を返す（推測名で置換しない）"
+  },
+  "side_effect": "read_only",
+  "required_permission": ["visibility:agent"],
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "external_service_access": ["nvidia-smi"],
+  "risk_level": "low",
+  "expected_failure": [
+    "nvidia-smi_not_found",
+    "nvidia_smi_timeout",
+    "nvidia_smi_failed",
+    "nvidia_smi_empty"
+  ],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "NVIDIA GPU + nvidia-smi 必須",
+    "VRAM per-process は PARTIAL — 多くの環境で \"unknown\"（[N/A] / 権限）",
+    "GPU identifier per process 未返却",
+    "プロセス一覧は観測時刻のスナップショット — 独立再実行と完全一致を要求しない",
+    "HEAD コミット (88febb3) の gpu_processes.py は固定 ollama/python リスト — working tree は実測 dict（未コミット diff）。本 Specification は working tree 基準"
+  ],
+  "cost": "free",
+  "tool_status": "available",
+  "catalog_hints": {
+    "experiment_status": "tested",
+    "adoption_status": "approved"
+  },
+  "contract": {
+    "can": [
+      "read_gpu_processes_via_nvidia_smi_compute_apps",
+      "return_empty_list_on_no_processes",
+      "return_unknown_vram_when_nvidia_smi_reports_na"
+    ],
+    "cannot": [
+      "fabricate_process_list",
+      "fallback_to_hardcoded_ollama_python",
+      "write_to_filesystem",
+      "call_network_apis"
+    ],
+    "must": [
+      "set_observation_source_real",
+      "return_structured_dict_with_processes_ok_status_error",
+      "return_empty_processes_on_observation_failure"
+    ],
+    "must_not": [
+      "invent_vram_from_na",
+      "remove_existing_output_keys",
+      "change_output_key_meanings"
+    ],
+    "contract_ref": "docs/ai_tool/tool_creation/TOOL_CONTRACT.md"
+  },
+  "safety_as_observed": {
+    "subprocess": "nvidia-smi --query-compute-apps（read-only query）",
+    "network_access": false,
+    "filesystem_write": false,
+    "process_information_scope": "pid, process_name, used_gpu_memory from nvidia-smi only",
+    "agent_tool_gate": "registry risk=low, visibility=agent",
+    "timeout_seconds": 8.0,
+    "safety_ref": "docs/ai_tool/tool_creation/SAFETY_BOUNDARY.md",
+    "note": "process 情報に credential は含まれない。パスは nvidia-smi 由来。"
+  },
+  "provider_specific": {
+    "module": "tools.system.gpu.gpu_processes",
+    "function": "get_gpu_processes",
+    "observation_module": "tools.system.gpu.nvidia_smi",
+    "observation_function": "query_gpu_processes",
+    "registry_visibility": "agent",
+    "registry_observation_source": "real",
+    "registry_name": "get_gpu_processes"
+  },
+  "observation_path_as_implemented": {
+    "steps": [
+      "get_gpu_processes() → query_gpu_processes()",
+      "nvidia-smi --query-compute-apps=pid,process_name,used_gpu_memory --format=csv,noheader,nounits",
+      "各行を {pid, name, vram_used} にパース",
+      "gpu_processes.py が processes/ok/status/error/observation_source/source の dict を返す"
+    ],
+    "technologies": ["subprocess", "nvidia-smi"],
+    "not_used": ["network", "WMI", "psutil", "Windows API direct"]
+  },
+  "observed_gaps": [
+    {
+      "id": "OG-01",
+      "gap": "VRAM per-process が unknown になるケースが多い",
+      "classification": "OBSERVED — 推測で埋めていない。PARTIAL observation",
+      "current_spec_violation": false
+    },
+    {
+      "id": "OG-02",
+      "gap": "HEAD コミット版は list + 固定 ollama/python；working tree は dict + 実測",
+      "classification": "Git working tree vs HEAD — Agent 互換は dict 形状で現行。HEAD 復帰は BREAKING",
+      "current_spec_violation": false
+    },
+    {
+      "id": "OG-03",
+      "gap": "Registry に output schema 未記載",
+      "classification": "Legacy Documentation Gap — Spec が補完",
+      "current_spec_violation": false
+    }
+  ],
+  "proposed_spec_change": {
+    "status": "DEFERRED — NOT APPLIED THIS PHASE",
+    "requires_human_review": true,
+    "candidates": [
+      { "field": "gpu_id", "reason": "マルチ GPU 環境での GPU 識別" },
+      { "field": "vram_used reliability", "reason": "unknown 率改善 — 取得経路要調査" }
+    ]
+  },
+  "repair_classification": {
+    "documentation": true,
+    "specification": true,
+    "test": true,
+    "implementation": false,
+    "safety": false,
+    "interface": false,
+    "rationale": "観測経路は妥当。Spec/Contract/Test/Catalog 不足を本 Phase で補完。実装変更・output 追加は不要。"
+  },
+  "migration_meta": {
+    "phase": "legacy_to_current_migration_phase1",
+    "legacy_audit_ref": "docs/ai_tool/project_audit/LEGACY_TOOL_AUDIT.md",
+    "recommended_action_at_audit": "REPAIR",
+    "implementation_changed_in_this_phase": false,
+    "registry_changed_in_this_phase": false,
+    "agent_changed_in_this_phase": false,
+    "baseline": "working_tree_gpu_processes.py"
+  },
+  "test_contract_mapping": {
+    "normal": {
+      "N-01": "COVERED — test_success_process_list_structure",
+      "N-02": "NOT_APPLICABLE — 引数なし",
+      "N-03": "COVERED — test_output_keys_match_spec"
+    },
+    "boundary": {
+      "B-01": "COVERED — test_empty_process_list_success"
+    },
+    "invalid": "NOT_APPLICABLE — 引数なし",
+    "failure": {
+      "F-02": "COVERED — test_failure_empty_no_hardcoded_fallback"
+    },
+    "safety": {
+      "S-01": "COVERED — test_no_hardcoded_ollama_python",
+      "S-04": "COVERED — spec network_access=false"
+    },
+    "unknown_handling": {
+      "VRAM_NA": "COVERED — test_vram_na_becomes_unknown_not_zero"
+    },
+    "live_observation": {
+      "suite": "tests/ai_tool/tool_creation/test_get_gpu_processes_migration.py::test_live_observation_optional",
+      "classification": "local_live_observation",
+      "ci_default": "skip unless nvidia-smi present"
+    },
+    "contract_tests": "tests/ai_tool/tool_creation/test_get_gpu_processes_migration.py",
+    "legacy_indirect": "tests/test_gpu_real_observation.py::test_processes_not_fixed_ollama_python"
+  },
+  "registry_alignment": {
+    "registry_name": "get_gpu_processes",
+    "descriptor_fields_observed": [
+      "name",
+      "visibility",
+      "observation_source",
+      "module",
+      "function",
+      "input",
+      "risk",
+      "description"
+    ],
+    "registry_output_documented": false,
+    "note": "Registry に output schema なし — Specification が補完"
+  }
+}

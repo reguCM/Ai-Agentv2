@@ -1,0 +1,1323 @@
+{
+  "note": "Clarity 3種。Research は渡さない。unittest ではない。",
+  "runs": [
+    {
+      "timestamp": "2026-08-19T02:03:53.524941+00:00",
+      "case": "clarity_memory_usage",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリ使用率を取得するTool",
+      "expect_status": "clear",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "clear",
+        "expect_next_step": "research",
+        "status_ok": false,
+        "next_step_ok": false,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "Which specific Windows tool or method would you like to use to get the memory usage rate?",
+        "options": [
+          {
+            "id": "1",
+            "label": "使用するToolの名前を指定"
+          },
+          {
+            "id": "2",
+            "label": "コマンドラインを使用"
+          },
+          {
+            "id": "3",
+            "label": "GUIアプリケーションを使用"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 6.7,
+        "llm_seconds": 6.7,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:03:54.799597+00:00",
+      "case": "clarity_memory_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": true,
+      "pass": true,
+      "error": null,
+      "request": "Windowsのメモリを取得するTool",
+      "expect_status": "needs_clarification",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "needs_clarification",
+        "expect_next_step": "ask_user",
+        "status_ok": true,
+        "next_step_ok": true,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "ok": true,
+        "pass": true
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "Which specific Windows tool or method would you like to use to retrieve memory information?",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "Use Task Manager"
+          },
+          {
+            "id": "opt2",
+            "label": "Use PowerShell Command"
+          },
+          {
+            "id": "opt3",
+            "label": "Use System Information Tool"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.3,
+        "llm_seconds": 1.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:03:57.146001+00:00",
+      "case": "clarity_memory_vague",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "便利なメモリToolを作って",
+      "expect_status": "insufficient_information",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "insufficient_information",
+        "expect_next_step": "ask_user",
+        "status_ok": false,
+        "next_step_ok": true,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "What specific features or functionalities do you want in your memory tool?",
+        "options": [
+          {
+            "id": "request.subject",
+            "label": "Subject"
+          },
+          {
+            "id": "request.action",
+            "label": "Action"
+          },
+          {
+            "id": "request.metric",
+            "label": "Metric"
+          },
+          {
+            "id": "request.target",
+            "label": "Target"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 2.3,
+        "llm_seconds": 2.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:06:09.149185+00:00",
+      "case": "clarity_memory_usage",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリ使用率を取得するTool",
+      "expect_status": "clear",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "clear",
+        "expect_next_step": "research",
+        "status_ok": false,
+        "next_step_ok": false,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "The user requested to retrieve memory information, but did not specify which metric (usage, free, or total) they are interested in.",
+        "question": "Which specific memory metric do you want to retrieve: usage, free, or total?",
+        "options": [
+          {
+            "id": "memory_usage",
+            "label": "Usage"
+          },
+          {
+            "id": "memory_free",
+            "label": "Free"
+          },
+          {
+            "id": "memory_total",
+            "label": "Total"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 6.3,
+        "llm_seconds": 6.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:06:10.706273+00:00",
+      "case": "clarity_memory_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": true,
+      "pass": true,
+      "error": null,
+      "request": "Windowsのメモリを取得するTool",
+      "expect_status": "needs_clarification",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "needs_clarification",
+        "expect_next_step": "ask_user",
+        "status_ok": true,
+        "next_step_ok": true,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": true,
+        "pass": true
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "The user's request is broad. Clarifying the specific memory metric they need will help provide a more accurate response.",
+        "question": "Which specific memory information do you need? Please choose from usage, free, or total.",
+        "options": [
+          {
+            "id": "usage",
+            "label": "Memory Usage"
+          },
+          {
+            "id": "free",
+            "label": "Free Memory"
+          },
+          {
+            "id": "total",
+            "label": "Total Memory"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.6,
+        "llm_seconds": 1.6,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:06:11.331168+00:00",
+      "case": "clarity_memory_vague",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": true,
+      "pass": true,
+      "error": null,
+      "request": "便利なメモリToolを作って",
+      "expect_status": "insufficient_information",
+      "labels": {
+        "status": "insufficient_information",
+        "next_step": "ask_user",
+        "expect_status": "insufficient_information",
+        "expect_next_step": "ask_user",
+        "status_ok": true,
+        "next_step_ok": true,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": true,
+        "pass": true
+      },
+      "judgment": {
+        "status": "insufficient_information",
+        "reason": "What specific type of memory tool do you need? Please specify the type of information you want to track, such as usage, free space, or total capacity.",
+        "question": "What specific type of memory tool do you need? Please specify the type of information you want to track, such as usage, free space, or total capacity.",
+        "options": []
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 0.6,
+        "llm_seconds": 0.6,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:06:41.602526+00:00",
+      "case": "clarity_memory_usage",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリ使用率を取得するTool",
+      "expect_status": "clear",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "clear",
+        "expect_next_step": "research",
+        "status_ok": false,
+        "next_step_ok": false,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "The user has requested to retrieve the memory usage on a Windows system, but did not specify which memory metric to retrieve.",
+        "question": "Which specific memory metric do you want to retrieve: usage, free, or total?",
+        "options": [
+          {
+            "id": "usage",
+            "label": "Usage"
+          },
+          {
+            "id": "free",
+            "label": "Free"
+          },
+          {
+            "id": "total",
+            "label": "Total"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 5.9,
+        "llm_seconds": 5.9,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:13:07.134457+00:00",
+      "case": "clarity_memory_usage",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリ使用率を取得するTool",
+      "expect_status": "clear",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "clear",
+        "expect_next_step": "research",
+        "status_ok": false,
+        "next_step_ok": false,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "Which tool would you like to use to get the memory usage rate on Windows?",
+        "options": [
+          {
+            "id": "1",
+            "label": "PowerShell"
+          },
+          {
+            "id": "2",
+            "label": "WMI"
+          },
+          {
+            "id": "3",
+            "label": "CIM"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 7.0,
+        "llm_seconds": 7.0,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:13:29.345465+00:00",
+      "case": "clarity_memory_usage",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリ使用率を取得するTool",
+      "expect_status": "clear",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "clear",
+        "expect_next_step": "research",
+        "status_ok": false,
+        "next_step_ok": false,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "Which tool would you like to use to get the memory usage rate on Windows?",
+        "options": [
+          {
+            "id": "1",
+            "label": "PowerShell"
+          },
+          {
+            "id": "2",
+            "label": "WMI"
+          },
+          {
+            "id": "3",
+            "label": "CIM"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 6.5,
+        "llm_seconds": 6.5,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:13:30.551163+00:00",
+      "case": "clarity_memory_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリを取得するTool",
+      "expect_status": "needs_clarification",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "needs_clarification",
+        "expect_next_step": "ask_user",
+        "status_ok": true,
+        "next_step_ok": true,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "expect_hit": false,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "Which tool do you want to use to get the memory information of Windows?",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "PowerShell"
+          },
+          {
+            "id": "opt2",
+            "label": "WMI"
+          },
+          {
+            "id": "opt3",
+            "label": "CIM"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.2,
+        "llm_seconds": 1.2,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:13:31.794555+00:00",
+      "case": "clarity_memory_vague",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "便利なメモリToolを作って",
+      "expect_status": "insufficient_information",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "insufficient_information",
+        "expect_next_step": "ask_user",
+        "status_ok": false,
+        "next_step_ok": true,
+        "research_isolated": true,
+        "invented_command": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "What specific type of memory tool are you looking to create?",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "Note-taking app"
+          },
+          {
+            "id": "opt2",
+            "label": "Memory management app"
+          },
+          {
+            "id": "opt3",
+            "label": "Other"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.2,
+        "llm_seconds": 1.2,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:37.619552+00:00",
+      "case": "clarity_memory_usage",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリ使用率を取得するTool",
+      "expect_status": "clear",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "clear",
+        "expect_next_step": "research",
+        "status_ok": false,
+        "next_step_ok": false,
+        "asked_only_when_needed": false,
+        "user_decision_question": false,
+        "did_not_delegate_method": true,
+        "handed_to_research": false,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "何を取得したいですか？Windowsのメモリ使用率を取得するために使用するツールが既に存在していますが、具体的にどのツールを使用しますか？",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "Windowsのメモリ使用率を取得するTool"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 5.9,
+        "llm_seconds": 5.9,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:39.037740+00:00",
+      "case": "clarity_memory_usage",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリ使用率を取得するTool",
+      "expect_status": "clear",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "clear",
+        "expect_next_step": "research",
+        "status_ok": false,
+        "next_step_ok": false,
+        "asked_only_when_needed": false,
+        "user_decision_question": false,
+        "did_not_delegate_method": true,
+        "handed_to_research": false,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "どのようにしてWindowsのメモリ使用率を取得しますか？",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "Windowsのメモリ使用率を取得するための既存のツールを使用する"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.4,
+        "llm_seconds": 1.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:40.470266+00:00",
+      "case": "clarity_memory_usage",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "Windowsのメモリ使用率を取得するTool",
+      "expect_status": "clear",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "clear",
+        "expect_next_step": "research",
+        "status_ok": false,
+        "next_step_ok": false,
+        "asked_only_when_needed": false,
+        "user_decision_question": false,
+        "did_not_delegate_method": true,
+        "handed_to_research": false,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "どのようにしてWindowsのメモリ使用率を取得しますか？",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "Windowsのメモリ使用率を取得するための既存のツールを使用する"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.4,
+        "llm_seconds": 1.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:41.634407+00:00",
+      "case": "clarity_memory_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": true,
+      "pass": true,
+      "error": null,
+      "request": "Windowsのメモリを取得するTool",
+      "expect_status": "needs_clarification",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "needs_clarification",
+        "expect_next_step": "ask_user",
+        "status_ok": true,
+        "next_step_ok": true,
+        "asked_only_when_needed": true,
+        "user_decision_question": true,
+        "did_not_delegate_method": true,
+        "handed_to_research": true,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": true,
+        "pass": true
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "何を取得したいですか？Windowsのメモリ使用量を取得するためのツールを構築します。",
+        "options": [
+          {
+            "id": "memory_usage",
+            "label": "メモリ使用量"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.2,
+        "llm_seconds": 1.2,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:42.717151+00:00",
+      "case": "clarity_memory_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "ok": true,
+      "pass": true,
+      "error": null,
+      "request": "Windowsのメモリを取得するTool",
+      "expect_status": "needs_clarification",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "needs_clarification",
+        "expect_next_step": "ask_user",
+        "status_ok": true,
+        "next_step_ok": true,
+        "asked_only_when_needed": true,
+        "user_decision_question": true,
+        "did_not_delegate_method": true,
+        "handed_to_research": true,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": true,
+        "pass": true
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "何を取得したいですか？",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "メモリ使用量"
+          },
+          {
+            "id": "opt2",
+            "label": "メモリの空き容量"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.1,
+        "llm_seconds": 1.1,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:43.830018+00:00",
+      "case": "clarity_memory_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "ok": true,
+      "pass": true,
+      "error": null,
+      "request": "Windowsのメモリを取得するTool",
+      "expect_status": "needs_clarification",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "needs_clarification",
+        "expect_next_step": "ask_user",
+        "status_ok": true,
+        "next_step_ok": true,
+        "asked_only_when_needed": true,
+        "user_decision_question": true,
+        "did_not_delegate_method": true,
+        "handed_to_research": true,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": true,
+        "pass": true
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "何を取得したいですか？",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "メモリ使用量"
+          },
+          {
+            "id": "opt2",
+            "label": "メモリの空き容量"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 1.1,
+        "llm_seconds": 1.1,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:46.290051+00:00",
+      "case": "clarity_memory_vague",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "便利なメモリToolを作って",
+      "expect_status": "insufficient_information",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "insufficient_information",
+        "expect_next_step": "ask_user",
+        "status_ok": false,
+        "next_step_ok": true,
+        "asked_only_when_needed": true,
+        "user_decision_question": true,
+        "did_not_delegate_method": true,
+        "handed_to_research": true,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "何を便利なメモリToolとして作成しますか？",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "テキストベースのメモリ管理"
+          },
+          {
+            "id": "opt2",
+            "label": "オンラインストレージのメモリ管理"
+          },
+          {
+            "id": "opt3",
+            "label": "データベースベースのメモリ管理"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 2.5,
+        "llm_seconds": 2.5,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:48.630798+00:00",
+      "case": "clarity_memory_vague",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "便利なメモリToolを作って",
+      "expect_status": "insufficient_information",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "insufficient_information",
+        "expect_next_step": "ask_user",
+        "status_ok": false,
+        "next_step_ok": true,
+        "asked_only_when_needed": true,
+        "user_decision_question": true,
+        "did_not_delegate_method": true,
+        "handed_to_research": true,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "何を便利なメモリToolとして作成しますか？",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "テキストベースのメモリ管理"
+          },
+          {
+            "id": "opt2",
+            "label": "オンラインストレージの統合"
+          },
+          {
+            "id": "opt3",
+            "label": "カスタムアプリケーション開発"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 2.3,
+        "llm_seconds": 2.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T02:38:50.963065+00:00",
+      "case": "clarity_memory_vague",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "ok": false,
+      "pass": false,
+      "error": null,
+      "request": "便利なメモリToolを作って",
+      "expect_status": "insufficient_information",
+      "labels": {
+        "status": "needs_clarification",
+        "next_step": "ask_user",
+        "expect_status": "insufficient_information",
+        "expect_next_step": "ask_user",
+        "status_ok": false,
+        "next_step_ok": true,
+        "asked_only_when_needed": true,
+        "user_decision_question": true,
+        "did_not_delegate_method": true,
+        "handed_to_research": true,
+        "research_isolated": true,
+        "context_present": true,
+        "invented_command": false,
+        "delegated_method": false,
+        "resolved_without_asking": false,
+        "expect_hit": true,
+        "ok": false,
+        "pass": false
+      },
+      "judgment": {
+        "status": "needs_clarification",
+        "reason": "",
+        "question": "何を便利なメモリToolとして作成しますか？",
+        "options": [
+          {
+            "id": "opt1",
+            "label": "テキストベースのメモリ管理"
+          },
+          {
+            "id": "opt2",
+            "label": "オンラインストレージの統合"
+          },
+          {
+            "id": "opt3",
+            "label": "カスタムアプリケーション開発"
+          }
+        ]
+      },
+      "isolation": {
+        "ok": true,
+        "leaks": []
+      },
+      "context": {
+        "ok": true,
+        "present": true
+      },
+      "material_keys": [
+        "conversation",
+        "target_request"
+      ],
+      "timing": {
+        "total_seconds": 2.3,
+        "llm_seconds": 2.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    }
+  ]
+}

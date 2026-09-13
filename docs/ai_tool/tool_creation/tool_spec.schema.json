@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/tool_spec.schema.json",
+  "title": "AI-Agent Tool Specification",
+  "description": "Phase 1 draft. EXPERIMENTAL — not enforced by CI yet.",
+  "type": "object",
+  "required": [
+    "tool_id",
+    "name",
+    "version",
+    "description",
+    "provider",
+    "source",
+    "capability",
+    "purpose",
+    "allowed_operations",
+    "prohibited_operations",
+    "input_schema",
+    "output_schema",
+    "error_format",
+    "side_effect",
+    "authentication",
+    "network_access",
+    "filesystem_access",
+    "risk_level",
+    "cost",
+    "tool_status"
+  ],
+  "properties": {
+    "tool_id": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+" },
+    "description": { "type": "string", "minLength": 1 },
+    "provider": {
+      "type": "string",
+      "enum": ["local", "mcp", "api", "external", "unknown"]
+    },
+    "source": { "type": "string", "minLength": 1 },
+    "capability": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "purpose": { "type": "string", "minLength": 1 },
+    "allowed_operations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "prohibited_operations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "input_schema": { "type": "object" },
+    "required": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "optional": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "constraints": { "type": "string" },
+    "examples": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "output_schema": {},
+    "success_format": { "type": "string" },
+    "error_format": { "type": "object" },
+    "side_effect": {
+      "type": "string",
+      "enum": ["none", "read_only", "write", "modify", "execute", "unknown"]
+    },
+    "required_permission": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "authentication": {
+      "type": "string",
+      "enum": ["none", "user", "token", "oauth", "unknown"]
+    },
+    "network_access": { "type": "boolean" },
+    "filesystem_access": {
+      "type": "string",
+      "enum": ["none", "read", "write", "read_write"]
+    },
+    "external_service_access": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "expected_failure": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "timeout_seconds": { "type": "number", "minimum": 0 },
+    "retry_policy": {
+      "type": "string",
+      "enum": ["none", "idempotent_retry", "unknown"]
+    },
+    "deterministic": { "type": "boolean" },
+    "known_limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "cost": {
+      "type": "string",
+      "enum": ["free", "local_cost", "paid", "unknown"]
+    },
+    "tool_status": {
+      "type": "string",
+      "enum": ["available", "disabled", "unavailable", "deprecated"]
+    },
+    "contract": {
+      "type": "object",
+      "properties": {
+        "can": { "type": "array", "items": { "type": "string" } },
+        "cannot": { "type": "array", "items": { "type": "string" } },
+        "must": { "type": "array", "items": { "type": "string" } },
+        "must_not": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "provider_specific": { "type": "object" }
+  },
+  "additionalProperties": true
+}

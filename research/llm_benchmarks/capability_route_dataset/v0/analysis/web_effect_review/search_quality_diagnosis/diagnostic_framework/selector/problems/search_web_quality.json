@@ -1,0 +1,34 @@
+{
+  "problem_id": "search_web_quality",
+  "tool": "search_web",
+  "title": "公開 search_web の検索品質が弱く見える",
+  "source": "existing_diagnosis_only",
+  "do_not_modify_tool": true,
+  "symptoms": [
+    "runtime_quality_odd",
+    "many_empty_snippets_in_ranking_comparison",
+    "some_cases_ranking_drop_with_snippet",
+    "diagnostic_confusion_stdout_vs_llm_handoff",
+    "diagnostic_confusion_collect_vs_ranking",
+    "off_path_causes_sometimes_proposed"
+  ],
+  "features": {
+    "has_runtime_logs": true,
+    "code_available": true,
+    "path_unknown_or_untrusted": true,
+    "suspect_ranking_vs_filter": true,
+    "suspect_stdout_vs_llm_handoff": true,
+    "suspect_off_path_causes": true,
+    "needs_path_integration": true,
+    "needs_local_analysis": true,
+    "intent_map_needed": true,
+    "caller_complex": true,
+    "long_logs_small_ctx": false,
+    "optional_short_edge_probe": false
+  },
+  "feature_notes": {
+    "has_runtime_logs": "ranking_comparison.csv と機械観測がある。本番 Agent 個別 messages の完全一致は UNKNOWN。",
+    "long_logs_small_ctx": "本評価では Qwen 32768 系を前提とし、DeepSeek 超過問題は全面置換禁止で扱う。",
+    "optional_short_edge_probe": "全面置換は不支持。短文プローブは必須にしない。"
+  }
+}

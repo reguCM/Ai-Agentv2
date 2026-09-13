@@ -1,0 +1,230 @@
+[EXECUTION_IDENTITY] event=agent_start EXECUTION_ACTOR=PROJECT_AGENT
+
+CLARITY CHECK:
+{
+  "status": "clear",
+  "next_step": "research",
+  "skipped_for_collection": true
+}
+
+関連Tool:
+[]
+
+参考Tool:
+[
+  {
+    "name": "get_gpu_status",
+    "category": "system",
+    "subcategory": "gpu",
+    "visibility": "agent",
+    "description": "GPUの基本状態を取得する。GPUモデル、温度、使用率、VRAM使用量を nvidia-smi から実測する。取得不能時は unknown/unavailable を返し固定値へフォールバックしない。",
+    "keywords": [
+      "GPU",
+      "グラボ",
+      "VRAM",
+      "温度",
+      "使用率"
+    ],
+    "risk": "low",
+    "observation_source": "real",
+    "module": "tools.system.gpu.gpu_status",
+    "function": "get_gpu_status",
+    "input": {}
+  },
+  {
+    "name": "get_gpu_processes",
+    "category": "system",
+    "subcategory": "gpu",
+    "visibility": "agent",
+    "description": "現在GPUを使用しているプロセスを nvidia-smi から実測する。取得不能時は空リストと status/error を返し、固定プロセス一覧へフォールバックしない。",
+    "keywords": [
+      "GPU",
+      "プロセス",
+      "プログラム",
+      "VRAM使用",
+      "GPU使用中"
+    ],
+    "risk": "low",
+    "observation_source": "real",
+    "module": "tools.system.gpu.gpu_processes",
+    "function": "get_gpu_processes",
+    "input": {}
+  }
+]
+
+参考Toolのソース:
+[
+  {
+    "name": "get_gpu_status",
+    "category": "system",
+    "subcategory": "gpu",
+    "module": "tools.system.gpu.gpu_status",
+    "function": "get_gpu_status",
+    "source": "\"\"\"GPU 基本状態の実測 Tool。固定値フォールバック禁止。\"\"\"\n\nfrom tools.system.gpu.nvidia_smi import query_gpu_status\n\n\ndef get_gpu_status():\n    \"\"\"\n    nvidia-smi から GPU 状態を取得する。\n    失敗時は unknown / unavailable / error を返し、架空値は返さない。\n    \"\"\"\n    result = query_gpu_status()\n    return {\n        \"gpu\": result.get(\"gpu\"),\n        \"temperature\": result.get(\"temperature\"),\n        \"utilization\": result.get(\"utilization\"),\n        \"vram_used\": result.get(\"vram_used\"),\n        \"vram_total\": result.get(\"vram_total\"),\n        \"ok\": result.get(\"ok\"),\n        \"status\": result.get(\"status\"),\n        \"error\": result.get(\"error\"),\n        \"observation_source\": \"real\",\n        \"source\": result.get(\"source\"),\n    }\n"
+  },
+  {
+    "name": "get_gpu_processes",
+    "category": "system",
+    "subcategory": "gpu",
+    "module": "tools.system.gpu.gpu_processes",
+    "function": "get_gpu_processes",
+    "source": "\"\"\"GPU 使用プロセスの実測 Tool。固定プロセス一覧フォールバック禁止。\"\"\"\n\nfrom tools.system.gpu.nvidia_smi import query_gpu_processes\n\n\ndef get_gpu_processes():\n    \"\"\"\n    nvidia-smi compute-apps から GPU プロセスを取得する。\n    失敗時は空リスト + status/error。固定の ollama/python は返さない。\n    \"\"\"\n    result = query_gpu_processes()\n    # 後方互換: 成功時はプロセス list を主結果にしつつメタを付与した dict も返す\n    # 既存呼び出しが list 期待の場合があるため、list を返すときはメタを失う。\n    # Agent が事実と混同しないよう、常に構造化 dict を返す。\n    return {\n        \"processes\": list(result.get(\"processes\") or []),\n        \"ok\": result.get(\"ok\"),\n        \"status\": result.get(\"status\"),\n        \"error\": result.get(\"error\"),\n        \"observation_source\": \"real\",\n        \"source\": result.get(\"source\"),\n    }\n"
+  }
+]
+
+選択されたTool: read_file
+引数: {'path': 'docs/v1_basic_specification.md'}
+[EXECUTION_IDENTITY] event=tool_call EXECUTION_ACTOR=PROJECT_AGENT
+[EXECUTION_IDENTITY] event=tool_result EXECUTION_ACTOR=PROJECT_AGENT
+
+Tool実行結果:
+{
+  "tool": "read_file",
+  "keys": [
+    "error",
+    "limit",
+    "lines",
+    "offset",
+    "ok",
+    "path",
+    "returned_lines",
+    "size_bytes",
+    "total_lines",
+    "truncated"
+  ],
+  "note": "stdout要約。LLMには raw result を渡す。"
+}
+[EXECUTION_IDENTITY] event=capability_route_observed EXECUTION_ACTOR=PROJECT_AGENT
+
+[CAPABILITY_ROUTE_OBS]
+{
+  "observation_id": "caproute-355d3c10b5d7",
+  "route": "uncertain",
+  "reason": "agent_public_tools_exist_but_no_related_match",
+  "web_search": {
+    "judgment": {
+      "judged_appropriate": true,
+      "recognized_as_candidate": true,
+      "in_related_tools": false,
+      "reason": "request_hints_web; search_web_is_agent_public",
+      "observation_only": true
+    },
+    "execution": {
+      "called": false,
+      "call_count": 0,
+      "outcomes": [],
+      "note": "execution facts only; not a capability judgment"
+    },
+    "comparison_note": "Compare judgment.judged_appropriate / recognized_as_candidate with execution.called / outcomes. Do not treat judgment as execution."
+  },
+  "agent_tools_tried_count": 1,
+  "log": "research\\llm_benchmarks\\capability_route_obs\\collect_batch_remaining\\composite_file_and_web\\capability_route.jsonl",
+  "observation_only": true
+}
+
+最終回答:
+このドキュメントは、V1バージョンのシステム開発に関する仕様とプロセスを定義したものです。以下に主要なポイントを整理します：
+
+---
+
+### **8.2 失敗の扱い**
+- **失敗の分類**: 改善対象の失敗と情報非存在・要求不能を区別する。
+- **詳細分類**: 運用側で柔軟に改良可能（構想§15・§31参照）。
+- **過去失敗の禁止**: 永久禁止はしない（構想§25参照）。V1では禁止リストの自動化は実施しない。
+
+---
+
+### **9. V1 完了条件（受け入れ）**
+**必須条件**:
+1. **二入口と visibility 契約**: 文書化され、実コードと一致。
+2. **PROJECT_AGENT**: 公開Toolを選択・実行し、結果をLLMに返す。
+3. **RESEARCH_PIPELINE**: 人間監督下でTool開発系ループを実行可能。
+4. **実行主体の区別**: ログで区別可能。
+5. **安全変更**: 人間承認なしに自動変更不可。
+6. **能力再試験**: 代表的な能力について、手順またはテストあり。
+7. **仕様書の改訂**: 現状仕様書が実コードと乖離しない（改訂ルール遵守）。
+
+**不要条件**:
+- 完全自律
+- 自己改善の無人実行
+- Web全問正解
+- 単一Agentへの統合
+- 90%昇格ルール
+
+---
+
+### **10. V1期間中の開発プロセス（規範）**
+1. 基本機能を動かす。
+2. 実際に使う・測る（主体を偽らない）。
+3. 問題を発見・分類する。
+4. 人間+Cursor+上位LLMで改善する。
+5. 仕様書を必要なら更新する。
+6. 十分な実績がある領域のみ、将来バージョンで自動化を検討。
+
+---
+
+### **11. 関連文書**
+| 文書 | 参照目的 |
+|------|----------|
+| 構想書 | 理念・将来・未決定の正本 |
+| `docs/current_system_specification.md` | 実装事実 |
+| `docs/architecture.md` | Tool Builder / 自己修復の詳細 |
+| `docs/autonomous_research_architecture.md` | Research/Judge の詳細 |
+| `PROJECT_SPEC.md` | プロジェクト概要・環境 |
+
+**衝突時の優先順位**:
+1. **安全・人間承認**: 構想の厳格側を優先。
+2. **将来機能の必須化**: V1が拒否。
+3. **コード事実**: 現状仕様書を優先し、V1は「あるべき必須」を現状の上に載せる。
+
+---
+
+### **12. 改訂履歴**
+- **2026-08-21**: 初版。構想の将来機能をV1必須から除外し、二入口現状を正規化。
+- **2026-08-21**: PROJECT_AGENT Tool Gate（デフォルト人間確認・昇格/降格）を §5.4 に追加。Research Safety 非統合。
+
+---
+
+### **要点まとめ**
+- **安全と人間監督**: すべての変更・自動化は人間承認を前提。
+- **柔軟な改善**: 運用側が詳細分類や改善プロセスを自由に設計可能。
+- **V1の限界**: 完全自律や自己改善の無人実行は不要。現状の実装と仕様書の整合性が重視。
+- **文書の役割**: 構想書は将来の方向性、現状仕様書は実装事実を示す。
+
+この仕様は、安全を最優先にしつつ、人間とAIの協働による段階的な改善を推進する設計となっています。
+[EXECUTION_IDENTITY] event=capability_outcome_compared EXECUTION_ACTOR=PROJECT_AGENT
+
+[CAPABILITY_OUTCOME_COMPARE]
+{
+  "observation_id": "caproute-355d3c10b5d7",
+  "stage": 2,
+  "web_pattern": "web_judged_not_called_answer_present",
+  "chain": {
+    "web_judgment": {
+      "judged_appropriate": true,
+      "recognized_as_candidate": true,
+      "reason": "request_hints_web; search_web_is_agent_public"
+    },
+    "web_execution": {
+      "called": false,
+      "call_count": 0,
+      "outcomes": [],
+      "primary_outcome": null
+    },
+    "final_answer": {
+      "status": "present",
+      "outcome_proxy": "success_candidate",
+      "signals": [
+        "non_empty_content"
+      ],
+      "char_count": 1544,
+      "observation_only": true,
+      "not_ground_truth": true
+    }
+  },
+  "misjudgment_classification": null,
+  "log": "research\\llm_benchmarks\\capability_route_obs\\collect_batch_remaining\\composite_file_and_web\\capability_route.jsonl",
+  "observation_only": true
+}
+
+--- STDERR ---

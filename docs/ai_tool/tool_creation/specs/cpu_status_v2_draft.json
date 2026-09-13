@@ -1,0 +1,135 @@
+{
+  "tool_id": "local:cpu_status",
+  "name": "cpu_status",
+  "version": "2.0.0-draft",
+  "description": "CPU LoadPercentage（使用率%）を Windows CIM から実測し、文字列として status キーに返す Legacy Tool。CPUモデル・コア数・温度は返さない — 必要なら get_cpu_status（別Tool案）を検討。",
+  "provider": "local",
+  "source": "docs/ai_tool/tool_creation/specs/cpu_status_v2_draft.json",
+  "capability": ["CPU", "LoadPercentage", "observation"],
+  "purpose": "Windows PowerShell Get-CimInstance Win32_Processor から LoadPercentage のみ取得し {status: string} で返す — Legacy 互換を v2 spec で固定",
+  "allowed_operations": ["read", "execute"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "status": { "type": "string" }
+    },
+    "required": ["status"]
+  },
+  "supported_environment": {
+    "os": ["Windows"],
+    "requirements": ["PowerShell", "CIM Win32_Processor"],
+    "normal_operation_condition": "powershell Get-CimInstance returns LoadPercentage"
+  },
+  "environment_dependencies": {
+    "provider_strategy": "A — single Tool, Windows CIM provider only",
+    "non_windows": "unsupported — no Linux implementation in v2 baseline"
+  },
+  "field_capability": {
+    "status": {
+      "tier": "REQUIRED",
+      "meaning": "LoadPercentage as string",
+      "evidence": "VERIFIED on audit host",
+      "failure": "literal string \"error\""
+    },
+    "model": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED via CIM on audit host", "note": "use get_cpu_status proposal" },
+    "cores": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED" },
+    "threads": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED" },
+    "clock": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED" },
+    "temperature": { "tier": "UNSUPPORTED", "evidence": "CIM Win32_Processor alone — not PROBED as available", "note": "hardware-specific API needed" }
+  },
+  "observation_semantics": {
+    "observed": "status contains numeric LoadPercentage string from CIM",
+    "unknown": "Not used — failure returns status=\"error\"",
+    "unsupported": "Non-Windows OS",
+    "unavailable": "PowerShell/CIM failure → status=\"error\""
+  },
+  "unknown_semantics": {
+    "note": "cpu_status v2 does not emit unknown string for load — uses error status instead"
+  },
+  "unsupported_semantics": {
+    "non_windows": "Tool not specified for Linux/macOS in v2 baseline"
+  },
+  "unavailable_semantics": {
+    "powershell_failure": "{\"status\": \"error\"} only — no ok/error keys"
+  },
+  "error_semantics": {
+    "status_error": "PowerShell returncode != 0",
+    "no_separate_error_key": "KNOWN_LIMITATION vs GPU tools"
+  },
+  "output_fields": {
+    "status": {
+      "unit": "percent",
+      "meaning": "Win32_Processor.LoadPercentage as string (e.g. \"65\")",
+      "naming_note": "Key name 'status' is legacy — semantically LoadPercentage not general health"
+    }
+  },
+  "not_provided_fields": {
+    "model": { "status": "NOT_PROVIDED", "not_a_defect": true },
+    "cores": { "status": "NOT_PROVIDED" },
+    "threads": { "status": "NOT_PROVIDED" },
+    "temperature": { "status": "NOT_PROVIDED", "note": "UNSUPPORTED via current path" },
+    "ok": { "status": "NOT_PROVIDED", "cross_tool_gap": "GPU tools have ok; cpu_status does not" },
+    "error": { "status": "NOT_PROVIDED" },
+    "observation_source": { "status": "NOT_PROVIDED", "registry_metadata_only": true }
+  },
+  "success_format": "{\"status\": \"<LoadPercentage>\"}",
+  "error_format": { "status": "error" },
+  "side_effect": "execute",
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "risk_level": "low",
+  "expected_failure": ["powershell_nonzero_exit"],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "LoadPercentage only — not full CPU status",
+    "status key naming ambiguity",
+    "No ok/error/observation_source in output — OBSERVED GAP vs GPU tools",
+    "Empty stdout last line → \"0\" (implementation behavior)"
+  ],
+  "cost": "free",
+  "tool_status": "available",
+  "safety_boundary": {
+    "network_access": false,
+    "subprocess": "local PowerShell CIM read",
+    "ref": "docs/ai_tool/tool_creation/SAFETY_BOUNDARY.md"
+  },
+  "compatibility_notes": {
+    "v1_legacy_migrated": "output schema unchanged — single status key",
+    "extension_policy": "Adding keys to cpu_status requires HR — prefer get_cpu_status new tool",
+    "breaking_change_policy": "Changing status meaning from LoadPercentage forbidden"
+  },
+  "implementation_notes": {
+    "module": "tools.system.cpu.cpu_status",
+    "function": "cpu_status",
+    "query": "Get-CimInstance Win32_Processor | Select LoadPercentage"
+  },
+  "validation_requirements": [
+    "validate_tool_spec_file ACCEPT",
+    "migration tests 10/10",
+    "E2E det_case3 routes to cpu_status not get_gpu_processes"
+  ],
+  "agent_usage": {
+    "use_for": ["CPU load percentage", "CPU utilization percent (LoadPercentage)"],
+    "do_not_use_for": ["CPU model", "core count", "CPU temperature", "GPU metrics"],
+    "llm_rules": ["status is LoadPercentage string", "Do not invent cores/model from status alone"]
+  },
+  "contract": {
+    "can": ["return_load_percentage_string"],
+    "cannot": ["return_cpu_model", "return_temperature"],
+    "must": ["preserve status-only output in v2 baseline"],
+    "must_not": ["change status semantic to general health object"]
+  },
+  "provider_specific": {
+    "module": "tools.system.cpu.cpu_status",
+    "function": "cpu_status"
+  }
+}

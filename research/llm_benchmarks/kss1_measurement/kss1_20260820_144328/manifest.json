@@ -1,0 +1,33 @@
+{
+  "experiment_id": "kss1_20260820_144328",
+  "purpose": "measurement_ok for KSS-1 observability (not performance)",
+  "formalize_phase5_1": false,
+  "auto_routing": false,
+  "common_env": {
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+    "AI_AGENT_KSS1_OBS": "1"
+  },
+  "cases": [
+    "memory_usage",
+    "cpu_temperature",
+    "disk_usage",
+    "gpu_usage",
+    "gpu_vram_usage"
+  ],
+  "trials": 1,
+  "success_criteria": [
+    "decision observation attachable",
+    "result provenance linkable",
+    "high_confidence_zero_gain extractable",
+    "useful vs zero-info failure separable",
+    "pipeline behavior unchanged",
+    "headroom gate unchanged"
+  ]
+}

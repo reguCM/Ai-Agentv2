@@ -1,0 +1,125 @@
+{
+  "tool_id": "local:read_url_text",
+  "name": "read_url_text",
+  "version": "0.1.0-draft",
+  "description": "HTTP/HTTPS URL からテキストを read-only GET で取得する（experimental）。SSRF 対策付き。",
+  "provider": "local",
+  "source": "docs/ai_tool/tool_creation/specs/local_read_url_text.json",
+  "capability": ["network", "read", "text", "url", "http"],
+  "purpose": "指定 URL からテキストレスポンスを安全に取得し Tool 開発 Context 等で利用する",
+  "allowed_operations": ["read", "network"],
+  "prohibited_operations": ["write", "modify", "execute"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "url": {
+        "type": "string",
+        "description": "HTTP または HTTPS URL"
+      },
+      "max_bytes": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 65536,
+        "description": "最大レスポンスバイト（任意、既定 65536）"
+      },
+      "timeout_seconds": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 60,
+        "description": "接続・読取タイムアウト秒（任意、既定 10）"
+      }
+    },
+    "required": ["url"]
+  },
+  "required": ["url"],
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "ok": { "type": "boolean" },
+      "url": { "type": "string" },
+      "final_url": { "type": ["string", "null"] },
+      "status_code": { "type": ["integer", "null"] },
+      "content_type": { "type": ["string", "null"] },
+      "size_bytes": { "type": ["integer", "null"] },
+      "content": { "type": ["string", "null"] },
+      "truncated": { "type": "boolean" },
+      "error": { "type": ["string", "null"] }
+    },
+    "required": ["ok", "url", "error"]
+  },
+  "success_format": "ok=true, content にテキスト、HTTP metadata 付き",
+  "error_format": {
+    "ok": false,
+    "url": "string",
+    "error": "string",
+    "content": null
+  },
+  "side_effect": "read_only",
+  "required_permission": ["visibility:experimental"],
+  "authentication": "none",
+  "network_access": true,
+  "filesystem_access": "none",
+  "external_service_access": ["http", "https"],
+  "risk_level": "medium",
+  "expected_failure": [
+    "malformed url",
+    "unsupported scheme",
+    "ssrf blocked",
+    "timeout",
+    "connection failure",
+    "http error",
+    "binary response",
+    "size exceeds max_bytes",
+    "encoding error",
+    "redirect limit exceeded",
+    "redirect ssrf blocked"
+  ],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "GET のみ。POST/認証/Cookie なし",
+    "SSRF 完全防御は不可（DNS rebinding 等は UNKNOWN）",
+    "JavaScript レンダリングなし",
+    "experimental — Registry/Agent 未統合",
+    "デフォルト max_bytes=65536, timeout_seconds=10"
+  ],
+  "cost": "free",
+  "tool_status": "unavailable",
+  "catalog_hints": {
+    "experiment_status": "experimental",
+    "adoption_status": "not_reviewed"
+  },
+  "contract": {
+    "can": [
+      "http_get_text_from_public_url",
+      "validate_url_before_connect",
+      "return_structured_error_on_violation"
+    ],
+    "cannot": [
+      "post_put_patch_delete",
+      "access_private_or_loopback_targets",
+      "store_credentials_or_cookies",
+      "write_to_filesystem",
+      "follow_redirect_to_blocked_target"
+    ],
+    "must": [
+      "use_get_only",
+      "set_ok_false_on_error",
+      "include_url_in_result",
+      "revalidate_each_redirect"
+    ],
+    "must_not": [
+      "trust_url_string_without_dns_check",
+      "silently_accept_ssrf_target",
+      "fallback_to_unbounded_read"
+    ]
+  },
+  "provider_specific": {
+    "safety_policy": "docs/ai_tool/tool_creation/URL_FETCH_SAFETY_POLICY.md",
+    "implementation_module": "ai_tool.experimental.read_url.reader",
+    "implementation_function": "read_url_text",
+    "registry_visibility": "experimental",
+    "http_client": "urllib.request (stdlib)"
+  }
+}

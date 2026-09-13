@@ -1,0 +1,28 @@
+{
+  "head": "7e23ad6",
+  "canonical_identity_available": true,
+  "requirement_projection_available": false,
+  "canonical_state_persisted": false,
+  "goal_task_trace_head_native": true,
+  "verification_trace_head_native": true,
+  "canonical_required_state": "MIXED",
+  "canonical_baseline_commitability": "COMMITTABLE_WITH_DEPENDENCIES",
+  "canonical_baseline_dependencies": [
+    "ai_tool/chat_interface/requirement_resolution.py (canonical symbols)",
+    "ai_tool/chat_interface/task_orchestration.py (orchestrator fields + apply_canonical_requirements_from_state + mission export)",
+    "ai_tool/chat_interface/goal_continuation_resume.py (optional resume hydration)",
+    "tests/ai_tool/chat_interface/test_canonical_goal_transport_step1.py through step5.py (untracked)"
+  ],
+  "external_dirty_dependencies": [
+    "goal_handoff_runtime_bridge handoff trace (worktree) couples to orchestrator handoff_* fields — commit together or defer handoff trace from baseline",
+    "agent_turn.py / semantic_revalidation / environment_policy — not required for canonical unit tests but remain dirty in worktree"
+  ],
+  "no_required_dependency_on_uncommitted_unrelated_code": false,
+  "status": "READY_FOR_CANONICAL_BASELINE_REVIEW",
+  "cross_link_assessment": {
+    "requirement_to_goal": "NOT_AVAILABLE",
+    "goal_to_task": "SIDECAR_AVAILABLE",
+    "task_to_verification": "SIDECAR_AVAILABLE",
+    "constraint_refs_to_canonical_constraint": "PARTIAL"
+  }
+}

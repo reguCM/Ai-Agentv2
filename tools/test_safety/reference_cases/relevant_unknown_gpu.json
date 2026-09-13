@@ -1,0 +1,21 @@
+{
+  "reference_case_id": "relevant_unknown_gpu",
+  "description": "Case C — GPU test planned but GPU state UNKNOWN; cannot verify safety.",
+  "test_plan": {
+    "plan_id": "relevant_unknown_gpu",
+    "commands": ["python -m pytest tests/system/gpu/test_gpu_status.py -q"],
+    "declared_primary_risk_level": "LEVEL_2",
+    "declared_dimensions": {
+      "gpu": "UNKNOWN",
+      "llm": "NONE",
+      "network": "NONE"
+    },
+    "notes": "Synthetic S3 case; do not execute in CI shadow suite."
+  },
+  "expectation": {
+    "shadow_gate_decision": "BLOCKED",
+    "human_decision": "BLOCKED",
+    "human_approval_required": false,
+    "reason": "relevant UNKNOWN gpu"
+  }
+}

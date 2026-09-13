@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "status": "experimental",
+  "description": "Mechanical file selection rules for Tool Development Context Builder. No LLM selection.",
+  "global_documents": {
+    "P0": [
+      {
+        "path": "docs/ai_tool/tool_creation/TOOL_SPECIFICATION.md",
+        "slot": "specification",
+        "reason": "GLOBAL_TOOL_SPECIFICATION"
+      },
+      {
+        "path": "docs/ai_tool/tool_creation/TOOL_CONTRACT.md",
+        "slot": "contract",
+        "reason": "GLOBAL_TOOL_CONTRACT"
+      },
+      {
+        "path": "docs/ai_tool/tool_creation/TEST_CONTRACT.md",
+        "slot": "tests",
+        "reason": "GLOBAL_TEST_CONTRACT"
+      },
+      {
+        "path": "docs/ai_tool/tool_creation/SAFETY_BOUNDARY.md",
+        "slot": "safety",
+        "reason": "GLOBAL_SAFETY_BOUNDARY"
+      }
+    ],
+    "P1": [
+      {
+        "path": "docs/ai_tool/tool_creation/TOOL_CHANGE_POLICY.md",
+        "slot": "change_policy",
+        "reason": "GLOBAL_CHANGE_POLICY"
+      },
+      {
+        "path": "docs/ai_tool/tool_creation/CATALOG.md",
+        "slot": "catalog",
+        "reason": "GLOBAL_CATALOG"
+      },
+      {
+        "path": "docs/ai_tool/tool_creation/PROVIDER_BOUNDARY.md",
+        "slot": "safety",
+        "reason": "GLOBAL_PROVIDER_BOUNDARY"
+      },
+      {
+        "path": "docs/ai_tool/tool_creation/CREATION_WORKFLOW.md",
+        "slot": "related_context",
+        "reason": "GLOBAL_CREATION_WORKFLOW"
+      }
+    ]
+  },
+  "tool_specific": {
+    "local:workspace_read_text_scoped": {
+      "spec_path": "docs/ai_tool/tool_creation/specs/local_workspace_read_text_scoped.json",
+      "P1": [
+        {
+          "path": "docs/ai_tool/tool_creation/ALLOWLIST_POLICY.md",
+          "slot": "safety",
+          "reason": "TOOL_ALLOWLIST_POLICY"
+        },
+        {
+          "path": "docs/ai_tool/tool_creation/allowed_roots.experimental.json",
+          "slot": "safety",
+          "reason": "TOOL_ALLOWLIST_CONFIG"
+        }
+      ],
+      "P2": [
+        {
+          "path": "docs/ai_tool/tool_creation/EXISTING_READ_FILE_RELATION.md",
+          "slot": "related_context",
+          "reason": "NON_REPLACEMENT_POLICY"
+        },
+        {
+          "path": "docs/ai_tool/tool_creation/LOCAL_IMPLEMENTATION_REPORT.md",
+          "slot": "related_context",
+          "reason": "LOCAL_IMPLEMENTATION_REPORT"
+        }
+      ],
+      "reference_only": {
+        "implementation": "ai_tool/experimental/scoped_read/reader.py",
+        "tests": "tests/ai_tool/experimental/test_scoped_read.py"
+      }
+    },
+    "local:get_gpu_status": {
+      "spec_path": "docs/ai_tool/tool_creation/specs/local_get_gpu_status.json",
+      "P2": [
+        {
+          "path": "docs/ai_tool/tool_creation/examples/existing_get_gpu_status.md",
+          "slot": "related_context",
+          "reason": "EXISTING_TOOL_MAPPING"
+        }
+      ],
+      "reference_only": {
+        "implementation": "tools/system/gpu/gpu_status.py",
+        "tests": "tests/test_gpu_real_observation.py"
+      }
+    },
+    "local:cpu_status": {
+      "spec_path": "docs/ai_tool/tool_creation/specs/local_cpu_status.json",
+      "P2": [
+        {
+          "path": "docs/ai_tool/tool_creation/examples/existing_cpu_status.md",
+          "slot": "related_context",
+          "reason": "EXISTING_TOOL_MAPPING"
+        }
+      ],
+      "reference_only": {
+        "implementation": "tools/system/cpu/cpu_status.py",
+        "tests": null
+      }
+    }
+  },
+  "aliases": {
+    "get_gpu_status": "local:get_gpu_status",
+    "cpu_status": "local:cpu_status",
+    "workspace_read_text_scoped": "local:workspace_read_text_scoped"
+  }
+}

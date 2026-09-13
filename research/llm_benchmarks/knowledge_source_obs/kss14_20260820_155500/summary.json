@@ -1,0 +1,3021 @@
+{
+  "phase": "kss-1.4",
+  "experiment_dir": "D:\\AI-Agent\\research\\llm_benchmarks\\knowledge_source_obs\\kss14_20260820_155500",
+  "not_for_decision": true,
+  "routing_implemented": false,
+  "case_count": 5,
+  "success_count": 1,
+  "fail_count": 4,
+  "answer_presence_totals": {
+    "total_web_hits": 175.0,
+    "kept_hits": 175.0,
+    "direct_in_kept": 0.0,
+    "core_in_kept": 136.0,
+    "lead_in_kept": 0.0,
+    "unknown_count": 0.0,
+    "failed_runs_with_answer_in_dropped_hit": 0,
+    "failed_runs_with_answer_in_kept_hit": 3,
+    "failed_runs_with_no_answer_found": 1
+  },
+  "focus_cases": {
+    "cpu_temperature": {
+      "pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "labels": [
+        "JUDGE不足",
+        "PROGRESS不足",
+        "STAGNATION"
+      ],
+      "first_loss": {
+        "round": 1,
+        "label": "VERIFICATION不足",
+        "stage": "candidate_verified"
+      },
+      "web_vs_llm": [
+        "case6_gain_then_no_gain_streak",
+        "case4_candidate_verify_ng",
+        "case2_hit_no_candidate",
+        "round_no_gain",
+        "case5_usable_judge_ng"
+      ],
+      "trajectory_rounds": [
+        {
+          "round_index": 1,
+          "hit": 5,
+          "candidate": 2,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 1,
+          "new_term": 102,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 2,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 3,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 4,
+          "hit": 8,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 1,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 5,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 6,
+          "hit": 5,
+          "candidate": 3,
+          "linked": 3,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 8,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 7,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 2,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 8,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 9,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 1,
+          "verify_ok": 1,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 4,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "judge_satisfied",
+            "observational_label": "JUDGE不足",
+            "count": false,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": true,
+            "usable_finding_available": true,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 10,
+          "hit": 5,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "stop",
+          "progress_reason": "max_research_rounds",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": "missing",
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "stop"
+          }
+        }
+      ],
+      "answer_run": {
+        "aggregates_sum": {
+          "total_web_hits": 59.0,
+          "kept_hits": 59.0,
+          "direct_in_kept": 0.0,
+          "core_in_kept": 59.0,
+          "lead_in_kept": 0.0,
+          "unknown_count": 0.0
+        },
+        "answer_in_kept_hit": true,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      }
+    },
+    "disk_usage": {
+      "pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "labels": [
+        "VERIFICATION不足",
+        "PROGRESS不足",
+        "STAGNATION"
+      ],
+      "first_loss": {
+        "round": 1,
+        "label": "SEARCH不足",
+        "stage": "web_hit_kept"
+      },
+      "web_vs_llm": [
+        "case6_gain_then_no_gain_streak",
+        "case1_no_web_hit",
+        "case3_candidate_no_link",
+        "case4_candidate_verify_ng",
+        "round_no_gain"
+      ],
+      "trajectory_rounds": [
+        {
+          "round_index": 1,
+          "hit": 0,
+          "candidate": 4,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 7,
+          "link_coverage": 0.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "web_hit_kept",
+            "observational_label": "SEARCH不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": false,
+            "web_hit_kept": false,
+            "candidate_available": true,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 2,
+          "hit": 5,
+          "candidate": 4,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 1,
+          "new_term": 78,
+          "link_coverage": 0.5,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 3,
+          "hit": 8,
+          "candidate": 3,
+          "linked": 3,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 122,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 4,
+          "hit": 8,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 5,
+          "hit": 8,
+          "candidate": 3,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 8,
+          "link_coverage": 0.667,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 6,
+          "hit": 5,
+          "candidate": 4,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 5,
+          "link_coverage": 0.5,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 7,
+          "hit": 5,
+          "candidate": 3,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 2,
+          "link_coverage": 0.667,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 8,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 2,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "stop",
+          "progress_reason": "stagnation",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": "missing",
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "stop"
+          }
+        }
+      ],
+      "answer_run": {
+        "aggregates_sum": {
+          "total_web_hits": 44.0,
+          "kept_hits": 44.0,
+          "direct_in_kept": 0.0,
+          "core_in_kept": 6.0,
+          "lead_in_kept": 0.0,
+          "unknown_count": 0.0
+        },
+        "answer_in_kept_hit": true,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      }
+    },
+    "gpu_vram_usage": {
+      "pass": false,
+      "fail_stage": "research",
+      "stop_reason": "max_research_rounds",
+      "labels": [
+        "VERIFICATION不足",
+        "PROGRESS不足",
+        "STAGNATION"
+      ],
+      "first_loss": {
+        "round": 1,
+        "label": "VERIFICATION不足",
+        "stage": "candidate_verified"
+      },
+      "web_vs_llm": [
+        "case6_gain_then_no_gain_streak",
+        "case4_candidate_verify_ng",
+        "case3_candidate_no_link",
+        "case2_hit_no_candidate",
+        "round_no_gain"
+      ],
+      "trajectory_rounds": [
+        {
+          "round_index": 1,
+          "hit": 5,
+          "candidate": 2,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 1,
+          "new_term": 107,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 2,
+          "hit": 8,
+          "candidate": 2,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 5,
+          "link_coverage": 0.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_linked",
+            "observational_label": "LINK不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 3,
+          "hit": 8,
+          "candidate": 2,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 4,
+          "link_coverage": 0.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_linked",
+            "observational_label": "LINK不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 4,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 5,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 6,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 7,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 8,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 9,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 1,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 10,
+          "hit": 5,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "stop",
+          "progress_reason": "max_research_rounds",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": "missing",
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "stop"
+          }
+        }
+      ],
+      "answer_run": {
+        "aggregates_sum": {
+          "total_web_hits": 71.0,
+          "kept_hits": 71.0,
+          "direct_in_kept": 0.0,
+          "core_in_kept": 71.0,
+          "lead_in_kept": 0.0,
+          "unknown_count": 0.0
+        },
+        "answer_in_kept_hit": true,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      }
+    },
+    "memory_usage": {
+      "pass": true,
+      "fail_stage": null,
+      "stop_reason": "findings_complete",
+      "labels": [
+        "LINK不足",
+        "success_trajectory"
+      ],
+      "first_loss": {
+        "round": 1,
+        "label": "LINK不足",
+        "stage": "candidate_linked"
+      },
+      "web_vs_llm": [
+        "case3_candidate_no_link"
+      ],
+      "trajectory_rounds": [
+        {
+          "round_index": 1,
+          "hit": 1,
+          "candidate": 4,
+          "linked": 0,
+          "usable": 1,
+          "verify_ok": 4,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 1,
+          "new_term": 47,
+          "link_coverage": 0.0,
+          "judge_satisfied": true,
+          "progress_action": "implement",
+          "progress_reason": "findings_complete",
+          "first_loss_point": {
+            "stage": "candidate_linked",
+            "observational_label": "LINK不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": "missing",
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": false,
+            "candidate_verified": true,
+            "usable_finding_available": true,
+            "judge_satisfied": true,
+            "progress_action": "implement"
+          }
+        }
+      ],
+      "answer_run": {
+        "aggregates_sum": {
+          "total_web_hits": 1.0,
+          "kept_hits": 1.0,
+          "direct_in_kept": 0.0,
+          "core_in_kept": 0.0,
+          "lead_in_kept": 0.0,
+          "unknown_count": 0.0
+        },
+        "answer_in_kept_hit": false,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      }
+    }
+  },
+  "questions": {
+    "Q1_fail_despite_web_hits": {
+      "fail_with_hits": 3,
+      "fail_without_hits": 1,
+      "note": "tendency only; n small"
+    },
+    "Q2_hit_vs_success_rate": {
+      "signal_yes|fail": 27,
+      "signal_yes|next_no_gain": 18,
+      "signal_yes|next_gain": 6,
+      "signal_no|fail": 1,
+      "signal_no|next_no_gain": 1,
+      "signal_yes|success": 1
+    },
+    "Q3_new_source_term_then_gain": {
+      "new_source": {
+        "signal_yes|fail": 3,
+        "signal_yes|next_no_gain": 2,
+        "signal_no|fail": 25,
+        "signal_no|next_no_gain": 17,
+        "signal_no|next_gain": 5,
+        "signal_yes|next_gain": 1,
+        "signal_yes|success": 1
+      },
+      "new_term": {
+        "signal_yes|fail": 16,
+        "signal_yes|next_no_gain": 11,
+        "signal_no|fail": 12,
+        "signal_no|next_no_gain": 8,
+        "signal_yes|next_gain": 4,
+        "signal_no|next_gain": 2,
+        "signal_yes|success": 1
+      },
+      "lead_then_next_gain": [
+        [
+          "cpu_temperature",
+          {
+            "lead_rounds": 0,
+            "next_gain_true": 0,
+            "next_gain_false": 0,
+            "next_gain_missing": 0
+          }
+        ],
+        [
+          "disk_usage",
+          {
+            "lead_rounds": 0,
+            "next_gain_true": 0,
+            "next_gain_false": 0,
+            "next_gain_missing": 0
+          }
+        ],
+        [
+          "gpu_usage",
+          {
+            "lead_rounds": 0,
+            "next_gain_true": 0,
+            "next_gain_false": 0,
+            "next_gain_missing": 0
+          }
+        ],
+        [
+          "gpu_vram_usage",
+          {
+            "lead_rounds": 0,
+            "next_gain_true": 0,
+            "next_gain_false": 0,
+            "next_gain_missing": 0
+          }
+        ],
+        [
+          "memory_usage",
+          {
+            "lead_rounds": 0,
+            "next_gain_true": 0,
+            "next_gain_false": 0,
+            "next_gain_missing": 0
+          }
+        ]
+      ]
+    },
+    "Q4_candidate_without_usable": {
+      "round_count": 18
+    },
+    "Q5_success_without_link": {
+      "success_cases_with_link_coverage_0": 1,
+      "contrast": "memory_usage may succeed without linkage"
+    },
+    "Q6_no_gain_after_useful_exploration": {
+      "cases_with_novelty_before_no_gain": 3
+    },
+    "Q7_first_loss_points": [
+      {
+        "case": "cpu_temperature",
+        "round": 1,
+        "label": "VERIFICATION不足",
+        "stage": "candidate_verified"
+      },
+      {
+        "case": "disk_usage",
+        "round": 1,
+        "label": "SEARCH不足",
+        "stage": "web_hit_kept"
+      },
+      {
+        "case": "gpu_vram_usage",
+        "round": 1,
+        "label": "VERIFICATION不足",
+        "stage": "candidate_verified"
+      },
+      {
+        "case": "memory_usage",
+        "round": 1,
+        "label": "LINK不足",
+        "stage": "candidate_linked"
+      }
+    ],
+    "Q8_trajectory_success_vs_fail": {
+      "success_avg_rounds": 1.0,
+      "fail_avg_rounds": 7.0
+    }
+  },
+  "answer_presence_questions": {
+    "A1_failures_without_web_answer": 1,
+    "A2_failures_with_answer_only_in_dropped": 0,
+    "A3_lead_presence": 0.0,
+    "A4_lead_then_additional_info": [
+      [
+        "cpu_temperature",
+        {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      ],
+      [
+        "disk_usage",
+        {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      ],
+      [
+        "gpu_usage",
+        {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      ],
+      [
+        "gpu_vram_usage",
+        {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      ],
+      [
+        "memory_usage",
+        {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      ]
+    ],
+    "A5_valuable_in_dropped": {
+      "direct_in_dropped": 0,
+      "core_in_dropped": 0,
+      "lead_in_dropped": 0,
+      "dropped_observed": false,
+      "note": "If dropped_hits missing on historical data, counts stay 0/missing — do not invent."
+    },
+    "A6_kept_valuable_but_no_usable": 2,
+    "A7_loss_label_distribution": {
+      "JUDGE不足": 1,
+      "PROGRESS不足": 3,
+      "STAGNATION": 3,
+      "VERIFICATION不足": 2,
+      "PROPOSAL_FAILURE": 1,
+      "LINK不足": 1,
+      "success_trajectory": 1
+    }
+  },
+  "signal_comparisons": {
+    "hit_present": {
+      "signal_yes|fail": 27,
+      "signal_yes|next_no_gain": 18,
+      "signal_yes|next_gain": 6,
+      "signal_no|fail": 1,
+      "signal_no|next_no_gain": 1,
+      "signal_yes|success": 1
+    },
+    "new_source": {
+      "signal_yes|fail": 3,
+      "signal_yes|next_no_gain": 2,
+      "signal_no|fail": 25,
+      "signal_no|next_no_gain": 17,
+      "signal_no|next_gain": 5,
+      "signal_yes|next_gain": 1,
+      "signal_yes|success": 1
+    },
+    "new_term": {
+      "signal_yes|fail": 16,
+      "signal_yes|next_no_gain": 11,
+      "signal_no|fail": 12,
+      "signal_no|next_no_gain": 8,
+      "signal_yes|next_gain": 4,
+      "signal_no|next_gain": 2,
+      "signal_yes|success": 1
+    },
+    "candidate": {
+      "signal_yes|fail": 19,
+      "signal_yes|next_no_gain": 12,
+      "signal_no|fail": 9,
+      "signal_no|next_no_gain": 7,
+      "signal_yes|next_gain": 6,
+      "signal_yes|success": 1
+    },
+    "linked": {
+      "signal_yes|fail": 16,
+      "signal_yes|next_no_gain": 9,
+      "signal_no|fail": 12,
+      "signal_no|next_no_gain": 10,
+      "signal_yes|next_gain": 6,
+      "signal_no|success": 1
+    },
+    "no_gain": {
+      "signal_no|fail": 11,
+      "signal_no|next_no_gain": 7,
+      "signal_yes|fail": 17,
+      "signal_yes|next_no_gain": 12,
+      "signal_yes|next_gain": 3,
+      "signal_no|next_gain": 3,
+      "signal_no|success": 1
+    }
+  },
+  "human_audit_samples": [
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method re",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Sample scripts for system administration - PowerShell",
+      "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance",
+      "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumen",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "システム管理のサンプル スクリプト - PowerShell",
+      "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEv",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method re",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Sample scripts for system administration - PowerShell",
+      "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance",
+      "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumen",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "システム管理のサンプル スクリプト - PowerShell",
+      "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEv",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method re",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Sample scripts for system administration - PowerShell",
+      "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance",
+      "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumen",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "cpu_temperature",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "システム管理のサンプル スクリプト - PowerShell",
+      "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEv",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Windows PE (WinPE)",
+      "snippet": "Windows PE (WinPE) Summarize this article for me In this article Windows PE (WinPE) is a small operating system used to install, deploy, and repair Windows desktop editions, Windows Server, and other Windows operating systems. In order to b",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Windows PE (WinPE)",
+      "snippet": "Windows PE (WinPE) Summarize this article for me In this article Windows PE (WinPE) is a small operating system used to install, deploy, and repair Windows desktop editions, Windows Server, and other Windows operating systems. In order to b",
+      "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/winpe-intro",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "サーバー メモリ構成オプション - SQL Server",
+      "snippet": "サーバー メモリの構成オプション この記事の内容 適用対象:SQL Server SQL Server データベース エンジンのメモリ使用率は、 min server memory (MB) と max server memory (MB)の構成設定のペアによって制限されます。. Locking pages in memory might keep the server responsive when paging memory... Establish maximum se",
+      "url": "https://learn.microsoft.com/ja-jp/sql/database-engine/configure-windows/server-memory-server-configuration-options",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Windows PE (WinPE)",
+      "snippet": "Windows PE (WinPE) Summarize this article for me In this article Windows PE (WinPE) is a small operating system used to install, deploy, and repair Windows desktop editions, Windows Server, and other Windows operating systems. In order to b",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/winpe-intro",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "MBR2GPT",
+      "snippet": "MBR2GPT.EXE Summarize this article for me In this article Important MBR. MBR2GPT.EXE converts a disk from the Master Boot Record (MBR) to the GUID Partition Table (GPT) partition style without modifying or deleting data on the disk. The too",
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/mbr-to-gpt",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "diskpart",
+      "snippet": "Parameters You can run the following commands from the Diskpart command interpreter: Command Description active Marks the disk's partition with focus, as active. add Mirrors the simple volume with focus to the specified disk. assign Assigns",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Select a disk type for Azure IaaS VMs - managed disks - Azure Virtual Machines",
+      "snippet": "Azure managed disk types Summarize this article for me In this article Applies to: ✔️ Linux VMs ✔️ Windows VMs ✔️ Flexible scale sets ✔️ Uniform scale sets Azure managed disks currently offers five disk types, each intended to address a spe",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Point-in-time restore for Windows",
+      "snippet": "Note *Reserved storage is a Windows feature that sets aside a portion of disk space for successful update installation. Configuration details are as follows: Configuration Defaults Options Editions eligible to configure Feature On/Off See b",
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "MBR2GPT",
+      "snippet": "MBR2GPT.EXE Summarize this article for me In this article Important MBR. MBR2GPT.EXE converts a disk from the Master Boot Record (MBR) to the GUID Partition Table (GPT) partition style without modifying or deleting data on the disk. The too",
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/mbr-to-gpt",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "diskpart",
+      "snippet": "Parameters You can run the following commands from the Diskpart command interpreter: Command Description active Marks the disk's partition with focus, as active. add Mirrors the simple volume with focus to the specified disk. assign Assigns",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Select a disk type for Azure IaaS VMs - managed disks - Azure Virtual Machines",
+      "snippet": "Azure managed disk types Summarize this article for me In this article Applies to: ✔️ Linux VMs ✔️ Windows VMs ✔️ Flexible scale sets ✔️ Uniform scale sets Azure managed disks currently offers five disk types, each intended to address a spe",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "disk_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Point-in-time restore for Windows",
+      "snippet": "Note *Reserved storage is a Windows feature that sets aside a portion of disk space for successful update installation. Configuration details are as follows: Configuration Defaults Options Editions eligible to configure Feature On/Off See b",
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "GPU Utilization - Microsoft Q&A",
+      "snippet": "For querying GPU utilization, a more common method is to use the nvidia-smi command-line tool to view GPU utilization, temperature, memory usage, etc. For more information about NVIDIA-SMI, please refer to the following links: System Manage",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/1696159/gpu-utilization",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "How I can allocate full GPU to a python/anaconda ? - Microsoft Q&A",
+      "snippet": "..., P0, 67, 95 %, 74 %, 46068 MiB, 31550 MiB, 14241 MiB 2023/07/08 00:11:35.950, P0, 67, 91 %, 61 %, 46068 MiB, 31550 MiB, 14241 MiB C:\\Users\\Administrator&gt;nvidia-smi Sat Jul  8 00:06:34 2023 +-------------------------------------------",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4131160/how-i-can-allocate-full-gpu-to-a-python-anaconda",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Linux 用の N シリーズ GPU ドライバーのセットアップをAzureする - Azure Virtual Machines",
+      "snippet": "NVIDIA GPU ドライバー拡張機能は、N シリーズ VM に適切な NVIDIA コンピューティング統合デバイス アーキテクチャ (CUDA) または GRID ドライバーをインストールします。. サポートされているオペレーティング システム (OS) と展開の手順については、 NVIDIA GPU ドライバー拡張機能のドキュメントを参照してください。. NVIDIA GPU ドライバーを手動でインストールするには、この記事で説明されている手順に従います。. CUDA ",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/linux/n-series-driver-setup",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Windows用の N シリーズ NVIDIA GPU ドライバーのセットアップをAzureする - Azure Virtual Machines",
+      "snippet": "GRID ドライバーのインストールを確認す... nvidia-smi を実行します。. ドライバーがインストールされている場合、NVIDIA SMI は 、VM で GPU ワークロードを実行するまで GPU-Util を N/A として一覧表示します。. AzureでWindows ServerまたはWindowsを実行している N シリーズ VM 用に NVIDIA GPU ドライバーを設定する方法. Install NVIDIA GPU Drivers on N-se",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/windows/n-series-driver-setup",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "GPU Utilization - Microsoft Q&A",
+      "snippet": "For querying GPU utilization, a more common method is to use the nvidia-smi command-line tool to view GPU utilization, temperature, memory usage, etc. For more information about NVIDIA-SMI, please refer to the following links: System Manage",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/1696159/gpu-utilization",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "How I can allocate full GPU to a python/anaconda ? - Microsoft Q&A",
+      "snippet": "..., P0, 67, 95 %, 74 %, 46068 MiB, 31550 MiB, 14241 MiB 2023/07/08 00:11:35.950, P0, 67, 91 %, 61 %, 46068 MiB, 31550 MiB, 14241 MiB C:\\Users\\Administrator&gt;nvidia-smi Sat Jul  8 00:06:34 2023 +-------------------------------------------",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4131160/how-i-can-allocate-full-gpu-to-a-python-anaconda",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Linux 用の N シリーズ GPU ドライバーのセットアップをAzureする - Azure Virtual Machines",
+      "snippet": "NVIDIA GPU ドライバー拡張機能は、N シリーズ VM に適切な NVIDIA コンピューティング統合デバイス アーキテクチャ (CUDA) または GRID ドライバーをインストールします。. サポートされているオペレーティング システム (OS) と展開の手順については、 NVIDIA GPU ドライバー拡張機能のドキュメントを参照してください。. NVIDIA GPU ドライバーを手動でインストールするには、この記事で説明されている手順に従います。. CUDA ",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/linux/n-series-driver-setup",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Windows用の N シリーズ NVIDIA GPU ドライバーのセットアップをAzureする - Azure Virtual Machines",
+      "snippet": "GRID ドライバーのインストールを確認す... nvidia-smi を実行します。. ドライバーがインストールされている場合、NVIDIA SMI は 、VM で GPU ワークロードを実行するまで GPU-Util を N/A として一覧表示します。. AzureでWindows ServerまたはWindowsを実行している N シリーズ VM 用に NVIDIA GPU ドライバーを設定する方法. Install NVIDIA GPU Drivers on N-se",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/windows/n-series-driver-setup",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "GPU Utilization - Microsoft Q&A",
+      "snippet": "For querying GPU utilization, a more common method is to use the nvidia-smi command-line tool to view GPU utilization, temperature, memory usage, etc. For more information about NVIDIA-SMI, please refer to the following links: System Manage",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/1696159/gpu-utilization",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "How I can allocate full GPU to a python/anaconda ? - Microsoft Q&A",
+      "snippet": "..., P0, 67, 95 %, 74 %, 46068 MiB, 31550 MiB, 14241 MiB 2023/07/08 00:11:35.950, P0, 67, 91 %, 61 %, 46068 MiB, 31550 MiB, 14241 MiB C:\\Users\\Administrator&gt;nvidia-smi Sat Jul  8 00:06:34 2023 +-------------------------------------------",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4131160/how-i-can-allocate-full-gpu-to-a-python-anaconda",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Linux 用の N シリーズ GPU ドライバーのセットアップをAzureする - Azure Virtual Machines",
+      "snippet": "NVIDIA GPU ドライバー拡張機能は、N シリーズ VM に適切な NVIDIA コンピューティング統合デバイス アーキテクチャ (CUDA) または GRID ドライバーをインストールします。. サポートされているオペレーティング システム (OS) と展開の手順については、 NVIDIA GPU ドライバー拡張機能のドキュメントを参照してください。. NVIDIA GPU ドライバーを手動でインストールするには、この記事で説明されている手順に従います。. CUDA ",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/linux/n-series-driver-setup",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "gpu_vram_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Windows用の N シリーズ NVIDIA GPU ドライバーのセットアップをAzureする - Azure Virtual Machines",
+      "snippet": "GRID ドライバーのインストールを確認す... nvidia-smi を実行します。. ドライバーがインストールされている場合、NVIDIA SMI は 、VM で GPU ワークロードを実行するまで GPU-Util を N/A として一覧表示します。. AzureでWindows ServerまたはWindowsを実行している N シリーズ VM 用に NVIDIA GPU ドライバーを設定する方法. Install NVIDIA GPU Drivers on N-se",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/windows/n-series-driver-setup",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "core",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    },
+    {
+      "case_id": "memory_usage",
+      "bucket": "kept",
+      "dropped": false,
+      "title": "Windows 回復環境 (Windows RE)",
+      "snippet": "Windows 回復環境 (Windows RE) この記事の内容 Windows回復環境 (WinRE) は、起動できないオペレーティング システムの一般的な原因を修復できる回復環境です。. The base WinRE... Memory requirements In order to boot Windows RE directly from memory (also known as RAM disk boot), a contiguous portion of p",
+      "url": "https://learn.microsoft.com/ja-jp/windows-hardware/manufacture/desktop/windows-recovery-environment--windows-re--technical-reference",
+      "discard_reason": "kept",
+      "heuristic_answer_presence": "none",
+      "human_answer_presence": "missing",
+      "llm_judge_answer_presence": "missing"
+    }
+  ],
+  "per_case": [
+    {
+      "case": "cpu_temperature",
+      "pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "labels": [
+        "JUDGE不足",
+        "PROGRESS不足",
+        "STAGNATION"
+      ],
+      "first_loss": {
+        "round": 1,
+        "label": "VERIFICATION不足",
+        "stage": "candidate_verified"
+      },
+      "trajectory": [
+        {
+          "round_index": 1,
+          "hit": 5,
+          "candidate": 2,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 1,
+          "new_term": 102,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 2,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 3,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 4,
+          "hit": 8,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 1,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 5,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 6,
+          "hit": 5,
+          "candidate": 3,
+          "linked": 3,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 8,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 7,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 2,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 8,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 9,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 1,
+          "verify_ok": 1,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 4,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "judge_satisfied",
+            "observational_label": "JUDGE不足",
+            "count": false,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": true,
+            "usable_finding_available": true,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 10,
+          "hit": 5,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "stop",
+          "progress_reason": "max_research_rounds",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": "missing",
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "stop"
+          }
+        }
+      ],
+      "answer_run": {
+        "aggregates_sum": {
+          "total_web_hits": 59.0,
+          "kept_hits": 59.0,
+          "direct_in_kept": 0.0,
+          "core_in_kept": 59.0,
+          "lead_in_kept": 0.0,
+          "unknown_count": 0.0
+        },
+        "answer_in_kept_hit": true,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "disk_usage",
+      "pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "labels": [
+        "VERIFICATION不足",
+        "PROGRESS不足",
+        "STAGNATION"
+      ],
+      "first_loss": {
+        "round": 1,
+        "label": "SEARCH不足",
+        "stage": "web_hit_kept"
+      },
+      "trajectory": [
+        {
+          "round_index": 1,
+          "hit": 0,
+          "candidate": 4,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 7,
+          "link_coverage": 0.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "web_hit_kept",
+            "observational_label": "SEARCH不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": false,
+            "web_hit_kept": false,
+            "candidate_available": true,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 2,
+          "hit": 5,
+          "candidate": 4,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 1,
+          "new_term": 78,
+          "link_coverage": 0.5,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 3,
+          "hit": 8,
+          "candidate": 3,
+          "linked": 3,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 122,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 4,
+          "hit": 8,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 5,
+          "hit": 8,
+          "candidate": 3,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 8,
+          "link_coverage": 0.667,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 6,
+          "hit": 5,
+          "candidate": 4,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 5,
+          "link_coverage": 0.5,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 7,
+          "hit": 5,
+          "candidate": 3,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 2,
+          "link_coverage": 0.667,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 8,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 2,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "stop",
+          "progress_reason": "stagnation",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": "missing",
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "stop"
+          }
+        }
+      ],
+      "answer_run": {
+        "aggregates_sum": {
+          "total_web_hits": 44.0,
+          "kept_hits": 44.0,
+          "direct_in_kept": 0.0,
+          "core_in_kept": 6.0,
+          "lead_in_kept": 0.0,
+          "unknown_count": 0.0
+        },
+        "answer_in_kept_hit": true,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "gpu_usage",
+      "pass": false,
+      "fail_stage": "proposal",
+      "stop_reason": null,
+      "labels": [
+        "PROPOSAL_FAILURE"
+      ],
+      "first_loss": null,
+      "trajectory": [],
+      "answer_run": {
+        "aggregates_sum": {},
+        "answer_in_kept_hit": false,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "gpu_vram_usage",
+      "pass": false,
+      "fail_stage": "research",
+      "stop_reason": "max_research_rounds",
+      "labels": [
+        "VERIFICATION不足",
+        "PROGRESS不足",
+        "STAGNATION"
+      ],
+      "first_loss": {
+        "round": 1,
+        "label": "VERIFICATION不足",
+        "stage": "candidate_verified"
+      },
+      "trajectory": [
+        {
+          "round_index": 1,
+          "hit": 5,
+          "candidate": 2,
+          "linked": 2,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 1,
+          "new_term": 107,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": true,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 2,
+          "hit": 8,
+          "candidate": 2,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 5,
+          "link_coverage": 0.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_linked",
+            "observational_label": "LINK不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 3,
+          "hit": 8,
+          "candidate": 2,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": false,
+          "new_source": 0,
+          "new_term": 4,
+          "link_coverage": 0.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_linked",
+            "observational_label": "LINK不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 4,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 5,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 6,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 7,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 8,
+          "hit": 8,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 9,
+          "hit": 5,
+          "candidate": 1,
+          "linked": 1,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 1,
+          "link_coverage": 1.0,
+          "judge_satisfied": false,
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "first_loss_point": {
+            "stage": "candidate_verified",
+            "observational_label": "VERIFICATION不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": false,
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": true,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "continue"
+          }
+        },
+        {
+          "round_index": 10,
+          "hit": 5,
+          "candidate": 0,
+          "linked": 0,
+          "usable": 0,
+          "verify_ok": 0,
+          "gain": false,
+          "no_gain": true,
+          "new_source": 0,
+          "new_term": 0,
+          "link_coverage": null,
+          "judge_satisfied": false,
+          "progress_action": "stop",
+          "progress_reason": "max_research_rounds",
+          "first_loss_point": {
+            "stage": "candidate_available",
+            "observational_label": "SEARCH→CANDIDATE変換不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": "missing",
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": false,
+            "candidate_linked": false,
+            "candidate_verified": false,
+            "usable_finding_available": false,
+            "judge_satisfied": false,
+            "progress_action": "stop"
+          }
+        }
+      ],
+      "answer_run": {
+        "aggregates_sum": {
+          "total_web_hits": 71.0,
+          "kept_hits": 71.0,
+          "direct_in_kept": 0.0,
+          "core_in_kept": 71.0,
+          "lead_in_kept": 0.0,
+          "unknown_count": 0.0
+        },
+        "answer_in_kept_hit": true,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "case": "memory_usage",
+      "pass": true,
+      "fail_stage": null,
+      "stop_reason": "findings_complete",
+      "labels": [
+        "LINK不足",
+        "success_trajectory"
+      ],
+      "first_loss": {
+        "round": 1,
+        "label": "LINK不足",
+        "stage": "candidate_linked"
+      },
+      "trajectory": [
+        {
+          "round_index": 1,
+          "hit": 1,
+          "candidate": 4,
+          "linked": 0,
+          "usable": 1,
+          "verify_ok": 4,
+          "gain": true,
+          "no_gain": false,
+          "new_source": 1,
+          "new_term": 47,
+          "link_coverage": 0.0,
+          "judge_satisfied": true,
+          "progress_action": "implement",
+          "progress_reason": "findings_complete",
+          "first_loss_point": {
+            "stage": "candidate_linked",
+            "observational_label": "LINK不足",
+            "count": 0,
+            "note": "first False/zero along chain; not blame assignment"
+          },
+          "next_round_gain": "missing",
+          "stage_flags": {
+            "web_hit_available": true,
+            "web_hit_kept": true,
+            "candidate_available": true,
+            "candidate_linked": false,
+            "candidate_verified": true,
+            "usable_finding_available": true,
+            "judge_satisfied": true,
+            "progress_action": "implement"
+          }
+        }
+      ],
+      "answer_run": {
+        "aggregates_sum": {
+          "total_web_hits": 1.0,
+          "kept_hits": 1.0,
+          "direct_in_kept": 0.0,
+          "core_in_kept": 0.0,
+          "lead_in_kept": 0.0,
+          "unknown_count": 0.0
+        },
+        "answer_in_kept_hit": false,
+        "answer_in_dropped_hit": "missing",
+        "valuable_only_in_dropped": "missing",
+        "dropped_hits_observed": false,
+        "lead_then_next_gain": {
+          "lead_rounds": 0,
+          "next_gain_true": 0,
+          "next_gain_false": 0,
+          "next_gain_missing": 0
+        }
+      },
+      "error": null
+    }
+  ],
+  "routing_readiness": {
+    "sufficient_for_routing_rules": false,
+    "reason": "n small; dropped_hits often missing on historical runs; heuristic answer_presence not calibrated vs human; no causal proof that continuing web would flip fail→pass.",
+    "next_observations": [
+      "Live KSS-1.4 runs with web_hit_partition (kept+dropped)",
+      "Human audit of heuristic vs human_answer_presence samples",
+      "Optional offline web_answer_presence_judge (LLM) agreement rate",
+      "More success trajectories beyond memory_usage"
+    ],
+    "options_not_executed": {
+      "A": "Webを追加探索",
+      "B": "検索戦略を変更",
+      "C": "LLMに戻す",
+      "D": "上位LLMへ相談",
+      "E": "HELP",
+      "F": "終了"
+    }
+  },
+  "kss15_hypotheses": [
+    "H-A: valuable dropped hits (direct/core/lead) correlate with avoidable failures",
+    "H-B: lead rounds predict next_round novelty more than raw hit counts",
+    "H-C: verification/judge gaps dominate when kept already has core",
+    "H-D: search-strategy change beats blind additional searches"
+  ],
+  "experiment_id": "kss14_20260820_155500",
+  "manifest": {
+    "experiment_id": "kss14_20260820_155500",
+    "purpose": "KSS-1.4 information loss + discarded hit answer audit",
+    "mode": "offline_rebuild",
+    "offline_from": "D:\\AI-Agent\\research\\llm_benchmarks\\knowledge_source_obs\\kss13_20260820_154524",
+    "routing": false,
+    "confidence_threshold": false,
+    "web_force": false,
+    "answer_judge": "web_answer_presence_heuristic (LLM judge OFF)",
+    "cases": [
+      "memory_usage",
+      "cpu_temperature",
+      "disk_usage",
+      "gpu_usage",
+      "gpu_vram_usage"
+    ]
+  }
+}

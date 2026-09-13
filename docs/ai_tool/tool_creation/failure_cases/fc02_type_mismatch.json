@@ -1,0 +1,28 @@
+{
+  "tool_id": "local:bad_type",
+  "name": "bad_type",
+  "version": "1.0.0",
+  "description": "network_access should be boolean",
+  "provider": "local",
+  "source": "test",
+  "capability": ["test"],
+  "purpose": "failure case 02",
+  "allowed_operations": ["read"],
+  "prohibited_operations": [],
+  "input_schema": { "type": "object" },
+  "output_schema": { "type": "object" },
+  "error_format": {},
+  "side_effect": "read_only",
+  "authentication": "none",
+  "network_access": "yes",
+  "filesystem_access": "none",
+  "risk_level": "low",
+  "cost": "free",
+  "tool_status": "available",
+  "contract": {
+    "can": ["x"],
+    "cannot": ["y"],
+    "must": ["z"],
+    "must_not": ["w"]
+  }
+}

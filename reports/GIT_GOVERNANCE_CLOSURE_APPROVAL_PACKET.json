@@ -1,0 +1,379 @@
+{
+  "packet_type": "GIT_GOVERNANCE_HUMAN_APPROVAL_PACKET",
+  "generated_at": "2026-09-11T22:29:57.923740+00:00",
+  "g5_verdict_maintained": "CONSISTENT_WITH_KNOWN_GAPS",
+  "verified_means": "current_recorded_state_confirmed_not_zero_gaps_nor_full_enforced",
+  "registry_freshness_mutated": false,
+  "cursor_user_rules": "HOST_ADAPTER_NOT_VERIFIED (out of scope)",
+  "freshness_dry_run": {
+    "report_path": "reports/project_asset_freshness_post_g6_closure_dry_run.json",
+    "timestamp": "2026-09-11T22:30:26.330728+00:00",
+    "registry_summary": {
+      "UNCHANGED": 22,
+      "CHANGE_CANDIDATE": 7,
+      "UNKNOWN": 9
+    },
+    "git_governance_assets": {
+      "git_operation_policy": "UNCHANGED",
+      "git_governance_contract": "UNCHANGED",
+      "git_governance_cursor_adapter": "UNCHANGED",
+      "git_guard": "UNCHANGED",
+      "git_hooks_deployment": "UNCHANGED"
+    },
+    "self_change_candidate_note": "None of the five Git Governance assets are CHANGE_CANDIDATE after post-closure baseline capture; evidence fingerprint matches watched content."
+  },
+  "phase_evidence_reused": [
+    "reports/GIT_GOVERNANCE_PHASE_G2.json",
+    "reports/GIT_GOVERNANCE_PHASE_G3.json",
+    "reports/GIT_GOVERNANCE_PHASE_G4.json",
+    "reports/GIT_GOVERNANCE_PHASE_G5.json",
+    "reports/GIT_GOVERNANCE_PHASE_G6.json"
+  ],
+  "assets": [
+    {
+      "asset_id": "git_operation_policy",
+      "path": "docs/GIT_OPERATION_POLICY.md",
+      "source_of_truth": "docs/GIT_OPERATION_POLICY.md",
+      "freshness_dependencies": [],
+      "consumers": [
+        "human",
+        "cursor",
+        "codex",
+        "local_agent"
+      ],
+      "enforcement_level": "DOCUMENTATION",
+      "current_freshness": "POSSIBLY_STALE",
+      "registry_evidence_ref": "reports/verification_evidence/asset_git_operation_policy.json",
+      "verification_result": {
+        "ok": true,
+        "checks": [
+          {
+            "check": "primary_path_exists",
+            "result": "PASS"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G2.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G3.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G4.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G5.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G6.json",
+            "result": "PRESENT"
+          }
+        ]
+      },
+      "baseline_status": "CAPTURED",
+      "new_baseline_verification_id": "ve_20260911T222954161590Z_git_operation_policy",
+      "new_baseline_evidence_ref": "reports/verification_evidence/asset_git_operation_policy.json",
+      "known_gaps": [
+        "semantic_only_not_machine_enforced"
+      ],
+      "recommended_human_decision": "APPROVE_VERIFIED",
+      "notes": "Semantic Source of Truth for Git (human prose). Machine contract: git_governance_contract."
+    },
+    {
+      "asset_id": "git_governance_contract",
+      "path": "ai_tool/policy/git_governance.json",
+      "source_of_truth": "ai_tool/policy/git_governance.json",
+      "freshness_dependencies": [
+        {
+          "kind": "asset_id",
+          "asset_id": "git_operation_policy"
+        }
+      ],
+      "consumers": [
+        "cursor",
+        "codex",
+        "local_agent"
+      ],
+      "enforcement_level": "VALIDATED",
+      "current_freshness": "POSSIBLY_STALE",
+      "registry_evidence_ref": "reports/verification_evidence/asset_git_governance_contract.json",
+      "verification_result": {
+        "ok": true,
+        "checks": [
+          {
+            "check": "primary_path_exists",
+            "result": "PASS"
+          },
+          {
+            "check": "contract_schema_and_adapters",
+            "result": "PASS"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G2.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G3.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G4.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G5.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G6.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "g5_distribution_audit",
+            "result": "PASS"
+          }
+        ]
+      },
+      "baseline_status": "CAPTURED",
+      "new_baseline_verification_id": "ve_20260911T222954161590Z_git_governance_contract",
+      "new_baseline_evidence_ref": "reports/verification_evidence/asset_git_governance_contract.json",
+      "known_gaps": [
+        "commit",
+        "amend",
+        "amend_after_hook_failure",
+        "clean",
+        "rebase",
+        "worktree_remove",
+        "branch_delete",
+        "merge_to_main"
+      ],
+      "recommended_human_decision": "APPROVE_VERIFIED",
+      "notes": "contract_version 2026-09-12.3. G5 verdict CONSISTENT_WITH_KNOWN_GAPS. known_enforcement_gaps: commit authorization, amend, amend_after_hook_failure, clean, rebase, worktree_remove, branch_delete, merge_to_main."
+    },
+    {
+      "asset_id": "git_governance_cursor_adapter",
+      "path": ".cursor/rules/git-governance-adapter.mdc",
+      "source_of_truth": "ai_tool/policy/git_governance.json (adapter reference; not semantic substitute)",
+      "freshness_dependencies": [
+        {
+          "kind": "asset_id",
+          "asset_id": "git_governance_contract"
+        }
+      ],
+      "consumers": [
+        "cursor"
+      ],
+      "enforcement_level": "PROMPT_CONSTRAINT",
+      "current_freshness": "POSSIBLY_STALE",
+      "registry_evidence_ref": "reports/verification_evidence/asset_git_governance_cursor_adapter.json",
+      "verification_result": {
+        "ok": true,
+        "checks": [
+          {
+            "check": "primary_path_exists",
+            "result": "PASS"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G2.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G3.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G4.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G5.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G6.json",
+            "result": "PRESENT"
+          }
+        ]
+      },
+      "baseline_status": "CAPTURED",
+      "new_baseline_verification_id": "ve_20260911T222954161590Z_git_governance_cursor_adapter",
+      "new_baseline_evidence_ref": "reports/verification_evidence/asset_git_governance_cursor_adapter.json",
+      "known_gaps": [
+        "HOST_ADAPTER_NOT_VERIFIED (cursor_user_rules)"
+      ],
+      "recommended_human_decision": "APPROVE_VERIFIED",
+      "notes": "Host User Rules remain HOST_ADAPTER_NOT_VERIFIED; see docs/adapters/GIT_GOVERNANCE_CURSOR_HOST.md"
+    },
+    {
+      "asset_id": "git_guard",
+      "path": "tools/git_guard/guard.py",
+      "source_of_truth": "tools/git_guard/POLICY.md + configs",
+      "freshness_dependencies": [
+        {
+          "kind": "asset_id",
+          "asset_id": "git_governance_contract"
+        },
+        {
+          "kind": "path",
+          "path": "tools/git_guard/configs/ai-agent.pre-commit.json"
+        },
+        {
+          "kind": "path",
+          "path": "tools/git_guard/configs/ai-agent.pre-push.json"
+        }
+      ],
+      "consumers": [
+        "local_agent",
+        "human"
+      ],
+      "enforcement_level": "ENFORCED",
+      "current_freshness": "POSSIBLY_STALE",
+      "registry_evidence_ref": "reports/verification_evidence/asset_git_guard.json",
+      "verification_result": {
+        "ok": true,
+        "checks": [
+          {
+            "check": "primary_path_exists",
+            "result": "PASS"
+          },
+          {
+            "check": "guard_config_alignment",
+            "result": "PASS"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G2.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G3.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G4.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G5.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G6.json",
+            "result": "PRESENT"
+          }
+        ]
+      },
+      "baseline_status": "CAPTURED",
+      "new_baseline_verification_id": "ve_20260911T222954161590Z_git_guard",
+      "new_baseline_evidence_ref": "reports/verification_evidence/asset_git_guard.json",
+      "known_gaps": [
+        "partial_enforcement_scope",
+        "RAW_CLI_ENFORCEMENT_GAP"
+      ],
+      "recommended_human_decision": "APPROVE_VERIFIED",
+      "notes": "Validator/Gate only (not Git Governance semantic SoT). ENFORCED on guard action path + hook-invoked checks; not full agent CLI coverage."
+    },
+    {
+      "asset_id": "git_hooks_deployment",
+      "path": "tools/git_guard/DEPLOYED.md",
+      "source_of_truth": "tools/git_guard/DEPLOYED.md",
+      "freshness_dependencies": [
+        {
+          "kind": "asset_id",
+          "asset_id": "git_guard"
+        },
+        {
+          "kind": "path",
+          "path": "tools/git_guard/DEPLOYED.md"
+        }
+      ],
+      "consumers": [
+        "human",
+        "local_agent"
+      ],
+      "enforcement_level": "ENFORCED",
+      "current_freshness": "POSSIBLY_STALE",
+      "registry_evidence_ref": "reports/verification_evidence/asset_git_hooks_deployment.json",
+      "verification_result": {
+        "ok": true,
+        "checks": [
+          {
+            "check": "primary_path_exists",
+            "result": "PASS"
+          },
+          {
+            "check": "deployed_md",
+            "result": "PASS"
+          },
+          {
+            "check": "live_hooks",
+            "result": "PASS"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G2.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G3.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G4.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G5.json",
+            "result": "PRESENT"
+          },
+          {
+            "check": "phase_evidence:reports/GIT_GOVERNANCE_PHASE_G6.json",
+            "result": "PRESENT"
+          }
+        ]
+      },
+      "baseline_status": "CAPTURED",
+      "new_baseline_verification_id": "ve_20260911T222954161590Z_git_hooks_deployment",
+      "new_baseline_evidence_ref": "reports/verification_evidence/asset_git_hooks_deployment.json",
+      "known_gaps": [
+        "hook_bodies_outside_repository",
+        "RAW_CLI_ENFORCEMENT_GAP"
+      ],
+      "recommended_human_decision": "APPROVE_VERIFIED",
+      "notes": "Physical hooks: D:\\AI-Agent\\.git\\hooks\\pre-commit and pre-push (thin adapter → worktree tools/git_guard). Not modified in G4–G6."
+    }
+  ],
+  "baseline_captures": [
+    {
+      "asset_id": "git_operation_policy",
+      "verification_id": "ve_20260911T222954161590Z_git_operation_policy",
+      "evidence_path": "reports/verification_evidence/asset_git_operation_policy.json",
+      "history_path": "reports/verification_evidence/history/git_operation_policy/ve_20260911T222954161590Z_git_operation_policy.json"
+    },
+    {
+      "asset_id": "git_governance_contract",
+      "verification_id": "ve_20260911T222954161590Z_git_governance_contract",
+      "evidence_path": "reports/verification_evidence/asset_git_governance_contract.json",
+      "history_path": "reports/verification_evidence/history/git_governance_contract/ve_20260911T222954161590Z_git_governance_contract.json"
+    },
+    {
+      "asset_id": "git_governance_cursor_adapter",
+      "verification_id": "ve_20260911T222954161590Z_git_governance_cursor_adapter",
+      "evidence_path": "reports/verification_evidence/asset_git_governance_cursor_adapter.json",
+      "history_path": "reports/verification_evidence/history/git_governance_cursor_adapter/ve_20260911T222954161590Z_git_governance_cursor_adapter.json"
+    },
+    {
+      "asset_id": "git_guard",
+      "verification_id": "ve_20260911T222954161590Z_git_guard",
+      "evidence_path": "reports/verification_evidence/asset_git_guard.json",
+      "history_path": "reports/verification_evidence/history/git_guard/ve_20260911T222954161590Z_git_guard.json"
+    },
+    {
+      "asset_id": "git_hooks_deployment",
+      "verification_id": "ve_20260911T222954161590Z_git_hooks_deployment",
+      "evidence_path": "reports/verification_evidence/asset_git_hooks_deployment.json",
+      "history_path": "reports/verification_evidence/history/git_hooks_deployment/ve_20260911T222954161590Z_git_hooks_deployment.json"
+    }
+  ]
+}

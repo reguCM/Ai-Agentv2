@@ -1,0 +1,728 @@
+{
+  "source_run": "research/grill_observation_v0/resolver_owner_v0/runs/20260909T064802Z/case2",
+  "model": "qwen3:14b",
+  "llm_call": {
+    "messages_roles": [
+      "user"
+    ],
+    "system_prompt_present": false,
+    "format_json": false,
+    "code": "research/grill_observation_v0/resolver_owner_v0/run_once.py llm() -> call_freeform"
+  },
+  "harness_unknown_field_not_in_llm_prompt": "grid の所在・形式・アクセス方法が未確認である。",
+  "steps": [
+    {
+      "id": "S00",
+      "name": "User Goal",
+      "producer": "USER",
+      "provenance": "USER_GOAL",
+      "input": null,
+      "output": "gridを検索して、その内容を要約してほしい。",
+      "added": [
+        "grid",
+        "検索",
+        "内容",
+        "要約"
+      ],
+      "removed": [],
+      "transformed": []
+    },
+    {
+      "id": "S00s",
+      "name": "State",
+      "producer": "USER",
+      "provenance": "STATE",
+      "input": null,
+      "output": "まだ何も調査していない。",
+      "added": [
+        "まだ何も調査していない。"
+      ],
+      "removed": [],
+      "transformed": []
+    },
+    {
+      "id": "S01",
+      "name": "Need LLM Input",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n質問:\n現在のGoalを進めるため、\n今まず解決する必要があることを1つだけ出してください。\n\n完全な作業計画は不要です。\n一度に1つだけ答えてください。\n",
+      "output": null,
+      "added": [
+        "今まず解決する必要があることを1つだけ出してください。"
+      ],
+      "removed": [],
+      "transformed": [],
+      "note": "Goal and State copied into user prompt. case.json unknown field was not in this prompt."
+    },
+    {
+      "id": "S02",
+      "name": "Need LLM Output",
+      "producer": "QWEN",
+      "provenance": "QWEN",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n質問:\n現在のGoalを進めるため、\n今まず解決する必要があることを1つだけ出してください。\n\n完全な作業計画は不要です。\n一度に1つだけ答えてください。\n",
+      "output_raw": "gridの構造と内容を確認する。",
+      "output_visible": "gridの構造と内容を確認する。",
+      "strip_think_changed": false,
+      "added": [
+        "構造",
+        "確認する"
+      ],
+      "removed": [
+        "要約してほしい",
+        "検索して"
+      ],
+      "transformed": [
+        "その内容を要約 -> 構造と内容を確認する"
+      ]
+    },
+    {
+      "id": "S03",
+      "name": "System First",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\nNext need:\ngridの構造と内容を確認する。\n",
+      "output": {
+        "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\nNext need:\ngridの構造と内容を確認する。\n",
+        "required_capabilities": [],
+        "resolutions": [
+          {
+            "required_capability": null,
+            "source_task_id": "T1",
+            "status": "NOT_NEEDED",
+            "capability_index_checked": false,
+            "registry_checked": false,
+            "candidate_tools": [],
+            "selected_tool": null,
+            "rejection_reasons": [],
+            "tool_gap_confirmed": false,
+            "evidence_ids": [],
+            "existing_candidates": [],
+            "missing_capability": null,
+            "suggested_minimal_tool": null,
+            "requires_human_approval": false,
+            "next_action": null
+          }
+        ],
+        "tool_expectation": {
+          "generated": false,
+          "required_capability": null,
+          "expected_tool": null,
+          "expected_arguments": null,
+          "reason": null,
+          "level": "none",
+          "actual_tool_called": null,
+          "expectation_matched": false
+        },
+        "label": "UNRESOLVED",
+        "action": null,
+        "stopped_at": "no_required_capability"
+      },
+      "added": [
+        "label=UNRESOLVED",
+        "stopped_at=no_required_capability",
+        "status=NOT_NEEDED",
+        "next_action=null"
+      ],
+      "removed": [],
+      "transformed": []
+    },
+    {
+      "id": "S04",
+      "name": "Grill 1 Input",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\ngridの構造と内容を確認する。\n\nSystem で解決できなかった事実:\n既存Systemだけでは次の実行可能Actionまで解決できませんでした。\n停止場所: no_required_capability\n不足: Goal と現在の未解決点だけでは、次に実行する対象・条件・引数まで確定できなかった。\n\n依頼:\n現在なぜ進めないのかを1段掘り、\n次の処理を再開するために必要な情報を具体化してください。\n\n一度に1段だけ掘ってください。\n\n【Grounding】\n\n未確認の意味・対象・値・構造を具体化する際は、\n確認済みの事実から導けない具体情報で不足を埋めないこと。\n\n分からないことは、分からない状態として保持すること。\n\n具体化のために追加情報が必要なら、\nその情報自体を「次に確認すべきこと」として扱うこと。\n\n確認されていない具体例を、\n確認済み事実として扱わないこと。\n",
+      "output": null,
+      "added": [
+        "停止場所: no_required_capability",
+        "【Grounding】",
+        "一度に1段だけ掘ってください。"
+      ],
+      "removed": [],
+      "transformed": [
+        "Next need: -> 現在の未解決点:"
+      ]
+    },
+    {
+      "id": "S05",
+      "name": "Grill 1 Output",
+      "producer": "QWEN",
+      "provenance": "QWEN",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\ngridの構造と内容を確認する。\n\nSystem で解決できなかった事実:\n既存Systemだけでは次の実行可能Actionまで解決できませんでした。\n停止場所: no_required_capability\n不足: Goal と現在の未解決点だけでは、次に実行する対象・条件・引数まで確定できなかった。\n\n依頼:\n現在なぜ進めないのかを1段掘り、\n次の処理を再開するために必要な情報を具体化してください。\n\n一度に1段だけ掘ってください。\n\n【Grounding】\n\n未確認の意味・対象・値・構造を具体化する際は、\n確認済みの事実から導けない具体情報で不足を埋めないこと。\n\n分からないことは、分からない状態として保持すること。\n\n具体化のために追加情報が必要なら、\nその情報自体を「次に確認すべきこと」として扱うこと。\n\n確認されていない具体例を、\n確認済み事実として扱わないこと。\n",
+      "output_raw": "**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）",
+      "output_visible": "**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）",
+      "strip_think_changed": false,
+      "added": [
+        "ヘッダー",
+        "列名",
+        "行/列の数",
+        "データの形式",
+        "セル",
+        "10行×5列",
+        "確認済みと仮定",
+        "リンク"
+      ],
+      "removed": [],
+      "transformed": [
+        "構造と内容 -> 構造（例: 行/列の数、ヘッダーの内容、データの形式）と具体的な情報（例: 文字列/数値/日付など）が不明"
+      ]
+    },
+    {
+      "id": "S06",
+      "name": "System Retry 1",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\ngridの構造と内容を確認する。\n\nGrill:\n**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）\n",
+      "output": {
+        "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\ngridの構造と内容を確認する。\n\nGrill:\n**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）\n",
+        "required_capabilities": [
+          "workspace_file_search"
+        ],
+        "resolutions": [
+          {
+            "required_capability": "workspace_file_search",
+            "source_task_id": "T1",
+            "status": "RESOLVED",
+            "capability_index_checked": true,
+            "registry_checked": true,
+            "candidate_tools": [
+              "search_files"
+            ],
+            "selected_tool": "search_files",
+            "rejection_reasons": [],
+            "tool_gap_confirmed": false,
+            "evidence_ids": [],
+            "existing_candidates": [
+              "search_files"
+            ],
+            "missing_capability": null,
+            "suggested_minimal_tool": null,
+            "requires_human_approval": false,
+            "next_action": null
+          }
+        ],
+        "tool_expectation": {
+          "generated": false,
+          "required_capability": null,
+          "expected_tool": null,
+          "expected_arguments": null,
+          "reason": null,
+          "level": "none",
+          "actual_tool_called": null,
+          "expectation_matched": false
+        },
+        "label": "PARTIAL",
+        "action": null,
+        "stopped_at": "tool_selected_arguments_incomplete"
+      },
+      "added": [
+        "workspace_file_search",
+        "search_files",
+        "label=PARTIAL",
+        "stopped_at=tool_selected_arguments_incomplete"
+      ],
+      "removed": [
+        "label=UNRESOLVED",
+        "stopped_at=no_required_capability"
+      ],
+      "transformed": [
+        "Grill 1 visible concatenated under Grill:"
+      ]
+    },
+    {
+      "id": "S07",
+      "name": "Grill 2 Input",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\n**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）\n\nSystem で解決できなかった事実:\nGrill 後の System Retry でも実行可能 Action の引数が不足しています。\n停止場所: tool_selected_arguments_incomplete\n不足している arguments 等だけを1段掘ってください。\n\n依頼:\n現在なぜ進めないのかを1段掘り、\n次の処理を再開するために必要な情報を具体化してください。\n\n一度に1段だけ掘ってください。\n\n【Grounding】\n\n未確認の意味・対象・値・構造を具体化する際は、\n確認済みの事実から導けない具体情報で不足を埋めないこと。\n\n分からないことは、分からない状態として保持すること。\n\n具体化のために追加情報が必要なら、\nその情報自体を「次に確認すべきこと」として扱うこと。\n\n確認されていない具体例を、\n確認済み事実として扱わないこと。\n",
+      "output": null,
+      "added": [
+        "停止場所: tool_selected_arguments_incomplete",
+        "不足している arguments 等だけを1段掘ってください。"
+      ],
+      "removed": [
+        "現在の未解決点: gridの構造と内容を確認する。"
+      ],
+      "transformed": [
+        "現在の未解決点 := Grill 1 visible"
+      ]
+    },
+    {
+      "id": "S08",
+      "name": "Grill 2 Output",
+      "producer": "QWEN",
+      "provenance": "QWEN",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\n**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）\n\nSystem で解決できなかった事実:\nGrill 後の System Retry でも実行可能 Action の引数が不足しています。\n停止場所: tool_selected_arguments_incomplete\n不足している arguments 等だけを1段掘ってください。\n\n依頼:\n現在なぜ進めないのかを1段掘り、\n次の処理を再開するために必要な情報を具体化してください。\n\n一度に1段だけ掘ってください。\n\n【Grounding】\n\n未確認の意味・対象・値・構造を具体化する際は、\n確認済みの事実から導けない具体情報で不足を埋めないこと。\n\n分からないことは、分からない状態として保持すること。\n\n具体化のために追加情報が必要なら、\nその情報自体を「次に確認すべきこと」として扱うこと。\n\n確認されていない具体例を、\n確認済み事実として扱わないこと。\n",
+      "output_raw": "**次の確認が必要な情報（1段掘り）:**  \n- **gridのヘッダー（列名）の内容**  \n  → 例: \"ID\", \"名前\", \"日付\", \"金額\"などの具体的な列名が不明。  \n- **各セルに含まれるデータの種類**  \n  → 例: \"文字列\"（\"山田太郎\"）、\"数値\"（\"123\"）、\"日付\"（\"2023-01-01\"）、\"リンク\"（\"https://example.com\"）など、セルごとのデータ形式が不明。  \n- **gridの行数や列数の概略**  \n  → 例: \"10行×5列\"や\"数百行×数十列\"などの規模が不明。  \n\n**理由:**  \ngridの構造や内容が不明なため、要約の基準（例: 数値の統計、日付の範囲、テキストのキーワード抽出など）を確定できない。これらの情報が得られれば、次のステップ（要約の実行）に進める。",
+      "output_visible": "**次の確認が必要な情報（1段掘り）:**  \n- **gridのヘッダー（列名）の内容**  \n  → 例: \"ID\", \"名前\", \"日付\", \"金額\"などの具体的な列名が不明。  \n- **各セルに含まれるデータの種類**  \n  → 例: \"文字列\"（\"山田太郎\"）、\"数値\"（\"123\"）、\"日付\"（\"2023-01-01\"）、\"リンク\"（\"https://example.com\"）など、セルごとのデータ形式が不明。  \n- **gridの行数や列数の概略**  \n  → 例: \"10行×5列\"や\"数百行×数十列\"などの規模が不明。  \n\n**理由:**  \ngridの構造や内容が不明なため、要約の基準（例: 数値の統計、日付の範囲、テキストのキーワード抽出など）を確定できない。これらの情報が得られれば、次のステップ（要約の実行）に進める。",
+      "strip_think_changed": false,
+      "added": [
+        "\"ID\"",
+        "\"名前\"",
+        "\"金額\"",
+        "\"山田太郎\"",
+        "\"123\"",
+        "\"2023-01-01\"",
+        "\"https://example.com\"",
+        "\"数百行×数十列\""
+      ],
+      "removed": [],
+      "transformed": [
+        "例: 文字列/数値/日付 -> 例: \"ID\", \"名前\" ... は不明"
+      ]
+    },
+    {
+      "id": "S09",
+      "name": "System Retry 2 Input",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\n**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）\n\nGrill:\n**次の確認が必要な情報（1段掘り）:**  \n- **gridのヘッダー（列名）の内容**  \n  → 例: \"ID\", \"名前\", \"日付\", \"金額\"などの具体的な列名が不明。  \n- **各セルに含まれるデータの種類**  \n  → 例: \"文字列\"（\"山田太郎\"）、\"数値\"（\"123\"）、\"日付\"（\"2023-01-01\"）、\"リンク\"（\"https://example.com\"）など、セルごとのデータ形式が不明。  \n- **gridの行数や列数の概略**  \n  → 例: \"10行×5列\"や\"数百行×数十列\"などの規模が不明。  \n\n**理由:**  \ngridの構造や内容が不明なため、要約の基準（例: 数値の統計、日付の範囲、テキストのキーワード抽出など）を確定できない。これらの情報が得られれば、次のステップ（要約の実行）に進める。\n",
+      "output": null,
+      "added": [
+        "Grill: + Grill 2 visible"
+      ],
+      "removed": [],
+      "transformed": []
+    },
+    {
+      "id": "S10",
+      "name": "System Retry 2 Extraction / next_action",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "input": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\n**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）\n\nGrill:\n**次の確認が必要な情報（1段掘り）:**  \n- **gridのヘッダー（列名）の内容**  \n  → 例: \"ID\", \"名前\", \"日付\", \"金額\"などの具体的な列名が不明。  \n- **各セルに含まれるデータの種類**  \n  → 例: \"文字列\"（\"山田太郎\"）、\"数値\"（\"123\"）、\"日付\"（\"2023-01-01\"）、\"リンク\"（\"https://example.com\"）など、セルごとのデータ形式が不明。  \n- **gridの行数や列数の概略**  \n  → 例: \"10行×5列\"や\"数百行×数十列\"などの規模が不明。  \n\n**理由:**  \ngridの構造や内容が不明なため、要約の基準（例: 数値の統計、日付の範囲、テキストのキーワード抽出など）を確定できない。これらの情報が得られれば、次のステップ（要約の実行）に進める。\n",
+      "output": {
+        "label": "RESOLVED",
+        "stopped_at": "executable_action",
+        "required_capabilities": [
+          "workspace_file_search"
+        ],
+        "resolutions": [
+          {
+            "required_capability": "workspace_file_read",
+            "source_task_id": "T1",
+            "status": "RESOLVED",
+            "capability_index_checked": true,
+            "registry_checked": true,
+            "candidate_tools": [
+              "read_file"
+            ],
+            "selected_tool": "read_file",
+            "rejection_reasons": [],
+            "tool_gap_confirmed": false,
+            "evidence_ids": [],
+            "existing_candidates": [
+              "read_file"
+            ],
+            "missing_capability": null,
+            "suggested_minimal_tool": null,
+            "requires_human_approval": false,
+            "next_action": null
+          },
+          {
+            "required_capability": "workspace_file_search",
+            "source_task_id": "T1",
+            "status": "RESOLVED",
+            "capability_index_checked": true,
+            "registry_checked": true,
+            "candidate_tools": [
+              "search_files"
+            ],
+            "selected_tool": "search_files",
+            "rejection_reasons": [],
+            "tool_gap_confirmed": false,
+            "evidence_ids": [],
+            "existing_candidates": [
+              "search_files"
+            ],
+            "missing_capability": null,
+            "suggested_minimal_tool": null,
+            "requires_human_approval": false,
+            "next_action": {
+              "tool": "search_files",
+              "arguments": {
+                "query": "ID",
+                "path": "."
+              }
+            }
+          },
+          {
+            "required_capability": "url_fetch",
+            "source_task_id": "T1",
+            "status": "RESOLVED",
+            "capability_index_checked": true,
+            "registry_checked": true,
+            "candidate_tools": [
+              "read_url_text"
+            ],
+            "selected_tool": "read_url_text",
+            "rejection_reasons": [],
+            "tool_gap_confirmed": false,
+            "evidence_ids": [],
+            "existing_candidates": [
+              "read_url_text"
+            ],
+            "missing_capability": null,
+            "suggested_minimal_tool": null,
+            "requires_human_approval": false,
+            "next_action": null
+          }
+        ],
+        "tool_expectation": {
+          "generated": true,
+          "required_capability": "workspace_file_search",
+          "expected_tool": "search_files",
+          "expected_arguments": {
+            "query": "ID",
+            "path": "."
+          },
+          "reason": "Current Taskを既存のagent-visible Capabilityへ接続する",
+          "level": "required",
+          "actual_tool_called": null,
+          "expectation_matched": false
+        },
+        "action": {
+          "tool": "search_files",
+          "arguments": {
+            "query": "ID",
+            "path": "."
+          }
+        }
+      },
+      "added": [
+        "workspace_file_read",
+        "read_file",
+        "url_fetch",
+        "read_url_text",
+        "query=\"ID\"",
+        "path=\".\"",
+        "stopped_at=executable_action",
+        "label=RESOLVED"
+      ],
+      "removed": [
+        "search_files next_action=null"
+      ],
+      "transformed": [
+        "Qwen text 例: \"ID\" ... が不明 -> System next_action.arguments.query=\"ID\""
+      ],
+      "note": "Qwen output does not contain query= or search_files. Those strings appear first in System output."
+    }
+  ],
+  "adjacent_diffs": [
+    {
+      "from": "S00",
+      "to": "S02",
+      "ADDED": [
+        "構造",
+        "確認する"
+      ],
+      "REMOVED": [
+        "要約してほしい"
+      ],
+      "REFRAMED": [
+        "内容を要約 -> 構造と内容を確認"
+      ],
+      "UNCHANGED": [
+        "grid"
+      ]
+    },
+    {
+      "from": "S02",
+      "to": "S03",
+      "ADDED": [
+        "UNRESOLVED",
+        "no_required_capability"
+      ],
+      "REMOVED": [],
+      "REFRAMED": [
+        "Need string placed under Next need:"
+      ],
+      "UNCHANGED": [
+        "Goal",
+        "State",
+        "Need visible text"
+      ]
+    },
+    {
+      "from": "S03",
+      "to": "S04",
+      "ADDED": [
+        "Grounding block",
+        "停止場所: no_required_capability"
+      ],
+      "REMOVED": [],
+      "REFRAMED": [
+        "Next need -> 現在の未解決点"
+      ],
+      "UNCHANGED": [
+        "Goal",
+        "State",
+        "Need visible"
+      ]
+    },
+    {
+      "from": "S04",
+      "to": "S05",
+      "ADDED": [
+        "ヘッダー",
+        "列名",
+        "10行×5列",
+        "確認済みと仮定"
+      ],
+      "REMOVED": [],
+      "REFRAMED": [
+        "構造と内容 -> 不明な構造の例示"
+      ],
+      "UNCHANGED": [
+        "grid"
+      ]
+    },
+    {
+      "from": "S05",
+      "to": "S06",
+      "ADDED": [
+        "workspace_file_search",
+        "search_files",
+        "tool_selected_arguments_incomplete"
+      ],
+      "REMOVED": [],
+      "REFRAMED": [
+        "Grill 1 visible copied under Grill:"
+      ],
+      "UNCHANGED": [
+        "Grill 1 visible text body"
+      ]
+    },
+    {
+      "from": "S06",
+      "to": "S07",
+      "ADDED": [
+        "不足している arguments 等だけを1段掘ってください。"
+      ],
+      "REMOVED": [
+        "Need-only 未解決点 as the 未解決点 field"
+      ],
+      "REFRAMED": [
+        "現在の未解決点 := Grill 1 output"
+      ],
+      "UNCHANGED": [
+        "Goal",
+        "State",
+        "Grounding block"
+      ]
+    },
+    {
+      "from": "S07",
+      "to": "S08",
+      "ADDED": [
+        "\"ID\"",
+        "\"名前\"",
+        "\"金額\"",
+        "\"山田太郎\"",
+        "https://example.com"
+      ],
+      "REMOVED": [],
+      "REFRAMED": [
+        "unquoted type examples -> quoted column-name examples marked 不明"
+      ],
+      "UNCHANGED": [
+        "ヘッダー（列名）",
+        "セルのデータ種類",
+        "行数や列数"
+      ]
+    },
+    {
+      "from": "S08",
+      "to": "S09",
+      "ADDED": [
+        "Grill 2 visible concatenated"
+      ],
+      "REMOVED": [],
+      "REFRAMED": [],
+      "UNCHANGED": [
+        "Grill 2 visible body"
+      ]
+    },
+    {
+      "from": "S09",
+      "to": "S10",
+      "ADDED": [
+        "query=\"ID\"",
+        "path=\".\"",
+        "read_file",
+        "url_fetch",
+        "executable_action"
+      ],
+      "REMOVED": [
+        "search_files next_action=null"
+      ],
+      "REFRAMED": [
+        "quoted example ID -> Action argument query"
+      ],
+      "UNCHANGED": [
+        "request_text body"
+      ]
+    }
+  ],
+  "term_first_seen": [
+    {
+      "term": "grid",
+      "first_seen_step": "S00",
+      "producer": "USER",
+      "provenance": "USER_GOAL"
+    },
+    {
+      "term": "検索",
+      "first_seen_step": "S00",
+      "producer": "USER",
+      "provenance": "USER_GOAL"
+    },
+    {
+      "term": "内容",
+      "first_seen_step": "S00",
+      "producer": "USER",
+      "provenance": "USER_GOAL"
+    },
+    {
+      "term": "要約",
+      "first_seen_step": "S00",
+      "producer": "USER",
+      "provenance": "USER_GOAL"
+    },
+    {
+      "term": "構造",
+      "first_seen_step": "S02",
+      "producer": "QWEN",
+      "provenance": "QWEN"
+    },
+    {
+      "term": "未解決点",
+      "first_seen_step": "S04",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM"
+    },
+    {
+      "term": "UNRESOLVED",
+      "first_seen_step": "S03",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM"
+    },
+    {
+      "term": "no_required_capability",
+      "first_seen_step": "S03",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM"
+    },
+    {
+      "term": "next_action",
+      "first_seen_step": "S03",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "value": null
+    },
+    {
+      "term": "ヘッダー",
+      "first_seen_step": "S05",
+      "producer": "QWEN",
+      "provenance": "QWEN"
+    },
+    {
+      "term": "日付",
+      "first_seen_step": "S05",
+      "producer": "QWEN",
+      "provenance": "QWEN",
+      "form": "例: 文字列/数値/日付など"
+    },
+    {
+      "term": "workspace_file_search",
+      "first_seen_step": "S06",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM"
+    },
+    {
+      "term": "search_files",
+      "first_seen_step": "S06",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM"
+    },
+    {
+      "term": "ID",
+      "first_seen_step": "S08",
+      "producer": "QWEN",
+      "provenance": "QWEN",
+      "form": "例: \"ID\" ... が不明"
+    },
+    {
+      "term": "名前",
+      "first_seen_step": "S08",
+      "producer": "QWEN",
+      "provenance": "QWEN"
+    },
+    {
+      "term": "金額",
+      "first_seen_step": "S08",
+      "producer": "QWEN",
+      "provenance": "QWEN"
+    },
+    {
+      "term": "query",
+      "first_seen_step": "S10",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "value": "ID"
+    },
+    {
+      "term": "path",
+      "first_seen_step": "S10",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "value": "."
+    },
+    {
+      "term": "workspace_file_read",
+      "first_seen_step": "S10",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM"
+    },
+    {
+      "term": "read_file",
+      "first_seen_step": "S10",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM"
+    },
+    {
+      "term": "場所",
+      "first_seen_step": "S04",
+      "producer": "SYSTEM",
+      "provenance": "SYSTEM",
+      "form": "停止場所",
+      "note": "not 保存場所"
+    },
+    {
+      "term": "ファイル",
+      "first_seen_step": null,
+      "producer": null,
+      "provenance": null,
+      "note": "not in Goal/Need/Grill/Retry request_text; appears later in 05_help_index.json Help describe"
+    },
+    {
+      "term": "DB",
+      "first_seen_step": null,
+      "note": "not present in this Case 2 run files (excluding Help catalog text)"
+    },
+    {
+      "term": "API",
+      "first_seen_step": null,
+      "note": "not present in this Case 2 run files"
+    },
+    {
+      "term": "保存場所",
+      "first_seen_step": null,
+      "note": "not present"
+    },
+    {
+      "term": "所在 / 形式 / アクセス方法",
+      "first_seen_step": null,
+      "note": "only in case.json unknown harness field; not in Need/Grill/Retry prompts"
+    }
+  ]
+}

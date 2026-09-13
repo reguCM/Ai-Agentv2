@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "note": "LLM observation schema. Feature names and method names are forbidden in LLM output.",
+  "forbidden_in_llm_output": [
+    "feature names (state_change_requested, has_runtime_logs, etc.)",
+    "method recommendations",
+    "root-cause claims",
+    "escalation decisions"
+  ],
+  "fields": {
+    "explicit_requests": "Materialsに書かれた要求（更新、REOPEN、コード確認など）の引用",
+    "explicit_state_changes": "Goal/Claim/Hypothesis の更新・Active化・REOPENの明示。無ければ action=none",
+    "explicit_runtime_symptoms": "実行ログ・実測値。『なし』なら present=false",
+    "explicit_evidence_information": "Evidence ID, exists, content不一致など明示されたものだけ",
+    "explicit_code_scope": "コード抜粋の有無、ファイル名、複数ファイル、caller不明",
+    "surface_text_relation": "過去Stateと新テキストの関係が材料に明示されている場合のみ",
+    "prior_analysis_notes": "小型LLM出力や大小LLM不一致など、材料に明示された分析メモ",
+    "unknowns": "材料に無い情報",
+    "inferences_not_facts": "推測。Fingerprintには使わない"
+  }
+}

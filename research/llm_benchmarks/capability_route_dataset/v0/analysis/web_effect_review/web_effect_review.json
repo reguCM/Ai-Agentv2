@@ -1,0 +1,488 @@
+{
+  "kind": "web_effect_review_pilot",
+  "not_agent_gold": true,
+  "no_auto_labels": true,
+  "case_count": 10,
+  "cases": [
+    {
+      "case_id": "A01",
+      "band": "W0",
+      "request": "今日の日本の主なニュースを教えて",
+      "why_selected": "時事。ローカルTool不要の純粋WEB比較",
+      "ts": "2026-08-21T19:00:35.786197+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "今日の日本の主なニュースとして、以下の内容が挙げられます：  \n\n1. **地震と災害対応**：東北地方（岩手県・宮城県など）で規模7.0の地震が発生し、一部地域で停電や交通機関の混乱が生じました。政府は災害対策本部を設置し、被災地への支援を進めています。  \n\n2. **福島原発の状況**：過去の福島第一原子力発電所の事故に絡む懸念が再浮上したものの、現時点では原子力規制委員会が「安定した状態」と判断しています。  \n\n3. **経済政策**：日本銀行が金融緩和の継続を表明し、物価上昇と景気回復を後押しする方針を示しました。  \n\n4. **国際協力**：地震後の被災地支援に、米国や欧州諸国から物資や資金の支援が表明されています。  \n\n※上記は2023年10月時点の情報に基づくものです。最新の詳細は専門メディアをご確認ください。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "今日の日本の主要ニュースについての検索結果は確認できませんでした。最新のニュース情報が必要であれば、信頼できるニュースサイトをご確認ください。",
+      "web_search": {
+        "query": "今日の日本の主要ニュース",
+        "result": {
+          "query": "今日の日本の主要ニュース",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "A02",
+      "band": "W0",
+      "request": "現在のドル円の大まかな為替水準について教えて",
+      "why_selected": "現在価格。純粋WEB比較",
+      "ts": "2026-08-21T19:00:58.371015+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "現在のドル円の為替水準は、2023年10月時点での情報によると、1米ドルに対して約145〜148円程度が一般的です。ただし、為替市場はリアルタイムで変動するため、正確な金額は金融機関や為替レートサイトで確認することをお勧めします。また、金利政策や経済指標などの要因で急激な変動も起こり得ます。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "現在のドル円の為替水準については、リアルタイムのデータを提供することはできません。為替レートは常に変動しており、最新の情報については金融機関や信頼できる金融ニュースサイトをご確認ください。",
+      "web_search": {
+        "query": "ドル円の現在の大まかな為替水準",
+        "result": {
+          "query": "ドル円の現在の大まかな為替水準",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "A05",
+      "band": "W0",
+      "request": "明日の大阪の天気を教えて",
+      "why_selected": "予報。純粋WEB比較",
+      "ts": "2026-08-21T19:01:13.330798+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "明日の大阪の天気について、私の手元の情報では具体的な予報は提供できません。大阪の気候は梅雨期（6月〜7月）には湿気の多い雨天、夏は高温多湿、冬は比較的穏やかですが、急な天候変化がある場合があります。最新の天気情報は、気象庁や信頼できる天気予報サービスをご確認ください。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "明日の大阪の天気情報は確認できませんでした。最新の天気情報をご確認ください。",
+      "web_search": {
+        "query": "Weather in Osaka tomorrow",
+        "result": {
+          "query": "Weather in Osaka tomorrow",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "A06",
+      "band": "W0",
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "why_selected": "版固有情報。知識でも部分回答可だがWEBが主",
+      "ts": "2026-08-21T19:01:26.094716+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "Python 3.13 で追加された主な変更点は以下の通りです。ただし、一部の詳細は公式ドキュメントやリリースノートの確認が必要な場合があります。\n\n1. **asyncio ライブラリの改善**  \n   - TCP/UDP サポートの強化（例: `asyncio.open_connection()` と `asyncio.create_connection()` の改善）。\n   - `asyncio.WindowsSelector` での非同期 I/O のパフォーマンス向上。\n\n2. **標準ライブラリの拡張**  \n   - `pathlib` モジュールの機能追加（例: `Path.read_text()` と `Path.write_text()` の拡張）。\n   - `logging` モジュールの改善（例: フォーマットの柔軟性向上）。\n\n3. **パフォーマンスとメモリ管理**  \n   - ガベージコレクションの最適化（新しい世代別 GC の導入でメモリ使用量の削減）。\n   - CPython インタプリタの実行速度の改善（特にループ処理やリスト操作の最適化）。\n\n4. **型ヒント関連の改善**  \n   - `typing_extensions` との互換性向上（例: `TypedDict` や `Protocol` の拡張）。\n\n5. **デプロイメントとセキュリティ**  \n   - `venv` モジュールの改善（例: `--system-site-packages` オプションの動作修正）。\n   - セキュリティ関連のパッチ（例: エスケープ処理の強化）。\n\n6. **その他の変更**  \n   - `subprocess` モジュールの改善（例: `subprocess.run()` のデフォルト動作の調整）。\n   - デバッグ用の `__debug__` モードでの警告メッセージの改善。\n\n**注意**: 一部の変更点は公式リリースノートやドキュメントで確認が必要です。具体的な詳細については、Python 官方リリースノート（https://docs.python.org/3.13/whatsnew/3.13.html）を参照することをお勧めします。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "Python 3.13に関する公式ドキュメントや信頼できる情報源での変更点の記載は確認できませんでした。最新情報については、Python公式リリースノートや公式ブログをご確認ください。",
+      "web_search": {
+        "query": "Python 3.13で追加された主な変更点",
+        "result": {
+          "query": "Python 3.13で追加された主な変更点",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "B05",
+      "band": "W1",
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "why_selected": "一般知識で足りうる（WEB不要寄りでも検索効果を見る）",
+      "ts": "2026-08-21T19:01:59.892804+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "Pythonのリストとタプルの主な違いは以下の通りです：\n\n1. **変更可能（ミュータブル） vs 変更不可（イミュータブル）**  \n   - リスト：要素の追加・削除・変更が可能（`append()`や`remove()`など）  \n   - タプル：作成後は要素を変更できない（不変なデータを保持するのに適した構造）\n\n2. **構文**  \n   - リスト：`[]`で表す例：`my_list = [1, 2, 3]`  \n   - タプル：`()`で表す例：`my_tuple = (1, 2, 3)`  \n   - タプルの括弧は省略可能（`my_tuple = 1, 2, 3`）\n\n3. **使用目的**  \n   - リスト：動的なデータ（例：ユーザー入力、リスト操作）  \n   - タプル：固定データ（例：日付、座標、設定値）  \n\n4. **辞書のキーとしての利用**  \n   - タプルはハッシュ化可能（辞書のキーとして使用可能）  \n   - リストはハッシュ化不可（辞書のキーとして使用不可）  \n\n5. **パフォーマンス**  \n   - タプルはリストより高速でメモリ効率が良い（不変性による）  \n\n要するに、**変更が必要なデータにはリスト、変更不要なデータにはタプル**が適しています。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "Pythonのリストとタプルの主な違いは、**変更可能かどうか**です。  \n- **リスト（list）**：要素を追加・削除・変更できます（ミュータブル）。`[]`で表します。  \n- **タプル（tuple）**：一度作成後は要素を変更できません（イミュータブル）。`()`で表します。  \n\nタプルは、データの整合性を保つ場合や、辞書のキーとして使用する際に使われます。リストは柔軟な操作が求められる場合に適しています。",
+      "web_search": {
+        "query": "Pythonリストとタプルの違いを簡単に説明する方法",
+        "result": {
+          "query": "Pythonリストとタプルの違いを簡単に説明する方法",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "C02",
+      "band": "W1",
+      "request": "Ollamaについて詳しく教えて",
+      "why_selected": "知識でもWEBでも可。追加情報源としてのWEB",
+      "ts": "2026-08-21T19:02:26.043920+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "Ollamaは、大規模言語モデル（LLM）の開発と提供を行う企業で、主にオープンソースのモデルを提供しています。以下にその特徴と情報を整理します。\n\n1. **モデルの提供**  \n   Ollamaは、Llama（Metaが開発したモデルをベースとしたもの）やLlama 2などのモデルを提供しており、これらはローカル環境での実行が可能です。また、他のモデル（例: Mistral、Mixtralなど）もサポートしている場合がありますが、具体的なモデルラインアップは変更される可能性があるため、最新情報を確認することをお勧めします。\n\n2. **ツールとインターフェース**  \n   - **CLI（コマンドラインインターフェース）**：モデルの起動や操作に使用でき、ローカルでの実行に適しています。  \n   - **Webインターフェース**：ブラウザ経由でモデルにアクセスできるツールを提供しており、操作が簡単です。\n\n3. **ローカル実行の強み**  \n   Ollamaはプライバシー保護やネットワーク依存の低減を目的としており、モデルをローカル環境にインストールして運用する設計となっています。これにより、データの漏洩リスクを軽減できます。\n\n4. **ライセンス情報**  \n   各モデルのライセンス条件は異なります（例: Llama 2はMetaのライセンスに準拠）。利用する際は、各モデルの公式ドキュメントでライセンス条件を確認することが重要です。\n\n5. **注意点**  \n   - Ollamaが開発したモデルと、他の企業が開発したモデルの区別に注意が必要です（例: LlamaはMetaが開発）。  \n   - モデルのバージョンや機能は時間とともに変化するため、最新情報を公式サイトで確認することを推奨します。\n\n不明点については「未確認」と明記しており、正確な情報を提供するよう努めています。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "Ollamaは、大規模言語モデル（LLM）の開発と提供を目的とした企業です。主にオープンソースのモデルを提供しており、代表的なモデルとしてLlamaシリーズ（Llama、Llama 2など）が挙げられます。これらのモデルは、自然言語処理やコード生成など幅広い用途に応じた機能を持ち、研究者や開発者向けに利用可能です。Ollamaはモデルのトレーニング・デプロイメントを支援するツールやプラットフォームも提供しているとされていますが、具体的な詳細については「未確認」です。最新情報については公式サイトや関連リソースをご確認ください。",
+      "web_search": {
+        "query": "Ollama について 詳しく教えて",
+        "result": {
+          "query": "Ollama について 詳しく教えて",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "C03",
+      "band": "W1",
+      "request": "RTX 3060って今どういう扱いですか？",
+      "why_selected": "『今』の扱い。WEB任意〜有用",
+      "ts": "2026-08-21T19:03:13.802956+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "RTX 3060は、2020年9月に発売されたNVIDIAのAmpereアーキテクチャ搭載の中〜上位グレードGPUで、1080pゲームや軽量なコンテンツ作成に適しています。現在の扱いとしては、最新のRTX 40系（例：RTX 4060、4060 Ti）に比べて性能や効率面で劣るため、市場での人気はやや低下しています。ただし、価格が比較的安価で安定したパフォーマンスを提供するため、予算に余裕がある場合や、4Kゲーム・高負荷作業が不要なユーザーにとっては依然として実用性の高い選択肢です。新製品の入手が難しい場合、中古やリファーブリッシュ品が流通している可能性があります。最新の機能（例：DLSS 3.0、進化した光追）を求める場合は、40系が推奨されます。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "RTX 3060は2021年にリリースされたGPUで、現在（2023年〜2024年）では既に後継モデル（例：RTX 4060、4070）が登場しており、性能面ではやや劣る可能性があります。ただし、価格が下落している場合や、中古市場での需要が高ければ、依然としてコストパフォーマンスの高い選択肢となることがあります。  \n\n**今後の価値**については、2024年時点での情報は確認できていませんが、既存のモデルでは最新ゲームや高設定での動作が難しくなる可能性があります。新作ゲームの要件が高まると、性能不足になるケースも考えられます。  \n\n**おすすめか**という点では、予算が限られている場合や、中古市場での入手が可能であれば検討価値ありですが、最新性能を求める場合は後継モデルへの移行を検討することをお勧めします。  \n\n※ 検索結果が空だったため、最新の価格や市場動向については「確認できなかった」としています。実際の購入前には、最新情報を確認することをおすすめします。",
+      "web_search": {
+        "query": "RTX 3060 2023 今後の価値 おすすめか 比較 2024",
+        "result": {
+          "query": "RTX 3060 2023 今後の価値 おすすめか 比較 2024",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "E02",
+      "band": "W0",
+      "request": "ChatGPTの有料プランの違いを教えて",
+      "why_selected": "製品情報。変化しうる外部情報",
+      "ts": "2026-08-21T19:03:41.907905+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "ChatGPTの有料プランとして主に「ChatGPT Plus」というプランがあります。以下がその特徴です：\n\n- **料金**: 月額20ドル（※2023年時点の情報）  \n- **主な特典**:  \n  - 新機能の優先利用権  \n  - 応答速度の向上  \n  - GPT-4モデルへのアクセス（無料版では利用不可）  \n  - レスポンス長の制限の解除  \n\n**注意点**:  \n- 「GPT-4 Turbo」や「GPT-3.5 Turbo」は別モデルであり、ChatGPTの有料プランとは直接関係ありません。  \n- 無料版では、応答長や機能の制限があるため、特定の用途には有料プランが推奨されます。  \n\n※料金や特典は変更される可能性があるため、公式情報でご確認ください。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "ChatGPTの有料プランに関する最新情報は確認できませんでした。公式なプランの違いや料金体系については、OpenAIの公式サイトや公式アナウンスをご確認ください。現時点で公表されている情報はございませんので、正確な比較を行うためには追加情報が必要です。",
+      "web_search": {
+        "query": "ChatGPT 有料プランの違い 比較",
+        "result": {
+          "query": "ChatGPT 有料プランの違い 比較",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "E05",
+      "band": "W0",
+      "request": "Appleの次の大型発表イベントはいつと言われているか教えて",
+      "why_selected": "時事。純粋WEB比較",
+      "ts": "2026-08-21T19:04:07.643569+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "Appleの次の大型発表イベントは、通常9月に開催されるiPhoneや新製品の発表が予想されています。ただし、具体的な日付は未確認です。また、6月にはWWDC（ Worldwide Developers Conference）というソフトウェア関連のイベントも開催されることが一般的です。どちらが「次の」イベントかは、ユーザーの意図によりますが、最新情報は公式発表まで待つ必要があります。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "Appleの次の大型発表イベントの具体的な日程については、現時点では確認できませんでした。通常、Appleは年1回程度のペースで大型イベントを開催していますが、詳細な日程は公式発表がない限り正確に把握できません。最新情報はAppleの公式サイトや公式SNSをご確認ください。",
+      "web_search": {
+        "query": "Appleの次の大型発表イベントはいつか",
+        "result": {
+          "query": "Appleの次の大型発表イベントはいつか",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    },
+    {
+      "case_id": "P01a",
+      "band": "W0",
+      "request": "大阪の明日の天気を教えて",
+      "why_selected": "天気（A05言い換え）。純粋WEB比較",
+      "ts": "2026-08-21T19:04:32.593694+00:00",
+      "model": "qwen3:8b",
+      "definition": {
+        "answer_without_web": "Final user-facing answer generated without search_web and without web results (not an internal draft).",
+        "answer_with_web": "Final user-facing answer generated after executing search_web and providing hits to the LLM.",
+        "not_agent_judgment_score": true,
+        "not_using_pre_web_answer_candidate": true
+      },
+      "web_need": "",
+      "web_effect": "",
+      "factual_effect": "",
+      "overall_effect": "",
+      "reason": "",
+      "reviewer_note": "",
+      "answer_without_web": "大阪の明日の天気について、私の現時点の知識では具体的な天気予報は提供できません。日本全国の天気は季節によって大きく変化するため、最新の天気情報は気象庁や信頼できる天気アプリをご確認ください。現地の気温や降水確率など、正確な情報はリアルタイムデータに基づく必要がありますので、ご注意ください。",
+      "meta": {
+        "path": "without_web",
+        "search_web_used": false,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      },
+      "answer_with_web": "大阪の明日の天気予報に関する情報は確認できませんでした。最新の天気情報は、気象庁や天気予報アプリなどでご確認ください。",
+      "web_search": {
+        "query": "大阪 明日の天気予報",
+        "result": {
+          "query": "大阪 明日の天気予報",
+          "hit_count": 0,
+          "error": "検索結果がありません",
+          "hits": [],
+          "backends_tried": [
+            "duckduckgo",
+            "wikipedia-ja",
+            "wikipedia-en"
+          ]
+        }
+      },
+      "with_web_meta": {
+        "path": "with_web",
+        "search_web_used": true,
+        "local_tools_used": [],
+        "model": "qwen3:8b"
+      }
+    }
+  ]
+}

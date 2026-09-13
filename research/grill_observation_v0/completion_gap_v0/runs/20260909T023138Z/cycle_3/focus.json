@@ -1,0 +1,17 @@
+{
+  "gap": "行の削除（ラインクリア）のロジック",
+  "minimum_focus": [
+    "full-row detect",
+    "delete and shift down",
+    "score += cleared count"
+  ],
+  "assets": [
+    "spec ラインクリア",
+    "collision.empty_grid in tests only"
+  ],
+  "vertical_map": false,
+  "horizontal_map": false,
+  "focus_expanded": false,
+  "expand_reason": null,
+  "minimum_sufficient_focus": "line_clear.py clear_full_lines + add_score; no lock/move/draw/point table"
+}

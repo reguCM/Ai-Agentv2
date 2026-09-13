@@ -1,0 +1,195 @@
+{
+  "note": "Evaluator only. Never send this file to the Local LLM.",
+  "items": {
+    "Q1": {
+      "adopted": "範囲は選択/Gap/expectation/read-only bridge/Sandbox判断。製品全体は含めない。",
+      "rejected": ["製品全体まで含める"],
+      "danger_if": ["morphology in core", "help english search as completion", "delete leftovers to finish"]
+    },
+    "Q2": {
+      "adopted": "web/gpu/cpu を Index に semantic capability として足す。",
+      "rejected": ["keywords のみ", "ID を足さない"],
+      "danger_if": []
+    },
+    "Q3": {
+      "adopted": "5 semantic capability。CPU 二本は同一 capability cpu_observation。Tool 名クローンにしない。",
+      "rejected": ["Tool 名クローン", "CPU を2 capability"],
+      "danger_if": ["clone tool names as capability ids"]
+    },
+    "Q4": {
+      "adopted": "意図: CPU / URL / 汎用web / GPUプロセス / 汎用GPU。親に畳まない。汎用GPUで両方必須にしない。両側 exclusive なら両方残す。",
+      "rejected": ["親 capability", "汎用GPUで両方必須"],
+      "danger_if": []
+    },
+    "Q5-6": {
+      "adopted": "Classifier B: keyword 逆引き。共有だけなら prefer_when_ambiguous。複数 exclusive は全部残す。",
+      "rejected": ["IDF", "文字長", "具体語リスト", "固定意図表を正本にする"],
+      "danger_if": ["restore _RULES as canonical", "second vocabulary"]
+    },
+    "Q7": {
+      "adopted": "複数形が正本。単数は 0/1/2+エラー。削除しない。常に first に折らない。",
+      "rejected": ["常に first", "即削除"],
+      "danger_if": ["delete singular API", "fold 2+ to first"]
+    },
+    "Q8": {
+      "adopted": "B は file 含む全 Index。file だけの file in text 特例を正本にしない。",
+      "rejected": ["file だけ \"file\" in text"],
+      "danger_if": ["dual classifier"]
+    },
+    "Q9": {
+      "adopted": "汎用 file→prefer read。registry_read は look_first 等。keyword でマージしない。",
+      "rejected": ["両 capability を keyword でマージ"],
+      "danger_if": ["merge registry_read and workspace_file_read"]
+    },
+    "Q10": {
+      "adopted": "_RULES を正本から外す。",
+      "rejected": ["Python 意図表を残す"],
+      "danger_if": ["keep _RULES as canonical"]
+    },
+    "Q11-13": {
+      "adopted": "1 res=1 cap。snapshot flat。memory list。upsert+reconcile。複合キーやネスト snapshot にしない。",
+      "rejected": ["複合キー", "ネスト snapshot"],
+      "danger_if": ["nest snapshot"]
+    },
+    "Q14-15": {
+      "adopted": "selected はちょうど1。2+=CANDIDATES_AVAILABLE。[0] ranking しない。",
+      "rejected": ["[0] ranking"],
+      "danger_if": ["selected_tool = candidate_tools[0]", "ranking in core"]
+    },
+    "Q16": {
+      "adopted": "suggested は Index、実行に使わない。_MINIMAL_TOOLS で呼ばない。",
+      "rejected": ["_MINIMAL_TOOLS で呼ぶ"],
+      "danger_if": ["execute suggested_minimal_tool"]
+    },
+    "Q20-A": {
+      "adopted": "Latin 境界、日本語 substring。形態素必須にしない。同一script除外を全面適用しない。",
+      "rejected": ["形態素必須", "同一script除外を全面適用"],
+      "danger_if": ["morphology in core", "same-script exclusion blocking ログファイル"]
+    },
+    "Q23": {
+      "adopted": "裸 verb と mutation の日本語「ファイル」を足さない。file付き表層+組合せ。",
+      "rejected": ["裸 編集", "mutation に ファイル 単独"],
+      "danger_if": ["add bare 編集 keyword", "add Japanese ファイル to mutation"]
+    },
+    "Q24": {
+      "adopted": "除外初期「プロファイル」のみ。形態素 Core にしない。FP を全面受容しない。同一script除外にしない。Help にはかけない。",
+      "rejected": ["形態素 Core", "FP 受け入れ", "同一script除外"],
+      "danger_if": ["grow exclusion table", "apply exclusion to Help"]
+    },
+    "Q25": {
+      "adopted": "read next_action は path 根拠のみ。look_first[0] 黙読廃止。テストを緑にするため戻さない。",
+      "rejected": ["黙読維持"],
+      "danger_if": ["restore look_first[0] silent read"]
+    },
+    "Q26": {
+      "adopted": "look_first 選択 signal は read-only と registry_read のみ。",
+      "rejected": ["全 capability の look_first で選択"],
+      "danger_if": ["use write look_first as selection signal"]
+    },
+    "Q27": {
+      "adopted": "look_first を write 側から削除しない（無視）。",
+      "rejected": ["削除して誤用防止"],
+      "danger_if": ["delete write look_first"]
+    },
+    "Q28": {
+      "adopted": "_VERIFIED_ROUTES を capability 正本から外す。概念層は残す。",
+      "rejected": ["Python 表を残す"],
+      "danger_if": ["restore _VERIFIED_ROUTES as canonical"]
+    },
+    "Q29": {
+      "adopted": "search text[:80] 禁止。query 機械抽出できなければ next_action なし。",
+      "rejected": ["長文を query にする"],
+      "danger_if": ["text[:80] as search query"]
+    },
+    "Q30": {
+      "adopted": "list は selected 時 '.' 可。Residual として明記。Core 中に Q25 同型へ黙って変えない。",
+      "rejected": ["Q25 同型で path 必須（Core中の黙変更）"],
+      "danger_if": ["silently close list dot in core without fork"]
+    },
+    "Q31": {
+      "adopted": "next_action 2+ なら inject なし。",
+      "rejected": ["[0] inject"],
+      "danger_if": ["inject first of multiple next_action"]
+    },
+    "Q32": {
+      "adopted": "pending は side_effect と selected_tool。名集合3件を正本にしない。",
+      "rejected": ["名集合3件"],
+      "danger_if": ["name-set allowlist for pending"]
+    },
+    "Q33": {
+      "adopted": "search-hit 次読取は Help 確認した workspace_file_read Tool。",
+      "rejected": ["名 read_file 固定"],
+      "danger_if": ["hardcode read_file after search"]
+    },
+    "Q34": {
+      "adopted": "Sandbox は dedicated_sandbox_required。",
+      "rejected": ["名集合"],
+      "danger_if": ["name-set {create_file, edit_file} as sandbox canonical"]
+    },
+    "Q35": {
+      "adopted": "Task 上 mutation Resolution 2+ なら Sandbox 起動、required 名 None。各 Resolution の selected は高々1。",
+      "rejected": ["1 Resolution に複数 selected"],
+      "danger_if": ["multiple selected_tool on one resolution"]
+    },
+    "Q36": {
+      "adopted": "横断共有だけ（検索、使用率）では確定しない。file対象時 検索だけで web を足さない。",
+      "rejected": ["片方へ prefer"],
+      "danger_if": ["confirm web from 検索 alone"]
+    },
+    "Q37": {
+      "adopted": "audit 降格を Index classifier へ。",
+      "rejected": ["_RULES に残す", "廃止"],
+      "danger_if": ["keep audit in _RULES"]
+    },
+    "Q38": {
+      "adopted": "cpu_observation は常時 CANDIDATES_AVAILABLE。Core で get_cpu_status を選ばない。",
+      "rejected": ["Core で get_cpu_status を選ぶ"],
+      "danger_if": ["rank CPU tools in core"]
+    },
+    "Q39": {
+      "adopted": "time/memory/summary を Index に足さない。",
+      "rejected": ["全部載せる"],
+      "danger_if": ["scope explosion"]
+    },
+    "Q40": {
+      "adopted": "日本語一致は A のまま。除外を file 以外に広げない。",
+      "rejected": ["GPU にも除外表"],
+      "danger_if": ["second vocabulary exclusions"]
+    },
+    "Q41": {
+      "adopted": "file付き表層の最小集合（ファイルを作 等）。裸 verb ではない。",
+      "rejected": ["裸 verb"],
+      "danger_if": ["bare verb keywords"]
+    },
+    "Q42": {
+      "adopted": "除外正本は Index classifier。schema 2。",
+      "rejected": ["隠れた Python set"],
+      "danger_if": ["hidden python exclusion set"]
+    },
+    "Q43": {
+      "adopted": "prefer は read / gpu device / web_search。CPU 間 prefer しない。",
+      "rejected": ["CPU 間 prefer"],
+      "danger_if": ["CPU ranking via prefer"]
+    },
+    "Q44": {
+      "adopted": "URL は URI 形 + schema URL 欄。",
+      "rejected": ["URL Tool 名表"],
+      "danger_if": ["url tool-name allowlist"]
+    },
+    "Q45": {
+      "adopted": "search/list に英語 file。search に日本語ファイル必須にしない。mutation にファイルを足さない。",
+      "rejected": ["search に日本語ファイル必須", "mutation にファイル"],
+      "danger_if": ["japanese ファイル on mutation"]
+    },
+    "Q46": {
+      "adopted": "概念 look_first は変えない。",
+      "rejected": ["一緒に黙読停止"],
+      "danger_if": ["fold concept look_first into capability"]
+    },
+    "Q47": {
+      "adopted": "leftover を削除しない。",
+      "rejected": ["掃除して完成"],
+      "danger_if": ["delete leftovers as completion"]
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "request_text": "Goal:\nregistry/tools.json を読んで、内容を確認してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\nNext need:\nregistry/tools.json の内容が未確認である。\n",
+  "required_capabilities": [
+    "workspace_file_read"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_read",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "read_file"
+      ],
+      "selected_tool": "read_file",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "read_file"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": {
+        "tool": "read_file",
+        "arguments": {
+          "path": "registry/tools.json"
+        }
+      }
+    }
+  ],
+  "tool_expectation": {
+    "generated": true,
+    "required_capability": "workspace_file_read",
+    "expected_tool": "read_file",
+    "expected_arguments": {
+      "path": "registry/tools.json"
+    },
+    "reason": "Current Taskを既存のagent-visible Capabilityへ接続する",
+    "level": "required",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "RESOLVED",
+  "action": {
+    "tool": "read_file",
+    "arguments": {
+      "path": "registry/tools.json"
+    }
+  },
+  "stopped_at": "executable_action"
+}

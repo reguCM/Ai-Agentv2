@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "description": "再調整要求判定ポリシー（閾値は後から変更可能。今回は暫定）",
+  "evaluation_state": {
+    "insufficient_data_max": 9,
+    "accumulating_max": 19,
+    "ready_for_review_min": 20
+  },
+  "recalibration_rules": [
+    {
+      "id": "min_observations_met",
+      "enabled": true,
+      "description": "一定回数以上の実測データが蓄積",
+      "type": "threshold",
+      "metric": "total_observations",
+      "operator": ">=",
+      "value": 20,
+      "weight": 1
+    },
+    {
+      "id": "timeout_rate_elevated",
+      "enabled": true,
+      "description": "timeout が一定割合以上",
+      "type": "rate",
+      "metric": "timeout_rate",
+      "operator": ">=",
+      "value": 0.15,
+      "min_observations": 10,
+      "weight": 2
+    },
+    {
+      "id": "success_rate_degraded",
+      "enabled": true,
+      "description": "成功率が低下",
+      "type": "rate",
+      "metric": "success_rate",
+      "operator": "<",
+      "value": 0.85,
+      "min_observations": 10,
+      "weight": 2
+    },
+    {
+      "id": "latency_increased_vs_baseline",
+      "enabled": true,
+      "description": "平均実行時間が baseline より悪化",
+      "type": "baseline_delta",
+      "metric": "avg_elapsed_ms",
+      "operator": ">",
+      "baseline_key": "historical_avg_elapsed_ms",
+      "delta_ratio": 0.25,
+      "min_observations": 10,
+      "weight": 1
+    },
+    {
+      "id": "vram_pressure_low_free",
+      "enabled": true,
+      "description": "実行前 VRAM 空きが少ない",
+      "type": "threshold",
+      "metric": "avg_vram_free_before_mib",
+      "operator": "<",
+      "value": 400,
+      "min_observations": 5,
+      "weight": 1
+    },
+    {
+      "id": "gpu_environment_changed",
+      "enabled": false,
+      "description": "GPU 環境が以前の検証条件から大きく変化（将来拡張）",
+      "type": "manual_flag",
+      "weight": 1
+    },
+    {
+      "id": "model_changed",
+      "enabled": false,
+      "description": "新しいモデルに変更（将来拡張）",
+      "type": "manual_flag",
+      "weight": 1
+    },
+    {
+      "id": "recalibration_stale",
+      "enabled": false,
+      "description": "過去の評価から一定期間経過（将来拡張）",
+      "type": "manual_flag",
+      "weight": 1
+    }
+  ],
+  "recalibration_recommend_threshold": {
+    "min_triggered_rules": 2,
+    "min_total_weight": 3
+  }
+}

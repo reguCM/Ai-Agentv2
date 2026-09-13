@@ -1,0 +1,48 @@
+{
+  "id": "cpu_temperature",
+  "fixture_kind": "BENCH_FIXTURE_NOT_LIVE_SENSOR",
+  "observation_source": "fixture",
+  "note": "research_implement 用のSTATE固定ケース（失敗期待：WindowsのCPU温度）。実機センサーではない。",
+  "request": "WindowsのCPU温度を取得するToolを作ってください。",
+  "state": {
+    "task": "WindowsのCPU温度を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "温度",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "WindowsのCPU温度",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "C",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-120",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "expected": {
+    "category": "system",
+    "subcategory_contains": "cpu",
+    "module_pattern": "tools\\.system\\..+\\..+",
+    "function_present": true,
+    "output_includes": "status",
+    "name_present": true
+  }
+}

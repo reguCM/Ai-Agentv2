@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/git-guard/config.schema.json",
+  "title": "GitGuardConfig",
+  "type": "object",
+  "required": [
+    "repo"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "repo": {
+      "type": "string",
+      "description": "Git worktree path. Absolute path (backward compatible), or \".\" / \"\" to resolve via git rev-parse --show-toplevel from process cwd (hooks/worktrees). Env GIT_GUARD_REPO overrides config when set."
+    },
+    "require_branch": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Exact branch name required, or null to skip"
+    },
+    "allow_branches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Allowed branch name globs"
+    },
+    "deny_branches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Denied branch name globs"
+    },
+    "require_clean": {
+      "type": "boolean",
+      "description": "Fail if working tree / index is dirty"
+    },
+    "ignore_untracked": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Untracked path globs ignored when require_clean is true"
+    },
+    "ignore_untracked_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alias for ignore_untracked"
+    },
+    "forbid_staged": {
+      "type": "boolean",
+      "description": "Fail if any staged files exist"
+    },
+    "allow_path_globs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Every changed path must match at least one allow glob"
+    },
+    "ignore_path_globs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Paths excluded before allow/deny/overlap checks (e.g. .venv/**)"
+    },
+    "deny_path_globs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fail if any changed path matches a deny glob"
+    },
+    "base_ref": {
+      "type": "string",
+      "description": "Diff working tree / staged against this ref for path checks"
+    },
+    "diff_refs": {
+      "type": "object",
+      "required": [
+        "from",
+        "to"
+      ],
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        }
+      },
+      "description": "Review path set for a commit range against allow/deny"
+    },
+    "forbid_overlap_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Refs whose changed files must not overlap current diff"
+    },
+    "remotes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url_must_contain": {
+            "type": "string"
+          },
+          "forbid_push": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "forbid_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Action types that always FAIL (e.g. force_push, reset_hard)"
+    },
+    "human_gate_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Action types that always NEED_HUMAN even if other checks pass"
+    },
+    "push_safety": {
+      "type": "string",
+      "description": "When set to v2.1, normal push uses safe-push evaluation instead of unconditional human_gate on push"
+    },
+    "local_safety": {
+      "type": "string",
+      "description": "When set to v2.2, --action local_git uses safe local operation evaluation (explicit guard invocation only)"
+    },
+    "action": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "target_remote": {
+              "type": "string"
+            },
+            "target_branch": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "description": "Optional proposed action to validate"
+    },
+    "required_tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "cmd"
+        ],
+        "properties": {
+          "cmd": {
+            "type": "string"
+          },
+          "cwd": {
+            "type": "string"
+          },
+          "timeout_sec": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Commands run only when checks pass and --run-tests is set"
+    }
+  }
+}

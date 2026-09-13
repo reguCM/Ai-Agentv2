@@ -1,0 +1,33 @@
+{
+  "experiment_id": "problem_solving_real_code",
+  "at": "2026-09-01T01:16:37.375648+00:00",
+  "temperature": 0.0,
+  "max_turns": 14,
+  "prompt_header": "この問題を解決してください。\n\n実行結果：",
+  "models": [
+    "deepseek-coder-v2:16b",
+    "qwen3:14b"
+  ],
+  "initial_pytest_exit_code": 1,
+  "initial_main_exit_code": 1,
+  "models_run": [
+    {
+      "model": "deepseek-coder-v2:16b",
+      "stop_reason": "idle_no_tool_or_write",
+      "turns": 2,
+      "tool_calls": 0,
+      "modifications": 0,
+      "tests": 0,
+      "call_ok": true
+    },
+    {
+      "model": "qwen3:14b",
+      "stop_reason": "idle_no_tool_or_write",
+      "turns": 7,
+      "tool_calls": 6,
+      "modifications": 1,
+      "tests": 1,
+      "call_ok": true
+    }
+  ]
+}

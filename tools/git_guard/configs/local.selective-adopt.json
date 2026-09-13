@@ -1,0 +1,33 @@
+{
+  "repo": ".",
+  "allow_branches": [
+    "adopt/*",
+    "wip/*",
+    "feature/*"
+  ],
+  "deny_branches": [
+    "main",
+    "master"
+  ],
+  "deny_path_globs": [
+    ".env",
+    "**/.env",
+    "**/secrets/**",
+    "**/*.pem",
+    "**/credentials.json"
+  ],
+  "remotes": [
+    {
+      "name": "origin",
+      "forbid_push": true
+    }
+  ],
+  "forbid_actions": [
+    "force_push",
+    "reset_hard"
+  ],
+  "human_gate_actions": [
+    "push",
+    "merge"
+  ]
+}

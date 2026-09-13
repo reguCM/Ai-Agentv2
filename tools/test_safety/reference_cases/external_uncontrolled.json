@@ -1,0 +1,20 @@
+{
+  "reference_case_id": "external_uncontrolled",
+  "description": "Case F — external uncontrolled network/service; shadow BLOCKED; no real execution in S3.",
+  "test_plan": {
+    "plan_id": "external_uncontrolled",
+    "commands": ["python scripts/call_external_api.py --url https://api.example.com/v1/run"],
+    "declared_primary_risk_level": "LEVEL_3",
+    "declared_dimensions": {
+      "network": "PRESENT",
+      "external_service": "PRESENT",
+      "llm": "NONE"
+    }
+  },
+  "expectation": {
+    "shadow_gate_decision": "BLOCKED",
+    "human_decision": "BLOCKED",
+    "human_approval_required": true,
+    "reason": "external uncontrolled; human approval would be required at runtime"
+  }
+}

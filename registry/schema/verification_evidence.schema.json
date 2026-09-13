@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/verification_evidence.schema.json",
+  "title": "Project asset verification evidence",
+  "description": "Frozen watch-path fingerprints at verification time (includes dirty worktree state).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "verification_id",
+    "asset_id",
+    "verified_at",
+    "verified_revision",
+    "verification_method",
+    "resolved_watch_paths",
+    "watch_snapshots"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "verification_id": { "type": "string", "minLength": 1 },
+    "asset_id": { "type": "string", "minLength": 1 },
+    "verified_at": { "type": "string" },
+    "verified_revision": { "type": "string" },
+    "verification_method": { "type": "string" },
+    "resolved_watch_paths": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "watch_snapshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/watch_snapshot" }
+    },
+    "source_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "verification_method": { "type": "string" },
+        "verified_at": { "type": "string" },
+        "verified_revision": { "type": "string" },
+        "label": { "type": "string" }
+      }
+    },
+    "enrollment_phase": { "type": "string" }
+  },
+  "$defs": {
+    "watch_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "existence", "content_fingerprint"],
+      "properties": {
+        "path": { "type": "string" },
+        "existence": { "type": "boolean" },
+        "content_fingerprint": { "type": "string" },
+        "git_state_if_available": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

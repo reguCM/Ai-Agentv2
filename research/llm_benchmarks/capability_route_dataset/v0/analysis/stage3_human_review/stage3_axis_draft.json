@@ -1,0 +1,32 @@
+{
+  "C_layer_mismatch": [
+    "C_layer_mismatch_underflag_candidate",
+    "C_layer_mismatch_overflag_candidate"
+  ],
+  "D_search_path": [
+    "D_search_path_error_candidate",
+    "D_search_path_hits_candidate",
+    "D_search_path_empty_candidate",
+    "D_search_path_blocked_candidate"
+  ],
+  "F_route_related": [
+    "F_route_uncertain_saturated_candidate",
+    "F_related_continue_not_sufficiency_candidate",
+    "F_new_tool_hint_collision_candidate"
+  ],
+  "G_tool_capability": [
+    "G_existing_tool_path_candidate",
+    "G_tool_gap_but_searched_candidate",
+    "G_no_web_human_but_llm_searched_candidate"
+  ],
+  "E_evidence_answer": [
+    "E_insufficient_search_evidence_candidate",
+    "E_hits_use_unverified_candidate"
+  ],
+  "notes": [
+    "Candidates only; misjudgment_final stays null until human finalizes axes.",
+    "human_web_need is curator scaffold, not automatic agent score.",
+    "Separate judgment-layer issues from search-path failures (D_*).",
+    "n=50 is too small to generalize."
+  ]
+}

@@ -1,0 +1,1733 @@
+{
+  "note": "STATE 維持ベンチ。unittest ではない。",
+  "runs": [
+    {
+      "timestamp": "2026-08-19T01:06:05.345864+00:00",
+      "case": "persist_status_unit_baseline",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "without_state",
+      "ok": false,
+      "pass": false,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "statusの単位はパーセントです。",
+          "reason": "この質問は、statusの単位を尋ねています。提供された情報によると、statusの値は43.2となっており、これはパーセントを示しています。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 13.2,
+        "llm_seconds": 13.2,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 13.2,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:06:06.237642+00:00",
+      "case": "persist_status_unit_baseline",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "without_state",
+      "ok": false,
+      "pass": false,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "単位はパーセントです。",
+          "reason": "この質問は、statusの単位が何であるかを尋ねています。ツールの返り値によると、statusの値はパーセントです。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.9,
+        "llm_seconds": 0.9,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.9,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:06:07.150841+00:00",
+      "case": "persist_status_unit_baseline",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "without_state",
+      "ok": false,
+      "pass": false,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "単位はパーセントです。",
+          "reason": "この質問は、statusの単位が何であるかを尋ねています。ツールの返り値によると、statusの値はパーセントです。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.9,
+        "llm_seconds": 0.9,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.9,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:12:29.889753+00:00",
+      "case": "persist_status_unit_baseline",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "with_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a memory usage rate in percentage format.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 14.1,
+        "llm_seconds": 14.1,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 14.1,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:12:31.292336+00:00",
+      "case": "persist_status_unit_baseline",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "with_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a memory usage rate in percentage format.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 1.4,
+        "llm_seconds": 1.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 1.4,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:12:32.682533+00:00",
+      "case": "persist_status_unit_baseline",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "with_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a memory usage rate in percentage format.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 1.4,
+        "llm_seconds": 1.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 1.4,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:19:39.522894+00:00",
+      "case": "persist_unit_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "without_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "単位は%です",
+          "reason": "ツールの返り値にはステータスとして43.2という数値が含まれており、その数値の単位が%であることが推測できます。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "value_inference"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 5.1,
+        "llm_seconds": 5.1,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 5.1,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:19:40.463655+00:00",
+      "case": "persist_unit_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "without_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "単位は%です",
+          "reason": "ツールの返り値にはステータスとして43.2という数値が含まれており、その数値の単位は%であることが推測できます。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "value_inference"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.9,
+        "llm_seconds": 0.9,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.9,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:19:41.418672+00:00",
+      "case": "persist_unit_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "without_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "単位は%です",
+          "reason": "ツールの返り値にはステータスとして43.2という数値が含まれており、その数値の単位は%であることが推測できます。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "value_inference"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.9,
+        "llm_seconds": 0.9,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.9,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:19:42.247811+00:00",
+      "case": "persist_unit_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "with_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a value of 43.2, and the question asked for the unit of this value. The unit provided in the response matches the expected unit from the task description.",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.8,
+        "llm_seconds": 0.8,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.8,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:19:42.940578+00:00",
+      "case": "persist_unit_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "with_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a value of 43.2, and the question asked for the unit of this value. The unit provided in the response matches the expected unit from the task description.",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.7,
+        "llm_seconds": 0.7,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.7,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:19:43.628080+00:00",
+      "case": "persist_unit_ambiguous",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "with_state",
+      "ok": true,
+      "pass": true,
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a value of 43.2, and the question asked for the unit of this value. The unit provided in the response matches the expected unit from the task description.",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.7,
+        "llm_seconds": 0.7,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.7,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:39.116597+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "without_state",
+      "gap": 0,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [],
+      "prior_work": [],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "単位は%です",
+          "reason": "ツールの返り値にはステータスとして43.2という数値が含まれており、その数値の単位が%であることが推測できます。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "value_inference"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 5.4,
+        "llm_seconds": 5.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 5.4,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:40.158679+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "without_state",
+      "gap": 0,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [],
+      "prior_work": [],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "単位は%です",
+          "reason": "ツールの返り値にはステータスとして43.2という数値が含まれており、その数値の単位は%であることが推測できます。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "value_inference"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 1.0,
+        "llm_seconds": 1.0,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 1.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:41.193622+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "without_state",
+      "gap": 0,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [],
+      "prior_work": [],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "単位は%です",
+          "reason": "ツールの返り値にはステータスとして43.2という数値が含まれており、その数値の単位は%であることが推測できます。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "value_inference"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 1.0,
+        "llm_seconds": 1.0,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 1.0,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:42.523433+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "without_state",
+      "gap": 1,
+      "ok": false,
+      "pass": false,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "2",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "単位は不明です",
+          "reason": "ツールから返された値には単位が明記されていません。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": false,
+            "unit_percent": false,
+            "generic_status": false,
+            "reason_class": "unknown"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 1.3,
+        "llm_seconds": 1.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 1.3,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:43.834517+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "without_state",
+      "gap": 1,
+      "ok": false,
+      "pass": false,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "2",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "単位は不明です",
+          "reason": "ツールから返された値には単位が明記されていません。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": false,
+            "unit_percent": false,
+            "generic_status": false,
+            "reason_class": "unknown"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 1.3,
+        "llm_seconds": 1.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 1.3,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:45.112902+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "without_state",
+      "gap": 1,
+      "ok": false,
+      "pass": false,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "2",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "単位は不明です",
+          "reason": "ツールから返された値には単位が明記されていません。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": false,
+            "unit_percent": false,
+            "generic_status": false,
+            "reason_class": "unknown"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 1.3,
+        "llm_seconds": 1.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 1.3,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:49.503961+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "without_state",
+      "gap": 4,
+      "ok": false,
+      "pass": false,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "2",
+          "error": null
+        },
+        {
+          "id": "d2",
+          "question": "Pythonのリストとタプルの違いは一言で？",
+          "answer": "リストは可変、タプルは不変です。",
+          "error": null
+        },
+        {
+          "id": "d3",
+          "question": "次のJSONのキーはいくつ？ {\"a\": 1, \"b\": 2}",
+          "answer": 2,
+          "error": null
+        },
+        {
+          "id": "d4",
+          "question": "ファイル名 backup.txt を backup.bak にする操作を一言で。",
+          "answer": "ファイル名を変更します",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "単位不明",
+          "reason": "prior_work内の質問には様々な分野の知識が含まれており、具体的な値の単位を特定する情報は見当たりません。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": false,
+            "generic_status": false,
+            "reason_class": "unknown"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 4.4,
+        "llm_seconds": 4.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 4.4,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 5
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:53.994362+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "without_state",
+      "gap": 4,
+      "ok": false,
+      "pass": false,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "2",
+          "error": null
+        },
+        {
+          "id": "d2",
+          "question": "Pythonのリストとタプルの違いは一言で？",
+          "answer": "リストは可変、タプルは不変です。",
+          "error": null
+        },
+        {
+          "id": "d3",
+          "question": "次のJSONのキーはいくつ？ {\"a\": 1, \"b\": 2}",
+          "answer": 2,
+          "error": null
+        },
+        {
+          "id": "d4",
+          "question": "ファイル名 backup.txt を backup.bak にする操作を一言で。",
+          "answer": "ファイル名を変更します",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "単位不明",
+          "reason": "prior_work内の質問には様々な分野の知識が含まれており、具体的な値の単位を特定する情報は見当たりません。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": false,
+            "generic_status": false,
+            "reason_class": "unknown"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 4.5,
+        "llm_seconds": 4.5,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 4.5,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 5
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:58.426264+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "without_state",
+      "gap": 4,
+      "ok": false,
+      "pass": false,
+      "state": {
+        "injected": false,
+        "keys": [],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        },
+        {
+          "injected": false,
+          "keys": [],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "2",
+          "error": null
+        },
+        {
+          "id": "d2",
+          "question": "Pythonのリストとタプルの違いは一言で？",
+          "answer": "リストは可変、タプルは不変です。",
+          "error": null
+        },
+        {
+          "id": "d3",
+          "question": "次のJSONのキーはいくつ？ {\"a\": 1, \"b\": 2}",
+          "answer": 2,
+          "error": null
+        },
+        {
+          "id": "d4",
+          "question": "ファイル名 backup.txt を backup.bak にする操作を一言で。",
+          "answer": "ファイル名を変更します",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": false,
+          "error": null,
+          "answer": "単位不明",
+          "reason": "prior_work内の質問には様々な分野の知識が含まれており、具体的な値の単位を特定する情報は見当たりません。",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": false,
+            "generic_status": false,
+            "reason_class": "unknown"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 4.4,
+        "llm_seconds": 4.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 4.4,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 5
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:32:59.307949+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "with_state",
+      "gap": 0,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [],
+      "prior_work": [],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a value of 43.2, and the question asked for the unit of this value. The unit provided in the response matches the expected unit from the task description.",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.9,
+        "llm_seconds": 0.9,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.9,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:33:00.067814+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "with_state",
+      "gap": 0,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [],
+      "prior_work": [],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a value of 43.2, and the question asked for the unit of this value. The unit provided in the response matches the expected unit from the task description.",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.8,
+        "llm_seconds": 0.8,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.8,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:33:00.817082+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "with_state",
+      "gap": 0,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [],
+      "prior_work": [],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool returned a value of 43.2, and the question asked for the unit of this value. The unit provided in the response matches the expected unit from the task description.",
+          "labels": {
+            "recognized_memory_usage": false,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 0.7,
+        "llm_seconds": 0.7,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 0.7,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 1
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:33:03.297392+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "with_state",
+      "gap": 1,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "4",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool provided a memory usage value of 43.2, and the question asks for the unit of this value. Based on the confirmed information in the STATE, the unit should be '%' as it is specified in the decisions related to the status.unit.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 2.5,
+        "llm_seconds": 2.5,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 2.5,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:33:05.715323+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "with_state",
+      "gap": 1,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "4",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool provided a memory usage value of 43.2, and the question asks for the unit of this value. Based on the confirmed information in the STATE, the unit should be '%' as it is specified in the decisions related to the status.unit.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 2.4,
+        "llm_seconds": 2.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 2.4,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:33:08.141019+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "with_state",
+      "gap": 1,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "4",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "%",
+          "reason": "The tool provided a memory usage value of 43.2, and the question asks for the unit of this value. Based on the confirmed information in the STATE, the unit should be '%' as it is specified in the decisions related to the status.unit.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 2.4,
+        "llm_seconds": 2.4,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 2.4,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 2
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:33:14.465344+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 1,
+      "mode": "with_state",
+      "gap": 4,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "4",
+          "error": null
+        },
+        {
+          "id": "d2",
+          "question": "Pythonのリストとタプルの違いは一言で？",
+          "answer": "Pythonのリストとタプルの違いは、リストは可変（mutable）であるのに対し、タプルは不変（immutable）であることです。",
+          "error": null
+        },
+        {
+          "id": "d3",
+          "question": "次のJSONのキーはいくつ？ {\"a\": 1, \"b\": 2}",
+          "answer": "2",
+          "error": null
+        },
+        {
+          "id": "d4",
+          "question": "ファイル名 backup.txt を backup.bak にする操作を一言で。",
+          "answer": "ファイル名を変更する操作は「リネーム」または「移動」と言えます。",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "43.2%",
+          "reason": "The tool returned a memory usage rate of 43.2%, which is within the expected range for memory usage on Windows systems. The unit for this value is confirmed to be in percentage, as indicated by the status.unit key in the STATE.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 6.3,
+        "llm_seconds": 6.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 6.3,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 5
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:33:20.773085+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 2,
+      "mode": "with_state",
+      "gap": 4,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "4",
+          "error": null
+        },
+        {
+          "id": "d2",
+          "question": "Pythonのリストとタプルの違いは一言で？",
+          "answer": "Pythonのリストとタプルの違いは、リストは可変（mutable）であるのに対し、タプルは不変（immutable）であることです。",
+          "error": null
+        },
+        {
+          "id": "d3",
+          "question": "次のJSONのキーはいくつ？ {\"a\": 1, \"b\": 2}",
+          "answer": "2",
+          "error": null
+        },
+        {
+          "id": "d4",
+          "question": "ファイル名 backup.txt を backup.bak にする操作を一言で。",
+          "answer": "ファイル名を変更する操作は「リネーム」または「移動」と言えます。",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "43.2%",
+          "reason": "The tool returned a memory usage rate of 43.2%, which is within the expected range for memory usage on Windows systems. The unit for this value is confirmed to be in percentage, as indicated by the status.unit key in the STATE.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 6.3,
+        "llm_seconds": 6.3,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 6.3,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 5
+      }
+    },
+    {
+      "timestamp": "2026-08-19T01:33:26.998954+00:00",
+      "case": "persist_unit_gap",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "n": 3,
+      "mode": "with_state",
+      "gap": 4,
+      "ok": true,
+      "pass": true,
+      "state": {
+        "injected": true,
+        "keys": [
+          "status.meaning",
+          "status.unit",
+          "status.range"
+        ],
+        "lost": false
+      },
+      "inspections": [
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        },
+        {
+          "injected": true,
+          "keys": [
+            "status.meaning",
+            "status.unit",
+            "status.range"
+          ],
+          "lost": false
+        }
+      ],
+      "prior_work": [
+        {
+          "id": "d1",
+          "question": "1+1はいくつ？",
+          "answer": "4",
+          "error": null
+        },
+        {
+          "id": "d2",
+          "question": "Pythonのリストとタプルの違いは一言で？",
+          "answer": "Pythonのリストとタプルの違いは、リストは可変（mutable）であるのに対し、タプルは不変（immutable）であることです。",
+          "error": null
+        },
+        {
+          "id": "d3",
+          "question": "次のJSONのキーはいくつ？ {\"a\": 1, \"b\": 2}",
+          "answer": "2",
+          "error": null
+        },
+        {
+          "id": "d4",
+          "question": "ファイル名 backup.txt を backup.bak にする操作を一言で。",
+          "answer": "ファイル名を変更する操作は「リネーム」または「移動」と言えます。",
+          "error": null
+        }
+      ],
+      "rounds": [
+        {
+          "id": "unit",
+          "kind": "query",
+          "ok": true,
+          "error": null,
+          "answer": "43.2%",
+          "reason": "The tool returned a memory usage rate of 43.2%, which is within the expected range for memory usage on Windows systems. The unit for this value is confirmed to be in percentage, as indicated by the status.unit key in the STATE.",
+          "labels": {
+            "recognized_memory_usage": true,
+            "recognized_tool_status": true,
+            "unit_percent": true,
+            "generic_status": false,
+            "reason_class": "state_based"
+          }
+        }
+      ],
+      "timing": {
+        "total_seconds": 6.2,
+        "llm_seconds": 6.2,
+        "machine_seconds": 0.0,
+        "research_seconds": 0.0,
+        "judge_seconds": 6.2,
+        "implementation_seconds": 0.0,
+        "repair_seconds": 0.0,
+        "validation_seconds": 0.0,
+        "llm_calls": 5
+      }
+    }
+  ]
+}

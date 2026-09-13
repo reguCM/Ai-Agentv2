@@ -1,0 +1,53 @@
+{
+  "unresolved_regions": [
+    {
+      "id": "ui_design",
+      "title": "ユーザーインターフェース設計",
+      "text": "画面レイアウト・色・UI要素の詳細が未確定",
+      "goal_impact": "medium",
+      "human_intent_required": true,
+      "human_impact": "high",
+      "rollback_impact": "high",
+      "cross_cutting_impact": "medium",
+      "ai_decidable": false,
+      "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+    },
+    {
+      "id": "difficulty_scaling",
+      "title": "難易度スケーリング",
+      "text": "レベルアップに伴うゲーム速度の変化やピースの挙動の詳細が未確定",
+      "goal_impact": "medium",
+      "human_intent_required": false,
+      "human_impact": "medium",
+      "rollback_impact": "medium",
+      "cross_cutting_impact": "high",
+      "ai_decidable": true,
+      "why": "標準テトリスルールに準拠するため、AIが既存のルールに基づいて決定可能"
+    },
+    {
+      "id": "resolution_settings",
+      "title": "解像度設定",
+      "text": "ゲームウィンドウのサイズやスケーリング方法が未確定",
+      "goal_impact": "low",
+      "human_intent_required": false,
+      "human_impact": "medium",
+      "rollback_impact": "low",
+      "cross_cutting_impact": "low",
+      "ai_decidable": true,
+      "why": "Pygameのデフォルト設定やPC環境に合わせてAIが自動的に決定可能"
+    }
+  ],
+  "comparison": "UI設計はユーザー体験に最も直接的な影響を与えるが、人間の意図が必要。難易度スケーリングはゲームバランスに影響し、AIが既存ルールに基づいて決定可能。解像度設定は技術的詳細で、AIが自動的に決定可能。",
+  "next": {
+    "id": "difficulty_scaling",
+    "action": "internal_ai_decision",
+    "reason": "標準テトリスルールに準拠するため、AIが既存のルールに基づいて決定可能",
+    "ai_decision": {
+      "id": "difficulty_scaling",
+      "title": "難易度スケーリング",
+      "value": "レベルが上がるごとにピースの落下速度が10%ずつ増加（最大レベル10で50%増加）",
+      "reason": "テトリスの標準的な難易度調整を簡略化し、ゲームバランスを維持",
+      "evidence": "テトリス公式ルール書およびオープンソーステトリス実装の速度調整方法を参考"
+    }
+  }
+}

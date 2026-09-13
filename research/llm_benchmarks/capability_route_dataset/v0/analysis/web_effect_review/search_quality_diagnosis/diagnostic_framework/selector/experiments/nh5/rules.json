@@ -1,0 +1,130 @@
+{
+  "version": "0.1",
+  "kind": "nh5_rule_based_selector",
+  "note": "Experimental NH5 selection rules. Does NOT modify selector/rules.json.",
+  "always_select": [
+    {
+      "method_id": "evidence_four_classes",
+      "reason": "H-EVID-1: 証拠4分類は常時。OBSERVED捏造抑制が支持（範囲限定）。",
+      "rule_id": "NH5-ALWAYS-EVID"
+    },
+    {
+      "method_id": "unknown_non_forcing_policy",
+      "reason": "NH3/NH4: UNKNOWNを無理にACCEPT/Activeへ変換しない。",
+      "rule_id": "NH5-ALWAYS-UNKNOWN"
+    }
+  ],
+  "hard_reject": [
+    "auto_fix",
+    "deepseek_full_replace",
+    "n2_full_path_narrative",
+    "nh4_morph_synonym_reactivation_ban"
+  ],
+  "feature_rules": [
+    {
+      "rule_id": "NH5-STATE-CHANGE",
+      "when": {"state_change_requested": true},
+      "select": [
+        "change_request_validator",
+        "nh_state_history_validator",
+        "nh3_normalized_reactivation_ban",
+        "mechanical_validator_priority"
+      ],
+      "reason": "State変更要求: CR+Validator+History+exact/NFKC。H-REQ-1/H-NH2-1/H-NH3-1（experimental）。"
+    },
+    {
+      "rule_id": "NH5-REOPEN",
+      "when": {"reopen_requested": true},
+      "select": [
+        "change_request_validator",
+        "nh_state_history_validator",
+        "nh3_normalized_reactivation_ban",
+        "nh3_evidence_existence_check",
+        "nh3_evidence_content_match",
+        "nh4_evidence_freshness_gate",
+        "nh4_sidecar_minimal_tre",
+        "mechanical_validator_priority"
+      ],
+      "reason": "REOPEN: exists+content+timestamp+sidecar最小。NH3/NH4 experimental。"
+    },
+    {
+      "rule_id": "NH5-EVID-SUSPECT",
+      "when": {"evidence_suspicious": true},
+      "select": [
+        "nh3_evidence_content_match",
+        "nh4_evidence_freshness_gate",
+        "unknown_non_forcing_policy"
+      ],
+      "reason": "Evidence怪しい: content/timestamp確認。自動適用しない。H-NH3-4/H-NH4-2。"
+    },
+    {
+      "rule_id": "NH5-NEAR-EXACT",
+      "when": {"near_exact_reactivation": true},
+      "select": [
+        "nh3_normalized_reactivation_ban",
+        "unknown_non_forcing_policy"
+      ],
+      "reject": ["nh4_morph_synonym_reactivation_ban"],
+      "reason": "near-exact: NFKC/normalized拒否。同義形態素積極拒否はnot_recommended（H-NH4-1 PARTIAL）。"
+    },
+    {
+      "rule_id": "NH5-NEW-GOAL",
+      "when": {"similar_but_new_goal": true},
+      "select": ["unknown_non_forcing_policy"],
+      "reject": ["nh4_morph_synonym_reactivation_ban"],
+      "reason": "類似新Goal: 過剰拒否しない。同義自動拒否は選ばない。"
+    },
+    {
+      "rule_id": "NH5-DIAG-CODE",
+      "when": {"code_available": true, "state_change_requested": false},
+      "select": ["small_llm_local"],
+      "reason": "コード読解: 小型LLM局所解析（条件付き採用）。単独確定しない。"
+    },
+    {
+      "rule_id": "NH5-RUNTIME",
+      "when": {"has_runtime_logs": true, "state_change_requested": false},
+      "select": [],
+      "delegate_diagnostic": ["n3_runtime_evidence_gate"],
+      "reason": "runtime症状: OBSERVEDをログに限定。推測だけで原因確定しない。"
+    },
+    {
+      "rule_id": "NH5-NO-LOGS",
+      "when": {"has_runtime_logs": false, "code_available": true, "state_change_requested": false},
+      "select": ["unknown_non_forcing_policy"],
+      "delegate_diagnostic": ["n3_runtime_evidence_gate"],
+      "reason": "情報不足: runtime原因をOBSERVED扱いしない。UNKNOWN/追加調査。"
+    },
+    {
+      "rule_id": "NH5-INTEGRATION",
+      "when": {"needs_path_integration": true, "state_change_requested": false},
+      "select": ["large_llm_escalation"],
+      "reason": "全体統合が必要なら大型LLMへ（条件付き支持 H-LARGE）。"
+    },
+    {
+      "rule_id": "NH5-SMALL-SUSPECT",
+      "when": {"small_llm_output_suspicious": true},
+      "select": ["large_llm_escalation", "gpt_external_audit"],
+      "reject": [],
+      "reason": "小型LLM結果をそのまま採用しない。独立検証・大型へ。"
+    },
+    {
+      "rule_id": "NH5-LLM-DISAGREE",
+      "when": {"llm_disagreement": true},
+      "select": ["unknown_non_forcing_policy"],
+      "reject": ["auto_fix"],
+      "reason": "小型/大型不一致: 自動修正禁止、人間承認へ。"
+    }
+  ],
+  "reject_reasons": {
+    "auto_fix": "H-AUTOFIX: 自動修正はNOT_ALLOWED。OPEN_PROBLEMS未解決。",
+    "deepseek_full_replace": "H-DS: 全面置換は単独不支持（EXP-009）。",
+    "n2_full_path_narrative": "N2 TEST-C: フル経路物語は過信増加。既定にしない。",
+    "nh4_morph_synonym_reactivation_ban": "H-NH4-1 PARTIALLY_SUPPORTED: 積極的同義拒否はFRリスク。selector_default禁止。",
+    "nh3_evidence_existence_check": "REOPEN/evidence文脈以外では必須ではない。",
+    "nh3_evidence_content_match": "REOPEN/evidence文脈以外では必須ではない。",
+    "nh4_evidence_freshness_gate": "REOPEN+content一致後のみ。通常State変更では不要。",
+    "nh4_sidecar_minimal_tre": "sidecar観測が無い/State文脈でない場合は必須ではない。",
+    "gpt_external_audit": "常用エスカレーションではない。疑義・統合必要時のみ experimental。",
+    "large_llm_escalation": "統合必要が立っていない、または人間承認のみで足りる。"
+  }
+}

@@ -1,0 +1,521 @@
+# AI-Agent 開発 Step 1
+
+## Agent Runtime / 状態管理の土台を作る
+
+### 目的
+
+現在開発中の Local AI-Agent に、今後の Tool Calling、Test Runner、Verification、Recovery、Model Registry などを安全に追加できるようにするため、まず Agent Runtime の基本的な状態管理を導入する。
+
+今回は大規模な作り直しを行わない。
+
+**現在動いている機能をできるだけ維持しながら、「Agentが現在何をしているのか」をプログラム側で管理できる状態を作ることを最優先とする。**
+
+---
+
+# 1. 最初に必ず現状を調査する
+
+実装を開始する前に、現在のプロジェクトを調査すること。
+
+特に以下を確認する。
+
+* `agent.py`
+* Local LLMとの通信処理
+* Chat UI
+* Tool Calling処理
+* Tool Registry
+* Tool実行処理
+* Tool結果をLLMへ戻す処理
+* エラー処理
+* 現在存在するテスト
+* `PROJECT_SPEC.md`
+* `registry/`
+* `tools/`
+
+現在の構造を勝手に推測して作り直さない。
+
+まず、
+
+1. 現在のAgent処理フロー
+2. LLM呼び出し位置
+3. Tool Calling開始位置
+4. Tool実行位置
+5. Tool結果受け取り位置
+6. 最終回答生成位置
+7. UIへ結果を渡している位置
+
+を特定する。
+
+調査結果を日本語で簡潔に報告する。
+
+---
+
+# 2. 今回の状態管理の考え方
+
+Agentの外側に `Agent Runtime` を置く。
+
+重要なのは、
+
+**LLM自身に状態管理を任せないこと。**
+
+状態はPython側で管理する。
+
+概念的には以下。
+
+```text
+User
+ ↓
+Agent Runtime
+ ↓
+LLM
+ ↓
+Tool Calling
+ ↓
+Tool
+ ↓
+Verification
+ ↓
+Agent Runtime
+ ↓
+LLM
+ ↓
+Final Answer
+```
+
+Agent Runtimeが現在の状態を保持する。
+
+---
+
+# 3. 最小限の状態を定義する
+
+最初から大量の状態を作らない。
+
+まず以下程度でよい。
+
+```text
+IDLE
+THINKING
+TOOL_CALL_REQUESTED
+TOOL_RUNNING
+TOOL_SUCCESS
+TOOL_FAILED
+OBSERVING
+COMPLETED
+ERROR
+CANCELLED
+```
+
+実際のコードでは、文字列を直接ばらばらに使用せず、Enum等を使用して管理すること。
+
+例：
+
+```python
+class AgentState(Enum):
+    IDLE = "idle"
+    THINKING = "thinking"
+    TOOL_CALL_REQUESTED = "tool_call_requested"
+    TOOL_RUNNING = "tool_running"
+    TOOL_SUCCESS = "tool_success"
+    TOOL_FAILED = "tool_failed"
+    OBSERVING = "observing"
+    COMPLETED = "completed"
+    ERROR = "error"
+    CANCELLED = "cancelled"
+```
+
+ただし、既存コードとの整合性を確認してから実装すること。
+
+---
+
+# 4. Agent Runtimeを作る
+
+可能であれば専用モジュールを作る。
+
+例：
+
+```text
+runtime/
+├── __init__.py
+├── agent_runtime.py
+└── state.py
+```
+
+ただし、現在のプロジェクト構造により適切な場所がある場合は、それを優先する。
+
+Agent Runtimeには最低限、
+
+* 現在状態
+* セッションID
+* 実行中Tool
+* Tool実行回数
+* 最後のエラー
+* 状態変更履歴
+
+を保持できるようにする。
+
+---
+
+# 5. 状態遷移を記録する
+
+例えば、
+
+```text
+IDLE
+ ↓
+THINKING
+ ↓
+TOOL_CALL_REQUESTED
+ ↓
+TOOL_RUNNING
+ ↓
+TOOL_SUCCESS
+ ↓
+OBSERVING
+ ↓
+THINKING
+ ↓
+COMPLETED
+```
+
+のような履歴を残せるようにする。
+
+最低限、
+
+```python
+{
+    "state": "tool_running",
+    "timestamp": "...",
+    "tool": "get_gpu_status"
+}
+```
+
+のような情報を記録できればよい。
+
+---
+
+# 6. 現在のTool Callingへ接続する
+
+既存のTool Callingを作り直さない。
+
+現在の処理に対して、状態変更を追加する。
+
+例えば、
+
+```text
+LLMへ問い合わせ
+↓
+THINKING
+↓
+Tool Callを検出
+↓
+TOOL_CALL_REQUESTED
+↓
+Tool実行開始
+↓
+TOOL_RUNNING
+↓
+Tool成功
+↓
+TOOL_SUCCESS
+↓
+結果をLLMへ渡す
+↓
+OBSERVING
+↓
+再度LLM
+↓
+THINKING
+↓
+最終回答
+↓
+COMPLETED
+```
+
+という流れを作る。
+
+---
+
+# 7. Tool失敗時も状態を記録する
+
+Toolが例外を返した場合、
+
+```text
+TOOL_RUNNING
+ ↓
+TOOL_FAILED
+ ↓
+ERROR
+```
+
+など、現在の状態を正しく残す。
+
+この段階では高度なRecoveryやRetryをまだ実装しなくてよい。
+
+ただし、
+
+**「失敗したことをRuntimeが認識できる」**
+
+ところまでは作る。
+
+---
+
+# 8. UIへの状態表示
+
+現在のChat UIを確認し、可能ならAgent状態を簡単に表示できるようにする。
+
+例えば、
+
+```text
+● Thinking...
+```
+
+```text
+🔧 Tool実行中: get_gpu_status
+```
+
+```text
+✓ Tool完了
+```
+
+など。
+
+UIの大幅な変更は不要。
+
+現在のUI構造を壊さないこと。
+
+---
+
+# 9. ログを確認できるようにする
+
+開発中に状態遷移を確認できるようにする。
+
+例：
+
+```text
+[AgentRuntime] IDLE -> THINKING
+[AgentRuntime] THINKING -> TOOL_CALL_REQUESTED
+[AgentRuntime] TOOL_CALL_REQUESTED -> TOOL_RUNNING
+[AgentRuntime] TOOL_RUNNING -> TOOL_SUCCESS
+[AgentRuntime] TOOL_SUCCESS -> OBSERVING
+[AgentRuntime] OBSERVING -> THINKING
+[AgentRuntime] THINKING -> COMPLETED
+```
+
+ログ形式は既存プロジェクトの方式があればそれに合わせる。
+
+---
+
+# 10. テストを作る
+
+今回の最重要部分。
+
+最低限、以下をテストする。
+
+### Test 1
+
+通常のチャット。
+
+```text
+User
+ ↓
+LLM
+ ↓
+Final Answer
+```
+
+状態が、
+
+```text
+IDLE
+→ THINKING
+→ COMPLETED
+```
+
+になること。
+
+### Test 2
+
+Tool Calling。
+
+```text
+User
+ ↓
+LLM
+ ↓
+Tool
+ ↓
+LLM
+ ↓
+Answer
+```
+
+状態が適切に変化すること。
+
+### Test 3
+
+Tool成功。
+
+```text
+TOOL_RUNNING
+→ TOOL_SUCCESS
+```
+
+になること。
+
+### Test 4
+
+Tool失敗。
+
+```text
+TOOL_RUNNING
+→ TOOL_FAILED
+```
+
+になること。
+
+### Test 5
+
+状態履歴が正しく保存されること。
+
+---
+
+# 11. 今回はまだ実装しないもの
+
+以下は今回のStep 1では実装しない。
+
+* Test Runner
+* 100回テスト
+* Verificationの本格実装
+* Retry
+* Recovery
+* Memory
+* 複数Agent
+* 高度なModel Routing
+* Tool Search
+* Model Registryの高度な自動選択
+
+これらは今後追加する。
+
+---
+
+# 12. 将来のTest Runnerを考慮する
+
+ただし、Test Runnerを後から追加しやすい構造にする。
+
+将来的には、
+
+```text
+Chat UI
+  │
+  ├── 通常のAgent実行
+  │
+  └── Test Runner
+          ↓
+       Agent Runtime
+          ↓
+       Tool / LLM
+```
+
+という構造にする予定。
+
+そのためAgent Runtimeは、
+
+**「チャット専用の処理」にならないようにする。**
+
+通常チャットでもTest Runnerでも利用できる共通Runtimeとして設計する。
+
+---
+
+# 13. 将来の完成形
+
+最終的には以下を目指す。
+
+```text
+                    User
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+       Chat UI              Test UI
+          │                     │
+          └──────────┬──────────┘
+                     ↓
+              Agent Runtime
+                     │
+          ┌──────────┼──────────┐
+          ↓          ↓          ↓
+       Model       Tool      Verification
+      Registry     Registry
+          │          │
+          └────┬─────┘
+               ↓
+              LLM
+               │
+            Tool Call
+               │
+              Tool
+               │
+          Verification
+               │
+          ┌────┴────┐
+          ↓         ↓
+        Success    Failure
+                    │
+                 Recovery
+```
+
+この構造を今後段階的に構築する。
+
+---
+
+# 14. 実装方針
+
+重要事項：
+
+* 既存機能を壊さない
+* 大規模なリファクタリングをしない
+* 現状調査を先に行う
+* 最小限の変更で実装する
+* 新しい機能にはテストを付ける
+* 日本語コメント・ログを優先する
+* 技術上必要な識別子は英語のままでよい
+* 不明点がある場合は勝手に仕様を決めず、質問する
+
+---
+
+# 15. 完了条件
+
+以下をすべて確認する。
+
+* [ ] Agent Runtimeが存在する
+* [ ] Agent Stateが定義されている
+* [ ] 通常チャットで状態遷移する
+* [ ] Tool Callingで状態遷移する
+* [ ] Tool成功を認識できる
+* [ ] Tool失敗を認識できる
+* [ ] 状態履歴を確認できる
+* [ ] UIで現在状態を確認できる
+* [ ] 既存のTool Callingが壊れていない
+* [ ] 新規テストが成功する
+* [ ] 既存テストが成功する
+
+---
+
+# 16. 作業終了時の報告
+
+実装後、以下を日本語で報告する。
+
+1. 変更したファイル
+2. 追加した機能
+3. Agent State一覧
+4. 状態遷移の実例
+5. 実行したテスト
+6. テスト結果
+7. 現在残っている問題
+8. 次に実装すべき項目
+
+特に、
+
+**「次にTest Runnerを実装できる状態になっているか」**
+
+を明確に報告する。
+
+勝手に次のStepまで実装せず、ここで停止する。

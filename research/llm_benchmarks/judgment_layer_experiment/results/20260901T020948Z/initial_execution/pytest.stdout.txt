@@ -1,0 +1,23 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____________________________ test_assemble_pack ______________________________
+
+    def test_assemble_pack():
+>       pack = assemble_pack()
+
+tests\test_main.py:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+main.py:9: in assemble_pack
+    "bin": pick_bin(bins, 2),
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+bins = ['empty'], index = 2
+
+    def pick_bin(bins, index):
+>       return bins[index]
+E       IndexError: list index out of range
+
+helper.py:10: IndexError
+=========================== short test summary info ===========================
+FAILED tests/test_main.py::test_assemble_pack - IndexError: list index out of...
+1 failed in 0.08s

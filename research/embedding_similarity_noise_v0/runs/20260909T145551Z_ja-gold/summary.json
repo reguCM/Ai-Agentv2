@@ -1,0 +1,269 @@
+{
+  "all_noisy": {
+    "n": 30,
+    "gold_top_n": 27,
+    "gold_not_top_n": 3,
+    "gold_top_rate": 0.9,
+    "mean_gold_rank": 1.233,
+    "mean_gap_vs_second": 0.173709,
+    "mean_delta_vs_clean": -0.162751,
+    "failed_query_ids": [
+      "runtime_compound",
+      "research_conversion",
+      "research_asr"
+    ]
+  },
+  "by_noise_type": {
+    "clean": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.324152,
+      "mean_delta_vs_clean": null,
+      "failed_query_ids": []
+    },
+    "typo": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.132023,
+      "mean_delta_vs_clean": -0.20001,
+      "failed_query_ids": []
+    },
+    "conversion": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 2.0,
+      "mean_gap_vs_second": 0.134171,
+      "mean_delta_vs_clean": -0.181451,
+      "failed_query_ids": [
+        "research_conversion"
+      ]
+    },
+    "missing_char": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.187387,
+      "mean_delta_vs_clean": -0.139514,
+      "failed_query_ids": []
+    },
+    "particle_drop": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.310225,
+      "mean_delta_vs_clean": -0.01981,
+      "failed_query_ids": []
+    },
+    "colloquial": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.200391,
+      "mean_delta_vs_clean": -0.126955,
+      "failed_query_ids": []
+    },
+    "filler": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.219427,
+      "mean_delta_vs_clean": -0.169687,
+      "failed_query_ids": []
+    },
+    "restatement": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.180364,
+      "mean_delta_vs_clean": -0.14512,
+      "failed_query_ids": []
+    },
+    "asr_like": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 2.0,
+      "mean_gap_vs_second": 0.110696,
+      "mean_delta_vs_clean": -0.197937,
+      "failed_query_ids": [
+        "research_asr"
+      ]
+    },
+    "demonstrative": {
+      "n": 3,
+      "gold_top_n": 3,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.216801,
+      "mean_delta_vs_clean": -0.120452,
+      "failed_query_ids": []
+    },
+    "compound": {
+      "n": 3,
+      "gold_top_n": 2,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.6667,
+      "mean_gold_rank": 1.333,
+      "mean_gap_vs_second": 0.045602,
+      "mean_delta_vs_clean": -0.326577,
+      "failed_query_ids": [
+        "runtime_compound"
+      ]
+    }
+  },
+  "by_anchor": {
+    "board": {
+      "n": 10,
+      "gold_top_n": 10,
+      "gold_not_top_n": 0,
+      "gold_top_rate": 1.0,
+      "mean_gold_rank": 1.0,
+      "mean_gap_vs_second": 0.17514,
+      "mean_delta_vs_clean": -0.062857,
+      "failed_query_ids": []
+    },
+    "research": {
+      "n": 10,
+      "gold_top_n": 8,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.8,
+      "mean_gold_rank": 1.6,
+      "mean_gap_vs_second": 0.141285,
+      "mean_delta_vs_clean": -0.253631,
+      "failed_query_ids": [
+        "research_conversion",
+        "research_asr"
+      ]
+    },
+    "runtime": {
+      "n": 10,
+      "gold_top_n": 9,
+      "gold_not_top_n": 1,
+      "gold_top_rate": 0.9,
+      "mean_gold_rank": 1.1,
+      "mean_gap_vs_second": 0.204701,
+      "mean_delta_vs_clean": -0.171765,
+      "failed_query_ids": [
+        "runtime_compound"
+      ]
+    }
+  },
+  "noise_types_with_gold_not_top": [
+    "conversion",
+    "asr_like",
+    "compound"
+  ],
+  "failed_queries": [
+    {
+      "query_id": "runtime_compound",
+      "noise_type": "compound",
+      "anchor_id": "runtime",
+      "query_text": "あの実際ゲームで使ってるほう",
+      "gold_rank": 2,
+      "gold_cosine": 0.596542,
+      "top_id": "c_board",
+      "top_cosine": 0.613708,
+      "gap_vs_second": -0.017166,
+      "delta_vs_clean": -0.342923,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 1,
+          "cosine": 0.613708
+        }
+      ]
+    },
+    {
+      "query_id": "research_conversion",
+      "noise_type": "conversion",
+      "anchor_id": "research",
+      "query_text": "兼休用のもの",
+      "gold_rank": 4,
+      "gold_cosine": 0.508512,
+      "top_id": "c_score",
+      "top_cosine": 0.572932,
+      "gap_vs_second": -0.06442,
+      "delta_vs_clean": -0.430008,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "rank": 1,
+          "cosine": 0.572932
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 2,
+          "cosine": 0.549927
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "rank": 3,
+          "cosine": 0.534004
+        }
+      ]
+    },
+    {
+      "query_id": "research_asr",
+      "noise_type": "asr_like",
+      "anchor_id": "research",
+      "query_text": "兼急用のもの",
+      "gold_rank": 4,
+      "gold_cosine": 0.529941,
+      "top_id": "c_prd",
+      "top_cosine": 0.564459,
+      "gap_vs_second": -0.034518,
+      "delta_vs_clean": -0.408579,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "rank": 1,
+          "cosine": 0.564459
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "rank": 2,
+          "cosine": 0.546981
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "rank": 3,
+          "cosine": 0.539634
+        }
+      ]
+    }
+  ]
+}

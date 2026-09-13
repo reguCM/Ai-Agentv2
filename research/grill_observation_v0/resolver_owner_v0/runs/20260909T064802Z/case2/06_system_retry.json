@@ -1,0 +1,99 @@
+{
+  "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\n**掘り下げた未解決点:**  \ngridの構造（例: 行/列の数、ヘッダーの内容、データの形式）と、その中に含まれる具体的な情報（例: 文字列/数値/日付など）が不明であるため、要約の基準や方法を確定できない。  \n\n**次の確認が必要な情報:**  \n- gridのヘッダー（列名）の内容  \n- 各セルに含まれるデータの種類（例: 文字列、数値、日付、リンクなど）  \n- gridの行数や列数の概略（例: 10行×5列など）  \n\n（※この段階では、gridの存在自体は確認済みと仮定し、構造と内容の詳細を新たに確認する必要がある）\n\nGrill:\n**次の確認が必要な情報（1段掘り）:**  \n- **gridのヘッダー（列名）の内容**  \n  → 例: \"ID\", \"名前\", \"日付\", \"金額\"などの具体的な列名が不明。  \n- **各セルに含まれるデータの種類**  \n  → 例: \"文字列\"（\"山田太郎\"）、\"数値\"（\"123\"）、\"日付\"（\"2023-01-01\"）、\"リンク\"（\"https://example.com\"）など、セルごとのデータ形式が不明。  \n- **gridの行数や列数の概略**  \n  → 例: \"10行×5列\"や\"数百行×数十列\"などの規模が不明。  \n\n**理由:**  \ngridの構造や内容が不明なため、要約の基準（例: 数値の統計、日付の範囲、テキストのキーワード抽出など）を確定できない。これらの情報が得られれば、次のステップ（要約の実行）に進める。\n",
+  "required_capabilities": [
+    "workspace_file_search"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_read",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "read_file"
+      ],
+      "selected_tool": "read_file",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "read_file"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null
+    },
+    {
+      "required_capability": "workspace_file_search",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "search_files"
+      ],
+      "selected_tool": "search_files",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "search_files"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": {
+        "tool": "search_files",
+        "arguments": {
+          "query": "ID",
+          "path": "."
+        }
+      }
+    },
+    {
+      "required_capability": "url_fetch",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "read_url_text"
+      ],
+      "selected_tool": "read_url_text",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "read_url_text"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null
+    }
+  ],
+  "tool_expectation": {
+    "generated": true,
+    "required_capability": "workspace_file_search",
+    "expected_tool": "search_files",
+    "expected_arguments": {
+      "query": "ID",
+      "path": "."
+    },
+    "reason": "Current Taskを既存のagent-visible Capabilityへ接続する",
+    "level": "required",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "RESOLVED",
+  "action": {
+    "tool": "search_files",
+    "arguments": {
+      "query": "ID",
+      "path": "."
+    }
+  },
+  "stopped_at": "executable_action"
+}

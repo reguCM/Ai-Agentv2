@@ -1,0 +1,88 @@
+{
+  "id": "implement_single_select_memory_usage",
+  "selection": "single",
+  "note": "単一選択。要求は使用率だけ。Aが完全一致。Bは空き容量（別用途）。Cは古いWMI。Dは空き物理メモリ（部分）。正解ラベルは LLM に渡さない。並びは B, C, D, A。",
+  "request": "メモリ使用率を取得してください。",
+  "correct_label": "A",
+  "correct_fragments": ["PercentCommittedBytesInUse"],
+  "roles": {
+    "A": "complete",
+    "B": "similar_other_purpose",
+    "C": "legacy",
+    "D": "partial"
+  },
+  "proposal": {
+    "name": "get_memory_status",
+    "category": "system",
+    "subcategory": "memory",
+    "description": "Windows のメモリ使用率を取得する",
+    "module": "tools.system.memory.memory_status",
+    "function": "get_memory_status",
+    "input": {},
+    "output": ["status"],
+    "dependencies": ["powershell"],
+    "implementation_notes": []
+  },
+  "research_result": {
+    "usable_findings": [
+      {
+        "kind": "output",
+        "question": "メモリ関連の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command", "Get-CimInstance -Class Win32_PerfFormattedData_PerfOS_Memory | Select AvailableMBytes"],
+          "returncode": 0,
+          "sample": ["AvailableMBytes", "---------------", "8192"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      },
+      {
+        "kind": "output",
+        "question": "メモリ関連の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command", "Get-WmiObject -Class Win32_OperatingSystem | Select TotalVisibleMemorySize"],
+          "returncode": 0,
+          "sample": ["TotalVisibleMemorySize", "----------------------", "16384"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      },
+      {
+        "kind": "output",
+        "question": "メモリ関連の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command", "Get-CimInstance -Class Win32_OperatingSystem | Select FreePhysicalMemory"],
+          "returncode": 0,
+          "sample": ["FreePhysicalMemory", "------------------", "9342000"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      },
+      {
+        "kind": "output",
+        "question": "メモリ関連の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command", "Get-CimInstance -Class Win32_PerfFormattedData_PerfOS_Memory | Select PercentCommittedBytesInUse"],
+          "returncode": 0,
+          "sample": ["PercentCommittedBytesInUse", "--------------------------", "43.2"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      }
+    ],
+    "insufficient_findings": [],
+    "unresolved": []
+  }
+}

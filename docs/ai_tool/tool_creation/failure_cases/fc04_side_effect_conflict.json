@@ -1,0 +1,28 @@
+{
+  "tool_id": "local:side_effect_conflict",
+  "name": "side_effect_conflict",
+  "version": "1.0.0",
+  "description": "read_only but network enabled",
+  "provider": "local",
+  "source": "test",
+  "capability": ["test"],
+  "purpose": "failure case 04",
+  "allowed_operations": ["read"],
+  "prohibited_operations": ["network"],
+  "input_schema": { "type": "object" },
+  "output_schema": { "type": "object" },
+  "error_format": {},
+  "side_effect": "read_only",
+  "authentication": "none",
+  "network_access": true,
+  "filesystem_access": "none",
+  "risk_level": "low",
+  "cost": "free",
+  "tool_status": "available",
+  "contract": {
+    "can": ["x"],
+    "cannot": ["y"],
+    "must": ["z"],
+    "must_not": ["w"]
+  }
+}

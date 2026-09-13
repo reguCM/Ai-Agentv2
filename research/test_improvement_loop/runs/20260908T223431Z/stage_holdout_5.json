@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "n": 5,
+    "ids": [
+      "Q26",
+      "Q32",
+      "Q34",
+      "Q36",
+      "Q39"
+    ],
+    "AUTO": 5,
+    "REVIEW": 0,
+    "HUMAN": 0,
+    "auto_ids": [
+      "Q26",
+      "Q32",
+      "Q34",
+      "Q36",
+      "Q39"
+    ],
+    "review_ids": [],
+    "human_ids": [],
+    "semantic_dangerous_count": 0,
+    "parse_failure": 0,
+    "missing_output": 0
+  },
+  "records": [
+    {
+      "decision_id": "Q26",
+      "first_recommendation": "Limit look_first to read-only capabilities. Avoid mutation selection.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q32",
+      "first_recommendation": "Use Registry flag for pending inject, not name set.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q34",
+      "first_recommendation": "Use Registry flag for Sandbox, not name set {create_file, edit_file}",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility",
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q36",
+      "first_recommendation": "Avoid shared keywords for web/gpu/cpu. Prefer adding to web_search.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q39",
+      "first_recommendation": "Do not add time/memory/summary to Index. Not part of H4 Core completion.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 10,
+      "parse_failure": false,
+      "missing_output": false
+    }
+  ],
+  "llm_called": false
+}

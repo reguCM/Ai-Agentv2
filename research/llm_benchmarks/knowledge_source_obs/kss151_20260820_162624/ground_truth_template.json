@@ -1,0 +1,1890 @@
+{
+  "phase": "kss-1.5.1",
+  "experiment_id": "kss151_20260820_162624",
+  "human_audit_status": "pending",
+  "routing_ready": false,
+  "not_for_decision": true,
+  "source_kss15": {
+    "source_experiment_id": "kss15_20260820_160911",
+    "source_dir": "D:\\AI-Agent\\research\\llm_benchmarks\\knowledge_source_obs\\kss15_20260820_160911",
+    "frozen_observation": {
+      "cases_total": 5,
+      "cases_completed": 5,
+      "cases_failed": 4,
+      "cases_valid_for_measurement": 4,
+      "searches_observed": 46,
+      "hits_observed": 192,
+      "kept_hits": 183,
+      "dropped_hits": 9,
+      "successful_runs": 1,
+      "failed_runs": 3,
+      "dropped_with_core": 7,
+      "dropped_with_direct": 0,
+      "dropped_with_lead": 0,
+      "failed_runs_with_answer_in_dropped": 1,
+      "failed_runs_with_answer_in_kept": 3,
+      "failed_runs_with_no_answer_found": 0,
+      "heuristic_dropped_answer_rate_observed": 0.778,
+      "note": "heuristic_dropped_answer_rate is NOT ground truth; do not treat 0.778 as confirmed precision"
+    },
+    "environment": {
+      "ok": true,
+      "python_executable": "D:\\AI-Agent\\.venv\\Scripts\\python.exe",
+      "python_version": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+      "ollama_available": true,
+      "ollama_version": "missing",
+      "ollama_file": "D:\\AI-Agent\\.venv\\Lib\\site-packages\\ollama\\__init__.py",
+      "project_root": "D:\\AI-Agent",
+      "working_directory": "D:\\AI-Agent",
+      "feature_flags": {
+        "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+        "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+        "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+        "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+        "AI_AGENT_MEMORY_JUDGE": "0",
+        "AI_AGENT_MEMORY_RECALL": "0",
+        "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+        "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+        "AI_AGENT_KSS1_OBS": "0",
+        "AI_AGENT_KSS11_OBS": "1",
+        "AI_AGENT_KSS12_OBS": "1",
+        "AI_AGENT_KSS13_OBS": "1",
+        "AI_AGENT_KSS14_OBS": "1",
+        "AI_AGENT_KSS15_OBS": "1",
+        "AI_AGENT_KSS14_ANSWER_JUDGE": "0"
+      },
+      "web_search_module": "tools.system.tool_builder.research.web",
+      "stdout": "preflight_ok\n800"
+    },
+    "per_case": [
+      {
+        "case": "memory_usage",
+        "pass": true,
+        "fail_stage": null,
+        "stop_reason": "findings_complete",
+        "live_search_executed": true,
+        "dropped_hits_state": "positive",
+        "valid_for_kss15_measurement": true,
+        "error": null
+      },
+      {
+        "case": "cpu_temperature",
+        "pass": false,
+        "fail_stage": "judge",
+        "stop_reason": "max_research_rounds",
+        "live_search_executed": true,
+        "dropped_hits_state": "zero",
+        "valid_for_kss15_measurement": true,
+        "error": null
+      },
+      {
+        "case": "disk_usage",
+        "pass": false,
+        "fail_stage": "research",
+        "stop_reason": "stagnation",
+        "live_search_executed": true,
+        "dropped_hits_state": "positive",
+        "valid_for_kss15_measurement": true,
+        "error": null
+      },
+      {
+        "case": "gpu_usage",
+        "pass": false,
+        "fail_stage": "proposal",
+        "stop_reason": null,
+        "live_search_executed": false,
+        "dropped_hits_state": "missing",
+        "valid_for_kss15_measurement": false,
+        "error": null
+      },
+      {
+        "case": "gpu_vram_usage",
+        "pass": false,
+        "fail_stage": "research",
+        "stop_reason": "stagnation",
+        "live_search_executed": true,
+        "dropped_hits_state": "zero",
+        "valid_for_kss15_measurement": true,
+        "error": null
+      }
+    ]
+  },
+  "entries": [
+    {
+      "audit_id": "k151_37c38d37f2",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 1,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "disk",
+      "url": "https://learn.microsoft.com/en-us/windows/deployment/mbr-to-gpt",
+      "title": "MBR2GPT",
+      "snippet": "MBR2GPT.EXE Summarize this article for me In this article Important MBR. MBR2GPT.EXE converts a disk from the Master Boot Record (MBR) to the GUID Partition Table (GPT) partition style without modifying or deleting data on the disk. The tool runs from a Windows Preinstallation Environment (Windows PE) command prompt, but can also be run from the.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "not_relevant_low_score",
+      "position_rank": 1,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_9bc879cc9c",
+      "hit_id": "hit_b9ef8bd22660",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "related",
+      "heuristic_reasons": [
+        "weak_overlap:['tool', 'windows']"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_5f65367132",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 1,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "disk",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+      "title": "diskpart",
+      "snippet": "Parameters You can run the following commands from the Diskpart command interpreter: Command Description active Marks the disk's partition with focus, as active. add Mirrors the simple volume with focus to the specified disk. assign Assigns a drive letter or mount point to the volume with focus. attach vdisk Attaches (sometimes called mounts or.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "not_relevant_low_score",
+      "position_rank": 2,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_9bc879cc9c",
+      "hit_id": "hit_ac4fa03e3f9d",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:drive"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_9c99470ad3",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 1,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "disk",
+      "url": "https://learn.microsoft.com/en-us/windows/dev-drive/",
+      "title": "Set up a Dev Drive on Windows 11",
+      "snippet": "See the blog post: Dev Drive for Performance Improvements in Visual Studio and Dev Boxes for some average improvement measurements across common dev operations. How to set up a Dev Drive To set up a new Dev Drive, open Windows Settings and navigate to System > Storage > Advanced Storage Settings > Disks & volumes. Prerequisites Windows 11, Build.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "irrelevant_token:dev drive",
+      "position_rank": 3,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_9bc879cc9c",
+      "hit_id": "hit_bb64d1f250dc",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:drive"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_f6f1ed7f26",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 1,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "disk",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types",
+      "title": "Select a disk type for Azure IaaS VMs - managed disks - Azure Virtual Machines",
+      "snippet": "Azure managed disk types Summarize this article for me In this article Applies to: ✔️ Linux VMs ✔️ Windows VMs ✔️ Flexible scale sets ✔️ Uniform scale sets Azure managed disks currently offers five disk types, each intended to address a specific customer scenario: Ultra Disks Premium SSD v2 Premium SSDs (solid-state drives) Standard SSDs Standard.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "not_relevant_low_score",
+      "position_rank": 4,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_9bc879cc9c",
+      "hit_id": "hit_f4fa5bb77da7",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:drive"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_d27fe98442",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 1,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "disk",
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+      "title": "Point-in-time restore for Windows",
+      "snippet": "Note *Reserved storage is a Windows feature that sets aside a portion of disk space for successful update installation. Configuration details are as follows: Configuration Defaults Options Editions eligible to configure Feature On/Off See below* On, Off Home, Pro, Enterprise Restore point frequency (approximate) Every 24 hours 4, 6, 12, 16, 24.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "not_relevant_low_score",
+      "position_rank": 5,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_9bc879cc9c",
+      "hit_id": "hit_689ab97b3de6",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "related",
+      "heuristic_reasons": [
+        "weak_overlap:['windows']"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_f29bdceb53",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 3,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "output status disk disk",
+      "url": "https://learn.microsoft.com/en-us/windows/dev-drive/",
+      "title": "Set up a Dev Drive on Windows 11",
+      "snippet": "See the blog post: Dev Drive for Performance Improvements in Visual Studio and Dev Boxes for some average improvement measurements across common dev operations. How to set up a Dev Drive To set up a new Dev Drive, open Windows Settings and navigate to System > Storage > Advanced Storage Settings > Disks & volumes. Prerequisites Windows 11, Build.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "irrelevant_token:dev drive",
+      "position_rank": 3,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_16fcde1f6c",
+      "hit_id": "hit_87fc458a5e20",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:drive"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_35c7bac28a",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 4,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "output status disk disk",
+      "url": "https://learn.microsoft.com/en-us/windows/dev-drive/",
+      "title": "Set up a Dev Drive on Windows 11",
+      "snippet": "See the blog post: Dev Drive for Performance Improvements in Visual Studio and Dev Boxes for some average improvement measurements across common dev operations. How to set up a Dev Drive To set up a new Dev Drive, open Windows Settings and navigate to System > Storage > Advanced Storage Settings > Disks & volumes. Prerequisites Windows 11, Build.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "irrelevant_token:dev drive",
+      "position_rank": 3,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_9b268651f0",
+      "hit_id": "hit_1ce0fc30cc0e",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:drive"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_9c36e9e1ad",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 5,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "output status disk disk",
+      "url": "https://learn.microsoft.com/en-us/windows/dev-drive/",
+      "title": "Set up a Dev Drive on Windows 11",
+      "snippet": "See the blog post: Dev Drive for Performance Improvements in Visual Studio and Dev Boxes for some average improvement measurements across common dev operations. How to set up a Dev Drive To set up a new Dev Drive, open Windows Settings and navigate to System > Storage > Advanced Storage Settings > Disks & volumes. Prerequisites Windows 11, Build.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "irrelevant_token:dev drive",
+      "position_rank": 3,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_f66c10c8da",
+      "hit_id": "hit_ed3a61789fb0",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:drive"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_558cad72b5",
+      "bucket": "DROPPED_ALL",
+      "human_audit_status": "pending",
+      "case": "memory_usage",
+      "round": 1,
+      "original_question": "Windowsのメモリ使用率を取得するToolを作ってください。",
+      "query": "wmic powershell Windows memory usage percent PowerShell",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+      "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+      "snippet": "Note Using performance mode doesn't apply to high cpu or high memory usage scenarios with Microsoft Defender Antivirus services (MsMpEng.exe, WinDefend, or Antimalware Service Executable). If you're troubleshooting a high cpu usage, instead use the Microsof... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": false,
+      "drop_reason": "irrelevant_token:dev drive",
+      "position_rank": 2,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_f0536f8b07",
+      "hit_id": "hit_91903a1d4dfe",
+      "final_pass": true,
+      "fail_stage": null,
+      "stop_reason": "findings_complete",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:memory usage"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_9a38b8cb64",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "cpu_temperature",
+      "round": 1,
+      "original_question": "WindowsのCPU温度を取得するToolを作ってください。",
+      "query": "wmic powershell Win32_Processor LoadPercentage",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process",
+      "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "The output reveals that. The second pipeline shows a different way to get the owner of a process using Get-CimInstance and Invoke-CimMethod. The Win32_Process class with a filter retrieves pwsh processes and the invoked GetOwner() method returns information on the process's Domain and User. For more information, see: Example 8: Find the owner of a.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 1,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": true,
+        "candidate_index": 1,
+        "token_overlap": 1,
+        "command": "powershell"
+      },
+      "search_id": "search_89fd6f1cb5",
+      "hit_id": "hit_28451aa353f6",
+      "final_pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:get-ciminstance"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_4ea8c4fb7f",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "cpu_temperature",
+      "round": 1,
+      "original_question": "WindowsのCPU温度を取得するToolを作ってください。",
+      "query": "wmic powershell Win32_Processor LoadPercentage",
+      "url": "https://learn.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration",
+      "title": "Sample scripts for system administration - PowerShell",
+      "snippet": "Working with objects How-To Guide Viewing object structure Selecting parts of objects Removing objects from the pipeline Sorting objects Creating .NET and COM objects Using static classes and methods Getting WMI objects with Get-CimInstance Manipulating items directly Managing computers How-To Guide Changing computer state Collecting information.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 2,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": true,
+        "candidate_index": 0,
+        "token_overlap": 2,
+        "command": "powershell"
+      },
+      "search_id": "search_89fd6f1cb5",
+      "hit_id": "hit_17e51f056c97",
+      "final_pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:get-ciminstance"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_c8d65446ca",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "cpu_temperature",
+      "round": 1,
+      "original_question": "WindowsのCPU温度を取得するToolを作ってください。",
+      "query": "wmic powershell Win32_Processor LoadPercentage",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-process",
+      "title": "Get-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "Get-Process モジュール: Microsoft.PowerShell.Management Module ローカル コンピューターで実行されているプロセスを取得します。. 2 番目のパイプラインは、 Get-CimInstance と Invoke-CimMethodを使用してプロセスの所有者を取得する別の方法を示しています。. Windows では、Get-Processの代わりに、PowerShell で Windows Management Instrumentation (WMI) Win32_Process クラスを使用できます。. 例 8: プロセスの所有者を検索する Get-CimInstance Process オブジェクトの既定の表示は、次の列を含むテーブル...",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 3,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_89fd6f1cb5",
+      "hit_id": "hit_f9a2ece3628d",
+      "final_pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:get-ciminstance"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_2c62399581",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "cpu_temperature",
+      "round": 1,
+      "original_question": "WindowsのCPU温度を取得するToolを作ってください。",
+      "query": "wmic powershell Win32_Processor LoadPercentage",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/scripting/samples/sample-scripts-for-administration",
+      "title": "システム管理のサンプル スクリプト - PowerShell",
+      "snippet": "オブジェクトの操作 攻略ガイド オブジェクトの構造の表示 一部のオブジェクトの選択 パイプラインからのオブジェクトの削除 オブジェクトの並べ替え .NET オブジェクトと COM オブジェクトの作成 静的なクラスとメソッドの使用 Get-CimInstance を使った WMI オブジェクトの取得 項目を直接操作する コンピューターの管理 攻略ガイド コンピューターの状態を変更する コンピューターに関する情報の収集 FilterHashtable を使った Get-WinEvent クエリの作成 プロセスとサービスの管理 攻略ガイド Process コマンドレットによるプロセスの管理 サービスの管理 プリンターの操作 ネットワーク関連タスクの実行 ソフトウェア インストールの操作 実行...",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 4,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_89fd6f1cb5",
+      "hit_id": "hit_f31c67f0b51a",
+      "final_pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:get-ciminstance"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_b59aa1831d",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "cpu_temperature",
+      "round": 1,
+      "original_question": "WindowsのCPU温度を取得するToolを作ってください。",
+      "query": "wmic powershell Win32_Processor LoadPercentage",
+      "url": "https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/stop-process",
+      "title": "Stop-Process (Microsoft.PowerShell.Management) - PowerShell",
+      "snippet": "既定では、Stop-Process は、現在のユーザーが所有していないプロセスを停止する前に確認を求められます。. プロセスの所有者を見つけるには、Get-CimInstance コマンドレットを使用してプロセスを表す Win32_Process オブジェクトを取得し、そのオブジェクトの GetOwner メソッドを使用します。. プロセスの PID を見つけるには、「Get-Process」と入力します。. By default, Stop-Process prompts for confirmation before stopping any process th... To find the owner of a process, use the Get-CimInstance ...",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 5,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_89fd6f1cb5",
+      "hit_id": "hit_f1e7cc786522",
+      "final_pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:get-ciminstance"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_b22d0523aa",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 3,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "output status disk disk",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskpart",
+      "title": "diskpart",
+      "snippet": "Parameters You can run the following commands from the Diskpart command interpreter: Command Description active Marks the disk's partition with focus, as active. add Mirrors the simple volume with focus to the specified disk. assign Assigns a drive letter or mount point to the volume with focus. attach vdisk Attaches (sometimes called mounts or.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 2,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_16fcde1f6c",
+      "hit_id": "hit_751f3f3085d9",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:drive"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_9172a54373",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "disk_usage",
+      "round": 3,
+      "original_question": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "query": "output status disk disk",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types",
+      "title": "Select a disk type for Azure IaaS VMs - managed disks - Azure Virtual Machines",
+      "snippet": "Azure managed disk types Summarize this article for me In this article Applies to: ✔️ Linux VMs ✔️ Windows VMs ✔️ Flexible scale sets ✔️ Uniform scale sets Azure managed disks currently offers five disk types, each intended to address a specific customer scenario: Ultra Disks Premium SSD v2 Premium SSDs (solid-state drives) Standard SSDs Standard.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 4,
+      "existing_hit_score": 0,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_16fcde1f6c",
+      "hit_id": "hit_cc47e06dfb7e",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:drive"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_3199dc2315",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "gpu_vram_usage",
+      "round": 1,
+      "original_question": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+      "query": "nvidia-smi nvidia-smi query gpu",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/1696159/gpu-utilization",
+      "title": "GPU Utilization - Microsoft Q&A",
+      "snippet": "For querying GPU utilization, a more common method is to use the nvidia-smi command-line tool to view GPU utilization, temperature, memory usage, etc. For more information about NVIDIA-SMI, please refer to the following links: System Management Interface SMI | NVIDIA Developer How-to-guide: Using nvidia-smi on host to monitor GPU behavior with.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 1,
+      "existing_hit_score": 2,
+      "candidate_link": {
+        "linked": true,
+        "candidate_index": 0,
+        "token_overlap": 2,
+        "command": "nvidia-smi"
+      },
+      "search_id": "search_05677fb149",
+      "hit_id": "hit_8b981fea6b43",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:nvidia-smi"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_557527ce0c",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "gpu_vram_usage",
+      "round": 1,
+      "original_question": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+      "query": "nvidia-smi nvidia-smi query gpu",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4131160/how-i-can-allocate-full-gpu-to-a-python-anaconda",
+      "title": "How I can allocate full GPU to a python/anaconda ? - Microsoft Q&A",
+      "snippet": "..., P0, 67, 95 %, 74 %, 46068 MiB, 31550 MiB, 14241 MiB 2023/07/08 00:11:35.950, P0, 67, 91 %, 61 %, 46068 MiB, 31550 MiB, 14241 MiB C:\\Users\\Administrator&gt;nvidia-smi Sat Jul  8 00:06:34 2023 +-----------------------------------------------------------------------------+ | NVIDIA-SMI 518.03       Driver Version: 518.03       CUDA Version: 11.7.",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 2,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": true,
+        "candidate_index": 1,
+        "token_overlap": 2,
+        "command": "python"
+      },
+      "search_id": "search_05677fb149",
+      "hit_id": "hit_e4a1f99ba368",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:nvidia-smi"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_d2fd959ec4",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "gpu_vram_usage",
+      "round": 1,
+      "original_question": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+      "query": "nvidia-smi nvidia-smi query gpu",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/linux/n-series-driver-setup",
+      "title": "Linux 用の N シリーズ GPU ドライバーのセットアップをAzureする - Azure Virtual Machines",
+      "snippet": "NVIDIA GPU ドライバー拡張機能は、N シリーズ VM に適切な NVIDIA コンピューティング統合デバイス アーキテクチャ (CUDA) または GRID ドライバーをインストールします。. サポートされているオペレーティング システム (OS) と展開の手順については、 NVIDIA GPU ドライバー拡張機能のドキュメントを参照してください。. NVIDIA GPU ドライバーを手動でインストールするには、この記事で説明されている手順に従います。. CUDA ドライバーのインストールを確認する nvidia-smi を実行します。. ドライバーがインストールされている場合、NVIDIA SMI は 、VM で GPU ワークロードを実行するまで GPU-Util を N...",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 3,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_05677fb149",
+      "hit_id": "hit_3a82e5eb20d6",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:nvidia-smi"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_38a9f67fea",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "gpu_vram_usage",
+      "round": 1,
+      "original_question": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+      "query": "nvidia-smi nvidia-smi query gpu",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/windows/n-series-driver-setup",
+      "title": "Windows用の N シリーズ NVIDIA GPU ドライバーのセットアップをAzureする - Azure Virtual Machines",
+      "snippet": "GRID ドライバーのインストールを確認す... nvidia-smi を実行します。. ドライバーがインストールされている場合、NVIDIA SMI は 、VM で GPU ワークロードを実行するまで GPU-Util を N/A として一覧表示します。. AzureでWindows ServerまたはWindowsを実行している N シリーズ VM 用に NVIDIA GPU ドライバーを設定する方法. Install NVIDIA GPU Drivers on N-series VMs Running Windows Summarize this article for me In this article Applies to: ✔️ Windows VMs To take a...",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 4,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_05677fb149",
+      "hit_id": "hit_4234d4dab497",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:nvidia-smi"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    },
+    {
+      "audit_id": "k151_64a56e297c",
+      "bucket": "FAILED_KEPT_CORE_UNIQUE",
+      "human_audit_status": "pending",
+      "case": "gpu_vram_usage",
+      "round": 1,
+      "original_question": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+      "query": "nvidia-smi nvidia-smi query gpu",
+      "url": "https://learn.microsoft.com/ja-jp/azure/virtual-machines/sizes/gpu-accelerated/nc-rtxpro6000-bse-v6-series-overview",
+      "title": "NC_RTXPRO6000BSE_v6 サイズ シリーズの概要 - Azure Virtual Machines",
+      "snippet": "オムニバース Isaac-Sim は NC... オムニバース Isaac-Sim 6.0 は NCv6 でサポートされています。. NCv6 の nvidia-smi を使用すると、電力や熱テレメトリが表示されないのはなぜですか. これは、SR-IOV モードの制限です。. 詳細については、「 HPC および GPU VM に関する既知の問題のトラブルシューティング」を参照してください。. NC RTX PRO 6000 Blackwell v6 sizes series overview Summarize this article for me In this article The NCv6-series is a single virtual machine (VM) fam...",
+      "domain": "learn.microsoft.com",
+      "source": "learn.microsoft",
+      "kept": true,
+      "drop_reason": "kept",
+      "position_rank": 5,
+      "existing_hit_score": 1,
+      "candidate_link": {
+        "linked": false
+      },
+      "search_id": "search_05677fb149",
+      "hit_id": "hit_a6c6a7ecd0c8",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "heuristic_answer_presence": "core",
+      "heuristic_reasons": [
+        "core_hint:nvidia-smi"
+      ],
+      "human_label": "missing",
+      "answer_presence": "missing",
+      "source_quality": "missing",
+      "answer_location": "missing",
+      "answer_excerpt_reference": "missing",
+      "human_rationale": "missing",
+      "drop_heuristic_error": "missing",
+      "notes": "missing",
+      "allowed_human_labels": [
+        "DIRECT",
+        "CORE",
+        "RELATED",
+        "IRRELEVANT",
+        "MISLEADING",
+        "UNKNOWN"
+      ],
+      "allowed_answer_presence": [
+        "direct",
+        "core",
+        "related",
+        "none",
+        "misleading",
+        "unknown"
+      ],
+      "allowed_source_quality": [
+        "official",
+        "authoritative",
+        "reputable_secondary",
+        "ordinary",
+        "unknown",
+        "unreliable"
+      ],
+      "label_guide": {
+        "DIRECT": "質問そのものへの直接的な回答・解決情報",
+        "CORE": "直接回答ではないが回答を構築する核心情報",
+        "RELATED": "関連だが単独では核心にならない",
+        "IRRELEVANT": "有用性がほぼない",
+        "MISLEADING": "関連して見えるが誤情報・文脈違い・適用不能",
+        "UNKNOWN": "ページ内容を十分確認できない"
+      },
+      "constraints": {
+        "heuristic_is_not_ground_truth": true,
+        "answer_present_is_not_success": true,
+        "do_not_auto_reinject_dropped": true
+      }
+    }
+  ],
+  "loss_forms": [
+    {
+      "form_id": "loss_386c06ba49",
+      "case": "cpu_temperature",
+      "final_pass": false,
+      "fail_stage": "judge",
+      "stop_reason": "max_research_rounds",
+      "request": "WindowsのCPU温度を取得するToolを作ってください。",
+      "valid_for_kss15_measurement": true,
+      "human_audit_status": "pending",
+      "answer_present_in_web": "missing",
+      "run_success": false,
+      "primary_loss_stage": "missing",
+      "secondary_loss_stage": "missing",
+      "allowed_loss_stages": [
+        "SEARCH_MISS",
+        "DROP_ERROR",
+        "CANDIDATE_MISS",
+        "VERIFY_ERROR",
+        "USABLE_CONVERSION_ERROR",
+        "JUDGE_ERROR",
+        "PROGRESS_ERROR",
+        "PROPOSAL_ERROR",
+        "UNKNOWN"
+      ],
+      "loss_stage_guide": {
+        "SEARCH_MISS": "有用情報を取得できていない",
+        "DROP_ERROR": "有用hitをdroppedした",
+        "CANDIDATE_MISS": "kept有用情報がcandidate化されなかった",
+        "VERIFY_ERROR": "verificationで採用できなかった",
+        "USABLE_CONVERSION_ERROR": "usable findingへ変換できなかった",
+        "JUDGE_ERROR": "usableがあるのにjudgeで不適切",
+        "PROGRESS_ERROR": "継続/終了判断が不適切",
+        "PROPOSAL_ERROR": "research以前のproposal失敗",
+        "UNKNOWN": "観測だけでは判定不能"
+      },
+      "notes": "missing"
+    },
+    {
+      "form_id": "loss_04e7d1ad40",
+      "case": "disk_usage",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "request": "Windowsのディスク使用率を取得するToolを作ってください。",
+      "valid_for_kss15_measurement": true,
+      "human_audit_status": "pending",
+      "answer_present_in_web": "missing",
+      "run_success": false,
+      "primary_loss_stage": "missing",
+      "secondary_loss_stage": "missing",
+      "allowed_loss_stages": [
+        "SEARCH_MISS",
+        "DROP_ERROR",
+        "CANDIDATE_MISS",
+        "VERIFY_ERROR",
+        "USABLE_CONVERSION_ERROR",
+        "JUDGE_ERROR",
+        "PROGRESS_ERROR",
+        "PROPOSAL_ERROR",
+        "UNKNOWN"
+      ],
+      "loss_stage_guide": {
+        "SEARCH_MISS": "有用情報を取得できていない",
+        "DROP_ERROR": "有用hitをdroppedした",
+        "CANDIDATE_MISS": "kept有用情報がcandidate化されなかった",
+        "VERIFY_ERROR": "verificationで採用できなかった",
+        "USABLE_CONVERSION_ERROR": "usable findingへ変換できなかった",
+        "JUDGE_ERROR": "usableがあるのにjudgeで不適切",
+        "PROGRESS_ERROR": "継続/終了判断が不適切",
+        "PROPOSAL_ERROR": "research以前のproposal失敗",
+        "UNKNOWN": "観測だけでは判定不能"
+      },
+      "notes": "missing"
+    },
+    {
+      "form_id": "loss_3527d6aff2",
+      "case": "gpu_usage",
+      "final_pass": false,
+      "fail_stage": "proposal",
+      "stop_reason": null,
+      "request": "GPUの使用率を取得するToolを作ってください。",
+      "valid_for_kss15_measurement": false,
+      "human_audit_status": "pending",
+      "answer_present_in_web": "missing",
+      "run_success": false,
+      "primary_loss_stage": "missing",
+      "secondary_loss_stage": "missing",
+      "allowed_loss_stages": [
+        "SEARCH_MISS",
+        "DROP_ERROR",
+        "CANDIDATE_MISS",
+        "VERIFY_ERROR",
+        "USABLE_CONVERSION_ERROR",
+        "JUDGE_ERROR",
+        "PROGRESS_ERROR",
+        "PROPOSAL_ERROR",
+        "UNKNOWN"
+      ],
+      "loss_stage_guide": {
+        "SEARCH_MISS": "有用情報を取得できていない",
+        "DROP_ERROR": "有用hitをdroppedした",
+        "CANDIDATE_MISS": "kept有用情報がcandidate化されなかった",
+        "VERIFY_ERROR": "verificationで採用できなかった",
+        "USABLE_CONVERSION_ERROR": "usable findingへ変換できなかった",
+        "JUDGE_ERROR": "usableがあるのにjudgeで不適切",
+        "PROGRESS_ERROR": "継続/終了判断が不適切",
+        "PROPOSAL_ERROR": "research以前のproposal失敗",
+        "UNKNOWN": "観測だけでは判定不能"
+      },
+      "notes": "missing"
+    },
+    {
+      "form_id": "loss_6b2b80714d",
+      "case": "gpu_vram_usage",
+      "final_pass": false,
+      "fail_stage": "research",
+      "stop_reason": "stagnation",
+      "request": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+      "valid_for_kss15_measurement": true,
+      "human_audit_status": "pending",
+      "answer_present_in_web": "missing",
+      "run_success": false,
+      "primary_loss_stage": "missing",
+      "secondary_loss_stage": "missing",
+      "allowed_loss_stages": [
+        "SEARCH_MISS",
+        "DROP_ERROR",
+        "CANDIDATE_MISS",
+        "VERIFY_ERROR",
+        "USABLE_CONVERSION_ERROR",
+        "JUDGE_ERROR",
+        "PROGRESS_ERROR",
+        "PROPOSAL_ERROR",
+        "UNKNOWN"
+      ],
+      "loss_stage_guide": {
+        "SEARCH_MISS": "有用情報を取得できていない",
+        "DROP_ERROR": "有用hitをdroppedした",
+        "CANDIDATE_MISS": "kept有用情報がcandidate化されなかった",
+        "VERIFY_ERROR": "verificationで採用できなかった",
+        "USABLE_CONVERSION_ERROR": "usable findingへ変換できなかった",
+        "JUDGE_ERROR": "usableがあるのにjudgeで不適切",
+        "PROGRESS_ERROR": "継続/終了判断が不適切",
+        "PROPOSAL_ERROR": "research以前のproposal失敗",
+        "UNKNOWN": "観測だけでは判定不能"
+      },
+      "notes": "missing"
+    }
+  ],
+  "report_counts": {
+    "dropped_total": 9,
+    "human_direct": "missing",
+    "human_core": "missing",
+    "human_related": "missing",
+    "human_none": "missing",
+    "human_misleading": "missing",
+    "human_unknown": "missing",
+    "kept_audited": 12,
+    "kept_direct": "missing",
+    "kept_core": "missing",
+    "kept_related": "missing",
+    "kept_none": "missing",
+    "kept_misleading": "missing",
+    "kept_unknown": "missing",
+    "failure_loss_stage_counts": {
+      "SEARCH_MISS": "missing",
+      "DROP_ERROR": "missing",
+      "CANDIDATE_MISS": "missing",
+      "VERIFY_ERROR": "missing",
+      "USABLE_CONVERSION_ERROR": "missing",
+      "JUDGE_ERROR": "missing",
+      "PROGRESS_ERROR": "missing",
+      "PROPOSAL_ERROR": "missing",
+      "UNKNOWN": "missing"
+    },
+    "heuristic_calibration": {
+      "status": "pending_human_labels",
+      "note": "small-n; do not claim true precision",
+      "confusion_matrix": "missing",
+      "heuristic_direct_precision": "missing",
+      "heuristic_core_precision": "missing",
+      "heuristic_answer_presence_precision": "missing",
+      "heuristic_false_negative_rate": "missing",
+      "heuristic_false_positive_rate": "missing"
+    }
+  },
+  "report_counts_note": "pending until human labels; A/B/C/D sections stay missing",
+  "generated_at": "2026-08-20T16:26:24.602677+00:00"
+}

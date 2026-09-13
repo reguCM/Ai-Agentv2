@@ -1,0 +1,1360 @@
+{
+  "run_id": "20260909T141840Z",
+  "at": "2026-09-09T14:18:58.486034+00:00",
+  "status": "ok",
+  "embed_error": null,
+  "embed_model": "qwen3-embedding:0.6b",
+  "gen_model": "qwen3:14b",
+  "skip_gen": false,
+  "production_connected": false,
+  "grill_connected": false,
+  "threshold_canonicalized": false,
+  "selected_rule_created": false,
+  "vector_dim": 1024,
+  "embed_timings": {
+    "q_board": {
+      "elapsed_ms": 2923.4,
+      "dim": 1024
+    },
+    "q_runtime": {
+      "elapsed_ms": 4482.8,
+      "dim": 1024
+    },
+    "q_research": {
+      "elapsed_ms": 134.1,
+      "dim": 1024
+    },
+    "q_runtime_ja": {
+      "elapsed_ms": 29.8,
+      "dim": 1024
+    },
+    "c_board_en": {
+      "elapsed_ms": 29.3,
+      "dim": 1024
+    },
+    "c_runtime_en": {
+      "elapsed_ms": 27.0,
+      "dim": 1024
+    },
+    "c_research_en": {
+      "elapsed_ms": 26.4,
+      "dim": 1024
+    },
+    "c_runtime_code": {
+      "elapsed_ms": 27.6,
+      "dim": 1024
+    },
+    "c_research_code": {
+      "elapsed_ms": 25.3,
+      "dim": 1024
+    },
+    "c_unrelated_cpu": {
+      "elapsed_ms": 26.1,
+      "dim": 1024
+    },
+    "c_unrelated_weather": {
+      "elapsed_ms": 31.2,
+      "dim": 1024
+    },
+    "c_unrelated_license": {
+      "elapsed_ms": 33.5,
+      "dim": 1024
+    }
+  },
+  "simultaneous": {
+    "gen_loaded_before_embed": true,
+    "both_listed_during_embed": true,
+    "gen_responded_after_embed": true,
+    "note": "Resident-in-VRAM vs sequential Ollama swap are recorded separately.",
+    "gen_warmup": {
+      "ok": true,
+      "elapsed_ms": 7757.2,
+      "content": "",
+      "error": null
+    },
+    "ollama_ps_after_embed": "NAME                    ID              SIZE      PROCESSOR    CONTEXT    UNTIL               \nqwen3-embedding:0.6b    ac6da0dfba84    2.4 GB    100% GPU     4096       29 minutes from now    \nqwen3:14b               bdbd181c33f2    9.6 GB    100% GPU     4096       29 minutes from now",
+    "first_embed_ms": 2923.4,
+    "gen_reping": {
+      "ok": true,
+      "elapsed_ms": 1651.4,
+      "content": "",
+      "error": null
+    }
+  },
+  "snapshots": [
+    {
+      "label": "baseline",
+      "at": "2026-09-09T14:18:40.675871+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 60.0,
+        "utilization": 21.0,
+        "vram_used": 2059,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 26981,
+        "used_mb": 38296,
+        "load_percent": 58,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL",
+        "error": null
+      }
+    },
+    {
+      "label": "after_gen_warmup",
+      "at": "2026-09-09T14:18:48.595198+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 68.0,
+        "utilization": 49.0,
+        "vram_used": 11385,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 46256,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 26043,
+        "used_mb": 39234,
+        "load_percent": 60,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME         ID              SIZE      PROCESSOR    CONTEXT    UNTIL               \nqwen3:14b    bdbd181c33f2    9.6 GB    100% GPU     4096       29 minutes from now",
+        "error": null
+      }
+    },
+    {
+      "label": "after_embed",
+      "at": "2026-09-09T14:18:56.583433+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 59.0,
+        "utilization": 56.0,
+        "vram_used": 11933,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 46256,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 39684,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 24014,
+        "used_mb": 41263,
+        "load_percent": 63,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME                    ID              SIZE      PROCESSOR    CONTEXT    UNTIL               \nqwen3-embedding:0.6b    ac6da0dfba84    2.4 GB    100% GPU     4096       29 minutes from now    \nqwen3:14b               bdbd181c33f2    9.6 GB    100% GPU     4096       29 minutes from now",
+        "error": null
+      }
+    },
+    {
+      "label": "after_gen_reping",
+      "at": "2026-09-09T14:18:58.413963+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 68.0,
+        "utilization": 99.0,
+        "vram_used": 11933,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 46256,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 39684,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 22989,
+        "used_mb": 42288,
+        "load_percent": 64,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME                    ID              SIZE      PROCESSOR    CONTEXT    UNTIL               \nqwen3:14b               bdbd181c33f2    9.6 GB    100% GPU     4096       29 minutes from now    \nqwen3-embedding:0.6b    ac6da0dfba84    2.4 GB    100% GPU     4096       29 minutes from now",
+        "error": null
+      }
+    }
+  ],
+  "results": [
+    {
+      "query_id": "q_board",
+      "query_text": "テトリスの盤面",
+      "embed_ms": 2923.4,
+      "ranked": [
+        {
+          "candidate_id": "c_board_en",
+          "text": "game board state",
+          "kind": "near_en",
+          "cosine": 0.62101,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_unrelated_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "unrelated",
+          "cosine": 0.510193,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime_en",
+          "text": "runtime implementation",
+          "kind": "near_en",
+          "cosine": 0.505042,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_unrelated_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "unrelated",
+          "cosine": 0.501499,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_research_code",
+          "text": "research/ experiment harness",
+          "kind": "near_code",
+          "cosine": 0.480075,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_research_en",
+          "text": "research experiment",
+          "kind": "near_en",
+          "cosine": 0.468611,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_runtime_code",
+          "text": "production runtime path",
+          "kind": "near_code",
+          "cosine": 0.412605,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_unrelated_license",
+          "text": "MIT license text for a Python package",
+          "kind": "unrelated",
+          "cosine": 0.373873,
+          "rank": 8
+        }
+      ],
+      "expected_hit": {
+        "top_id": "c_board_en",
+        "top_in_expected_near": true,
+        "expected_near": [
+          "c_board_en"
+        ],
+        "expected_ranks": {
+          "c_board_en": 1
+        }
+      }
+    },
+    {
+      "query_id": "q_runtime",
+      "query_text": "実際のゲームで使っている方",
+      "embed_ms": 4482.8,
+      "ranked": [
+        {
+          "candidate_id": "c_board_en",
+          "text": "game board state",
+          "kind": "near_en",
+          "cosine": 0.467997,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime_en",
+          "text": "runtime implementation",
+          "kind": "near_en",
+          "cosine": 0.459901,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_unrelated_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "unrelated",
+          "cosine": 0.408951,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_research_code",
+          "text": "research/ experiment harness",
+          "kind": "near_code",
+          "cosine": 0.408639,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_research_en",
+          "text": "research experiment",
+          "kind": "near_en",
+          "cosine": 0.4056,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_unrelated_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "unrelated",
+          "cosine": 0.347196,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_runtime_code",
+          "text": "production runtime path",
+          "kind": "near_code",
+          "cosine": 0.331324,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_unrelated_license",
+          "text": "MIT license text for a Python package",
+          "kind": "unrelated",
+          "cosine": 0.257132,
+          "rank": 8
+        }
+      ],
+      "expected_hit": {
+        "top_id": "c_board_en",
+        "top_in_expected_near": false,
+        "expected_near": [
+          "c_runtime_en"
+        ],
+        "expected_ranks": {
+          "c_runtime_en": 2
+        }
+      }
+    },
+    {
+      "query_id": "q_research",
+      "query_text": "研究用のもの",
+      "embed_ms": 134.1,
+      "ranked": [
+        {
+          "candidate_id": "c_research_en",
+          "text": "research experiment",
+          "kind": "near_en",
+          "cosine": 0.756724,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_research_code",
+          "text": "research/ experiment harness",
+          "kind": "near_code",
+          "cosine": 0.646167,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime_en",
+          "text": "runtime implementation",
+          "kind": "near_en",
+          "cosine": 0.523563,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_unrelated_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "unrelated",
+          "cosine": 0.454538,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_unrelated_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "unrelated",
+          "cosine": 0.418587,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_runtime_code",
+          "text": "production runtime path",
+          "kind": "near_code",
+          "cosine": 0.410544,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_board_en",
+          "text": "game board state",
+          "kind": "near_en",
+          "cosine": 0.384425,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_unrelated_license",
+          "text": "MIT license text for a Python package",
+          "kind": "unrelated",
+          "cosine": 0.322165,
+          "rank": 8
+        }
+      ],
+      "expected_hit": {
+        "top_id": "c_research_en",
+        "top_in_expected_near": true,
+        "expected_near": [
+          "c_research_en"
+        ],
+        "expected_ranks": {
+          "c_research_en": 1
+        }
+      }
+    },
+    {
+      "query_id": "q_runtime_ja",
+      "query_text": "実行時に動いている実装",
+      "embed_ms": 29.8,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime_en",
+          "text": "runtime implementation",
+          "kind": "near_en",
+          "cosine": 0.718644,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_research_code",
+          "text": "research/ experiment harness",
+          "kind": "near_code",
+          "cosine": 0.526192,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime_code",
+          "text": "production runtime path",
+          "kind": "near_code",
+          "cosine": 0.503209,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_research_en",
+          "text": "research experiment",
+          "kind": "near_en",
+          "cosine": 0.500866,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_unrelated_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "unrelated",
+          "cosine": 0.478329,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_board_en",
+          "text": "game board state",
+          "kind": "near_en",
+          "cosine": 0.431851,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_unrelated_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "unrelated",
+          "cosine": 0.414541,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_unrelated_license",
+          "text": "MIT license text for a Python package",
+          "kind": "unrelated",
+          "cosine": 0.282617,
+          "rank": 8
+        }
+      ],
+      "expected_hit": {
+        "top_id": "c_runtime_en",
+        "top_in_expected_near": true,
+        "expected_near": [
+          "c_runtime_en",
+          "c_runtime_code"
+        ],
+        "expected_ranks": {
+          "c_runtime_en": 1,
+          "c_runtime_code": 3
+        }
+      }
+    }
+  ],
+  "cases_path": "D:\\AI-Agent-worktrees\\current-dev\\research\\embedding_similarity_v0\\cases.json"
+}

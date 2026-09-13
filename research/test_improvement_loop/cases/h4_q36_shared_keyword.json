@@ -1,0 +1,24 @@
+{
+  "upgrade_bundle_id": "h4_q36_shared_keyword",
+  "note": "Evidence id Q36 is a reproduction case only. Routing rules must not key off this id.",
+  "cases": [
+    {
+      "case_id": "h4-shared-keyword-family-prefer",
+      "source": "h4_decision_maker_bench",
+      "source_test": "previous_holdout_5_false_auto_missed_by_parse_only_confirm",
+      "source_failure": "false_AUTO",
+      "observed_failure": "Local mixed avoid-shared-keywords with prefer-adding-to-web_search and Gate 2 routed AUTO. Holdout confirm only checked parse/HUMAN.",
+      "expected_invariant": "Unnegated prefer/confirm of one family from a shared/cross-cutting keyword is Gate 1 FAIL. Mentioning the constraint while still preferring one family is still FAIL.",
+      "evidence": ["saved recommendation: Avoid shared keywords for web/gpu/cpu. Prefer adding to web_search."],
+      "target_layer": "adoption_gate",
+      "upgrade_type": "adoption_gate",
+      "severity": "high",
+      "status": "experimental",
+      "canary_id": "Q36",
+      "expected_after": {
+        "route_not": "AUTO",
+        "semantic_gate": "FAIL"
+      }
+    }
+  ]
+}

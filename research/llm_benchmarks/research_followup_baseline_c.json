@@ -1,0 +1,19 @@
+{
+  "note": "固定回帰基準。Research follow-up が失敗候補を繰り返す C 3/3。実検索ヒット固定ケース。上書きしない。検索改善後は同一ケースで再測する。",
+  "frozen_at": "2026-08-19T06:08:00Z",
+  "source_run": "research/llm_benchmarks/research_followup_results.json research_followup_v1 with captured search_results",
+  "contract_phase": "research_followup_v1",
+  "pass_criterion": "A",
+  "observed_grades": {
+    "C": 3
+  },
+  "trial_grades": ["C", "C", "C"],
+  "pass": false,
+  "case": "research_followup_after_verify_fail",
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "repeat": 3,
+  "summary": "実検索ヒットが無関係（Exchange/Dev Drive/Kerberos 等）。Research は rejected と同じ TotalPhysicalMemory 式を 3/3 繰り返した。",
+  "candidate_example": "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { ... }",
+  "search_results_note": "cases/research_followup_after_verify_fail.json の search_results を凍結材料とする"
+}

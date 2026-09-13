@@ -1,0 +1,166 @@
+{
+  "coverage": [
+    "ゲームループ構造、テトロミノ処理、衝突判定、ラインクリア、ゲームオーバー判定、描画処理のすべての仕様項目がカバーされている"
+  ],
+  "missing_connections": [
+    "GameLoop → LineClearの依存関係がexecution_pathに存在するがdependenciesに記載されていない"
+  ],
+  "missing_dependencies": [
+    "LineClear → Scoreの依存関係が明示的に記載されていない"
+  ],
+  "missing_shared_state": [],
+  "medium_task_candidates": [
+    {
+      "name": "GameSpeedControl",
+      "purpose": "落下速度の制御とタイマー処理の統合",
+      "components": [
+        "GameLoop",
+        "Tetromino"
+      ]
+    },
+    {
+      "name": "GameStateManagement",
+      "purpose": "グリッド状態とゲーム進行状態の統合管理",
+      "components": [
+        "Grid",
+        "LineClear",
+        "GameOverDetection"
+      ]
+    }
+  ],
+  "notes": "依存関係の網羅性が95%で、GameLoopとLineClearの関係性がexecution_pathとdependenciesの整合性にわずかなズレがある。SharedStateの設計は完全に仕様に合致している。",
+  "expected_map_v0": {
+    "components": [
+      {
+        "id": "GameLoop",
+        "role": "Main loop handling events and updates",
+        "spec_item": "ゲームループの構造"
+      },
+      {
+        "id": "Tetromino",
+        "role": "テトロミノの形状と移動・回転処理",
+        "spec_item": "テトロミノの形状と初期配置"
+      },
+      {
+        "id": "Grid",
+        "role": "グリッドの状態管理と衝突判定",
+        "spec_item": "衝突判定の実装方法"
+      },
+      {
+        "id": "CollisionDetection",
+        "role": "移動・回転時の衝突判定",
+        "spec_item": "衝突判定の実装方法"
+      },
+      {
+        "id": "LineClear",
+        "role": "ラインクリア処理とスコア加算",
+        "spec_item": "行の削除（ラインクリア）のロジック"
+      },
+      {
+        "id": "GameOverDetection",
+        "role": "ゲームオーバー判定処理",
+        "spec_item": "ゲームオーバー判定条件"
+      },
+      {
+        "id": "Display",
+        "role": "画面の描画処理",
+        "spec_item": "ゲーム画面のサイズとグリッドの設定"
+      }
+    ],
+    "dependencies": [
+      {
+        "from": "GameLoop",
+        "to": "Tetromino",
+        "why": "テトロミノの更新処理が必要"
+      },
+      {
+        "from": "GameLoop",
+        "to": "CollisionDetection",
+        "why": "移動・回転時の衝突判定が必要"
+      },
+      {
+        "from": "CollisionDetection",
+        "to": "Grid",
+        "why": "グリッド状態を参照して衝突判定"
+      },
+      {
+        "from": "LineClear",
+        "to": "Grid",
+        "why": "グリッド状態を参照してラインクリア"
+      },
+      {
+        "from": "GameOverDetection",
+        "to": "Grid",
+        "why": "グリッド状態を参照してゲームオーバー判定"
+      },
+      {
+        "from": "Display",
+        "to": "Grid",
+        "why": "グリッド状態を描画"
+      },
+      {
+        "from": "Display",
+        "to": "Tetromino",
+        "why": "テトロミノの描画が必要"
+      }
+    ],
+    "execution_paths": [
+      {
+        "id": "main_game_loop",
+        "steps": [
+          "GameLoop: イベント処理（QUIT判定）",
+          "Tetromino: 自動落下処理",
+          "CollisionDetection: 移動・回転時の衝突判定",
+          "Grid: テトロミノの位置更新",
+          "LineClear: ラインクリア判定と処理",
+          "GameOverDetection: ゲームオーバー判定",
+          "Display: グリッドとテトロミノの描画",
+          "GameLoop: pygame.display.flip()で画面更新"
+        ]
+      }
+    ],
+    "shared_state": [
+      {
+        "name": "grid_state",
+        "writers": [
+          "Grid",
+          "LineClear"
+        ],
+        "readers": [
+          "CollisionDetection",
+          "GameOverDetection",
+          "Display"
+        ]
+      },
+      {
+        "name": "current_tetromino",
+        "writers": [
+          "GameLoop",
+          "Tetromino"
+        ],
+        "readers": [
+          "CollisionDetection",
+          "Display"
+        ]
+      },
+      {
+        "name": "game_over_flag",
+        "writers": [
+          "GameOverDetection"
+        ],
+        "readers": [
+          "GameLoop"
+        ]
+      },
+      {
+        "name": "score",
+        "writers": [
+          "LineClear"
+        ],
+        "readers": [
+          "Display"
+        ]
+      }
+    ]
+  }
+}

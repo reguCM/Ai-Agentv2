@@ -1,0 +1,291 @@
+{
+  "summary": {
+    "n": 13,
+    "ids": [
+      "Q9",
+      "Q25",
+      "Q29",
+      "Q14-15",
+      "Q30",
+      "Q7",
+      "Q10",
+      "Q40",
+      "Q47",
+      "Q1",
+      "Q28",
+      "Q2",
+      "Q31"
+    ],
+    "AUTO": 6,
+    "REVIEW": 7,
+    "HUMAN": 0,
+    "auto_ids": [
+      "Q29",
+      "Q30",
+      "Q10",
+      "Q40",
+      "Q47",
+      "Q1"
+    ],
+    "review_ids": [
+      "Q9",
+      "Q25",
+      "Q14-15",
+      "Q7",
+      "Q28",
+      "Q2",
+      "Q31"
+    ],
+    "human_ids": [],
+    "semantic_dangerous_count": 1,
+    "parse_failure": 0,
+    "missing_output": 0
+  },
+  "records": [
+    {
+      "decision_id": "Q9",
+      "first_recommendation": "Keep registry_read and generic file keywords strictly separate. Use look_first path metadata to trigger registry_read only when the request explicitly references registry-specific paths (e.g., registry/tools.json).",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "unresolved_artifact_or_api_adjustment"
+      ],
+      "attributes": [
+        "compatibility",
+        "safety"
+      ],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 75,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q25",
+      "first_recommendation": "Stop silent read of look_first[0]. Require path for file-read next_action.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "safety_behavior_change_unverified"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q29",
+      "first_recommendation": "Skip next_action if search_files has no query. Do not use text[:80].",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q14-15",
+      "first_recommendation": "Reject selecting among 2+ Help-confirmed candidates by index [0]. For single candidates, select and mark RESOLVED. For multiple candidates, leave unresolved (status=AMBIGUOUS) unless a non-index-based disambiguation rule exists in registry/tools.json.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "unresolved_artifact_or_api_adjustment"
+      ],
+      "attributes": [
+        "compatibility",
+        "safety"
+      ],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 45,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q30",
+      "first_recommendation": "Allow pathless '.' for list_files as residual. Do not enforce path requirement during H4 Core.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": false,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q7",
+      "first_recommendation": "Keep single API per capability. Allow 0/1/2+ results but return them as a flat list without folding. Do not delete singular APIs.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "api_cardinality_not_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility",
+        "destructive",
+        "irreversible"
+      ],
+      "need_human": false,
+      "needs_deep_review": false,
+      "uncertainty": 15,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q10",
+      "first_recommendation": "Remove _RULES from capability core. Avoid allowlist growth.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 30,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q40",
+      "first_recommendation": "Reject expansion of exclusion rules beyond file-based contexts (e.g., GPU). Maintain strict alignment with Q25-Q26 (read-only look_first signals) and Q30 (list '.' residual).",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 70,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q47",
+      "first_recommendation": "Do not delete leftovers. Keep residuals for Core completion.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility",
+        "destructive",
+        "irreversible"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 10,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q1",
+      "first_recommendation": "Close H4 Core at capability resolution, gap detection, and sandbox judgment. Do not include full product features like Help English search, UI, or detect_tool_gap internals.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "destructive",
+        "irreversible",
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 10,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q28",
+      "first_recommendation": "Keep _VERIFIED_ROUTES in capability core. Separate from Index routes.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "canonical_code_table_keep_not_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q2",
+      "first_recommendation": "Add web/gpu/cpu as semantic capabilities with keywords only. Do not add IDs.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "decision_polarity_not_closed"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false
+    },
+    {
+      "decision_id": "Q31",
+      "first_recommendation": "Inject only [0] next_action. Inject none if multiple.",
+      "semantic_gate": "FAIL",
+      "semantic_dangerous": [
+        {
+          "rule_id": "cardinality_index_or_head_select",
+          "kind": "known_wrong",
+          "forbidden": "Selecting, injecting, or resolving among 2+ candidates by list index [0], first, or head without a unique non-index reason."
+        }
+      ],
+      "route": "REVIEW",
+      "notes": [
+        "semantic_fail_contract_recheck"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false
+    }
+  ],
+  "llm_called": false
+}

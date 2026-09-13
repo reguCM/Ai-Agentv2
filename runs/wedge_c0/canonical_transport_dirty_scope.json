@@ -1,0 +1,97 @@
+{
+  "head": "7e23ad6",
+  "files": [
+    {
+      "file": "ai_tool/chat_interface/requirement_resolution.py",
+      "canonical_symbols": [
+        "_runtime_adoption_from_rows",
+        "project_to_runtime_adoption_entries",
+        "canonical_requirement_projection_from_dict_rows",
+        "sync_canonical_requirement_projection",
+        "runtime_matches_for_completion_condition",
+        "build_canonical_requirement_evidence_trace",
+        "build_canonical_requirement_runtime_coverage",
+        "_build_canonical_requirement_runtime_trace",
+        "sync_canonical_requirements_from_mission"
+      ],
+      "unrelated_dirty_symbols": [],
+      "separable": true,
+      "notes": "Entire dirty diff is canonical transport extension atop HEAD project_to_runtime_adoption."
+    },
+    {
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "canonical_symbols": [
+        "structured_requirements",
+        "canonical_requirement_projection",
+        "apply_canonical_requirements_from_state",
+        "canonical_requirement_evidence_trace",
+        "canonical_requirement_runtime_coverage",
+        "handoff_acceptance_runtime_trace",
+        "handoff_acceptance_projection",
+        "handoff_task_acceptance_mapping",
+        "mission state structured_requirements export"
+      ],
+      "unrelated_dirty_symbols": [],
+      "separable": true,
+      "notes": "Wedge A/B hunks already committed at HEAD; remaining dirty is canonical + handoff trace fields only."
+    },
+    {
+      "file": "ai_tool/chat_interface/goal_continuation_resume.py",
+      "canonical_symbols": [
+        "sync_canonical_requirements_from_mission import and call in restore_orchestrator_from_goal_continuation"
+      ],
+      "unrelated_dirty_symbols": [],
+      "separable": false,
+      "notes": "Depends on WORKTREE_ONLY sync_canonical_requirements_from_mission in requirement_resolution."
+    },
+    {
+      "file": "ai_tool/goal_handoff_runtime_bridge.py",
+      "canonical_symbols": [
+        "build_handoff_acceptance_projection",
+        "build_handoff_task_acceptance_mapping",
+        "build_handoff_acceptance_runtime_trace",
+        "attach_handoff_identity_traceability"
+      ],
+      "unrelated_dirty_symbols": [
+        "seed_orchestrator_from_handoff calls attach_handoff_identity_traceability"
+      ],
+      "separable": true,
+      "notes": "Handoff trace parallel to req-*; couples to orchestrator worktree fields."
+    },
+    {
+      "file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step1.py",
+      "canonical_symbols": ["step1 coverage"],
+      "unrelated_dirty_symbols": [],
+      "separable": true,
+      "notes": "Untracked; not in HEAD."
+    },
+    {
+      "file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step2.py",
+      "canonical_symbols": ["projection entries"],
+      "unrelated_dirty_symbols": [],
+      "separable": true,
+      "notes": "Untracked."
+    },
+    {
+      "file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step3.py",
+      "canonical_symbols": ["evidence trace"],
+      "unrelated_dirty_symbols": [],
+      "separable": true,
+      "notes": "Untracked."
+    },
+    {
+      "file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step4.py",
+      "canonical_symbols": ["runtime coverage"],
+      "unrelated_dirty_symbols": [],
+      "separable": true,
+      "notes": "Untracked."
+    },
+    {
+      "file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step5.py",
+      "canonical_symbols": ["handoff / transport step5"],
+      "unrelated_dirty_symbols": [],
+      "separable": true,
+      "notes": "Untracked; verify handoff overlap when baseline commit planned."
+    }
+  ]
+}

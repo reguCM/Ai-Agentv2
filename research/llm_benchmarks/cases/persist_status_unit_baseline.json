@@ -1,0 +1,48 @@
+{
+  "id": "persist_status_unit_baseline",
+  "note": "第一テストの対照。MATERIALS（要求と status=43.2）は with / without で同じ。STATE だけ足す。取得コマンドは書かない。",
+  "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "judge",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "judge",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "judge",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "rounds": [
+    {
+      "id": "unit",
+      "kind": "query",
+      "classify": "status_unit",
+      "question": "statusの単位は何ですか？",
+      "materials": {
+        "request": "Windowsのメモリ使用率を取得するToolを作ってください。",
+        "tool": {
+          "return_value": {
+            "status": 43.2
+          }
+        }
+      }
+    }
+  ]
+}

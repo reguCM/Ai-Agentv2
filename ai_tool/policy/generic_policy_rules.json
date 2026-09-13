@@ -1,0 +1,17 @@
+{
+  "audit_rules_id": "generic-policy-authoring-rules",
+  "audit_rules_version": "1.0.0",
+  "activation": "EXPLICIT_POLICY_AUDIT_ONLY",
+  "policy_scopes": ["GENERIC", "PROJECT_SPECIFIC", "ADAPTER"],
+  "audit_statuses": ["NOT_AUDITED", "AUDITED_CLEAN", "AUDITED_WITH_FINDINGS", "AUDITED_WITH_EXCEPTIONS", "REVIEW_REQUIRED"],
+  "preflight_outcomes": ["ALREADY_AUDITED_VALID", "AUDIT_REQUIRED", "FORCED_REAUDIT"],
+  "required_policy_sections": ["scope", "responsibility", "inputs", "outputs", "invariants_or_principles", "non_goals", "policy_relationships", "project_specific_assumptions", "example_normativity"],
+  "generic_test": "normative_meaning_survives_removal_of_project_specific_names_examples_and_implementations",
+  "project_leakage_candidates": ["absolute_repository_path", "worktree_or_branch", "model_name", "tool_name", "implementation_symbol", "project_failure_code", "project_task_id", "fixed_benchmark_count", "runtime_specific_universal_assumption", "ui_specific_universal_assumption", "feature_specific_overgeneralization", "temporary_todo_or_current_state", "project_permission_recovery_or_tool_rule_as_universal"],
+  "allowed_context_labels": ["NON_NORMATIVE_EXAMPLE", "PROJECT_APPLICATION", "ADAPTER_REFERENCE"],
+  "certificate_identity_fields": ["policy_path", "policy_sha256", "audit_rules_version"],
+  "valid_reuse_statuses": ["AUDITED_CLEAN"],
+  "reaudit_triggers": ["policy_hash_changed", "audit_rules_version_changed", "previous_findings", "invalid_or_incomplete_certificate", "new_material_project_leakage_evidence", "explicit_authority_reaudit"],
+  "dormant_during_normal_development": true,
+  "automatic_semantic_audit": "NOT_IMPLEMENTED"
+}

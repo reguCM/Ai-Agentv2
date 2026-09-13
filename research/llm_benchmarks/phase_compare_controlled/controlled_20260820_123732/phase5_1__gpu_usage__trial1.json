@@ -1,0 +1,182 @@
+{
+  "condition": "phase5_1",
+  "condition_label": "phase5_1_pivot_recall",
+  "policy": "error_class_family_open_question_no_gain_pivot",
+  "case": "gpu_usage",
+  "trial": 1,
+  "returncode": 1,
+  "timestamp": "2026-08-20T13:08:19.167379+00:00",
+  "experiment": {
+    "AI_AGENT_EXPERIMENT_ID": "controlled_20260820_123732",
+    "AI_AGENT_EXPERIMENT_CONDITION": "phase5_1",
+    "AI_AGENT_EXPERIMENT_TRIAL": "1",
+    "AI_AGENT_EXPERIMENT_CASE": "gpu_usage",
+    "AI_AGENT_MEMORY_RECALL": "1",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "5.1",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3"
+  },
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "metrics": {
+    "pass": false,
+    "result": false,
+    "fail_stage": "proposal",
+    "error": "proposal_validation_ng",
+    "stop_reason": null,
+    "rounds": null,
+    "llm_calls": 2,
+    "usable_findings": 0,
+    "insufficient_findings": 0,
+    "verify_fail_count": 0,
+    "repeat_same_command_rate": null,
+    "repeat_same_command_count": 0,
+    "repeat_same_error_class_rate": null,
+    "repeat_same_error_class_count": 0,
+    "repeat_same_command_family_rate": null,
+    "repeat_same_command_family_count": 0,
+    "repeated_open_question_rate": 0.0,
+    "repeated_open_question_count": 0,
+    "no_gain": false,
+    "no_gain_loop_rate": 0.0,
+    "information_gain": {
+      "has_gain": false,
+      "no_gain": false,
+      "reasons_gain": [],
+      "reasons_stuck": [],
+      "stuck_error_class": null,
+      "stuck_family": null
+    },
+    "pivot_required_count": 0,
+    "repeating_call_count": 0,
+    "recall_mode_counts": {},
+    "usable_increase_after_pivot": null,
+    "verify_ok_after_pivot": null,
+    "pivot_followup": {
+      "pivot_round_count": 0,
+      "usable_increase_after_pivot": null,
+      "verify_ok_after_pivot": null,
+      "note": "no_rounds_detail"
+    },
+    "actual_headroom_min": null,
+    "headroom_gate_ok": null,
+    "allocated_chars_max": null,
+    "reduction_applied_count": null,
+    "defer_count": null,
+    "context_overflow": false,
+    "history_event_count": 0,
+    "primary_waste_event_count": 0,
+    "eval_focus": "no_gain_error_class_family_open_question_loop"
+  },
+  "pipeline": {
+    "research": null,
+    "judgments": [],
+    "progress": [],
+    "research_rounds_detail": [],
+    "research_history": null,
+    "global_judge_shadow": null,
+    "context_budget_shadow": null,
+    "generated_code": null,
+    "repair": "skipped"
+  },
+  "state": {
+    "task": "GPUの使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "GPUの使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "open_questions": [],
+    "unresolved": [],
+    "research_history": [],
+    "banned_actions": []
+  },
+  "timing": {
+    "total_seconds": 12.8,
+    "llm_seconds": 12.8,
+    "machine_seconds": 0.0,
+    "research_seconds": 0.0,
+    "judge_seconds": 0.0,
+    "implementation_seconds": 0.0,
+    "repair_seconds": 0.0,
+    "validation_seconds": 0.0,
+    "llm_calls": 2
+  },
+  "trace": [
+    {
+      "phase": "proposal",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "proposals"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": [
+          "get_gpu_status"
+        ]
+      }
+    },
+    {
+      "phase": "proposal_retry",
+      "error": null,
+      "parsed": {
+        "keys": [
+          "proposals"
+        ],
+        "path": null,
+        "function": null,
+        "unimplemented": null,
+        "notes": null,
+        "code_present": false,
+        "code_chars": 0,
+        "candidates": null,
+        "satisfies_request": null,
+        "reason": null,
+        "missing": null,
+        "proposal_names": [
+          "get_gpu_status"
+        ]
+      }
+    }
+  ],
+  "pass": false,
+  "fail_stage": "proposal",
+  "error": "proposal_validation_ng",
+  "request": "GPUの使用率を取得するToolを作ってください。"
+}

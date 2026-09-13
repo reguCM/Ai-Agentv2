@@ -1,0 +1,46 @@
+﻿#!/bin/sh
+# Git Guard pre-push sample — copy into .git/hooks/pre-push (see install-hooks.md)
+#
+# Reads stdin lines: <local_ref> <local_sha> <remote_ref> <remote_sha>
+# Passes action=push to guard; human_gate / forbid_push → non-zero exits block the push.
+#
+# Env:
+#   GIT_GUARD_ROOT, GIT_GUARD_CONFIG, PYTHON — same as pre-commit.sample
+#   GIT_GUARD_REMOTE_NAME — remote name for --target-remote (default: first arg $1)
+
+set -e
+
+remote_name="${1:-origin}"
+if [ -n "$GIT_GUARD_REMOTE_NAME" ]; then
+  remote_name="$GIT_GUARD_REMOTE_NAME"
+fi
+
+if [ -z "$GIT_GUARD_CONFIG" ]; then
+  echo "git-guard pre-push: set GIT_GUARD_CONFIG" >&2
+  exit 1
+fi
+
+ROOT="${GIT_GUARD_ROOT:-}"
+if [ -z "$ROOT" ]; then
+  HERE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+  if [ -f "$HERE/../guard.py" ]; then
+    ROOT=$(CDPATH= cd -- "$HERE/.." && pwd)
+  else
+    echo "git-guard pre-push: set GIT_GUARD_ROOT" >&2
+    exit 1
+  fi
+fi
+
+PY="${PYTHON:-python}"
+
+push_ref_args=""
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [ -z "$local_ref" ] && [ -z "$local_sha" ] && [ -z "$remote_ref" ] && [ -z "$remote_sha" ]; then
+    continue
+  fi
+  push_ref_args="$push_ref_args --push-ref ${local_ref}|${local_sha}|${remote_ref}|${remote_sha}"
+done
+
+# shellcheck disable=SC2086
+exec "$PY" "$ROOT/guard.py" --config "$GIT_GUARD_CONFIG" \
+  --action push --target-remote "$remote_name" $push_ref_args

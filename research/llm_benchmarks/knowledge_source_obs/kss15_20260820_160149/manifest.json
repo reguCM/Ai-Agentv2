@@ -1,0 +1,32 @@
+{
+  "experiment_id": "kss15_20260820_160149",
+  "purpose": "KSS-1.5 live kept/dropped + human audit dataset",
+  "routing": false,
+  "filter_changed": false,
+  "llm_judge": false,
+  "common_env": {
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+    "AI_AGENT_KSS1_OBS": "0",
+    "AI_AGENT_KSS11_OBS": "1",
+    "AI_AGENT_KSS12_OBS": "1",
+    "AI_AGENT_KSS13_OBS": "1",
+    "AI_AGENT_KSS14_OBS": "1",
+    "AI_AGENT_KSS15_OBS": "1",
+    "AI_AGENT_KSS14_ANSWER_JUDGE": "0"
+  },
+  "cases": [
+    "memory_usage",
+    "cpu_temperature",
+    "disk_usage",
+    "gpu_usage",
+    "gpu_vram_usage"
+  ],
+  "trials": 1
+}

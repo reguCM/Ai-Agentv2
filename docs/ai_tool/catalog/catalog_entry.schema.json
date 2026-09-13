@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/catalog_entry.schema.json",
+  "title": "AI-Agent Tool Catalog Entry",
+  "description": "Phase 1 draft. EXPERIMENTAL.",
+  "type": "object",
+  "required": [
+    "tool_id",
+    "name",
+    "provider",
+    "version",
+    "capabilities",
+    "input_schema",
+    "side_effect",
+    "permissions",
+    "network_access",
+    "risk_level",
+    "cost",
+    "tool_status",
+    "experiment_status",
+    "adoption_status"
+  ],
+  "properties": {
+    "tool_id": { "type": "string" },
+    "name": { "type": "string" },
+    "provider": {
+      "type": "string",
+      "enum": ["local", "mcp", "api", "external", "unknown"]
+    },
+    "version": { "type": "string" },
+    "description": { "type": "string" },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "input_schema": { "type": "object" },
+    "output_schema": {},
+    "side_effect": {
+      "type": "string",
+      "enum": ["none", "read_only", "write", "modify", "execute", "unknown"]
+    },
+    "permissions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "network_access": { "type": "boolean" },
+    "filesystem_access": {
+      "type": "string",
+      "enum": ["none", "read", "write", "read_write"]
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "cost": {
+      "type": "string",
+      "enum": ["free", "local_cost", "paid", "unknown"]
+    },
+    "tool_status": {
+      "type": "string",
+      "enum": ["available", "disabled", "unavailable", "deprecated"]
+    },
+    "experiment_status": {
+      "type": "string",
+      "enum": ["unknown", "experimental", "tested", "unsupported"]
+    },
+    "adoption_status": {
+      "type": "string",
+      "enum": ["not_reviewed", "candidate", "approved", "rejected"]
+    },
+    "spec_ref": { "type": "string" },
+    "provider_specific": { "type": "object" }
+  },
+  "additionalProperties": true
+}

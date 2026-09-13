@@ -1,0 +1,99 @@
+{
+  "case": "proposal_memory_usage",
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "repeat": 3,
+  "pass_count": 3,
+  "total": 3,
+  "summary": "COMPLETE 3/3",
+  "trials": [
+    {
+      "n": 1,
+      "ok": true,
+      "grade": "COMPLETE",
+      "proposal_name": "get_memory_status",
+      "module": "tools.system.memory.memory_status",
+      "function": "get_memory_status",
+      "category": "system",
+      "subcategory": "memory",
+      "output": [
+        "status"
+      ],
+      "checks": {
+        "name": true,
+        "category": true,
+        "module": true,
+        "function": true,
+        "output": true,
+        "category_match": true,
+        "subcategory_match": true,
+        "module_pattern": true,
+        "output_includes": true,
+        "function_present": true,
+        "name_present": true
+      },
+      "missing_keys": [],
+      "error": null,
+      "seconds": 6.8
+    },
+    {
+      "n": 2,
+      "ok": true,
+      "grade": "COMPLETE",
+      "proposal_name": "get_memory_status",
+      "module": "tools.system.memory.memory_status",
+      "function": "get_memory_status",
+      "category": "system",
+      "subcategory": "memory",
+      "output": [
+        "status"
+      ],
+      "checks": {
+        "name": true,
+        "category": true,
+        "module": true,
+        "function": true,
+        "output": true,
+        "category_match": true,
+        "subcategory_match": true,
+        "module_pattern": true,
+        "output_includes": true,
+        "function_present": true,
+        "name_present": true
+      },
+      "missing_keys": [],
+      "error": null,
+      "seconds": 2.0
+    },
+    {
+      "n": 3,
+      "ok": true,
+      "grade": "COMPLETE",
+      "proposal_name": "get_memory_status",
+      "module": "tools.system.memory.memory_status",
+      "function": "get_memory_status",
+      "category": "system",
+      "subcategory": "memory",
+      "output": [
+        "status"
+      ],
+      "checks": {
+        "name": true,
+        "category": true,
+        "module": true,
+        "function": true,
+        "output": true,
+        "category_match": true,
+        "subcategory_match": true,
+        "module_pattern": true,
+        "output_includes": true,
+        "function_present": true,
+        "name_present": true
+      },
+      "missing_keys": [],
+      "error": null,
+      "seconds": 2.0
+    }
+  ],
+  "ts": "2026-08-19T09:21:19.992815+00:00"
+}

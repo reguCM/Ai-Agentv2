@@ -1,0 +1,19 @@
+{
+  "gap": "テトロミノの落下・移動・回転",
+  "minimum_focus": [
+    "try_move dx/dy vs collides",
+    "try_rotate via existing rotate vs collides",
+    "fall_due 500ms from caller ticks"
+  ],
+  "assets": [
+    "spec 落下・移動・回転",
+    "spec 落下速度 500ms",
+    "collision.collides",
+    "tetromino.rotate"
+  ],
+  "vertical_map": false,
+  "horizontal_map": false,
+  "focus_expanded": true,
+  "expand_reason": "move/rotate-in-place must reject collisions; reuse collides and rotate APIs only",
+  "minimum_sufficient_focus": "movement.py try_move/try_rotate/fall_due; no keyboard, lock, loop wiring, draw"
+}

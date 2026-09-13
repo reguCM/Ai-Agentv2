@@ -1,0 +1,1037 @@
+{
+  "run_dir": "research\\llm_benchmarks\\capability_route_dataset\\v0\\results\\run_v0_50",
+  "case_count": 50,
+  "route_counts": {
+    "uncertain": 39,
+    "agent_continue": 10,
+    "needs_new_tool": 1
+  },
+  "web_judge_vs_call": {
+    "judged_no|called": 29,
+    "judged_no|not_called": 13,
+    "judged_yes|called": 3,
+    "judged_yes|not_called": 5
+  },
+  "web_pattern_counts": {
+    "web_not_judged_but_called": 29,
+    "web_not_judged_not_called": 13,
+    "web_judged_called_error_answer_declined_unconfirmed": 3,
+    "web_judged_not_called_answer_present": 2,
+    "web_judged_not_called_answer_other": 2,
+    "web_judged_not_called_answer_empty": 1
+  },
+  "paraphrase_groups": {
+    "para_osaka_weather": [
+      {
+        "case_id": "P01a",
+        "route": "uncertain",
+        "judged_web": false,
+        "web_called": true,
+        "web_pattern": "web_not_judged_but_called"
+      },
+      {
+        "case_id": "P01b",
+        "route": "uncertain",
+        "judged_web": false,
+        "web_called": true,
+        "web_pattern": "web_not_judged_but_called"
+      },
+      {
+        "case_id": "P01c",
+        "route": "uncertain",
+        "judged_web": false,
+        "web_called": true,
+        "web_pattern": "web_not_judged_but_called"
+      }
+    ],
+    "para_rtx3060": [
+      {
+        "case_id": "P02a",
+        "route": "uncertain",
+        "judged_web": false,
+        "web_called": true,
+        "web_pattern": "web_not_judged_but_called"
+      },
+      {
+        "case_id": "P02b",
+        "route": "uncertain",
+        "judged_web": false,
+        "web_called": true,
+        "web_pattern": "web_not_judged_but_called"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "A01",
+      "category": "web_needed_clear",
+      "group_id": null,
+      "request": "今日の日本の主なニュースを教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": true,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_judged_called_error_answer_declined_unconfirmed",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "A02",
+      "category": "web_needed_clear",
+      "group_id": null,
+      "request": "現在のドル円の大まかな為替水準について教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": true,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_judged_called_error_answer_declined_unconfirmed",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "A03",
+      "category": "web_needed_clear",
+      "group_id": null,
+      "request": "OpenAIについて最近何か大きな発表はありましたか",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "A04",
+      "category": "web_needed_clear",
+      "group_id": null,
+      "request": "今のNVIDIAの株価の雰囲気を教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "A05",
+      "category": "web_needed_clear",
+      "group_id": null,
+      "request": "明日の大阪の天気を教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "A06",
+      "category": "web_needed_clear",
+      "group_id": null,
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "B01",
+      "category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "CPU使用率を教えて",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "cpu_status"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "B02",
+      "category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "GPUの状態を教えて",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "get_gpu_status"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "B03",
+      "category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "registry/tools.json を読んで visibility が agent のTool名を一覧して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "list_files",
+        "list_files",
+        "read_file"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "B04",
+      "category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "docs/v1_basic_specification.md の冒頭にあるV1の目的を要約して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "read_file"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "B05",
+      "category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "B06",
+      "category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "このリポジトリ直下にどんな主要フォルダがあるか list して",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "list_files"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "C01",
+      "category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "WindowsのCPU温度取得って最近どうなってる？",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web",
+        "cpu_status"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "C02",
+      "category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "Ollamaについて詳しく教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "hits"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "C03",
+      "category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "RTX 3060って今どういう扱いですか？",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "C04",
+      "category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "ローカルLLMの事情、最近どう？",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "C05",
+      "category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "この手のエージェントって今どこまで実用的なの",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "D01",
+      "category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "このプロジェクトのWeb検索Toolの実装を、ローカルのコードから説明して",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": true,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "search_files"
+      ],
+      "web_pattern": "web_judged_not_called_answer_present",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "D02",
+      "category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "registryにある最新のTool一覧をファイルから確認して",
+      "route": "needs_new_tool",
+      "route_reason": "request_hints_new_tool; no_related_agent_public_tools",
+      "judged_web": true,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "list_files",
+        "list_files",
+        "read_file",
+        "list_files",
+        "read_file"
+      ],
+      "web_pattern": "web_judged_not_called_answer_empty",
+      "answer_proxy": "failure_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "D03",
+      "category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "現在のagent公開Toolは何か、tools.jsonを読んで答えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": true,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [],
+      "web_pattern": "web_judged_not_called_answer_other",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "D04",
+      "category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "ニュースという単語がdocsに出てくるか、リポジトリ内を検索して",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": true,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "search_files"
+      ],
+      "web_pattern": "web_judged_not_called_answer_other",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "D05",
+      "category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "検索結果のJSON形式がコード上どうなっているか、実装を読んで説明して",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": true,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [],
+      "web_pattern": "web_judged_not_called_answer_present",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "E01",
+      "category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "岸田政権以降の防衛費議論でよく挙げられる論点を整理して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "E02",
+      "category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "ChatGPTの有料プランの違いを教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "E03",
+      "category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "東京都のごみ分別の基本ルールを教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "E04",
+      "category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "鉄道の遅延証明書は一般にどう発行されるか教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "E05",
+      "category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "Appleの次の大型発表イベントはいつ頃と言われているか教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "F01",
+      "category": "search_hard",
+      "group_id": null,
+      "request": "zxqwv-nonexistent-topic-9f3a2b1c の公式発表日を教えて。分からなければその旨を書いて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "F02",
+      "category": "search_hard",
+      "group_id": null,
+      "request": "架空の企業 Quiblaxor Dynamics の2023年売上を教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "F03",
+      "category": "search_hard",
+      "group_id": null,
+      "request": "個人ブログ『みどりのティーカップ日記』の第137話の要約を教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "F04",
+      "category": "search_hard",
+      "group_id": null,
+      "request": "同じ出来事について日本語と英語で報じ方の違いを、根拠を分けて比較して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error",
+        "error",
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "failure_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "F05",
+      "category": "search_hard",
+      "group_id": null,
+      "request": "2010年ごろのローカル掲示板にだけ載っていた某ツールの使い方を再現して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G01",
+      "category": "existing_tool_ok",
+      "group_id": null,
+      "request": "GPUを使っているプロセスがあれば一覧して",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "get_gpu_processes"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G02",
+      "category": "existing_tool_ok",
+      "group_id": null,
+      "request": "config/pipeline.yaml の active_model をファイルから確認して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "read_file"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G03",
+      "category": "existing_tool_ok",
+      "group_id": null,
+      "request": "tools/system 配下で execution_identity という名前のファイルを探して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "list_files",
+        "list_files"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G04",
+      "category": "existing_tool_ok",
+      "group_id": null,
+      "request": "CPUの状態を確認して短く報告して",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "cpu_status"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G05",
+      "category": "existing_tool_ok",
+      "group_id": null,
+      "request": "registry フォルダ直下のファイル名を列挙して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "list_files"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G06",
+      "category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "キーボードのバッテリー残量を取得したい",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G07",
+      "category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "接続中のBluetoothデバイスの電波強度を数値で出したい",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G08",
+      "category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "マイク入力のリアルタイム音量ピークを返す機能が欲しい",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G09",
+      "category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "母艦のUPS残量パーセントを取得したい",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "G10",
+      "category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "ファン回転数を読む機能が欲しい",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web",
+        "get_gpu_status"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "H01",
+      "category": "composite_multi_tool",
+      "group_id": null,
+      "request": "docs/v1_basic_specification.md のV1目的をファイルから確認し、同様のテーマの一般説明も外部情報で補って比較して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "read_file",
+        "search_web",
+        "list_files",
+        "list_files",
+        "list_files",
+        "read_file"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "failure_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "H02",
+      "category": "composite_multi_tool",
+      "group_id": null,
+      "request": "GPUの状態を確認したうえで、同世代GPUの一般的な消費電力の目安も調べて並べて",
+      "route": "agent_continue",
+      "route_reason": "related_agent_public_tools_present",
+      "judged_web": true,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "get_gpu_status",
+        "search_web"
+      ],
+      "web_pattern": "web_judged_called_error_answer_declined_unconfirmed",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "H03",
+      "category": "composite_multi_tool",
+      "group_id": null,
+      "request": "agent_tool_gate の実装方針をコードから読み、同様の『デフォルト確認』の一般的な設計議論も参照して整理して",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": false,
+      "web_outcomes": [],
+      "tools_tried": [
+        "search_files"
+      ],
+      "web_pattern": "web_not_judged_not_called",
+      "answer_proxy": "success_candidate",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "P01a",
+      "category": "paraphrase",
+      "group_id": "para_osaka_weather",
+      "request": "大阪の明日の天気を教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "P01b",
+      "category": "paraphrase",
+      "group_id": "para_osaka_weather",
+      "request": "明日、大阪は雨ですか？",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "hits",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "P01c",
+      "category": "paraphrase",
+      "group_id": "para_osaka_weather",
+      "request": "明日大阪に行くんですが、傘は必要そうですか？",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "P02a",
+      "category": "paraphrase",
+      "group_id": "para_rtx3060",
+      "request": "RTX 3060について教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error"
+      ],
+      "tools_tried": [
+        "get_gpu_status",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    },
+    {
+      "case_id": "P02b",
+      "category": "paraphrase",
+      "group_id": "para_rtx3060",
+      "request": "今のRTX 3060の立ち位置を教えて",
+      "route": "uncertain",
+      "route_reason": "agent_public_tools_exist_but_no_related_match",
+      "judged_web": false,
+      "web_called": true,
+      "web_outcomes": [
+        "error",
+        "error",
+        "error"
+      ],
+      "tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "web_pattern": "web_not_judged_but_called",
+      "answer_proxy": "inconclusive",
+      "misjudgment_classification": null
+    }
+  ],
+  "notes": [
+    "No Stage3 misjudgment labels.",
+    "success_candidate is surface proxy only.",
+    "Do not treat heuristic routes as ground truth."
+  ]
+}

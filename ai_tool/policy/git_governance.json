@@ -1,0 +1,352 @@
+{
+  "schema_version": "1",
+  "contract_version": "2026-09-12.3",
+  "role": "git_governance_machine_contract",
+  "policy_id": "ai-agent-git-governance",
+  "semantic_sources": [
+    {
+      "path": "docs/GIT_OPERATION_POLICY.md",
+      "role": "primary"
+    },
+    {
+      "path": "docs/AI_DEVELOPMENT_SESSION_START_POLICY.md",
+      "role": "supplementary"
+    }
+  ],
+  "approval_class_enum": [
+    "ALLOW",
+    "TASK_AUTHORIZATION_REQUIRED",
+    "HUMAN_APPROVAL_REQUIRED",
+    "AGENT_ALWAYS_BLOCK",
+    "GUIDANCE_ONLY",
+    "UNDECIDED"
+  ],
+  "authorization": {
+    "auto_commit_token": "AUTO_COMMIT_ALLOWED",
+    "agent_default_auto_commit": false,
+    "runtime_binding": "NOT_CONNECTED",
+    "note": "Option C: Agent must not auto-commit unless AUTO_COMMIT_ALLOWED is explicitly issued by Task/Goal/Execution (runtime binding not implemented in G2)."
+  },
+  "human_decision_g2": {
+    "phase": "G2",
+    "commit_option": "C",
+    "encoded_in_contract": true
+  },
+  "human_decision_g4_1": {
+    "phase": "G4.1",
+    "reset_hard": "AGENT_ALWAYS_BLOCK",
+    "human_direct_operation": "OUTSIDE_AGENT_CONTRACT",
+    "encoded_in_contract": true
+  },
+  "policy_drift_notes": [
+    {
+      "topic": "commit_auto",
+      "git_operation_policy": "GIT_OPERATION_POLICY §4: LEVEL 2 applies when AUTO_COMMIT_ALLOWED is present (G3 semantic alignment)",
+      "human_decision_g2": "Option C: default no unconditional auto commit; TASK_AUTHORIZATION_REQUIRED with AUTO_COMMIT_ALLOWED",
+      "machine_contract_authority": "human_decision_g2"
+    },
+    {
+      "topic": "force_push",
+      "git_operation_policy": "GIT_OPERATION_POLICY §6: principle prohibit; if needed explain and Human Approval",
+      "human_decision_g2": "AGENT_ALWAYS_BLOCK (human may operate outside agent contract)",
+      "machine_contract_authority": "human_decision_g2"
+    },
+    {
+      "topic": "reset_hard",
+      "git_operation_policy": "GIT_OPERATION_POLICY §6 + Machine Contract Reference (G4.1)",
+      "human_decision_g4_1": "AGENT_ALWAYS_BLOCK; human_direct_operation OUTSIDE_AGENT_CONTRACT",
+      "machine_contract_authority": "human_decision_g4_1"
+    },
+    {
+      "topic": "clean",
+      "git_operation_policy": "GIT_OPERATION_POLICY §6: Human Approval if necessary for Human-operated paths",
+      "human_decision_g2": "HUMAN_APPROVAL_REQUIRED on agent path",
+      "machine_contract_authority": "human_decision_g2"
+    },
+    {
+      "topic": "amend",
+      "git_operation_policy": "GIT_OPERATION_POLICY §4 Machine Contract subsection (G3)",
+      "human_decision_g2": "amend HUMAN_APPROVAL_REQUIRED; amend_after_hook_failure AGENT_ALWAYS_BLOCK (PROJECT_CANONICAL intent)",
+      "machine_contract_authority": "human_decision_g2"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "commit",
+      "approval_class": "TASK_AUTHORIZATION_REQUIRED",
+      "required_conditions": [
+        { "condition_id": "authorization_present", "enforcement_status": "NOT_CONNECTED" },
+        { "condition_id": "explicit_scope_known", "enforcement_status": "NOT_CONNECTED" },
+        { "condition_id": "required_checks_passed", "enforcement_status": "NOT_CONNECTED" },
+        { "condition_id": "no_unrelated_changes", "enforcement_status": "NOT_CONNECTED" },
+        { "condition_id": "not_dangerous_operation", "enforcement_status": "NOT_CONNECTED" }
+      ],
+      "semantic_source_refs": [
+        "docs/GIT_OPERATION_POLICY.md#4",
+        "docs/GIT_OPERATION_POLICY.md#8"
+      ],
+      "validator_bindings": [],
+      "notes": [
+        "Maps to AUTO_COMMIT_ALLOWED when authorization_present is satisfied (runtime NOT_CONNECTED in G2)."
+      ]
+    },
+    {
+      "action_id": "amend",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "semantic_source_refs": [],
+      "notes": [
+        "PROJECT_CANONICAL intent for G2; semantic source is Human Decision G2 until GIT_OPERATION_POLICY is updated."
+      ]
+    },
+    {
+      "action_id": "amend_after_hook_failure",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "human_direct_operation": "OUTSIDE_AGENT_CONTRACT",
+      "semantic_source_refs": [],
+      "notes": [
+        "Agent must create a new commit after hook failure, not amend (Human Decision G2)."
+      ]
+    },
+    {
+      "action_id": "push",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#5"],
+      "validator_bindings": [
+        {
+          "validator_ref": "pre-push",
+          "hook_or_tool": "tools/git_guard/guard.py",
+          "enforcement_status": "PARTIAL",
+          "notes": "pre-push push_safety v2.1: verified safe fast-forward PASS; BLOCK/NEED_HUMAN otherwise."
+        },
+        {
+          "validator_ref": "git_guard",
+          "hook_or_tool": "tools/git_guard/configs/ai-agent.pre-push.json",
+          "enforcement_status": "PARTIAL",
+          "notes": "push_safety v2.1 + remotes url_must_contain; not unconditional human_gate on push."
+        }
+      ]
+    },
+    {
+      "action_id": "force_push",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "human_direct_operation": "OUTSIDE_AGENT_CONTRACT",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#6"],
+      "validator_bindings": [
+        {
+          "validator_ref": "pre-push",
+          "hook_or_tool": "tools/git_guard/guard.py",
+          "enforcement_status": "PARTIAL",
+          "notes": "forbid_actions includes force_push when hook runs; not full agent CLI coverage."
+        }
+      ]
+    },
+    {
+      "action_id": "force_push_with_lease",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "human_direct_operation": "OUTSIDE_AGENT_CONTRACT",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#6"],
+      "validator_bindings": [
+        {
+          "validator_ref": "git_guard",
+          "hook_or_tool": "tools/git_guard/configs/ai-agent.pre-push.json",
+          "enforcement_status": "PARTIAL",
+          "notes": "forbid_actions includes force_push_with_lease (G4); raw CLI bypass remains."
+        }
+      ]
+    },
+    {
+      "action_id": "reset_hard",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "human_direct_operation": "OUTSIDE_AGENT_CONTRACT",
+      "semantic_source_refs": [
+        "docs/GIT_OPERATION_POLICY.md#6",
+        "docs/GIT_OPERATION_POLICY.md#machine-contract-reference"
+      ],
+      "validator_bindings": [
+        {
+          "validator_ref": "git_guard",
+          "hook_or_tool": "tools/git_guard/configs/ai-agent.pre-commit.json",
+          "enforcement_status": "PARTIAL",
+          "notes": "forbid_actions includes reset_hard (exit 2 on guard --action path); raw CLI gap remains."
+        }
+      ],
+      "notes": [
+        "G4.1: Agent must not run git reset --hard; Human may operate outside agent contract."
+      ]
+    },
+    {
+      "action_id": "clean",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#6", "docs/GIT_OPERATION_POLICY.md#6.1"],
+      "validator_bindings": [
+        {
+          "validator_ref": "local-ops",
+          "hook_or_tool": "tools/git_guard/configs/ai-agent.local-ops.json",
+          "enforcement_status": "PARTIAL",
+          "notes": "v2.2 local_safety when guard invoked; raw git clean bypasses guard."
+        }
+      ]
+    },
+    {
+      "action_id": "restore_discard_worktree",
+      "approval_class": "GUIDANCE_ONLY",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#6.1"],
+      "validator_bindings": [
+        {
+          "validator_ref": "local-ops",
+          "hook_or_tool": "tools/git_guard/configs/ai-agent.local-ops.json",
+          "enforcement_status": "PARTIAL",
+          "notes": "restore/checkout_path: BLOCK when unstaged changes; explicit guard only."
+        }
+      ],
+      "notes": ["Probe-based SAFE/BLOCK; not unconditional agent allow."]
+    },
+    {
+      "action_id": "rebase",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#6"]
+    },
+    {
+      "action_id": "worktree_remove",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#6.1"],
+      "validator_bindings": [
+        {
+          "validator_ref": "local-ops",
+          "hook_or_tool": "tools/git_guard/configs/ai-agent.local-ops.json",
+          "enforcement_status": "PARTIAL",
+          "notes": "v2.2: clean registered worktree SAFE; dirty/force BLOCK; path-only delete NOT_COVERED."
+        }
+      ],
+      "notes": ["Human Decision G2; v2.2 probe when guard invoked."]
+    },
+    {
+      "action_id": "branch_delete",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#5"]
+    },
+    {
+      "action_id": "add_explicit_paths",
+      "approval_class": "ALLOW",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#7"],
+      "notes": ["Prefer explicit paths per staging rules."]
+    },
+    {
+      "action_id": "add_all",
+      "approval_class": "GUIDANCE_ONLY",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#7"],
+      "notes": [
+        "GIT §7: broad git add . / -A is principle discouraged; machine class is guidance not agent block."
+      ]
+    },
+    {
+      "action_id": "commit_message",
+      "approval_class": "GUIDANCE_ONLY",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#9"]
+    },
+    {
+      "action_id": "stash",
+      "approval_class": "UNDECIDED",
+      "semantic_source_refs": [],
+      "notes": ["Not classified in GIT_OPERATION_POLICY.md or Human Decision G2."]
+    },
+    {
+      "action_id": "merge_to_main",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#5"]
+    },
+    {
+      "action_id": "remote_push_restricted",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "semantic_source_refs": [],
+      "validator_bindings": [
+        {
+          "validator_ref": "git_guard",
+          "hook_or_tool": "tools/git_guard/configs/ai-agent.pre-push.json",
+          "enforcement_status": "CONNECTED",
+          "notes": "origin url_must_contain github.com/reguCM/Ai-Agent when pre-push hook runs."
+        }
+      ],
+      "notes": [
+        "Remote restriction is enforced via git_guard config; semantic rule not spelled as standalone section in GIT markdown."
+      ]
+    },
+    {
+      "action_id": "stage_deny_path_globs",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "human_direct_operation": "OUTSIDE_AGENT_CONTRACT",
+      "semantic_source_refs": [],
+      "validator_bindings": [
+        {
+          "validator_ref": "pre-commit",
+          "hook_or_tool": "tools/git_guard/configs/ai-agent.pre-commit.json",
+          "enforcement_status": "PARTIAL",
+          "notes": "deny_path_globs for .env, secrets, pem, credentials.json when pre-commit runs."
+        }
+      ],
+      "notes": [
+        "Secret-like paths: enforcement via git_guard deny_path_globs; GIT_OPERATION_POLICY.md has no dedicated secret section."
+      ]
+    },
+    {
+      "action_id": "status_read",
+      "approval_class": "ALLOW",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#4"]
+    },
+    {
+      "action_id": "diff_read",
+      "approval_class": "ALLOW",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#4"]
+    },
+    {
+      "action_id": "log_read",
+      "approval_class": "ALLOW",
+      "semantic_source_refs": ["docs/GIT_OPERATION_POLICY.md#4"]
+    }
+  ],
+  "adapters": {
+    "schema_version": "1",
+    "phase": "G3",
+    "note": "Reference-only adapters. Semantic authority remains docs/GIT_OPERATION_POLICY.md.",
+    "consumers": {
+      "cursor_git": {
+        "adapter": ".cursor/rules/git-governance-adapter.mdc",
+        "mode": "reference",
+        "required_references": [
+          "ai_tool/policy/git_governance.json",
+          "docs/GIT_OPERATION_POLICY.md"
+        ]
+      },
+      "cursor_development": {
+        "adapter": ".cursor/rules/agent-development-policy.mdc",
+        "mode": "reference",
+        "required_references": [
+          "ai_tool/policy/git_governance.json"
+        ]
+      },
+      "codex": {
+        "adapter": "AGENTS.md",
+        "mode": "reference",
+        "required_references": [
+          "ai_tool/policy/git_governance.json"
+        ]
+      },
+      "git_guard_policy": {
+        "adapter": "tools/git_guard/POLICY.md",
+        "mode": "reference",
+        "required_references": [
+          "ai_tool/policy/git_governance.json"
+        ]
+      },
+      "cursor_host_user_rules": {
+        "adapter": "docs/adapters/GIT_GOVERNANCE_CURSOR_HOST.md",
+        "mode": "human_sync_checklist",
+        "scope": "OUTSIDE_REPOSITORY",
+        "required_references": [
+          "ai_tool/policy/git_governance.json"
+        ],
+        "note": "Cursor User Rules are host-local; sync is manual per checklist."
+      }
+    }
+  }
+}

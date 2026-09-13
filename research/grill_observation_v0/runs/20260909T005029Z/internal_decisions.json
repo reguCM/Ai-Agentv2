@@ -1,0 +1,500 @@
+[
+  {
+    "kind": "internal_ai_decision",
+    "n": 1,
+    "decision": {
+      "id": "game_mechanics",
+      "title": "ゲームメカニクスの設計",
+      "value": "標準テトリスルールに基づく実装（I/O操作、ピースの移動・回転、線の消去処理）",
+      "status": "confirmed",
+      "decided_by": "AI",
+      "reason": "標準ルールは実装可能性が高く、テトリスの基本動作を担保する",
+      "evidence": {
+        "source": "internal_reeval",
+        "evidence": "Pygameのドキュメントおよびテトリスの公式ルール書に基づく",
+        "comparison_n": 1
+      },
+      "human_confirmed": false
+    },
+    "from_next": {
+      "id": "game_mechanics",
+      "action": "internal_ai_decision",
+      "reason": "ゲームの核となる動作設計であり、実装可能性に直接影響するため優先的に決定",
+      "ai_decision": {
+        "id": "game_mechanics",
+        "title": "ゲームメカニクスの設計",
+        "value": "標準テトリスルールに基づく実装（I/O操作、ピースの移動・回転、線の消去処理）",
+        "reason": "標準ルールは実装可能性が高く、テトリスの基本動作を担保する",
+        "evidence": "Pygameのドキュメントおよびテトリスの公式ルール書に基づく"
+      }
+    },
+    "state_after": {
+      "goal": {
+        "text": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。",
+        "concept": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。"
+      },
+      "environment_facts": {
+        "os": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11",
+        "workspace": "AI-Agent development worktree (not a blank game project)",
+        "local_llm": "Ollama is used by this experiment runner",
+        "note": "A simple Tetris that runs on this PC. Do not ask OS/runtime facts already listed."
+      },
+      "human_requirements": [
+        {
+          "id": "goal_text",
+          "text": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。",
+          "source": "parent_run.goal"
+        }
+      ],
+      "confirmed_decisions": [
+        {
+          "id": "lib_choice",
+          "title": "ゲーム開発に使用するPythonライブラリの選定",
+          "value": "Pygame",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適",
+          "evidence": {
+            "source": "recommendation",
+            "parent_run_id": "20260909T003636Z",
+            "option_id": "A",
+            "decision_basis": "recommendation",
+            "llm_adopt_value": "Pygame"
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "game_mechanics",
+          "title": "ゲームメカニクスの設計",
+          "value": "標準テトリスルールに基づく実装（I/O操作、ピースの移動・回転、線の消去処理）",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "標準ルールは実装可能性が高く、テトリスの基本動作を担保する",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "Pygameのドキュメントおよびテトリスの公式ルール書に基づく",
+            "comparison_n": 1
+          },
+          "human_confirmed": false
+        }
+      ],
+      "assumptions": [],
+      "unresolved": [
+        {
+          "id": "ui_design",
+          "title": "ユーザーインターフェース設計",
+          "text": "画面レイアウト・色・UI要素の詳細が未確定",
+          "goal_impact": "medium",
+          "human_intent_required": true,
+          "human_impact": "high",
+          "rollback_impact": "high",
+          "cross_cutting_impact": "medium",
+          "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+        },
+        {
+          "id": "scoring_system",
+          "title": "スコアリングシステム",
+          "text": "得点計算方法・レベルアップ条件が未確定",
+          "goal_impact": "medium",
+          "human_intent_required": false,
+          "human_impact": "medium",
+          "rollback_impact": "medium",
+          "cross_cutting_impact": "medium",
+          "why": "ゲームバランスに影響するが、基本動作に比べて優先度は低い"
+        }
+      ],
+      "delegated": []
+    }
+  },
+  {
+    "kind": "internal_ai_decision",
+    "n": 2,
+    "decision": {
+      "id": "scoring_system",
+      "title": "スコアリングシステム",
+      "value": "1行消去:100点, 2行:300点, 3行:500点, 4行:800点。レベルは1000点ごとに+1",
+      "status": "confirmed",
+      "decided_by": "AI",
+      "reason": "標準テトリスのスコアリングを簡略化し、ゲームバランスを維持しつつ実装が容易",
+      "evidence": {
+        "source": "internal_reeval",
+        "evidence": "テトリス公式ルール書およびオープンソーステトリス実装のスコア計算方法を参考",
+        "comparison_n": 2
+      },
+      "human_confirmed": false
+    },
+    "from_next": {
+      "id": "scoring_system",
+      "action": "internal_ai_decision",
+      "reason": "スコアリングシステムは標準的なテトリスルールに基づいてAIが独自に決定可能で、後戻りの影響も中程度。UI設計に比べて実装優先度が低いため。",
+      "ai_decision": {
+        "id": "scoring_system",
+        "title": "スコアリングシステム",
+        "value": "1行消去:100点, 2行:300点, 3行:500点, 4行:800点。レベルは1000点ごとに+1",
+        "reason": "標準テトリスのスコアリングを簡略化し、ゲームバランスを維持しつつ実装が容易",
+        "evidence": "テトリス公式ルール書およびオープンソーステトリス実装のスコア計算方法を参考"
+      }
+    },
+    "state_after": {
+      "goal": {
+        "text": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。",
+        "concept": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。"
+      },
+      "environment_facts": {
+        "os": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11",
+        "workspace": "AI-Agent development worktree (not a blank game project)",
+        "local_llm": "Ollama is used by this experiment runner",
+        "note": "A simple Tetris that runs on this PC. Do not ask OS/runtime facts already listed."
+      },
+      "human_requirements": [
+        {
+          "id": "goal_text",
+          "text": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。",
+          "source": "parent_run.goal"
+        }
+      ],
+      "confirmed_decisions": [
+        {
+          "id": "lib_choice",
+          "title": "ゲーム開発に使用するPythonライブラリの選定",
+          "value": "Pygame",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適",
+          "evidence": {
+            "source": "recommendation",
+            "parent_run_id": "20260909T003636Z",
+            "option_id": "A",
+            "decision_basis": "recommendation",
+            "llm_adopt_value": "Pygame"
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "game_mechanics",
+          "title": "ゲームメカニクスの設計",
+          "value": "標準テトリスルールに基づく実装（I/O操作、ピースの移動・回転、線の消去処理）",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "標準ルールは実装可能性が高く、テトリスの基本動作を担保する",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "Pygameのドキュメントおよびテトリスの公式ルール書に基づく",
+            "comparison_n": 1
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "scoring_system",
+          "title": "スコアリングシステム",
+          "value": "1行消去:100点, 2行:300点, 3行:500点, 4行:800点。レベルは1000点ごとに+1",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "標準テトリスのスコアリングを簡略化し、ゲームバランスを維持しつつ実装が容易",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "テトリス公式ルール書およびオープンソーステトリス実装のスコア計算方法を参考",
+            "comparison_n": 2
+          },
+          "human_confirmed": false
+        }
+      ],
+      "assumptions": [],
+      "unresolved": [
+        {
+          "id": "ui_design",
+          "title": "ユーザーインターフェース設計",
+          "text": "画面レイアウト・色・UI要素の詳細が未確定",
+          "goal_impact": "medium",
+          "human_intent_required": true,
+          "human_impact": "high",
+          "rollback_impact": "high",
+          "cross_cutting_impact": "medium",
+          "ai_decidable": false,
+          "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+        }
+      ],
+      "delegated": []
+    }
+  },
+  {
+    "kind": "internal_ai_decision",
+    "n": 3,
+    "decision": {
+      "id": "difficulty_scaling",
+      "title": "難易度スケーリング",
+      "value": "レベルが上がるごとにピースの落下速度が10%ずつ増加（最大レベル10で50%増加）",
+      "status": "confirmed",
+      "decided_by": "AI",
+      "reason": "テトリスの標準的な難易度調整を簡略化し、ゲームバランスを維持",
+      "evidence": {
+        "source": "internal_reeval",
+        "evidence": "テトリス公式ルール書およびオープンソーステトリス実装の速度調整方法を参考",
+        "comparison_n": 3
+      },
+      "human_confirmed": false
+    },
+    "from_next": {
+      "id": "difficulty_scaling",
+      "action": "internal_ai_decision",
+      "reason": "標準テトリスルールに準拠するため、AIが既存のルールに基づいて決定可能",
+      "ai_decision": {
+        "id": "difficulty_scaling",
+        "title": "難易度スケーリング",
+        "value": "レベルが上がるごとにピースの落下速度が10%ずつ増加（最大レベル10で50%増加）",
+        "reason": "テトリスの標準的な難易度調整を簡略化し、ゲームバランスを維持",
+        "evidence": "テトリス公式ルール書およびオープンソーステトリス実装の速度調整方法を参考"
+      }
+    },
+    "state_after": {
+      "goal": {
+        "text": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。",
+        "concept": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。"
+      },
+      "environment_facts": {
+        "os": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11",
+        "workspace": "AI-Agent development worktree (not a blank game project)",
+        "local_llm": "Ollama is used by this experiment runner",
+        "note": "A simple Tetris that runs on this PC. Do not ask OS/runtime facts already listed."
+      },
+      "human_requirements": [
+        {
+          "id": "goal_text",
+          "text": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。",
+          "source": "parent_run.goal"
+        }
+      ],
+      "confirmed_decisions": [
+        {
+          "id": "lib_choice",
+          "title": "ゲーム開発に使用するPythonライブラリの選定",
+          "value": "Pygame",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適",
+          "evidence": {
+            "source": "recommendation",
+            "parent_run_id": "20260909T003636Z",
+            "option_id": "A",
+            "decision_basis": "recommendation",
+            "llm_adopt_value": "Pygame"
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "game_mechanics",
+          "title": "ゲームメカニクスの設計",
+          "value": "標準テトリスルールに基づく実装（I/O操作、ピースの移動・回転、線の消去処理）",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "標準ルールは実装可能性が高く、テトリスの基本動作を担保する",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "Pygameのドキュメントおよびテトリスの公式ルール書に基づく",
+            "comparison_n": 1
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "scoring_system",
+          "title": "スコアリングシステム",
+          "value": "1行消去:100点, 2行:300点, 3行:500点, 4行:800点。レベルは1000点ごとに+1",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "標準テトリスのスコアリングを簡略化し、ゲームバランスを維持しつつ実装が容易",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "テトリス公式ルール書およびオープンソーステトリス実装のスコア計算方法を参考",
+            "comparison_n": 2
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "difficulty_scaling",
+          "title": "難易度スケーリング",
+          "value": "レベルが上がるごとにピースの落下速度が10%ずつ増加（最大レベル10で50%増加）",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "テトリスの標準的な難易度調整を簡略化し、ゲームバランスを維持",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "テトリス公式ルール書およびオープンソーステトリス実装の速度調整方法を参考",
+            "comparison_n": 3
+          },
+          "human_confirmed": false
+        }
+      ],
+      "assumptions": [],
+      "unresolved": [
+        {
+          "id": "ui_design",
+          "title": "ユーザーインターフェース設計",
+          "text": "画面レイアウト・色・UI要素の詳細が未確定",
+          "goal_impact": "medium",
+          "human_intent_required": true,
+          "human_impact": "high",
+          "rollback_impact": "high",
+          "cross_cutting_impact": "medium",
+          "ai_decidable": false,
+          "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+        },
+        {
+          "id": "resolution_settings",
+          "title": "解像度設定",
+          "text": "ゲームウィンドウのサイズやスケーリング方法が未確定",
+          "goal_impact": "low",
+          "human_intent_required": false,
+          "human_impact": "medium",
+          "rollback_impact": "low",
+          "cross_cutting_impact": "low",
+          "ai_decidable": true,
+          "why": "Pygameのデフォルト設定やPC環境に合わせてAIが自動的に決定可能"
+        }
+      ],
+      "delegated": []
+    }
+  },
+  {
+    "kind": "internal_ai_decision",
+    "n": 4,
+    "decision": {
+      "id": "resolution_settings",
+      "title": "解像度設定",
+      "value": "800x600 (Pygameのデフォルトスケーリング)",
+      "status": "confirmed",
+      "decided_by": "AI",
+      "reason": "PC環境に適した標準解像度で、Pygameのデフォルト設定と互換性がある",
+      "evidence": {
+        "source": "internal_reeval",
+        "evidence": "PygameのドキュメントおよびWindows 10環境の一般的なゲーム解像度を参考",
+        "comparison_n": 4
+      },
+      "human_confirmed": false
+    },
+    "from_next": {
+      "id": "resolution_settings",
+      "action": "internal_ai_decision",
+      "reason": "AIが自動決定可能で手戻りリスクが低く、実装の早期進捗に寄与",
+      "ai_decision": {
+        "id": "resolution_settings",
+        "title": "解像度設定",
+        "value": "800x600 (Pygameのデフォルトスケーリング)",
+        "reason": "PC環境に適した標準解像度で、Pygameのデフォルト設定と互換性がある",
+        "evidence": "PygameのドキュメントおよびWindows 10環境の一般的なゲーム解像度を参考"
+      }
+    },
+    "state_after": {
+      "goal": {
+        "text": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。",
+        "concept": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。"
+      },
+      "environment_facts": {
+        "os": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11",
+        "workspace": "AI-Agent development worktree (not a blank game project)",
+        "local_llm": "Ollama is used by this experiment runner",
+        "note": "A simple Tetris that runs on this PC. Do not ask OS/runtime facts already listed."
+      },
+      "human_requirements": [
+        {
+          "id": "goal_text",
+          "text": "このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。",
+          "source": "parent_run.goal"
+        }
+      ],
+      "confirmed_decisions": [
+        {
+          "id": "lib_choice",
+          "title": "ゲーム開発に使用するPythonライブラリの選定",
+          "value": "Pygame",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適",
+          "evidence": {
+            "source": "recommendation",
+            "parent_run_id": "20260909T003636Z",
+            "option_id": "A",
+            "decision_basis": "recommendation",
+            "llm_adopt_value": "Pygame"
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "game_mechanics",
+          "title": "ゲームメカニクスの設計",
+          "value": "標準テトリスルールに基づく実装（I/O操作、ピースの移動・回転、線の消去処理）",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "標準ルールは実装可能性が高く、テトリスの基本動作を担保する",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "Pygameのドキュメントおよびテトリスの公式ルール書に基づく",
+            "comparison_n": 1
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "scoring_system",
+          "title": "スコアリングシステム",
+          "value": "1行消去:100点, 2行:300点, 3行:500点, 4行:800点。レベルは1000点ごとに+1",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "標準テトリスのスコアリングを簡略化し、ゲームバランスを維持しつつ実装が容易",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "テトリス公式ルール書およびオープンソーステトリス実装のスコア計算方法を参考",
+            "comparison_n": 2
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "difficulty_scaling",
+          "title": "難易度スケーリング",
+          "value": "レベルが上がるごとにピースの落下速度が10%ずつ増加（最大レベル10で50%増加）",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "テトリスの標準的な難易度調整を簡略化し、ゲームバランスを維持",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "テトリス公式ルール書およびオープンソーステトリス実装の速度調整方法を参考",
+            "comparison_n": 3
+          },
+          "human_confirmed": false
+        },
+        {
+          "id": "resolution_settings",
+          "title": "解像度設定",
+          "value": "800x600 (Pygameのデフォルトスケーリング)",
+          "status": "confirmed",
+          "decided_by": "AI",
+          "reason": "PC環境に適した標準解像度で、Pygameのデフォルト設定と互換性がある",
+          "evidence": {
+            "source": "internal_reeval",
+            "evidence": "PygameのドキュメントおよびWindows 10環境の一般的なゲーム解像度を参考",
+            "comparison_n": 4
+          },
+          "human_confirmed": false
+        }
+      ],
+      "assumptions": [],
+      "unresolved": [
+        {
+          "id": "ui_design",
+          "title": "ユーザーインターフェース設計",
+          "text": "画面レイアウト・色・UI要素の詳細が未確定",
+          "goal_impact": "medium",
+          "human_intent_required": true,
+          "human_impact": "high",
+          "rollback_impact": "high",
+          "cross_cutting_impact": "medium",
+          "ai_decidable": false,
+          "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+        }
+      ],
+      "delegated": []
+    }
+  }
+]

@@ -1,0 +1,141 @@
+{
+  "head": "7e23ad6",
+  "items": [
+    {
+      "meaning": "Structured requirement row with stable requirement_id (req-*)",
+      "file": "ai_tool/chat_interface/requirement_resolution.py",
+      "symbol": "StructuredRequirement / validate_structured_requirements",
+      "state": "HEAD_NATIVE",
+      "needed_by_wedge_c": true,
+      "notes": "HEAD already models requirement_id on structured rows and mission bundle load."
+    },
+    {
+      "meaning": "Legacy runtime adoption (completion condition strings + explicit_constraints)",
+      "file": "ai_tool/chat_interface/requirement_resolution.py",
+      "symbol": "project_to_runtime_adoption",
+      "state": "HEAD_NATIVE",
+      "needed_by_wedge_c": true,
+      "notes": "HEAD returns string lists only; no requirement_id↔condition map on orchestrator."
+    },
+    {
+      "meaning": "ID-tagged requirement → completion_condition projection entries",
+      "file": "ai_tool/chat_interface/requirement_resolution.py",
+      "symbol": "project_to_runtime_adoption_entries / canonical_requirement_projection_from_dict_rows",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "Adds [{requirement_id, completion_condition}] derived from structured_requirements."
+    },
+    {
+      "meaning": "Orchestrator canonical_requirement_projection refresh",
+      "file": "ai_tool/chat_interface/requirement_resolution.py",
+      "symbol": "sync_canonical_requirement_projection",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "Writes orchestrator.canonical_requirement_projection from structured_requirements."
+    },
+    {
+      "meaning": "READ-ONLY requirement_id → task condition/evidence trace",
+      "file": "ai_tool/chat_interface/requirement_resolution.py",
+      "symbol": "build_canonical_requirement_evidence_trace / build_canonical_requirement_runtime_coverage",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "Joins projection to TaskRecord.completion_conditions string match only."
+    },
+    {
+      "meaning": "Mission → orchestrator structured_requirements hydration",
+      "file": "ai_tool/chat_interface/requirement_resolution.py",
+      "symbol": "sync_canonical_requirements_from_mission",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "Used by goal_continuation_resume dirty hunk."
+    },
+    {
+      "meaning": "Orchestrator structured_requirements + projection fields",
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "symbol": "ChatTaskOrchestrator.__init__ structured_requirements / canonical_requirement_projection",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "Not present at HEAD 7e23ad6; committed slice ends at task_graph_projection_sidecar."
+    },
+    {
+      "meaning": "Orchestrator READ-ONLY trace wrappers",
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "symbol": "canonical_requirement_evidence_trace / canonical_requirement_runtime_coverage",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "Delegates to requirement_resolution trace builders."
+    },
+    {
+      "meaning": "Restore structured_requirements from snapshot/mission state",
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "symbol": "apply_canonical_requirements_from_state",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "No HEAD hook in completion_runtime_slice for structured_requirements."
+    },
+    {
+      "meaning": "Mission snapshot persistence of structured_requirements",
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "symbol": "goal_completion_resume / mission row structured_requirements kwargs",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "Dirty hunk near orchestrator state export (~4236)."
+    },
+    {
+      "meaning": "completion_runtime_slice persistence of structured_requirements",
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "symbol": "completion_runtime_slice",
+      "state": "HEAD_PLUS_WORKTREE",
+      "needed_by_wedge_c": true,
+      "notes": "HEAD persists goals/tasks/evidence + task_graph_projection_sidecar (Wedge B). structured_requirements not in HEAD slice."
+    },
+    {
+      "meaning": "Domain goal identity + mapping (goal-root → G1)",
+      "file": "ai_tool/domain_goal_graph_adoption.py",
+      "symbol": "build_goal_rows_from_domain_goal_graph / DomainGoalAdoptionResult.goal_id_mapping",
+      "state": "HEAD_NATIVE",
+      "needed_by_wedge_c": true,
+      "notes": "Wedge A committed; source goal IDs preserved except root."
+    },
+    {
+      "meaning": "Domain task identity + primary goal_id + depends_on",
+      "file": "ai_tool/domain_task_graph_adoption.py",
+      "symbol": "build_task_rows_and_sidecar / adopt_domain_goal_and_task_graph",
+      "state": "HEAD_NATIVE",
+      "needed_by_wedge_c": true,
+      "notes": "Wedge B committed; uses _replace_runtime_graph_from_snapshot."
+    },
+    {
+      "meaning": "Multi-goal + verification_refs + source_refs sidecar",
+      "file": "ai_tool/domain_task_graph_adoption.py",
+      "symbol": "TASK_GRAPH_PROJECTION_SIDECAR_KEY / task_graph_projection_sidecar rows",
+      "state": "HEAD_NATIVE",
+      "needed_by_wedge_c": true,
+      "notes": "Persisted via completion_runtime_slice + apply_completion_runtime (Wedge B)."
+    },
+    {
+      "meaning": "req-* → domain goal ID (goal-ne-*) stable mapping",
+      "file": null,
+      "symbol": null,
+      "state": "NOT_FOUND",
+      "needed_by_wedge_c": true,
+      "notes": "No HEAD or worktree symbol links requirement_id to domain goal graph IDs; only parallel source_refs (ne-*) in sidecar vs goal source_refs in experiment artifacts."
+    },
+    {
+      "meaning": "Handoff acceptance identity trace (A* / gh-T*)",
+      "file": "ai_tool/goal_handoff_runtime_bridge.py",
+      "symbol": "build_handoff_acceptance_runtime_trace / attach_handoff_identity_traceability",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": false,
+      "notes": "Parallel transport; not req-* chain. Orchestrator dirty fields couple handoff trace to worktree."
+    },
+    {
+      "meaning": "Resume path loads canonical requirements from mission",
+      "file": "ai_tool/chat_interface/goal_continuation_resume.py",
+      "symbol": "restore_orchestrator_from_goal_continuation → sync_canonical_requirements_from_mission",
+      "state": "WORKTREE_ONLY",
+      "needed_by_wedge_c": true,
+      "notes": "Depends on WORKTREE_ONLY sync_canonical_requirements_from_mission."
+    }
+  ]
+}

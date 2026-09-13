@@ -1,0 +1,73 @@
+{
+  "experiment_id": "judgment_layer",
+  "fixture_version": "pack_bin_v1",
+  "prompt": "Analyze the problem and indicate the next investigation or action needed.",
+  "at": "2026-09-01T02:13:35.643027+00:00",
+  "temperature": 0.0,
+  "max_turns": 8,
+  "models": [
+    "gemma3:12b",
+    "deepseek-coder-v2:16b",
+    "qwen3:14b"
+  ],
+  "native_tools": false,
+  "schema_requested": false,
+  "mapping_provisional": true,
+  "initial_pytest_exit_code": 1,
+  "initial_main_exit_code": 1,
+  "models_run": [
+    {
+      "model": "gemma3:12b",
+      "stop_reason": "idle_no_m1_mapping",
+      "turns": 2,
+      "call_ok": true,
+      "mapping_status": [
+        "M2",
+        "M4"
+      ],
+      "tool_name": [
+        null,
+        null
+      ],
+      "files_read": []
+    },
+    {
+      "model": "deepseek-coder-v2:16b",
+      "stop_reason": "context_length_exceeded",
+      "turns": 6,
+      "call_ok": false,
+      "mapping_status": [
+        "M1",
+        "M1",
+        "M1",
+        "M1",
+        "M2",
+        null
+      ],
+      "tool_name": [
+        "run_test",
+        "run_test",
+        "run_test",
+        "run_test",
+        null,
+        null
+      ],
+      "files_read": []
+    },
+    {
+      "model": "qwen3:14b",
+      "stop_reason": "idle_no_m1_mapping",
+      "turns": 2,
+      "call_ok": true,
+      "mapping_status": [
+        "M4",
+        "M4"
+      ],
+      "tool_name": [
+        null,
+        null
+      ],
+      "files_read": []
+    }
+  ]
+}

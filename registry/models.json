@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "schema_note": "Model Registry 正本。Model 接続パラメータは config/llm_models.yaml。LLM Execution Profile（think 等・暫定 v0）は config/llm_execution_profiles.yaml。Agent active 参照は config/pipeline.yaml active_model（profile id）。永久固定ではない。",
+  "roles": [
+    {
+      "id": "general_agent",
+      "description": "Agent の判断・計画・Native Tool Calling 主経路"
+    },
+    {
+      "id": "coding",
+      "description": "コード生成・修正支援"
+    },
+    {
+      "id": "lightweight",
+      "description": "軽量・高速な汎用テキスト"
+    },
+    {
+      "id": "compat_research",
+      "description": "非 Tool Calling 互換・研究経路（Action Bridge 等）"
+    }
+  ],
+  "models": [
+    {
+      "id": "qwen3_14b",
+      "model": "qwen3:14b",
+      "profile_id": "qwen3_14b",
+      "provider": "ollama",
+      "roles": ["general_agent"],
+      "capabilities": {
+        "tool_calling": {
+          "supported": true,
+          "verified": true,
+          "verification_method": "probe_tool_calling",
+          "verification_date": "2026-09-02"
+        },
+        "text": {
+          "supported": true,
+          "verified": false
+        },
+        "coding": {
+          "supported": true,
+          "verified": false
+        }
+      },
+      "status": "active",
+      "pipeline_active": true,
+      "installed_observed": true,
+      "evaluation": {
+        "tool_calling": {
+          "single_tool": "PASS",
+          "multiple_tools": "PASS",
+          "tool_result_return": "PASS",
+          "tool_failure_handling": "PASS",
+          "source_task": "TC-REGISTRY-FOUNDATION-P0",
+          "notes": "Agent 主経路暫定 active。正式採用確定ではない。"
+        }
+      }
+    },
+    {
+      "id": "qwen3_8b",
+      "model": "qwen3:8b",
+      "profile_id": "qwen3_8b",
+      "provider": "ollama",
+      "roles": ["general_agent", "lightweight"],
+      "capabilities": {
+        "tool_calling": {
+          "supported": true,
+          "verified": true,
+          "verification_method": "probe_tool_calling",
+          "verification_date": "2026-09-02"
+        },
+        "text": {
+          "supported": true,
+          "verified": false
+        },
+        "coding": {
+          "supported": true,
+          "verified": false
+        }
+      },
+      "status": "candidate",
+      "pipeline_active": false,
+      "installed_observed": true,
+      "evaluation": {
+        "tool_calling": {
+          "probe_accepted": "PASS",
+          "source_task": "TC-REGISTRY-FOUNDATION-P0",
+          "notes": "P0 で probe のみ確認。Agent E2E フル実測は未記録。"
+        }
+      }
+    },
+    {
+      "id": "qwen2_5_coder_7b",
+      "model": "qwen2.5-coder:7b",
+      "profile_id": "qwen2_5_coder_7b",
+      "provider": "ollama",
+      "roles": ["coding"],
+      "capabilities": {
+        "tool_calling": {
+          "supported": true,
+          "verified": true,
+          "verification_method": "probe_tool_calling",
+          "verification_date": "2026-09-02"
+        },
+        "text": {
+          "supported": true,
+          "verified": false
+        },
+        "coding": {
+          "supported": true,
+          "verified": false
+        }
+      },
+      "status": "candidate",
+      "pipeline_active": false,
+      "installed_observed": true,
+      "evaluation": {
+        "tool_calling": {
+          "probe_accepted": "PASS",
+          "source_task": "TC-REGISTRY-FOUNDATION-P0",
+          "notes": "P0 で probe のみ確認。"
+        }
+      }
+    },
+    {
+      "id": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "profile_id": "deepseek_coder_v2_16b",
+      "provider": "ollama",
+      "roles": ["coding", "compat_research"],
+      "capabilities": {
+        "tool_calling": {
+          "supported": false,
+          "verified": true,
+          "verification_method": "probe_tool_calling",
+          "verification_date": "2026-09-02"
+        },
+        "text": {
+          "supported": true,
+          "verified": false
+        },
+        "coding": {
+          "supported": true,
+          "verified": false
+        }
+      },
+      "status": "experimental",
+      "pipeline_active": false,
+      "installed_observed": true,
+      "evaluation": {
+        "tool_calling": {
+          "probe_accepted": "FAIL",
+          "ollama_error": "does not support tools",
+          "source_task": "TC-REGISTRY-FOUNDATION-P0",
+          "notes": "P0 以前の pipeline active。非 TC 互換・研究経路向け。"
+        }
+      }
+    },
+    {
+      "id": "gemma3_12b",
+      "model": "gemma3:12b",
+      "profile_id": "gemma3_12b",
+      "provider": "ollama",
+      "roles": ["compat_research"],
+      "capabilities": {
+        "tool_calling": {
+          "supported": false,
+          "verified": true,
+          "verification_method": "probe_tool_calling",
+          "verification_date": "2026-09-02"
+        },
+        "text": {
+          "supported": true,
+          "verified": false
+        },
+        "coding": {
+          "supported": false,
+          "verified": false
+        }
+      },
+      "status": "candidate",
+      "pipeline_active": false,
+      "installed_observed": true,
+      "evaluation": {
+        "tool_calling": {
+          "probe_accepted": "FAIL",
+          "ollama_error": "does not support tools",
+          "source_task": "TC-REGISTRY-FOUNDATION-P0"
+        },
+        "judgment_layer": {
+          "source_task": "judgment_layer_llm_connection_experiment",
+          "notes": "非 TC 判断層実験で使用。Bridge 経由の読取連鎖を観測。"
+        }
+      }
+    }
+  ]
+}

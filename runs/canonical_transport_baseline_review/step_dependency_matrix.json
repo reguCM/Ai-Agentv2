@@ -1,0 +1,82 @@
+{
+  "head": "7e23ad6",
+  "steps": {
+    "STEP1": {
+      "test_file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step1.py",
+      "production_symbols": [
+        "extract_requirement_resolution",
+        "project_to_runtime_adoption",
+        "agent_turn._attach_requirement_contract",
+        "ChatTaskOrchestrator.structured_requirements",
+        "task_orchestration.snapshot structured_requirements export",
+        "apply_canonical_requirements_from_state",
+        "restore_orchestrator_from_goal_continuation",
+        "sync_canonical_requirements_from_mission"
+      ],
+      "prior_step": null,
+      "handoff_dependency": false,
+      "mission_resume_dependency": true,
+      "snapshot_dependency": true,
+      "notes": "G1–G5 identity; snapshot roundtrip via orchestrator.snapshot(); mission restore via goal_continuation_resume."
+    },
+    "STEP2": {
+      "test_file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step2.py",
+      "production_symbols": [
+        "project_to_runtime_adoption_entries",
+        "sync_canonical_requirement_projection",
+        "canonical_requirement_projection on orchestrator",
+        "agent_turn._attach_requirement_contract (calls sync)",
+        "sync_canonical_requirements_from_mission"
+      ],
+      "prior_step": "STEP1",
+      "handoff_dependency": false,
+      "mission_resume_dependency": true,
+      "snapshot_dependency": false,
+      "notes": "T8 resume rebuilds projection from mission structured_requirements."
+    },
+    "STEP3": {
+      "test_file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step3.py",
+      "production_symbols": [
+        "build_canonical_requirement_evidence_trace",
+        "_build_canonical_requirement_runtime_trace",
+        "runtime_matches_for_completion_condition",
+        "canonical_requirement_evidence_trace wrapper",
+        "sync_canonical_requirement_projection"
+      ],
+      "prior_step": "STEP2",
+      "handoff_dependency": false,
+      "mission_resume_dependency": false,
+      "snapshot_dependency": false,
+      "notes": "Read-only trace; sets projection directly in tests."
+    },
+    "STEP4": {
+      "test_file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step4.py",
+      "production_symbols": [
+        "build_canonical_requirement_runtime_coverage",
+        "canonical_requirement_runtime_coverage wrapper"
+      ],
+      "prior_step": "STEP3",
+      "handoff_dependency": false,
+      "mission_resume_dependency": false,
+      "snapshot_dependency": false,
+      "notes": "Coverage READ-ONLY over same trace core as STEP3."
+    },
+    "STEP5": {
+      "test_file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step5.py",
+      "production_symbols": [
+        "goal_handoff_runtime_bridge.build_handoff_acceptance_projection",
+        "build_handoff_task_acceptance_mapping",
+        "build_handoff_acceptance_runtime_trace",
+        "attach_handoff_identity_traceability",
+        "ChatTaskOrchestrator.handoff_acceptance_projection",
+        "handoff_acceptance_runtime_trace",
+        "seed_orchestrator_from_handoff"
+      ],
+      "prior_step": null,
+      "handoff_dependency": true,
+      "mission_resume_dependency": false,
+      "snapshot_dependency": false,
+      "notes": "Handoff A*/gh-T* acceptance trace; not req-* canonical transport."
+    }
+  }
+}

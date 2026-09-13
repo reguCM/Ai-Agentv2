@@ -1,0 +1,197 @@
+{
+  "experiment": "need_bypass_system_first_v0",
+  "run_id": "20260909T094239Z",
+  "production_modified": false,
+  "need_llm_called": false,
+  "grill_used": false,
+  "tool_executed": false,
+  "goal": "gridを検索して、その内容を要約してほしい。",
+  "initial_state": "まだ何も調査していない。",
+  "request_construction": {
+    "used_system_request": false,
+    "reason": "system_request は need 必須で Next need を必ず付ける。system_resolve は request_text のみで Need は必須ではない。今回は Need 工程をバイパスするため、Goal / Current State 見出しだけをsystem_request と同じ形式で組み立てた。"
+  },
+  "baseline": {
+    "path": "research/grill_observation_v0/resolver_owner_v0/runs/20260909T064802Z/case2/02_system_first.json",
+    "need": "gridの構造と内容を確認する。",
+    "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\nNext need:\ngridの構造と内容を確認する。\n",
+    "required_capabilities": [],
+    "capability_resolution": [
+      {
+        "required_capability": null,
+        "source_task_id": "T1",
+        "status": "NOT_NEEDED",
+        "capability_index_checked": false,
+        "registry_checked": false,
+        "candidate_tools": [],
+        "selected_tool": null,
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": null
+      }
+    ],
+    "selected_tool": null,
+    "next_action": null,
+    "resolved_arguments": null,
+    "unresolved_arguments": null,
+    "unresolved_reason": "no_required_capability",
+    "label": "UNRESOLVED",
+    "action": null,
+    "tool_executed": false
+  },
+  "current": {
+    "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n",
+    "required_capabilities": [
+      "workspace_file_search",
+      "web_search"
+    ],
+    "capability_resolution": [
+      {
+        "required_capability": "workspace_file_search",
+        "source_task_id": "T1",
+        "status": "RESOLVED",
+        "capability_index_checked": true,
+        "registry_checked": true,
+        "candidate_tools": [
+          "search_files"
+        ],
+        "selected_tool": "search_files",
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [
+          "search_files"
+        ],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": null,
+        "resolved_arguments": {
+          "path": "."
+        },
+        "unresolved_arguments": [
+          "query"
+        ]
+      },
+      {
+        "required_capability": "web_search",
+        "source_task_id": "T1",
+        "status": "RESOLVED",
+        "capability_index_checked": true,
+        "registry_checked": true,
+        "candidate_tools": [
+          "search_web"
+        ],
+        "selected_tool": "search_web",
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [
+          "search_web"
+        ],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": null,
+        "resolved_arguments": {},
+        "unresolved_arguments": [
+          "query"
+        ]
+      }
+    ],
+    "selected_tool": "search_files",
+    "next_action": null,
+    "resolved_arguments": {
+      "path": "."
+    },
+    "unresolved_arguments": [
+      "query"
+    ],
+    "unresolved_reason": "tool_selected_arguments_incomplete",
+    "label": "PARTIAL",
+    "action": null,
+    "tool_executed": false
+  },
+  "diff": {
+    "request_text_changed": true,
+    "required_capabilities_changed": true,
+    "selected_tool_changed": true,
+    "next_action_changed": false,
+    "unresolved_reason_changed": true
+  },
+  "verdict": "A",
+  "verdict_reason": "元Goal+State だけで search 系 Capability / Tool へ解決した。Need 生成が System First より前にあることが処理結果へ影響していた可能性を記録する。因果は断定しない。",
+  "summarize_resolution": {
+    "label": "PARTIAL",
+    "stopped_at": "tool_selected_arguments_incomplete",
+    "required_capabilities": [
+      "workspace_file_search",
+      "web_search"
+    ],
+    "resolutions": [
+      {
+        "required_capability": "workspace_file_search",
+        "source_task_id": "T1",
+        "status": "RESOLVED",
+        "capability_index_checked": true,
+        "registry_checked": true,
+        "candidate_tools": [
+          "search_files"
+        ],
+        "selected_tool": "search_files",
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [
+          "search_files"
+        ],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": null,
+        "resolved_arguments": {
+          "path": "."
+        },
+        "unresolved_arguments": [
+          "query"
+        ]
+      },
+      {
+        "required_capability": "web_search",
+        "source_task_id": "T1",
+        "status": "RESOLVED",
+        "capability_index_checked": true,
+        "registry_checked": true,
+        "candidate_tools": [
+          "search_web"
+        ],
+        "selected_tool": "search_web",
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [
+          "search_web"
+        ],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": null,
+        "resolved_arguments": {},
+        "unresolved_arguments": [
+          "query"
+        ]
+      }
+    ],
+    "action": null,
+    "selected_capability": "workspace_file_search",
+    "selected_tool": "search_files",
+    "next_action": null,
+    "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n"
+  },
+  "elapsed_s": 0.031
+}

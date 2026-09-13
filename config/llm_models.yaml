@@ -1,0 +1,108 @@
+# LLM プロファイル。自己修復の分岐・Validator・repair 種類はここへ書かない。
+# active_model は config/pipeline.yaml が指す。
+
+qwen3_8b:
+  model: qwen3:8b
+  context_limit: 4096
+  timeout_seconds: 90
+  temperature: 0
+  num_predict: 2048
+  keep_alive: 5m
+  prompt_style: japanese_verbose
+  materials:
+    compact_json: false
+    drop_keys: []
+    current_source_max_chars: null
+  strengths:
+    - 日本語の長い repair 指示を追える
+    - キー修正・dict 化など構造バグの修正が安定しやすい
+    - 確認済みコマンドへの置き換えができる
+  weaknesses:
+    - stdout 表のパースで IndexError を出すことがある
+    - code が空の repair 案を出すことがある
+
+qwen3_14b:
+  # Agent 主経路の暫定 active_model（config/pipeline.yaml）。正式採用確定ではない。
+  model: qwen3:14b
+  context_limit: 16384
+  timeout_seconds: 90
+  # 30s以降はUI上LONG_RUNNING。正常な生成は別の安全上限まで継続する。
+  long_running_after_seconds: 30
+  hard_timeout_seconds: 300
+  temperature: 0
+  num_predict: 2048
+  keep_alive: 5m
+  prompt_style: japanese_verbose
+  materials:
+    compact_json: false
+    drop_keys: []
+    current_source_max_chars: null
+  strengths: []
+  weaknesses: []
+
+qwen2_5_coder_7b:
+  model: qwen2.5-coder:7b
+  context_limit: 4096
+  timeout_seconds: 90
+  temperature: 0
+  num_predict: 2048
+  keep_alive: 5m
+  prompt_style: japanese_verbose
+  materials:
+    compact_json: false
+    drop_keys: []
+    current_source_max_chars: null
+  strengths: []
+  weaknesses: []
+
+gemma3_12b:
+  model: gemma3:12b
+  context_limit: 4096
+  timeout_seconds: 90
+  temperature: 0
+  num_predict: 2048
+  keep_alive: 5m
+  prompt_style: japanese_verbose
+  materials:
+    compact_json: false
+    drop_keys: []
+    current_source_max_chars: null
+  strengths: []
+  weaknesses: []
+
+gemma4_12b:
+  model: gemma4:12b
+  context_limit: 4096
+  timeout_seconds: 90
+  temperature: 0
+  num_predict: 2048
+  keep_alive: 5m
+  prompt_style: japanese_verbose
+  materials:
+    compact_json: false
+    drop_keys: []
+    current_source_max_chars: null
+  strengths: []
+  weaknesses: []
+
+deepseek_coder_v2_16b:
+  model: deepseek-coder-v2:16b
+  context_limit: 4096
+  timeout_seconds: 90
+  temperature: 0
+  num_predict: 2048
+  keep_alive: 5m
+  prompt_style: english_compact
+  materials:
+    compact_json: true
+    drop_keys: []
+    current_source_max_chars: 2500
+  strengths:
+    - 短い英語指示と圧縮 JSON なら構造修正ができる
+    - 確認済みコマンドへの置き換えができる
+    - dict 化は安定しやすい
+  weaknesses:
+    - 材料が長いと prompt overflow（context 超過）になる
+    - 表の見出し・区切り線を値として残しやすい
+    - status に空文字や見出し語（load など）を入れやすい
+    - 日本語の長い指示は弱い

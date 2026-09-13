@@ -1,0 +1,1291 @@
+{
+  "all_noisy": {
+    "n": 30,
+    "gold_top_n": 5,
+    "gold_not_top_n": 25,
+    "gold_top_rate": 0.1667,
+    "mean_gold_rank": 4.233,
+    "mean_gap_vs_second": -0.027168,
+    "mean_delta_vs_clean": -0.030805,
+    "failed_query_ids": [
+      "read_typo",
+      "read_conversion",
+      "read_missing_char",
+      "read_particle",
+      "read_asr",
+      "read_demonstrative",
+      "read_compound",
+      "search_typo",
+      "search_conversion",
+      "search_missing_char",
+      "search_particle",
+      "search_colloquial",
+      "search_filler",
+      "search_restatement",
+      "search_asr",
+      "search_demonstrative",
+      "search_compound",
+      "web_typo",
+      "web_conversion",
+      "web_missing_char",
+      "web_particle",
+      "web_colloquial",
+      "web_filler",
+      "web_restatement",
+      "web_asr"
+    ]
+  },
+  "by_noise_type": {
+    "clean": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 2.667,
+      "mean_gap_vs_second": -0.03256,
+      "mean_delta_vs_clean": null,
+      "failed_query_ids": [
+        "search_clean",
+        "web_clean"
+      ]
+    },
+    "typo": {
+      "n": 3,
+      "gold_top_n": 0,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.0,
+      "mean_gold_rank": 3.0,
+      "mean_gap_vs_second": -0.021558,
+      "mean_delta_vs_clean": -0.053217,
+      "failed_query_ids": [
+        "read_typo",
+        "search_typo",
+        "web_typo"
+      ]
+    },
+    "conversion": {
+      "n": 3,
+      "gold_top_n": 0,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.0,
+      "mean_gold_rank": 5.667,
+      "mean_gap_vs_second": -0.046625,
+      "mean_delta_vs_clean": -0.024646,
+      "failed_query_ids": [
+        "read_conversion",
+        "search_conversion",
+        "web_conversion"
+      ]
+    },
+    "missing_char": {
+      "n": 3,
+      "gold_top_n": 0,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.0,
+      "mean_gold_rank": 3.667,
+      "mean_gap_vs_second": -0.039258,
+      "mean_delta_vs_clean": -0.0194,
+      "failed_query_ids": [
+        "read_missing_char",
+        "search_missing_char",
+        "web_missing_char"
+      ]
+    },
+    "particle_drop": {
+      "n": 3,
+      "gold_top_n": 0,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.0,
+      "mean_gold_rank": 2.667,
+      "mean_gap_vs_second": -0.03149,
+      "mean_delta_vs_clean": 0.000844,
+      "failed_query_ids": [
+        "read_particle",
+        "search_particle",
+        "web_particle"
+      ]
+    },
+    "colloquial": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 3.667,
+      "mean_gap_vs_second": -0.007417,
+      "mean_delta_vs_clean": -0.017408,
+      "failed_query_ids": [
+        "search_colloquial",
+        "web_colloquial"
+      ]
+    },
+    "filler": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 2.667,
+      "mean_gap_vs_second": -0.027144,
+      "mean_delta_vs_clean": -0.012402,
+      "failed_query_ids": [
+        "search_filler",
+        "web_filler"
+      ]
+    },
+    "restatement": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 4.0,
+      "mean_gap_vs_second": -0.025549,
+      "mean_delta_vs_clean": -0.022917,
+      "failed_query_ids": [
+        "search_restatement",
+        "web_restatement"
+      ]
+    },
+    "asr_like": {
+      "n": 3,
+      "gold_top_n": 0,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.0,
+      "mean_gold_rank": 10.0,
+      "mean_gap_vs_second": -0.055855,
+      "mean_delta_vs_clean": -0.083208,
+      "failed_query_ids": [
+        "read_asr",
+        "search_asr",
+        "web_asr"
+      ]
+    },
+    "demonstrative": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 5.0,
+      "mean_gap_vs_second": -0.015841,
+      "mean_delta_vs_clean": -0.051575,
+      "failed_query_ids": [
+        "read_demonstrative",
+        "search_demonstrative"
+      ]
+    },
+    "compound": {
+      "n": 3,
+      "gold_top_n": 1,
+      "gold_not_top_n": 2,
+      "gold_top_rate": 0.3333,
+      "mean_gold_rank": 2.0,
+      "mean_gap_vs_second": -0.000945,
+      "mean_delta_vs_clean": -0.024121,
+      "failed_query_ids": [
+        "read_compound",
+        "search_compound"
+      ]
+    }
+  },
+  "by_anchor": {
+    "read": {
+      "n": 10,
+      "gold_top_n": 3,
+      "gold_not_top_n": 7,
+      "gold_top_rate": 0.3,
+      "mean_gold_rank": 2.6,
+      "mean_gap_vs_second": -0.004272,
+      "mean_delta_vs_clean": -0.041474,
+      "failed_query_ids": [
+        "read_typo",
+        "read_conversion",
+        "read_missing_char",
+        "read_particle",
+        "read_asr",
+        "read_demonstrative",
+        "read_compound"
+      ]
+    },
+    "search": {
+      "n": 10,
+      "gold_top_n": 0,
+      "gold_not_top_n": 10,
+      "gold_top_rate": 0.0,
+      "mean_gold_rank": 6.2,
+      "mean_gap_vs_second": -0.051926,
+      "mean_delta_vs_clean": -0.038945,
+      "failed_query_ids": [
+        "search_typo",
+        "search_conversion",
+        "search_missing_char",
+        "search_particle",
+        "search_colloquial",
+        "search_filler",
+        "search_restatement",
+        "search_asr",
+        "search_demonstrative",
+        "search_compound"
+      ]
+    },
+    "web": {
+      "n": 10,
+      "gold_top_n": 2,
+      "gold_not_top_n": 8,
+      "gold_top_rate": 0.2,
+      "mean_gold_rank": 3.9,
+      "mean_gap_vs_second": -0.025306,
+      "mean_delta_vs_clean": -0.011996,
+      "failed_query_ids": [
+        "web_typo",
+        "web_conversion",
+        "web_missing_char",
+        "web_particle",
+        "web_colloquial",
+        "web_filler",
+        "web_restatement",
+        "web_asr"
+      ]
+    }
+  },
+  "noise_types_with_gold_not_top": [
+    "typo",
+    "conversion",
+    "missing_char",
+    "particle_drop",
+    "colloquial",
+    "filler",
+    "restatement",
+    "asr_like",
+    "demonstrative",
+    "compound"
+  ],
+  "failed_queries": [
+    {
+      "query_id": "read_typo",
+      "noise_type": "typo",
+      "anchor_id": "read",
+      "query_text": "このふぁいるを読んで",
+      "gold_rank": 2,
+      "gold_cosine": 0.757719,
+      "top_id": "c_goal_read",
+      "top_cosine": 0.7592,
+      "gap_vs_second": -0.001481,
+      "delta_vs_clean": -0.1066,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 1,
+          "cosine": 0.7592
+        }
+      ]
+    },
+    {
+      "query_id": "read_conversion",
+      "noise_type": "conversion",
+      "anchor_id": "read",
+      "query_text": "このファイルを呼んで",
+      "gold_rank": 3,
+      "gold_cosine": 0.83822,
+      "top_id": "c_meaning_create",
+      "top_cosine": 0.849507,
+      "gap_vs_second": -0.011287,
+      "delta_vs_clean": -0.026099,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_create",
+          "text": "Meaning: 新しいファイルを作る",
+          "kind": "wrong_related_file",
+          "rank": 1,
+          "cosine": 0.849507
+        },
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 2,
+          "cosine": 0.847367
+        }
+      ]
+    },
+    {
+      "query_id": "read_missing_char",
+      "noise_type": "missing_char",
+      "anchor_id": "read",
+      "query_text": "このファイルを読",
+      "gold_rank": 3,
+      "gold_cosine": 0.86211,
+      "top_id": "c_goal_read",
+      "top_cosine": 0.868664,
+      "gap_vs_second": -0.006554,
+      "delta_vs_clean": -0.002209,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 1,
+          "cosine": 0.868664
+        },
+        {
+          "candidate_id": "c_role_read",
+          "text": "Target Role: read_file のワークスペース読取",
+          "kind": "role_read",
+          "rank": 2,
+          "cosine": 0.863104
+        }
+      ]
+    },
+    {
+      "query_id": "read_particle",
+      "noise_type": "particle_drop",
+      "anchor_id": "read",
+      "query_text": "このファイル読んで",
+      "gold_rank": 2,
+      "gold_cosine": 0.859727,
+      "top_id": "c_goal_read",
+      "top_cosine": 0.861075,
+      "gap_vs_second": -0.001348,
+      "delta_vs_clean": -0.004592,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 1,
+          "cosine": 0.861075
+        }
+      ]
+    },
+    {
+      "query_id": "read_asr",
+      "noise_type": "asr_like",
+      "anchor_id": "read",
+      "query_text": "このファいるを呼んで",
+      "gold_rank": 7,
+      "gold_cosine": 0.75972,
+      "top_id": "c_goal_weather",
+      "top_cosine": 0.784772,
+      "gap_vs_second": -0.025052,
+      "delta_vs_clean": -0.104599,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_weather",
+          "text": "Goal: 今日の天気を調べる",
+          "kind": "wrong_goal",
+          "rank": 1,
+          "cosine": 0.784772
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 2,
+          "cosine": 0.784069
+        },
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 3,
+          "cosine": 0.77661
+        },
+        {
+          "candidate_id": "c_focus_license",
+          "text": "Focus path: LICENSE",
+          "kind": "wrong_focus",
+          "rank": 4,
+          "cosine": 0.770104
+        },
+        {
+          "candidate_id": "c_meaning_create",
+          "text": "Meaning: 新しいファイルを作る",
+          "kind": "wrong_related_file",
+          "rank": 5,
+          "cosine": 0.76806
+        },
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 6,
+          "cosine": 0.76315
+        }
+      ]
+    },
+    {
+      "query_id": "read_demonstrative",
+      "noise_type": "demonstrative",
+      "anchor_id": "read",
+      "query_text": "そっちのファイル",
+      "gold_rank": 3,
+      "gold_cosine": 0.78395,
+      "top_id": "c_meaning_create",
+      "top_cosine": 0.801972,
+      "gap_vs_second": -0.018022,
+      "delta_vs_clean": -0.080369,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_create",
+          "text": "Meaning: 新しいファイルを作る",
+          "kind": "wrong_related_file",
+          "rank": 1,
+          "cosine": 0.801972
+        },
+        {
+          "candidate_id": "c_role_read",
+          "text": "Target Role: read_file のワークスペース読取",
+          "kind": "role_read",
+          "rank": 2,
+          "cosine": 0.789017
+        }
+      ]
+    },
+    {
+      "query_id": "read_compound",
+      "noise_type": "compound",
+      "anchor_id": "read",
+      "query_text": "えっとこのファイルを呼んでくれるやつ",
+      "gold_rank": 3,
+      "gold_cosine": 0.817703,
+      "top_id": "c_goal_read",
+      "top_cosine": 0.824239,
+      "gap_vs_second": -0.006536,
+      "delta_vs_clean": -0.046616,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 1,
+          "cosine": 0.824239
+        },
+        {
+          "candidate_id": "c_meaning_create",
+          "text": "Meaning: 新しいファイルを作る",
+          "kind": "wrong_related_file",
+          "rank": 2,
+          "cosine": 0.818625
+        }
+      ]
+    },
+    {
+      "query_id": "search_typo",
+      "noise_type": "typo",
+      "anchor_id": "search",
+      "query_text": "りぽじとりの中を検索して",
+      "gold_rank": 4,
+      "gold_cosine": 0.794598,
+      "top_id": "c_goal_search",
+      "top_cosine": 0.839701,
+      "gap_vs_second": -0.045103,
+      "delta_vs_clean": -0.036602,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 1,
+          "cosine": 0.839701
+        },
+        {
+          "candidate_id": "c_role_search",
+          "text": "Target Role: search_files のワークスペース検索",
+          "kind": "role_search",
+          "rank": 2,
+          "cosine": 0.799276
+        },
+        {
+          "candidate_id": "c_focus_search",
+          "text": "Focus path: search_files query in workspace",
+          "kind": "focus_search",
+          "rank": 3,
+          "cosine": 0.795339
+        }
+      ]
+    },
+    {
+      "query_id": "search_conversion",
+      "noise_type": "conversion",
+      "anchor_id": "search",
+      "query_text": "リポジトリの中を件作して",
+      "gold_rank": 6,
+      "gold_cosine": 0.807326,
+      "top_id": "c_goal_search",
+      "top_cosine": 0.883373,
+      "gap_vs_second": -0.076047,
+      "delta_vs_clean": -0.023874,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 1,
+          "cosine": 0.883373
+        },
+        {
+          "candidate_id": "c_role_read",
+          "text": "Target Role: read_file のワークスペース読取",
+          "kind": "role_read",
+          "rank": 2,
+          "cosine": 0.82512
+        },
+        {
+          "candidate_id": "c_role_search",
+          "text": "Target Role: search_files のワークスペース検索",
+          "kind": "role_search",
+          "rank": 3,
+          "cosine": 0.812018
+        },
+        {
+          "candidate_id": "c_meaning_read",
+          "text": "Meaning: ワークスペースのファイルを読む",
+          "kind": "meaning_read",
+          "rank": 4,
+          "cosine": 0.811427
+        },
+        {
+          "candidate_id": "c_focus_read",
+          "text": "Focus path: docs/CURRENT_DEVELOPMENT_STATE.md",
+          "kind": "focus_read",
+          "rank": 5,
+          "cosine": 0.808848
+        }
+      ]
+    },
+    {
+      "query_id": "search_missing_char",
+      "noise_type": "missing_char",
+      "anchor_id": "search",
+      "query_text": "リポジトリの中を検",
+      "gold_rank": 4,
+      "gold_cosine": 0.796289,
+      "top_id": "c_goal_search",
+      "top_cosine": 0.875725,
+      "gap_vs_second": -0.079436,
+      "delta_vs_clean": -0.034911,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 1,
+          "cosine": 0.875725
+        },
+        {
+          "candidate_id": "c_role_read",
+          "text": "Target Role: read_file のワークスペース読取",
+          "kind": "role_read",
+          "rank": 2,
+          "cosine": 0.812659
+        },
+        {
+          "candidate_id": "c_meaning_read",
+          "text": "Meaning: ワークスペースのファイルを読む",
+          "kind": "meaning_read",
+          "rank": 3,
+          "cosine": 0.807158
+        }
+      ]
+    },
+    {
+      "query_id": "search_particle",
+      "noise_type": "particle_drop",
+      "anchor_id": "search",
+      "query_text": "リポジトリ中を検索して",
+      "gold_rank": 3,
+      "gold_cosine": 0.826845,
+      "top_id": "c_goal_search",
+      "top_cosine": 0.891888,
+      "gap_vs_second": -0.065043,
+      "delta_vs_clean": -0.004355,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 1,
+          "cosine": 0.891888
+        },
+        {
+          "candidate_id": "c_role_search",
+          "text": "Target Role: search_files のワークスペース検索",
+          "kind": "role_search",
+          "rank": 2,
+          "cosine": 0.82855
+        }
+      ]
+    },
+    {
+      "query_id": "search_colloquial",
+      "noise_type": "colloquial",
+      "anchor_id": "search",
+      "query_text": "中を探してるほう",
+      "gold_rank": 8,
+      "gold_cosine": 0.772384,
+      "top_id": "c_meaning_search",
+      "top_cosine": 0.803524,
+      "gap_vs_second": -0.03114,
+      "delta_vs_clean": -0.058816,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_search",
+          "text": "Meaning: ワークスペース内を文字列検索する",
+          "kind": "meaning_search",
+          "rank": 1,
+          "cosine": 0.803524
+        },
+        {
+          "candidate_id": "c_meaning_read",
+          "text": "Meaning: ワークスペースのファイルを読む",
+          "kind": "meaning_read",
+          "rank": 2,
+          "cosine": 0.790529
+        },
+        {
+          "candidate_id": "c_meaning_web",
+          "text": "Meaning: ウェブを検索する",
+          "kind": "meaning_web",
+          "rank": 3,
+          "cosine": 0.785221
+        },
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 4,
+          "cosine": 0.784949
+        },
+        {
+          "candidate_id": "c_goal_weather",
+          "text": "Goal: 今日の天気を調べる",
+          "kind": "wrong_goal",
+          "rank": 5,
+          "cosine": 0.777449
+        },
+        {
+          "candidate_id": "c_focus_search",
+          "text": "Focus path: search_files query in workspace",
+          "kind": "focus_search",
+          "rank": 6,
+          "cosine": 0.77572
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 7,
+          "cosine": 0.773327
+        }
+      ]
+    },
+    {
+      "query_id": "search_filler",
+      "noise_type": "filler",
+      "anchor_id": "search",
+      "query_text": "あのーリポジトリの中を検索してなんですけど",
+      "gold_rank": 4,
+      "gold_cosine": 0.821655,
+      "top_id": "c_goal_search",
+      "top_cosine": 0.884204,
+      "gap_vs_second": -0.062549,
+      "delta_vs_clean": -0.009545,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 1,
+          "cosine": 0.884204
+        },
+        {
+          "candidate_id": "c_role_search",
+          "text": "Target Role: search_files のワークスペース検索",
+          "kind": "role_search",
+          "rank": 2,
+          "cosine": 0.831198
+        },
+        {
+          "candidate_id": "c_focus_search",
+          "text": "Focus path: search_files query in workspace",
+          "kind": "focus_search",
+          "rank": 3,
+          "cosine": 0.822277
+        }
+      ]
+    },
+    {
+      "query_id": "search_restatement",
+      "noise_type": "restatement",
+      "anchor_id": "search",
+      "query_text": "ネットじゃなくてリポジトリの中を検索して",
+      "gold_rank": 6,
+      "gold_cosine": 0.807408,
+      "top_id": "c_goal_search",
+      "top_cosine": 0.859068,
+      "gap_vs_second": -0.05166,
+      "delta_vs_clean": -0.023792,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 1,
+          "cosine": 0.859068
+        },
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 2,
+          "cosine": 0.837198
+        },
+        {
+          "candidate_id": "c_role_search",
+          "text": "Target Role: search_files のワークスペース検索",
+          "kind": "role_search",
+          "rank": 3,
+          "cosine": 0.821991
+        },
+        {
+          "candidate_id": "c_focus_web",
+          "text": "Focus: search_web の検索クエリ",
+          "kind": "focus_web",
+          "rank": 4,
+          "cosine": 0.816789
+        },
+        {
+          "candidate_id": "c_meaning_web",
+          "text": "Meaning: ウェブを検索する",
+          "kind": "meaning_web",
+          "rank": 5,
+          "cosine": 0.809905
+        }
+      ]
+    },
+    {
+      "query_id": "search_asr",
+      "noise_type": "asr_like",
+      "anchor_id": "search",
+      "query_text": "リポジ鳥の中を件作して",
+      "gold_rank": 14,
+      "gold_cosine": 0.742871,
+      "top_id": "c_goal_search",
+      "top_cosine": 0.815565,
+      "gap_vs_second": -0.072694,
+      "delta_vs_clean": -0.088329,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 1,
+          "cosine": 0.815565
+        },
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 2,
+          "cosine": 0.771702
+        },
+        {
+          "candidate_id": "c_role_followup",
+          "text": "Target Role: followup_investigation の追加調査",
+          "kind": "wrong_role",
+          "rank": 3,
+          "cosine": 0.764452
+        },
+        {
+          "candidate_id": "c_goal_weather",
+          "text": "Goal: 今日の天気を調べる",
+          "kind": "wrong_goal",
+          "rank": 4,
+          "cosine": 0.762591
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 5,
+          "cosine": 0.762586
+        },
+        {
+          "candidate_id": "c_meaning_create",
+          "text": "Meaning: 新しいファイルを作る",
+          "kind": "wrong_related_file",
+          "rank": 6,
+          "cosine": 0.755434
+        },
+        {
+          "candidate_id": "c_role_read",
+          "text": "Target Role: read_file のワークスペース読取",
+          "kind": "role_read",
+          "rank": 7,
+          "cosine": 0.752959
+        },
+        {
+          "candidate_id": "c_meaning_read",
+          "text": "Meaning: ワークスペースのファイルを読む",
+          "kind": "meaning_read",
+          "rank": 8,
+          "cosine": 0.752653
+        },
+        {
+          "candidate_id": "c_focus_license",
+          "text": "Focus path: LICENSE",
+          "kind": "wrong_focus",
+          "rank": 9,
+          "cosine": 0.7517
+        },
+        {
+          "candidate_id": "c_focus_read",
+          "text": "Focus path: docs/CURRENT_DEVELOPMENT_STATE.md",
+          "kind": "focus_read",
+          "rank": 10,
+          "cosine": 0.750374
+        },
+        {
+          "candidate_id": "c_focus_search",
+          "text": "Focus path: search_files query in workspace",
+          "kind": "focus_search",
+          "rank": 11,
+          "cosine": 0.749099
+        },
+        {
+          "candidate_id": "c_meaning_web",
+          "text": "Meaning: ウェブを検索する",
+          "kind": "meaning_web",
+          "rank": 12,
+          "cosine": 0.745486
+        },
+        {
+          "candidate_id": "c_focus_web",
+          "text": "Focus: search_web の検索クエリ",
+          "kind": "focus_web",
+          "rank": 13,
+          "cosine": 0.744857
+        }
+      ]
+    },
+    {
+      "query_id": "search_demonstrative",
+      "noise_type": "demonstrative",
+      "anchor_id": "search",
+      "query_text": "ローカルのほう",
+      "gold_rank": 11,
+      "gold_cosine": 0.744183,
+      "top_id": "c_focus_read",
+      "top_cosine": 0.774858,
+      "gap_vs_second": -0.030675,
+      "delta_vs_clean": -0.087017,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_focus_read",
+          "text": "Focus path: docs/CURRENT_DEVELOPMENT_STATE.md",
+          "kind": "focus_read",
+          "rank": 1,
+          "cosine": 0.774858
+        },
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 2,
+          "cosine": 0.774493
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 3,
+          "cosine": 0.771553
+        },
+        {
+          "candidate_id": "c_goal_weather",
+          "text": "Goal: 今日の天気を調べる",
+          "kind": "wrong_goal",
+          "rank": 4,
+          "cosine": 0.771336
+        },
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 5,
+          "cosine": 0.758327
+        },
+        {
+          "candidate_id": "c_focus_license",
+          "text": "Focus path: LICENSE",
+          "kind": "wrong_focus",
+          "rank": 6,
+          "cosine": 0.757328
+        },
+        {
+          "candidate_id": "c_meaning_read",
+          "text": "Meaning: ワークスペースのファイルを読む",
+          "kind": "meaning_read",
+          "rank": 7,
+          "cosine": 0.754758
+        },
+        {
+          "candidate_id": "c_meaning_search",
+          "text": "Meaning: ワークスペース内を文字列検索する",
+          "kind": "meaning_search",
+          "rank": 8,
+          "cosine": 0.753348
+        },
+        {
+          "candidate_id": "c_meaning_web",
+          "text": "Meaning: ウェブを検索する",
+          "kind": "meaning_web",
+          "rank": 9,
+          "cosine": 0.74982
+        },
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 10,
+          "cosine": 0.74526
+        }
+      ]
+    },
+    {
+      "query_id": "search_compound",
+      "noise_type": "compound",
+      "anchor_id": "search",
+      "query_text": "あの実際フォルダで探してるほう",
+      "gold_rank": 2,
+      "gold_cosine": 0.808993,
+      "top_id": "c_goal_search",
+      "top_cosine": 0.813908,
+      "gap_vs_second": -0.004915,
+      "delta_vs_clean": -0.022207,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 1,
+          "cosine": 0.813908
+        }
+      ]
+    },
+    {
+      "query_id": "web_typo",
+      "noise_type": "typo",
+      "anchor_id": "web",
+      "query_text": "ねっとで調べて",
+      "gold_rank": 3,
+      "gold_cosine": 0.780493,
+      "top_id": "c_role_web",
+      "top_cosine": 0.798582,
+      "gap_vs_second": -0.018089,
+      "delta_vs_clean": -0.01645,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 1,
+          "cosine": 0.798582
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 2,
+          "cosine": 0.790247
+        }
+      ]
+    },
+    {
+      "query_id": "web_conversion",
+      "noise_type": "conversion",
+      "anchor_id": "web",
+      "query_text": "熱っとで調べて",
+      "gold_rank": 8,
+      "gold_cosine": 0.772977,
+      "top_id": "c_meaning_cpu",
+      "top_cosine": 0.825517,
+      "gap_vs_second": -0.05254,
+      "delta_vs_clean": -0.023966,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_cpu",
+          "text": "Meaning: CPU温度の取得方法",
+          "kind": "wrong_meaning",
+          "rank": 1,
+          "cosine": 0.825517
+        },
+        {
+          "candidate_id": "c_goal_weather",
+          "text": "Goal: 今日の天気を調べる",
+          "kind": "wrong_goal",
+          "rank": 2,
+          "cosine": 0.81037
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 3,
+          "cosine": 0.803009
+        },
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 4,
+          "cosine": 0.779228
+        },
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 5,
+          "cosine": 0.778878
+        },
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 6,
+          "cosine": 0.777157
+        },
+        {
+          "candidate_id": "c_meaning_search",
+          "text": "Meaning: ワークスペース内を文字列検索する",
+          "kind": "meaning_search",
+          "rank": 7,
+          "cosine": 0.773034
+        }
+      ]
+    },
+    {
+      "query_id": "web_missing_char",
+      "noise_type": "missing_char",
+      "anchor_id": "web",
+      "query_text": "ネットで調",
+      "gold_rank": 4,
+      "gold_cosine": 0.775864,
+      "top_id": "c_goal_web",
+      "top_cosine": 0.807647,
+      "gap_vs_second": -0.031783,
+      "delta_vs_clean": -0.021079,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 1,
+          "cosine": 0.807647
+        },
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 2,
+          "cosine": 0.79273
+        },
+        {
+          "candidate_id": "c_focus_license",
+          "text": "Focus path: LICENSE",
+          "kind": "wrong_focus",
+          "rank": 3,
+          "cosine": 0.788904
+        }
+      ]
+    },
+    {
+      "query_id": "web_particle",
+      "noise_type": "particle_drop",
+      "anchor_id": "web",
+      "query_text": "ネット調べて",
+      "gold_rank": 3,
+      "gold_cosine": 0.808423,
+      "top_id": "c_role_web",
+      "top_cosine": 0.836501,
+      "gap_vs_second": -0.028078,
+      "delta_vs_clean": 0.01148,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 1,
+          "cosine": 0.836501
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 2,
+          "cosine": 0.836219
+        }
+      ]
+    },
+    {
+      "query_id": "web_colloquial",
+      "noise_type": "colloquial",
+      "anchor_id": "web",
+      "query_text": "ネットのやつ",
+      "gold_rank": 2,
+      "gold_cosine": 0.804879,
+      "top_id": "c_goal_web",
+      "top_cosine": 0.806287,
+      "gap_vs_second": -0.001408,
+      "delta_vs_clean": 0.007936,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 1,
+          "cosine": 0.806287
+        }
+      ]
+    },
+    {
+      "query_id": "web_filler",
+      "noise_type": "filler",
+      "anchor_id": "web",
+      "query_text": "まあネットで調べてかな",
+      "gold_rank": 3,
+      "gold_cosine": 0.780303,
+      "top_id": "c_role_web",
+      "top_cosine": 0.804557,
+      "gap_vs_second": -0.024254,
+      "delta_vs_clean": -0.01664,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 1,
+          "cosine": 0.804557
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 2,
+          "cosine": 0.804127
+        }
+      ]
+    },
+    {
+      "query_id": "web_restatement",
+      "noise_type": "restatement",
+      "anchor_id": "web",
+      "query_text": "ローカルじゃなくてネットで調べて",
+      "gold_rank": 5,
+      "gold_cosine": 0.783277,
+      "top_id": "c_role_web",
+      "top_cosine": 0.820153,
+      "gap_vs_second": -0.036876,
+      "delta_vs_clean": -0.013666,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 1,
+          "cosine": 0.820153
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 2,
+          "cosine": 0.807276
+        },
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 3,
+          "cosine": 0.798332
+        },
+        {
+          "candidate_id": "c_focus_web",
+          "text": "Focus: search_web の検索クエリ",
+          "kind": "focus_web",
+          "rank": 4,
+          "cosine": 0.793833
+        }
+      ]
+    },
+    {
+      "query_id": "web_asr",
+      "noise_type": "asr_like",
+      "anchor_id": "web",
+      "query_text": "熱斗で調べて",
+      "gold_rank": 9,
+      "gold_cosine": 0.740247,
+      "top_id": "c_meaning_cpu",
+      "top_cosine": 0.810066,
+      "gap_vs_second": -0.069819,
+      "delta_vs_clean": -0.056696,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_meaning_cpu",
+          "text": "Meaning: CPU温度の取得方法",
+          "kind": "wrong_meaning",
+          "rank": 1,
+          "cosine": 0.810066
+        },
+        {
+          "candidate_id": "c_goal_weather",
+          "text": "Goal: 今日の天気を調べる",
+          "kind": "wrong_goal",
+          "rank": 2,
+          "cosine": 0.784817
+        },
+        {
+          "candidate_id": "c_goal_web",
+          "text": "Goal: ネットで調べて要点を返す",
+          "kind": "goal_web",
+          "rank": 3,
+          "cosine": 0.7785
+        },
+        {
+          "candidate_id": "c_goal_read",
+          "text": "Goal: 指定ファイルを読んで要約する",
+          "kind": "goal_read",
+          "rank": 4,
+          "cosine": 0.758264
+        },
+        {
+          "candidate_id": "c_goal_search",
+          "text": "Goal: リポジトリ内を検索して該当箇所を探す",
+          "kind": "goal_search",
+          "rank": 5,
+          "cosine": 0.757295
+        },
+        {
+          "candidate_id": "c_role_followup",
+          "text": "Target Role: followup_investigation の追加調査",
+          "kind": "wrong_role",
+          "rank": 6,
+          "cosine": 0.755478
+        },
+        {
+          "candidate_id": "c_role_web",
+          "text": "Target Role: search_web のネット検索",
+          "kind": "role_web",
+          "rank": 7,
+          "cosine": 0.750561
+        },
+        {
+          "candidate_id": "c_focus_web",
+          "text": "Focus: search_web の検索クエリ",
+          "kind": "focus_web",
+          "rank": 8,
+          "cosine": 0.744296
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "persist_unit_gap",
+  "note": "時間・作業を挟む。最終質問は常に『この値の単位は？』。MATERIALS の最終は status=43.2。distractor に status / メモリ / 使用率 / 43.2 は書かない。",
+  "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "gaps": [0, 1, 4],
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "judge",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "judge",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "judge",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "final": {
+    "id": "unit",
+    "kind": "query",
+    "classify": "unit_ambiguous",
+    "question": "この値の単位は？",
+    "materials": {
+      "tool": {
+        "return_value": {
+          "status": 43.2
+        }
+      }
+    }
+  },
+  "distractors": [
+    {
+      "id": "d1",
+      "question": "1+1はいくつ？"
+    },
+    {
+      "id": "d2",
+      "question": "Pythonのリストとタプルの違いは一言で？"
+    },
+    {
+      "id": "d3",
+      "question": "次のJSONのキーはいくつ？ {\"a\": 1, \"b\": 2}"
+    },
+    {
+      "id": "d4",
+      "question": "ファイル名 backup.txt を backup.bak にする操作を一言で。"
+    },
+    {
+      "id": "d5",
+      "question": "未確認の取得方法は未実装と書く。今はそれだけ答えて。"
+    }
+  ]
+}

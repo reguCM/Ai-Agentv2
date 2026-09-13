@@ -1,0 +1,11 @@
+﻿case_id,query,API生件数,hit化件数,unique後,ranking後,return件数,LLM受領件数_live,LLM受領件数_stored,内容あり件数_return,内容なし件数_return,answer_use,drop_notes
+B05,Python tuple,3,3,3,3,3,3,3,0,3,判断不能,件数問題ではなく内容問題: return=3件だがsnippet非空=0
+C02,Ollama,18,15,14,3,3,3,3,1,2,明確に検索結果を利用,API生→hit化で減少: 18→15 | 重複除去: 15→14 | ranking/limit: 14→3 (return_limit=5)
+C03,GeForce RTX 3060,5,5,5,5,5,5,5,0,5,判断不能,件数問題ではなく内容問題: return=5件だがsnippet非空=0
+A04,NVIDIA,21,15,14,5,5,5,5,3,2,検索結果を利用した可能性が高い,API生→hit化で減少: 21→15 | 重複除去: 15→14 | ranking/limit: 14→5 (return_limit=5)
+A06,Python 3.13,1,1,1,1,1,1,1,0,1,判断不能,件数問題ではなく内容問題: return=1件だがsnippet非空=0 | returnが本当に1件（表示ラベル『検索結果1』とは別）
+C04,large language model,10,7,6,2,2,2,2,1,1,検索結果を利用した形跡が薄い,API生→hit化で減少: 10→7 | 重複除去: 7→6 | ranking/limit: 6→2 (return_limit=5)
+P02a,GeForce RTX 3060,5,5,5,5,5,5,5,0,5,判断不能,件数問題ではなく内容問題: return=5件だがsnippet非空=0
+E02,ChatGPT Plus,2,2,2,2,2,2,2,0,2,判断不能,件数問題ではなく内容問題: return=2件だがsnippet非空=0
+WB02,Docker (software),14,7,6,5,5,5,5,5,0,検索結果を利用した可能性が高い,API生→hit化で減少: 14→7 | 重複除去: 7→6 | ranking/limit: 6→5 (return_limit=5)
+A03,OpenAI,10,10,10,5,5,5,5,0,5,判断不能,ranking/limit: 10→5 (return_limit=5) | 件数問題ではなく内容問題: return=5件だがsnippet非空=0

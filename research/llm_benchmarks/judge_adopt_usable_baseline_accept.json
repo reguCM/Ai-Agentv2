@@ -1,0 +1,20 @@
+{
+  "note": "固定回帰基準。usable finding 採用 ACCEPT 3/3。上書きしない。契約変更時は judge_regression で確認。",
+  "frozen_at": "2026-08-19T05:48:06Z",
+  "source_run": "research/llm_benchmarks/judge_adopt_usable_results.json verify_gap_adopt_v5 session",
+  "contract_phase": "verify_gap_adopt_v5",
+  "pass_criterion": "ACCEPT",
+  "case": "judge_usable_usage_percent",
+  "profile": "deepseek_coder_v2_16b",
+  "model": "deepseek-coder-v2:16b",
+  "repeat": 3,
+  "pass": true,
+  "grades": {
+    "ACCEPT": 3
+  },
+  "trial_grades": ["ACCEPT", "ACCEPT", "ACCEPT"],
+  "summary": "sample=['48'] + misleading question + STATE 使用率/%。satisfies_request=true, missing=[]。",
+  "satisfies_request": true,
+  "missing_expected": [],
+  "misreject_forbidden": true
+}

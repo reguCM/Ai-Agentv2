@@ -1,0 +1,111 @@
+{
+  "experiment": "need_bypass_system_first_v0",
+  "run_id": "20260909T090850Z",
+  "production_modified": false,
+  "need_llm_called": false,
+  "grill_used": false,
+  "tool_executed": false,
+  "goal": "gridを検索して、その内容を要約してほしい。",
+  "initial_state": "まだ何も調査していない。",
+  "request_construction": {
+    "used_system_request": false,
+    "reason": "system_request は need 必須で Next need を必ず付ける。system_resolve は request_text のみで Need は必須ではない。今回は Need 工程をバイパスするため、Goal / Current State 見出しだけをsystem_request と同じ形式で組み立てた。"
+  },
+  "baseline": {
+    "path": "research/grill_observation_v0/resolver_owner_v0/runs/20260909T064802Z/case2/02_system_first.json",
+    "need": "gridの構造と内容を確認する。",
+    "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\nNext need:\ngridの構造と内容を確認する。\n",
+    "required_capabilities": [],
+    "capability_resolution": [
+      {
+        "required_capability": null,
+        "source_task_id": "T1",
+        "status": "NOT_NEEDED",
+        "capability_index_checked": false,
+        "registry_checked": false,
+        "candidate_tools": [],
+        "selected_tool": null,
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": null
+      }
+    ],
+    "selected_tool": null,
+    "next_action": null,
+    "unresolved_reason": "no_required_capability",
+    "label": "UNRESOLVED",
+    "action": null
+  },
+  "current": {
+    "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n",
+    "required_capabilities": [],
+    "capability_resolution": [
+      {
+        "required_capability": null,
+        "source_task_id": "T1",
+        "status": "NOT_NEEDED",
+        "capability_index_checked": false,
+        "registry_checked": false,
+        "candidate_tools": [],
+        "selected_tool": null,
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": null
+      }
+    ],
+    "selected_tool": null,
+    "next_action": null,
+    "unresolved_reason": "no_required_capability",
+    "label": "UNRESOLVED",
+    "action": null
+  },
+  "diff": {
+    "request_text_changed": true,
+    "required_capabilities_changed": false,
+    "selected_tool_changed": false,
+    "next_action_changed": false,
+    "unresolved_reason_changed": false
+  },
+  "verdict": "B",
+  "verdict_reason": "元Goalだけでも no_required_capability。Need 以前に System First / Capability 分類側に未解決点がある可能性を記録する。因果は断定しない。",
+  "summarize_resolution": {
+    "label": "UNRESOLVED",
+    "stopped_at": "no_required_capability",
+    "required_capabilities": [],
+    "resolutions": [
+      {
+        "required_capability": null,
+        "source_task_id": "T1",
+        "status": "NOT_NEEDED",
+        "capability_index_checked": false,
+        "registry_checked": false,
+        "candidate_tools": [],
+        "selected_tool": null,
+        "rejection_reasons": [],
+        "tool_gap_confirmed": false,
+        "evidence_ids": [],
+        "existing_candidates": [],
+        "missing_capability": null,
+        "suggested_minimal_tool": null,
+        "requires_human_approval": false,
+        "next_action": null
+      }
+    ],
+    "action": null,
+    "selected_capability": null,
+    "selected_tool": null,
+    "next_action": null,
+    "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n"
+  },
+  "elapsed_s": 0.027
+}

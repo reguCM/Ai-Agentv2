@@ -1,0 +1,958 @@
+{
+  "kind": "web_effect_llm_eval_self_check",
+  "ts": "2026-08-24T04:10:16.607401+00:00",
+  "model": "qwen3:8b",
+  "case_count": 11,
+  "original_eval_preserved": true,
+  "human_comparison_not_run": true,
+  "not_connected_to_agent_gate_pipeline": true,
+  "cases": [
+    {
+      "case_id": "B05",
+      "observation_id": "webeffect-hits-B05",
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "search_query": "Python tuple",
+      "hit_count": 3,
+      "has_content_count": 0,
+      "empty_content_count": 3,
+      "all_hits_empty": true,
+      "hits": [
+        {
+          "index": 1,
+          "title": "Python implementations",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/Python_implementations",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 2,
+          "title": "Python Unleashed",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/Python_Unleashed",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 3,
+          "title": "Python (nuclear primary)",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/Python_(nuclear_primary)",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "○ 有用",
+        "q1_reason": "Webなし回答と内容がほぼ一致し、必要情報は網羅しているが若干簡潔",
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "検索結果が本文なしで利用不可だったため回答品質に変化なし",
+        "q3_result_used_in_answer": "△ 利用したか不明",
+        "q5_preference": "WEBなし",
+        "q5_reason": "検索結果が本文なしで有用性が担保できないため",
+        "q6_search_result_issues": [
+          "本文なし",
+          "検索結果が少ない"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": false,
+        "usable_evidence_reason": "全検索結果が本文なし",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "？ 本文なし等で判断不能",
+        "q1_reason": "全検索結果が本文なし",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Web回答は簡潔で要点を明確にまとめている",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q3_reason": "Web回答は辞書キー利用の情報を使いこなしていない",
+        "q5_preference": "WEBあり",
+        "q5_reason": "簡潔でわかりやすい説明が可能"
+      },
+      "q1_rule_violation_candidate": true,
+      "q1_changed": true,
+      "recheck_reason": "原評価は全本文なしなのにQ1=◎/○（ルール違反候補）。独立Q1再評価で修正；Q1: '○ 有用' → '？ 本文なし等で判断不能'"
+    },
+    {
+      "case_id": "C02",
+      "observation_id": "webeffect-hits-C02",
+      "request": "Ollamaについて詳しく教えて",
+      "search_query": "Ollama",
+      "hit_count": 3,
+      "has_content_count": 1,
+      "empty_content_count": 2,
+      "all_hits_empty": false,
+      "hits": [
+        {
+          "index": 1,
+          "title": "Ollama",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/Ollama",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Ollama is an open-source software platform developed by Jeffrey Morgan and Michael Chiang in 2023 for running and managi…",
+          "body_len": 383
+        },
+        {
+          "index": 2,
+          "title": "Ollama",
+          "site": "ja.wikipedia.org",
+          "url": "https://ja.wikipedia.org/wiki/Ollama",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 3,
+          "title": "Ollamalitzli",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/Ollamalitzli",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webあり回答が検索結果から開発者情報やCLI/GUIなどの詳細を追加し、情報量が大幅に増加",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webなし回答にない「Jeffrey Morgan/Michael Chiangの開発者情報」「CLI/GUI/REST APIなどの機能詳細」を検索結果から追加",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "検索結果を活用した追加情報により回答の信頼性と詳細度が向上",
+        "q6_search_result_issues": [
+          "日本語情報不足",
+          "質問と無関係"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": true,
+        "usable_evidence_reason": "検索結果1に具体的な情報あり",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "検索結果1がOllamaの開発者・機能等を具体的に説明",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "開発者情報や具体的な機能（CLI/GUI/REST APIなど）を追加",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "開発者情報やモデル管理ツールなどの詳細情報が追加",
+        "q5_preference": "WEBあり",
+        "q5_reason": "具体的な機能説明と信頼性のある情報源（Wikipediaリンク）を含む"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": false,
+      "recheck_reason": "独立再評価実施（Q1変更なし）"
+    },
+    {
+      "case_id": "C03",
+      "observation_id": "webeffect-hits-C03",
+      "request": "RTX 3060って今どういう扱いですか？",
+      "search_query": "GeForce RTX 3060",
+      "hit_count": 5,
+      "has_content_count": 0,
+      "empty_content_count": 5,
+      "all_hits_empty": true,
+      "hits": [
+        {
+          "index": 1,
+          "title": "GeForce RTX 3060",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/GeForce_RTX_3060",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 2,
+          "title": "GeForce RTX 5070",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/GeForce_RTX_5070",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 3,
+          "title": "GeForce RTX 4050",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/GeForce_RTX_4050",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 4,
+          "title": "GeForce RTX 2060",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/GeForce_RTX_2060",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 5,
+          "title": "GeForce GTX 1060",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/GeForce_GTX_1060",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "回答はRTX 3060の基本スペックと市場状況を説明しており、質問への直接的な回答を提供",
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "Webあり回答は検索結果の不足を明記したが、質的内容の差異は限定的",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q5_preference": "WEBなし",
+        "q5_reason": "検索結果が不足していたため、Webなし回答の方が情報の信頼性が高い",
+        "q6_search_result_issues": [
+          "本文なし",
+          "情報が古い可能性"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": false,
+        "usable_evidence_reason": "全検索結果が本文なし",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "× ほぼ無用",
+        "q1_reason": "全検索結果が本文なし",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "情報が不足しているため、改善が難しい",
+        "q3_result_used_in_answer": "△ 利用したか不明",
+        "q3_reason": "検索結果の空欄により回答の信頼性が低下",
+        "q5_preference": "WEBなし",
+        "q5_reason": "具体的な性能比較や最新情報が不足している"
+      },
+      "q1_rule_violation_candidate": true,
+      "q1_changed": true,
+      "recheck_reason": "原評価は全本文なしなのにQ1=◎/○（ルール違反候補）。独立Q1再評価で修正；Q1: '◎ 十分に有用' → '× ほぼ無用'"
+    },
+    {
+      "case_id": "A04",
+      "observation_id": "webeffect-hits-A04",
+      "request": "今のNVIDIAの株価の雰囲気を教えて",
+      "search_query": "NVIDIA",
+      "hit_count": 5,
+      "has_content_count": 3,
+      "empty_content_count": 2,
+      "all_hits_empty": false,
+      "hits": [
+        {
+          "index": 1,
+          "title": "Nvidia",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/Nvidia",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Nvidia Corporation is an American multinational technology company headquartered in Santa Clara, California. The company…",
+          "body_len": 400
+        },
+        {
+          "index": 2,
+          "title": "Nvidia Category",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/c/Nvidia",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Nvidia Category",
+          "body_len": 15
+        },
+        {
+          "index": 3,
+          "title": "Nvidia Parabricks – GPU-accelerated genomics toolkit.",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Nvidia_Parabricks",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Nvidia Parabricks – GPU-accelerated genomics toolkit.",
+          "body_len": 53
+        },
+        {
+          "index": 4,
+          "title": "NVIDIA",
+          "site": "ja.wikipedia.org",
+          "url": "https://ja.wikipedia.org/wiki/NVIDIA",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 5,
+          "title": "NVIDIA GeForce",
+          "site": "ja.wikipedia.org",
+          "url": "https://ja.wikipedia.org/wiki/NVIDIA_GeForce",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "○ 有用",
+        "q1_reason": "Webなし回答はAI分野の成長を背景に株価が上昇していると述べているが、具体的な数値や最新情報は含まれていない",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webあり回答は検索結果に株価情報が含まれていないことを明示し、正確な情報提供を図っている",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "Webあり回答が検索結果の制約を正直に伝えているため信頼性が高い",
+        "q6_search_result_issues": [
+          "本文なし",
+          "日本語情報不足",
+          "検索結果が少ない"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": false,
+        "usable_evidence_reason": "本文なしまたは質問と無関係",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "× ほぼ無用",
+        "q1_reason": "検索結果が株価や市場の雰囲気に関する具体的情報を含んでいない",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webあり回答は検索結果の欠如を正直に伝えることで信頼性向上",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q3_reason": "Webあり回答は検索結果が無いため利用不可",
+        "q5_preference": "WEBあり",
+        "q5_reason": "検索結果の欠如を明示した誠実さが優れている"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": true,
+      "recheck_reason": "Q1: '○ 有用' → '× ほぼ無用'"
+    },
+    {
+      "case_id": "A06",
+      "observation_id": "webeffect-hits-A06",
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "search_query": "Python 3.13",
+      "hit_count": 1,
+      "has_content_count": 0,
+      "empty_content_count": 1,
+      "all_hits_empty": true,
+      "hits": [
+        {
+          "index": 1,
+          "title": "Python 3.0",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/Python_3.0",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "× ほぼ無用",
+        "q1_reason": "検索結果がPython 3.0に関する情報で、質問のPython 3.13とは無関係",
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "Webあり回答は検索結果の不足を明示したが、質問への回答は依然として不十分",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q5_preference": "WEBなし",
+        "q5_reason": "検索結果が質問と関係ないため、Web情報を活用する意義が薄い",
+        "q6_search_result_issues": [
+          "情報が古い可能性",
+          "検索結果が少ない"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": false,
+        "usable_evidence_reason": "本文なし",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "× ほぼ無用",
+        "q1_reason": "本文なし",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "× 劣化",
+        "q2_reason": "Webあり回答は検索結果の欠如を明示したが、内容的に改善点が存在しない",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q3_reason": "Webあり回答は検索結果を一切参照していない",
+        "q5_preference": "WEBなし",
+        "q5_reason": "Webなし回答が具体的な変更点を記載している"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": false,
+      "recheck_reason": "独立再評価実施（Q1変更なし）"
+    },
+    {
+      "case_id": "C05",
+      "observation_id": "webeffect-hits-C05",
+      "request": "この手のエージェントって今どこまで実用的なの",
+      "search_query": "AI agent",
+      "hit_count": 5,
+      "has_content_count": 4,
+      "empty_content_count": 1,
+      "all_hits_empty": false,
+      "hits": [
+        {
+          "index": 1,
+          "title": "AI agent",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/AI_agent",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "An AI agent or agentic AI is an artificial intelligence program that can pursue goals, use software or other tools, and …",
+          "body_len": 400
+        },
+        {
+          "index": 2,
+          "title": "Rational agent - A rational agent or rational being is a person or entity that always aims to perform optimal actions based on given premises and information. A rational agent can be anything that mak",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Rational_agent",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Rational agent - A rational agent or rational being is a person or entity that always aims to perform optimal actions ba…",
+          "body_len": 261
+        },
+        {
+          "index": 3,
+          "title": "Robotic process automation - Robotic process automation is a form of business process automation that is based on software robots or artificial intelligence agents. RPA should not be confused with art",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Robotic_process_automation",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Robotic process automation - Robotic process automation is a form of business process automation that is based on softwa…",
+          "body_len": 293
+        },
+        {
+          "index": 4,
+          "title": "Software agent - In computer science, a software agent is a computer program that acts for a user or another program in a relationship of agency. The term agent is derived from the Latin agere: an agr",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Software_agent",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Software agent - In computer science, a software agent is a computer program that acts for a user or another program in …",
+          "body_len": 230
+        },
+        {
+          "index": 5,
+          "title": "AIR AGENCY",
+          "site": "ja.wikipedia.org",
+          "url": "https://ja.wikipedia.org/wiki/AIR_AGENCY",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webあり回答が検索結果の具体例（RPA、Rational Agentなど）を活用して詳細な実用例を提示",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webなし回答の抽象的説明から、検索結果の具体例をもとに実用シーンを明確化",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "検索結果を活用した具体例が説得力ある実用性説明を可能にする",
+        "q6_search_result_issues": [
+          "本文なし",
+          "日本語情報不足",
+          "検索結果が少ない"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": true,
+        "usable_evidence_reason": "検索結果3がRPAにおけるAIエージェントの実用例を示す",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "○ 有用",
+        "q1_reason": "検索結果3が実用例を含むため",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webあり回答が具体的な例と分類を加え、説明が明確になったため",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "Webあり回答が具体的な例と分類を加え、検索結果を活用していると推定される",
+        "q5_preference": "WEBあり",
+        "q5_reason": "Webあり回答がより詳細で構造化されており、実用性の説明が明確なため"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": true,
+      "recheck_reason": "Q1: '◎ 十分に有用' → '○ 有用'"
+    },
+    {
+      "case_id": "WB01",
+      "observation_id": "webeffect-hits-WB01",
+      "request": "Gitとは何かを初心者向けに説明して",
+      "search_query": "Git",
+      "hit_count": 5,
+      "has_content_count": 3,
+      "empty_content_count": 2,
+      "all_hits_empty": false,
+      "hits": [
+        {
+          "index": 1,
+          "title": "Git A distributed version control software system that is capable of managing versions of source...",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Git",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Git A distributed version control software system that is capable of managing versions of source...",
+          "body_len": 99
+        },
+        {
+          "index": 2,
+          "title": "Git (pronoun) A pronoun in Old English.",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Git_(pronoun)",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Git (pronoun) A pronoun in Old English.",
+          "body_len": 39
+        },
+        {
+          "index": 3,
+          "title": "Git (slang) A term of insult denoting an unpleasant, silly, incompetent, annoying, senile, elderly or...",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Git_(slang)",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Git (slang) A term of insult denoting an unpleasant, silly, incompetent, annoying, senile, elderly or...",
+          "body_len": 104
+        },
+        {
+          "index": 4,
+          "title": "Git",
+          "site": "ja.wikipedia.org",
+          "url": "https://ja.wikipedia.org/wiki/Git",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        },
+        {
+          "index": 5,
+          "title": "GitHub",
+          "site": "ja.wikipedia.org",
+          "url": "https://ja.wikipedia.org/wiki/GitHub",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "× ほぼ無用",
+        "q1_reason": "検索結果の本文が全て空または不適切で、有用な情報が得られなかった",
+        "q2_web_improvement": "△ ほぼ変化なし",
+        "q2_reason": "Webあり回答は短縮されただけで、質的な改善は見られず",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q5_preference": "WEBなし",
+        "q5_reason": "Webあり回答のリンク先が不適切なため信頼性が欠如",
+        "q6_search_result_issues": [
+          "質問と無関係",
+          "英語のみ",
+          "日本語情報不足"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": false,
+        "usable_evidence_reason": "本文なしまたは質問と無関係",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "× ほぼ無用",
+        "q1_reason": "検索結果の本文が不完全または関連性がない",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "× 劣化",
+        "q2_reason": "Webあり回答は短く浅い説明にとどまり、Webなし回答の詳細な説明を欠いている",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q3_reason": "Webあり回答の本文は検索結果を直接利用していない（リンクのみ）",
+        "q5_preference": "WEBなし",
+        "q5_reason": "Webなし回答がより具体的で説明が充実している"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": false,
+      "recheck_reason": "独立再評価実施（Q1変更なし）"
+    },
+    {
+      "case_id": "WB02",
+      "observation_id": "webeffect-hits-WB02",
+      "request": "Dockerコンテナの基本的な考え方を教えて",
+      "search_query": "Docker (software)",
+      "hit_count": 5,
+      "has_content_count": 5,
+      "empty_content_count": 0,
+      "all_hits_empty": false,
+      "hits": [
+        {
+          "index": 1,
+          "title": "Docker (software)",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/Docker_(software)",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Docker is a set of products that uses operating system-level virtualization to deliver software in packages called conta…",
+          "body_len": 400
+        },
+        {
+          "index": 2,
+          "title": "DevOps - DevOps is the integration and automation of software development and information technology operations. DevOps encompasses the tasks necessary for software development and can lead to both sh",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/DevOps",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "DevOps - DevOps is the integration and automation of software development and information technology operations. DevOps …",
+          "body_len": 267
+        },
+        {
+          "index": 3,
+          "title": "DevOps toolchain - A DevOps toolchain is a set or combination of tools that aid in the delivery, development, and management of software applications throughout the systems development life cycle, as",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/DevOps_toolchain",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "DevOps toolchain - A DevOps toolchain is a set or combination of tools that aid in the delivery, development, and manage…",
+          "body_len": 258
+        },
+        {
+          "index": 4,
+          "title": "Kubernetes - Kubernetes, also known as K8s, is an open-source container orchestration system for automating software deployment, scaling, and management.",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Kubernetes",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Kubernetes - Kubernetes, also known as K8s, is an open-source container orchestration system for automating software dep…",
+          "body_len": 153
+        },
+        {
+          "index": 5,
+          "title": "Microservices - In software engineering, a microservice architecture is an architectural pattern that organizes an application into a collection of loosely coupled, fine-grained services that communic",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Microservices",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Microservices - In software engineering, a microservice architecture is an architectural pattern that organizes an appli…",
+          "body_len": 234
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webあり回答が検索結果のDocker Engineやリリース年などの具体的な情報を含むため",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webなし回答に比べて検索結果の詳細な情報を加えて説明が深化している",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "検索結果を活用したより正確な情報提供が可能",
+        "q6_search_result_issues": [
+          "質問と無関係",
+          "検索結果が少ない"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": true,
+        "usable_evidence_reason": "検索結果1にDockerの基本概念（コンテナ、Docker Engine）が具体的に記載",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "検索結果1がDockerコンテナの基本的な考え方を直接説明",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "× 劣化",
+        "q2_reason": "Webあり回答は短く浅い説明にとどまり、Webなし回答より情報量が劣る",
+        "q3_result_used_in_answer": "× 利用していない",
+        "q3_reason": "Webあり回答に検索結果の要素が見られず、回答の詳細度が低下している",
+        "q5_preference": "WEBなし",
+        "q5_reason": "Webなし回答がより詳細で構造化されており、品質が優れている"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": false,
+      "recheck_reason": "独立再評価実施（Q1変更なし）"
+    },
+    {
+      "case_id": "WB04",
+      "observation_id": "webeffect-hits-WB04",
+      "request": "JSONとは何か、何に使うかを教えて",
+      "search_query": "JSON",
+      "hit_count": 5,
+      "has_content_count": 5,
+      "empty_content_count": 0,
+      "all_hits_empty": false,
+      "hits": [
+        {
+          "index": 1,
+          "title": "JSON",
+          "site": "en.wikipedia.org",
+          "url": "https://en.wikipedia.org/wiki/JSON",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit dat…",
+          "body_len": 400
+        },
+        {
+          "index": 2,
+          "title": "JSON Category",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/c/JSON",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "JSON Category",
+          "body_len": 13
+        },
+        {
+          "index": 3,
+          "title": "BSON - BSON is a computer data interchange format extending JSON. It is a binary form for representing simple or complex data structures including associative arrays, integer indexed arrays, and a sui",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/BSON",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "BSON - BSON is a computer data interchange format extending JSON. It is a binary form for representing simple or complex…",
+          "body_len": 231
+        },
+        {
+          "index": 4,
+          "title": "Jackson (API) - In computing, Jackson is a high-performance JSON processor for Java. Its developers extol the combination of fast, correct, lightweight, and ergonomic attributes of the library.",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Jackson_(API)",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Jackson (API) - In computing, Jackson is a high-performance JSON processor for Java. Its developers extol the combinatio…",
+          "body_len": 193
+        },
+        {
+          "index": 5,
+          "title": "jaql – a functional data processing and query language most commonly used for JSON query processing.",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/jaql",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "jaql – a functional data processing and query language most commonly used for JSON query processing.",
+          "body_len": 100
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webなし回答がJSONの定義・用途・特徴を網羅的に説明",
+        "q2_web_improvement": "○ 改善",
+        "q2_reason": "Webあり回答が参考リンクを追加するなど補完的",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q5_preference": "WEBなし",
+        "q5_reason": "Webなし回答が自立的で補足情報不要",
+        "q6_search_result_issues": [
+          "本文なし",
+          "日本語情報不足",
+          "検索結果が少ない"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": true,
+        "usable_evidence_reason": "検索結果1に具体的な定義と用途が記載されている",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "検索結果1がJSONの定義と用途を具体的に説明している",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "参考リンクの追加で補足情報が得られる",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "参考リンクを含むため",
+        "q5_preference": "WEBあり",
+        "q5_reason": "参考リンクにより情報の信頼性が高まった"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": false,
+      "recheck_reason": "独立再評価実施（Q1変更なし）"
+    },
+    {
+      "case_id": "WB07",
+      "observation_id": "webeffect-hits-WB07",
+      "request": "CUDAとは何かを説明して",
+      "search_query": "CUDA",
+      "hit_count": 5,
+      "has_content_count": 4,
+      "empty_content_count": 1,
+      "all_hits_empty": false,
+      "hits": [
+        {
+          "index": 1,
+          "title": "Emilce Cuda An Argentine Catholic theologian, university professor, and Roman Curia official.",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Emilce_Cuda",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Emilce Cuda An Argentine Catholic theologian, university professor, and Roman Curia official.",
+          "body_len": 93
+        },
+        {
+          "index": 2,
+          "title": "CUDA A proprietary parallel computing platform and application programming interface developed by...",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/CUDA",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "CUDA A proprietary parallel computing platform and application programming interface developed by...",
+          "body_len": 100
+        },
+        {
+          "index": 3,
+          "title": "Barracuda Networks Barracuda Networks, Inc. provides security, networking and storage products based on network...",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Barracuda_Networks",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Barracuda Networks Barracuda Networks, Inc. provides security, networking and storage products based on network...",
+          "body_len": 114
+        },
+        {
+          "index": 4,
+          "title": "Plymouth Barracuda A two-door pony car that was manufactured by Chrysler Corporation from 1964 through 1974 model...",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Plymouth_Barracuda",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Plymouth Barracuda A two-door pony car that was manufactured by Chrysler Corporation from 1964 through 1974 model...",
+          "body_len": 116
+        },
+        {
+          "index": 5,
+          "title": "CUDA",
+          "site": "ja.wikipedia.org",
+          "url": "https://ja.wikipedia.org/wiki/CUDA",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webなし回答がすでにCUDAの定義と用途を十分に説明している",
+        "q2_web_improvement": "○ 改善",
+        "q2_reason": "Webあり回答がWikipediaリンクを追加したが、検索結果の実質的な情報は利用されていない",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "追加情報の参照先を明示的に提示している",
+        "q6_search_result_issues": [
+          "日本語情報不足",
+          "検索結果が少ない"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": true,
+        "usable_evidence_reason": "検索結果2にCUDAの説明あり",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "○ 有用",
+        "q1_reason": "検索結果2にCUDAの定義が含まれている",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "○ 改善",
+        "q2_reason": "Webあり回答は簡潔だが詳細情報が不足",
+        "q3_result_used_in_answer": "◎ 明確に利用している",
+        "q3_reason": "Wikipediaリンクを明示的に含む",
+        "q5_preference": "WEBなし",
+        "q5_reason": "詳細な説明が含まれている"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": true,
+      "recheck_reason": "Q1: '◎ 十分に有用' → '○ 有用'"
+    },
+    {
+      "case_id": "WB12",
+      "observation_id": "webeffect-hits-WB12",
+      "request": "Linuxとは何かを概要で教えて",
+      "search_query": "Linux",
+      "hit_count": 5,
+      "has_content_count": 4,
+      "empty_content_count": 1,
+      "all_hits_empty": false,
+      "hits": [
+        {
+          "index": 1,
+          "title": "Linux A family of open-source Unix-like operating systems based on the Linux kernel, an operating...",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Linux",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Linux A family of open-source Unix-like operating systems based on the Linux kernel, an operating...",
+          "body_len": 100
+        },
+        {
+          "index": 2,
+          "title": "Linux kernel A free and open-source, monolithic, modular, multitasking, Unix-like operating system kernel.",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Linux_kernel",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Linux kernel A free and open-source, monolithic, modular, multitasking, Unix-like operating system kernel.",
+          "body_len": 106
+        },
+        {
+          "index": 3,
+          "title": "9885 Linux An asteroid.",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/9885_Linux",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "9885 Linux An asteroid.",
+          "body_len": 23
+        },
+        {
+          "index": 4,
+          "title": "Linux distribution An operating system made from a software collection that includes the Linux kernel, and often a...",
+          "site": "duckduckgo.com",
+          "url": "https://duckduckgo.com/Linux_distribution",
+          "content_status": "available",
+          "content_class": "has_content",
+          "body_preview": "Linux distribution An operating system made from a software collection that includes the Linux kernel, and often a...",
+          "body_len": 117
+        },
+        {
+          "index": 5,
+          "title": "Linux",
+          "site": "ja.wikipedia.org",
+          "url": "https://ja.wikipedia.org/wiki/Linux",
+          "content_status": "empty",
+          "content_class": "empty_content",
+          "body_preview": "",
+          "body_len": 0
+        }
+      ],
+      "original_llm_evaluation": {
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "Webあり回答がカーネルの特性やディストリビューションの詳細を追加し、説明がより具体的になった",
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "Webなし回答にない「モノリシック」「モジュール化可能」「マルチタスク処理」などの技術的詳細を追加",
+        "q3_result_used_in_answer": "○ 一部利用している",
+        "q5_preference": "WEBあり",
+        "q5_reason": "技術的詳細の追加により説明の質が向上している",
+        "q6_search_result_issues": [
+          "質問と無関係",
+          "本文なし"
+        ]
+      },
+      "recheck_llm_evaluation": {
+        "usable_evidence": true,
+        "usable_evidence_reason": "検索結果1・2・4にLinuxの定義や関連概念が含まれる",
+        "mechanical_usable_evidence_override": false,
+        "q1_search_usefulness": "◎ 十分に有用",
+        "q1_reason": "検索結果1・2・4にLinuxの定義や関連概念が含まれており、質問への回答に十分な情報が得られる",
+        "q1_before_consistency_fix": null,
+        "q1_consistency_note": null,
+        "q2_web_improvement": "◎ 明確に改善",
+        "q2_reason": "カーネルのモノリシック・モジュール化・マルチタスク処理の技術的詳細を追加",
+        "q3_result_used_in_answer": "△ 利用したか不明",
+        "q3_reason": "回答テキストの差分から検索結果の利用が明確でない",
+        "q5_preference": "WEBなし",
+        "q5_reason": "歴史的背景・GNUプロジェクト・ディストリビューションの具体例を網羅している"
+      },
+      "q1_rule_violation_candidate": false,
+      "q1_changed": false,
+      "recheck_reason": "独立再評価実施（Q1変更なし）"
+    }
+  ]
+}

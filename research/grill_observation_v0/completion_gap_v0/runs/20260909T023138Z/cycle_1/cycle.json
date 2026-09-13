@@ -1,0 +1,99 @@
+{
+  "gap": "テトロミノの形状と初期配置の実装",
+  "classification_this_cycle": "adopted_from_previous_NEXT",
+  "focus": {
+    "gap": "テトロミノの形状と初期配置の実装",
+    "minimum_focus": [
+      "I,O,T,S,Z,J,L as 2D arrays",
+      "rotate by reverse+transpose",
+      "spawn at y=0,x=0"
+    ],
+    "assets": [
+      "technical spec item 形状と初期配置",
+      "Stage 1.5 isolation (workspace only)"
+    ],
+    "vertical_map": false,
+    "horizontal_map": false,
+    "focus_expanded": false,
+    "expand_reason": null,
+    "minimum_sufficient_focus": "tetromino.py SHAPES/rotate/spawn only; no pygame, no collision, no draw"
+  },
+  "test_result": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "D:\\AI-Agent-worktrees\\current-dev\\research\\grill_observation_v0\\completion_gap_v0\\tests\\test_tetromino_gap.py",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "...                                                                      [100%]\n3 passed in 0.02s\n",
+    "stderr": "",
+    "passed": true
+  },
+  "evidence": {
+    "changed_files": [
+      "workspace/tetromino.py",
+      "tests/test_tetromino_gap.py",
+      "stage2_lib.py"
+    ],
+    "elapsed_s_grill": 28.854
+  },
+  "current_state": {
+    "kind": "observed_facts",
+    "experiment_workspace": "D:\\AI-Agent-worktrees\\current-dev\\research\\grill_observation_v0\\completion_gap_v0\\workspace",
+    "files_in_workspace": [
+      "__init__.py",
+      "tetromino.py",
+      "window_loop.py"
+    ],
+    "python_modules": [
+      {
+        "file": "__init__.py",
+        "functions": [],
+        "simple_constants": {}
+      },
+      {
+        "file": "tetromino.py",
+        "functions": [
+          "rotate",
+          "spawn"
+        ],
+        "simple_constants": {}
+      },
+      {
+        "file": "window_loop.py",
+        "functions": [
+          "init_window",
+          "handle_events",
+          "update",
+          "draw",
+          "run_one_iteration",
+          "shutdown",
+          "run_forever"
+        ],
+        "simple_constants": {
+          "SCREEN_WIDTH": 300,
+          "SCREEN_HEIGHT": 600
+        }
+      }
+    ],
+    "python": "3.10.11",
+    "pygame_import_ok": true,
+    "pygame_version": "2.5.0",
+    "tests": {
+      "ran": true,
+      "passed": true,
+      "stdout": "...                                                                      [100%]\n3 passed in 0.02s\n"
+    },
+    "errors": [],
+    "completed_gaps": [
+      "ゲームウィンドウの初期化と基本的なゲームループ",
+      "テトロミノの形状と初期配置の実装"
+    ],
+    "last_completed_gap": "テトロミノの形状と初期配置の実装",
+    "note": "Facts from workspace files and test process. No inferred features."
+  },
+  "next_classification": "NEXT",
+  "next_gap": "は「衝突判定の実装」です。"
+}

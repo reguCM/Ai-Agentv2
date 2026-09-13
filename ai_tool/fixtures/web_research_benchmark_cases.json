@@ -1,0 +1,308 @@
+[
+  {
+    "case_id": "WRB-L01",
+    "category": "B01",
+    "label": "Osaka population",
+    "query": "大阪市の人口",
+    "user_request": "大阪市の人口をWeb検索しread_url_textで確認してください。",
+    "live": true,
+    "expected_facts": [
+      {
+        "fact_id": "osaka_pop",
+        "fact_type": "numeric",
+        "evidence_patterns": ["2[,，]?7[0-9]{2}", "275", "272", "人口"],
+        "answer_patterns": ["275|272|2[,，]?7"],
+        "numeric_min": 2500000,
+        "numeric_max": 2900000
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC",
+    "expected_source_hint": "wikipedia"
+  },
+  {
+    "case_id": "WRB-L02",
+    "category": "B01",
+    "label": "Japan capital",
+    "query": "日本の首都",
+    "user_request": "日本の首都はどこですか。Web検索しread_url_textで確認してください。",
+    "live": true,
+    "expected_facts": [
+      {
+        "fact_id": "capital",
+        "fact_type": "entity",
+        "evidence_patterns": ["東京", "東京都"],
+        "answer_patterns": ["東京"]
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC",
+    "expected_source_hint": "wikipedia"
+  },
+  {
+    "case_id": "WRB-L03",
+    "category": "B04",
+    "label": "Yokohama entity",
+    "query": "横浜市 人口",
+    "user_request": "横浜市の人口をWeb検索しread_url_textで確認してください。",
+    "live": true,
+    "expected_facts": [
+      {
+        "fact_id": "yokohama_pop",
+        "fact_type": "numeric",
+        "evidence_patterns": ["375", "3[,，]?7[0-9]", "人口"],
+        "answer_patterns": ["375|3[,，]?7"],
+        "numeric_min": 3500000,
+        "numeric_max": 4000000
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC",
+    "expected_source_hint": "wikipedia"
+  },
+  {
+    "case_id": "WRB-L04",
+    "category": "B02",
+    "label": "Japan area",
+    "query": "日本 国土面積",
+    "user_request": "日本の国土面積をWeb検索しread_url_textで確認してください。",
+    "live": true,
+    "expected_facts": [
+      {
+        "fact_id": "japan_area",
+        "fact_type": "numeric",
+        "evidence_patterns": ["377", "378", "km", "平方"],
+        "answer_patterns": ["377|378"],
+        "numeric_min": 370000,
+        "numeric_max": 380000
+      }
+    ],
+    "judgment_mode": "PARTIAL",
+    "expected_source_hint": "wikipedia"
+  },
+  {
+    "case_id": "WRB-L05",
+    "category": "B05",
+    "label": "Osaka population English",
+    "query": "Osaka city population",
+    "user_request": "What is the population of Osaka? Search and read_url_text.",
+    "live": true,
+    "expected_facts": [
+      {
+        "fact_id": "osaka_en",
+        "fact_type": "numeric",
+        "evidence_patterns": ["million", "population", "2\\.7", "275"],
+        "answer_patterns": ["million|275|2\\.7"],
+        "numeric_min": 2500000,
+        "numeric_max": 2900000
+      }
+    ],
+    "judgment_mode": "PARTIAL",
+    "expected_source_hint": "wikipedia"
+  },
+  {
+    "case_id": "WRB-L06",
+    "category": "B06",
+    "label": "Non-Wikipedia attempt",
+    "query": "総務省 統計 日本 人口",
+    "user_request": "日本の人口について総務省など非WikipediaソースをWeb検索しread_url_textで確認してください。",
+    "live": true,
+    "expected_facts": [
+      {
+        "fact_id": "japan_pop",
+        "fact_type": "numeric",
+        "evidence_patterns": ["1[,，]?2[0-9]{2}", "億", "人口", "million"],
+        "answer_patterns": ["1[,.]?2|億|million"],
+        "numeric_min": 120000000,
+        "numeric_max": 130000000
+      }
+    ],
+    "judgment_mode": "MANUAL_REQUIRED",
+    "expected_source_hint": "gov_or_stats"
+  },
+  {
+    "case_id": "WRB-L07",
+    "category": "B07",
+    "label": "Largest city comparative",
+    "query": "日本 人口 最多 都市",
+    "user_request": "日本で最も人口が多い都市はどこですか。Web検索しread_url_textで確認してください。",
+    "live": true,
+    "expected_facts": [
+      {
+        "fact_id": "largest",
+        "fact_type": "comparison",
+        "evidence_patterns": ["横浜", "375", "最多", "人口"],
+        "answer_patterns": ["横浜"]
+      }
+    ],
+    "judgment_mode": "PARTIAL",
+    "expected_source_hint": "wikipedia"
+  },
+  {
+    "case_id": "WRB-F01",
+    "category": "B01",
+    "label": "Fixture capital",
+    "query": "日本の首都",
+    "user_request": "日本の首都はどこですか。",
+    "live": false,
+    "fixture_search_url": "https://fixture.local/capital",
+    "fixture_html": "<html><body><main><h1>日本の首都</h1><p>日本の首都は東京（東京都）です。</p></main></body></html>",
+    "expected_facts": [
+      {
+        "fact_id": "capital",
+        "fact_type": "entity",
+        "evidence_patterns": ["東京"],
+        "answer_patterns": ["東京"]
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC"
+  },
+  {
+    "case_id": "WRB-F02",
+    "category": "B02",
+    "label": "Fixture osaka numeric",
+    "query": "大阪市 人口",
+    "user_request": "大阪市の人口",
+    "live": false,
+    "fixture_search_url": "https://fixture.local/osaka",
+    "fixture_html": "<html><body><main><h1>大阪市</h1><p>人口は約275万人（2,750,000人）です。</p></main></body></html>",
+    "expected_facts": [
+      {
+        "fact_id": "osaka_pop",
+        "fact_type": "numeric",
+        "evidence_patterns": ["275", "2[,，]?750"],
+        "answer_patterns": ["275|2[,，]?750"],
+        "numeric_min": 2500000,
+        "numeric_max": 2900000
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC"
+  },
+  {
+    "case_id": "WRB-F03",
+    "category": "B03",
+    "label": "Fixture temporal 2020",
+    "query": "大阪市 2020 人口",
+    "user_request": "2020年の大阪市人口",
+    "live": false,
+    "fixture_search_url": "https://fixture.local/osaka2020",
+    "fixture_html": "<html><body><main><p>2020年国勢調査: 2,752,412人</p></main></body></html>",
+    "expected_facts": [
+      {
+        "fact_id": "pop2020",
+        "fact_type": "numeric",
+        "evidence_patterns": ["2020", "2[,，]?752"],
+        "answer_patterns": ["2020|2752"],
+        "numeric_min": 2700000,
+        "numeric_max": 2800000
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC"
+  },
+  {
+    "case_id": "WRB-F04",
+    "category": "B06",
+    "label": "Fixture non-wiki",
+    "query": "デモ市 統計",
+    "user_request": "非Wikipedia統計ページ",
+    "live": false,
+    "fixture_search_url": "https://stats.example.gov/demo",
+    "fixture_html": "<html><body><main><h1>Demo Municipality</h1><p>Registered population: 1,234,567. Land area: 156.8 km².</p></main></body></html>",
+    "expected_facts": [
+      {
+        "fact_id": "demo_pop",
+        "fact_type": "numeric",
+        "evidence_patterns": ["1[,，]?234[,，]?567"],
+        "answer_patterns": ["1[,，]?234"],
+        "numeric_min": 1200000,
+        "numeric_max": 1300000
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC"
+  },
+  {
+    "case_id": "WRB-F05",
+    "category": "B07",
+    "label": "Fixture comparative",
+    "query": "日本 最多 人口 都市",
+    "user_request": "最大都市",
+    "live": false,
+    "fixture_search_url": "https://fixture.local/cities",
+    "fixture_html": "<html><body><main><p>人口最多は横浜市（約375.9万人）。2位大阪市、3位名古屋市。</p></main></body></html>",
+    "expected_facts": [
+      {
+        "fact_id": "largest",
+        "fact_type": "comparison",
+        "evidence_patterns": ["横浜", "375"],
+        "answer_patterns": ["横浜"]
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC"
+  },
+  {
+    "case_id": "WRB-F06",
+    "category": "B08",
+    "label": "Fixture multi-fact composite",
+    "query": "大阪市 面積 人口",
+    "user_request": "大阪市の面積と人口",
+    "live": false,
+    "fixture_search_url": "https://fixture.local/osaka-composite",
+    "fixture_html": "<html><body><main><p>大阪市: 面積225.21km²、人口2,750,000人。</p></main></body></html>",
+    "expected_facts": [
+      {
+        "fact_id": "osaka_area",
+        "fact_type": "numeric",
+        "evidence_patterns": ["225", "km"],
+        "answer_patterns": ["225"],
+        "numeric_min": 200,
+        "numeric_max": 250
+      },
+      {
+        "fact_id": "osaka_pop",
+        "fact_type": "numeric",
+        "evidence_patterns": ["275", "2[,，]?750"],
+        "answer_patterns": ["275|750"],
+        "numeric_min": 2500000,
+        "numeric_max": 2900000
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC"
+  },
+  {
+    "case_id": "WRB-F07",
+    "category": "B05",
+    "label": "Fixture English",
+    "query": "Osaka population",
+    "user_request": "Osaka population in English",
+    "live": false,
+    "fixture_search_url": "https://fixture.local/osaka-en",
+    "fixture_html": "<html><body><main><p>Osaka has a population of approximately 2.75 million people.</p></main></body></html>",
+    "expected_facts": [
+      {
+        "fact_id": "osaka_en",
+        "fact_type": "numeric",
+        "evidence_patterns": ["2\\.75\\s*million", "population"],
+        "answer_patterns": ["million|2\\.75"],
+        "numeric_min": 2500000,
+        "numeric_max": 2900000
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC"
+  },
+  {
+    "case_id": "WRB-F08",
+    "category": "B04",
+    "label": "Fixture organization entity",
+    "query": "国立天文台 本部",
+    "user_request": "国立天文台本部所在地",
+    "live": false,
+    "fixture_search_url": "https://fixture.local/nao",
+    "fixture_html": "<html><body><main><p>国立天文台の本部は東京都三鷹市に所在します。</p></main></body></html>",
+    "expected_facts": [
+      {
+        "fact_id": "nao_hq",
+        "fact_type": "entity",
+        "evidence_patterns": ["三鷹"],
+        "answer_patterns": ["三鷹"]
+      }
+    ],
+    "judgment_mode": "DETERMINISTIC"
+  }
+]

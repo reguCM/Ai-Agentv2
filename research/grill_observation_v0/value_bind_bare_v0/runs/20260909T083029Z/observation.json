@@ -1,0 +1,37 @@
+{
+  "experiment": "value_bind_bare_v0",
+  "run_id": "20260909T083029Z",
+  "model": "qwen3:14b",
+  "production_modified": false,
+  "runtime_used": false,
+  "grill_used": false,
+  "capability_resolution_used": false,
+  "help_used": false,
+  "tool_executed": false,
+  "confirmed_text": "gridを検索して、その内容を要約してほしい。",
+  "role": "検索対象を表す文字列",
+  "prompt": "確認済み文章:\ngridを検索して、その内容を要約してほしい。\n\n求める値の役割:\n検索対象を表す文字列\n\n依頼:\n以下の確認済み文章から、\n指定された役割に対応する値を決められる場合は、\n文章中に実際に存在する文字列をそのまま返してください。\n\n確認済み文章だけでは決められない場合は\nUNRESOLVED を返してください。\n\n文章に存在しない値を作らないでください。\n\n出力はこのJSONオブジェクト1つのみ。説明文は付けない。\n\n{\n  \"status\": \"PROPOSED または UNRESOLVED\",\n  \"value\": \"文字列 または null\",\n  \"source_text\": \"確認済み文章からの抜粋 または null\",\n  \"reason\": \"短い説明\"\n}\n\nstatus が UNRESOLVED のとき value と source_text は null。\n",
+  "raw": "{\n  \"status\": \"PROPOSED\",\n  \"value\": \"grid\",\n  \"source_text\": \"gridを検索して、その内容を要約してほしい。\",\n  \"reason\": \"検索対象として明示的に記述されている\"\n}",
+  "visible": "{\n  \"status\": \"PROPOSED\",\n  \"value\": \"grid\",\n  \"source_text\": \"gridを検索して、その内容を要約してほしい。\",\n  \"reason\": \"検索対象として明示的に記述されている\"\n}",
+  "parse_error": null,
+  "parsed_output": {
+    "status": "PROPOSED",
+    "value": "grid",
+    "source_text": "gridを検索して、その内容を要約してほしい。",
+    "reason": "検索対象として明示的に記述されている"
+  },
+  "value": "grid",
+  "source_text": "gridを検索して、その内容を要約してほしい。",
+  "reason": "検索対象として明示的に記述されている",
+  "validator": {
+    "result": "EXTRACTABLE",
+    "value_in_confirmed": true,
+    "source_text_in_confirmed": true,
+    "note": "value と source_text が確認済み文章に literal で存在する。"
+  },
+  "verdict": "PASS",
+  "verdict_reason": "確認済み文章から指定役割に対応する値を抽出し、Validator が literal 確認できた。",
+  "elapsed_s": 19.107,
+  "error": null,
+  "implication": "モデルは値束縛能力を持つが、これまでのRuntime / Grill Contextではその能力をうまく使えていない可能性"
+}

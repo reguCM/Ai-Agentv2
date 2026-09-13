@@ -1,0 +1,150 @@
+{
+  "version": "0.1",
+  "note": "Mechanical prefill from materials only. Raises confirmation slots to HIGH; never invents root causes or evidence IDs.",
+  "prefill_slot_rules": [
+    {
+      "id": "runtime_observed_line",
+      "when": "runtime_log contains [OBSERVED]",
+      "set_slots": {
+        "stdout_present": {"status": "OBSERVED", "value": true},
+        "runtime_issue_observed": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "runtime_log"
+    },
+    {
+      "id": "runtime_none",
+      "when": "runtime_log is なし/未提供",
+      "set_slots": {
+        "stdout_present": {"status": "NOT_OBSERVED", "value": false},
+        "runtime_issue_observed": {"status": "NOT_OBSERVED", "value": false}
+      },
+      "only_if_current_in": ["UNKNOWN", "OBSERVED"],
+      "evidence": "runtime_log"
+    },
+    {
+      "id": "code_excerpt_present",
+      "when": "code_excerpt present and not なし",
+      "set_slots": {
+        "code_scope_present": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "code_excerpt"
+    },
+    {
+      "id": "code_multi_file_hint",
+      "when": "code_excerpt mentions ファイル or multiple paths",
+      "set_slots": {
+        "code_multi_file": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "code_excerpt"
+    },
+    {
+      "id": "state_no_change",
+      "when": "state_context says 変更なし/変更要求はない",
+      "set_slots": {
+        "state_change_requested": {"status": "NOT_OBSERVED", "value": false},
+        "goal_change_requested": {"status": "NOT_OBSERVED", "value": false},
+        "reopen_requested": {"status": "NOT_OBSERVED", "value": false}
+      },
+      "only_if_current_in": ["UNKNOWN"],
+      "evidence": "state_context"
+    },
+    {
+      "id": "reopen_mentioned",
+      "when": "materials mention REOPEN and not ではない",
+      "set_slots": {
+        "reopen_requested": {"status": "OBSERVED", "value": true},
+        "state_change_requested": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "state_context|problem_summary|state_history"
+    },
+    {
+      "id": "evidence_id_present",
+      "when": "evidence_id or E-\\d+ present",
+      "set_slots": {
+        "evidence_present": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "evidence|problem_summary"
+    },
+    {
+      "id": "evidence_exists_true",
+      "when": "exists=true",
+      "set_slots": {
+        "evidence_exists_known": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "evidence"
+    },
+    {
+      "id": "content_mismatch",
+      "when": "一致しない or unrelated in evidence",
+      "set_slots": {
+        "evidence_content_mismatch": {"status": "OBSERVED", "value": true},
+        "evidence_content_known": {"status": "OBSERVED", "value": false}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "evidence|problem_summary"
+    },
+    {
+      "id": "llm_disagreement",
+      "when": "小型 and 大型 and 一致しない/不一致",
+      "set_slots": {
+        "llm_disagreement": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "prior_analysis|problem_summary"
+    },
+    {
+      "id": "small_unverified",
+      "when": "小型断定 / only root cause",
+      "set_slots": {
+        "small_llm_unverified": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "prior_analysis"
+    },
+    {
+      "id": "near_exact",
+      "when": "句読点/Unicode/case 差",
+      "set_slots": {
+        "near_exact_surface": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "state_history|state_context|problem_summary"
+    },
+    {
+      "id": "similar_new",
+      "when": "対象機能が異なる / 新しい意味",
+      "set_slots": {
+        "similar_new_meaning": {"status": "OBSERVED", "value": true}
+      },
+      "only_if_current_in": ["UNKNOWN", "NOT_OBSERVED"],
+      "evidence": "state_history|state_context|problem_summary"
+    }
+  ],
+  "force_high_rules": [
+    {
+      "id": "h_type_sparse_after_prefill",
+      "when": "code_only_no_runtime AND (code_available is not True OR feature_count < 3)",
+      "high_slots": ["code_scope_present", "runtime_issue_observed", "caller_scope_present"],
+      "reason": "sparse_fingerprint_insufficient_info",
+      "escalation": "HUMAN_REVIEW"
+    },
+    {
+      "id": "code_excerpt_but_code_not_available",
+      "when": "code_excerpt present AND features.code_available is not True",
+      "high_slots": ["code_scope_present"],
+      "reason": "code_excerpt_missed",
+      "escalation": "LARGE_LLM"
+    }
+  ],
+  "safety_locks": {
+    "never_observe_runtime_without_log": true,
+    "never_invent_evidence_id": true,
+    "auto_fix": "NOT_ALLOWED"
+  }
+}

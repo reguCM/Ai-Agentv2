@@ -1,0 +1,18 @@
+note: 環境調査ベンチの既知失敗。repair ループには接続しない。参照は tools.system.llm_failure_memory。
+wired_into_repair: false
+patterns:
+  - id: insufficient_research_memory_capacity
+    class: research_misses_request
+    models: [qwen3_8b]
+    case: insufficient_research_memory_capacity
+    reproducible_at_temperature_0: true
+    symptom: "usable_findings は搭載メモリ容量の Sum。要求は使用率。Verifier は成功コマンドを high にするので、要求充足の判断は LLM 側。"
+    command_markers:
+      - Win32_PhysicalMemory
+      - Measure-Object -Property Capacity -Sum
+  - id: judge_verify_failed_retry
+    class: judge_no_retry_after_verify_fail
+    models: [deepseek_coder_v2_16b]
+    case: judge_verify_failed_retry
+    wired_into_repair: false
+    symptom: "Verifier は候補を実行したが 0 除算で sample 空。Judge が no_json / missing 空で再調査に戻れなかった。"

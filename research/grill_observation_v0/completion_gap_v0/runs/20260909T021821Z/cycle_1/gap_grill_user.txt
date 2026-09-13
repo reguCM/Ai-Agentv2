@@ -1,0 +1,59 @@
+# 確定Technical Specification
+Goal:
+簡単なテトリスを作る。
+
+仕様:
+- Pythonで作る
+- Pygameを使う
+- ゲームの基本機能の範囲: 初期実装では「テトロミノの落下・移動・回転」「行の削除」「ゲームオーバー判定」を実装し、後でスコアやレベルアップを追加する。
+- ゲーム画面のサイズとグリッドの設定: 標準的なテトリスのグリッド（10×20）を採用し、1ブロックを30×30ピクセルに設定。画面サイズは300×600ピクセル。
+- ゲームループの構造:
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    # ゲーム状態の更新
+    # 画面の描画
+    pygame.display.flip()
+  この構造をベースに、処理を細分化する。
+- テトロミノの形状と初期配置: 各テトロミノを2次元配列で定義し、回転時に行列の転置と反転を用いて処理。
+- 衝突判定の実装方法: 移動後のテトロミノの各ブロックの座標を計算し、グリッドの範囲外または既存ブロックと重なっている場合に衝突と判定。
+- 行の削除（ラインクリア）のロジック: 各行をチェックし、すべてのセルが埋まっている場合に削除。上にある行を下にシフトし、スコアを加算。
+- ゲームオーバーの判定条件: 新しいテトロミノを生成し、初期位置（グリッドの上部）に配置できない場合にゲームオーバーと判定。
+- ゲームの速度（落下速度）の調整: pygame.time.get_ticks()を用いて、一定時間（例: 500ms）ごとにテトロミノを下に移動。
+
+# 実際のCurrent State
+{
+  "kind": "observed_facts",
+  "experiment_workspace": "D:\\AI-Agent-worktrees\\current-dev\\research\\grill_observation_v0\\completion_gap_v0\\workspace",
+  "files_in_workspace": [],
+  "implemented_content": "NOT OBSERVED: no game source files in experiment workspace",
+  "python": "3.10.11",
+  "pygame_import_ok": true,
+  "pygame_version": "2.5.0",
+  "pygame_import_error": null,
+  "tests": {
+    "ran": false,
+    "result": "NOT OBSERVED: no tetris tests have been run in this experiment"
+  },
+  "errors": [],
+  "last_completed_gap": null,
+  "note": "Facts only. No inferred game features."
+}
+
+確定仕様と現在地点を比較してください。
+
+完成までにまだ不足しているものの中から、
+今、次に解消すべきものを1つだけ選んでください。
+
+一度に複数の作業へ進まないでください。
+
+実装上必要なことが決まっていない場合だけ
+質問を1つしてください。
+
+コードベースや環境を調べれば判断できることは
+人間へ聞かないでください。
+
+確定仕様を満たしており、
+追加で必要なものが無ければ、
+完成可能な状態であることを回答してください。

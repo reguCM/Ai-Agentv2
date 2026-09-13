@@ -1,0 +1,48 @@
+{
+  "id": "gpu_vram_usage",
+  "fixture_kind": "BENCH_FIXTURE_NOT_LIVE_SENSOR",
+  "observation_source": "fixture",
+  "note": "research_implement 用のSTATE固定ケース（STATE固定：GPU VRAM使用量（MB））。実機センサーではない。",
+  "request": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+  "state": {
+    "task": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用量",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "GPU VRAM使用量",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "MB",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-12288",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "expected": {
+    "category": "system",
+    "subcategory_contains": "gpu",
+    "module_pattern": "tools\\.system\\..+\\..+",
+    "function_present": true,
+    "output_includes": "status",
+    "name_present": true
+  }
+}

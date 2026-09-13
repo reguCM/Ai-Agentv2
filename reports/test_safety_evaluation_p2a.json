@@ -1,0 +1,78 @@
+{
+  "schema_version": "1",
+  "packet_type": "TEST_SAFETY_EVALUATION",
+  "generated_at": "2026-09-11T23:01:32.878155+00:00",
+  "validator_id": "test_safety_validator_s2_prototype_v1",
+  "test_plan": {
+    "plan_id": "p2a_development_policy_regression",
+    "description": "Mocked unit pytest for development policy final answer boundary; localhost HTTP for spec propose API; optional repo session write on /h help test.",
+    "commands": [
+      "python -m pytest tests/ai_tool/chat_interface/test_development_policy_p2a.py tests/ai_tool/policy/test_development_policy.py tests/ai_tool/chat_interface/test_policy_api.py -q",
+      "python -m pytest tests/ai_tool/spec_proposal/test_propose.py::test_chat_development_saves_proposal -q",
+      "python -m pytest tests/ai_tool/chat_interface/test_spec_proposal_api.py -q"
+    ],
+    "declared_write_scope": [
+      "pytest tmp_path via chat_interface conftest (CONTROLLED)",
+      "possible repository runs/chat_ui/sessions for test_t5_help_route (DECLARED repo write)"
+    ],
+    "notes": "Host ollama and unknown high-CPU python observed during P2a preflight; not used by plan. Phase1 jsonl fixture test may ENVIRONMENT_PREREQUISITE_MISSING.",
+    "declared_primary_risk_level": "LEVEL_2",
+    "declared_dimensions": {
+      "llm": "NONE",
+      "gpu": "NONE",
+      "network": "CONTROLLED",
+      "subprocess": "CONTROLLED",
+      "filesystem_write": "CONTROLLED"
+    }
+  },
+  "evaluation": {
+    "primary_risk_level": "LEVEL_2",
+    "also_applies_risk_levels": [],
+    "safety_dimensions": {
+      "llm": "NONE",
+      "gpu": "NONE",
+      "network": "CONTROLLED",
+      "subprocess": "CONTROLLED",
+      "long_running_process": "NONE",
+      "tool_execution": "NONE",
+      "filesystem_write": "PRESENT",
+      "repository_outside_write": "NONE",
+      "git_operation": "NONE",
+      "external_service": "NONE",
+      "credentials": "NONE",
+      "shared_resource": "NONE"
+    },
+    "relevant_unknowns": [
+      {
+        "dimension": "long_running_process",
+        "observation": "ollama process present on host (unused by this plan)",
+        "relevant_to_plan": false,
+        "safety_verifiable": false,
+        "would_block_if_gate_connected": false
+      },
+      {
+        "dimension": "long_running_process",
+        "observation": "unknown high-CPU python process on host (relevance low for LEVEL_1/L2 mocked pytest)",
+        "relevant_to_plan": false,
+        "safety_verifiable": false,
+        "would_block_if_gate_connected": false
+      }
+    ],
+    "warnings": [
+      "declared_write_scope:possible repository runs/chat_ui/sessions for test_t5_help_route (DECLARED repo write)"
+    ],
+    "recommended_gate_decision": "PASS",
+    "gate_blocked_reasons": [],
+    "postflight_git_check_required": true,
+    "human_approval_required": false
+  },
+  "reference_case_id": "p2a_development_policy_regression",
+  "readonly_observations": {
+    "git": {
+      "branch": "dev/current",
+      "head": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+      "status_short": "## dev/current...origin/dev/current [ahead 6]\n M .cursor/rules/agent-development-policy.mdc\n M AGENTS.md\n M ai_tool/chat_interface/agent_turn.py\n M ai_tool/chat_interface/gap_resolution_router.py\n M ai_tool/dev_skill_pipeline.py\n M ai_tool/policy/development_policy.json\n M ai_tool/policy/paths.py\n M ai_tool/run_tetris_sandbox_e2e.py\n M config/pipeline.yaml\n M docs/GIT_OPERATION_POLICY.md\n M docs/SYSTEM_ASSET_INDEX.md\n M runs/ai_tool/context_monitor/observations.jsonl\n M runs/ai_tool/last_policy_eval.json\n M tests/ai_tool/chat_interface/test_agent_task_loop_p216.py\n M tests/ai_tool/chat_interface/test_execution_end_invariants.py\n M tools/git_guard/POLICY.md\n M tools/git_guard/configs/ai-agent.pre-commit.json\n M tools/git_guard/configs/ai-agent.pre-push.json\n?? .cursor/rules/git-governance-adapter.mdc\n?? ai_tool/_diag_case2_context_budget.py\n?? ai_tool/_diag_case2_envelope.py\n?? ai_tool/_diag_case2_replay_2x2.py\n?? ai_tool/_diag_case2_role_vs_message.py\n?? ai_tool/_diag_failure_snapshot.py\n?? ai_tool/_diag_regression_phase_attribution.py\n?? ai_tool/_diag_tool_timeout_safety.py\n?? ai_tool/chat_interface/agent_stop_control.py\n?? ai_tool/chat_interface/progress_classification_shadow.py\n?? ai_tool/chat_interface/progress_classification_v0.py\n?? ai_tool/chat_interface/semantic_stagnation_warning.py\n?? ai_tool/chat_interface/state_cycle_detection_v0.py\n?? ai_tool/policy/git_governance.json\n?? ai_tool/policy/git_governance.schema.json\n?? ai_tool/policy/git_governance_contract.py\n?? ai_tool/policy/git_governance_distribution.py\n?? ai_tool/policy/git_governance_enforcement.py\n?? ai_tool/policy/git_governance_invariants.py\n?? ai_tool/run_case_001_current_replay.py\n?? ai_tool/run_case_001_premise_cleanup_repair_lab.py\n?? ai_tool/run_case_001_repair_loop_lab.py\n?? ai_tool/run_case_001_repeated_contradiction_repair_lab.py\n?? ai_tool/run_case_001_repeated_contradiction_replay_lab.py\n?? ai_tool/run_case_001_unsupported_assumption_repair_lab.py\n?? ai_tool/run_full_tetris_condition_target_repair_lab.py\n?? ai_tool/run_full_tetris_control_repair_lab.py\n?? ai_tool/run_full_tetris_goal_anchor_repair_lab.py\n?? ai_tool/run_full_tetris_hypothesis_revision_lab.py\n?? ai_tool/run_full_tetris_repair_loop_lab.py\n?? ai_tool/tetris_code_specialization_lab/\n?? docs/adapters/\n?? local_state/\n?? registry/project_assets.json\n?? registry/schema/project_assets.schema.json\n?? registry/schema/test_safety_evaluation.schema.json\n?? registry/schema/verification_evidence.schema.json\n?? reports/DEVELOPMENT_POLICY_PHASE_P2A_REPORT.md\n?? reports/GIT_GOVERNANCE_CLOSURE_APPROVAL_PACKET.json\n?? reports/GIT_GOVERNANCE_CLOSURE_APPROVAL_PACKET.md\n?? reports/GIT_GOVERNANCE_CLOSURE_HUMAN_APPROVAL_APPLIED.json\n?? reports/GIT_GOVERNANCE_PHASE_G2.json\n?? reports/GIT_GOVERNANCE_PHASE_G2_REPORT.md\n?? reports/GIT_GOVERNANCE_PHASE_G3.json\n?? reports/GIT_GOVERNANCE_PHASE_G3_REPORT.md\n?? reports/GIT_GOVERNANCE_PHASE_G4.json\n?? reports/GIT_GOVERNANCE_PHASE_G4_REPORT.md\n?? reports/GIT_GOVERNANCE_PHASE_G5.json\n?? reports/GIT_GOVERNANCE_PHASE_G5_REPORT.md\n?? reports/GIT_GOVERNANCE_PHASE_G6.json\n?? reports/GIT_GOVERNANCE_PHASE_G6_REPORT.md\n?? reports/SYSTEM_ASSET_INDEX_v2_PHASE2A1_REPORT.md\n?? reports/SYSTEM_ASSET_INDEX_v2_PHASE2A2_REPORT.md\n?? reports/TEST_SAFETY_S2_REPORT.md\n?? reports/_tmp_test_safety_p2a.json\n?? reports/project_asset_baseline_enrollment.json\n?? reports/project_asset_baseline_enrollment.md\n?? reports/project_asset_freshness_candidates.json\n?? reports/project_asset_freshness_candidates.md\n?? reports/project_asset_freshness_g6_dry_run.json\n?? reports/project_asset_freshness_post_g6_closure_dry_run.json\n?? reports/project_asset_freshness_post_human_approval_dry_run.json\n?? reports/verification_evidence/\n?? runs/_diag_phase123_current_failures.txt\n?? runs/_diag_regression_phase_attribution.json\n?? runs/_diag_tmp/\n?? runs/_tmp_canonical_count/\n?? runs/capability_routing_lab/\n?? runs/post_failure_capability_lab/\n?? runs/revalidation_lab0/\n?? runs/tetris_code_specialization_lab/\n?? runs/tetris_goal_recursive_convergence_v0/\n?? tests/ai_tool/chat_interface/test_agent_stop_control.py\n?? tests/ai_tool/chat_interface/test_development_policy_p2a.py\n?? tests/ai_tool/chat_interface/test_pipeline_budget_agent_turn.py\n?? tests/ai_tool/chat_interface/test_progress_classification_shadow.py\n?? tests/ai_tool/chat_interface/test_progress_classification_v0.py\n?? tests/ai_tool/chat_interface/test_semantic_stagnation_warning.py\n?? tests/ai_tool/chat_interface/test_state_cycle_detection_v0.py\n?? tests/ai_tool/policy/test_git_governance.py\n?? tests/ai_tool/policy/test_git_governance_adapters.py\n?? tests/ai_tool/policy/test_git_governance_drift.py\n?? tests/ai_tool/tetris_code_specialization_lab/\n?? tests/registry/test_git_governance_registry.py\n?? tests/registry/test_project_asset_baseline_enrollment.py\n?? tests/registry/test_project_asset_freshness.py\n?? tests/registry/test_project_assets.py\n?? tests/tools/conftest.py\n?? tests/tools/test_git_guard_governance_alignment.py\n?? tests/tools/test_test_safety_validator.py\n?? tools/capture_project_asset_baselines.py\n?? tools/check_project_asset_freshness.py\n?? tools/enroll_project_asset_baselines.py\n?? tools/generate_system_asset_index.py\n?? tools/git_governance_closure_reverify.py\n?? tools/project_asset_baseline_enrollment.py\n?? tools/project_asset_verification.py\n?? tools/run_test_safety_validator.py\n?? tools/test_safety/"
+    },
+    "host_process_note": "ollama process present on host (unused by this plan); unknown high-CPU python process on host (relevance low for LEVEL_1/L2 mocked pytest)"
+  }
+}

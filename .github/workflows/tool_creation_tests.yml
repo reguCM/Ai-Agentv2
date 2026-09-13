@@ -1,0 +1,30 @@
+name: Tool Creation Layer Tests
+
+on:
+  push:
+    paths:
+      - 'docs/ai_tool/tool_creation/**'
+  pull_request:
+    paths:
+      - 'docs/ai_tool/tool_creation/**'
+  workflow_dispatch:
+
+jobs:
+  tool-creation-pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest jsonschema
+
+      - name: Run Tool Creation Layer pytest (isolated)
+        working-directory: docs/ai_tool/tool_creation
+        run: pytest tests -c pytest.ini -v

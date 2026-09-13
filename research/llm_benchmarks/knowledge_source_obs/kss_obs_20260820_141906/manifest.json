@@ -1,0 +1,26 @@
+{
+  "experiment_id": "kss_obs_20260820_141906",
+  "formalize_phase5_1": false,
+  "auto_switch": false,
+  "behavior": "phase4_live_plus_observation",
+  "common_env": {
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1"
+  },
+  "cases": [
+    "memory_usage",
+    "cpu_temperature",
+    "disk_usage",
+    "gpu_usage",
+    "gpu_vram_usage"
+  ],
+  "trials": 1,
+  "reference_baselines": "D:\\AI-Agent\\research\\llm_benchmarks\\baselines\\phase4_phase5_reference",
+  "success_criteria": "Measure provenance / value estimates / calibration links; do not require success-rate improvement."
+}

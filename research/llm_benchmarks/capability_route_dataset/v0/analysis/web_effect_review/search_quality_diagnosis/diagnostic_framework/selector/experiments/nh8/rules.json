@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "note": "Mechanical uncertainty gate. LLM does not decide whether to escalate.",
+  "high_triggers": [
+    "parse_or_empty",
+    "feature_name_hallucination",
+    "state_hint_missing_in_fingerprint",
+    "reopen_hint_missing_in_fingerprint",
+    "evidence_id_hint_missing",
+    "content_mismatch_hint_missing",
+    "disagreement_hint_missing",
+    "disagreement_in_inference_bucket",
+    "small_llm_unverified_hint_missing",
+    "runtime_none_but_logs_true",
+    "runtime_observed_but_logs_false",
+    "near_exact_and_similar_new",
+    "insufficient_runtime_with_code_only",
+    "mapping_reopen_ambiguity"
+  ],
+  "must_escalate_cases_for_eval": ["NH5-H", "NH5-I", "NH5-J"],
+  "must_not_escalate_cases_for_eval": ["NH5-A", "NH5-C", "NH5-F", "NH5-G"],
+  "optional_escalate_cases_for_eval": ["NH5-B", "NH5-D", "NH5-E"],
+  "post_large_remaining_high_policy": "HUMAN_REVIEW",
+  "large_cannot_clear_safety_flags": [
+    "state_change_requested",
+    "reopen_requested",
+    "evidence_suspicious",
+    "evidence_content_mismatch",
+    "near_exact_reactivation",
+    "llm_disagreement",
+    "small_llm_output_suspicious"
+  ]
+}

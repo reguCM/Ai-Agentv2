@@ -1,0 +1,4664 @@
+{
+  "run_id": "20260909T152721Z_grill-translate",
+  "created_at": "2026-09-09T15:27:45.601699+00:00",
+  "production_connected": false,
+  "grill_connected": false,
+  "selected_rule_created": false,
+  "threshold_canonicalized": false,
+  "eval_primary": "match_clarification_to_candidate_paths unique_gold",
+  "eval_auxiliary": "embedding cosine vs path+hit_text blob",
+  "gen_model": "qwen3:14b",
+  "embed_model": "qwen3-embedding:0.6b",
+  "cases_path": "D:\\AI-Agent-worktrees\\current-dev\\research\\embedding_similarity_noise_v0\\cases_grill_translate.json",
+  "cases_meta": {
+    "note": "Grill後の照合実験。翻訳層は独立Harness。Production / Conversation Grill には接続しない。類似度閾値は正本化しない。この結果だけで SELECTED 規則は作らない。",
+    "evaluation_note": "主評価は既存 match_clarification_to_candidate_paths が unique gold path になるか。cosine は補助観測であり SELECTED 判定ではない。",
+    "scenario": "人間が『文書を確認して』と依頼し、残候補が実ファイル3件。Grill がどれかを聞いている。人間がノイズ付き日本語で答える。同一検索クエリで3件が同時ヒットした事実ではない。Grill後に残った候補集合としての仮置き。",
+    "original_request": "文書を確認して",
+    "original_search_query": "文書",
+    "translation_layer": {
+      "status": "PROVISIONAL_NOT_IN_PRODUCTION",
+      "model": "qwen3:14b",
+      "sees_candidates": true,
+      "sees_gold": false,
+      "candidate_order": [
+        "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "docs/GRILL_V0.md",
+        "AGENTS.md"
+      ],
+      "order_bias_note": "候補提示順は固定。位置バイアスは未分離。"
+    }
+  },
+  "ignore_tokens": [
+    "文書",
+    "文書",
+    "確認して"
+  ],
+  "candidates": [
+    {
+      "id": "current",
+      "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "kind": "gold_current",
+      "hit_texts": [
+        "開発状態Checkpoint — Cursor引継ぎ記録",
+        "人間が H4 Core を完了承認した。H4 Core ≠ H4 製品全体。",
+        "現在Repositoryの実態を優先する。"
+      ]
+    },
+    {
+      "id": "grill",
+      "path": "docs/GRILL_V0.md",
+      "kind": "gold_grill",
+      "hit_texts": [
+        "Grill v0 — 人間向け質問原則と出口",
+        "人間の意図が必要なものを優先する",
+        "Technical Grill は別工程"
+      ]
+    },
+    {
+      "id": "agents",
+      "path": "AGENTS.md",
+      "kind": "gold_agents",
+      "hit_texts": [
+        "Repository Policy Adapter for Codex",
+        "Canonical Policy を優先する",
+        "policy-distribution-version"
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "label": "baseline",
+      "at": "2026-09-09T15:27:21.873233+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 58.0,
+        "utilization": 41.0,
+        "vram_used": 3908,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 39684,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 26479,
+        "used_mb": 38798,
+        "load_percent": 59,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME                    ID              SIZE      PROCESSOR    CONTEXT    UNTIL               \nqwen3-embedding:0.6b    ac6da0dfba84    2.4 GB    100% GPU     4096       13 minutes from now",
+        "error": null
+      }
+    },
+    {
+      "label": "after_translate",
+      "at": "2026-09-09T15:27:40.547067+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 76.0,
+        "utilization": 90.0,
+        "vram_used": 10899,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 26107,
+        "used_mb": 39170,
+        "load_percent": 60,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME         ID              SIZE      PROCESSOR    CONTEXT    UNTIL               \nqwen3:14b    bdbd181c33f2    9.6 GB    100% GPU     4096       29 minutes from now",
+        "error": null
+      }
+    },
+    {
+      "label": "after_embed",
+      "at": "2026-09-09T15:27:45.508115+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 62.0,
+        "utilization": 23.0,
+        "vram_used": 11909,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 39280,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 24112,
+        "used_mb": 41165,
+        "load_percent": 63,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME                    ID              SIZE      PROCESSOR    CONTEXT    UNTIL               \nqwen3-embedding:0.6b    ac6da0dfba84    2.4 GB    100% GPU     4096       29 minutes from now    \nqwen3:14b               bdbd181c33f2    9.6 GB    100% GPU     4096       29 minutes from now",
+        "error": null
+      }
+    }
+  ],
+  "embed_timings": {
+    "docs/CURRENT_DEVELOPMENT_STATE.md": {
+      "elapsed_ms": 2668.3,
+      "dim": 1024,
+      "ok": true
+    },
+    "docs/GRILL_V0.md": {
+      "elapsed_ms": 35.8,
+      "dim": 1024,
+      "ok": true
+    },
+    "AGENTS.md": {
+      "elapsed_ms": 34.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_clean": {
+      "elapsed_ms": 49.2,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_clean": {
+      "elapsed_ms": 28.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_typo": {
+      "elapsed_ms": 42.9,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_typo": {
+      "elapsed_ms": 28.2,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_conversion": {
+      "elapsed_ms": 30.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_conversion": {
+      "elapsed_ms": 32.5,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_missing_char": {
+      "elapsed_ms": 26.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_missing_char": {
+      "elapsed_ms": 28.8,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_particle": {
+      "elapsed_ms": 27.1,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_particle": {
+      "elapsed_ms": 33.3,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_colloquial": {
+      "elapsed_ms": 37.0,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_colloquial": {
+      "elapsed_ms": 42.2,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_filler": {
+      "elapsed_ms": 38.3,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_filler": {
+      "elapsed_ms": 44.5,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_restatement": {
+      "elapsed_ms": 30.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_restatement": {
+      "elapsed_ms": 26.8,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_asr": {
+      "elapsed_ms": 28.5,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_asr": {
+      "elapsed_ms": 25.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_demonstrative": {
+      "elapsed_ms": 30.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_demonstrative": {
+      "elapsed_ms": 29.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:current_compound": {
+      "elapsed_ms": 30.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:current_compound": {
+      "elapsed_ms": 29.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_clean": {
+      "elapsed_ms": 27.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_clean": {
+      "elapsed_ms": 32.1,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_typo": {
+      "elapsed_ms": 28.9,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_typo": {
+      "elapsed_ms": 28.3,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_conversion": {
+      "elapsed_ms": 29.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_conversion": {
+      "elapsed_ms": 26.9,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_missing_char": {
+      "elapsed_ms": 27.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_missing_char": {
+      "elapsed_ms": 37.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_particle": {
+      "elapsed_ms": 27.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_particle": {
+      "elapsed_ms": 26.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_colloquial": {
+      "elapsed_ms": 29.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_colloquial": {
+      "elapsed_ms": 35.0,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_filler": {
+      "elapsed_ms": 27.1,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_filler": {
+      "elapsed_ms": 29.0,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_restatement": {
+      "elapsed_ms": 29.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_restatement": {
+      "elapsed_ms": 27.2,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_asr": {
+      "elapsed_ms": 31.0,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_asr": {
+      "elapsed_ms": 32.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_demonstrative": {
+      "elapsed_ms": 27.8,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_demonstrative": {
+      "elapsed_ms": 24.3,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:grill_compound": {
+      "elapsed_ms": 27.2,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:grill_compound": {
+      "elapsed_ms": 25.9,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_clean": {
+      "elapsed_ms": 26.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_clean": {
+      "elapsed_ms": 35.9,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_typo": {
+      "elapsed_ms": 31.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_typo": {
+      "elapsed_ms": 32.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_conversion": {
+      "elapsed_ms": 28.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_conversion": {
+      "elapsed_ms": 27.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_missing_char": {
+      "elapsed_ms": 25.1,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_missing_char": {
+      "elapsed_ms": 29.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_particle": {
+      "elapsed_ms": 29.0,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_particle": {
+      "elapsed_ms": 31.5,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_colloquial": {
+      "elapsed_ms": 28.9,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_colloquial": {
+      "elapsed_ms": 29.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_filler": {
+      "elapsed_ms": 27.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_filler": {
+      "elapsed_ms": 24.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_restatement": {
+      "elapsed_ms": 29.6,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_restatement": {
+      "elapsed_ms": 27.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_asr": {
+      "elapsed_ms": 27.3,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_asr": {
+      "elapsed_ms": 31.7,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_demonstrative": {
+      "elapsed_ms": 29.9,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_demonstrative": {
+      "elapsed_ms": 25.4,
+      "dim": 1024,
+      "ok": true
+    },
+    "raw:agents_compound": {
+      "elapsed_ms": 30.0,
+      "dim": 1024,
+      "ok": true
+    },
+    "tr:agents_compound": {
+      "elapsed_ms": 34.5,
+      "dim": 1024,
+      "ok": true
+    }
+  },
+  "translations": {
+    "current_clean": {
+      "ok": true,
+      "elapsed_ms": 6803.7,
+      "source": "content",
+      "error": null,
+      "text": "CURRENT_DEVELOPMENT_STATE.mdを読んで"
+    },
+    "current_typo": {
+      "ok": true,
+      "elapsed_ms": 429.4,
+      "source": "content",
+      "error": null,
+      "text": "CURRENT_DEVELOPMENT_STATE.mdの文書を読んで"
+    },
+    "current_conversion": {
+      "ok": true,
+      "elapsed_ms": 291.2,
+      "source": "content",
+      "error": null,
+      "text": "過連との文書を読んで"
+    },
+    "current_missing_char": {
+      "ok": true,
+      "elapsed_ms": 327.3,
+      "source": "content",
+      "error": null,
+      "text": "CURRENT_DEVELOPMENT_STATE.mdを読"
+    },
+    "current_particle": {
+      "ok": true,
+      "elapsed_ms": 373.6,
+      "source": "content",
+      "error": null,
+      "text": "CURRENT_DEVELOPMENT_STATE.md文書読んで"
+    },
+    "current_colloquial": {
+      "ok": true,
+      "elapsed_ms": 355.8,
+      "source": "content",
+      "error": null,
+      "text": "今の開発状態のやつ"
+    },
+    "current_filler": {
+      "ok": true,
+      "elapsed_ms": 356.9,
+      "source": "content",
+      "error": null,
+      "text": "CURRENT_DEVELOPMENT_STATE.mdを読んでください"
+    },
+    "current_restatement": {
+      "ok": true,
+      "elapsed_ms": 258.7,
+      "source": "content",
+      "error": null,
+      "text": "CURRENT_DEVELOPMENT_STATE.md"
+    },
+    "current_asr": {
+      "ok": true,
+      "elapsed_ms": 353.5,
+      "source": "content",
+      "error": null,
+      "text": "カレントの文書を呼んで"
+    },
+    "current_demonstrative": {
+      "ok": true,
+      "elapsed_ms": 356.6,
+      "source": "content",
+      "error": null,
+      "text": "そっちのCURRENT_DEVELOPMENT_STATE.md"
+    },
+    "current_compound": {
+      "ok": true,
+      "elapsed_ms": 256.2,
+      "source": "content",
+      "error": null,
+      "text": "過連とのやつ読んで"
+    },
+    "grill_clean": {
+      "ok": true,
+      "elapsed_ms": 1195.7,
+      "source": "content",
+      "error": null,
+      "text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程"
+    },
+    "grill_typo": {
+      "ok": true,
+      "elapsed_ms": 290.1,
+      "source": "content",
+      "error": null,
+      "text": "Grill v0 の文書"
+    },
+    "grill_conversion": {
+      "ok": true,
+      "elapsed_ms": 259.0,
+      "source": "content",
+      "error": null,
+      "text": "具入るのやつ"
+    },
+    "grill_missing_char": {
+      "ok": true,
+      "elapsed_ms": 492.8,
+      "source": "content",
+      "error": null,
+      "text": "Grillの原稿はGRILL_V0.mdですか？"
+    },
+    "grill_particle": {
+      "ok": true,
+      "elapsed_ms": 257.5,
+      "source": "content",
+      "error": null,
+      "text": "Grill原則の文書"
+    },
+    "grill_colloquial": {
+      "ok": true,
+      "elapsed_ms": 1195.8,
+      "source": "content",
+      "error": null,
+      "text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程"
+    },
+    "grill_filler": {
+      "ok": true,
+      "elapsed_ms": 259.5,
+      "source": "content",
+      "error": null,
+      "text": "Grillの原則なんですけど"
+    },
+    "grill_restatement": {
+      "ok": true,
+      "elapsed_ms": 192.0,
+      "source": "content",
+      "error": null,
+      "text": "Grillの原則"
+    },
+    "grill_asr": {
+      "ok": true,
+      "elapsed_ms": 1202.0,
+      "source": "content",
+      "error": null,
+      "text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程"
+    },
+    "grill_demonstrative": {
+      "ok": true,
+      "elapsed_ms": 164.1,
+      "source": "content",
+      "error": null,
+      "text": "原則のほう"
+    },
+    "grill_compound": {
+      "ok": true,
+      "elapsed_ms": 294.1,
+      "source": "content",
+      "error": null,
+      "text": "まあ具入るのやつ"
+    },
+    "agents_clean": {
+      "ok": true,
+      "elapsed_ms": 227.1,
+      "source": "content",
+      "error": null,
+      "text": "AGENTS.mdの方針"
+    },
+    "agents_typo": {
+      "ok": true,
+      "elapsed_ms": 194.9,
+      "source": "content",
+      "error": null,
+      "text": "AGENTSの方針"
+    },
+    "agents_conversion": {
+      "ok": true,
+      "elapsed_ms": 245.0,
+      "source": "content",
+      "error": null,
+      "text": "AGENTS.mdの方針"
+    },
+    "agents_missing_char": {
+      "ok": true,
+      "elapsed_ms": 210.1,
+      "source": "content",
+      "error": null,
+      "text": "AGENTS.mdの方"
+    },
+    "agents_particle": {
+      "ok": true,
+      "elapsed_ms": 271.9,
+      "source": "content",
+      "error": null,
+      "text": "AGENTS.md方針"
+    },
+    "agents_colloquial": {
+      "ok": true,
+      "elapsed_ms": 179.5,
+      "source": "content",
+      "error": null,
+      "text": "AGENTS.md"
+    },
+    "agents_filler": {
+      "ok": true,
+      "elapsed_ms": 241.8,
+      "source": "content",
+      "error": null,
+      "text": "AGENTSの方針かな"
+    },
+    "agents_restatement": {
+      "ok": true,
+      "elapsed_ms": 206.6,
+      "source": "content",
+      "error": null,
+      "text": "AGENTSの方針"
+    },
+    "agents_asr": {
+      "ok": true,
+      "elapsed_ms": 250.9,
+      "source": "content",
+      "error": null,
+      "text": "AGENTS.mdの方針"
+    },
+    "agents_demonstrative": {
+      "ok": true,
+      "elapsed_ms": 233.6,
+      "source": "content",
+      "error": null,
+      "text": "ポリシーのほう"
+    },
+    "agents_compound": {
+      "ok": true,
+      "elapsed_ms": 264.2,
+      "source": "content",
+      "error": null,
+      "text": "AGENTS.md のやつ"
+    }
+  },
+  "results": [
+    {
+      "query_id": "current_clean",
+      "anchor_id": "current",
+      "noise_type": "clean",
+      "note": "ノイズなし。path語 CURRENT が残る",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "CURRENTの文書を読んで",
+      "translated_text": "CURRENT_DEVELOPMENT_STATE.mdを読んで",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 6803.7,
+      "raw": {
+        "text": "CURRENTの文書を読んで",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "CURRENT_DEVELOPMENT_STATE.mdを読んで",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.465149,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.491277,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.491277,
+        "gap_vs_best_wrong": -0.026128,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.491277,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.465149,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.310738,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.574041,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.574041,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.523613,
+        "gap_vs_best_wrong": 0.050428,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.574041,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.523613,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.282145,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.108892
+    },
+    {
+      "query_id": "current_typo",
+      "anchor_id": "current",
+      "noise_type": "typo",
+      "note": "CURRENT の N 抜け",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "CURRETの文書を読んで",
+      "translated_text": "CURRENT_DEVELOPMENT_STATE.mdの文書を読んで",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 429.4,
+      "raw": {
+        "text": "CURRETの文書を読んで",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "CURRENT_DEVELOPMENT_STATE.mdの文書を読んで",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.419867,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.458394,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.458394,
+        "gap_vs_best_wrong": -0.038527,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.458394,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.419867,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.305728,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.571201,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.571201,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.502839,
+        "gap_vs_best_wrong": 0.068362,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.571201,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.502839,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.284242,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.151334
+    },
+    {
+      "query_id": "current_conversion",
+      "anchor_id": "current",
+      "noise_type": "conversion",
+      "note": "かれんと → 過連と",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "過連との文書を読んで",
+      "translated_text": "過連との文書を読んで",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 291.2,
+      "raw": {
+        "text": "過連との文書を読んで",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "過連との文書を読んで",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.339875,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.441534,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.441534,
+        "gap_vs_best_wrong": -0.101659,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.441534,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.339875,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.296553,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.343015,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.446343,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.446343,
+        "gap_vs_best_wrong": -0.103328,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.446343,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.343015,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.29969,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.00314
+    },
+    {
+      "query_id": "current_missing_char",
+      "anchor_id": "current",
+      "noise_type": "missing_char",
+      "note": "んで が抜けた。CURRENT は残る",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "CURRENTの文書を読",
+      "translated_text": "CURRENT_DEVELOPMENT_STATE.mdを読",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 327.3,
+      "raw": {
+        "text": "CURRENTの文書を読",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "CURRENT_DEVELOPMENT_STATE.mdを読",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.47933,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.519564,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.519564,
+        "gap_vs_best_wrong": -0.040234,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.519564,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.47933,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.328984,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.578032,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.578032,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.530896,
+        "gap_vs_best_wrong": 0.047136,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.578032,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.530896,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.279102,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.098702
+    },
+    {
+      "query_id": "current_particle",
+      "anchor_id": "current",
+      "noise_type": "particle_drop",
+      "note": "の 抜け。CURRENT は残る",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "CURRENT文書読んで",
+      "translated_text": "CURRENT_DEVELOPMENT_STATE.md文書読んで",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 373.6,
+      "raw": {
+        "text": "CURRENT文書読んで",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "CURRENT_DEVELOPMENT_STATE.md文書読んで",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.398364,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.481412,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.481412,
+        "gap_vs_best_wrong": -0.083048,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.481412,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.398364,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.309775,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.536024,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.536024,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.509512,
+        "gap_vs_best_wrong": 0.026512,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.536024,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.509512,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.283209,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.13766
+    },
+    {
+      "query_id": "current_colloquial",
+      "anchor_id": "current",
+      "noise_type": "colloquial",
+      "note": "口語。ヒット文の 開発状態 で指す",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "今の開発状態のやつ",
+      "translated_text": "今の開発状態のやつ",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 355.8,
+      "raw": {
+        "text": "今の開発状態のやつ",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "今の開発状態のやつ",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.565171,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.565171,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.448142,
+        "gap_vs_best_wrong": 0.117029,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.565171,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.448142,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.340218,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.564834,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.564834,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.449946,
+        "gap_vs_best_wrong": 0.114888,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.564834,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.449946,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.341059,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": -0.000337
+    },
+    {
+      "query_id": "current_filler",
+      "anchor_id": "current",
+      "noise_type": "filler",
+      "note": "フィラー えっと。CURRENT は残る",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "えっとCURRENTの文書を読んでください",
+      "translated_text": "CURRENT_DEVELOPMENT_STATE.mdを読んでください",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 356.9,
+      "raw": {
+        "text": "えっとCURRENTの文書を読んでください",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "CURRENT_DEVELOPMENT_STATE.mdを読んでください",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.487682,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.491447,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.491447,
+        "gap_vs_best_wrong": -0.003765,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.491447,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.487682,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.34913,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.570116,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.570116,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.531696,
+        "gap_vs_best_wrong": 0.03842,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.570116,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.531696,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.29764,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.082434
+    },
+    {
+      "query_id": "current_restatement",
+      "anchor_id": "current",
+      "noise_type": "restatement",
+      "note": "言い直し。否定側に Grill が残る",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "GrillじゃなくてCURRENTの文書",
+      "translated_text": "CURRENT_DEVELOPMENT_STATE.md",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 258.7,
+      "raw": {
+        "text": "GrillじゃなくてCURRENTの文書",
+        "matched_paths": [
+          "docs/GRILL_V0.md",
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "ambiguous_includes_gold",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "CURRENT_DEVELOPMENT_STATE.md",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.459905,
+        "gold_rank": 2,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.575873,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.575873,
+        "gap_vs_best_wrong": -0.115968,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.575873,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.459905,
+            "rank": 2
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.432869,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.524375,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.524375,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.496575,
+        "gap_vs_best_wrong": 0.0278,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.524375,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.496575,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.244634,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.06447
+    },
+    {
+      "query_id": "current_asr",
+      "anchor_id": "current",
+      "noise_type": "asr_like",
+      "note": "音声認識風。カレント + 呼んで",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "カレントの文書を呼んで",
+      "translated_text": "カレントの文書を呼んで",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 353.5,
+      "raw": {
+        "text": "カレントの文書を呼んで",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "カレントの文書を呼んで",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.407848,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.497588,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.497588,
+        "gap_vs_best_wrong": -0.08974,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.497588,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.407848,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.339954,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.408038,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.499021,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.499021,
+        "gap_vs_best_wrong": -0.090983,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.499021,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.408038,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.339997,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.00019
+    },
+    {
+      "query_id": "current_demonstrative",
+      "anchor_id": "current",
+      "noise_type": "demonstrative",
+      "note": "指示語。CURRENT は残る",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "そっちのCURRENT",
+      "translated_text": "そっちのCURRENT_DEVELOPMENT_STATE.md",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 356.6,
+      "raw": {
+        "text": "そっちのCURRENT",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "そっちのCURRENT_DEVELOPMENT_STATE.md",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.503467,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.503467,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.495303,
+        "gap_vs_best_wrong": 0.008164,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.503467,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.495303,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.324167,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.604392,
+        "gold_rank": 1,
+        "top_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "top_cosine": 0.604392,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.539137,
+        "gap_vs_best_wrong": 0.065255,
+        "ranked": [
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.604392,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.539137,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.273734,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.100925
+    },
+    {
+      "query_id": "current_compound",
+      "anchor_id": "current",
+      "noise_type": "compound",
+      "note": "フィラー + 変換ミス + 口語",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "raw_text": "えっと過連とのやつ読んで",
+      "translated_text": "過連とのやつ読んで",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 256.2,
+      "raw": {
+        "text": "えっと過連とのやつ読んで",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "過連とのやつ読んで",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.325216,
+        "gold_rank": 3,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.406335,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.406335,
+        "gap_vs_best_wrong": -0.081119,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.406335,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.338299,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.325216,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.357343,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.444206,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.444206,
+        "gap_vs_best_wrong": -0.086863,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.444206,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.357343,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.330996,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.032127
+    },
+    {
+      "query_id": "grill_clean",
+      "anchor_id": "grill",
+      "noise_type": "clean",
+      "note": "ノイズなし。Grill と 原則 が残る",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "Grillの原則の文書",
+      "translated_text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 1195.7,
+      "raw": {
+        "text": "Grillの原則の文書",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程",
+        "matched_paths": [
+          "docs/GRILL_V0.md",
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "ambiguous_includes_gold",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "farther",
+      "raw_cosine": {
+        "gold_cosine": 0.705311,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.705311,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.461296,
+        "gap_vs_best_wrong": 0.244015,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.705311,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.461296,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.365141,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.949909,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.949909,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.369261,
+        "gap_vs_best_wrong": 0.580648,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.949909,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.369261,
+            "rank": 2
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.351101,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.244598
+    },
+    {
+      "query_id": "grill_typo",
+      "anchor_id": "grill",
+      "noise_type": "typo",
+      "note": "Grill の r 重複。原則は入れない",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "Grrillの文書",
+      "translated_text": "Grill v0 の文書",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 290.1,
+      "raw": {
+        "text": "Grrillの文書",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "Grill v0 の文書",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.511842,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.511842,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.454851,
+        "gap_vs_best_wrong": 0.056991,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.511842,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.454851,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.35401,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.67776,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.67776,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.4557,
+        "gap_vs_best_wrong": 0.22206,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.67776,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.4557,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.383603,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.165918
+    },
+    {
+      "query_id": "grill_conversion",
+      "anchor_id": "grill",
+      "noise_type": "conversion",
+      "note": "ぐりる → 具入る",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "具入るのやつ",
+      "translated_text": "具入るのやつ",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 259.0,
+      "raw": {
+        "text": "具入るのやつ",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "具入るのやつ",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.340464,
+        "gold_rank": 3,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.46072,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.46072,
+        "gap_vs_best_wrong": -0.120256,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.46072,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.346117,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.340464,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.340668,
+        "gold_rank": 3,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.460432,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.460432,
+        "gap_vs_best_wrong": -0.119764,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.460432,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.346098,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.340668,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.000204
+    },
+    {
+      "query_id": "grill_missing_char",
+      "anchor_id": "grill",
+      "noise_type": "missing_char",
+      "note": "則 が抜けた。Grill は残る",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "Grillの原",
+      "translated_text": "Grillの原稿はGRILL_V0.mdですか？",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 492.8,
+      "raw": {
+        "text": "Grillの原",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "Grillの原稿はGRILL_V0.mdですか？",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.597941,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.597941,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.320188,
+        "gap_vs_best_wrong": 0.277753,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.597941,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.320188,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.293425,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.600143,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.600143,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.315355,
+        "gap_vs_best_wrong": 0.284788,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.600143,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.315355,
+            "rank": 2
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.278366,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.002202
+    },
+    {
+      "query_id": "grill_particle",
+      "anchor_id": "grill",
+      "noise_type": "particle_drop",
+      "note": "の 抜け。Grill は残る",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "Grill原則の文書",
+      "translated_text": "Grill原則の文書",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 257.5,
+      "raw": {
+        "text": "Grill原則の文書",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "Grill原則の文書",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.67747,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.67747,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.470406,
+        "gap_vs_best_wrong": 0.207064,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.67747,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.470406,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.358024,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.677537,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.677537,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.470133,
+        "gap_vs_best_wrong": 0.207404,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.677537,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.470133,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.358084,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 6.7e-05
+    },
+    {
+      "query_id": "grill_colloquial",
+      "anchor_id": "grill",
+      "noise_type": "colloquial",
+      "note": "口語カタカナ。path語 Grill が無い",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "グリルのやつ",
+      "translated_text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 1195.8,
+      "raw": {
+        "text": "グリルのやつ",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程",
+        "matched_paths": [
+          "docs/GRILL_V0.md",
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "ambiguous_includes_gold",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.485049,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.485049,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.463992,
+        "gap_vs_best_wrong": 0.021057,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.485049,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.463992,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.368654,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.953034,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.953034,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.366736,
+        "gap_vs_best_wrong": 0.586298,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.953034,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.366736,
+            "rank": 2
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.344077,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.467985
+    },
+    {
+      "query_id": "grill_filler",
+      "anchor_id": "grill",
+      "noise_type": "filler",
+      "note": "フィラー。Grill は残る",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "あのーGrillの原則なんですけど",
+      "translated_text": "Grillの原則なんですけど",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 259.5,
+      "raw": {
+        "text": "あのーGrillの原則なんですけど",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "Grillの原則なんですけど",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.600517,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.600517,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.221073,
+        "gap_vs_best_wrong": 0.379444,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.600517,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.221073,
+            "rank": 2
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.187034,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.622963,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.622963,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.214064,
+        "gap_vs_best_wrong": 0.408899,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.622963,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.214064,
+            "rank": 2
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.188623,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.022446
+    },
+    {
+      "query_id": "grill_restatement",
+      "anchor_id": "grill",
+      "noise_type": "restatement",
+      "note": "言い直し。否定側に CURRENT が残る",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "CURRENTじゃなくてGrillの原則",
+      "translated_text": "Grillの原則",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 192.0,
+      "raw": {
+        "text": "CURRENTじゃなくてGrillの原則",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md",
+          "docs/GRILL_V0.md"
+        ],
+        "status": "ambiguous_includes_gold",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "Grillの原則",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.645179,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.645179,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.440188,
+        "gap_vs_best_wrong": 0.204991,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.645179,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.440188,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.407104,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.716075,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.716075,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.457736,
+        "gap_vs_best_wrong": 0.258339,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.716075,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.457736,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.372226,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.070896
+    },
+    {
+      "query_id": "grill_asr",
+      "anchor_id": "grill",
+      "noise_type": "asr_like",
+      "note": "音声認識風。グリル + 呼んで",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "グリルの文書を呼んで",
+      "translated_text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 1202.0,
+      "raw": {
+        "text": "グリルの文書を呼んで",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程",
+        "matched_paths": [
+          "docs/GRILL_V0.md",
+          "docs/CURRENT_DEVELOPMENT_STATE.md"
+        ],
+        "status": "ambiguous_includes_gold",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.500111,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.500111,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.483536,
+        "gap_vs_best_wrong": 0.016575,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.500111,
+            "rank": 1
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.483536,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.37873,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.953034,
+        "gold_rank": 1,
+        "top_path": "docs/GRILL_V0.md",
+        "top_cosine": 0.953034,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.366736,
+        "gap_vs_best_wrong": 0.586298,
+        "ranked": [
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.953034,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.366736,
+            "rank": 2
+          },
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.344077,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.452923
+    },
+    {
+      "query_id": "grill_demonstrative",
+      "anchor_id": "grill",
+      "noise_type": "demonstrative",
+      "note": "指示語。ヒット文の 原則 で指す",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "原則のほう",
+      "translated_text": "原則のほう",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 164.1,
+      "raw": {
+        "text": "原則のほう",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "原則のほう",
+        "matched_paths": [
+          "docs/GRILL_V0.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.435038,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.494936,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.494936,
+        "gap_vs_best_wrong": -0.059898,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.494936,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.435038,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.354041,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.435038,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.494936,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.494936,
+        "gap_vs_best_wrong": -0.059898,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.494936,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.435038,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.354041,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.0
+    },
+    {
+      "query_id": "grill_compound",
+      "anchor_id": "grill",
+      "noise_type": "compound",
+      "note": "フィラー + 変換ミス + 口語",
+      "gold_path": "docs/GRILL_V0.md",
+      "raw_text": "まあ具入るのやつ",
+      "translated_text": "まあ具入るのやつ",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 294.1,
+      "raw": {
+        "text": "まあ具入るのやつ",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "まあ具入るのやつ",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.332605,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.418234,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.418234,
+        "gap_vs_best_wrong": -0.085629,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.418234,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.332605,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.321748,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.333561,
+        "gold_rank": 2,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.418778,
+        "best_wrong_path": "AGENTS.md",
+        "best_wrong_cosine": 0.418778,
+        "gap_vs_best_wrong": -0.085217,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.418778,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.333561,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.322329,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.000956
+    },
+    {
+      "query_id": "agents_clean",
+      "anchor_id": "agents",
+      "noise_type": "clean",
+      "note": "ノイズなし。path語 AGENTS が残る",
+      "gold_path": "AGENTS.md",
+      "raw_text": "AGENTSの方針",
+      "translated_text": "AGENTS.mdの方針",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 227.1,
+      "raw": {
+        "text": "AGENTSの方針",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTS.mdの方針",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.604137,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.604137,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.384751,
+        "gap_vs_best_wrong": 0.219386,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.604137,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.384751,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.378255,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.56887,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.56887,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.357001,
+        "gap_vs_best_wrong": 0.211869,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.56887,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.357001,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.356579,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": -0.035267
+    },
+    {
+      "query_id": "agents_typo",
+      "anchor_id": "agents",
+      "noise_type": "typo",
+      "note": "AGENTS の転置",
+      "gold_path": "AGENTS.md",
+      "raw_text": "AGNETSの方針",
+      "translated_text": "AGENTSの方針",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 194.9,
+      "raw": {
+        "text": "AGNETSの方針",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTSの方針",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.571547,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.571547,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.397954,
+        "gap_vs_best_wrong": 0.173593,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.571547,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.397954,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.375997,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.60485,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.60485,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.385795,
+        "gap_vs_best_wrong": 0.219055,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.60485,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.385795,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.378709,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.033303
+    },
+    {
+      "query_id": "agents_conversion",
+      "anchor_id": "agents",
+      "noise_type": "conversion",
+      "note": "えーじぇんつ → 揚げんつ",
+      "gold_path": "AGENTS.md",
+      "raw_text": "揚げんつの方針",
+      "translated_text": "AGENTS.mdの方針",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 245.0,
+      "raw": {
+        "text": "揚げんつの方針",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTS.mdの方針",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.545203,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.545203,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.425286,
+        "gap_vs_best_wrong": 0.119917,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.545203,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.425286,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.389573,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.567355,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.567355,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.356049,
+        "gap_vs_best_wrong": 0.211306,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.567355,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.356049,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.355924,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.022152
+    },
+    {
+      "query_id": "agents_missing_char",
+      "anchor_id": "agents",
+      "noise_type": "missing_char",
+      "note": "針 が抜けた。AGENTS は残る",
+      "gold_path": "AGENTS.md",
+      "raw_text": "AGENTSの方",
+      "translated_text": "AGENTS.mdの方",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 210.1,
+      "raw": {
+        "text": "AGENTSの方",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTS.mdの方",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.562943,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.562943,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.355075,
+        "gap_vs_best_wrong": 0.207868,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.562943,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.355075,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.328852,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.563113,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.563113,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.355378,
+        "gap_vs_best_wrong": 0.207735,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.563113,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.355378,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.323544,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.00017
+    },
+    {
+      "query_id": "agents_particle",
+      "anchor_id": "agents",
+      "noise_type": "particle_drop",
+      "note": "の 抜け。AGENTS は残る",
+      "gold_path": "AGENTS.md",
+      "raw_text": "AGENTS方針",
+      "translated_text": "AGENTS.md方針",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 271.9,
+      "raw": {
+        "text": "AGENTS方針",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTS.md方針",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.54269,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.54269,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.359887,
+        "gap_vs_best_wrong": 0.182803,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.54269,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.359887,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.334089,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.55619,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.55619,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.373166,
+        "gap_vs_best_wrong": 0.183024,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.55619,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.373166,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.352259,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.0135
+    },
+    {
+      "query_id": "agents_colloquial",
+      "anchor_id": "agents",
+      "noise_type": "colloquial",
+      "note": "口語。path語 AGENTS が無い",
+      "gold_path": "AGENTS.md",
+      "raw_text": "エージェントのやつ",
+      "translated_text": "AGENTS.md",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 179.5,
+      "raw": {
+        "text": "エージェントのやつ",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTS.md",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.536874,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.536874,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.357756,
+        "gap_vs_best_wrong": 0.179118,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.536874,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.357756,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.338184,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.581625,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.581625,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.351784,
+        "gap_vs_best_wrong": 0.229841,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.581625,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.351784,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.325013,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.044751
+    },
+    {
+      "query_id": "agents_filler",
+      "anchor_id": "agents",
+      "noise_type": "filler",
+      "note": "フィラー。AGENTS は残る",
+      "gold_path": "AGENTS.md",
+      "raw_text": "まあAGENTSの方針かな",
+      "translated_text": "AGENTSの方針かな",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 241.8,
+      "raw": {
+        "text": "まあAGENTSの方針かな",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTSの方針かな",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.475656,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.475656,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.322837,
+        "gap_vs_best_wrong": 0.152819,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.475656,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.322837,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.314595,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.529,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.529,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.336526,
+        "gap_vs_best_wrong": 0.192474,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.529,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.336526,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.328183,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.053344
+    },
+    {
+      "query_id": "agents_restatement",
+      "anchor_id": "agents",
+      "noise_type": "restatement",
+      "note": "言い直し。否定側に CURRENT が残る",
+      "gold_path": "AGENTS.md",
+      "raw_text": "CURRENTじゃなくてAGENTSの方針",
+      "translated_text": "AGENTSの方針",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 206.6,
+      "raw": {
+        "text": "CURRENTじゃなくてAGENTSの方針",
+        "matched_paths": [
+          "docs/CURRENT_DEVELOPMENT_STATE.md",
+          "AGENTS.md"
+        ],
+        "status": "ambiguous_includes_gold",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTSの方針",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.522785,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.522785,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.39607,
+        "gap_vs_best_wrong": 0.126715,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.522785,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.39607,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.350143,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.604137,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.604137,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.384751,
+        "gap_vs_best_wrong": 0.219386,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.604137,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.384751,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.378255,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.081352
+    },
+    {
+      "query_id": "agents_asr",
+      "anchor_id": "agents",
+      "noise_type": "asr_like",
+      "note": "音声認識風。エージェンツ",
+      "gold_path": "AGENTS.md",
+      "raw_text": "エージェンツの方針",
+      "translated_text": "AGENTS.mdの方針",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 250.9,
+      "raw": {
+        "text": "エージェンツの方針",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTS.mdの方針",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.596483,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.596483,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.445516,
+        "gap_vs_best_wrong": 0.150967,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.596483,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.445516,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.405724,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.567355,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.567355,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.356049,
+        "gap_vs_best_wrong": 0.211306,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.567355,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.356049,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.355924,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": -0.029128
+    },
+    {
+      "query_id": "agents_demonstrative",
+      "anchor_id": "agents",
+      "noise_type": "demonstrative",
+      "note": "指示語。ヒット文の Policy をカタカナで指す",
+      "gold_path": "AGENTS.md",
+      "raw_text": "ポリシーのほう",
+      "translated_text": "ポリシーのほう",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 233.6,
+      "raw": {
+        "text": "ポリシーのほう",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "ポリシーのほう",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "progress": "same",
+      "raw_cosine": {
+        "gold_cosine": 0.591311,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.591311,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.328875,
+        "gap_vs_best_wrong": 0.262436,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.591311,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.328875,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.317738,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.589241,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.589241,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.328492,
+        "gap_vs_best_wrong": 0.260749,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.589241,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.328492,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.317838,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": -0.00207
+    },
+    {
+      "query_id": "agents_compound",
+      "anchor_id": "agents",
+      "noise_type": "compound",
+      "note": "フィラー + ひらがな + 口語",
+      "gold_path": "AGENTS.md",
+      "raw_text": "まあえーじぇんつのやつ",
+      "translated_text": "AGENTS.md のやつ",
+      "translation_ok": true,
+      "translation_source": "content",
+      "translation_error": null,
+      "translation_elapsed_ms": 264.2,
+      "raw": {
+        "text": "まあえーじぇんつのやつ",
+        "matched_paths": [],
+        "status": "empty",
+        "unique_gold": false,
+        "would_select": false,
+        "would_regrill": true,
+        "would_wrong_read": false
+      },
+      "translated": {
+        "text": "AGENTS.md のやつ",
+        "matched_paths": [
+          "AGENTS.md"
+        ],
+        "status": "unique_gold",
+        "unique_gold": true,
+        "would_select": true,
+        "would_regrill": false,
+        "would_wrong_read": false
+      },
+      "progress": "closer",
+      "raw_cosine": {
+        "gold_cosine": 0.380921,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.380921,
+        "best_wrong_path": "docs/GRILL_V0.md",
+        "best_wrong_cosine": 0.320588,
+        "gap_vs_best_wrong": 0.060333,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.380921,
+            "rank": 1
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.320588,
+            "rank": 2
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.308747,
+            "rank": 3
+          }
+        ]
+      },
+      "translated_cosine": {
+        "gold_cosine": 0.593404,
+        "gold_rank": 1,
+        "top_path": "AGENTS.md",
+        "top_cosine": 0.593404,
+        "best_wrong_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+        "best_wrong_cosine": 0.377279,
+        "gap_vs_best_wrong": 0.216125,
+        "ranked": [
+          {
+            "path": "AGENTS.md",
+            "cosine": 0.593404,
+            "rank": 1
+          },
+          {
+            "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+            "cosine": 0.377279,
+            "rank": 2
+          },
+          {
+            "path": "docs/GRILL_V0.md",
+            "cosine": 0.335276,
+            "rank": 3
+          }
+        ]
+      },
+      "cosine_delta_gold": 0.212483
+    }
+  ],
+  "summary": {
+    "noisy_n": 30,
+    "raw": {
+      "n": 30,
+      "unique_gold_n": 12,
+      "unique_gold_rate": 0.4,
+      "empty_n": 15,
+      "ambiguous_includes_gold_n": 3,
+      "ambiguous_no_gold_n": 0,
+      "unique_wrong_n": 0,
+      "would_select_n": 12,
+      "would_regrill_n": 18,
+      "would_wrong_read_n": 0
+    },
+    "translated": {
+      "n": 30,
+      "unique_gold_n": 22,
+      "unique_gold_rate": 0.7333,
+      "empty_n": 6,
+      "ambiguous_includes_gold_n": 2,
+      "ambiguous_no_gold_n": 0,
+      "unique_wrong_n": 0,
+      "would_select_n": 22,
+      "would_regrill_n": 8,
+      "would_wrong_read_n": 0
+    },
+    "progress": {
+      "closer": 12,
+      "same": 18,
+      "farther": 0
+    },
+    "mean_cosine_delta_gold": 0.076137,
+    "by_noise_type": {
+      "clean": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 2,
+          "unique_gold_rate": 0.6667,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 1,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 2,
+          "would_regrill_n": 1,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 0,
+          "same": 2,
+          "farther": 1
+        }
+      },
+      "typo": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 0,
+          "unique_gold_rate": 0.0,
+          "empty_n": 3,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 0,
+          "would_regrill_n": 3,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 3,
+          "same": 0,
+          "farther": 0
+        }
+      },
+      "conversion": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 0,
+          "unique_gold_rate": 0.0,
+          "empty_n": 3,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 0,
+          "would_regrill_n": 3,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 1,
+          "unique_gold_rate": 0.3333,
+          "empty_n": 2,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 1,
+          "would_regrill_n": 2,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 1,
+          "same": 2,
+          "farther": 0
+        }
+      },
+      "missing_char": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 0,
+          "same": 3,
+          "farther": 0
+        }
+      },
+      "particle_drop": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 0,
+          "same": 3,
+          "farther": 0
+        }
+      },
+      "colloquial": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 1,
+          "unique_gold_rate": 0.3333,
+          "empty_n": 2,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 1,
+          "would_regrill_n": 2,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 2,
+          "unique_gold_rate": 0.6667,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 1,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 2,
+          "would_regrill_n": 1,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 2,
+          "same": 1,
+          "farther": 0
+        }
+      },
+      "filler": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 0,
+          "same": 3,
+          "farther": 0
+        }
+      },
+      "restatement": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 0,
+          "unique_gold_rate": 0.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 3,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 0,
+          "would_regrill_n": 3,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 3,
+          "unique_gold_rate": 1.0,
+          "empty_n": 0,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 3,
+          "would_regrill_n": 0,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 3,
+          "same": 0,
+          "farther": 0
+        }
+      },
+      "asr_like": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 0,
+          "unique_gold_rate": 0.0,
+          "empty_n": 3,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 0,
+          "would_regrill_n": 3,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 1,
+          "unique_gold_rate": 0.3333,
+          "empty_n": 1,
+          "ambiguous_includes_gold_n": 1,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 1,
+          "would_regrill_n": 2,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 2,
+          "same": 1,
+          "farther": 0
+        }
+      },
+      "demonstrative": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 2,
+          "unique_gold_rate": 0.6667,
+          "empty_n": 1,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 2,
+          "would_regrill_n": 1,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 2,
+          "unique_gold_rate": 0.6667,
+          "empty_n": 1,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 2,
+          "would_regrill_n": 1,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 0,
+          "same": 3,
+          "farther": 0
+        }
+      },
+      "compound": {
+        "raw": {
+          "n": 3,
+          "unique_gold_n": 0,
+          "unique_gold_rate": 0.0,
+          "empty_n": 3,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 0,
+          "would_regrill_n": 3,
+          "would_wrong_read_n": 0
+        },
+        "translated": {
+          "n": 3,
+          "unique_gold_n": 1,
+          "unique_gold_rate": 0.3333,
+          "empty_n": 2,
+          "ambiguous_includes_gold_n": 0,
+          "ambiguous_no_gold_n": 0,
+          "unique_wrong_n": 0,
+          "would_select_n": 1,
+          "would_regrill_n": 2,
+          "would_wrong_read_n": 0
+        },
+        "progress": {
+          "closer": 1,
+          "same": 2,
+          "farther": 0
+        }
+      }
+    }
+  }
+}

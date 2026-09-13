@@ -1,0 +1,33 @@
+{
+  "head": "7e23ad6",
+  "wedge_c_intent": "req-* → canonical projection → domain goal → domain task → verification ref (no evidence yet)",
+  "minimal_required_set": {
+    "A_stable_requirement_identity": {
+      "description": "req-* on structured_requirements rows",
+      "head_status": "HEAD_NATIVE",
+      "artifact": "StructuredRequirement.requirement_id"
+    },
+    "B_requirement_to_runtime_projection": {
+      "description": "requirement_id ↔ completion_condition map on orchestrator",
+      "head_status": "WORKTREE_ONLY",
+      "artifact": "canonical_requirement_projection / sync_canonical_requirement_projection"
+    },
+    "C_persistence_for_rehydration": {
+      "description": "structured_requirements + projection survive mission/snapshot/resume",
+      "head_status": "WORKTREE_ONLY",
+      "artifact": "apply_canonical_requirements_from_state; mission export dirty hunk; sync_canonical_requirements_from_mission"
+    },
+    "D_cross_domain_source_trace": {
+      "description": "Explicit stable link req-* → goal ID → task ID (not string join)",
+      "head_status": "MISSING",
+      "artifact": "Would need new wedge-C adapter joining canonical projection + domain_goal_adoption.goal_id_mapping + task_graph_projection_sidecar.source_refs — not in HEAD"
+    },
+    "E_snapshot_resume_identity": {
+      "description": "Goal/task/vf sidecar preserved after restore",
+      "head_status": "HEAD_NATIVE",
+      "artifact": "Wedge B task_graph_projection_sidecar in completion_runtime"
+    }
+  },
+  "head_sufficient_for_wedge_c": false,
+  "notes": "HEAD provides req-* model and domain goal/task/sidecar runtimes; canonical projection + req→goal bridge are not on HEAD."
+}

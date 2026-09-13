@@ -1,0 +1,450 @@
+{
+  "kind": "actual_map",
+  "source": "workspace files + tests AST. Not conversation history.",
+  "workspace": "D:\\AI-Agent-worktrees\\current-dev\\research\\grill_observation_v0\\medium_task_reality_v0\\workspace",
+  "components": [
+    {
+      "file": "collision.py",
+      "id": "collision",
+      "functions": [
+        {
+          "name": "empty_grid",
+          "args": [],
+          "calls": [
+            "range",
+            "range"
+          ]
+        },
+        {
+          "name": "occupied_cells",
+          "args": [
+            "piece"
+          ],
+          "calls": [
+            "int",
+            "int",
+            "enumerate",
+            "get",
+            "enumerate",
+            "get",
+            "get"
+          ]
+        },
+        {
+          "name": "collides",
+          "args": [
+            "piece",
+            "grid"
+          ],
+          "calls": [
+            "occupied_cells"
+          ]
+        }
+      ],
+      "workspace_imports": []
+    },
+    {
+      "file": "game_over.py",
+      "id": "game_over",
+      "functions": [
+        {
+          "name": "is_game_over",
+          "args": [
+            "kind",
+            "grid"
+          ],
+          "calls": [
+            "collides",
+            "spawn"
+          ]
+        }
+      ],
+      "workspace_imports": [
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.collision",
+          "names": "collides"
+        },
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.tetromino",
+          "names": "spawn"
+        }
+      ]
+    },
+    {
+      "file": "line_clear.py",
+      "id": "line_clear",
+      "functions": [
+        {
+          "name": "clear_full_lines",
+          "args": [
+            "grid"
+          ],
+          "calls": [
+            "len",
+            "list",
+            "len",
+            "len",
+            "len",
+            "len",
+            "insert",
+            "all"
+          ]
+        },
+        {
+          "name": "add_score",
+          "args": [
+            "score",
+            "lines_cleared"
+          ],
+          "calls": [
+            "int",
+            "int"
+          ]
+        }
+      ],
+      "workspace_imports": []
+    },
+    {
+      "file": "movement.py",
+      "id": "movement",
+      "functions": [
+        {
+          "name": "try_move",
+          "args": [
+            "piece",
+            "grid",
+            "dx",
+            "dy"
+          ],
+          "calls": [
+            "collides",
+            "get",
+            "get",
+            "int",
+            "int",
+            "int",
+            "int",
+            "get",
+            "get"
+          ]
+        },
+        {
+          "name": "try_rotate",
+          "args": [
+            "piece",
+            "grid"
+          ],
+          "calls": [
+            "collides",
+            "get",
+            "rotate",
+            "get",
+            "get",
+            "get"
+          ]
+        },
+        {
+          "name": "fall_due",
+          "args": [
+            "now_ms",
+            "last_fall_ms",
+            "interval_ms"
+          ],
+          "calls": [
+            "int",
+            "int",
+            "int"
+          ]
+        }
+      ],
+      "workspace_imports": [
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.collision",
+          "names": "collides"
+        },
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.tetromino",
+          "names": "rotate"
+        }
+      ]
+    },
+    {
+      "file": "tetromino.py",
+      "id": "tetromino",
+      "functions": [
+        {
+          "name": "rotate",
+          "args": [
+            "shape"
+          ],
+          "calls": [
+            "list",
+            "zip"
+          ]
+        },
+        {
+          "name": "spawn",
+          "args": [
+            "kind"
+          ],
+          "calls": [
+            "KeyError",
+            "deepcopy"
+          ]
+        }
+      ],
+      "workspace_imports": []
+    },
+    {
+      "file": "window_loop.py",
+      "id": "window_loop",
+      "functions": [
+        {
+          "name": "init_window",
+          "args": [],
+          "calls": [
+            "init",
+            "set_mode"
+          ]
+        },
+        {
+          "name": "handle_events",
+          "args": [],
+          "calls": [
+            "get"
+          ]
+        },
+        {
+          "name": "update",
+          "args": [],
+          "calls": [
+            "clear_full_lines",
+            "add_score"
+          ]
+        },
+        {
+          "name": "draw",
+          "args": [
+            "screen"
+          ],
+          "calls": [
+            "flip"
+          ]
+        },
+        {
+          "name": "run_one_iteration",
+          "args": [
+            "screen"
+          ],
+          "calls": [
+            "handle_events",
+            "update",
+            "draw"
+          ]
+        },
+        {
+          "name": "shutdown",
+          "args": [],
+          "calls": [
+            "quit"
+          ]
+        },
+        {
+          "name": "run_forever",
+          "args": [],
+          "calls": [
+            "init_window",
+            "shutdown",
+            "run_one_iteration"
+          ]
+        }
+      ],
+      "workspace_imports": [
+        {
+          "module": "workspace.line_clear",
+          "names": "clear_full_lines,add_score"
+        }
+      ]
+    }
+  ],
+  "import_edges": [
+    {
+      "from": "game_over",
+      "to_module": "research.grill_observation_v0.medium_task_reality_v0.workspace.collision",
+      "names": "collides"
+    },
+    {
+      "from": "game_over",
+      "to_module": "research.grill_observation_v0.medium_task_reality_v0.workspace.tetromino",
+      "names": "spawn"
+    },
+    {
+      "from": "movement",
+      "to_module": "research.grill_observation_v0.medium_task_reality_v0.workspace.collision",
+      "names": "collides"
+    },
+    {
+      "from": "movement",
+      "to_module": "research.grill_observation_v0.medium_task_reality_v0.workspace.tetromino",
+      "names": "rotate"
+    },
+    {
+      "from": "window_loop",
+      "to_module": "workspace.line_clear",
+      "names": "clear_full_lines,add_score"
+    }
+  ],
+  "call_edges": [
+    {
+      "from_file": "game_over",
+      "from_fn": "is_game_over",
+      "to_file": "collision",
+      "to_fn": "collides"
+    },
+    {
+      "from_file": "game_over",
+      "from_fn": "is_game_over",
+      "to_file": "tetromino",
+      "to_fn": "spawn"
+    },
+    {
+      "from_file": "movement",
+      "from_fn": "try_move",
+      "to_file": "collision",
+      "to_fn": "collides"
+    },
+    {
+      "from_file": "movement",
+      "from_fn": "try_rotate",
+      "to_file": "collision",
+      "to_fn": "collides"
+    },
+    {
+      "from_file": "movement",
+      "from_fn": "try_rotate",
+      "to_file": "tetromino",
+      "to_fn": "rotate"
+    },
+    {
+      "from_file": "window_loop",
+      "from_fn": "update",
+      "to_file": "line_clear",
+      "to_fn": "clear_full_lines"
+    },
+    {
+      "from_file": "window_loop",
+      "from_fn": "update",
+      "to_file": "line_clear",
+      "to_fn": "add_score"
+    }
+  ],
+  "tests": [
+    {
+      "file": "test_collision_gap.py",
+      "workspace_imports": [
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace",
+          "names": "collision"
+        },
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.tetromino",
+          "names": "spawn"
+        }
+      ]
+    },
+    {
+      "file": "test_game_over_gap.py",
+      "workspace_imports": [
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.collision",
+          "names": "empty_grid"
+        },
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.game_over",
+          "names": "is_game_over"
+        }
+      ]
+    },
+    {
+      "file": "test_line_clear_gap.py",
+      "workspace_imports": [
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.collision",
+          "names": "empty_grid"
+        },
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.line_clear",
+          "names": "add_score,clear_full_lines"
+        }
+      ]
+    },
+    {
+      "file": "test_medium_task_v0.py",
+      "workspace_imports": [
+        {
+          "module": "workspace.window_loop",
+          "names": "update,grid,score"
+        }
+      ]
+    },
+    {
+      "file": "test_movement_gap.py",
+      "workspace_imports": [
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.collision",
+          "names": "empty_grid"
+        },
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.movement",
+          "names": "fall_due,try_move,try_rotate"
+        },
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace.tetromino",
+          "names": "SHAPES,spawn"
+        }
+      ]
+    },
+    {
+      "file": "test_tetromino_gap.py",
+      "workspace_imports": [
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace",
+          "names": "tetromino"
+        }
+      ]
+    },
+    {
+      "file": "test_window_loop_gap.py",
+      "workspace_imports": [
+        {
+          "module": "research.grill_observation_v0.medium_task_reality_v0.workspace",
+          "names": "window_loop"
+        }
+      ]
+    }
+  ],
+  "unconnected_paths": [
+    {
+      "component": "game_over",
+      "fact": "no other workspace component imports or calls this module"
+    },
+    {
+      "component": "movement",
+      "fact": "no other workspace component imports or calls this module"
+    }
+  ],
+  "tested_range": [
+    "test_collision_gap.py",
+    "test_game_over_gap.py",
+    "test_line_clear_gap.py",
+    "test_medium_task_v0.py",
+    "test_movement_gap.py",
+    "test_tetromino_gap.py",
+    "test_window_loop_gap.py"
+  ],
+  "env": {
+    "python": "3.10.11",
+    "pygame_import_ok": true,
+    "pygame_version": "2.5.0"
+  }
+}

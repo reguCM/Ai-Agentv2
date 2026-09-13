@@ -1,0 +1,79 @@
+{
+  "tool_id": "local:get_gpu_status",
+  "name": "get_gpu_status",
+  "version": "1.0.0",
+  "description": "GPUの基本状態を取得する。GPUモデル、温度、使用率、VRAM使用量を nvidia-smi から実測する。取得不能時は unknown/unavailable を返し固定値へフォールバックしない。",
+  "provider": "local",
+  "source": "registry/tools.json",
+  "capability": ["GPU", "VRAM", "温度", "使用率", "observation"],
+  "purpose": "nvidia-smi から GPU 基本メトリクスを実測して返す",
+  "allowed_operations": ["read"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "gpu": {},
+      "temperature": {},
+      "utilization": {},
+      "vram_used": {},
+      "vram_total": {},
+      "ok": { "type": "boolean" },
+      "status": {},
+      "error": {},
+      "observation_source": { "const": "real" },
+      "source": {}
+    }
+  },
+  "success_format": "ok=true かつ nvidia-smi 由来のフィールドが埋まる",
+  "error_format": {
+    "ok": false,
+    "status": "error|unavailable",
+    "error": "string|null",
+    "observation_source": "real"
+  },
+  "side_effect": "read_only",
+  "required_permission": ["visibility:agent"],
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "external_service_access": ["nvidia-smi"],
+  "risk_level": "low",
+  "expected_failure": ["nvidia-smi not found", "no GPU", "parse error"],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": ["NVIDIA GPU + nvidia-smi 必須"],
+  "cost": "free",
+  "tool_status": "available",
+  "catalog_hints": {
+    "experiment_status": "tested",
+    "adoption_status": "approved"
+  },
+  "contract": {
+    "can": [
+      "read_gpu_metrics_via_nvidia_smi",
+      "return_unknown_on_observation_failure"
+    ],
+    "cannot": [
+      "fabricate_gpu_values",
+      "write_to_filesystem",
+      "call_network_apis"
+    ],
+    "must": [
+      "set_observation_source_real",
+      "include_ok_status_error_fields"
+    ],
+    "must_not": [
+      "fallback_to_hardcoded_temperature_or_utilization"
+    ]
+  },
+  "provider_specific": {
+    "module": "tools.system.gpu.gpu_status",
+    "function": "get_gpu_status",
+    "registry_visibility": "agent",
+    "registry_observation_source": "real"
+  }
+}

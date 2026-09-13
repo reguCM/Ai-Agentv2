@@ -1,0 +1,56 @@
+{
+  "label": "humanize_q2",
+  "prompt": {
+    "system": "あなたは内部 Decision を人間向けの1問へ逆変換する役です。\n技術用語の言い換えだけで終わらせない。\n人間にとって何が変わるか（使い方 / 見た目 / 体験 / 要求の違い）へ変換する。\n一度に1問。コードは書かない。人間の回答を作らない。JSON のみ返す。\n\n候補は有力なものだけ。推奨を1つ付け、短い理由を付ける。\n",
+    "user": "# Goal\nこのPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。\n\n# Current system state\n{\n  \"goal\": \"このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。\",\n  \"environment_facts\": {\n    \"os\": \"Windows-10-10.0.26200-SP0\",\n    \"python\": \"3.10.11\",\n    \"workspace\": \"AI-Agent development worktree (not a blank game project)\",\n    \"local_llm\": \"Ollama is used by this experiment runner\",\n    \"note\": \"A simple Tetris that runs on this PC. Do not ask OS/runtime facts already listed.\"\n  },\n  \"human_requirements\": [\n    {\n      \"id\": \"goal_text\",\n      \"text\": \"このPC環境で動く、簡単なテトリスを作りたい。適切な実現方法・技術的な候補はAI側で考えてください。\",\n      \"source\": \"parent_run.goal\"\n    }\n  ],\n  \"confirmed_decisions\": [\n    {\n      \"id\": \"lib_choice\",\n      \"title\": \"ゲーム開発に使用するPythonライブラリの選定\",\n      \"value\": \"Pygame\",\n      \"status\": \"confirmed\",\n      \"decided_by\": \"AI\",\n      \"reason\": \"2Dゲーム開発に特化したライブラリで、テトリスのようなシンプルなゲームに最適\",\n      \"evidence\": {\n        \"source\": \"recommendation\",\n        \"parent_run_id\": \"20260909T003636Z\",\n        \"option_id\": \"A\",\n        \"decision_basis\": \"recommendation\",\n        \"llm_adopt_value\": \"Pygame\"\n      },\n      \"human_confirmed\": false\n    },\n    {\n      \"id\": \"game_mechanics\",\n      \"title\": \"ゲームメカニクスの設計\",\n      \"value\": \"標準テトリスルールに基づく実装（I/O操作、ピースの移動・回転、線の消去処理）\",\n      \"status\": \"confirmed\",\n      \"decided_by\": \"AI\",\n      \"reason\": \"標準ルールは実装可能性が高く、テトリスの基本動作を担保する\",\n      \"evidence\": {\n        \"source\": \"internal_reeval\",\n        \"evidence\": \"Pygameのドキュメントおよびテトリスの公式ルール書に基づく\",\n        \"comparison_n\": 1\n      },\n      \"human_confirmed\": false\n    },\n    {\n      \"id\": \"scoring_system\",\n      \"title\": \"スコアリングシステム\",\n      \"value\": \"1行消去:100点, 2行:300点, 3行:500点, 4行:800点。レベルは1000点ごとに+1\",\n      \"status\": \"confirmed\",\n      \"decided_by\": \"AI\",\n      \"reason\": \"標準テトリスのスコアリングを簡略化し、ゲームバランスを維持しつつ実装が容易\",\n      \"evidence\": {\n        \"source\": \"internal_reeval\",\n        \"evidence\": \"テトリス公式ルール書およびオープンソーステトリス実装のスコア計算方法を参考\",\n        \"comparison_n\": 2\n      },\n      \"human_confirmed\": false\n    },\n    {\n      \"id\": \"difficulty_scaling\",\n      \"title\": \"難易度スケーリング\",\n      \"value\": \"レベルが上がるごとにピースの落下速度が10%ずつ増加（最大レベル10で50%増加）\",\n      \"status\": \"confirmed\",\n      \"decided_by\": \"AI\",\n      \"reason\": \"テトリスの標準的な難易度調整を簡略化し、ゲームバランスを維持\",\n      \"evidence\": {\n        \"source\": \"internal_reeval\",\n        \"evidence\": \"テトリス公式ルール書およびオープンソーステトリス実装の速度調整方法を参考\",\n        \"comparison_n\": 3\n      },\n      \"human_confirmed\": false\n    },\n    {\n      \"id\": \"resolution_settings\",\n      \"title\": \"解像度設定\",\n      \"value\": \"800x600 (Pygameのデフォルトスケーリング)\",\n      \"status\": \"confirmed\",\n      \"decided_by\": \"AI\",\n      \"reason\": \"PC環境に適した標準解像度で、Pygameのデフォルト設定と互換性がある\",\n      \"evidence\": {\n        \"source\": \"internal_reeval\",\n        \"evidence\": \"PygameのドキュメントおよびWindows 10環境の一般的なゲーム解像度を参考\",\n        \"comparison_n\": 4\n      },\n      \"human_confirmed\": false\n    }\n  ],\n  \"assumptions\": [],\n  \"unresolved\": [\n    {\n      \"id\": \"ui_design\",\n      \"title\": \"ユーザーインターフェース設計\",\n      \"text\": \"画面レイアウト・色・UI要素の詳細が未確定\",\n      \"goal_impact\": \"medium\",\n      \"human_intent_required\": true,\n      \"human_impact\": \"high\",\n      \"rollback_impact\": \"high\",\n      \"cross_cutting_impact\": \"medium\",\n      \"ai_decidable\": false,\n      \"why\": \"視覚的体験に直接影響し、ユーザーの好みに依存\"\n    }\n  ],\n  \"delegated\": []\n}\n\n# Selected unresolved region (ask human)\n{\n  \"id\": \"ui_design\",\n  \"title\": \"ユーザーインターフェース設計\",\n  \"text\": \"画面レイアウト・色・UI要素の詳細が未確定\",\n  \"goal_impact\": \"medium\",\n  \"human_intent_required\": true,\n  \"human_impact\": \"high\",\n  \"rollback_impact\": \"high\",\n  \"cross_cutting_impact\": \"medium\",\n  \"ai_decidable\": false,\n  \"why\": \"視覚的体験に直接影響し、ユーザーの好みに依存\"\n}\n\n# Comparison that led to this choice\nUI設計は唯一の未確定領域で、ユーザー体験に最も直接的な影響を与える。他の技術的要素は既に確定しているため、この領域が次の焦点\n\nこの領域を、人間が判断できる1問へ逆変換せよ。\n技術手段の名前を聞く形にしない。体験・見た目・使い方・要求の差にする。\n特定の質問文を正解として再現する必要はない。\n出力JSONの形:\n{\n  \"why_ask_human\": \"今回Humanへ確認する理由\",\n  \"technical_decision\": \"内部で扱っていた Decision の要約\",\n  \"what_changes_for_human\": \"人間にとって何が変わるか\",\n  \"conversion_notes\": \"Technical から Human へどう変換したか\",\n  \"focus_item\": {\n    \"id\": \"short_id\",\n    \"title\": \"人間向けの項目名\",\n    \"why_now\": \"なぜ今これを決めるか\"\n  },\n  \"question\": \"人間向けの質問文（1問）\",\n  \"options\": [\n    {\n      \"id\": \"A\",\n      \"label\": \"短い名前\",\n      \"description\": \"使い方・見た目・体験の違い\"\n    }\n  ],\n  \"recommendation\": {\n    \"id\": \"A\",\n    \"reason\": \"短い理由\"\n  }\n}"
+  },
+  "raw_response": "{\n  \"why_ask_human\": \"UIの視覚的設計はユーザー体験に直接影響し、技術的制約を超えた主観的判断が必要\",\n  \"technical_decision\": \"UI要素の視覚設計が未確定\",\n  \"what_changes_for_human\": \"ゲームの見た目・操作感覚・集中力維持に直接影響\",\n  \"conversion_notes\": \"技術的要件（色コード/レイアウト構造）から、ユーザーにとっての体験差（ストレス/視認性/操作性）へ再定義\",\n  \"focus_item\": {\n    \"id\": \"ui_design\",\n    \"title\": \"ゲーム画面の視覚的設計方針\",\n    \"why_now\": \"既存技術選択が確定した段階で、ユーザー体験を決定付ける要素\"\n  },\n  \"question\": \"テトリスの画面デザインで最も重視すべき要素は？\\n1. クラシックな色使い（赤/青/黄色）\\n2. 現代的なグリッドデザイン\\n3. 高コントラストの視覚的アクセント\",\n  \"options\": [\n    {\n      \"id\": \"A\",\n      \"label\": \"クラシックスタイル\",\n      \"description\": \"伝統的なテトリスの色使いで、操作性を最優先\"\n    },\n    {\n      \"id\": \"B\",\n      \"label\": \"モダンスタイル\",\n      \"description\": \"グリッドの視認性を高めたデザイン\"\n    },\n    {\n      \"id\": \"C\",\n      \"label\": \"アクセントスタイル\",\n      \"description\": \"高コントラストで視覚的興味を引き出す\"\n    }\n  ],\n  \"recommendation\": {\n    \"id\": \"A\",\n    \"reason\": \"最も実装が容易で、テトリスのアイデンティティを維持\"\n  }\n}",
+  "elapsed_s": 45.352,
+  "error": null,
+  "parse_error": null,
+  "parsed": {
+    "why_ask_human": "UIの視覚的設計はユーザー体験に直接影響し、技術的制約を超えた主観的判断が必要",
+    "technical_decision": "UI要素の視覚設計が未確定",
+    "what_changes_for_human": "ゲームの見た目・操作感覚・集中力維持に直接影響",
+    "conversion_notes": "技術的要件（色コード/レイアウト構造）から、ユーザーにとっての体験差（ストレス/視認性/操作性）へ再定義",
+    "focus_item": {
+      "id": "ui_design",
+      "title": "ゲーム画面の視覚的設計方針",
+      "why_now": "既存技術選択が確定した段階で、ユーザー体験を決定付ける要素"
+    },
+    "question": "テトリスの画面デザインで最も重視すべき要素は？\n1. クラシックな色使い（赤/青/黄色）\n2. 現代的なグリッドデザイン\n3. 高コントラストの視覚的アクセント",
+    "options": [
+      {
+        "id": "A",
+        "label": "クラシックスタイル",
+        "description": "伝統的なテトリスの色使いで、操作性を最優先"
+      },
+      {
+        "id": "B",
+        "label": "モダンスタイル",
+        "description": "グリッドの視認性を高めたデザイン"
+      },
+      {
+        "id": "C",
+        "label": "アクセントスタイル",
+        "description": "高コントラストで視覚的興味を引き出す"
+      }
+    ],
+    "recommendation": {
+      "id": "A",
+      "reason": "最も実装が容易で、テトリスのアイデンティティを維持"
+    }
+  },
+  "selected_region": {
+    "id": "ui_design",
+    "title": "ユーザーインターフェース設計",
+    "text": "画面レイアウト・色・UI要素の詳細が未確定",
+    "goal_impact": "medium",
+    "human_intent_required": true,
+    "human_impact": "high",
+    "rollback_impact": "high",
+    "cross_cutting_impact": "medium",
+    "ai_decidable": false,
+    "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+  }
+}

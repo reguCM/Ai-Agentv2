@@ -1,0 +1,47 @@
+{
+  "id": "proposal_cpu_usage_percent",
+  "note": "Proposal 生成の孤立ベンチ。STATE 固定。要求は CPU使用率（%）。",
+  "request": "WindowsのCPU使用率を取得するToolを作ってください。",
+  "state": {
+    "task": "WindowsのCPU使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "WindowsのCPU使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "expected": {
+    "category": "system",
+    "subcategory_contains": "cpu",
+    "module_pattern": "tools\\.system\\..+\\..+",
+    "function_present": true,
+    "output_includes": "status",
+    "name_present": true
+  }
+}
+

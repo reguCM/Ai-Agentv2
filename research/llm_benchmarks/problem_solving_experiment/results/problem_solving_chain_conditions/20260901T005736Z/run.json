@@ -1,0 +1,186 @@
+{
+  "experiment": "problem_solving_chain_conditions",
+  "note": "When does investigation start and follow file references. Not FA. Mapping is not a spec. Existing results not modified.",
+  "at": "2026-09-01T00:57:36.307715+00:00",
+  "prompt_header": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.",
+  "max_turns": 5,
+  "cases": [
+    "F1_S1",
+    "F2_S1",
+    "F2_S2",
+    "F2_S3",
+    "F3_S2",
+    "F6_S1",
+    "F6_S2"
+  ],
+  "models": [
+    "deepseek-coder-v2:16b",
+    "qwen3:14b"
+  ],
+  "models_run": [
+    {
+      "model": "deepseek-coder-v2:16b",
+      "cases": [
+        {
+          "id": "F1_S1",
+          "call_ok": true,
+          "turns": 2,
+          "tool_turns": 1,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": true,
+          "multi_step_investigation": false,
+          "premature_repair": false
+        },
+        {
+          "id": "F2_S1",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": true
+        },
+        {
+          "id": "F2_S2",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": true,
+          "multi_step_investigation": false,
+          "premature_repair": true
+        },
+        {
+          "id": "F2_S3",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": true,
+          "multi_step_investigation": false,
+          "premature_repair": true
+        },
+        {
+          "id": "F3_S2",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": true
+        },
+        {
+          "id": "F6_S1",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": true
+        },
+        {
+          "id": "F6_S2",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": true
+        }
+      ]
+    },
+    {
+      "model": "qwen3:14b",
+      "cases": [
+        {
+          "id": "F1_S1",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": false,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": false
+        },
+        {
+          "id": "F2_S1",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": false
+        },
+        {
+          "id": "F2_S2",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": false
+        },
+        {
+          "id": "F2_S3",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": false,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": false
+        },
+        {
+          "id": "F3_S2",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": true,
+          "multi_step_investigation": false,
+          "premature_repair": false
+        },
+        {
+          "id": "F6_S1",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": true,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": false
+        },
+        {
+          "id": "F6_S2",
+          "call_ok": true,
+          "turns": 1,
+          "tool_turns": 0,
+          "stop_reason": "no_mappable_file_request",
+          "investigation_started": false,
+          "file_request_observed": false,
+          "multi_step_investigation": false,
+          "premature_repair": false
+        }
+      ]
+    }
+  ]
+}

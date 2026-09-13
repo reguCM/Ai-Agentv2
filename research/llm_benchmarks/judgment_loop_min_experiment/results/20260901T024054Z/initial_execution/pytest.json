@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-m",
+    "pytest",
+    "tests/test_main.py",
+    "-q"
+  ],
+  "working_directory": "D:\\AI-Agent\\research\\llm_benchmarks\\judgment_loop_min_experiment\\results\\20260901T024054Z\\fixture",
+  "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n_____________________________ test_assemble_order _____________________________\n\n    def test_assemble_order():\n>       order = assemble_order()\n\ntests\\test_main.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\nmain.py:9: in assemble_order\n    \"item\": pick_item(items, 2),\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nitems = ['draft'], index = 2\n\n    def pick_item(items, index):\n>       return items[index]\nE       IndexError: list index out of range\n\nhelper.py:10: IndexError\n=========================== short test summary info ===========================\nFAILED tests/test_main.py::test_assemble_order - IndexError: list index out o...\n1 failed in 0.07s\n",
+  "stderr": "",
+  "exit_code": 1,
+  "traceback": "",
+  "execution_time": 0.5544056999788154
+}

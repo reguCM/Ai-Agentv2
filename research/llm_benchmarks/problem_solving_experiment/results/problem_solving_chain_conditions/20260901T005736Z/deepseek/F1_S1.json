@@ -1,0 +1,312 @@
+{
+  "experiment": "problem_solving_chain_conditions",
+  "model": "deepseek-coder-v2:16b",
+  "case_id": "F1_S1",
+  "family": "F1",
+  "source_level": "S1",
+  "fixture": "f1_direct",
+  "case_note": "traceback に helper.py が出る直接参照",
+  "initial_failure": {
+    "tool_name": "f1_direct",
+    "status": "fail",
+    "error_type": "IndexError",
+    "error": "list index out of range"
+  },
+  "initial_prompt": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"f1_direct\",\n  \"status\": \"fail\",\n  \"error_type\": \"IndexError\",\n  \"error\": \"list index out of range\"\n}\n\ntraceback:\nTraceback (most recent call last):\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\main.py\", line 9, in <module>\n    print(run())\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\main.py\", line 5, in run\n    return {\"status\": pick_status()}\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\helper.py\", line 3, in pick_status\n    return rows[2]\nIndexError: list index out of range\n",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\main.py\", line 9, in <module>\n    print(run())\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\main.py\", line 5, in run\n    return {\"status\": pick_status()}\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\helper.py\", line 3, in pick_status\n    return rows[2]\nIndexError: list index out of range",
+  "source_files_in_prompt": [],
+  "prompt_header": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.",
+  "turns": [
+    {
+      "turn_index": 1,
+      "llm_input": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"f1_direct\",\n  \"status\": \"fail\",\n  \"error_type\": \"IndexError\",\n  \"error\": \"list index out of range\"\n}\n\ntraceback:\nTraceback (most recent call last):\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\main.py\", line 9, in <module>\n    print(run())\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\main.py\", line 5, in run\n    return {\"status\": pick_status()}\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\helper.py\", line 3, in pick_status\n    return rows[2]\nIndexError: list index out of range\n",
+      "llm_output": "The error message indicates that there is an `IndexError` which means that the code is trying to access an index in a list that does not exist. Specifically, the error occurs in the `pick_status` function, where the code is attempting to access the third element (index 2) of the `rows` list without checking if the list has enough elements.\n\nThe traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9.\n- The `run` function is called, which is defined in `main.py` at line 5.\n- The `run` function returns a dictionary containing the result of the `pick_status` function, which is defined in `helper.py` at line 3.\n- The `pick_status` function tries to access the third element of the `rows` list, but `rows` is not defined or initialized anywhere in the provided code snippet.\n\nThis means that the `rows` list is either empty or not properly initialized before being accessed, leading to the `IndexError`.\n\nTo fix this issue, you need to ensure that the `rows` list is properly initialized and contains at least three elements before attempting to access the third element. You can do this by initializing the `rows` list with at least three elements or by adding a check to ensure that the list has enough elements before accessing it.",
+      "llm_investigation": {
+        "raw_output": "The error message indicates that there is an `IndexError` which means that the code is trying to access an index in a list that does not exist. Specifically, the error occurs in the `pick_status` function, where the code is attempting to access the third element (index 2) of the `rows` list without checking if the list has enough elements.\n\nThe traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9.\n- The `run` function is called, which is defined in `main.py` at line 5.\n- The `run` function returns a dictionary containing the result of the `pick_status` function, which is defined in `helper.py` at line 3.\n- The `pick_status` function tries to access the third element of the `rows` list, but `rows` is not defined or initialized anywhere in the provided code snippet.\n\nThis means that the `rows` list is either empty or not properly initialized before being accessed, leading to the `IndexError`.\n\nTo fix this issue, you need to ensure that the `rows` list is properly initialized and contains at least three elements before attempting to access the third element. You can do this by initializing the `rows` list with at least three elements or by adding a check to ensure that the list has enough elements before accessing it.",
+        "raw_request_excerpts": [
+          "Specifically, the error occurs in the `pick_status` function, where the code is attempting to access the third element (index 2) of the `rows` list without checking if the list has enough elements.",
+          "The traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9.",
+          "To fix this issue, you need to ensure that the `rows` list is properly initialized and contains at least three elements before attempting to access the third element.",
+          "You can do this by initializing the `rows` list with at least three elements or by adding a check to ensure that the list has enough elements before accessing it."
+        ],
+        "py_filenames_as_written": [
+          "main.py",
+          "main.py",
+          "helper.py"
+        ]
+      },
+      "mapping": {
+        "mapped": [
+          {
+            "tool_selected": "read_file",
+            "tool_arguments": {
+              "path": "research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py"
+            },
+            "mapping_input_excerpt": "The traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9.",
+            "mapping_note": "experiment continuation only: fixture basename near request-like words in the same chunk. not a schema."
+          }
+        ],
+        "not_converted": [
+          {
+            "reason": "filename_in_chunk_without_request_words",
+            "excerpt": "- The `run` function is called, which is defined in `main.py` at line 5.",
+            "raw": "main.py"
+          },
+          {
+            "reason": "filename_in_chunk_without_request_words",
+            "excerpt": "- The `run` function returns a dictionary containing the result of the `pick_status` function, which is defined in `helper.py` at line 3.",
+            "raw": "helper.py"
+          }
+        ],
+        "search_files_used": false
+      },
+      "requested_information": [
+        "Specifically, the error occurs in the `pick_status` function, where the code is attempting to access the third element (index 2) of the `rows` list without checking if the list has enough elements.",
+        "The traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9.",
+        "To fix this issue, you need to ensure that the `rows` list is properly initialized and contains at least three elements before attempting to access the third element.",
+        "You can do this by initializing the `rows` list with at least three elements or by adding a check to ensure that the list has enough elements before accessing it."
+      ],
+      "tool_selected": "read_file",
+      "tool_arguments": {
+        "path": "research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py"
+      },
+      "tool_result": {
+        "ok": true,
+        "path": "research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py",
+        "size_bytes": 136,
+        "total_lines": 9,
+        "offset": 1,
+        "limit": null,
+        "returned_lines": 9,
+        "lines": [
+          {
+            "line": 1,
+            "text": "from helper import pick_status"
+          },
+          {
+            "line": 2,
+            "text": ""
+          },
+          {
+            "line": 3,
+            "text": ""
+          },
+          {
+            "line": 4,
+            "text": "def run():"
+          },
+          {
+            "line": 5,
+            "text": "    return {\"status\": pick_status()}"
+          },
+          {
+            "line": 6,
+            "text": ""
+          },
+          {
+            "line": 7,
+            "text": ""
+          },
+          {
+            "line": 8,
+            "text": "if __name__ == \"__main__\":"
+          },
+          {
+            "line": 9,
+            "text": "    print(run())"
+          }
+        ],
+        "truncated": false,
+        "error": null
+      },
+      "call_ok": true,
+      "error": null,
+      "thinking_observed": false,
+      "tool_result_sent": "{\"ok\": true, \"path\": \"research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py\", \"size_bytes\": 136, \"total_lines\": 9, \"offset\": 1, \"limit\": null, \"returned_lines\": 9, \"lines\": [{\"line\": 1, \"text\": \"from helper import pick_status\"}, {\"line\": 2, \"text\": \"\"}, {\"line\": 3, \"text\": \"\"}, {\"line\": 4, \"text\": \"def run():\"}, {\"line\": 5, \"text\": \"    return {\\\"status\\\": pick_status()}\"}, {\"line\": 6, \"text\": \"\"}, {\"line\": 7, \"text\": \"\"}, {\"line\": 8, \"text\": \"if __name__ == \\\"__main__\\\":\"}, {\"line\": 9, \"text\": \"    print(run())\"}], \"truncated\": false, \"error\": null}",
+      "mapping_input_excerpt": "The traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9."
+    },
+    {
+      "turn_index": 2,
+      "llm_input": "Tool result:\n{\"ok\": true, \"path\": \"research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py\", \"size_bytes\": 136, \"total_lines\": 9, \"offset\": 1, \"limit\": null, \"returned_lines\": 9, \"lines\": [{\"line\": 1, \"text\": \"from helper import pick_status\"}, {\"line\": 2, \"text\": \"\"}, {\"line\": 3, \"text\": \"\"}, {\"line\": 4, \"text\": \"def run():\"}, {\"line\": 5, \"text\": \"    return {\\\"status\\\": pick_status()}\"}, {\"line\": 6, \"text\": \"\"}, {\"line\": 7, \"text\": \"\"}, {\"line\": 8, \"text\": \"if __name__ == \\\"__main__\\\":\"}, {\"line\": 9, \"text\": \"    print(run())\"}], \"truncated\": false, \"error\": null}",
+      "llm_output": "The tool result provides detailed information about the file where the error occurred, including the path, size, total lines, and the specific lines of the file. Here's a breakdown of the key points from the tool result:\n\n1. **Path**: The file path is \"research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py\". This indicates the location of the file where the error is happening.\n\n2. **Size and Total Lines**: The file has a size of 136 bytes and contains 9 lines of code.\n\n3. **Offset and Limit**: The offset is set to 1, which means the result includes lines starting from the second line of the file. The limit is set to null, indicating that all lines from the offset are returned.\n\n4. **Returned Lines**: The tool returned 9 lines of code, which matches the total number of lines in the file.\n\n5. **Lines**: The lines are listed with their respective line numbers and text. The error occurred on line 5 of the file, where the code is:\n   ```python\n   return {\"status\": pick_status()}\n   ```\n   This line is calling the `pick_status` function, which is expected to return a status value.\n\n6. **Truncated**: The result indicates that the file was not truncated, meaning all lines were successfully retrieved.\n\n7. **Error**: There is no error mentioned in the result, which means the tool was able to fetch the file without any issues.\n\nBased on this information, the error is likely due to the `rows` list not being properly initialized or containing fewer than three elements, leading to the `IndexError`. The code snippet provided does not show the initialization or population of the `rows` list, which is necessary to fix the issue.",
+      "llm_investigation": {
+        "raw_output": "The tool result provides detailed information about the file where the error occurred, including the path, size, total lines, and the specific lines of the file. Here's a breakdown of the key points from the tool result:\n\n1. **Path**: The file path is \"research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py\". This indicates the location of the file where the error is happening.\n\n2. **Size and Total Lines**: The file has a size of 136 bytes and contains 9 lines of code.\n\n3. **Offset and Limit**: The offset is set to 1, which means the result includes lines starting from the second line of the file. The limit is set to null, indicating that all lines from the offset are returned.\n\n4. **Returned Lines**: The tool returned 9 lines of code, which matches the total number of lines in the file.\n\n5. **Lines**: The lines are listed with their respective line numbers and text. The error occurred on line 5 of the file, where the code is:\n   ```python\n   return {\"status\": pick_status()}\n   ```\n   This line is calling the `pick_status` function, which is expected to return a status value.\n\n6. **Truncated**: The result indicates that the file was not truncated, meaning all lines were successfully retrieved.\n\n7. **Error**: There is no error mentioned in the result, which means the tool was able to fetch the file without any issues.\n\nBased on this information, the error is likely due to the `rows` list not being properly initialized or containing fewer than three elements, leading to the `IndexError`. The code snippet provided does not show the initialization or population of the `rows` list, which is necessary to fix the issue.",
+        "raw_request_excerpts": [
+          "**Error**: There is no error mentioned in the result, which means the tool was able to fetch the file without any issues.",
+          "The code snippet provided does not show the initialization or population of the `rows` list, which is necessary to fix the issue."
+        ],
+        "py_filenames_as_written": [
+          "/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py"
+        ]
+      },
+      "mapping": {
+        "mapped": [],
+        "not_converted": [
+          {
+            "reason": "already_read",
+            "excerpt": "**Path**: The file path is \"research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py\".",
+            "raw": "/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py"
+          }
+        ],
+        "search_files_used": false
+      },
+      "requested_information": [
+        "**Error**: There is no error mentioned in the result, which means the tool was able to fetch the file without any issues.",
+        "The code snippet provided does not show the initialization or population of the `rows` list, which is necessary to fix the issue."
+      ],
+      "tool_selected": null,
+      "tool_arguments": null,
+      "tool_result": null,
+      "call_ok": true,
+      "error": null,
+      "thinking_observed": false,
+      "stop_reason": "no_mappable_file_request"
+    }
+  ],
+  "investigation_chain": [
+    {
+      "step": "llm_output_1",
+      "text": "The error message indicates that there is an `IndexError` which means that the code is trying to access an index in a list that does not exist. Specifically, the error occurs in the `pick_status` function, where the code is attempting to access the third element (index 2) of the `rows` list without checking if the list has enough elements.\n\nThe traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9.\n- The `run` function is called, which is defined in `main.py` at line 5.\n- The `run` function returns a dictionary containing the result of the `pick_status` function, which is defined in `helper.py` at line 3.\n- The `pick_status` function tries to access the third element of the `rows` list, but `rows` is not defined or initialized anywhere in the provided code snippet.\n\nThis means that the `rows` list is either empty or not properly initialized before being accessed, leading to the `IndexError`.\n\nTo fix this issue, you need to ensure that the `rows` list is properly initialized and contains at least three elements before attempting to access the third element. You can do this by initializing the `rows` list with at least three elements or by adding a check to ensure that the list has enough elements before accessing it."
+    },
+    {
+      "step": "mapping_1",
+      "tool_selected": "read_file",
+      "tool_arguments": {
+        "path": "research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py"
+      },
+      "mapping_input_excerpt": "The traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9."
+    },
+    {
+      "step": "tool_result_1",
+      "result": {
+        "ok": true,
+        "path": "research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py",
+        "size_bytes": 136,
+        "total_lines": 9,
+        "offset": 1,
+        "limit": null,
+        "returned_lines": 9,
+        "lines": [
+          {
+            "line": 1,
+            "text": "from helper import pick_status"
+          },
+          {
+            "line": 2,
+            "text": ""
+          },
+          {
+            "line": 3,
+            "text": ""
+          },
+          {
+            "line": 4,
+            "text": "def run():"
+          },
+          {
+            "line": 5,
+            "text": "    return {\"status\": pick_status()}"
+          },
+          {
+            "line": 6,
+            "text": ""
+          },
+          {
+            "line": 7,
+            "text": ""
+          },
+          {
+            "line": 8,
+            "text": "if __name__ == \"__main__\":"
+          },
+          {
+            "line": 9,
+            "text": "    print(run())"
+          }
+        ],
+        "truncated": false,
+        "error": null
+      }
+    },
+    {
+      "step": "llm_output_2",
+      "text": "The tool result provides detailed information about the file where the error occurred, including the path, size, total lines, and the specific lines of the file. Here's a breakdown of the key points from the tool result:\n\n1. **Path**: The file path is \"research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py\". This indicates the location of the file where the error is happening.\n\n2. **Size and Total Lines**: The file has a size of 136 bytes and contains 9 lines of code.\n\n3. **Offset and Limit**: The offset is set to 1, which means the result includes lines starting from the second line of the file. The limit is set to null, indicating that all lines from the offset are returned.\n\n4. **Returned Lines**: The tool returned 9 lines of code, which matches the total number of lines in the file.\n\n5. **Lines**: The lines are listed with their respective line numbers and text. The error occurred on line 5 of the file, where the code is:\n   ```python\n   return {\"status\": pick_status()}\n   ```\n   This line is calling the `pick_status` function, which is expected to return a status value.\n\n6. **Truncated**: The result indicates that the file was not truncated, meaning all lines were successfully retrieved.\n\n7. **Error**: There is no error mentioned in the result, which means the tool was able to fetch the file without any issues.\n\nBased on this information, the error is likely due to the `rows` list not being properly initialized or containing fewer than three elements, leading to the `IndexError`. The code snippet provided does not show the initialization or population of the `rows` list, which is necessary to fix the issue."
+    }
+  ],
+  "observation_flags": {
+    "investigation_started": true,
+    "file_request_observed": true,
+    "multi_step_investigation": false,
+    "hypothesis_updated": "NOT_SCORED_IN_HARNESS",
+    "premature_repair": false,
+    "note": "experiment log helpers only; not a success schema"
+  },
+  "stop_reason": "no_mappable_file_request",
+  "timestamp": "2026-09-01T00:57:36.362114+00:00",
+  "call_ok": true,
+  "error": null,
+  "temperature": 0.0,
+  "notes": [
+    "chain_conditions",
+    "llm_text_not_rewritten",
+    "mapping_logged_separately",
+    "no_search_files_mapping",
+    "not_a_success_schema",
+    "bodies_leaked={'main.py': False, 'helper.py': False}"
+  ],
+  "observability": {
+    "experiment_start": "2026-09-01T00:57:36.362114+00:00",
+    "experiment_end": "2026-09-01T00:57:49.115740+00:00",
+    "stop_reason": "no_mappable_file_request",
+    "max_turns": 5,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"f1_direct\",\n  \"status\": \"fail\",\n  \"error_type\": \"IndexError\",\n  \"error\": \"list index out of range\"\n}\n\ntraceback:\nTraceback (most recent call last):\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\main.py\", line 9, in <module>\n    print(run())\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\main.py\", line 5, in run\n    return {\"status\": pick_status()}\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\problem_solving_experiment\\fixtures\\chain_conditions\\f1_direct\\helper.py\", line 3, in pick_status\n    return rows[2]\nIndexError: list index out of range\n"
+      },
+      {
+        "role": "assistant",
+        "content": "The error message indicates that there is an `IndexError` which means that the code is trying to access an index in a list that does not exist. Specifically, the error occurs in the `pick_status` function, where the code is attempting to access the third element (index 2) of the `rows` list without checking if the list has enough elements.\n\nThe traceback shows the exact location of the error:\n- The error occurs in the `main.py` file at line 9.\n- The `run` function is called, which is defined in `main.py` at line 5.\n- The `run` function returns a dictionary containing the result of the `pick_status` function, which is defined in `helper.py` at line 3.\n- The `pick_status` function tries to access the third element of the `rows` list, but `rows` is not defined or initialized anywhere in the provided code snippet.\n\nThis means that the `rows` list is either empty or not properly initialized before being accessed, leading to the `IndexError`.\n\nTo fix this issue, you need to ensure that the `rows` list is properly initialized and contains at least three elements before attempting to access the third element. You can do this by initializing the `rows` list with at least three elements or by adding a check to ensure that the list has enough elements before accessing it."
+      },
+      {
+        "role": "user",
+        "content": "Tool result:\n{\"ok\": true, \"path\": \"research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py\", \"size_bytes\": 136, \"total_lines\": 9, \"offset\": 1, \"limit\": null, \"returned_lines\": 9, \"lines\": [{\"line\": 1, \"text\": \"from helper import pick_status\"}, {\"line\": 2, \"text\": \"\"}, {\"line\": 3, \"text\": \"\"}, {\"line\": 4, \"text\": \"def run():\"}, {\"line\": 5, \"text\": \"    return {\\\"status\\\": pick_status()}\"}, {\"line\": 6, \"text\": \"\"}, {\"line\": 7, \"text\": \"\"}, {\"line\": 8, \"text\": \"if __name__ == \\\"__main__\\\":\"}, {\"line\": 9, \"text\": \"    print(run())\"}], \"truncated\": false, \"error\": null}"
+      },
+      {
+        "role": "assistant",
+        "content": "The tool result provides detailed information about the file where the error occurred, including the path, size, total lines, and the specific lines of the file. Here's a breakdown of the key points from the tool result:\n\n1. **Path**: The file path is \"research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py\". This indicates the location of the file where the error is happening.\n\n2. **Size and Total Lines**: The file has a size of 136 bytes and contains 9 lines of code.\n\n3. **Offset and Limit**: The offset is set to 1, which means the result includes lines starting from the second line of the file. The limit is set to null, indicating that all lines from the offset are returned.\n\n4. **Returned Lines**: The tool returned 9 lines of code, which matches the total number of lines in the file.\n\n5. **Lines**: The lines are listed with their respective line numbers and text. The error occurred on line 5 of the file, where the code is:\n   ```python\n   return {\"status\": pick_status()}\n   ```\n   This line is calling the `pick_status` function, which is expected to return a status value.\n\n6. **Truncated**: The result indicates that the file was not truncated, meaning all lines were successfully retrieved.\n\n7. **Error**: There is no error mentioned in the result, which means the tool was able to fetch the file without any issues.\n\nBased on this information, the error is likely due to the `rows` list not being properly initialized or containing fewer than three elements, leading to the `IndexError`. The code snippet provided does not show the initialization or population of the `rows` list, which is necessary to fix the issue."
+      }
+    ],
+    "chat_kwargs": {
+      "model": "deepseek-coder-v2:16b",
+      "tools": "not_used",
+      "keep_alive": "5m",
+      "options": {
+        "num_predict": 2048,
+        "temperature": 0.0,
+        "num_ctx": 4096
+      },
+      "timeout_seconds": 90,
+      "tool_presentation": "none",
+      "kwargs_source": {
+        "harness_chat_call": [
+          "model",
+          "messages"
+        ],
+        "llm_chat_setdefault": [
+          "options",
+          "keep_alive"
+        ],
+        "not_passed": [
+          "tools"
+        ]
+      }
+    },
+    "fixture_dir": "research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct",
+    "fixture_files": {
+      "main.py": "research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/main.py",
+      "helper.py": "research/llm_benchmarks/problem_solving_experiment/fixtures/chain_conditions/f1_direct/helper.py"
+    },
+    "traceback_capture_ok": true
+  }
+}

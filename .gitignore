@@ -1,0 +1,47 @@
+# Common generated artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+logs/
+*.egg-info/
+
+# AI-Agent runtime data
+runs/ai_tool/20*/
+runs/chat_ui/
+runs/agent_tests/
+
+# Operational Mission / Execution / Evidence canonical. Not Git data.
+# Kept out of runs/ because that tree mixes experiment artifacts, Chat sessions,
+# and some Git-tracked run outputs. No retention job is attached to this path.
+local_state/mission_memory/
+
+# Research experiment generated data
+research/llm_benchmarks/research_implement_failures.json
+research/llm_benchmarks/capability_route_dataset/v0/results/
+research/llm_benchmarks/capability_route_dataset/v0/analysis/web_effect_review/search_path_trace/examples/
+research/llm_benchmarks/capability_route_dataset/v0/analysis/web_effect_review/hits_batch_results/
+research/llm_benchmarks/capability_route_dataset/v0/analysis/web_effect_review/pilot_results/
+research/llm_benchmarks/capability_route_dataset/v0/analysis/web_effect_review/search_quality_diagnosis/diagnostic_framework/runs/
+research/llm_benchmarks/problem_solving_experiment/results/problem_solving_real_code/20260901T011427Z/
+research/llm_benchmarks/problem_solving_experiment/results/problem_solving_real_code/**/fixture/
+research/llm_benchmarks/problem_solving_experiment/results/problem_solving_real_code/**/fixture_snapshot/
+research/llm_benchmarks/problem_solving_experiment/results/problem_solving_real_code/**/initial_execution/
+research/llm_benchmarks/problem_solving_experiment/results/problem_solving_rejudgment/**/fixture/
+research/llm_benchmarks/problem_solving_experiment/results/problem_solving_rejudgment/**/initial_execution/
+
+# Temporary workspaces generated inside experiment results
+research/llm_benchmarks/experiment_infrastructure_validation/results/**/workspace/
+research/llm_benchmarks/experiment_infrastructure_validation/results/**/workspace_*/
+research/llm_benchmarks/judgment_action_bridge_experiment/results/**/workspace/
+research/llm_benchmarks/judgment_action_bridge_experiment/results/**/workspace_*/
+research/llm_benchmarks/judgment_layer_experiment/results/**/workspace/
+research/llm_benchmarks/judgment_layer_experiment/results/**/workspace_*/
+research/llm_benchmarks/judgment_layer_llm_connection_experiment/results/**/workspace/
+research/llm_benchmarks/judgment_layer_llm_connection_experiment/results/**/workspace_*/
+research/llm_benchmarks/judgment_loop_min_experiment/results/**/workspace/
+research/llm_benchmarks/judgment_loop_min_experiment/results/**/workspace_*/
+research/llm_benchmarks/problem_solving_experiment/results/**/workspace/
+research/llm_benchmarks/problem_solving_experiment/results/**/workspace_*/
+research/llm_benchmarks/tool_calling_compression_experiment/results/**/workspace/
+research/llm_benchmarks/tool_calling_compression_experiment/results/**/workspace_*/

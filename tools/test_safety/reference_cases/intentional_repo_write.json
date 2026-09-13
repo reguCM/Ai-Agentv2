@@ -1,0 +1,24 @@
+{
+  "reference_case_id": "intentional_repo_write",
+  "description": "Case E — declared repository artifact write; PASS with warning and postflight git flag.",
+  "test_plan": {
+    "plan_id": "intentional_repo_write",
+    "commands": ["python -m pytest tests/example_repo_write.py -q"],
+    "declared_primary_risk_level": "LEVEL_2",
+    "declared_write_scope": ["repository runs/chat_ui/sessions (DECLARED repo write)"],
+    "declared_dimensions": {
+      "llm": "NONE",
+      "filesystem_write": "PRESENT",
+      "git_operation": "NONE",
+      "network": "NONE"
+    }
+  },
+  "expectation": {
+    "shadow_gate_decision": "PASS",
+    "human_decision": "PASS",
+    "human_approval_required": false,
+    "warnings_nonempty": true,
+    "postflight_git_check_required": true,
+    "reason": "declared repo write allowed with postflight requirement"
+  }
+}

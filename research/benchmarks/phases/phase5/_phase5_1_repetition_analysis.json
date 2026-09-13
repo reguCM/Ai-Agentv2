@@ -1,0 +1,967 @@
+{
+  "cases": {
+    "memory_usage": {
+      "case": "memory_usage",
+      "phase4": {
+        "verify_fail_count": 11,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 7,
+        "family_repeat_rate": 0.636,
+        "family_repeat_examples": [
+          {
+            "id": "evt_0525a38e666d",
+            "round": 2,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_7916f2ac85f3",
+            "round": 3,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_fcb8d070e841",
+            "round": 4,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_5a8d383cda2d",
+            "round": 5,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_72b98ba802e0",
+            "round": 6,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          }
+        ],
+        "error_class_counts": {
+          "type_convert": 1,
+          "other": 7,
+          "empty_sample": 3
+        },
+        "max_error_class_streak": 3,
+        "max_error_class_name": "other",
+        "error_class_recurrence": {
+          "other": 7,
+          "empty_sample": 3
+        },
+        "open_question_missing_loops": [
+          {
+            "round": 4,
+            "streak": 3,
+            "missing": [
+              "output 'status' の取得方法",
+              "total physical memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 7,
+            "streak": 3,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 8,
+            "streak": 4,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ]
+          }
+        ],
+        "missing_loop_events": 3,
+        "same_cause_after_command_switch": [],
+        "same_cause_after_switch_count": 0,
+        "ignored_recall_signals": [
+          {
+            "round": 2,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 2,
+            "kind": "same_family_despite_prior",
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ]
+          },
+          {
+            "round": 2,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 2,
+            "kind": "same_family_despite_prior",
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ]
+          },
+          {
+            "round": 2,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 3,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 3,
+            "kind": "same_family_despite_prior",
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ]
+          },
+          {
+            "round": 4,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          }
+        ],
+        "ignored_recall_count": 23,
+        "unique_exact_keys": 8,
+        "unique_families": 1,
+        "dominant_waste": "ignored_recall",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 8,
+          "command_family_repeat": 7,
+          "open_question_loop": 3,
+          "same_cause_after_switch": 0,
+          "ignored_recall": 23
+        },
+        "pass": false,
+        "fail_stage": "research",
+        "rounds": 8,
+        "usable_findings": 0
+      },
+      "phase5": {
+        "verify_fail_count": 10,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 1,
+        "family_repeat_rate": 0.1,
+        "family_repeat_examples": [
+          {
+            "id": "evt_3cf6cff85882",
+            "round": 2,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "type_convert"
+          }
+        ],
+        "error_class_counts": {
+          "type_convert": 2,
+          "empty_sample": 7,
+          "other": 1
+        },
+        "max_error_class_streak": 6,
+        "max_error_class_name": "empty_sample",
+        "error_class_recurrence": {
+          "type_convert": 2,
+          "empty_sample": 7
+        },
+        "open_question_missing_loops": [
+          {
+            "round": 5,
+            "streak": 3,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 8,
+            "streak": 3,
+            "missing": [
+              "total physical memory"
+            ]
+          }
+        ],
+        "missing_loop_events": 2,
+        "same_cause_after_command_switch": [
+          {
+            "id": "evt_3cf6cff85882",
+            "round": 2,
+            "from_command": "powershell",
+            "to_command": "powershell",
+            "error_class": "type_convert"
+          }
+        ],
+        "same_cause_after_switch_count": 1,
+        "ignored_recall_signals": [],
+        "ignored_recall_count": 0,
+        "unique_exact_keys": 3,
+        "unique_families": 2,
+        "dominant_waste": "error_class_recurrence",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 7,
+          "command_family_repeat": 1,
+          "open_question_loop": 2,
+          "same_cause_after_switch": 1,
+          "ignored_recall": 0
+        },
+        "pass": false,
+        "fail_stage": "judge",
+        "rounds": 10,
+        "usable_findings": 0
+      }
+    },
+    "cpu_temperature": {
+      "case": "cpu_temperature",
+      "phase4": {
+        "verify_fail_count": 9,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 0,
+        "family_repeat_rate": 0.0,
+        "family_repeat_examples": [],
+        "error_class_counts": {
+          "type_convert": 2,
+          "empty_sample": 7
+        },
+        "max_error_class_streak": 7,
+        "max_error_class_name": "empty_sample",
+        "error_class_recurrence": {
+          "type_convert": 2,
+          "empty_sample": 7
+        },
+        "open_question_missing_loops": [
+          {
+            "round": 6,
+            "streak": 3,
+            "missing": [
+              "total physical memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 9,
+            "streak": 3,
+            "missing": [
+              "CPU temperature"
+            ]
+          }
+        ],
+        "missing_loop_events": 2,
+        "same_cause_after_command_switch": [
+          {
+            "id": "evt_7449b13a9d12",
+            "round": 2,
+            "from_command": "powershell",
+            "to_command": "powershell",
+            "error_class": "type_convert"
+          }
+        ],
+        "same_cause_after_switch_count": 1,
+        "ignored_recall_signals": [
+          {
+            "round": 2,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 2,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          }
+        ],
+        "ignored_recall_count": 2,
+        "unique_exact_keys": 2,
+        "unique_families": 2,
+        "dominant_waste": "error_class_recurrence",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 7,
+          "command_family_repeat": 0,
+          "open_question_loop": 2,
+          "same_cause_after_switch": 1,
+          "ignored_recall": 2
+        },
+        "pass": false,
+        "fail_stage": "judge",
+        "rounds": 10,
+        "usable_findings": 0
+      },
+      "phase5": {
+        "verify_fail_count": 23,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 0,
+        "family_repeat_rate": 0.0,
+        "family_repeat_examples": [],
+        "error_class_counts": {
+          "type_convert": 2,
+          "empty_sample": 20,
+          "other": 1
+        },
+        "max_error_class_streak": 10,
+        "max_error_class_name": "empty_sample",
+        "error_class_recurrence": {
+          "type_convert": 2,
+          "empty_sample": 20
+        },
+        "open_question_missing_loops": [
+          {
+            "round": 4,
+            "streak": 3,
+            "missing": [
+              "output 'status' の取得方法",
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 7,
+            "streak": 3,
+            "missing": [
+              "method to retrieve Windows CPU temperature",
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          }
+        ],
+        "missing_loop_events": 2,
+        "same_cause_after_command_switch": [
+          {
+            "id": "evt_7bd719e4bca1",
+            "round": 2,
+            "from_command": "powershell",
+            "to_command": "powershell",
+            "error_class": "type_convert"
+          }
+        ],
+        "same_cause_after_switch_count": 1,
+        "ignored_recall_signals": [],
+        "ignored_recall_count": 0,
+        "unique_exact_keys": 3,
+        "unique_families": 3,
+        "dominant_waste": "error_class_recurrence",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 20,
+          "command_family_repeat": 0,
+          "open_question_loop": 2,
+          "same_cause_after_switch": 1,
+          "ignored_recall": 0
+        },
+        "pass": false,
+        "fail_stage": "research",
+        "rounds": 10,
+        "usable_findings": 0
+      }
+    },
+    "disk_usage": {
+      "case": "disk_usage",
+      "phase4": {
+        "verify_fail_count": 18,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 5,
+        "family_repeat_rate": 0.278,
+        "family_repeat_examples": [
+          {
+            "id": "evt_41da5da6e67d",
+            "round": 2,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_001d84c863ca",
+            "round": 3,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_4b908579139d",
+            "round": 4,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_8e1ae95c7a1c",
+            "round": 6,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_52c64f503a3e",
+            "round": 7,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          }
+        ],
+        "error_class_counts": {
+          "other": 6,
+          "empty_sample": 12
+        },
+        "max_error_class_streak": 5,
+        "max_error_class_name": "empty_sample",
+        "error_class_recurrence": {
+          "other": 6,
+          "empty_sample": 12
+        },
+        "open_question_missing_loops": [
+          {
+            "round": 4,
+            "streak": 3,
+            "missing": [
+              "output 'status' の取得方法",
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 7,
+            "streak": 3,
+            "missing": [
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 8,
+            "streak": 4,
+            "missing": [
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          }
+        ],
+        "missing_loop_events": 3,
+        "same_cause_after_command_switch": [],
+        "same_cause_after_switch_count": 0,
+        "ignored_recall_signals": [
+          {
+            "round": 2,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 2,
+            "kind": "same_family_despite_prior",
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ]
+          },
+          {
+            "round": 2,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 2,
+            "kind": "same_family_despite_prior",
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ]
+          },
+          {
+            "round": 2,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 2,
+            "kind": "same_family_despite_prior",
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ]
+          },
+          {
+            "round": 3,
+            "kind": "same_command_despite_prior",
+            "command": "powershell"
+          },
+          {
+            "round": 3,
+            "kind": "same_family_despite_prior",
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ]
+          }
+        ],
+        "ignored_recall_count": 22,
+        "unique_exact_keys": 6,
+        "unique_families": 1,
+        "dominant_waste": "ignored_recall",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 16,
+          "command_family_repeat": 5,
+          "open_question_loop": 3,
+          "same_cause_after_switch": 0,
+          "ignored_recall": 22
+        },
+        "pass": false,
+        "fail_stage": "research",
+        "rounds": 8,
+        "usable_findings": 0
+      },
+      "phase5": {
+        "verify_fail_count": 14,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 3,
+        "family_repeat_rate": 0.214,
+        "family_repeat_examples": [
+          {
+            "id": "evt_1e37b96a0c70",
+            "round": 2,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_084ea3bb646e",
+            "round": 3,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_0936a00655cb",
+            "round": 8,
+            "family": [
+              "powershell",
+              "get-wmiobject"
+            ],
+            "error_class": "other"
+          }
+        ],
+        "error_class_counts": {
+          "other": 4,
+          "empty_sample": 10
+        },
+        "max_error_class_streak": 9,
+        "max_error_class_name": "empty_sample",
+        "error_class_recurrence": {
+          "other": 4,
+          "empty_sample": 10
+        },
+        "open_question_missing_loops": [
+          {
+            "round": 4,
+            "streak": 3,
+            "missing": [
+              "output 'status' の取得方法",
+              "powershellコマンドが利用可能か確認"
+            ]
+          },
+          {
+            "round": 7,
+            "streak": 3,
+            "missing": [
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 8,
+            "streak": 4,
+            "missing": [
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          }
+        ],
+        "missing_loop_events": 3,
+        "same_cause_after_command_switch": [],
+        "same_cause_after_switch_count": 0,
+        "ignored_recall_signals": [],
+        "ignored_recall_count": 0,
+        "unique_exact_keys": 4,
+        "unique_families": 1,
+        "dominant_waste": "error_class_recurrence",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 12,
+          "command_family_repeat": 3,
+          "open_question_loop": 3,
+          "same_cause_after_switch": 0,
+          "ignored_recall": 0
+        },
+        "pass": false,
+        "fail_stage": "research",
+        "rounds": 8,
+        "usable_findings": 0
+      }
+    },
+    "gpu_usage": {
+      "case": "gpu_usage",
+      "phase4": {
+        "verify_fail_count": 0,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 0,
+        "family_repeat_rate": 0.0,
+        "family_repeat_examples": [],
+        "error_class_counts": {},
+        "max_error_class_streak": 0,
+        "max_error_class_name": null,
+        "error_class_recurrence": {},
+        "open_question_missing_loops": [],
+        "missing_loop_events": 0,
+        "same_cause_after_command_switch": [],
+        "same_cause_after_switch_count": 0,
+        "ignored_recall_signals": [],
+        "ignored_recall_count": 0,
+        "unique_exact_keys": 0,
+        "unique_families": 0,
+        "dominant_waste": "none_or_exploration_diversity",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 0,
+          "command_family_repeat": 0,
+          "open_question_loop": 0,
+          "same_cause_after_switch": 0,
+          "ignored_recall": 0
+        },
+        "pass": false,
+        "fail_stage": "proposal",
+        "rounds": null,
+        "usable_findings": 0
+      },
+      "phase5": {
+        "verify_fail_count": 0,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 0,
+        "family_repeat_rate": 0.0,
+        "family_repeat_examples": [],
+        "error_class_counts": {},
+        "max_error_class_streak": 0,
+        "max_error_class_name": null,
+        "error_class_recurrence": {},
+        "open_question_missing_loops": [],
+        "missing_loop_events": 0,
+        "same_cause_after_command_switch": [],
+        "same_cause_after_switch_count": 0,
+        "ignored_recall_signals": [],
+        "ignored_recall_count": 0,
+        "unique_exact_keys": 0,
+        "unique_families": 0,
+        "dominant_waste": "none_or_exploration_diversity",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 0,
+          "command_family_repeat": 0,
+          "open_question_loop": 0,
+          "same_cause_after_switch": 0,
+          "ignored_recall": 0
+        },
+        "pass": false,
+        "fail_stage": "proposal",
+        "rounds": null,
+        "usable_findings": 0
+      }
+    },
+    "gpu_vram_usage": {
+      "case": "gpu_vram_usage",
+      "phase4": {
+        "verify_fail_count": 17,
+        "exact_command_key_repeats": 0,
+        "exact_command_key_repeat_rate": 0.0,
+        "exact_repeat_examples": [],
+        "family_repeats": 3,
+        "family_repeat_rate": 0.176,
+        "family_repeat_examples": [
+          {
+            "id": "evt_5f89af67449f",
+            "round": 5,
+            "family": [
+              "python",
+              "memory"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_098d9260eae8",
+            "round": 7,
+            "family": [
+              "python",
+              "memory"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_936f1c664ab1",
+            "round": 10,
+            "family": [
+              "python",
+              "memory"
+            ],
+            "error_class": "other"
+          }
+        ],
+        "error_class_counts": {
+          "other": 7,
+          "empty_sample": 10
+        },
+        "max_error_class_streak": 6,
+        "max_error_class_name": "empty_sample",
+        "error_class_recurrence": {
+          "other": 7,
+          "empty_sample": 10
+        },
+        "open_question_missing_loops": [
+          {
+            "round": 4,
+            "streak": 3,
+            "missing": [
+              "output 'vram_usage' の取得方法",
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 7,
+            "streak": 3,
+            "missing": [
+              "GPU VRAM使用量の具体的な取得方法"
+            ]
+          }
+        ],
+        "missing_loop_events": 2,
+        "same_cause_after_command_switch": [],
+        "same_cause_after_switch_count": 0,
+        "ignored_recall_signals": [],
+        "ignored_recall_count": 0,
+        "unique_exact_keys": 7,
+        "unique_families": 4,
+        "dominant_waste": "error_class_recurrence",
+        "waste_scores": {
+          "exact_command_key_repeat": 0,
+          "error_class_recurrence": 15,
+          "command_family_repeat": 3,
+          "open_question_loop": 2,
+          "same_cause_after_switch": 0,
+          "ignored_recall": 0
+        },
+        "pass": false,
+        "fail_stage": "research",
+        "rounds": 10,
+        "usable_findings": 0
+      },
+      "phase5": {
+        "verify_fail_count": 17,
+        "exact_command_key_repeats": 1,
+        "exact_command_key_repeat_rate": 0.059,
+        "exact_repeat_examples": [
+          {
+            "id": "evt_c1fc99f1cfe0",
+            "round": 4,
+            "command_key": [
+              "wmic",
+              [
+                "/FORMAT:csv",
+                "SELECT",
+                "TotalPhysicalMemory,UsedMemory",
+                "FROM",
+                "Win32_ComputerSystem"
+              ]
+            ],
+            "error_class": "other"
+          }
+        ],
+        "family_repeats": 3,
+        "family_repeat_rate": 0.176,
+        "family_repeat_examples": [
+          {
+            "id": "evt_9aad1b20c7af",
+            "round": 3,
+            "family": [
+              "wmic",
+              "memory"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_d83850a2af3e",
+            "round": 4,
+            "family": [
+              "wmic",
+              "memory"
+            ],
+            "error_class": "other"
+          },
+          {
+            "id": "evt_c1fc99f1cfe0",
+            "round": 4,
+            "family": [
+              "wmic",
+              "memory"
+            ],
+            "error_class": "other"
+          }
+        ],
+        "error_class_counts": {
+          "other": 6,
+          "empty_sample": 11
+        },
+        "max_error_class_streak": 7,
+        "max_error_class_name": "empty_sample",
+        "error_class_recurrence": {
+          "other": 6,
+          "empty_sample": 11
+        },
+        "open_question_missing_loops": [
+          {
+            "round": 4,
+            "streak": 3,
+            "missing": [
+              "output 'vram_usage' の取得方法",
+              "total physical memory is still unconfirmed",
+              "used memory is still unconfirmed"
+            ]
+          },
+          {
+            "round": 7,
+            "streak": 3,
+            "missing": [
+              "GPU VRAMの使用量をMB単位で取得する方法を確定するために、実環境での確認が必要です。"
+            ]
+          }
+        ],
+        "missing_loop_events": 2,
+        "same_cause_after_command_switch": [],
+        "same_cause_after_switch_count": 0,
+        "ignored_recall_signals": [],
+        "ignored_recall_count": 0,
+        "unique_exact_keys": 5,
+        "unique_families": 3,
+        "dominant_waste": "error_class_recurrence",
+        "waste_scores": {
+          "exact_command_key_repeat": 1,
+          "error_class_recurrence": 15,
+          "command_family_repeat": 3,
+          "open_question_loop": 2,
+          "same_cause_after_switch": 0,
+          "ignored_recall": 0
+        },
+        "pass": false,
+        "fail_stage": "research",
+        "rounds": 10,
+        "usable_findings": 0
+      }
+    }
+  },
+  "aggregate_waste_weights_phase5": {
+    "error_class_recurrence": 54,
+    "open_question_loop": 9,
+    "command_family_repeat": 7,
+    "same_cause_after_switch": 2,
+    "exact_command_key_repeat": 1,
+    "ignored_recall": 0
+  },
+  "dominant_waste_votes_phase5": {
+    "error_class_recurrence": 4
+  },
+  "intervention_definition": {
+    "intervene": [
+      {
+        "pattern": "error_class_recurrence",
+        "observed_weight": 54,
+        "policy_hint": "error_class 単位を exact command_key より優先して Recall"
+      },
+      {
+        "pattern": "open_question_loop",
+        "observed_weight": 9,
+        "policy_hint": "同一 missing 連続時に exploration pivot を強制 / 別経路ヒント"
+      },
+      {
+        "pattern": "command_family_repeat",
+        "observed_weight": 7,
+        "policy_hint": "command_family（Win32_*/Get-* 等）単位で ban/冷却"
+      },
+      {
+        "pattern": "same_cause_after_switch",
+        "observed_weight": 2,
+        "policy_hint": "command 変更後も同 error_class なら『原因クラス』を Prompt に明示"
+      },
+      {
+        "pattern": "ignored_recall",
+        "observed_weight": 0,
+        "policy_hint": "提示しても無視されるなら提示量より『禁止理由の明示 + 別経路必須』が先"
+      }
+    ],
+    "do_not_intervene_as_primary": [
+      {
+        "pattern": "exact_command_key_repeat",
+        "observed_weight": 1,
+        "policy_hint": "機械フィルタ banned_actions が既に主担当。Recall の主目標にしない"
+      }
+    ],
+    "rationale": [
+      "Memory Recall が介入すべきなのは『同じ command を再実行』より『同じ原因クラス・同じ open_question・同じ探索ファミリーを回り続けること』。"
+    ],
+    "proposed_recall_targets": [
+      "error_class streak >= 2（command が変わっても）",
+      "command_family の再登場（syntax 違い含む）",
+      "同一 missing / open_question が 2+ rounds",
+      "prior 提示後に同 family を再提案したとき（ignored_recall）→ mode=repeating + pivot 強制"
+    ],
+    "non_targets": [
+      "exact command_key 再実行（banned_actions / filter_rejected に委譲）",
+      "単発の新規失敗（fresh）への過剰 History 提示"
+    ]
+  }
+}

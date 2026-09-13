@@ -1,0 +1,27 @@
+{
+  "note": "NEW extension only. Does not modify selector.py, rules.json, or method_catalog.json.",
+  "proposed_method_id": "uncertainty_gate",
+  "status": "experimental",
+  "do_not_use_as_primary_signal": ["qwen_self_confidence", "escalation_recommended_alone"],
+  "primary_signals": [
+    "answer_content_heuristics",
+    "unsupported_strong_with_empty_counterevidence",
+    "question_category_vs_evidence_module_mismatch"
+  ],
+  "proposed_pipeline": [
+    "selector",
+    "qwen_local",
+    "uncertainty_gate",
+    "gpt_external_or_large_llm_if_high",
+    "human_approval"
+  ],
+  "evidence_run": "diagnostic_framework/runs/20260825_193500/uncertainty_escalation_experiment/",
+  "key_result": {
+    "missed_escalation_self_only": 5,
+    "missed_escalation_content_heuristic": 0,
+    "false_escalation_primary": 1,
+    "hypothesis_H5": "supported"
+  },
+  "always_select": false,
+  "auto_fix_allowed": false
+}

@@ -1,0 +1,82 @@
+{
+  "version": "0.1",
+  "note": "Same problem_id reuses existing experiment artifacts. Do not re-run those experiments.",
+  "problems": {
+    "search_web_quality": {
+      "tool": "search_web",
+      "description": "公開 search_web の検索品質が弱いように見える問題。診断実験の対象。",
+      "experiments": [
+        "EXP-001",
+        "EXP-002",
+        "EXP-003",
+        "EXP-004",
+        "EXP-005",
+        "EXP-006",
+        "EXP-007",
+        "EXP-008",
+        "EXP-009",
+        "EXP-010"
+      ],
+      "artifacts_by_method": {
+        "mechanical_observation": [
+          "llm_diagnosis/llm_diagnosis.json",
+          "llm_diagnosis/CASE_ANALYSIS.md"
+        ],
+        "code_reading_large_ctx": [
+          "diagnostic_framework/runs/20260824_082857/code_reading_experiment/EXPERIMENT_REPORT.md"
+        ],
+        "specification_map": [
+          "diagnostic_framework/specs/search_web_spec.md",
+          "diagnostic_framework/specs/search_web_spec_v2.md",
+          "diagnostic_framework/runs/20260824_093317/spec_experiment/EXPERIMENT_REPORT.md",
+          "diagnostic_framework/runs/20260824_194421/spec_experiment_v2/EXPERIMENT_REPORT.md"
+        ],
+        "route_decomposition": [
+          "diagnostic_framework/runs/20260824_195842/route_decomposition_experiment/EXPERIMENT_REPORT.md"
+        ],
+        "collect_rank_split": [
+          "diagnostic_framework/runs/20260824_205442/ranking_filter_log_evidence_experiment/EXPERIMENT_REPORT.md"
+        ],
+        "evidence_four_classes": [
+          "diagnostic_framework/runs/20260824_205442/ranking_filter_log_evidence_experiment/EXPERIMENT_REPORT.md"
+        ],
+        "n2_path_gate": [
+          "diagnostic_framework/runs/20260824_212236/n2_execution_path_gate/EXPERIMENT_REPORT.md"
+        ],
+        "n2_full_path_narrative": [
+          "diagnostic_framework/runs/20260824_212236/n2_execution_path_gate/EXPERIMENT_REPORT.md"
+        ],
+        "n3_runtime_evidence_gate": [
+          "diagnostic_framework/runs/20260824_205442/ranking_filter_log_evidence_experiment/EXPERIMENT_REPORT.md"
+        ],
+        "small_llm_local": [
+          "diagnostic_framework/runs/20260824_082857/code_reading_experiment/EXPERIMENT_REPORT.md"
+        ],
+        "deepseek_full_replace": [
+          "diagnostic_framework/runs/20260824_234729/model_comparison_deepseek/COMPARISON_REPORT.md"
+        ],
+        "deepseek_short_yes_no": [
+          "diagnostic_framework/runs/20260824_234729/model_comparison_deepseek/COMPARISON_REPORT.md"
+        ],
+        "large_llm_escalation": [
+          "diagnostic_framework/runs/20260825_124200/large_llm_search_web_diagnosis/COMPARISON_REPORT.md",
+          "diagnostic_framework/runs/20260825_124200/large_llm_search_web_diagnosis/CONDITION_B_INDEPENDENT_DIAGNOSIS.md"
+        ],
+        "small_then_large_pipeline": [
+          "diagnostic_framework/runs/20260825_124200/large_llm_search_web_diagnosis/COMPARISON_REPORT.md"
+        ],
+        "sufficient_ctx_code_pack": [
+          "diagnostic_framework/runs/20260824_170527/self_verify/SELF_VERIFY.md",
+          "diagnostic_framework/runs/20260824_082857/code_reading_experiment/EXPERIMENT_REPORT.md"
+        ],
+        "human_approval": [
+          "diagnostic_framework/runs/20260824_170527/self_verify/SELF_VERIFY.md",
+          "diagnostic_framework/runs/20260825_124200/large_llm_search_web_diagnosis/COMPARISON_REPORT.md"
+        ],
+        "auto_fix": [
+          "diagnostic_framework/runs/20260824_170527/self_verify/SELF_VERIFY.md"
+        ]
+      }
+    }
+  }
+}

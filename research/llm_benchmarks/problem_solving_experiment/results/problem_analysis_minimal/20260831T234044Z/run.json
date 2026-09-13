@@ -1,0 +1,43 @@
+{
+  "experiment": "problem_analysis_minimal",
+  "note": "Minimal prompt Problem Analysis. No category list, no analysis goals. Not FA. Not the tool-using problem-solving loop. Same A-E failures as problem_analysis_standalone.",
+  "at": "2026-08-31T23:40:44.104540+00:00",
+  "model": "deepseek-coder-v2:16b",
+  "prompt_template": "Analyze the failure.\n\nDo not fix the problem.\nDo not use tools.\n\nFailure:\n{failure}\n",
+  "compared_to": [
+    "results/problem_analysis/20260831T232753Z",
+    "results/problem_analysis_free/20260831T233507Z"
+  ],
+  "cases": [
+    {
+      "id": "A_index_error",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 1903
+    },
+    {
+      "id": "B_none_attribute",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 2337
+    },
+    {
+      "id": "C_validation_fields",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 2168
+    },
+    {
+      "id": "D_cuda_init",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 2721
+    },
+    {
+      "id": "E_information_poor",
+      "call_ok": true,
+      "timeout": null,
+      "raw_chars": 2377
+    }
+  ]
+}

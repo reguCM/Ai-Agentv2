@@ -1,0 +1,25 @@
+{
+  "reference_case_id": "dogfood_s2_s7a_regression",
+  "description": "Dogfood: Commit Plan six-file test safety stack regression via explicit runner (S7a auto resolution, no pre-auth).",
+  "test_plan": {
+    "plan_id": "dogfood_s2_s7a_regression",
+    "commands": [
+      "python -m pytest tests/tools/test_test_safety_validator.py tests/tools/test_test_safety_shadow_gate.py tests/tools/test_test_safety_authorization.py tests/tools/test_test_safety_runner_wedge.py tests/tools/test_test_safety_postflight_lifecycle.py tests/tools/test_test_safety_resolution.py -q"
+    ],
+    "declared_primary_risk_level": "LEVEL_1",
+    "declared_dimensions": {
+      "llm": "NONE",
+      "gpu": "NONE",
+      "network": "NONE",
+      "filesystem_write": "NONE",
+      "git_operation": "NONE"
+    }
+  },
+  "expectation": {
+    "shadow_gate_decision": "PASS",
+    "human_decision": "PASS",
+    "human_approval_required": false,
+    "warnings_nonempty": false,
+    "reason": "L1 controlled unit regression (six authoritative test modules)"
+  }
+}

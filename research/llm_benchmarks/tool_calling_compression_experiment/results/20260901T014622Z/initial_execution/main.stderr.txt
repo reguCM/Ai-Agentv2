@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\AI-Agent\research\llm_benchmarks\tool_calling_compression_experiment\results\20260901T014622Z\fixture\main.py", line 19, in <module>
+    main()
+  File "D:\AI-Agent\research\llm_benchmarks\tool_calling_compression_experiment\results\20260901T014622Z\fixture\main.py", line 15, in main
+    print(json.dumps(assemble_ticket()))
+  File "D:\AI-Agent\research\llm_benchmarks\tool_calling_compression_experiment\results\20260901T014622Z\fixture\main.py", line 9, in assemble_ticket
+    "stage": select_stage(rows, 2),
+  File "D:\AI-Agent\research\llm_benchmarks\tool_calling_compression_experiment\results\20260901T014622Z\fixture\helper.py", line 10, in select_stage
+    return rows[index]
+IndexError: list index out of range

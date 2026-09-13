@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/test_safety_shadow_gate.schema.json",
+  "title": "Test Safety Shadow Gate Packet (S3; non-authoritative)",
+  "description": "Shadow Gate output. execution_authoritative is always false in S3; does not stop pytest or CI.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_type",
+    "generated_at",
+    "gate_id",
+    "shadow_mode",
+    "execution_authoritative",
+    "gate_decision",
+    "warnings",
+    "blocked_reasons",
+    "human_approval_required",
+    "required_postflight",
+    "evaluation_ref"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "packet_type": { "const": "TEST_SAFETY_SHADOW_GATE" },
+    "generated_at": { "type": "string" },
+    "gate_id": { "type": "string" },
+    "shadow_mode": { "const": true },
+    "execution_authoritative": { "const": false },
+    "gate_decision": { "type": "string", "enum": ["PASS", "BLOCKED"] },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "blocked_reasons": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "human_approval_required": { "type": "boolean" },
+    "human_approval_reason": { "type": "string" },
+    "gate_reason": { "type": "string" },
+    "required_postflight": { "$ref": "#/$defs/required_postflight" },
+    "evaluation_ref": { "$ref": "#/$defs/evaluation_ref" },
+    "reference_case_id": { "type": "string" }
+  },
+  "$defs": {
+    "required_postflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["postflight_git_check_required"],
+      "properties": {
+        "postflight_git_check_required": { "type": "boolean" }
+      }
+    },
+    "evaluation_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "packet_type", "validator_id"],
+      "properties": {
+        "schema_version": { "type": "string" },
+        "packet_type": { "type": "string" },
+        "validator_id": { "type": "string" },
+        "reference_case_id": { "type": "string" },
+        "generated_at": { "type": "string" }
+      }
+    }
+  }
+}

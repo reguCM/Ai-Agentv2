@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-09-02T08:24:24Z",
+  "recalibration_required": true,
+  "status": "recalibration_recommended",
+  "scope": "context=16384",
+  "focus_context_size": 16384,
+  "evaluation_state": "ready_for_review",
+  "observation_count": 23,
+  "triggered_rules": [
+    {
+      "rule_id": "timeout_rate_elevated",
+      "description": "timeout が一定割合以上",
+      "weight": 2,
+      "detail": {
+        "rule_id": "timeout_rate_elevated",
+        "metric": "timeout_rate",
+        "current": 0.2174,
+        "threshold": 0.15
+      }
+    },
+    {
+      "rule_id": "success_rate_degraded",
+      "description": "成功率が低下",
+      "weight": 2,
+      "detail": {
+        "rule_id": "success_rate_degraded",
+        "metric": "success_rate",
+        "current": 0.3913,
+        "threshold": 0.85
+      }
+    }
+  ],
+  "triggered_rule_count": 2,
+  "total_weight": 4,
+  "message": "Context 再調整テストを推奨します（自動変更は行いません）。",
+  "reasons": [
+    "timeout_rate_elevated: timeout が一定割合以上 ({'rule_id': 'timeout_rate_elevated', 'metric': 'timeout_rate', 'current': 0.2174, 'threshold': 0.15})",
+    "success_rate_degraded: 成功率が低下 ({'rule_id': 'success_rate_degraded', 'metric': 'success_rate', 'current': 0.3913, 'threshold': 0.85})"
+  ],
+  "policy_version": 1,
+  "note": "RECALIBRATION_REQUIRED は報告のみ。Context の自動変更は行わない。"
+}

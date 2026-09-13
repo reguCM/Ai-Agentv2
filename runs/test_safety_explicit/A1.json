@@ -1,0 +1,219 @@
+{
+  "schema_version": "1",
+  "packet_type": "TEST_SAFETY_EXPLICIT_RUN",
+  "resolution": {
+    "schema_version": "1",
+    "packet_type": "TEST_SAFETY_RESOLUTION_EVIDENCE",
+    "resolver_id": "test_safety_resolution_s7a_v1",
+    "issued_at": "2026-09-12T08:16:47.971413+00:00",
+    "action_id": "A1",
+    "plan_fingerprint": "9066fa07b0766059de4d35d22c731b19beb6ce20c93bce4c18c1e52e977232ed",
+    "authorization_present_before": false,
+    "resolution_attempted": true,
+    "resolution_attempt_count": 1,
+    "original_action_preserved": true,
+    "general_runtime_connected": false,
+    "resolution_result": "RESOLVED",
+    "resolution_skipped": false,
+    "evaluation_ref": {
+      "schema_version": "1",
+      "packet_type": "TEST_SAFETY_EVALUATION",
+      "validator_id": "test_safety_validator_s2_prototype_v1",
+      "generated_at": "2026-09-12T08:16:48.164206+00:00"
+    },
+    "gate_decision": "PASS",
+    "authorization_id": "cf35a168-58ee-45d9-90df-af6a40badec3",
+    "authorization_packet": {
+      "schema_version": "1",
+      "packet_type": "TEST_SAFETY_AUTHORIZATION",
+      "binder_id": "test_safety_authorization_binder_s5a_v1",
+      "authorization_id": "cf35a168-58ee-45d9-90df-af6a40badec3",
+      "authorization_binding_key": "50cd14532854b0464f7de8f5ea8ee6a5492ecaa0ec0e9cd732b4cdee0cbfe7c9",
+      "execution_authoritative": true,
+      "execution_connected": false,
+      "action_id": "A1",
+      "plan_fingerprint": "9066fa07b0766059de4d35d22c731b19beb6ce20c93bce4c18c1e52e977232ed",
+      "evaluation_ref": {
+        "schema_version": "1",
+        "packet_type": "TEST_SAFETY_EVALUATION",
+        "validator_id": "test_safety_validator_s2_prototype_v1",
+        "generated_at": "2026-09-12T08:16:48.164206+00:00"
+      },
+      "gate_decision": "PASS",
+      "authorization": "AUTHORIZED",
+      "issued_at": "2026-09-12T08:16:48.165206+00:00",
+      "reasons": [],
+      "reason": null,
+      "required_postflight": {
+        "postflight_git_check_required": false
+      }
+    },
+    "evaluation_packet": {
+      "schema_version": "1",
+      "packet_type": "TEST_SAFETY_EVALUATION",
+      "generated_at": "2026-09-12T08:16:48.164206+00:00",
+      "validator_id": "test_safety_validator_s2_prototype_v1",
+      "test_plan": {
+        "plan_id": "step2a-verify",
+        "description": "",
+        "commands": [
+          "echo step2a"
+        ],
+        "declared_write_scope": [],
+        "notes": "",
+        "declared_primary_risk_level": "LEVEL_1",
+        "declared_dimensions": {
+          "llm": "NONE",
+          "gpu": "NONE",
+          "network": "NONE"
+        }
+      },
+      "evaluation": {
+        "primary_risk_level": "LEVEL_1",
+        "also_applies_risk_levels": [],
+        "safety_dimensions": {
+          "llm": "NONE",
+          "gpu": "NONE",
+          "network": "NONE",
+          "subprocess": "NONE",
+          "long_running_process": "NONE",
+          "tool_execution": "NONE",
+          "filesystem_write": "NONE",
+          "repository_outside_write": "NONE",
+          "git_operation": "NONE",
+          "external_service": "NONE",
+          "credentials": "NONE",
+          "shared_resource": "NONE"
+        },
+        "relevant_unknowns": [],
+        "warnings": [],
+        "recommended_gate_decision": "PASS",
+        "gate_blocked_reasons": [],
+        "postflight_git_check_required": false,
+        "human_approval_required": false
+      },
+      "readonly_observations": {
+        "git": {
+          "branch": "dev/current",
+          "head": "bbb35bf0375c72579cdecd0d010ae96bedd26738",
+          "status_short": "## dev/current...origin/dev/current\n M ai_tool/chat_interface/agent_turn.py\n M ai_tool/chat_interface/task_orchestration.py\n M ai_tool/run_tetris_sandbox_e2e.py\n M ai_tool/tetris_execution_context.py\n M ai_tool/tetris_precondition_checker.py\n M tests/ai_tool/chat_interface/execution_end_invariants.py\n M tests/ai_tool/chat_interface/test_agent_task_loop_p216.py\n M tests/ai_tool/chat_interface/test_execution_end_invariants.py\n?? ai_tool/chat_interface/semantic_revalidation_gate.py\n?? ai_tool/environment_policy.py\n?? ai_tool/requirement_semantic_clarification.py\n?? ai_tool/requirement_semantic_explanation.py\n?? ai_tool/requirement_semantic_revalidation.py\n?? reports/_tmp_shadow_all_refs.json\n?? runs/_diag_tmp/\n?? runs/test_safety_explicit/\n?? tests/ai_tool/chat_interface/test_completion_verification_gate_step2a.py\n?? tests/ai_tool/test_environment_policy.py\n?? tests/ai_tool/test_requirement_semantic_clarification.py\n?? tests/ai_tool/test_requirement_semantic_revalidation.py"
+        }
+      }
+    },
+    "gate_packet": {
+      "schema_version": "1",
+      "packet_type": "TEST_SAFETY_SHADOW_GATE",
+      "generated_at": "2026-09-12T08:16:48.165206+00:00",
+      "gate_id": "test_safety_shadow_gate_s3_v1",
+      "shadow_mode": true,
+      "execution_authoritative": false,
+      "gate_decision": "PASS",
+      "warnings": [],
+      "blocked_reasons": [],
+      "human_approval_required": false,
+      "required_postflight": {
+        "postflight_git_check_required": false
+      },
+      "evaluation_ref": {
+        "schema_version": "1",
+        "packet_type": "TEST_SAFETY_EVALUATION",
+        "validator_id": "test_safety_validator_s2_prototype_v1",
+        "generated_at": "2026-09-12T08:16:48.164206+00:00"
+      }
+    },
+    "executor_called": true
+  },
+  "executor_called": true,
+  "test_failed": true,
+  "runner_evidence": {
+    "schema_version": "1",
+    "packet_type": "TEST_SAFETY_RUNNER_EVIDENCE",
+    "runner_id": "test_safety_runner_wedge_s5c_v1",
+    "issued_at": "2026-09-12T08:16:48.166206+00:00",
+    "action_id": "A1",
+    "plan_fingerprint": "9066fa07b0766059de4d35d22c731b19beb6ce20c93bce4c18c1e52e977232ed",
+    "evaluation_ref": {
+      "schema_version": "1",
+      "packet_type": "TEST_SAFETY_EVALUATION",
+      "validator_id": "test_safety_validator_s2_prototype_v1",
+      "generated_at": "2026-09-12T08:16:48.164206+00:00"
+    },
+    "authorization_id": "cf35a168-58ee-45d9-90df-af6a40badec3",
+    "authorization": "AUTHORIZED",
+    "authorization_binding_key": "50cd14532854b0464f7de8f5ea8ee6a5492ecaa0ec0e9cd732b4cdee0cbfe7c9",
+    "authorization_packet": {
+      "schema_version": "1",
+      "packet_type": "TEST_SAFETY_AUTHORIZATION",
+      "binder_id": "test_safety_authorization_binder_s5a_v1",
+      "authorization_id": "cf35a168-58ee-45d9-90df-af6a40badec3",
+      "authorization_binding_key": "50cd14532854b0464f7de8f5ea8ee6a5492ecaa0ec0e9cd732b4cdee0cbfe7c9",
+      "execution_authoritative": true,
+      "execution_connected": false,
+      "action_id": "A1",
+      "plan_fingerprint": "9066fa07b0766059de4d35d22c731b19beb6ce20c93bce4c18c1e52e977232ed",
+      "evaluation_ref": {
+        "schema_version": "1",
+        "packet_type": "TEST_SAFETY_EVALUATION",
+        "validator_id": "test_safety_validator_s2_prototype_v1",
+        "generated_at": "2026-09-12T08:16:48.164206+00:00"
+      },
+      "gate_decision": "PASS",
+      "authorization": "AUTHORIZED",
+      "issued_at": "2026-09-12T08:16:48.165206+00:00",
+      "reasons": [],
+      "reason": null,
+      "required_postflight": {
+        "postflight_git_check_required": false
+      }
+    },
+    "authorization_verification": {
+      "schema_version": "1",
+      "packet_type": "TEST_SAFETY_AUTHORIZATION",
+      "binder_id": "test_safety_authorization_binder_s5a_v1",
+      "authorization_id": "cf35a168-58ee-45d9-90df-af6a40badec3",
+      "authorization_binding_key": "50cd14532854b0464f7de8f5ea8ee6a5492ecaa0ec0e9cd732b4cdee0cbfe7c9",
+      "execution_authoritative": true,
+      "execution_connected": false,
+      "action_id": "A1",
+      "plan_fingerprint": "9066fa07b0766059de4d35d22c731b19beb6ce20c93bce4c18c1e52e977232ed",
+      "evaluation_ref": {
+        "schema_version": "1",
+        "packet_type": "TEST_SAFETY_EVALUATION",
+        "validator_id": "test_safety_validator_s2_prototype_v1",
+        "generated_at": "2026-09-12T08:16:48.164206+00:00"
+      },
+      "gate_decision": "PASS",
+      "authorization": "AUTHORIZED",
+      "issued_at": "2026-09-12T08:16:48.165206+00:00",
+      "reasons": [],
+      "reason": null,
+      "required_postflight": {
+        "postflight_git_check_required": false
+      }
+    },
+    "required_postflight": {
+      "postflight_git_check_required": false
+    },
+    "execution_connected": true,
+    "general_runtime_connected": false,
+    "outcome": "EXECUTED",
+    "execution_verification": "VALID",
+    "executor_called": true,
+    "execution_result": {
+      "ok": false,
+      "error": "FileNotFoundError: [WinError 2] 指定されたファイルが見つかりません。",
+      "returncode": 1,
+      "command": [
+        "echo",
+        "step2a"
+      ]
+    },
+    "postflight_result": null,
+    "test_failed": true,
+    "run_closed": true,
+    "postflight_completed": false,
+    "closure_reason": "NO_REQUIRED_POSTFLIGHT",
+    "execution_consumed": true
+  },
+  "run_closed": true
+}

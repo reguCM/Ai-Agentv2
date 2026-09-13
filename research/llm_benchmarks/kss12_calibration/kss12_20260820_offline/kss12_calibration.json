@@ -1,0 +1,956 @@
+{
+  "phase": "kss-1.2",
+  "experiment_dir": "research\\llm_benchmarks\\kss11_measurement\\kss11_20260820_151041",
+  "not_for_decision": true,
+  "routing_implemented": false,
+  "confidence_threshold_implemented": false,
+  "per_case": [
+    {
+      "case": "cpu_temperature",
+      "file": "kss11__cpu_temperature__trial1.json",
+      "calibration": {
+        "run": {
+          "case": "cpu_temperature",
+          "pass": false,
+          "fail_stage": "judge",
+          "request": null
+        },
+        "progress_action_counts": {
+          "continue": 9,
+          "stop": 1
+        },
+        "verifier_label_vs_progress": [
+          {
+            "verify_confidence_label": "low",
+            "n": 9,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 9
+            }
+          },
+          {
+            "verify_confidence_label": "high",
+            "n": 1,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 1
+            }
+          }
+        ],
+        "round_had_verify_ok_vs_progress": [
+          {
+            "had_verify_ok": false,
+            "n": 9,
+            "outcome_rates": {
+              "continue": 0.889,
+              "stop": 0.111
+            },
+            "outcome_counts": {
+              "continue": 8,
+              "stop": 1
+            }
+          },
+          {
+            "had_verify_ok": true,
+            "n": 1,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 1
+            }
+          }
+        ],
+        "evidence_level_vs_progress": [
+          {
+            "evidence_level": "medium",
+            "n": 9,
+            "outcome_rates": {
+              "continue": 0.889,
+              "stop": 0.111
+            },
+            "outcome_counts": {
+              "continue": 8,
+              "stop": 1
+            }
+          },
+          {
+            "evidence_level": "high",
+            "n": 1,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 1
+            }
+          }
+        ],
+        "evidence_level_vs_case_pass": [
+          {
+            "evidence_level": "medium",
+            "n": 9,
+            "outcome_rates": {
+              "fail": 1.0
+            },
+            "outcome_counts": {
+              "fail": 9
+            }
+          },
+          {
+            "evidence_level": "high",
+            "n": 1,
+            "outcome_rates": {
+              "fail": 1.0
+            },
+            "outcome_counts": {
+              "fail": 1
+            }
+          }
+        ],
+        "judge_satisfies_vs_progress": [
+          {
+            "judge_satisfies": false,
+            "n": 10,
+            "outcome_rates": {
+              "continue": 0.9,
+              "stop": 0.1
+            },
+            "outcome_counts": {
+              "continue": 9,
+              "stop": 1
+            }
+          }
+        ],
+        "no_gain_vs_progress": [
+          {
+            "no_gain": false,
+            "n": 5,
+            "outcome_rates": {
+              "continue": 0.8,
+              "stop": 0.2
+            },
+            "outcome_counts": {
+              "continue": 4,
+              "stop": 1
+            }
+          },
+          {
+            "no_gain": true,
+            "n": 5,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 5
+            }
+          }
+        ],
+        "rule_reason_vs_progress": [
+          {
+            "progress_reason": "no_progress",
+            "n": 5,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 5
+            }
+          },
+          {
+            "progress_reason": "new_information",
+            "n": 4,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 4
+            }
+          },
+          {
+            "progress_reason": "max_research_rounds",
+            "n": 1,
+            "outcome_rates": {
+              "stop": 1.0
+            },
+            "outcome_counts": {
+              "stop": 1
+            }
+          }
+        ],
+        "web_decision_link_audit": {
+          "rounds_total": 10,
+          "rounds_with_hits": 10,
+          "candidates_total": 10,
+          "candidates_linked": 10,
+          "link_coverage": 1.0,
+          "hit_score_present_saved": 0,
+          "hit_score_missing_saved": 59,
+          "hit_score_computed_retro": 59,
+          "overlap_hist": {
+            "1": 5,
+            "2": 5
+          },
+          "audit_gaps": {
+            "none": 10
+          }
+        }
+      }
+    },
+    {
+      "case": "disk_usage",
+      "file": "kss11__disk_usage__trial1.json",
+      "calibration": {
+        "run": {
+          "case": "disk_usage",
+          "pass": false,
+          "fail_stage": "research",
+          "request": null
+        },
+        "progress_action_counts": {
+          "continue": 7,
+          "stop": 1
+        },
+        "verifier_label_vs_progress": [
+          {
+            "verify_confidence_label": "low",
+            "n": 23,
+            "outcome_rates": {
+              "continue": 0.957,
+              "stop": 0.043
+            },
+            "outcome_counts": {
+              "continue": 22,
+              "stop": 1
+            }
+          }
+        ],
+        "round_had_verify_ok_vs_progress": [
+          {
+            "had_verify_ok": false,
+            "n": 8,
+            "outcome_rates": {
+              "continue": 0.875,
+              "stop": 0.125
+            },
+            "outcome_counts": {
+              "continue": 7,
+              "stop": 1
+            }
+          }
+        ],
+        "evidence_level_vs_progress": [
+          {
+            "evidence_level": "medium",
+            "n": 7,
+            "outcome_rates": {
+              "continue": 0.857,
+              "stop": 0.143
+            },
+            "outcome_counts": {
+              "continue": 6,
+              "stop": 1
+            }
+          },
+          {
+            "evidence_level": "low",
+            "n": 1,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 1
+            }
+          }
+        ],
+        "evidence_level_vs_case_pass": [
+          {
+            "evidence_level": "medium",
+            "n": 7,
+            "outcome_rates": {
+              "fail": 1.0
+            },
+            "outcome_counts": {
+              "fail": 7
+            }
+          },
+          {
+            "evidence_level": "low",
+            "n": 1,
+            "outcome_rates": {
+              "fail": 1.0
+            },
+            "outcome_counts": {
+              "fail": 1
+            }
+          }
+        ],
+        "judge_satisfies_vs_progress": [
+          {
+            "judge_satisfies": false,
+            "n": 8,
+            "outcome_rates": {
+              "continue": 0.875,
+              "stop": 0.125
+            },
+            "outcome_counts": {
+              "continue": 7,
+              "stop": 1
+            }
+          }
+        ],
+        "no_gain_vs_progress": [
+          {
+            "no_gain": true,
+            "n": 5,
+            "outcome_rates": {
+              "continue": 0.8,
+              "stop": 0.2
+            },
+            "outcome_counts": {
+              "continue": 4,
+              "stop": 1
+            }
+          },
+          {
+            "no_gain": false,
+            "n": 3,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 3
+            }
+          }
+        ],
+        "rule_reason_vs_progress": [
+          {
+            "progress_reason": "no_progress",
+            "n": 5,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 5
+            }
+          },
+          {
+            "progress_reason": "new_information",
+            "n": 2,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 2
+            }
+          },
+          {
+            "progress_reason": "stagnation",
+            "n": 1,
+            "outcome_rates": {
+              "stop": 1.0
+            },
+            "outcome_counts": {
+              "stop": 1
+            }
+          }
+        ],
+        "web_decision_link_audit": {
+          "rounds_total": 8,
+          "rounds_with_hits": 7,
+          "candidates_total": 23,
+          "candidates_linked": 13,
+          "link_coverage": 0.565,
+          "hit_score_present_saved": 0,
+          "hit_score_missing_saved": 44,
+          "hit_score_computed_retro": 44,
+          "overlap_hist": {
+            "0": 10,
+            "1": 12,
+            "6+": 1
+          },
+          "audit_gaps": {
+            "no_web_hits_in_round": 1,
+            "zero_candidate_hit_token_overlap": 1,
+            "none": 7
+          }
+        }
+      }
+    },
+    {
+      "case": "gpu_usage",
+      "file": "kss11__gpu_usage__trial1.json",
+      "calibration": {
+        "run": {
+          "case": "gpu_usage",
+          "pass": false,
+          "fail_stage": "proposal",
+          "request": null
+        },
+        "progress_action_counts": {},
+        "verifier_label_vs_progress": [],
+        "round_had_verify_ok_vs_progress": [],
+        "evidence_level_vs_progress": [],
+        "evidence_level_vs_case_pass": [],
+        "judge_satisfies_vs_progress": [],
+        "no_gain_vs_progress": [],
+        "rule_reason_vs_progress": [],
+        "web_decision_link_audit": {
+          "rounds_total": 0,
+          "rounds_with_hits": 0,
+          "candidates_total": 0,
+          "candidates_linked": 0,
+          "link_coverage": null,
+          "hit_score_present_saved": 0,
+          "hit_score_missing_saved": 0,
+          "hit_score_computed_retro": 0,
+          "overlap_hist": {},
+          "audit_gaps": {}
+        }
+      }
+    },
+    {
+      "case": "gpu_vram_usage",
+      "file": "kss11__gpu_vram_usage__trial1.json",
+      "calibration": {
+        "run": {
+          "case": "gpu_vram_usage",
+          "pass": false,
+          "fail_stage": "research",
+          "request": null
+        },
+        "progress_action_counts": {
+          "continue": 9,
+          "stop": 1
+        },
+        "verifier_label_vs_progress": [
+          {
+            "verify_confidence_label": "low",
+            "n": 7,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 7
+            }
+          }
+        ],
+        "round_had_verify_ok_vs_progress": [
+          {
+            "had_verify_ok": false,
+            "n": 10,
+            "outcome_rates": {
+              "continue": 0.9,
+              "stop": 0.1
+            },
+            "outcome_counts": {
+              "continue": 9,
+              "stop": 1
+            }
+          }
+        ],
+        "evidence_level_vs_progress": [
+          {
+            "evidence_level": "medium",
+            "n": 10,
+            "outcome_rates": {
+              "continue": 0.9,
+              "stop": 0.1
+            },
+            "outcome_counts": {
+              "continue": 9,
+              "stop": 1
+            }
+          }
+        ],
+        "evidence_level_vs_case_pass": [
+          {
+            "evidence_level": "medium",
+            "n": 10,
+            "outcome_rates": {
+              "fail": 1.0
+            },
+            "outcome_counts": {
+              "fail": 10
+            }
+          }
+        ],
+        "judge_satisfies_vs_progress": [
+          {
+            "judge_satisfies": false,
+            "n": 10,
+            "outcome_rates": {
+              "continue": 0.9,
+              "stop": 0.1
+            },
+            "outcome_counts": {
+              "continue": 9,
+              "stop": 1
+            }
+          }
+        ],
+        "no_gain_vs_progress": [
+          {
+            "no_gain": true,
+            "n": 7,
+            "outcome_rates": {
+              "continue": 0.857,
+              "stop": 0.143
+            },
+            "outcome_counts": {
+              "continue": 6,
+              "stop": 1
+            }
+          },
+          {
+            "no_gain": false,
+            "n": 3,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 3
+            }
+          }
+        ],
+        "rule_reason_vs_progress": [
+          {
+            "progress_reason": "no_progress",
+            "n": 6,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 6
+            }
+          },
+          {
+            "progress_reason": "new_information",
+            "n": 3,
+            "outcome_rates": {
+              "continue": 1.0
+            },
+            "outcome_counts": {
+              "continue": 3
+            }
+          },
+          {
+            "progress_reason": "max_research_rounds",
+            "n": 1,
+            "outcome_rates": {
+              "stop": 1.0
+            },
+            "outcome_counts": {
+              "stop": 1
+            }
+          }
+        ],
+        "web_decision_link_audit": {
+          "rounds_total": 10,
+          "rounds_with_hits": 10,
+          "candidates_total": 7,
+          "candidates_linked": 3,
+          "link_coverage": 0.429,
+          "hit_score_present_saved": 0,
+          "hit_score_missing_saved": 71,
+          "hit_score_computed_retro": 71,
+          "overlap_hist": {
+            "1": 3,
+            "0": 4
+          },
+          "audit_gaps": {
+            "none": 8,
+            "zero_candidate_hit_token_overlap": 2
+          }
+        }
+      }
+    },
+    {
+      "case": "memory_usage",
+      "file": "kss11__memory_usage__trial1.json",
+      "calibration": {
+        "run": {
+          "case": "memory_usage",
+          "pass": true,
+          "fail_stage": null,
+          "request": null
+        },
+        "progress_action_counts": {
+          "implement": 1
+        },
+        "verifier_label_vs_progress": [
+          {
+            "verify_confidence_label": "high",
+            "n": 4,
+            "outcome_rates": {
+              "implement": 1.0
+            },
+            "outcome_counts": {
+              "implement": 4
+            }
+          }
+        ],
+        "round_had_verify_ok_vs_progress": [
+          {
+            "had_verify_ok": true,
+            "n": 1,
+            "outcome_rates": {
+              "implement": 1.0
+            },
+            "outcome_counts": {
+              "implement": 1
+            }
+          }
+        ],
+        "evidence_level_vs_progress": [
+          {
+            "evidence_level": "high",
+            "n": 1,
+            "outcome_rates": {
+              "implement": 1.0
+            },
+            "outcome_counts": {
+              "implement": 1
+            }
+          }
+        ],
+        "evidence_level_vs_case_pass": [
+          {
+            "evidence_level": "high",
+            "n": 1,
+            "outcome_rates": {
+              "pass": 1.0
+            },
+            "outcome_counts": {
+              "pass": 1
+            }
+          }
+        ],
+        "judge_satisfies_vs_progress": [
+          {
+            "judge_satisfies": true,
+            "n": 1,
+            "outcome_rates": {
+              "implement": 1.0
+            },
+            "outcome_counts": {
+              "implement": 1
+            }
+          }
+        ],
+        "no_gain_vs_progress": [
+          {
+            "no_gain": false,
+            "n": 1,
+            "outcome_rates": {
+              "implement": 1.0
+            },
+            "outcome_counts": {
+              "implement": 1
+            }
+          }
+        ],
+        "rule_reason_vs_progress": [
+          {
+            "progress_reason": "findings_complete",
+            "n": 1,
+            "outcome_rates": {
+              "implement": 1.0
+            },
+            "outcome_counts": {
+              "implement": 1
+            }
+          }
+        ],
+        "web_decision_link_audit": {
+          "rounds_total": 1,
+          "rounds_with_hits": 1,
+          "candidates_total": 4,
+          "candidates_linked": 0,
+          "link_coverage": 0.0,
+          "hit_score_present_saved": 0,
+          "hit_score_missing_saved": 1,
+          "hit_score_computed_retro": 1,
+          "overlap_hist": {
+            "0": 4
+          },
+          "audit_gaps": {
+            "zero_candidate_hit_token_overlap": 1
+          }
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "verifier_label_vs_progress": [
+      {
+        "verify_confidence_label": "low",
+        "n": 39,
+        "outcome_rates": {
+          "continue": 0.974,
+          "stop": 0.026
+        },
+        "outcome_counts": {
+          "continue": 38,
+          "stop": 1
+        }
+      },
+      {
+        "verify_confidence_label": "high",
+        "n": 5,
+        "outcome_rates": {
+          "continue": 0.2,
+          "implement": 0.8
+        },
+        "outcome_counts": {
+          "continue": 1,
+          "implement": 4
+        }
+      }
+    ],
+    "evidence_level_vs_progress": [
+      {
+        "evidence_level": "medium",
+        "n": 26,
+        "outcome_rates": {
+          "continue": 0.885,
+          "stop": 0.115
+        },
+        "outcome_counts": {
+          "continue": 23,
+          "stop": 3
+        }
+      },
+      {
+        "evidence_level": "high",
+        "n": 2,
+        "outcome_rates": {
+          "continue": 0.5,
+          "implement": 0.5
+        },
+        "outcome_counts": {
+          "continue": 1,
+          "implement": 1
+        }
+      },
+      {
+        "evidence_level": "low",
+        "n": 1,
+        "outcome_rates": {
+          "continue": 1.0
+        },
+        "outcome_counts": {
+          "continue": 1
+        }
+      }
+    ],
+    "evidence_level_vs_case_pass": [
+      {
+        "evidence_level": "medium",
+        "n": 26,
+        "outcome_rates": {
+          "fail": 1.0
+        },
+        "outcome_counts": {
+          "fail": 26
+        }
+      },
+      {
+        "evidence_level": "high",
+        "n": 2,
+        "outcome_rates": {
+          "fail": 0.5,
+          "pass": 0.5
+        },
+        "outcome_counts": {
+          "fail": 1,
+          "pass": 1
+        }
+      },
+      {
+        "evidence_level": "low",
+        "n": 1,
+        "outcome_rates": {
+          "fail": 1.0
+        },
+        "outcome_counts": {
+          "fail": 1
+        }
+      }
+    ],
+    "round_had_verify_ok_vs_progress": [
+      {
+        "had_verify_ok": false,
+        "n": 27,
+        "outcome_rates": {
+          "continue": 0.889,
+          "stop": 0.111
+        },
+        "outcome_counts": {
+          "continue": 24,
+          "stop": 3
+        }
+      },
+      {
+        "had_verify_ok": true,
+        "n": 2,
+        "outcome_rates": {
+          "continue": 0.5,
+          "implement": 0.5
+        },
+        "outcome_counts": {
+          "continue": 1,
+          "implement": 1
+        }
+      }
+    ],
+    "judge_satisfies_vs_progress": [
+      {
+        "judge_satisfies": false,
+        "n": 28,
+        "outcome_rates": {
+          "continue": 0.893,
+          "stop": 0.107
+        },
+        "outcome_counts": {
+          "continue": 25,
+          "stop": 3
+        }
+      },
+      {
+        "judge_satisfies": true,
+        "n": 1,
+        "outcome_rates": {
+          "implement": 1.0
+        },
+        "outcome_counts": {
+          "implement": 1
+        }
+      }
+    ],
+    "no_gain_vs_progress": [
+      {
+        "no_gain": true,
+        "n": 17,
+        "outcome_rates": {
+          "continue": 0.882,
+          "stop": 0.118
+        },
+        "outcome_counts": {
+          "continue": 15,
+          "stop": 2
+        }
+      },
+      {
+        "no_gain": false,
+        "n": 12,
+        "outcome_rates": {
+          "continue": 0.833,
+          "stop": 0.083,
+          "implement": 0.083
+        },
+        "outcome_counts": {
+          "continue": 10,
+          "stop": 1,
+          "implement": 1
+        }
+      }
+    ],
+    "rule_reason_vs_progress": [
+      {
+        "progress_reason": "no_progress",
+        "n": 16,
+        "outcome_rates": {
+          "continue": 1.0
+        },
+        "outcome_counts": {
+          "continue": 16
+        }
+      },
+      {
+        "progress_reason": "new_information",
+        "n": 9,
+        "outcome_rates": {
+          "continue": 1.0
+        },
+        "outcome_counts": {
+          "continue": 9
+        }
+      },
+      {
+        "progress_reason": "max_research_rounds",
+        "n": 2,
+        "outcome_rates": {
+          "stop": 1.0
+        },
+        "outcome_counts": {
+          "stop": 2
+        }
+      },
+      {
+        "progress_reason": "findings_complete",
+        "n": 1,
+        "outcome_rates": {
+          "implement": 1.0
+        },
+        "outcome_counts": {
+          "implement": 1
+        }
+      },
+      {
+        "progress_reason": "stagnation",
+        "n": 1,
+        "outcome_rates": {
+          "stop": 1.0
+        },
+        "outcome_counts": {
+          "stop": 1
+        }
+      }
+    ],
+    "web_decision_link_audit": {
+      "rounds_total": 29,
+      "rounds_with_hits": 28,
+      "candidates_total": 44,
+      "candidates_linked": 26,
+      "hit_score_present_saved": 0,
+      "hit_score_missing_saved": 175,
+      "hit_score_computed_retro": 175,
+      "link_coverage": 0.591,
+      "audit_gaps": {
+        "none": 25,
+        "no_web_hits_in_round": 1,
+        "zero_candidate_hit_token_overlap": 4
+      },
+      "overlap_hist": {
+        "1": 20,
+        "2": 5,
+        "0": 18,
+        "6+": 1
+      },
+      "note": "Saved KSS-1.1 runs omit hit.score on web_hits; retroactive audit recomputes existing hit_score and token-overlap links to verified_runs (observational only)."
+    }
+  },
+  "code_linkage_audit": {
+    "web_search_produces_hits": true,
+    "hit_score_exists": true,
+    "hit_score_path": "tools/system/tool_builder/research/web.py:hit_score",
+    "hits_reach_candidate_prompt": true,
+    "candidate_json_has_hit_url_field": false,
+    "verifier_reads_hit_score": false,
+    "progress_reads_hit_score": false,
+    "round_details_web_hits_include_score_before_kss12": false,
+    "linkage_before_kss12": "missing",
+    "linkage_after_kss12_obs": "token_overlap_observational_only",
+    "routing_on_web_score": false,
+    "env_flag": "AI_AGENT_KSS12_OBS (also inherits AI_AGENT_KSS11_OBS)"
+  },
+  "interpretation_hints": {
+    "verifier_high_should_correlate_with_implement": true,
+    "web_link_gap": "Candidates are LLM-proposed; no hard FK to hit.url existed. KSS-1.2 adds observational token-overlap links only.",
+    "do_not_set_thresholds_yet": true
+  }
+}

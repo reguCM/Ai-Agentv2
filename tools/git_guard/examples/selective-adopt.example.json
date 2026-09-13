@@ -1,0 +1,57 @@
+{
+  "repo": "D:\\AI-Agent-worktrees\\YOUR-SELECTIVE-ADOPT-WORKTREE",
+  "require_branch": null,
+  "allow_branches": [
+    "adopt/*",
+    "wip/*",
+    "feature/*"
+  ],
+  "deny_branches": [
+    "stabilize/*",
+    "main",
+    "master",
+    "promote/*"
+  ],
+  "require_clean": false,
+  "base_ref": "HEAD",
+  "allow_path_globs": [
+    "tools/**",
+    "tests/**",
+    "docs/**",
+    "*.md"
+  ],
+  "deny_path_globs": [
+    ".git/**",
+    "**/.env",
+    "**/secrets/**",
+    "promote/**"
+  ],
+  "forbid_overlap_refs": [],
+  "remotes": [
+    {
+      "name": "origin",
+      "forbid_push": true
+    }
+  ],
+  "forbid_actions": [
+    "force_push",
+    "reset_hard"
+  ],
+  "human_gate_actions": [
+    "push",
+    "merge",
+    "merge_ff"
+  ],
+  "action": {
+    "type": "push",
+    "target_remote": "origin",
+    "target_branch": "stabilize/example"
+  },
+  "required_tests": [
+    {
+      "cmd": "python -m pytest -q --maxfail=1",
+      "cwd": null,
+      "timeout_sec": 300
+    }
+  ]
+}

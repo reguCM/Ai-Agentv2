@@ -1,0 +1,641 @@
+{
+    "tools": [
+        {
+            "name": "get_gpu_status",
+            "category": "system",
+            "subcategory": "gpu",
+            "description": "GPUの基本状態を取得する。GPUモデル、温度、使用率、VRAM使用量を nvidia-smi から実測する。取得不能時は unknown/unavailable を返し固定値へフォールバックしない。",
+            "keywords": [
+                "GPU",
+                "グラボ",
+                "VRAM",
+                "温度",
+                "使用率",
+                "状態"
+            ],
+            "risk": "low",
+            "module": "tools.system.gpu.gpu_status",
+            "function": "get_gpu_status",
+            "input": {},
+            "visibility": "agent",
+            "observation_source": "real"
+        },
+        {
+            "name": "get_gpu_processes",
+            "category": "system",
+            "subcategory": "gpu",
+            "description": "現在GPUを使用しているプロセスを nvidia-smi から実測する。取得不能時は空リストと status/error を返し、固定プロセス一覧へフォールバックしない。",
+            "keywords": [
+                "GPU",
+                "プロセス",
+                "プログラム",
+                "VRAM使用",
+                "GPU使用中"
+            ],
+            "risk": "low",
+            "module": "tools.system.gpu.gpu_processes",
+            "function": "get_gpu_processes",
+            "input": {},
+            "visibility": "agent",
+            "observation_source": "real"
+        },
+        {
+            "name": "create_tool_proposal",
+            "category": "ai",
+            "subcategory": "tool_builder",
+            "description": "既存Toolでは足りない新しい機能が必要なときに呼ぶ。設計案の材料を返す。requestにユーザー要求を渡すだけでよい。仕様・Registry・既存実装・環境はシステムが付与する。ファイル作成はしない。",
+            "keywords": [
+                "Toolを作る",
+                "新しいTool",
+                "Tool追加",
+                "機能追加",
+                "プログラム作成",
+                "自動生成"
+            ],
+            "risk": "low",
+            "module": "tools.ai.tool_builder.proposal",
+            "function": "create_tool_proposal",
+            "input": {
+                "request": {
+                    "type": "string",
+                    "description": "作成したいToolについてのユーザー要求"
+                }
+            }
+        },
+        {
+            "name": "create_tool_implementation",
+            "category": "ai",
+            "subcategory": "tool_builder",
+            "description": "検証済みのTool設計案をもとに実装案の材料を返す。ファイル作成はしない。引数は不要。proposal・参考実装・環境はシステムが付与する。",
+            "keywords": [
+                "実装",
+                "コード生成",
+                "Tool作成"
+            ],
+            "risk": "medium",
+            "module": "tools.ai.tool_builder.implementation",
+            "function": "create_tool_implementation",
+            "input": {}
+        },
+        {
+            "name": "validate_tool_implementation",
+            "category": "system",
+            "subcategory": "tool_builder",
+            "description": "実装案を機械的に検査する。path・function・code構文・関数存在・unimplemented・Registry整合性を確認する。コードは実行しない。",
+            "keywords": [
+                "検証",
+                "実装案",
+                "validate"
+            ],
+            "risk": "low",
+            "module": "tools.system.tool_builder.validate.implementation",
+            "function": "validate_tool_implementation",
+            "input": {}
+        },
+        {
+            "name": "register_tool",
+            "category": "system",
+            "subcategory": "tool_builder",
+            "description": "検証済みの設計案と実装案をRegistryに登録し、コードファイルを作成する。検証がOKのときだけ実行する。",
+            "keywords": [
+                "Registry",
+                "登録",
+                "Tool追加"
+            ],
+            "risk": "medium",
+            "module": "tools.system.tool_builder.register",
+            "function": "register_tool",
+            "input": {}
+        },
+        {
+            "name": "run_test_plan",
+            "category": "system",
+            "subcategory": "test_safety",
+            "description": "構造化 test_plan を Test Safety 経路で実行する。validator→gate→authorization→pytest。直接pytestやshellへのfallbackはしない。",
+            "keywords": [
+                "pytest",
+                "test plan",
+                "test_safety",
+                "回帰テスト"
+            ],
+            "risk": "medium",
+            "module": "tools.system.test_safety.run_test_plan_entry",
+            "function": "run_test_plan_entry",
+            "input": {
+                "test_plan": {
+                    "type": "object",
+                    "description": "Normative shape: registry/schema/test_safety_evaluation.schema.json $defs/test_plan"
+                },
+                "authorization_packet": {
+                    "type": "object",
+                    "description": "Optional. Human-approved TEST_SAFETY_AUTHORIZATION for resume only."
+                }
+            },
+            "visibility": "agent",
+            "observation_source": "real"
+        },
+        {
+            "name": "test_tool",
+            "category": "system",
+            "subcategory": "tool_builder",
+            "description": "Registryに登録されたToolを引数なしで1回実行し、結果またはエラーを返す。",
+            "keywords": [
+                "テスト",
+                "実行",
+                "Tool確認"
+            ],
+            "risk": "low",
+            "module": "tools.system.tool_builder.test",
+            "function": "test_tool",
+            "input": {
+                "tool_name": {
+                    "type": "string",
+                    "description": "テストするTool名"
+                }
+            }
+        },
+        {
+            "name": "validate_tool_result",
+            "category": "system",
+            "subcategory": "tool_builder",
+            "description": "test_tool の実行結果が設計案の output を満たしているか機械的に確認する。コードは再実行しない。",
+            "keywords": [
+                "検証",
+                "実行結果",
+                "validate"
+            ],
+            "risk": "low",
+            "module": "tools.system.tool_builder.validate.result",
+            "function": "validate_tool_result",
+            "input": {}
+        },
+        {
+            "name": "repair_tool",
+            "category": "ai",
+            "subcategory": "tool_builder",
+            "description": "実行結果の検証NGや未完了をもとに、修正に必要な材料を返す。ファイル変更はしない。",
+            "keywords": [
+                "修正",
+                "repair",
+                "直す"
+            ],
+            "risk": "low",
+            "module": "tools.ai.tool_builder.repair",
+            "function": "repair_tool",
+            "input": {}
+        },
+        {
+            "name": "apply_repair",
+            "category": "system",
+            "subcategory": "tool_builder",
+            "description": "検証済みの修正案を既存ToolのファイルとRegistryに反映する。新規登録はしない。",
+            "keywords": [
+                "修正適用",
+                "repair",
+                "更新"
+            ],
+            "risk": "medium",
+            "module": "tools.system.tool_builder.apply",
+            "function": "apply_repair",
+            "input": {}
+        },
+        {
+            "name": "research_tool",
+            "category": "ai",
+            "subcategory": "tool_builder",
+            "description": "blocked な実装について、調査が必要な項目を整理して返す。実際の調査は行わない。",
+            "keywords": [
+                "調査",
+                "research",
+                "未確認"
+            ],
+            "risk": "low",
+            "module": "tools.ai.tool_builder.research",
+            "function": "research_tool",
+            "input": {}
+        },
+        {
+            "name": "research_executor",
+            "category": "system",
+            "subcategory": "tool_builder",
+            "description": "research_items を調べ、構造化した調査結果を返す。source=local は import/which。source=web は検索ヒットまで。",
+            "keywords": [
+                "調査実行",
+                "ローカル調査",
+                "web",
+                "research"
+            ],
+            "risk": "low",
+            "module": "tools.system.tool_builder.research.executor",
+            "function": "research_executor",
+            "input": {}
+        },
+        {
+            "name": "web_research",
+            "category": "ai",
+            "subcategory": "tool_builder",
+            "description": "Web検索結果とローカルで使えるコマンドから、実環境確認用の検証コマンド材料をまとめる。実行はしない。",
+            "keywords": [
+                "Web調査",
+                "検証コマンド",
+                "research"
+            ],
+            "risk": "low",
+            "module": "tools.ai.tool_builder.web",
+            "function": "web_research",
+            "input": {}
+        },
+        {
+            "name": "research_verifier",
+            "category": "system",
+            "subcategory": "tool_builder",
+            "description": "Web調査の検証用コマンドを実環境で実行し、成功したものだけ confidence=high にする。",
+            "keywords": [
+                "検証実行",
+                "Web調査",
+                "research"
+            ],
+            "risk": "medium",
+            "module": "tools.system.tool_builder.research.verify",
+            "function": "research_verifier",
+            "input": {}
+        },
+        {
+            "name": "research_result_validator",
+            "category": "system",
+            "subcategory": "tool_builder",
+            "description": "調査結果が question / finding / evidence / confidence を持つ信用できる形式か機械的に確認する。再調査はしない。",
+            "keywords": [
+                "検証",
+                "調査結果",
+                "validate"
+            ],
+            "risk": "low",
+            "module": "tools.system.tool_builder.validate.research",
+            "function": "research_result_validator",
+            "input": {}
+        },
+        {
+            "name": "research_result",
+            "category": "ai",
+            "subcategory": "tool_builder",
+            "description": "検証済みの調査結果を実装・修正用の材料にまとめる。high は usable_findings、medium は reference_findings、low は unresolved。ファイル作成はしない。",
+            "keywords": [
+                "調査結果",
+                "実装材料",
+                "research"
+            ],
+            "risk": "low",
+            "module": "tools.ai.tool_builder.research_result",
+            "function": "research_result",
+            "input": {}
+        },
+        {
+            "name": "cpu_status",
+            "category": "system",
+            "subcategory": "cpu",
+            "description": "CPU LoadPercentage を Legacy 形式（status 文字列）で返す。構造化 CPU 情報は get_cpu_status を使う。",
+            "keywords": [
+                "CPU",
+                "状態"
+            ],
+            "risk": "low",
+            "module": "tools.system.cpu.cpu_status",
+            "function": "cpu_status",
+            "input": {},
+            "output": [
+                "status"
+            ],
+            "visibility": "agent",
+            "observation_source": "real"
+        },
+        {
+            "name": "get_cpu_status",
+            "category": "system",
+            "subcategory": "cpu",
+            "visibility": "agent",
+            "description": "Windows CIM から CPU model、コア数、スレッド数、LoadPercentage、クロック情報を実測する。温度は UNSUPPORTED。Legacy cpu_status とは別 Tool。",
+            "keywords": [
+                "CPU",
+                "コア",
+                "スレッド",
+                "モデル",
+                "使用率",
+                "クロック"
+            ],
+            "risk": "low",
+            "observation_source": "real",
+            "module": "tools.system.cpu.get_cpu_status",
+            "function": "get_cpu_status",
+            "input": {}
+        },
+        {
+            "name": "get_system_time",
+            "category": "system",
+            "subcategory": "time",
+            "visibility": "agent",
+            "description": "実行ホストのローカル現在日時を実測する。datetime / timezone / formatted を返す。固定時刻へフォールバックしない。",
+            "keywords": [
+                "時刻",
+                "日時",
+                "timezone",
+                "clock"
+            ],
+            "risk": "low",
+            "observation_source": "real",
+            "module": "tools.system.time.get_system_time",
+            "function": "get_system_time",
+            "input": {},
+            "output": [
+                "datetime",
+                "timezone",
+                "formatted"
+            ]
+        },
+        {
+            "name": "get_memory_status",
+            "category": "system",
+            "subcategory": "memory",
+            "visibility": "agent",
+            "description": "実行ホストの物理メモリを実測する。total_mb / used_mb / free_mb / used_percent を返す。固定値へフォールバックしない。",
+            "keywords": [
+                "メモリ",
+                "RAM",
+                "memory",
+                "使用率"
+            ],
+            "risk": "low",
+            "observation_source": "real",
+            "module": "tools.system.memory.get_memory_status",
+            "function": "get_memory_status",
+            "input": {},
+            "output": [
+                "total_mb",
+                "used_mb",
+                "free_mb",
+                "used_percent"
+            ]
+        },
+        {
+            "name": "get_system_summary",
+            "category": "system",
+            "subcategory": "summary",
+            "visibility": "agent",
+            "description": "既存の get_system_time / get_cpu_status / get_memory_status / get_gpu_status の結果を合成する。自身は CIM / nvidia-smi / datetime を直接取得しない。欠測を推測で埋めない。",
+            "keywords": [
+                "概要",
+                "summary",
+                "システム状態",
+                "合成"
+            ],
+            "risk": "low",
+            "observation_source": "composed",
+            "module": "tools.system.summary.get_system_summary",
+            "function": "get_system_summary",
+            "input": {},
+            "output": [
+                "status",
+                "sections",
+                "derived"
+            ]
+        },
+        {
+            "name": "search_web",
+            "category": "system",
+            "subcategory": "network",
+            "description": "Web上の情報を探索する（Discovery）。queryを検索backendへ渡し、title/snippet/URL等のヒットを返す。URL本文の取得はread_url_text。意味理解や要約はTool側では行わない。",
+            "keywords": [
+                "Web",
+                "検索",
+                "探索",
+                "search",
+                "インターネット"
+            ],
+            "risk": "low",
+            "module": "tools.system.network.search_web",
+            "function": "search_web",
+            "input": {
+                "query": {
+                    "type": "string",
+                    "description": "検索クエリ",
+                    "required": true
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "LLMへ返すヒット数（return_limit）。省略時は複数件。"
+                }
+            },
+            "visibility": "agent"
+        },
+        {
+            "name": "read_url_text",
+            "category": "system",
+            "subcategory": "network",
+            "description": "既知の HTTP/HTTPS URL から本文を read-only GET で取得する（Fetch / Evidence）。main_text と quality（fact_ready 等）を返す。意味推論・要約は行わない。URLが分からない探索はsearch_web。",
+            "keywords": [
+                "URL",
+                "Web",
+                "fetch",
+                "本文",
+                "HTTP"
+            ],
+            "risk": "medium",
+            "module": "ai_tool.experimental.read_url.reader",
+            "function": "read_url_text",
+            "input": {
+                "url": {
+                    "type": "string",
+                    "description": "HTTP または HTTPS URL",
+                    "required": true
+                },
+                "max_bytes": {
+                    "type": "integer",
+                    "description": "最大HTTP取得バイト（任意、既定 262144）。取得後に main_text を抽出・制限する。"
+                },
+                "timeout_seconds": {
+                    "type": "number",
+                    "description": "接続・読取タイムアウト秒（任意、既定 10）"
+                }
+            },
+            "visibility": "agent"
+        },
+        {
+            "name": "read_file",
+            "category": "file",
+            "subcategory": "workspace",
+            "description": "Workspace（本リポジトリ）内のテキストファイルを read-only で読み取り、行番号付きで返す。Workspace 外・絶対パス・'..' を含むパスは拒否する。バイナリと 64KB 超は読めない。ファイル探索は list_files、内容検索は search_files（いずれも別 Tool）。",
+            "keywords": [
+                "ファイル",
+                "読取",
+                "read",
+                "workspace",
+                "テキスト",
+                "ソースコード"
+            ],
+            "risk": "low",
+            "side_effect": "read-only",
+            "security": {
+                "workspace_boundary": true,
+                "path_traversal_protection": true,
+                "filesystem_access": "workspace_read_only"
+            },
+            "module": "tools.file.workspace.read_file",
+            "function": "read_file",
+            "input": {
+                "path": {
+                    "type": "string",
+                    "description": "Workspace 内の相対パス（例: registry/tools.json）。workspace root 外・絶対パス・'..' セグメントは不可。",
+                    "required": true
+                },
+                "offset": {
+                    "type": "integer",
+                    "description": "開始行（1-based、任意）。省略時は先頭から。"
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "返す最大行数（任意）。省略時は offset 以降すべて（ファイルサイズ上限内）。"
+                }
+            },
+            "visibility": "agent",
+            "observation_source": "real"
+        },
+        {
+            "name": "list_files",
+            "category": "file",
+            "subcategory": "workspace",
+            "description": "Workspace（本リポジトリ）内の指定ディレクトリ直下のファイル・ディレクトリを一覧する（read-only）。再帰せず1階層のみ。省略時は workspace root。Workspace 外・絶対パス・'..' は不可。中身の読取は read_file、パターン検索は search_files。",
+            "keywords": [
+                "ファイル",
+                "一覧",
+                "list",
+                "directory",
+                "workspace",
+                "探索",
+                "file"
+            ],
+            "risk": "low",
+            "side_effect": "read-only",
+            "security": {
+                "workspace_boundary": true,
+                "path_traversal_protection": true,
+                "filesystem_access": "workspace_read_only"
+            },
+            "module": "tools.file.workspace.list_files",
+            "function": "list_files",
+            "input": {
+                "path": {
+                    "type": "string",
+                    "description": "Workspace 内のディレクトリ相対パス。省略時は workspace root（.）。直下のみ列挙（再帰しない）。"
+                }
+            },
+            "visibility": "agent",
+            "observation_source": "real"
+        },
+        {
+            "name": "search_files",
+            "category": "file",
+            "subcategory": "workspace",
+            "description": "Workspace（本リポジトリ）内の256 KiB以下のテキストファイルを通常の文字列検索する（read-only）。指定 path 以下を再帰走査し、一致行の path・行番号・抜粋を返す。正規表現ではなく部分文字列一致。1回の走査ファイル数に上限があり、達した場合は partial / has_more と next_cursor を返す。続きは同じ query/path に after=next_cursor を付けて再開する。Workspace 外・絶対パス・'..' は不可。ディレクトリ一覧は list_files、ファイル読取は read_file。",
+            "keywords": [
+                "検索",
+                "search",
+                "grep",
+                "workspace",
+                "文字列",
+                "コード",
+                "file"
+            ],
+            "risk": "low",
+            "side_effect": "read-only",
+            "security": {
+                "workspace_boundary": true,
+                "path_traversal_protection": true,
+                "filesystem_access": "workspace_read_only"
+            },
+            "module": "tools.file.workspace.search_files",
+            "function": "search_files",
+            "input": {
+                "query": {
+                    "type": "string",
+                    "description": "検索する通常の文字列（部分一致。正規表現ではない）。",
+                    "required": true
+                },
+                "path": {
+                    "type": "string",
+                    "description": "検索起点の Workspace 内相対パス。省略時は workspace root（.）。ディレクトリ以下を再帰検索。"
+                },
+                "after": {
+                    "type": "string",
+                    "description": "直前ページの next_cursor（last_scanned_path）。この相対ファイルより後の走査順から再開する。省略時は path 起点から。"
+                }
+            },
+            "visibility": "agent",
+            "observation_source": "real"
+        },
+        {
+            "name": "create_file",
+            "category": "file",
+            "subcategory": "sandbox",
+            "description": "Runtimeが所有するDedicated Sandbox内にUTF-8テキストファイルを新規作成する。既存ファイルは上書きせず、Productionおよび開発元Worktreeへは書き込まない。",
+            "keywords": ["sandbox", "file", "create", "新規作成", "ファイルを作", "ファイル作成", "新しいファイル"],
+            "risk": "medium",
+            "side_effect": "sandbox-write",
+            "security": {
+                "dedicated_sandbox_required": true,
+                "workspace_boundary": true,
+                "path_traversal_protection": true,
+                "production_write": false
+            },
+            "module": "tools.file.sandbox.create_file",
+            "function": "create_file",
+            "input": {
+                "path": {
+                    "type": "string",
+                    "description": "Dedicated Sandbox内の新規ファイルへの相対パス。絶対パスと'..'は禁止。",
+                    "required": true
+                },
+                "content": {
+                    "type": "string",
+                    "description": "新規ファイルへUTF-8で保存する内容。",
+                    "required": true
+                }
+            },
+            "visibility": "agent"
+        },
+        {
+            "name": "edit_file",
+            "category": "file",
+            "subcategory": "sandbox",
+            "description": "Runtimeが所有するDedicated Sandbox内の既存UTF-8テキストファイルを、単一一致するold_textからnew_textへ限定置換する。Productionは変更しない。",
+            "keywords": ["sandbox", "file", "edit", "exact replacement", "ファイルを編集", "ファイル編集", "ファイルを書き換え", "ファイル書き換え"],
+            "risk": "medium",
+            "side_effect": "sandbox-write",
+            "security": {
+                "dedicated_sandbox_required": true,
+                "workspace_boundary": true,
+                "path_traversal_protection": true,
+                "production_write": false
+            },
+            "module": "tools.file.sandbox.edit_file",
+            "function": "edit_file",
+            "input": {
+                "path": {
+                    "type": "string",
+                    "description": "Dedicated Sandbox内の既存ファイルへの相対パス。絶対パスと'..'は禁止。",
+                    "required": true
+                },
+                "old_text": {
+                    "type": "string",
+                    "description": "ファイル内で正確に1回だけ一致する置換前文字列。",
+                    "required": true
+                },
+                "new_text": {
+                    "type": "string",
+                    "description": "置換後文字列。空文字列も許可する。",
+                    "required": true
+                }
+            },
+            "visibility": "agent"
+        }
+    ]
+}

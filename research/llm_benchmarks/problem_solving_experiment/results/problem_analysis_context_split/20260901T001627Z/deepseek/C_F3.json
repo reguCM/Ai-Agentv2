@@ -1,0 +1,72 @@
+{
+  "experiment": "problem_analysis_context_split",
+  "model": "deepseek-coder-v2:16b",
+  "case_id": "C_validation_fields",
+  "condition": "F3",
+  "input": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"validator\",\n  \"status\": \"fail\",\n  \"error_type\": \"ValidationError\",\n  \"error\": \"expected 3 fields, got 2\"\n}\n\nsource:\nNOT_RECORDED\n",
+  "raw_output": "The problem described is a validation error that occurred while using a tool named \"validator\". The tool reported a failure (status: \"fail\") and indicated that there was a ValidationError. The specific error message indicated that the tool expected 3 fields in the data but only received 2.\n\nThe source of the data is not recorded, which means the data was not provided or was not accessible at the time of the validation attempt. This lack of data could be due to various reasons such as incomplete data input, data not being loaded correctly, or an issue with the system that was supposed to provide the data.\n\nIn summary, the problem is a validation error in a tool due to a mismatch between the expected number of fields and the actual number of fields in the data. The source of the data is not recorded, which makes it difficult to diagnose the exact cause of the issue.",
+  "timestamp": "2026-09-01T00:17:06.556514+00:00",
+  "call_ok": true,
+  "error": null,
+  "temperature": 0.0,
+  "failure": {
+    "tool_name": "validator",
+    "status": "fail",
+    "error_type": "ValidationError",
+    "error": "expected 3 fields, got 2"
+  },
+  "prompt_header": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.",
+  "notes": [
+    "context_split",
+    "no_analysis_taxonomy",
+    "no_tools",
+    "no_invented_traceback_or_source",
+    "f5_conversation_from_previous_fixture"
+  ],
+  "observability": {
+    "experiment_start": "2026-09-01T00:17:06.556514+00:00",
+    "experiment_end": "2026-09-01T00:17:08.178756+00:00",
+    "stop_reason": "single_turn",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"validator\",\n  \"status\": \"fail\",\n  \"error_type\": \"ValidationError\",\n  \"error\": \"expected 3 fields, got 2\"\n}\n\nsource:\nNOT_RECORDED\n"
+      }
+    ],
+    "chat_kwargs": {
+      "model": "deepseek-coder-v2:16b",
+      "tools": "not_used",
+      "keep_alive": "5m",
+      "options": {
+        "num_predict": 2048,
+        "temperature": 0.0,
+        "num_ctx": 4096
+      },
+      "timeout_seconds": 90,
+      "tool_presentation": "none",
+      "kwargs_source": {
+        "harness_chat_call": [
+          "model",
+          "messages"
+        ],
+        "llm_chat_setdefault": [
+          "options",
+          "keep_alive"
+        ],
+        "not_passed": [
+          "tools"
+        ]
+      }
+    },
+    "tools_used": false,
+    "extras": {
+      "traceback_included": false,
+      "source_included": true,
+      "conversation_included": false,
+      "traceback_recorded": false,
+      "source_recorded": false,
+      "conversation_provenance": "problem_analysis_context_cases.py (previous context experiment fixture, not live chat)"
+    },
+    "thinking_observed": false
+  }
+}

@@ -1,0 +1,34 @@
+query_id,noise_type,raw_text,translated_text,raw_matched_paths,translated_matched_paths,gold_path,raw_status,translated_status,progress,raw_gold_cosine,translated_gold_cosine,cosine_delta_gold,translation_ok,note
+current_clean,clean,CURRENTの文書を読んで,CURRENT_DEVELOPMENT_STATE.mdを読んで,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,unique_gold,unique_gold,same,0.465149,0.574041,0.108892,True,ノイズなし。path語 CURRENT が残る
+current_typo,typo,CURRETの文書を読んで,CURRENT_DEVELOPMENT_STATE.mdの文書を読んで,,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,empty,unique_gold,closer,0.419867,0.571201,0.151334,True,CURRENT の N 抜け
+current_conversion,conversion,過連との文書を読んで,過連との文書を読んで,,,docs/CURRENT_DEVELOPMENT_STATE.md,empty,empty,same,0.339875,0.343015,0.00314,True,かれんと → 過連と
+current_missing_char,missing_char,CURRENTの文書を読,CURRENT_DEVELOPMENT_STATE.mdを読,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,unique_gold,unique_gold,same,0.47933,0.578032,0.098702,True,んで が抜けた。CURRENT は残る
+current_particle,particle_drop,CURRENT文書読んで,CURRENT_DEVELOPMENT_STATE.md文書読んで,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,unique_gold,unique_gold,same,0.398364,0.536024,0.13766,True,の 抜け。CURRENT は残る
+current_colloquial,colloquial,今の開発状態のやつ,今の開発状態のやつ,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,unique_gold,unique_gold,same,0.565171,0.564834,-0.000337,True,口語。ヒット文の 開発状態 で指す
+current_filler,filler,えっとCURRENTの文書を読んでください,CURRENT_DEVELOPMENT_STATE.mdを読んでください,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,unique_gold,unique_gold,same,0.487682,0.570116,0.082434,True,フィラー えっと。CURRENT は残る
+current_restatement,restatement,GrillじゃなくてCURRENTの文書,CURRENT_DEVELOPMENT_STATE.md,docs/GRILL_V0.md | docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,ambiguous_includes_gold,unique_gold,closer,0.459905,0.524375,0.06447,True,言い直し。否定側に Grill が残る
+current_asr,asr_like,カレントの文書を呼んで,カレントの文書を呼んで,,,docs/CURRENT_DEVELOPMENT_STATE.md,empty,empty,same,0.407848,0.408038,0.00019,True,音声認識風。カレント + 呼んで
+current_demonstrative,demonstrative,そっちのCURRENT,そっちのCURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,docs/CURRENT_DEVELOPMENT_STATE.md,unique_gold,unique_gold,same,0.503467,0.604392,0.100925,True,指示語。CURRENT は残る
+current_compound,compound,えっと過連とのやつ読んで,過連とのやつ読んで,,,docs/CURRENT_DEVELOPMENT_STATE.md,empty,empty,same,0.325216,0.357343,0.032127,True,フィラー + 変換ミス + 口語
+grill_clean,clean,Grillの原則の文書,Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程,docs/GRILL_V0.md,docs/GRILL_V0.md | docs/CURRENT_DEVELOPMENT_STATE.md,docs/GRILL_V0.md,unique_gold,ambiguous_includes_gold,farther,0.705311,0.949909,0.244598,True,ノイズなし。Grill と 原則 が残る
+grill_typo,typo,Grrillの文書,Grill v0 の文書,,docs/GRILL_V0.md,docs/GRILL_V0.md,empty,unique_gold,closer,0.511842,0.67776,0.165918,True,Grill の r 重複。原則は入れない
+grill_conversion,conversion,具入るのやつ,具入るのやつ,,,docs/GRILL_V0.md,empty,empty,same,0.340464,0.340668,0.000204,True,ぐりる → 具入る
+grill_missing_char,missing_char,Grillの原,Grillの原稿はGRILL_V0.mdですか？,docs/GRILL_V0.md,docs/GRILL_V0.md,docs/GRILL_V0.md,unique_gold,unique_gold,same,0.597941,0.600143,0.002202,True,則 が抜けた。Grill は残る
+grill_particle,particle_drop,Grill原則の文書,Grill原則の文書,docs/GRILL_V0.md,docs/GRILL_V0.md,docs/GRILL_V0.md,unique_gold,unique_gold,same,0.67747,0.677537,6.7e-05,True,の 抜け。Grill は残る
+grill_colloquial,colloquial,グリルのやつ,Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程,,docs/GRILL_V0.md | docs/CURRENT_DEVELOPMENT_STATE.md,docs/GRILL_V0.md,empty,ambiguous_includes_gold,closer,0.485049,0.953034,0.467985,True,口語カタカナ。path語 Grill が無い
+grill_filler,filler,あのーGrillの原則なんですけど,Grillの原則なんですけど,docs/GRILL_V0.md,docs/GRILL_V0.md,docs/GRILL_V0.md,unique_gold,unique_gold,same,0.600517,0.622963,0.022446,True,フィラー。Grill は残る
+grill_restatement,restatement,CURRENTじゃなくてGrillの原則,Grillの原則,docs/CURRENT_DEVELOPMENT_STATE.md | docs/GRILL_V0.md,docs/GRILL_V0.md,docs/GRILL_V0.md,ambiguous_includes_gold,unique_gold,closer,0.645179,0.716075,0.070896,True,言い直し。否定側に CURRENT が残る
+grill_asr,asr_like,グリルの文書を呼んで,Grill v0 — 人間向け質問原則と出口 / 人間の意図が必要なものを優先する / Technical Grill は別工程,,docs/GRILL_V0.md | docs/CURRENT_DEVELOPMENT_STATE.md,docs/GRILL_V0.md,empty,ambiguous_includes_gold,closer,0.500111,0.953034,0.452923,True,音声認識風。グリル + 呼んで
+grill_demonstrative,demonstrative,原則のほう,原則のほう,docs/GRILL_V0.md,docs/GRILL_V0.md,docs/GRILL_V0.md,unique_gold,unique_gold,same,0.435038,0.435038,0.0,True,指示語。ヒット文の 原則 で指す
+grill_compound,compound,まあ具入るのやつ,まあ具入るのやつ,,,docs/GRILL_V0.md,empty,empty,same,0.332605,0.333561,0.000956,True,フィラー + 変換ミス + 口語
+agents_clean,clean,AGENTSの方針,AGENTS.mdの方針,AGENTS.md,AGENTS.md,AGENTS.md,unique_gold,unique_gold,same,0.604137,0.56887,-0.035267,True,ノイズなし。path語 AGENTS が残る
+agents_typo,typo,AGNETSの方針,AGENTSの方針,,AGENTS.md,AGENTS.md,empty,unique_gold,closer,0.571547,0.60485,0.033303,True,AGENTS の転置
+agents_conversion,conversion,揚げんつの方針,AGENTS.mdの方針,,AGENTS.md,AGENTS.md,empty,unique_gold,closer,0.545203,0.567355,0.022152,True,えーじぇんつ → 揚げんつ
+agents_missing_char,missing_char,AGENTSの方,AGENTS.mdの方,AGENTS.md,AGENTS.md,AGENTS.md,unique_gold,unique_gold,same,0.562943,0.563113,0.00017,True,針 が抜けた。AGENTS は残る
+agents_particle,particle_drop,AGENTS方針,AGENTS.md方針,AGENTS.md,AGENTS.md,AGENTS.md,unique_gold,unique_gold,same,0.54269,0.55619,0.0135,True,の 抜け。AGENTS は残る
+agents_colloquial,colloquial,エージェントのやつ,AGENTS.md,,AGENTS.md,AGENTS.md,empty,unique_gold,closer,0.536874,0.581625,0.044751,True,口語。path語 AGENTS が無い
+agents_filler,filler,まあAGENTSの方針かな,AGENTSの方針かな,AGENTS.md,AGENTS.md,AGENTS.md,unique_gold,unique_gold,same,0.475656,0.529,0.053344,True,フィラー。AGENTS は残る
+agents_restatement,restatement,CURRENTじゃなくてAGENTSの方針,AGENTSの方針,docs/CURRENT_DEVELOPMENT_STATE.md | AGENTS.md,AGENTS.md,AGENTS.md,ambiguous_includes_gold,unique_gold,closer,0.522785,0.604137,0.081352,True,言い直し。否定側に CURRENT が残る
+agents_asr,asr_like,エージェンツの方針,AGENTS.mdの方針,,AGENTS.md,AGENTS.md,empty,unique_gold,closer,0.596483,0.567355,-0.029128,True,音声認識風。エージェンツ
+agents_demonstrative,demonstrative,ポリシーのほう,ポリシーのほう,,,AGENTS.md,empty,empty,same,0.591311,0.589241,-0.00207,True,指示語。ヒット文の Policy をカタカナで指す
+agents_compound,compound,まあえーじぇんつのやつ,AGENTS.md のやつ,,AGENTS.md,AGENTS.md,empty,unique_gold,closer,0.380921,0.593404,0.212483,True,フィラー + ひらがな + 口語

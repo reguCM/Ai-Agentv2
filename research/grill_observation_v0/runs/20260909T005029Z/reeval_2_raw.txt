@@ -1,0 +1,41 @@
+{
+  "unresolved_regions": [
+    {
+      "id": "ui_design",
+      "title": "ユーザーインターフェース設計",
+      "text": "画面レイアウト・色・UI要素の詳細が未確定",
+      "goal_impact": "medium",
+      "human_intent_required": true,
+      "human_impact": "high",
+      "rollback_impact": "high",
+      "cross_cutting_impact": "medium",
+      "ai_decidable": false,
+      "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+    },
+    {
+      "id": "scoring_system",
+      "title": "スコアリングシステム",
+      "text": "得点計算方法・レベルアップ条件が未確定",
+      "goal_impact": "medium",
+      "human_intent_required": false,
+      "human_impact": "medium",
+      "rollback_impact": "medium",
+      "cross_cutting_impact": "medium",
+      "ai_decidable": true,
+      "why": "ゲームバランスに影響するが、基本動作に比べて優先度は低い"
+    }
+  ],
+  "comparison": "UI設計はユーザー体験に直接影響するが人間の意図が必要。スコアリングシステムは技術的実装に焦点を当て、AI独自判断が可能。前者は後戻りが大きいが、後者は実装可能性が高く優先度が低い。",
+  "next": {
+    "id": "scoring_system",
+    "action": "internal_ai_decision",
+    "reason": "スコアリングシステムは標準的なテトリスルールに基づいてAIが独自に決定可能で、後戻りの影響も中程度。UI設計に比べて実装優先度が低いため。",
+    "ai_decision": {
+      "id": "scoring_system",
+      "title": "スコアリングシステム",
+      "value": "1行消去:100点, 2行:300点, 3行:500点, 4行:800点。レベルは1000点ごとに+1",
+      "reason": "標準テトリスのスコアリングを簡略化し、ゲームバランスを維持しつつ実装が容易",
+      "evidence": "テトリス公式ルール書およびオープンソーステトリス実装のスコア計算方法を参考"
+    }
+  }
+}

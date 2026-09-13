@@ -1,0 +1,34 @@
+{
+  "problem_id": "search_web_quality",
+  "note": "Gold is knowledge-base verdicts from existing experiments, not a new model run.",
+  "must_select": [
+    "mechanical_observation",
+    "evidence_four_classes",
+    "sufficient_ctx_code_pack",
+    "human_approval",
+    "route_decomposition",
+    "collect_rank_split",
+    "n2_path_gate",
+    "n3_runtime_evidence_gate",
+    "small_llm_local",
+    "large_llm_escalation"
+  ],
+  "must_not_select": [
+    "auto_fix",
+    "deepseek_full_replace",
+    "n2_full_path_narrative"
+  ],
+  "may_select": [
+    "specification_map",
+    "code_reading_large_ctx",
+    "n1_single_edge",
+    "small_then_large_pipeline"
+  ],
+  "must_not_treat_as_proven_spec": [
+    "small_then_large_pipeline",
+    "n1_single_edge",
+    "n3_runtime_evidence_gate"
+  ],
+  "reuse_required": true,
+  "auto_fix_must_be": "NOT_ALLOWED"
+}

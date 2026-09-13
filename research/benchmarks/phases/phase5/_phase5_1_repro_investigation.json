@@ -1,0 +1,927 @@
+{
+  "artifacts": {
+    "_phase5_benchmark_summary.json": {
+      "exists": true,
+      "mtime": "2026-08-20T20:33:05",
+      "bytes": 3821,
+      "cases": [
+        {
+          "case": "memory_usage",
+          "rounds": 8,
+          "llm_calls": 19,
+          "fail_stage": "research",
+          "usable_findings": 0,
+          "recall_mode_counts": {
+            "fresh": 3,
+            "escalation": 4,
+            "related": 4,
+            "repeating": 6
+          },
+          "actual_headroom_min": 1031
+        },
+        {
+          "case": "cpu_temperature",
+          "rounds": 10,
+          "llm_calls": 26,
+          "fail_stage": "research",
+          "usable_findings": 0,
+          "recall_mode_counts": {
+            "fresh": 2,
+            "escalation": 6,
+            "related": 2,
+            "repeating": 14
+          },
+          "actual_headroom_min": 1060
+        },
+        {
+          "case": "disk_usage",
+          "rounds": 10,
+          "llm_calls": 24,
+          "fail_stage": "research",
+          "usable_findings": 0,
+          "recall_mode_counts": {
+            "fresh": 4,
+            "escalation": 6,
+            "repeating": 10,
+            "related": 2
+          },
+          "actual_headroom_min": 1087
+        },
+        {
+          "case": "gpu_usage",
+          "rounds": null,
+          "llm_calls": 2,
+          "fail_stage": "proposal",
+          "usable_findings": 0,
+          "recall_mode_counts": {},
+          "actual_headroom_min": null
+        },
+        {
+          "case": "gpu_vram_usage",
+          "rounds": 10,
+          "llm_calls": 25,
+          "fail_stage": "research",
+          "usable_findings": 0,
+          "recall_mode_counts": {
+            "fresh": 2,
+            "escalation": 6,
+            "related": 1,
+            "repeating": 14
+          },
+          "actual_headroom_min": 869
+        }
+      ]
+    },
+    "_phase5_vs_phase4_compare.json": {
+      "exists": true,
+      "mtime": "2026-08-20T21:05:13",
+      "bytes": 19903,
+      "stores_full_history": false,
+      "stored_metric_keys": [
+        "actual_headroom_min",
+        "allocated_chars_max",
+        "candidate_repeat_rate",
+        "candidate_total",
+        "case",
+        "context_overflow",
+        "error",
+        "fail_stage",
+        "headroom_gate_ok",
+        "insufficient_findings",
+        "label",
+        "llm_calls",
+        "max_command_streak",
+        "pass",
+        "recall_mode_counts",
+        "repeat_fail_count",
+        "repeat_fail_rate",
+        "rounds",
+        "stop_reason",
+        "unique_command_keys",
+        "usable_findings",
+        "verified_fail_repeat_rate",
+        "verified_fail_total",
+        "verify_fail_count"
+      ],
+      "missing_for_5_1_eval": [
+        "research_history",
+        "research_rounds_detail",
+        "judgments / missing loops raw",
+        "error_class_recurrence",
+        "command_family_recurrence",
+        "no_gain_loop",
+        "pivot_required / usable after pivot",
+        "run timestamps / model / seed"
+      ]
+    },
+    "_phase5_1_repetition_analysis.json": {
+      "exists": true,
+      "mtime": "2026-08-20T21:09:59",
+      "bytes": 28756,
+      "has_waste_metrics": true,
+      "has_no_gain": false,
+      "has_pivot": true,
+      "case_ids": [
+        "memory_usage",
+        "cpu_temperature",
+        "disk_usage",
+        "gpu_usage",
+        "gpu_vram_usage"
+      ]
+    },
+    "research_implement_results.json": {
+      "exists": true,
+      "mtime": "2026-08-20T21:05:13",
+      "bytes": 11932441
+    },
+    "_phase5_memory_recall_v5_restore.py": {
+      "exists": true,
+      "mtime": "2026-08-20T21:24:31",
+      "bytes": 13319
+    },
+    "memory_recall.py": {
+      "exists": true,
+      "mtime": "2026-08-20T21:16:43",
+      "bytes": 24969
+    },
+    "_phase5_vs_phase4_compare.py": {
+      "exists": true,
+      "mtime": "2026-08-20T20:40:46",
+      "bytes": 11445
+    },
+    "_phase5_run_benchmarks.py": {
+      "exists": true,
+      "mtime": "2026-08-20T20:18:17",
+      "bytes": 6344
+    }
+  },
+  "git": {
+    "memory_recall_in_HEAD": false,
+    "note": "tools/ai/state/memory_recall.py は untracked。Phase1-5 系は HEAD に未コミット。"
+  },
+  "env_from_scripts": {
+    "phase5_run_benchmarks": {
+      "AI_AGENT_MEMORY_RECALL": "1",
+      "AI_AGENT_MEMORY_JUDGE": "0",
+      "AI_AGENT_CONTEXT_ALLOC_LIVE": "1 (setdefault)",
+      "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1 (setdefault)",
+      "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1 (setdefault)",
+      "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3 (setdefault)",
+      "cases": [
+        "memory_usage",
+        "cpu_temperature",
+        "disk_usage",
+        "gpu_usage",
+        "gpu_vram_usage"
+      ],
+      "entry": "research/llm_benchmarks/research_implement.py"
+    },
+    "phase5_vs_phase4_compare": {
+      "phase4_live": {
+        "AI_AGENT_MEMORY_RECALL": "0",
+        "common": "same as above + MEMORY_JUDGE=0"
+      },
+      "phase5_recall": {
+        "AI_AGENT_MEMORY_RECALL": "1",
+        "common": "same"
+      },
+      "note": "同一スクリプト連続実行。seed / model temperature 固定なし。"
+    }
+  },
+  "phase5_source_recovery": {
+    "git_commit": null,
+    "transcript_write_restored_file": "_phase5_memory_recall_v5_restore.py",
+    "restored_exists": true,
+    "restored_bytes": 13319,
+    "current_on_disk": "Phase 5.1 (assess_information_gain / pivot)",
+    "can_re_run_phase5_logic": true,
+    "caveat": "トランスクリプトから復元したソースは当時の1スナップショット。その後の小修正があれば欠落しうる。"
+  },
+  "results_json_linkage": {
+    "results_exists": true,
+    "run_count": 122,
+    "matched_phase5_summary": {
+      "memory_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 107,
+            "case": "memory_usage",
+            "timestamp": "2026-08-20T11:22:41.910308+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "stagnation",
+            "rounds": 8,
+            "llm_calls": 19,
+            "usable_findings": 0,
+            "history_events": 20,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {
+              "fresh": 3,
+              "escalation": 4,
+              "related": 4,
+              "repeating": 6
+            },
+            "actual_headroom_min": 1031,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "cpu_temperature": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 108,
+            "case": "cpu_temperature",
+            "timestamp": "2026-08-20T11:25:35.254305+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "max_research_rounds",
+            "rounds": 10,
+            "llm_calls": 26,
+            "usable_findings": 0,
+            "history_events": 31,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {
+              "fresh": 2,
+              "escalation": 6,
+              "related": 2,
+              "repeating": 14
+            },
+            "actual_headroom_min": 1060,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "disk_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 109,
+            "case": "disk_usage",
+            "timestamp": "2026-08-20T11:29:46.902427+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "max_research_rounds",
+            "rounds": 10,
+            "llm_calls": 24,
+            "usable_findings": 0,
+            "history_events": 31,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {
+              "fresh": 4,
+              "escalation": 6,
+              "repeating": 10,
+              "related": 2
+            },
+            "actual_headroom_min": 1087,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "gpu_usage": {
+        "hit_count": 18,
+        "hits": [
+          {
+            "idx": 110,
+            "case": "gpu_usage",
+            "timestamp": "2026-08-20T11:30:03.595488+00:00",
+            "pass": false,
+            "fail_stage": "proposal",
+            "error": "proposal_validation_ng",
+            "rounds": null,
+            "llm_calls": 2,
+            "usable_findings": 0,
+            "history_events": null,
+            "has_rounds_detail": false,
+            "has_judgments": false,
+            "recall_mode_counts": {},
+            "actual_headroom_min": null,
+            "headroom_gate_ok": null
+          },
+          {
+            "idx": 115,
+            "case": "gpu_usage",
+            "timestamp": "2026-08-20T11:49:33.217535+00:00",
+            "pass": false,
+            "fail_stage": "proposal",
+            "error": "proposal_validation_ng",
+            "rounds": null,
+            "llm_calls": 2,
+            "usable_findings": 0,
+            "history_events": null,
+            "has_rounds_detail": false,
+            "has_judgments": false,
+            "recall_mode_counts": {},
+            "actual_headroom_min": null,
+            "headroom_gate_ok": null
+          },
+          {
+            "idx": 120,
+            "case": "gpu_usage",
+            "timestamp": "2026-08-20T12:02:35.259554+00:00",
+            "pass": false,
+            "fail_stage": "proposal",
+            "error": "proposal_validation_ng",
+            "rounds": null,
+            "llm_calls": 2,
+            "usable_findings": 0,
+            "history_events": null,
+            "has_rounds_detail": false,
+            "has_judgments": false,
+            "recall_mode_counts": {},
+            "actual_headroom_min": null,
+            "headroom_gate_ok": null
+          }
+        ]
+      },
+      "gpu_vram_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 111,
+            "case": "gpu_vram_usage",
+            "timestamp": "2026-08-20T11:33:03.985219+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "max_research_rounds",
+            "rounds": 10,
+            "llm_calls": 25,
+            "usable_findings": 0,
+            "history_events": 33,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {
+              "fresh": 2,
+              "escalation": 6,
+              "related": 1,
+              "repeating": 14
+            },
+            "actual_headroom_min": 869,
+            "headroom_gate_ok": true
+          }
+        ]
+      }
+    },
+    "matched_compare_phase4": {
+      "memory_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 112,
+            "case": "memory_usage",
+            "timestamp": "2026-08-20T11:43:43.915859+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "stagnation",
+            "rounds": 8,
+            "llm_calls": 14,
+            "usable_findings": 0,
+            "history_events": 20,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {},
+            "actual_headroom_min": 989,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "cpu_temperature": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 113,
+            "case": "cpu_temperature",
+            "timestamp": "2026-08-20T11:46:21.128573+00:00",
+            "pass": false,
+            "fail_stage": "judge",
+            "error": "max_research_rounds",
+            "rounds": 10,
+            "llm_calls": 24,
+            "usable_findings": 0,
+            "history_events": 26,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {},
+            "actual_headroom_min": 1656,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "disk_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 114,
+            "case": "disk_usage",
+            "timestamp": "2026-08-20T11:49:17.821457+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "stagnation",
+            "rounds": 8,
+            "llm_calls": 16,
+            "usable_findings": 0,
+            "history_events": 27,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {},
+            "actual_headroom_min": 1116,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "gpu_usage": {
+        "hit_count": 18,
+        "hits": [
+          {
+            "idx": 115,
+            "case": "gpu_usage",
+            "timestamp": "2026-08-20T11:49:33.217535+00:00",
+            "pass": false,
+            "fail_stage": "proposal",
+            "error": "proposal_validation_ng",
+            "rounds": null,
+            "llm_calls": 2,
+            "usable_findings": 0,
+            "history_events": null,
+            "has_rounds_detail": false,
+            "has_judgments": false,
+            "recall_mode_counts": {},
+            "actual_headroom_min": null,
+            "headroom_gate_ok": null
+          },
+          {
+            "idx": 120,
+            "case": "gpu_usage",
+            "timestamp": "2026-08-20T12:02:35.259554+00:00",
+            "pass": false,
+            "fail_stage": "proposal",
+            "error": "proposal_validation_ng",
+            "rounds": null,
+            "llm_calls": 2,
+            "usable_findings": 0,
+            "history_events": null,
+            "has_rounds_detail": false,
+            "has_judgments": false,
+            "recall_mode_counts": {},
+            "actual_headroom_min": null,
+            "headroom_gate_ok": null
+          }
+        ]
+      },
+      "gpu_vram_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 116,
+            "case": "gpu_vram_usage",
+            "timestamp": "2026-08-20T11:51:54.162602+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "max_research_rounds",
+            "rounds": 10,
+            "llm_calls": 19,
+            "usable_findings": 0,
+            "history_events": 32,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {},
+            "actual_headroom_min": 1493,
+            "headroom_gate_ok": true
+          }
+        ]
+      }
+    },
+    "matched_compare_phase5": {
+      "memory_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 117,
+            "case": "memory_usage",
+            "timestamp": "2026-08-20T11:55:58.551487+00:00",
+            "pass": false,
+            "fail_stage": "judge",
+            "error": "max_research_rounds",
+            "rounds": 10,
+            "llm_calls": 25,
+            "usable_findings": 0,
+            "history_events": 24,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {
+              "fresh": 2,
+              "escalation": 6,
+              "repeating": 10,
+              "related": 5
+            },
+            "actual_headroom_min": 821,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "cpu_temperature": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 118,
+            "case": "cpu_temperature",
+            "timestamp": "2026-08-20T11:59:21.531884+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "max_research_rounds",
+            "rounds": 10,
+            "llm_calls": 26,
+            "usable_findings": 0,
+            "history_events": 37,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {
+              "fresh": 2,
+              "escalation": 6,
+              "related": 2,
+              "repeating": 14
+            },
+            "actual_headroom_min": 867,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "disk_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 119,
+            "case": "disk_usage",
+            "timestamp": "2026-08-20T12:02:19.682513+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "stagnation",
+            "rounds": 8,
+            "llm_calls": 18,
+            "usable_findings": 0,
+            "history_events": 24,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {
+              "fresh": 2,
+              "escalation": 4,
+              "repeating": 8,
+              "related": 2
+            },
+            "actual_headroom_min": 1087,
+            "headroom_gate_ok": true
+          }
+        ]
+      },
+      "gpu_usage": {
+        "hit_count": 18,
+        "hits": [
+          {
+            "idx": 115,
+            "case": "gpu_usage",
+            "timestamp": "2026-08-20T11:49:33.217535+00:00",
+            "pass": false,
+            "fail_stage": "proposal",
+            "error": "proposal_validation_ng",
+            "rounds": null,
+            "llm_calls": 2,
+            "usable_findings": 0,
+            "history_events": null,
+            "has_rounds_detail": false,
+            "has_judgments": false,
+            "recall_mode_counts": {},
+            "actual_headroom_min": null,
+            "headroom_gate_ok": null
+          },
+          {
+            "idx": 120,
+            "case": "gpu_usage",
+            "timestamp": "2026-08-20T12:02:35.259554+00:00",
+            "pass": false,
+            "fail_stage": "proposal",
+            "error": "proposal_validation_ng",
+            "rounds": null,
+            "llm_calls": 2,
+            "usable_findings": 0,
+            "history_events": null,
+            "has_rounds_detail": false,
+            "has_judgments": false,
+            "recall_mode_counts": {},
+            "actual_headroom_min": null,
+            "headroom_gate_ok": null
+          }
+        ]
+      },
+      "gpu_vram_usage": {
+        "hit_count": 1,
+        "hits": [
+          {
+            "idx": 121,
+            "case": "gpu_vram_usage",
+            "timestamp": "2026-08-20T12:05:12.703710+00:00",
+            "pass": false,
+            "fail_stage": "research",
+            "error": "max_research_rounds",
+            "rounds": 10,
+            "llm_calls": 24,
+            "usable_findings": 0,
+            "history_events": 32,
+            "has_rounds_detail": true,
+            "has_judgments": true,
+            "recall_mode_counts": {
+              "fresh": 3,
+              "escalation": 6,
+              "related": 2,
+              "repeating": 11
+            },
+            "actual_headroom_min": 1018,
+            "headroom_gate_ok": true
+          }
+        ]
+      }
+    },
+    "raw_runs_usable_for_reanalysis": true,
+    "runs_with_history": 48,
+    "last_10": [
+      {
+        "idx": 112,
+        "case": "memory_usage",
+        "timestamp": "2026-08-20T11:43:43.915859+00:00",
+        "pass": false,
+        "fail_stage": "research",
+        "error": "stagnation",
+        "rounds": 8,
+        "llm_calls": 14,
+        "usable_findings": 0,
+        "history_events": 20,
+        "has_rounds_detail": true,
+        "has_judgments": true,
+        "recall_mode_counts": {},
+        "actual_headroom_min": 989,
+        "headroom_gate_ok": true
+      },
+      {
+        "idx": 113,
+        "case": "cpu_temperature",
+        "timestamp": "2026-08-20T11:46:21.128573+00:00",
+        "pass": false,
+        "fail_stage": "judge",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 24,
+        "usable_findings": 0,
+        "history_events": 26,
+        "has_rounds_detail": true,
+        "has_judgments": true,
+        "recall_mode_counts": {},
+        "actual_headroom_min": 1656,
+        "headroom_gate_ok": true
+      },
+      {
+        "idx": 114,
+        "case": "disk_usage",
+        "timestamp": "2026-08-20T11:49:17.821457+00:00",
+        "pass": false,
+        "fail_stage": "research",
+        "error": "stagnation",
+        "rounds": 8,
+        "llm_calls": 16,
+        "usable_findings": 0,
+        "history_events": 27,
+        "has_rounds_detail": true,
+        "has_judgments": true,
+        "recall_mode_counts": {},
+        "actual_headroom_min": 1116,
+        "headroom_gate_ok": true
+      },
+      {
+        "idx": 115,
+        "case": "gpu_usage",
+        "timestamp": "2026-08-20T11:49:33.217535+00:00",
+        "pass": false,
+        "fail_stage": "proposal",
+        "error": "proposal_validation_ng",
+        "rounds": null,
+        "llm_calls": 2,
+        "usable_findings": 0,
+        "history_events": null,
+        "has_rounds_detail": false,
+        "has_judgments": false,
+        "recall_mode_counts": {},
+        "actual_headroom_min": null,
+        "headroom_gate_ok": null
+      },
+      {
+        "idx": 116,
+        "case": "gpu_vram_usage",
+        "timestamp": "2026-08-20T11:51:54.162602+00:00",
+        "pass": false,
+        "fail_stage": "research",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 19,
+        "usable_findings": 0,
+        "history_events": 32,
+        "has_rounds_detail": true,
+        "has_judgments": true,
+        "recall_mode_counts": {},
+        "actual_headroom_min": 1493,
+        "headroom_gate_ok": true
+      },
+      {
+        "idx": 117,
+        "case": "memory_usage",
+        "timestamp": "2026-08-20T11:55:58.551487+00:00",
+        "pass": false,
+        "fail_stage": "judge",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 25,
+        "usable_findings": 0,
+        "history_events": 24,
+        "has_rounds_detail": true,
+        "has_judgments": true,
+        "recall_mode_counts": {
+          "fresh": 2,
+          "escalation": 6,
+          "repeating": 10,
+          "related": 5
+        },
+        "actual_headroom_min": 821,
+        "headroom_gate_ok": true
+      },
+      {
+        "idx": 118,
+        "case": "cpu_temperature",
+        "timestamp": "2026-08-20T11:59:21.531884+00:00",
+        "pass": false,
+        "fail_stage": "research",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 26,
+        "usable_findings": 0,
+        "history_events": 37,
+        "has_rounds_detail": true,
+        "has_judgments": true,
+        "recall_mode_counts": {
+          "fresh": 2,
+          "escalation": 6,
+          "related": 2,
+          "repeating": 14
+        },
+        "actual_headroom_min": 867,
+        "headroom_gate_ok": true
+      },
+      {
+        "idx": 119,
+        "case": "disk_usage",
+        "timestamp": "2026-08-20T12:02:19.682513+00:00",
+        "pass": false,
+        "fail_stage": "research",
+        "error": "stagnation",
+        "rounds": 8,
+        "llm_calls": 18,
+        "usable_findings": 0,
+        "history_events": 24,
+        "has_rounds_detail": true,
+        "has_judgments": true,
+        "recall_mode_counts": {
+          "fresh": 2,
+          "escalation": 4,
+          "repeating": 8,
+          "related": 2
+        },
+        "actual_headroom_min": 1087,
+        "headroom_gate_ok": true
+      },
+      {
+        "idx": 120,
+        "case": "gpu_usage",
+        "timestamp": "2026-08-20T12:02:35.259554+00:00",
+        "pass": false,
+        "fail_stage": "proposal",
+        "error": "proposal_validation_ng",
+        "rounds": null,
+        "llm_calls": 2,
+        "usable_findings": 0,
+        "history_events": null,
+        "has_rounds_detail": false,
+        "has_judgments": false,
+        "recall_mode_counts": {},
+        "actual_headroom_min": null,
+        "headroom_gate_ok": null
+      },
+      {
+        "idx": 121,
+        "case": "gpu_vram_usage",
+        "timestamp": "2026-08-20T12:05:12.703710+00:00",
+        "pass": false,
+        "fail_stage": "research",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 24,
+        "usable_findings": 0,
+        "history_events": 32,
+        "has_rounds_detail": true,
+        "has_judgments": true,
+        "recall_mode_counts": {
+          "fresh": 3,
+          "escalation": 6,
+          "related": 2,
+          "repeating": 11
+        },
+        "actual_headroom_min": 1018,
+        "headroom_gate_ok": true
+      }
+    ]
+  },
+  "metric_coverage": {
+    "error_class_recurrence": {
+      "in_compare_json": false,
+      "in_phase5_summary": false,
+      "in_repetition_analysis": true,
+      "needs_live_rerun_or_raw_history": false
+    },
+    "no_gain_loop": {
+      "in_compare_json": false,
+      "in_phase5_summary": false,
+      "in_repetition_analysis": false,
+      "needs_live_rerun_or_raw_history": true
+    },
+    "command_family_recurrence": {
+      "in_compare_json": false,
+      "in_phase5_summary": false,
+      "in_repetition_analysis": true,
+      "needs_live_rerun_or_raw_history": false
+    },
+    "open_question_loop": {
+      "in_compare_json": false,
+      "in_phase5_summary": false,
+      "in_repetition_analysis": true,
+      "needs_live_rerun_or_raw_history": false
+    },
+    "pivot_then_usable_increase": {
+      "in_compare_json": false,
+      "in_phase5_summary": false,
+      "in_repetition_analysis": false,
+      "needs_live_rerun_or_raw_history": true,
+      "note": "Phase 5.1 導入前の run には pivot_required が無い。5.1 は新規実行が必要。"
+    },
+    "rounds": {
+      "in_compare_json": true,
+      "in_phase5_summary": true,
+      "in_repetition_analysis": true,
+      "needs_live_rerun_or_raw_history": false
+    },
+    "llm_calls": {
+      "in_compare_json": true,
+      "in_phase5_summary": true,
+      "in_repetition_analysis": false,
+      "needs_live_rerun_or_raw_history": false
+    },
+    "headroom": {
+      "in_compare_json": true,
+      "in_phase5_summary": true,
+      "in_repetition_analysis": false,
+      "needs_live_rerun_or_raw_history": false
+    },
+    "result_fail_stage": {
+      "in_compare_json": true,
+      "in_phase5_summary": true,
+      "in_repetition_analysis": true,
+      "needs_live_rerun_or_raw_history": false
+    }
+  },
+  "reproducibility_verdict": {
+    "identical_conditions_three_way_live": {
+      "possible": true,
+      "how": "MEMORY_RECALL=0 / =1+v5ソース / =1+v5.1ソース を同一スクリプト・同一 env 共通部で連続実行。 v5 ソースはトランスクリプト復元を tools/ai/state に切替。",
+      "not_identical_to_saved_runs": true,
+      "reason": "LLM 非決定性 + 保存 run と新規 run は別試行。因果断定不可。"
+    },
+    "reuse_saved_p4_p5_as_baseline_for_p51_only_rerun": {
+      "possible_partial": true,
+      "have_scalar_p4_p5": true,
+      "have_waste_p4_p5": true,
+      "have_raw_history_for_deeper_recompute": true,
+      "missing": [
+        "no_gain_loop（当時未定義）",
+        "pivot後usable（5.1専用）",
+        "Git 上の Phase5 commit（無し）",
+        "model/seed/temperature の記録"
+      ]
+    },
+    "git_phase5_commit": {
+      "exists": false,
+      "implication": "checkout によるビット一致再現は不可。ソースはトランスクリプト復元のみ。"
+    },
+    "recommended_next_step": "正式な三条件ライブ比較を行うなら: (1) v5 復元モジュールを env 切替で固定、(2) 生 pipeline（history/rounds_detail）を比較 JSON に保存、(3) 1試行のみで因果断定せず観測として報告。 または保存 P4/P5（compare+analysis）を参照基線とし、P5.1 のみ新規実行して『同条件ではない参照比較』と明示する。",
+    "phase5_source_recoverable": true,
+    "saved_pair_p4_p5_scalars": true,
+    "saved_pair_p4_p5_waste_taxonomy": true
+  }
+}

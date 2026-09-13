@@ -1,0 +1,4078 @@
+{
+  "run_id": "20260909T145551Z",
+  "at": "2026-09-09T14:55:53.426350+00:00",
+  "status": "ok",
+  "embed_error": null,
+  "embed_model": "qwen3-embedding:0.6b",
+  "gen_model": "qwen3:14b",
+  "with_gen": false,
+  "production_connected": false,
+  "grill_connected": false,
+  "threshold_canonicalized": false,
+  "selected_rule_created": false,
+  "vector_dim": 1024,
+  "embed_timings": {
+    "board_clean": {
+      "elapsed_ms": 107.0,
+      "dim": 1024
+    },
+    "board_typo": {
+      "elapsed_ms": 97.3,
+      "dim": 1024
+    },
+    "board_conversion": {
+      "elapsed_ms": 35.3,
+      "dim": 1024
+    },
+    "board_missing_char": {
+      "elapsed_ms": 35.0,
+      "dim": 1024
+    },
+    "board_particle": {
+      "elapsed_ms": 34.7,
+      "dim": 1024
+    },
+    "board_colloquial": {
+      "elapsed_ms": 33.2,
+      "dim": 1024
+    },
+    "board_filler": {
+      "elapsed_ms": 38.5,
+      "dim": 1024
+    },
+    "board_restatement": {
+      "elapsed_ms": 39.8,
+      "dim": 1024
+    },
+    "board_asr": {
+      "elapsed_ms": 31.6,
+      "dim": 1024
+    },
+    "board_demonstrative": {
+      "elapsed_ms": 33.7,
+      "dim": 1024
+    },
+    "board_compound": {
+      "elapsed_ms": 37.3,
+      "dim": 1024
+    },
+    "runtime_clean": {
+      "elapsed_ms": 29.1,
+      "dim": 1024
+    },
+    "runtime_typo": {
+      "elapsed_ms": 26.1,
+      "dim": 1024
+    },
+    "runtime_conversion": {
+      "elapsed_ms": 30.1,
+      "dim": 1024
+    },
+    "runtime_missing_char": {
+      "elapsed_ms": 34.8,
+      "dim": 1024
+    },
+    "runtime_particle": {
+      "elapsed_ms": 27.8,
+      "dim": 1024
+    },
+    "runtime_colloquial": {
+      "elapsed_ms": 26.3,
+      "dim": 1024
+    },
+    "runtime_filler": {
+      "elapsed_ms": 30.3,
+      "dim": 1024
+    },
+    "runtime_restatement": {
+      "elapsed_ms": 34.0,
+      "dim": 1024
+    },
+    "runtime_asr": {
+      "elapsed_ms": 32.0,
+      "dim": 1024
+    },
+    "runtime_demonstrative": {
+      "elapsed_ms": 26.0,
+      "dim": 1024
+    },
+    "runtime_compound": {
+      "elapsed_ms": 30.0,
+      "dim": 1024
+    },
+    "research_clean": {
+      "elapsed_ms": 37.2,
+      "dim": 1024
+    },
+    "research_typo": {
+      "elapsed_ms": 37.6,
+      "dim": 1024
+    },
+    "research_conversion": {
+      "elapsed_ms": 43.5,
+      "dim": 1024
+    },
+    "research_missing_char": {
+      "elapsed_ms": 32.9,
+      "dim": 1024
+    },
+    "research_particle": {
+      "elapsed_ms": 37.8,
+      "dim": 1024
+    },
+    "research_colloquial": {
+      "elapsed_ms": 33.3,
+      "dim": 1024
+    },
+    "research_filler": {
+      "elapsed_ms": 39.1,
+      "dim": 1024
+    },
+    "research_restatement": {
+      "elapsed_ms": 40.0,
+      "dim": 1024
+    },
+    "research_asr": {
+      "elapsed_ms": 32.6,
+      "dim": 1024
+    },
+    "research_demonstrative": {
+      "elapsed_ms": 30.7,
+      "dim": 1024
+    },
+    "research_compound": {
+      "elapsed_ms": 32.0,
+      "dim": 1024
+    },
+    "c_board": {
+      "elapsed_ms": 29.6,
+      "dim": 1024
+    },
+    "c_runtime": {
+      "elapsed_ms": 33.1,
+      "dim": 1024
+    },
+    "c_research": {
+      "elapsed_ms": 28.7,
+      "dim": 1024
+    },
+    "c_score": {
+      "elapsed_ms": 29.2,
+      "dim": 1024
+    },
+    "c_theme": {
+      "elapsed_ms": 28.4,
+      "dim": 1024
+    },
+    "c_prd": {
+      "elapsed_ms": 30.7,
+      "dim": 1024
+    },
+    "c_weather": {
+      "elapsed_ms": 30.7,
+      "dim": 1024
+    },
+    "c_cpu": {
+      "elapsed_ms": 27.3,
+      "dim": 1024
+    },
+    "c_license": {
+      "elapsed_ms": 31.6,
+      "dim": 1024
+    }
+  },
+  "first_embed_ms": 107.0,
+  "gen_warmup": null,
+  "gen_reping": null,
+  "snapshots": [
+    {
+      "label": "baseline",
+      "at": "2026-09-09T14:55:51.593257+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 59.0,
+        "utilization": 27.0,
+        "vram_used": 3765,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 39684,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 25645,
+        "used_mb": 39632,
+        "load_percent": 60,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME                    ID              SIZE      PROCESSOR    CONTEXT    UNTIL              \nqwen3-embedding:0.6b    ac6da0dfba84    2.4 GB    100% GPU     4096       6 minutes from now",
+        "error": null
+      }
+    },
+    {
+      "label": "after_embed",
+      "at": "2026-09-09T14:55:53.307717+00:00",
+      "gpu": {
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "gpu": "NVIDIA GeForce RTX 3060",
+        "temperature": 62.0,
+        "utilization": 21.0,
+        "vram_used": 3765,
+        "vram_total": 12288,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "gpu_processes": {
+        "processes": [
+          {
+            "pid": 1748,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 2412,
+            "name": "C:\\Windows\\System32\\ShellHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4828,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\CrossDeviceResume.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 9212,
+            "name": "C:\\Windows\\explorer.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10384,
+            "name": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10376,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 12940,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26071.164.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14444,
+            "name": "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 16996,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18376,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 18444,
+            "name": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 7828,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 11852,
+            "name": "C:\\Program Files (x86)\\Epic Games\\Launcher\\Engine\\Binaries\\Win64\\EpicWebHelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 14780,
+            "name": "C:\\Program Files (x86)\\Steam\\bin\\cef\\cef.win64\\steamwebhelper.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20064,
+            "name": "D:\\Oculus\\Support\\oculus-client\\Client.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20880,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Discord\\app-1.0.9256\\Discord.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 20716,
+            "name": "C:\\Program Files (x86)\\Battle.net\\temp_55378fa22eff4403dae46bf6f2453db5.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 8608,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23728,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Blitz\\Blitz.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26472,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.53\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 24108,
+            "name": "C:\\Program Files\\WindowsApps\\MSTeams_26213.1006.5014.9784_x64__8wekyb3d8bbwe\\ms-teams.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 26744,
+            "name": "C:\\Program Files\\Docker\\Docker\\frontend\\Docker Desktop.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 4,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 10904,
+            "name": "C:\\Windows\\System32\\ApplicationFrameHost.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 15644,
+            "name": "C:\\Windows\\ImmersiveControlPanel\\SystemSettings.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 27224,
+            "name": "C:\\Windows\\SystemApps\\Windows.PrintDialog_cw5n1h2txyewy\\PrintDialog.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 30660,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 17084,
+            "name": "C:\\Program Files\\NVIDIA Corporation\\NVIDIA GeForce Experience\\NVIDIA Share.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 33052,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Obsidian\\Obsidian.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 38668,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_19.2609.33021.0_x64__8wekyb3d8bbwe\\M365Copilot.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35980,
+            "name": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\152.0.4191.62\\msedgewebview2.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43164,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 23900,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 42084,
+            "name": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe\\SnippingTool\\SnippingTool.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 40104,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 43296,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 5460,
+            "name": "C:\\Program Files (x86)\\RAGNAROK X\\Data\\download\\games\\1058\\install\\2004_gungho_publish_GunghoOnlineConfig_jp_1.10_20250731.1738_release_CN_p1_a101\\RagnarokX_Data\\Plugins\\x86_64\\VuplexWebViewChromium\\Vuplex WebView.vuplex",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 36880,
+            "name": "[Insufficient Permissions]",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 35916,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\cursor\\Cursor.exe",
+            "vram_used": "unknown"
+          },
+          {
+            "pid": 39684,
+            "name": "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\llama-server.exe",
+            "vram_used": "unknown"
+          }
+        ],
+        "ok": true,
+        "status": "ok",
+        "error": null,
+        "observation_source": "real",
+        "source": "nvidia-smi"
+      },
+      "ram": {
+        "ok": true,
+        "total_mb": 65277,
+        "avail_mb": 25606,
+        "used_mb": 39671,
+        "load_percent": 60,
+        "source": "GlobalMemoryStatusEx"
+      },
+      "ollama_ps": {
+        "ok": true,
+        "raw": "NAME                    ID              SIZE      PROCESSOR    CONTEXT    UNTIL               \nqwen3-embedding:0.6b    ac6da0dfba84    2.4 GB    100% GPU     4096       29 minutes from now",
+        "error": null
+      }
+    }
+  ],
+  "results": [
+    {
+      "query_id": "board_clean",
+      "query_text": "テトリスの盤面",
+      "noise_type": "clean",
+      "anchor_id": "board",
+      "embed_ms": 107.0,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.778096,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.535761,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.532625,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.531124,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.520031,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.510193,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.501499,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.468016,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.373873,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_typo",
+      "query_text": "テとりすの盤面",
+      "noise_type": "typo",
+      "anchor_id": "board",
+      "embed_ms": 97.3,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.669371,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.550325,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.547288,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.536502,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.536027,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.507733,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.483607,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.477314,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.365487,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_conversion",
+      "query_text": "テトリスの番面",
+      "noise_type": "conversion",
+      "anchor_id": "board",
+      "embed_ms": 35.3,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.728993,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.543052,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.533032,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.528306,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.506666,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.504798,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.49132,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.461326,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.36603,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_missing_char",
+      "query_text": "テトリスの盤",
+      "noise_type": "missing_char",
+      "anchor_id": "board",
+      "embed_ms": 35.0,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.744728,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.550457,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.524079,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.520083,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.509711,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.506455,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.502639,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.461317,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.378972,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_particle",
+      "query_text": "テトリス盤面",
+      "noise_type": "particle_drop",
+      "anchor_id": "board",
+      "embed_ms": 34.7,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.779116,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.534477,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.508588,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.504608,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.503255,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.497141,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.484244,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.452516,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.36671,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_colloquial",
+      "query_text": "テトリスの盤面のやつ",
+      "noise_type": "colloquial",
+      "anchor_id": "board",
+      "embed_ms": 33.2,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.77335,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.532793,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.528441,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.525569,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.513868,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.493612,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.492357,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.465027,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.364074,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_filler",
+      "query_text": "えっとテトリスの盤面",
+      "noise_type": "filler",
+      "anchor_id": "board",
+      "embed_ms": 38.5,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.750977,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.535429,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.532552,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.523982,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.522898,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.509769,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.488095,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.466834,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.375408,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_restatement",
+      "query_text": "いやスコアじゃなくてテトリスの盤面",
+      "noise_type": "restatement",
+      "anchor_id": "board",
+      "embed_ms": 39.8,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.653524,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.498443,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.470815,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.442529,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.435027,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.399216,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.397791,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.397009,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.310106,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_asr",
+      "query_text": "手取り巣の盤面",
+      "noise_type": "asr_like",
+      "anchor_id": "board",
+      "embed_ms": 31.6,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.676548,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.595016,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.585839,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.577524,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.56709,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.510033,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.49879,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.458087,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.349772,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_demonstrative",
+      "query_text": "そっちの盤面",
+      "noise_type": "demonstrative",
+      "anchor_id": "board",
+      "embed_ms": 33.7,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.711475,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.541727,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.536779,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.532829,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.53252,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.510958,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.448251,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.436475,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.34322,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "board_compound",
+      "query_text": "えっとテトリスの番面のやつ",
+      "noise_type": "compound",
+      "anchor_id": "board",
+      "embed_ms": 37.3,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.66431,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.51927,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.510897,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.508784,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.486321,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.468485,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.460343,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.443429,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.350474,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_clean",
+      "query_text": "実行時に動いている実装",
+      "noise_type": "clean",
+      "anchor_id": "runtime",
+      "embed_ms": 29.1,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.939465,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.572451,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.545588,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.478329,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.472516,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.456681,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.437623,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.414541,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.282617,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_typo",
+      "query_text": "実交時に動いている実装",
+      "noise_type": "typo",
+      "anchor_id": "runtime",
+      "embed_ms": 26.1,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.837585,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.566897,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.519584,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.496961,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.475209,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.451415,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.439691,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.436543,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.28848,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_conversion",
+      "query_text": "実効時に動いている実装",
+      "noise_type": "conversion",
+      "anchor_id": "runtime",
+      "embed_ms": 30.1,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.874223,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.593231,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.556537,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.535934,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.503427,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.473641,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.459989,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.456501,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.302729,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_missing_char",
+      "query_text": "実行時に動いている実",
+      "noise_type": "missing_char",
+      "anchor_id": "runtime",
+      "embed_ms": 34.8,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.783649,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.487606,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.47974,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.385274,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.384717,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.379301,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.366076,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.345773,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.209294,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_particle",
+      "query_text": "実行時動いている実装",
+      "noise_type": "particle_drop",
+      "anchor_id": "runtime",
+      "embed_ms": 27.8,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.905696,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.570634,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.568877,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.47482,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.468863,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.465018,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.455392,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.451744,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.300418,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_colloquial",
+      "query_text": "実際に動いてるほう",
+      "noise_type": "colloquial",
+      "anchor_id": "runtime",
+      "embed_ms": 26.3,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.590041,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.588687,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.506929,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.481565,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.478544,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.416717,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.416054,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.403408,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.246694,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_filler",
+      "query_text": "あのー実行時に動いている実装なんですけど",
+      "noise_type": "filler",
+      "anchor_id": "runtime",
+      "embed_ms": 30.3,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.708859,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.433168,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.417419,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.346551,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.341314,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.337382,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.316329,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.303263,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.170058,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_restatement",
+      "query_text": "実験用じゃなくて実行時に動いている実装",
+      "noise_type": "restatement",
+      "anchor_id": "runtime",
+      "embed_ms": 34.0,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.866028,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.660907,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.515246,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.475628,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.456346,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.442339,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.43776,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.400471,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.280571,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_asr",
+      "query_text": "実効時に動いてる実装",
+      "noise_type": "asr_like",
+      "anchor_id": "runtime",
+      "embed_ms": 32.0,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.855782,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.570708,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.559242,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.517107,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.488738,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.46451,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.445967,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.44579,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.293446,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_demonstrative",
+      "query_text": "実際に使ってる方",
+      "noise_type": "demonstrative",
+      "anchor_id": "runtime",
+      "embed_ms": 26.0,
+      "ranked": [
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.658591,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.544437,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.530379,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.477491,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.466673,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.461033,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.455266,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.441104,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.291027,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "runtime_compound",
+      "query_text": "あの実際ゲームで使ってるほう",
+      "noise_type": "compound",
+      "anchor_id": "runtime",
+      "embed_ms": 30.0,
+      "ranked": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.613708,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.596542,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.471128,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.467429,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.448066,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.417568,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.383604,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.374837,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.247088,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_clean",
+      "query_text": "研究用のもの",
+      "noise_type": "clean",
+      "anchor_id": "research",
+      "embed_ms": 37.2,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.93852,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.575414,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.549232,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.497804,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.496517,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.48177,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.454538,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.418587,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.322165,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_typo",
+      "query_text": "けんきゅう用のもの",
+      "noise_type": "typo",
+      "anchor_id": "research",
+      "embed_ms": 37.6,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.549096,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.542761,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.539582,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.508311,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.504555,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.496553,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.491396,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.430509,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.358441,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_conversion",
+      "query_text": "兼休用のもの",
+      "noise_type": "conversion",
+      "anchor_id": "research",
+      "embed_ms": 43.5,
+      "ranked": [
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.572932,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.549927,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.534004,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.508512,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.4941,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.49401,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.413845,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.410217,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.348057,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_missing_char",
+      "query_text": "究用のもの",
+      "noise_type": "missing_char",
+      "anchor_id": "research",
+      "embed_ms": 32.9,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.709162,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.637314,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.595856,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.59479,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.585705,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.529831,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.521363,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.517767,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.402398,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_particle",
+      "query_text": "研究用もの",
+      "noise_type": "particle_drop",
+      "anchor_id": "research",
+      "embed_ms": 37.8,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.911839,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.560864,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.526135,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.500377,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.493965,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.491212,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.461981,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.420646,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.316213,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_colloquial",
+      "query_text": "研究用のやつ",
+      "noise_type": "colloquial",
+      "anchor_id": "research",
+      "embed_ms": 33.3,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.911826,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.552563,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.535179,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.482334,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.476996,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.474413,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.445291,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.401705,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.325305,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_filler",
+      "query_text": "まあ研究用のものかな",
+      "noise_type": "filler",
+      "anchor_id": "research",
+      "embed_ms": 39.1,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.687184,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.520141,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.49431,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.463452,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.46266,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.460644,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.444814,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.41604,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.330571,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_restatement",
+      "query_text": "本番じゃなくて研究用のもの",
+      "noise_type": "restatement",
+      "anchor_id": "research",
+      "embed_ms": 40.0,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.701169,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.520278,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.507219,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.49026,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.484921,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.484842,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.403723,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.403304,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.309539,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_asr",
+      "query_text": "兼急用のもの",
+      "noise_type": "asr_like",
+      "anchor_id": "research",
+      "embed_ms": 32.6,
+      "ranked": [
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.564459,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.546981,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.539634,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.529941,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.517863,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.506197,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.49427,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.432699,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.352104,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_demonstrative",
+      "query_text": "研究用のほう",
+      "noise_type": "demonstrative",
+      "anchor_id": "research",
+      "embed_ms": 30.7,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.924659,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.558157,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.517601,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.473426,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.466487,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.462298,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.442389,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.396849,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.286772,
+          "rank": 9
+        }
+      ]
+    },
+    {
+      "query_id": "research_compound",
+      "query_text": "まあけんきゅう用のも",
+      "noise_type": "compound",
+      "anchor_id": "research",
+      "embed_ms": 32.0,
+      "ranked": [
+        {
+          "candidate_id": "c_research",
+          "text": "研究用の実験",
+          "kind": "gold_research",
+          "cosine": 0.415498,
+          "rank": 1
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "cosine": 0.406566,
+          "rank": 2
+        },
+        {
+          "candidate_id": "c_theme",
+          "text": "画面の配色テーマ",
+          "kind": "wrong_related_ui",
+          "cosine": 0.367524,
+          "rank": 3
+        },
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "cosine": 0.358047,
+          "rank": 4
+        },
+        {
+          "candidate_id": "c_weather",
+          "text": "今日の天気と降水確率",
+          "kind": "wrong_unrelated",
+          "cosine": 0.353555,
+          "rank": 5
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "cosine": 0.346111,
+          "rank": 6
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "cosine": 0.345385,
+          "rank": 7
+        },
+        {
+          "candidate_id": "c_cpu",
+          "text": "CPU温度の取得方法",
+          "kind": "wrong_unrelated",
+          "cosine": 0.309236,
+          "rank": 8
+        },
+        {
+          "candidate_id": "c_license",
+          "text": "MIT license text for a Python package",
+          "kind": "wrong_unrelated",
+          "cosine": 0.239437,
+          "rank": 9
+        }
+      ]
+    }
+  ],
+  "evaluations": [
+    {
+      "query_id": "board_clean",
+      "anchor_id": "board",
+      "noise_type": "clean",
+      "query_text": "テトリスの盤面",
+      "note": "ノイズなし正常文",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.778096,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.778096,
+      "second_id": "c_score",
+      "second_cosine": 0.535761,
+      "gap_vs_second": 0.242335,
+      "clean_gold_rank": null,
+      "clean_gold_cosine": null,
+      "delta_vs_clean": null,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_typo",
+      "anchor_id": "board",
+      "noise_type": "typo",
+      "query_text": "テとりすの盤面",
+      "note": "カタカナの一部をひらがなで打った",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.669371,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.669371,
+      "second_id": "c_score",
+      "second_cosine": 0.550325,
+      "gap_vs_second": 0.119046,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.108725,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_conversion",
+      "anchor_id": "board",
+      "noise_type": "conversion",
+      "query_text": "テトリスの番面",
+      "note": "ばんめん→番面",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.728993,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.728993,
+      "second_id": "c_score",
+      "second_cosine": 0.543052,
+      "gap_vs_second": 0.185941,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.049103,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_missing_char",
+      "anchor_id": "board",
+      "noise_type": "missing_char",
+      "query_text": "テトリスの盤",
+      "note": "面が抜けた",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.744728,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.744728,
+      "second_id": "c_score",
+      "second_cosine": 0.550457,
+      "gap_vs_second": 0.194271,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.033368,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_particle",
+      "anchor_id": "board",
+      "noise_type": "particle_drop",
+      "query_text": "テトリス盤面",
+      "note": "の 抜け",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.779116,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.779116,
+      "second_id": "c_theme",
+      "second_cosine": 0.534477,
+      "gap_vs_second": 0.244639,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": 0.00102,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_colloquial",
+      "anchor_id": "board",
+      "noise_type": "colloquial",
+      "query_text": "テトリスの盤面のやつ",
+      "note": "口語のやつ",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.77335,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.77335,
+      "second_id": "c_theme",
+      "second_cosine": 0.532793,
+      "gap_vs_second": 0.240557,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.004746,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_filler",
+      "anchor_id": "board",
+      "noise_type": "filler",
+      "query_text": "えっとテトリスの盤面",
+      "note": "フィラー えっと",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.750977,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.750977,
+      "second_id": "c_runtime",
+      "second_cosine": 0.535429,
+      "gap_vs_second": 0.215548,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.027119,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_restatement",
+      "anchor_id": "board",
+      "noise_type": "restatement",
+      "query_text": "いやスコアじゃなくてテトリスの盤面",
+      "note": "言い直し。否定語にハイスコアが含まれる",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.653524,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.653524,
+      "second_id": "c_theme",
+      "second_cosine": 0.498443,
+      "gap_vs_second": 0.155081,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.124572,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_asr",
+      "anchor_id": "board",
+      "noise_type": "asr_like",
+      "query_text": "手取り巣の盤面",
+      "note": "テトリスの音声認識風誤変換",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.676548,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.676548,
+      "second_id": "c_prd",
+      "second_cosine": 0.595016,
+      "gap_vs_second": 0.081532,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.101548,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_demonstrative",
+      "anchor_id": "board",
+      "noise_type": "demonstrative",
+      "query_text": "そっちの盤面",
+      "note": "指示語。盤面は残っている",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.711475,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.711475,
+      "second_id": "c_theme",
+      "second_cosine": 0.541727,
+      "gap_vs_second": 0.169748,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.066621,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "board_compound",
+      "anchor_id": "board",
+      "noise_type": "compound",
+      "query_text": "えっとテトリスの番面のやつ",
+      "note": "フィラー+変換ミス+口語",
+      "gold_id": "c_board",
+      "gold_rank": 1,
+      "gold_cosine": 0.66431,
+      "gold_is_top": true,
+      "top_id": "c_board",
+      "top_cosine": 0.66431,
+      "second_id": "c_theme",
+      "second_cosine": 0.51927,
+      "gap_vs_second": 0.14504,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.778096,
+      "delta_vs_clean": -0.113786,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_clean",
+      "anchor_id": "runtime",
+      "noise_type": "clean",
+      "query_text": "実行時に動いている実装",
+      "note": "ノイズなし正常文",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.939465,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.939465,
+      "second_id": "c_research",
+      "second_cosine": 0.572451,
+      "gap_vs_second": 0.367014,
+      "clean_gold_rank": null,
+      "clean_gold_cosine": null,
+      "delta_vs_clean": null,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_typo",
+      "anchor_id": "runtime",
+      "noise_type": "typo",
+      "query_text": "実交時に動いている実装",
+      "note": "行→交 の打ち間違い",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.837585,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.837585,
+      "second_id": "c_board",
+      "second_cosine": 0.566897,
+      "gap_vs_second": 0.270688,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.10188,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_conversion",
+      "anchor_id": "runtime",
+      "noise_type": "conversion",
+      "query_text": "実効時に動いている実装",
+      "note": "じっこうじ→実効時",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.874223,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.874223,
+      "second_id": "c_research",
+      "second_cosine": 0.593231,
+      "gap_vs_second": 0.280992,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.065242,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_missing_char",
+      "anchor_id": "runtime",
+      "noise_type": "missing_char",
+      "query_text": "実行時に動いている実",
+      "note": "装が抜けた",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.783649,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.783649,
+      "second_id": "c_research",
+      "second_cosine": 0.487606,
+      "gap_vs_second": 0.296043,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.155816,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_particle",
+      "anchor_id": "runtime",
+      "noise_type": "particle_drop",
+      "query_text": "実行時動いている実装",
+      "note": "に 抜け",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.905696,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.905696,
+      "second_id": "c_board",
+      "second_cosine": 0.570634,
+      "gap_vs_second": 0.335062,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.033769,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_colloquial",
+      "anchor_id": "runtime",
+      "noise_type": "colloquial",
+      "query_text": "実際に動いてるほう",
+      "note": "口語。実装という言葉が無い",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.590041,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.590041,
+      "second_id": "c_board",
+      "second_cosine": 0.588687,
+      "gap_vs_second": 0.001354,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.349424,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_filler",
+      "anchor_id": "runtime",
+      "noise_type": "filler",
+      "query_text": "あのー実行時に動いている実装なんですけど",
+      "note": "フィラー+なんですけど",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.708859,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.708859,
+      "second_id": "c_research",
+      "second_cosine": 0.433168,
+      "gap_vs_second": 0.275691,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.230606,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_restatement",
+      "anchor_id": "runtime",
+      "noise_type": "restatement",
+      "query_text": "実験用じゃなくて実行時に動いている実装",
+      "note": "言い直し。否定語に実験が含まれる",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.866028,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.866028,
+      "second_id": "c_research",
+      "second_cosine": 0.660907,
+      "gap_vs_second": 0.205121,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.073437,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_asr",
+      "anchor_id": "runtime",
+      "noise_type": "asr_like",
+      "query_text": "実効時に動いてる実装",
+      "note": "実効時+口語のてる",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.855782,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.855782,
+      "second_id": "c_research",
+      "second_cosine": 0.570708,
+      "gap_vs_second": 0.285074,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.083683,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_demonstrative",
+      "anchor_id": "runtime",
+      "noise_type": "demonstrative",
+      "query_text": "実際に使ってる方",
+      "note": "指示語的な方。前回v0で失敗した口語に近い",
+      "gold_id": "c_runtime",
+      "gold_rank": 1,
+      "gold_cosine": 0.658591,
+      "gold_is_top": true,
+      "top_id": "c_runtime",
+      "top_cosine": 0.658591,
+      "second_id": "c_board",
+      "second_cosine": 0.544437,
+      "gap_vs_second": 0.114154,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.280874,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "runtime_compound",
+      "anchor_id": "runtime",
+      "noise_type": "compound",
+      "query_text": "あの実際ゲームで使ってるほう",
+      "note": "フィラー+口語+指示語。実装という言葉が無い",
+      "gold_id": "c_runtime",
+      "gold_rank": 2,
+      "gold_cosine": 0.596542,
+      "gold_is_top": false,
+      "top_id": "c_board",
+      "top_cosine": 0.613708,
+      "second_id": "c_runtime",
+      "second_cosine": 0.596542,
+      "gap_vs_second": -0.017166,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.939465,
+      "delta_vs_clean": -0.342923,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 1,
+          "cosine": 0.613708
+        }
+      ],
+      "experimental_outcome": "gold_not_top"
+    },
+    {
+      "query_id": "research_clean",
+      "anchor_id": "research",
+      "noise_type": "clean",
+      "query_text": "研究用のもの",
+      "note": "ノイズなし正常文",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.93852,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.93852,
+      "second_id": "c_runtime",
+      "second_cosine": 0.575414,
+      "gap_vs_second": 0.363106,
+      "clean_gold_rank": null,
+      "clean_gold_cosine": null,
+      "delta_vs_clean": null,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "research_typo",
+      "anchor_id": "research",
+      "noise_type": "typo",
+      "query_text": "けんきゅう用のもの",
+      "note": "漢字をひらがなで打った",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.549096,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.549096,
+      "second_id": "c_score",
+      "second_cosine": 0.542761,
+      "gap_vs_second": 0.006335,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.389424,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "research_conversion",
+      "anchor_id": "research",
+      "noise_type": "conversion",
+      "query_text": "兼休用のもの",
+      "note": "けんきゅう→兼休",
+      "gold_id": "c_research",
+      "gold_rank": 4,
+      "gold_cosine": 0.508512,
+      "gold_is_top": false,
+      "top_id": "c_score",
+      "top_cosine": 0.572932,
+      "second_id": "c_board",
+      "second_cosine": 0.549927,
+      "gap_vs_second": -0.06442,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.430008,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "rank": 1,
+          "cosine": 0.572932
+        },
+        {
+          "candidate_id": "c_board",
+          "text": "ゲームの盤面状態",
+          "kind": "gold_board",
+          "rank": 2,
+          "cosine": 0.549927
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "rank": 3,
+          "cosine": 0.534004
+        }
+      ],
+      "experimental_outcome": "gold_not_top"
+    },
+    {
+      "query_id": "research_missing_char",
+      "anchor_id": "research",
+      "noise_type": "missing_char",
+      "query_text": "究用のもの",
+      "note": "研が抜けた",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.709162,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.709162,
+      "second_id": "c_runtime",
+      "second_cosine": 0.637314,
+      "gap_vs_second": 0.071848,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.229358,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "research_particle",
+      "anchor_id": "research",
+      "noise_type": "particle_drop",
+      "query_text": "研究用もの",
+      "note": "の 抜け",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.911839,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.911839,
+      "second_id": "c_runtime",
+      "second_cosine": 0.560864,
+      "gap_vs_second": 0.350975,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.026681,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "research_colloquial",
+      "anchor_id": "research",
+      "noise_type": "colloquial",
+      "query_text": "研究用のやつ",
+      "note": "口語のやつ",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.911826,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.911826,
+      "second_id": "c_runtime",
+      "second_cosine": 0.552563,
+      "gap_vs_second": 0.359263,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.026694,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "research_filler",
+      "anchor_id": "research",
+      "noise_type": "filler",
+      "query_text": "まあ研究用のものかな",
+      "note": "フィラー まあ+かな",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.687184,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.687184,
+      "second_id": "c_prd",
+      "second_cosine": 0.520141,
+      "gap_vs_second": 0.167043,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.251336,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "research_restatement",
+      "anchor_id": "research",
+      "noise_type": "restatement",
+      "query_text": "本番じゃなくて研究用のもの",
+      "note": "言い直し。否定語に本番が含まれる",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.701169,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.701169,
+      "second_id": "c_runtime",
+      "second_cosine": 0.520278,
+      "gap_vs_second": 0.180891,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.237351,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "research_asr",
+      "anchor_id": "research",
+      "noise_type": "asr_like",
+      "query_text": "兼急用のもの",
+      "note": "けんきゅうようの音声認識風誤変換",
+      "gold_id": "c_research",
+      "gold_rank": 4,
+      "gold_cosine": 0.529941,
+      "gold_is_top": false,
+      "top_id": "c_prd",
+      "top_cosine": 0.564459,
+      "second_id": "c_runtime",
+      "second_cosine": 0.546981,
+      "gap_vs_second": -0.034518,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.408579,
+      "wrong_above_gold": [
+        {
+          "candidate_id": "c_prd",
+          "text": "PRDの書き方",
+          "kind": "wrong_related_docs",
+          "rank": 1,
+          "cosine": 0.564459
+        },
+        {
+          "candidate_id": "c_runtime",
+          "text": "実行時の実装",
+          "kind": "gold_runtime",
+          "rank": 2,
+          "cosine": 0.546981
+        },
+        {
+          "candidate_id": "c_score",
+          "text": "ハイスコアの保存方法",
+          "kind": "wrong_related_game",
+          "rank": 3,
+          "cosine": 0.539634
+        }
+      ],
+      "experimental_outcome": "gold_not_top"
+    },
+    {
+      "query_id": "research_demonstrative",
+      "anchor_id": "research",
+      "noise_type": "demonstrative",
+      "query_text": "研究用のほう",
+      "note": "指示語 ほう。研究用は残っている",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.924659,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.924659,
+      "second_id": "c_runtime",
+      "second_cosine": 0.558157,
+      "gap_vs_second": 0.366502,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.013861,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    },
+    {
+      "query_id": "research_compound",
+      "anchor_id": "research",
+      "noise_type": "compound",
+      "query_text": "まあけんきゅう用のも",
+      "note": "フィラー+ひらがな+末尾切れ",
+      "gold_id": "c_research",
+      "gold_rank": 1,
+      "gold_cosine": 0.415498,
+      "gold_is_top": true,
+      "top_id": "c_research",
+      "top_cosine": 0.415498,
+      "second_id": "c_board",
+      "second_cosine": 0.406566,
+      "gap_vs_second": 0.008932,
+      "clean_gold_rank": 1,
+      "clean_gold_cosine": 0.93852,
+      "delta_vs_clean": -0.523022,
+      "wrong_above_gold": [],
+      "experimental_outcome": "gold_top"
+    }
+  ],
+  "summary": {
+    "all_noisy": {
+      "n": 30,
+      "gold_top_n": 27,
+      "gold_not_top_n": 3,
+      "gold_top_rate": 0.9,
+      "mean_gold_rank": 1.233,
+      "mean_gap_vs_second": 0.173709,
+      "mean_delta_vs_clean": -0.162751,
+      "failed_query_ids": [
+        "runtime_compound",
+        "research_conversion",
+        "research_asr"
+      ]
+    },
+    "by_noise_type": {
+      "clean": {
+        "n": 3,
+        "gold_top_n": 3,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.324152,
+        "mean_delta_vs_clean": null,
+        "failed_query_ids": []
+      },
+      "typo": {
+        "n": 3,
+        "gold_top_n": 3,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.132023,
+        "mean_delta_vs_clean": -0.20001,
+        "failed_query_ids": []
+      },
+      "conversion": {
+        "n": 3,
+        "gold_top_n": 2,
+        "gold_not_top_n": 1,
+        "gold_top_rate": 0.6667,
+        "mean_gold_rank": 2.0,
+        "mean_gap_vs_second": 0.134171,
+        "mean_delta_vs_clean": -0.181451,
+        "failed_query_ids": [
+          "research_conversion"
+        ]
+      },
+      "missing_char": {
+        "n": 3,
+        "gold_top_n": 3,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.187387,
+        "mean_delta_vs_clean": -0.139514,
+        "failed_query_ids": []
+      },
+      "particle_drop": {
+        "n": 3,
+        "gold_top_n": 3,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.310225,
+        "mean_delta_vs_clean": -0.01981,
+        "failed_query_ids": []
+      },
+      "colloquial": {
+        "n": 3,
+        "gold_top_n": 3,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.200391,
+        "mean_delta_vs_clean": -0.126955,
+        "failed_query_ids": []
+      },
+      "filler": {
+        "n": 3,
+        "gold_top_n": 3,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.219427,
+        "mean_delta_vs_clean": -0.169687,
+        "failed_query_ids": []
+      },
+      "restatement": {
+        "n": 3,
+        "gold_top_n": 3,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.180364,
+        "mean_delta_vs_clean": -0.14512,
+        "failed_query_ids": []
+      },
+      "asr_like": {
+        "n": 3,
+        "gold_top_n": 2,
+        "gold_not_top_n": 1,
+        "gold_top_rate": 0.6667,
+        "mean_gold_rank": 2.0,
+        "mean_gap_vs_second": 0.110696,
+        "mean_delta_vs_clean": -0.197937,
+        "failed_query_ids": [
+          "research_asr"
+        ]
+      },
+      "demonstrative": {
+        "n": 3,
+        "gold_top_n": 3,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.216801,
+        "mean_delta_vs_clean": -0.120452,
+        "failed_query_ids": []
+      },
+      "compound": {
+        "n": 3,
+        "gold_top_n": 2,
+        "gold_not_top_n": 1,
+        "gold_top_rate": 0.6667,
+        "mean_gold_rank": 1.333,
+        "mean_gap_vs_second": 0.045602,
+        "mean_delta_vs_clean": -0.326577,
+        "failed_query_ids": [
+          "runtime_compound"
+        ]
+      }
+    },
+    "by_anchor": {
+      "board": {
+        "n": 10,
+        "gold_top_n": 10,
+        "gold_not_top_n": 0,
+        "gold_top_rate": 1.0,
+        "mean_gold_rank": 1.0,
+        "mean_gap_vs_second": 0.17514,
+        "mean_delta_vs_clean": -0.062857,
+        "failed_query_ids": []
+      },
+      "research": {
+        "n": 10,
+        "gold_top_n": 8,
+        "gold_not_top_n": 2,
+        "gold_top_rate": 0.8,
+        "mean_gold_rank": 1.6,
+        "mean_gap_vs_second": 0.141285,
+        "mean_delta_vs_clean": -0.253631,
+        "failed_query_ids": [
+          "research_conversion",
+          "research_asr"
+        ]
+      },
+      "runtime": {
+        "n": 10,
+        "gold_top_n": 9,
+        "gold_not_top_n": 1,
+        "gold_top_rate": 0.9,
+        "mean_gold_rank": 1.1,
+        "mean_gap_vs_second": 0.204701,
+        "mean_delta_vs_clean": -0.171765,
+        "failed_query_ids": [
+          "runtime_compound"
+        ]
+      }
+    },
+    "noise_types_with_gold_not_top": [
+      "conversion",
+      "asr_like",
+      "compound"
+    ],
+    "failed_queries": [
+      {
+        "query_id": "runtime_compound",
+        "noise_type": "compound",
+        "anchor_id": "runtime",
+        "query_text": "あの実際ゲームで使ってるほう",
+        "gold_rank": 2,
+        "gold_cosine": 0.596542,
+        "top_id": "c_board",
+        "top_cosine": 0.613708,
+        "gap_vs_second": -0.017166,
+        "delta_vs_clean": -0.342923,
+        "wrong_above_gold": [
+          {
+            "candidate_id": "c_board",
+            "text": "ゲームの盤面状態",
+            "kind": "gold_board",
+            "rank": 1,
+            "cosine": 0.613708
+          }
+        ]
+      },
+      {
+        "query_id": "research_conversion",
+        "noise_type": "conversion",
+        "anchor_id": "research",
+        "query_text": "兼休用のもの",
+        "gold_rank": 4,
+        "gold_cosine": 0.508512,
+        "top_id": "c_score",
+        "top_cosine": 0.572932,
+        "gap_vs_second": -0.06442,
+        "delta_vs_clean": -0.430008,
+        "wrong_above_gold": [
+          {
+            "candidate_id": "c_score",
+            "text": "ハイスコアの保存方法",
+            "kind": "wrong_related_game",
+            "rank": 1,
+            "cosine": 0.572932
+          },
+          {
+            "candidate_id": "c_board",
+            "text": "ゲームの盤面状態",
+            "kind": "gold_board",
+            "rank": 2,
+            "cosine": 0.549927
+          },
+          {
+            "candidate_id": "c_runtime",
+            "text": "実行時の実装",
+            "kind": "gold_runtime",
+            "rank": 3,
+            "cosine": 0.534004
+          }
+        ]
+      },
+      {
+        "query_id": "research_asr",
+        "noise_type": "asr_like",
+        "anchor_id": "research",
+        "query_text": "兼急用のもの",
+        "gold_rank": 4,
+        "gold_cosine": 0.529941,
+        "top_id": "c_prd",
+        "top_cosine": 0.564459,
+        "gap_vs_second": -0.034518,
+        "delta_vs_clean": -0.408579,
+        "wrong_above_gold": [
+          {
+            "candidate_id": "c_prd",
+            "text": "PRDの書き方",
+            "kind": "wrong_related_docs",
+            "rank": 1,
+            "cosine": 0.564459
+          },
+          {
+            "candidate_id": "c_runtime",
+            "text": "実行時の実装",
+            "kind": "gold_runtime",
+            "rank": 2,
+            "cosine": 0.546981
+          },
+          {
+            "candidate_id": "c_score",
+            "text": "ハイスコアの保存方法",
+            "kind": "wrong_related_game",
+            "rank": 3,
+            "cosine": 0.539634
+          }
+        ]
+      }
+    ]
+  },
+  "cases_path": "D:\\AI-Agent-worktrees\\current-dev\\research\\embedding_similarity_noise_v0\\cases_ja_gold.json",
+  "run_suffix": "ja-gold",
+  "evaluation_definition": {
+    "gold_is_top": "intended candidate is rank 1 in this candidate set",
+    "gap_vs_second": "gold_cosine - second_cosine when gold is top; else gold_cosine - top_cosine",
+    "delta_vs_clean": "noisy gold_cosine minus the same-anchor clean gold_cosine",
+    "not_a_selected_rule": true,
+    "no_canonical_threshold": true
+  }
+}

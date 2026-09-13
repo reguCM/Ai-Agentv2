@@ -1,0 +1,52 @@
+{
+  "experiment_id": "controlled_20260820_123732",
+  "created_at": "2026-08-20T12:37:32.892932+00:00",
+  "formalize_phase5_1": false,
+  "reference_baseline_dir": "D:\\AI-Agent\\research\\llm_benchmarks\\baselines\\phase4_phase5_reference",
+  "reference_baseline_note": "Past P4/P5 runs are reference-only; not same-trial as this experiment.",
+  "common_env": {
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_MEMORY_JUDGE": "0"
+  },
+  "conditions": {
+    "phase4": {
+      "label": "phase4_live",
+      "AI_AGENT_MEMORY_RECALL": "0",
+      "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+      "policy": "handoff_legacy_no_memory_recall"
+    },
+    "phase5": {
+      "label": "phase5_rule_recall",
+      "AI_AGENT_MEMORY_RECALL": "1",
+      "AI_AGENT_MEMORY_RECALL_VERSION": "5",
+      "policy": "rule_recall_command_key_error_class"
+    },
+    "phase5_1": {
+      "label": "phase5_1_pivot_recall",
+      "AI_AGENT_MEMORY_RECALL": "1",
+      "AI_AGENT_MEMORY_RECALL_VERSION": "5.1",
+      "policy": "error_class_family_open_question_no_gain_pivot"
+    }
+  },
+  "cases": [
+    "memory_usage",
+    "cpu_temperature",
+    "disk_usage",
+    "gpu_usage",
+    "gpu_vram_usage"
+  ],
+  "trials": 2,
+  "pipeline": {
+    "active_model": "deepseek_coder_v2_16b",
+    "profile_id": "deepseek_coder_v2_16b",
+    "model": "deepseek-coder-v2:16b",
+    "temperature": 0,
+    "num_predict": 2048,
+    "context_limit": 4096
+  },
+  "entry": "D:\\AI-Agent\\research\\llm_benchmarks\\research_implement.py",
+  "eval_focus": "Reduce no-gain repetition of same error_class / open_question / command_family (not mere exact command repeats)."
+}

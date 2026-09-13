@@ -1,0 +1,148 @@
+{
+  "tool_id": "local:get_gpu_processes",
+  "name": "get_gpu_processes",
+  "version": "2.0.0-draft",
+  "description": "GPUを使用しているプロセス（pid, name）を nvidia-smi compute-apps から実測する。プロセス別VRAMは環境により unknown になり得る。GPU全体状態は get_gpu_status を使う。固定プロセス一覧へフォールバックしない。",
+  "provider": "local",
+  "source": "docs/ai_tool/tool_creation/specs/get_gpu_processes_v2_draft.json",
+  "capability": ["GPU", "プロセス", "VRAM使用", "observation"],
+  "purpose": "nvidia-smi --query-compute-apps から GPU 使用中プロセス一覧を実測して返す（正式採用契約 82c40db を v2 spec として明文化）",
+  "allowed_operations": ["read"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "processes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "pid": {},
+            "name": {},
+            "vram_used": {}
+          },
+          "required": ["pid", "name", "vram_used"]
+        }
+      },
+      "ok": { "type": "boolean" },
+      "status": {},
+      "error": {},
+      "observation_source": { "const": "real" },
+      "source": {}
+    },
+    "required": ["processes", "ok", "status", "error", "observation_source", "source"]
+  },
+  "supported_environment": {
+    "os": ["Windows", "Linux"],
+    "gpu_vendor": ["NVIDIA"],
+    "requirements": ["nvidia-smi in PATH", "NVIDIA driver"],
+    "normal_operation_condition": "compute-apps query returns rows or empty list with ok=true"
+  },
+  "environment_dependencies": {
+    "provider_strategy": "A — nvidia-smi internal provider",
+    "vram_per_process": "ENVIRONMENT_DEPENDENT — audit host: all [N/A] at nvidia-smi source",
+    "permissions": "[Insufficient Permissions] process names OBSERVED — not replaced"
+  },
+  "field_capability": {
+    "processes[].pid": { "tier": "REQUIRED", "evidence": "VERIFIED", "failure": "unknown in item" },
+    "processes[].name": { "tier": "REQUIRED", "evidence": "VERIFIED", "failure": "unknown string" },
+    "processes[].vram_used": { "tier": "ENVIRONMENT_DEPENDENT", "evidence": "VERIFIED when numeric; PARTIAL when [N/A]", "failure": "unknown string (not 0)" },
+    "processes[].gpu_uuid": { "tier": "NOT_IMPLEMENTED", "evidence": "PROBED in raw nvidia-smi output", "future": "optional v2.1+ HR" },
+    "processes[].gpu_index": { "tier": "NOT_IMPLEMENTED", "evidence": "UNKNOWN general availability" }
+  },
+  "observation_semantics": {
+    "observed": "pid integer, name string, vram_used integer MiB when nvidia-smi returns numeric",
+    "unknown": "vram_used 対象だが [N/A]/欠測 — 文字列 \"unknown\"",
+    "unsupported": "non-NVIDIA — Tool unavailable, empty processes",
+    "unavailable": "nvidia-smi not found"
+  },
+  "unknown_semantics": {
+    "vram_used": "[N/A] → unknown via _safe_int; never 0 or estimated MB",
+    "partial_success": "ok=true with all vram_used unknown is valid PARTIAL observation",
+    "root_cause": "UNKNOWN — driver/WDDM/permissions (audit Phase 1)"
+  },
+  "unsupported_semantics": {
+    "non_nvidia": "Same as unavailable for v2 baseline"
+  },
+  "unavailable_semantics": {
+    "nvidia_smi_missing": "ok=false, status=unavailable, processes=[]"
+  },
+  "error_semantics": {
+    "empty_processes_ok_true": "No GPU compute apps — not an error",
+    "empty_processes_ok_false": "Observation failure"
+  },
+  "not_provided_fields": {
+    "gpu_id": { "status": "NOT_PROVIDED", "note": "gpu_uuid PROBED but not in v2 output" },
+    "process_count_key": { "status": "NOT_PROVIDED", "note": "derive from len(processes)" }
+  },
+  "success_format": "ok=true, processes=[{pid,name,vram_used}], status=ok",
+  "error_format": {
+    "ok": false,
+    "processes": [],
+    "status": "error|unavailable",
+    "error": "string",
+    "observation_source": "real",
+    "source": "nvidia-smi|none"
+  },
+  "side_effect": "read_only",
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "external_service_access": ["nvidia-smi"],
+  "risk_level": "low",
+  "expected_failure": ["nvidia-smi_not_found", "nvidia_smi_timeout", "nvidia_smi_failed"],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "VRAM per-process often unknown on Windows WDDM (VERIFIED audit host 33/33)",
+    "Snapshot timing — PID set may change between queries",
+    "Adopted output dict shape (not list) — Human Review ADOPT_WORKING_TREE 82c40db"
+  ],
+  "cost": "free",
+  "tool_status": "available",
+  "safety_boundary": {
+    "network_access": false,
+    "filesystem_write": false,
+    "ref": "docs/ai_tool/tool_creation/SAFETY_BOUNDARY.md"
+  },
+  "compatibility_notes": {
+    "v1_legacy_migrated": "output schema identical to get_gpu_processes_legacy_migrated.json",
+    "adoption_commit": "82c40db",
+    "e2e_frozen_run": "runs/ai_tool/20260828_170349_gpu_process_agent_e2e",
+    "breaking_change_policy": "gpu_uuid addition = additive HR; list output revert forbidden"
+  },
+  "implementation_notes": {
+    "module": "tools.system.gpu.gpu_processes",
+    "observation_module": "tools.system.gpu.nvidia_smi",
+    "observation_function": "query_gpu_processes"
+  },
+  "validation_requirements": [
+    "validate_tool_spec_file ACCEPT",
+    "mock: [N/A] VRAM → unknown not 0",
+    "migration tests 11/11",
+    "E2E deterministic + live qwen3:8b routing"
+  ],
+  "agent_usage": {
+    "use_for": ["Which processes use GPU", "Process names and PIDs", "VRAM per process when available"],
+    "do_not_use_for": ["GPU overall temperature/utilization", "CPU load"],
+    "llm_rules": ["Report unknown VRAM as unknown", "Do not rank processes by fabricated VRAM"]
+  },
+  "contract": {
+    "can": ["return_real_process_list", "return_unknown_vram"],
+    "cannot": ["fabricate_process_list", "coerce_na_to_zero"],
+    "must": ["observation_source_real", "structured dict output"],
+    "must_not": ["hardcoded ollama/python list"]
+  },
+  "provider_specific": {
+    "module": "tools.system.gpu.gpu_processes",
+    "function": "get_gpu_processes",
+    "registry_name": "get_gpu_processes",
+    "registry_observation_source": "real"
+  }
+}

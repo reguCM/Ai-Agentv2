@@ -1,0 +1,74 @@
+{
+  "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n",
+  "required_capabilities": [
+    "workspace_file_search",
+    "web_search"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_search",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "search_files"
+      ],
+      "selected_tool": "search_files",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "search_files"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null,
+      "resolved_arguments": {
+        "path": "."
+      },
+      "unresolved_arguments": [
+        "query"
+      ]
+    },
+    {
+      "required_capability": "web_search",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "search_web"
+      ],
+      "selected_tool": "search_web",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "search_web"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null,
+      "resolved_arguments": {},
+      "unresolved_arguments": [
+        "query"
+      ]
+    }
+  ],
+  "tool_expectation": {
+    "generated": false,
+    "required_capability": null,
+    "expected_tool": null,
+    "expected_arguments": null,
+    "reason": null,
+    "level": "none",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "PARTIAL",
+  "action": null,
+  "stopped_at": "tool_selected_arguments_incomplete"
+}

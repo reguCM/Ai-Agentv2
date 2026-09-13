@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "purpose": "search_web LLM self-diagnosis experiment integration for future method selection",
+    "created_from": "existing experiment artifacts only; no new runs",
+    "base_path": "research/llm_benchmarks/capability_route_dataset/v0/analysis/web_effect_review/search_quality_diagnosis",
+    "note": "Unknown fields use unknown or not_recorded. Do not treat hypotheses as measured results."
+  },
+  "experiments": [
+    {
+      "id": "EXP-001",
+      "name": "data_only_llm_diagnosis",
+      "method": "data_only_case_analysis",
+      "model": "qwen3:8b",
+      "num_ctx": "not_recorded",
+      "input_conditions": ["mechanical case observations", "no full code pack by design"],
+      "tests": "not_recorded",
+      "compared": ["llm independent analysis without prior conclusions in prompt"],
+      "result": "partial",
+      "supported_claims": [
+        "data-only diagnosis motivates need for code reading"
+      ],
+      "failed_claims": [
+        "reliable path attribution from data alone"
+      ],
+      "confidence": "medium",
+      "artifacts": [
+        "llm_diagnosis/LLM_DIAGNOSIS.md",
+        "llm_diagnosis/CASE_ANALYSIS.md",
+        "llm_diagnosis/llm_diagnosis.json"
+      ]
+    },
+    {
+      "id": "EXP-002",
+      "name": "diagnostic_framework_self_verify",
+      "method": "generic_diagnostic_runner_self_verify",
+      "model": "qwen3:8b",
+      "num_ctx": "4096_reported_for_early_profiles",
+      "input_conditions": ["profiles", "evidence packs", "code_pack missing reported in early full run"],
+      "tests": ["self_verify"],
+      "compared": ["auto_fix allowance"],
+      "result": "partial",
+      "supported_claims": [
+        "harness ctx and code attachment dominate diagnosis quality",
+        "auto_fix denied when evidence insufficient"
+      ],
+      "failed_claims": [
+        "missing-code conclusion always reflects production code absence"
+      ],
+      "confidence": "high",
+      "artifacts": [
+        "diagnostic_framework/runs/20260824_164358/",
+        "diagnostic_framework/runs/20260824_170527/self_verify/SELF_VERIFY.md"
+      ]
+    },
+    {
+      "id": "EXP-003",
+      "name": "code_reading_experiment",
+      "method": "code_reading_with_large_ctx",
+      "model": "qwen3:8b",
+      "num_ctx": 32768,
+      "input_conditions": ["code packs", "optional logs"],
+      "tests": ["TEST-A", "TEST-B", "TEST-C"],
+      "compared": ["code only vs code+logs vs cause diagnosis"],
+      "result": "partial",
+      "supported_claims": [
+        "entry backends and rank_hits_for_query often found",
+        "path connection and cause overconfidence remain failure modes"
+      ],
+      "failed_claims": [
+        "sufficient code alone yields correct stdout vs LLM handoff attribution"
+      ],
+      "confidence": "high",
+      "artifacts": [
+        "diagnostic_framework/runs/20260824_082857/code_reading_experiment/EXPERIMENT_REPORT.md"
+      ]
+    },
+    {
+      "id": "EXP-004",
+      "name": "spec_experiment_v1",
+      "method": "specification_assisted_code_reading",
+      "model": "qwen3:8b",
+      "num_ctx": 32768,
+      "input_conditions": ["code", "optional design-map spec without answer line leakage intent"],
+      "tests": ["TEST-A no spec", "TEST-B with spec", "TEST-C spec only"],
+      "compared": ["no-spec vs spec vs spec-only"],
+      "result": "partial",
+      "supported_claims": [
+        "spec helps narrative path understanding",
+        "spec alone insufficient for implementation attribution"
+      ],
+      "failed_claims": [
+        "spec resolves stdout L520 vs dumps confusion"
+      ],
+      "confidence": "high",
+      "artifacts": [
+        "diagnostic_framework/runs/20260824_093317/spec_experiment/EXPERIMENT_REPORT.md",
+        "diagnostic_framework/specs/search_web_spec.md"
+      ]
+    },
+    {
+      "id": "EXP-005",
+      "name": "spec_experiment_v2",
+      "method": "specification_v2_existence_usage_principles",
+      "model": "qwen3:8b",
+      "num_ctx": 32768,
+      "input_conditions": ["code always", "no-spec / v1 / v2"],
+      "tests": ["TEST-A", "TEST-B", "TEST-C"],
+      "compared": ["no-spec vs spec v1 vs spec v2"],
+      "result": "partial",
+      "supported_claims": [
+        "spec refinement alone does not clearly beat baselines on critical handoff items"
+      ],
+      "failed_claims": [
+        "existence/usage principles eliminate mis-attribution on critical items"
+      ],
+      "confidence": "high",
+      "artifacts": [
+        "diagnostic_framework/runs/20260824_194421/spec_experiment_v2/EXPERIMENT_REPORT.md",
+        "diagnostic_framework/specs/search_web_spec_v2.md"
+      ]
+    },
+    {
+      "id": "EXP-006",
+      "name": "route_decomposition_experiment",
+      "method": "route_decomposition",
+      "model": "qwen3:8b",
+      "num_ctx": 32768,
+      "input_conditions": ["monolithic pack vs decomposed route packs", "optional logs"],
+      "tests": ["TEST-A", "TEST-B", "TEST-C", "TEST-D"],
+      "compared": ["bulk vs spec+bulk vs decomposed vs decomposed+logs"],
+      "result": "partial",
+      "supported_claims": [
+        "separating display and LLM packs can improve connection tests"
+      ],
+      "failed_claims": [
+        "decomposition alone removes caller errors and cause overconfidence"
+      ],
+      "confidence": "medium",
+      "artifacts": [
+        "diagnostic_framework/runs/20260824_195842/route_decomposition_experiment/EXPERIMENT_REPORT.md"
+      ]
+    },
+    {
+      "id": "EXP-007",
+      "name": "ranking_filter_log_evidence_experiment",
+      "method": "split_collect_rank_packs_and_evidence_classes",
+      "model": "qwen3:8b",
+      "num_ctx": 32768,
+      "input_conditions": ["mixed vs split packs", "logs present vs absent"],
+      "tests": ["H1_A", "H1_B", "H2_A", "H2_B"],
+      "compared": ["collect/rank mixed vs split", "evidence labels with/without logs"],
+      "result": "partial",
+      "supported_claims": [
+        "FACT/OBSERVED/INFERENCE/UNKNOWN reduces invented OBSERVED without logs",
+        "split packs help stage attribution conditionally"
+      ],
+      "failed_claims": [
+        "evidence labels alone guarantee correct causes"
+      ],
+      "confidence": "high",
+      "artifacts": [
+        "diagnostic_framework/runs/20260824_205442/ranking_filter_log_evidence_experiment/EXPERIMENT_REPORT.md"
+      ]
+    },
+    {
+      "id": "EXP-008",
+      "name": "n2_execution_path_gate",
+      "method": "execution_path_existence_gate",
+      "model": "qwen3:8b",
+      "num_ctx": 32768,
+      "input_conditions": ["baseline", "N2 gate", "N2 plus full path narrative"],
+      "tests": ["TEST-A", "TEST-B", "TEST-C"],
+      "compared": ["no gate vs N2 vs N2+full path story"],
+      "result": "partial",
+      "supported_claims": [
+        "N2 is for off-path filtering only",
+        "on-path wrong causation not removed by N2",
+        "full path narrative can increase overconfidence"
+      ],
+      "failed_claims": [
+        "N2 measures cause strength or occurrence"
+      ],
+      "confidence": "medium",
+      "artifacts": [
+        "diagnostic_framework/runs/20260824_212236/n2_execution_path_gate/EXPERIMENT_REPORT.md"
+      ]
+    },
+    {
+      "id": "EXP-009",
+      "name": "model_comparison_deepseek",
+      "method": "same_prompt_model_swap_deepseek",
+      "model": "deepseek-coder-v2:16b",
+      "num_ctx": 32768,
+      "input_conditions": [
+        "same questions as qwen artifacts",
+        "full prompts overflowed on B/C/E",
+        "adapted shorter materials after overflow"
+      ],
+      "tests": ["TEST-A", "TEST-B", "TEST-C", "TEST-D", "TEST-E"],
+      "compared": ["qwen3:8b reused artifacts vs deepseek new runs"],
+      "result": "insufficient_as_sole_replacement",
+      "supported_claims": [
+        "model swap alone does not fix shared failure modes",
+        "context limits are part of DeepSeek comparison outcome"
+      ],
+      "failed_claims": [
+        "replacing diagnostic LLM with DeepSeek is sufficient"
+      ],
+      "confidence": "high",
+      "artifacts": [
+        "diagnostic_framework/runs/20260824_234729/model_comparison_deepseek/COMPARISON_REPORT.md"
+      ]
+    },
+    {
+      "id": "EXP-010",
+      "name": "large_llm_search_web_diagnosis",
+      "method": "large_llm_independent_diagnosis_and_qwen_audit",
+      "model": "cursor_auto_composer",
+      "num_ctx": "not_recorded_session_dependent",
+      "input_conditions": [
+        "condition B: code+logs without qwen conclusions",
+        "condition A: audit of existing qwen results"
+      ],
+      "tests": ["CONDITION_A", "CONDITION_B"],
+      "compared": ["qwen3:8b prior results vs large llm independent diagnosis"],
+      "result": "improved_on_this_problem_set",
+      "supported_claims": [
+        "better path separation false-cause rejection and UNKNOWN use than qwen on this set",
+        "auto_fix not allowed"
+      ],
+      "failed_claims": [
+        "large llm alone proves general self-diagnosis or safe auto-fix"
+      ],
+      "confidence": "medium",
+      "artifacts": [
+        "diagnostic_framework/runs/20260825_124200/large_llm_search_web_diagnosis/COMPARISON_REPORT.md",
+        "diagnostic_framework/runs/20260825_124200/large_llm_search_web_diagnosis/CONDITION_B_INDEPENDENT_DIAGNOSIS.md",
+        "diagnostic_framework/runs/20260825_124200/large_llm_search_web_diagnosis/CONDITION_A_QWEN_AUDIT.md"
+      ]
+    }
+  ],
+  "related_not_full_experiments": [
+    {
+      "id": "REL-llm_code_diagnosis",
+      "path": "llm_code_diagnosis/",
+      "status": "runner_present_completed_run_report_not_indexed",
+      "note": "Script exists; no EXPERIMENT_REPORT indexed in this integration."
+    }
+  ],
+  "methods_status": {
+    "evidence_four_classes": "adopt",
+    "route_decomposition": "conditional_adopt",
+    "collect_rank_split": "conditional_adopt",
+    "specification_map": "partially_effective_alone_insufficient",
+    "n2_path_gate": "conditional_adopt_existence_filter_only",
+    "n3_runtime_evidence_gate": "unverified_promising",
+    "n1_single_edge_yes_no": "unverified_promising",
+    "qwen3_8b_local": "conditional_adopt_local_alone_insufficient_final",
+    "deepseek_full_replace": "not_supported_as_sole_replacement",
+    "large_llm_escalation": "promising_conditional",
+    "small_then_large_pipeline": "unverified_promising_hypothesis"
+  },
+  "findings_refs": ["F001", "F002", "F003", "F004", "F005", "F006", "F007", "F008", "F009", "F010", "F011"],
+  "selector": {
+    "type": "rule_based_plus_knowledge_base",
+    "catalog": "knowledge_base/method_catalog.json",
+    "implementation": "diagnostic_framework/selector/",
+    "ml": false,
+    "note": "Provisional selector; not LLM-autonomous method selection."
+  }
+}

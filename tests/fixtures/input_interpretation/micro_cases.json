@@ -1,0 +1,10 @@
+{"suite":"MICRO","cases":[
+ {"case_id":"micro_read_001","level":"MICRO","evaluation_type":"HARD_GOLD","pair_id":"read","input":"この文章を読んで","expected_request_ir":{"operations":["READ"]}},
+ {"case_id":"micro_call_001","level":"MICRO","evaluation_type":"HARD_GOLD","input":"この関数を呼んで","expected_request_ir":{"operations":["CALL"]}},
+ {"case_id":"micro_typo_001","level":"MICRO","evaluation_type":"HARD_GOLD","pair_id":"typo","input":"この文章をｙｐんで","expected_request_ir":{"operations":["READ"]}},
+ {"case_id":"micro_voice_001","level":"MICRO","evaluation_type":"RUBRIC","pair_id":"voice","input":"えーっとA.mdを、いやB.mdを読んで","rubric":[{"field":"request_ir.operations","expected":["READ"],"importance":"MAJOR","weight":4},{"field":"request_ir.targets","expected":[{"value":"B.md"}],"importance":"CRITICAL","weight":8}],"must_remove":["えーっと","A.md"]},
+ {"case_id":"micro_dialect_001","level":"MICRO","evaluation_type":"HARD_GOLD","pair_id":"dialect","input":"A.mdを読んどいてや","expected_request_ir":{"operations":["READ"]}},
+ {"case_id":"micro_negation_001","level":"MICRO","evaluation_type":"RUBRIC","pair_id":"negation","input":"A.mdは削除しない","critical_requirements":[{"field":"request_ir.negations","expected":["A.mdは削除しない"],"weight":8}]},
+ {"case_id":"micro_order_001","level":"MICRO","evaluation_type":"RUBRIC","pair_id":"order","input":"最初にA.mdを読み、その後B.pyを実行","rubric":[{"field":"request_ir.operations","expected":["READ"],"importance":"MAJOR","weight":4},{"field":"request_ir.operation_order","expected":["READ"],"importance":"CRITICAL","weight":8}]},
+ {"case_id":"micro_ambiguity_001","level":"MICRO","evaluation_type":"HUMAN_ADJUDICATED","pair_id":"ambiguity","input":"A.mdとB.mdがあります。それを読んでください。","gold_certainty":"AMBIGUOUS","clarification_expected":true,"forbidden_interpretations":[{"certainty":"KNOWN"}],"critical_requirements":[{"field":"request_ir.candidate_interpretations","expected":[{"target":"A.md"},{"target":"B.md"}],"weight":8}]}
+]}

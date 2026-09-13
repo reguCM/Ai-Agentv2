@@ -1,0 +1,50 @@
+{
+  "experiment_id": "judgment_loop_min",
+  "fixture_version": "order_live_v1",
+  "prompt": "Analyze the current problem and determine what should be done next.",
+  "at": "2026-09-01T02:40:55.189563+00:00",
+  "temperature": 0.0,
+  "max_turns": 10,
+  "models": [
+    "qwen3:14b",
+    "gemma3:12b"
+  ],
+  "native_tools": false,
+  "schema_requested": false,
+  "initial_pytest_exit_code": 1,
+  "initial_main_exit_code": 1,
+  "models_run": [
+    {
+      "model": "qwen3:14b",
+      "stop_reason": "idle_no_mapping",
+      "turns": 2,
+      "call_ok": true,
+      "mapping_status": [
+        "mapping_gap",
+        "mapping_gap"
+      ],
+      "tool_name": [
+        null,
+        null
+      ],
+      "files_read": []
+    },
+    {
+      "model": "gemma3:12b",
+      "stop_reason": "idle_no_mapping",
+      "turns": 3,
+      "call_ok": true,
+      "mapping_status": [
+        "M1",
+        "mapping_gap",
+        "mapping_gap"
+      ],
+      "tool_name": [
+        "run_test",
+        null,
+        null
+      ],
+      "files_read": []
+    }
+  ]
+}

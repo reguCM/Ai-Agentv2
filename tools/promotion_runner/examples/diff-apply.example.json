@@ -1,0 +1,47 @@
+{
+  "name": "example-delta",
+  "repo": "D:\\AI-Agent",
+  "source_from": "BASE_SHA_OR_REF",
+  "source_to": "TIP_SHA_OR_REF",
+  "target_base": "stabilize/tool-result-contract",
+  "target_branch": "promote/example-delta",
+  "mode": "diff_apply",
+  "allow_path_globs": [
+    "ai_tool/**",
+    "tests/**",
+    "docs/**"
+  ],
+  "deny_path_globs": [
+    ".env",
+    "**/*.pem"
+  ],
+  "ignore_path_globs": [
+    "**/__pycache__/**"
+  ],
+  "forbid_overlap_refs": [],
+  "git_guard_config": "tools/git_guard/configs/local.check-stabilize.json",
+  "required_tests": [],
+  "impact_sync": [
+    "正本",
+    "Rule",
+    "Help",
+    "Registry",
+    "Test"
+  ],
+  "human_gate_actions": [
+    "merge",
+    "push",
+    "reset_hard",
+    "delete_branch"
+  ],
+  "auto_commit": true,
+  "commit_message": "promote({name}): apply delta {source_from}..{source_to}",
+  "report_dir": "tools/promotion_runner/reports",
+  "apply_worktree": "D:\\AI-Agent-worktrees\\_promote-example",
+  "sparse_dirs": [
+    "ai_tool",
+    "tests",
+    "docs",
+    "tools"
+  ]
+}

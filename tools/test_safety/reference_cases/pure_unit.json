@@ -1,0 +1,23 @@
+{
+  "reference_case_id": "pure_unit",
+  "description": "Case B — pure controlled unit pytest; no repo write, no live resources.",
+  "test_plan": {
+    "plan_id": "pure_unit",
+    "commands": ["python -m pytest tests/tools/test_test_safety_validator.py::test_schema_validates_minimal_packet -q"],
+    "declared_primary_risk_level": "LEVEL_1",
+    "declared_dimensions": {
+      "llm": "NONE",
+      "gpu": "NONE",
+      "network": "NONE",
+      "filesystem_write": "NONE",
+      "git_operation": "NONE"
+    }
+  },
+  "expectation": {
+    "shadow_gate_decision": "PASS",
+    "human_decision": "PASS",
+    "human_approval_required": false,
+    "warnings_nonempty": false,
+    "reason": "L1 controlled unit"
+  }
+}

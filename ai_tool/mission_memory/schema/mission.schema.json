@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/mission_memory/mission.schema.json",
+  "title": "Mission record (frozen draft)",
+  "description": "Goal canonical for one Agent mission. effective_goal is composed on read and must not be stored. This is not a completed product schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mission_id",
+    "original_goal",
+    "explicit_conditions",
+    "explicit_constraints",
+    "user_confirmed_supplements"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1",
+      "description": "Git-side schema version. Not operational mission data."
+    },
+    "mission_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_goal": {
+      "type": "string",
+      "description": "Immutable original user goal text. Empty string means an empty original, not missing."
+    },
+    "explicit_conditions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "[] means zero known explicit conditions, not missing."
+    },
+    "explicit_constraints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "[] means zero known explicit constraints. LLM-invented constraints must not be stored."
+    },
+    "user_confirmed_supplements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "source"],
+        "properties": {
+          "text": { "type": "string" },
+          "source": {
+            "type": "string",
+            "enum": [
+              "grill",
+              "goal_completion",
+              "boundary_grill",
+              "requirement_resolution"
+            ],
+            "description": "Human-confirmed supplement source. grill remains valid for legacy rows. boundary_grill is Boundary Grill. goal_completion is Goal Completion Gate resume. requirement_resolution is Human Requirement Resolution wedge."
+          },
+          "decision_id": {
+            "type": "string",
+            "description": "Optional stable decision record id."
+          },
+          "decision_key": {
+            "type": "string",
+            "description": "Semantic identity of the decision (e.g. acceptance:output_format)."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["confirmed", "superseded"],
+            "description": "Lifecycle of this supplement row. Omitted means confirmed."
+          },
+          "supersedes": {
+            "type": "string",
+            "description": "Prior decision_id replaced by this row."
+          },
+          "dimension": {
+            "type": "string",
+            "description": "Boundary Grill dimension when applicable."
+          }
+        }
+      },
+      "description": "[] means no user-confirmed supplements yet. Withdrawal is undefined."
+    },
+    "confirmed_clarifications": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/decision_record" },
+      "description": "Cross-execution Human Decision records for the mission, including superseded rows."
+    },
+    "structured_requirements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/structured_requirement" },
+      "description": "Mission-canonical structured human requirements. Does not replace original_goal."
+    },
+    "requirement_resolution_phase": {
+      "type": "string",
+      "enum": [
+        "REQUIREMENTS_RESOLVED",
+        "AWAITING_HUMAN_REQUIREMENT",
+        "AWAITING_FACT_RESOLUTION",
+        "AWAITING_ENVIRONMENT_RESOLUTION"
+      ],
+      "description": "Human requirement resolution gate phase for implementation-entry."
+    },
+    "completion_runtime": {
+      "type": "object",
+      "description": "Mission-canonical latest Task/Goal completion snapshot for cross-execution resume. Carries decision_premises and premise_revalidation semantic outcomes. Session Goal Continuation packets are fast carriers only.",
+      "additionalProperties": true,
+      "properties": {
+        "current_goal_id": { "type": "string" },
+        "current_task_id": { "type": "string" },
+        "goals": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "tasks": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "directory_listings": {
+          "type": "object"
+        },
+        "search_observations": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "task_change_propagation_guard": {
+          "type": "object",
+          "description": "Minimal persistent graph-level safety for task change propagation across executions.",
+          "additionalProperties": true,
+          "properties": {
+            "unresolved": { "type": "boolean" },
+            "graph_converged": { "type": "boolean" },
+            "propagation_id": { "type": ["string", "null"] },
+            "stop_reason": { "type": ["string", "null"] },
+            "completed_wave_index": { "type": ["integer", "null"] },
+            "held_task_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "structured_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement_id",
+        "source_text",
+        "source_span",
+        "disposition",
+        "resolution_status",
+        "provenance",
+        "materiality"
+      ],
+      "properties": {
+        "requirement_id": { "type": "string", "minLength": 1 },
+        "source_text": { "type": "string" },
+        "source_span": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "integer" }
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "GOAL",
+            "CONSTRAINT",
+            "PREFERENCE",
+            "AMBIGUOUS_REQUIREMENT",
+            "CONTEXT",
+            "NOISE"
+          ]
+        },
+        "constraint_subtype": {
+          "type": "string",
+          "enum": ["prohibition", "technology"]
+        },
+        "resolution_status": {
+          "type": "string",
+          "enum": ["resolved", "unresolved", "waived_by_human"]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "user_explicit",
+            "human_confirmed",
+            "research_confirmed",
+            "probe_confirmed",
+            "llm_proposed"
+          ]
+        },
+        "materiality": {
+          "type": "string",
+          "enum": ["blocks_design", "informational"]
+        },
+        "unknown_kind": {
+          "type": "string",
+          "enum": ["user_intent", "fact_unknown", "environment_unknown"]
+        },
+        "normalized_meaning": { "type": "string" },
+        "decision_owner": {
+          "type": "string",
+          "enum": ["human", "research", "environment_probe"]
+        }
+      }
+    },
+    "decision_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision_id", "decision_key", "status", "source"],
+      "properties": {
+        "decision_id": { "type": "string", "minLength": 1 },
+        "decision_key": { "type": "string", "minLength": 1 },
+        "status": {
+          "type": "string",
+          "enum": ["confirmed", "superseded"]
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "grill",
+            "goal_completion",
+            "boundary_grill",
+            "requirement_resolution"
+          ]
+        },
+        "text": { "type": "string" },
+        "question_id": {
+          "type": "string",
+          "description": "Initial Grill / Boundary Grill question instance id."
+        },
+        "supersedes": { "type": "string" },
+        "superseded_by": { "type": "string" },
+        "superseded_at_execution_id": { "type": "string" },
+        "dimension": { "type": "string" },
+        "decision_subject": { "type": "string" },
+        "option_id": { "type": "string" },
+        "human_confirmed": { "type": "boolean" },
+        "auto_selected": { "type": "boolean" },
+        "selection_policy": { "type": "string" },
+        "role": { "type": "string" },
+        "extracted_path_grounds": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

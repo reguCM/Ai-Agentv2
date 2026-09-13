@@ -1,0 +1,50 @@
+{
+  "tool_id": "local:read_url_text",
+  "name": "read_url_text",
+  "provider": "local",
+  "version": "0.1.0-draft",
+  "description": "HTTP/HTTPS URL からテキストを read-only GET で取得する（experimental）。SSRF 対策付き。",
+  "capabilities": ["network", "read", "text", "url", "http"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "url": {"type": "string", "description": "HTTP または HTTPS URL"},
+      "max_bytes": {"type": "integer", "minimum": 1, "maximum": 65536, "description": "最大レスポンスバイト（任意、既定 65536）"},
+      "timeout_seconds": {"type": "number", "minimum": 1, "maximum": 60, "description": "接続・読取タイムアウト秒（任意、既定 10）"}
+    },
+    "required": ["url"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "ok": {"type": "boolean"},
+      "url": {"type": "string"},
+      "final_url": {"type": ["string", "null"]},
+      "status_code": {"type": ["integer", "null"]},
+      "content_type": {"type": ["string", "null"]},
+      "size_bytes": {"type": ["integer", "null"]},
+      "content": {"type": ["string", "null"]},
+      "truncated": {"type": "boolean"},
+      "error": {"type": ["string", "null"]}
+    },
+    "required": ["ok", "url", "error"]
+  },
+  "side_effect": "read_only",
+  "permissions": ["visibility:experimental"],
+  "network_access": true,
+  "filesystem_access": "none",
+  "risk_level": "medium",
+  "cost": "free",
+  "tool_status": "unavailable",
+  "experiment_status": "experimental",
+  "adoption_status": "not_reviewed",
+  "spec_ref": "docs/ai_tool/tool_creation/specs/local_read_url_text.json",
+  "provider_specific": {
+    "safety_policy": "docs/ai_tool/tool_creation/URL_FETCH_SAFETY_POLICY.md",
+    "implementation_module": "ai_tool.experimental.read_url.reader",
+    "implementation_function": "read_url_text",
+    "registry_visibility": "experimental",
+    "http_client": "urllib.request (stdlib)"
+  }
+}

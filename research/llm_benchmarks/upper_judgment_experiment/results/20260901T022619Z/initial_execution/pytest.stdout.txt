@@ -1,0 +1,23 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+___________________________ test_assemble_shipment ____________________________
+
+    def test_assemble_shipment():
+>       shipment = assemble_shipment()
+
+tests\test_main.py:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+main.py:9: in assemble_shipment
+    "lane": pick_lane(lanes, 2),
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+lanes = ['north'], index = 2
+
+    def pick_lane(lanes, index):
+>       return lanes[index]
+E       IndexError: list index out of range
+
+helper.py:10: IndexError
+=========================== short test summary info ===========================
+FAILED tests/test_main.py::test_assemble_shipment - IndexError: list index ou...
+1 failed in 0.08s

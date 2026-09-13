@@ -1,0 +1,75 @@
+{
+  "request_text": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\ngridの構造と内容を確認する。\n\nGrill:\n**掘り下げた未解決点:**  \ngridの構造（例: 行数、列数、ヘッダーの内容、データの形式（テキスト/数値/日付など））と、gridに含まれる具体的なデータの種類（例: 売上データ、ユーザー情報、製品一覧など）を確認する必要がある。  \n\n**次の処理を再開するための必要な情報:**  \n- gridの構造（例: 3行4列、ヘッダーが「商品名」「価格」「在庫数」など）  \n- gridに含まれるデータの種類（例: 数値データ、テキストデータ、日付データなど）  \n\nこの情報がないと、gridの内容を要約するための処理（例: 数値の合計、テキストのキーワード抽出など）が実行できません。\n",
+  "required_capabilities": [
+    "workspace_file_list"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_read",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "read_file"
+      ],
+      "selected_tool": "read_file",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "read_file"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null
+    },
+    {
+      "required_capability": "workspace_file_list",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "list_files"
+      ],
+      "selected_tool": "list_files",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "list_files"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": {
+        "tool": "list_files",
+        "arguments": {
+          "path": "."
+        }
+      }
+    }
+  ],
+  "tool_expectation": {
+    "generated": true,
+    "required_capability": "workspace_file_list",
+    "expected_tool": "list_files",
+    "expected_arguments": {
+      "path": "."
+    },
+    "reason": "Current Taskを既存のagent-visible Capabilityへ接続する",
+    "level": "required",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "RESOLVED",
+  "action": {
+    "tool": "list_files",
+    "arguments": {
+      "path": "."
+    }
+  },
+  "stopped_at": "executable_action"
+}

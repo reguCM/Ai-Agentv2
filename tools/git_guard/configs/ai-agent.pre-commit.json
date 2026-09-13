@@ -1,0 +1,28 @@
+﻿{
+    "remotes":  [
+                    {
+                        "url_must_contain":  "github.com/reguCM/Ai-Agent",
+                        "name":  "origin"
+                    }
+                ],
+    "ignore_path_globs":  [
+                              ".venv/**",
+                              ".venv*/**",
+                              "**/__pycache__/**",
+                              "node_modules/**",
+                              "**/.pytest_cache/**"
+                          ],
+    "deny_path_globs":  [
+                            ".env",
+                            "**/.env",
+                            "**/secrets/**",
+                            "**/*.pem",
+                            "**/credentials.json"
+                        ],
+    "forbid_actions":  [
+                           "force_push",
+                           "force_push_with_lease",
+                           "reset_hard"
+                       ],
+    "repo":  "."
+}

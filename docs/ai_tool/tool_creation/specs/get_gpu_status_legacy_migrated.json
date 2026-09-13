@@ -1,0 +1,236 @@
+{
+  "tool_id": "local:get_gpu_status",
+  "name": "get_gpu_status",
+  "version": "1.0.0-legacy-migrated",
+  "description": "GPUの基本状態を取得する。GPUモデル、温度、使用率、VRAM使用量を nvidia-smi から実測する。取得不能時は unknown/unavailable を返し固定値へフォールバックしない。",
+  "provider": "local",
+  "source": "registry/tools.json",
+  "capability": ["GPU", "VRAM", "温度", "使用率", "observation"],
+  "purpose": "nvidia-smi --query-gpu から GPU 基本メトリクスを実測して返す（Registry 登録 Legacy Tool の現行契約固定）",
+  "allowed_operations": ["read"],
+  "prohibited_operations": ["write", "modify", "network"],
+  "input_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  },
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "gpu": {},
+      "temperature": {},
+      "utilization": {},
+      "vram_used": {},
+      "vram_total": {},
+      "ok": { "type": "boolean" },
+      "status": {},
+      "error": {},
+      "observation_source": { "const": "real" },
+      "source": {}
+    },
+    "required": [
+      "gpu",
+      "temperature",
+      "utilization",
+      "vram_used",
+      "vram_total",
+      "ok",
+      "status",
+      "error",
+      "observation_source",
+      "source"
+    ]
+  },
+  "output_fields": {
+    "gpu": {
+      "type_success": "string",
+      "type_failure": "string",
+      "unit": "none",
+      "meaning": "nvidia-smi query-gpu name（GPU 0 のデバイス名）",
+      "observation_source": "nvidia-smi name",
+      "unknown_condition": "ok=false のとき文字列 \"unknown\"（推測値ではない）"
+    },
+    "temperature": {
+      "type_success": "number",
+      "type_failure": "string",
+      "unit": "celsius",
+      "meaning": "nvidia-smi temperature.gpu",
+      "observation_source": "nvidia-smi",
+      "unknown_condition": "パース不能・欠測時は文字列 \"unknown\"；N/A 等も \"unknown\""
+    },
+    "utilization": {
+      "type_success": "number",
+      "type_failure": "string",
+      "unit": "percent",
+      "meaning": "nvidia-smi utilization.gpu（GPU 使用率 %）",
+      "observation_source": "nvidia-smi",
+      "unknown_condition": "パース不能・欠測時は文字列 \"unknown\"；スナップショット間で変動し得る（KNOWN_LIMITATION）"
+    },
+    "vram_used": {
+      "type_success": "integer",
+      "type_failure": "string",
+      "unit": "mib",
+      "meaning": "nvidia-smi memory.used（使用中 VRAM）",
+      "observation_source": "nvidia-smi",
+      "unknown_condition": "パース不能・欠測時は文字列 \"unknown\"；スナップショット間で変動し得る"
+    },
+    "vram_total": {
+      "type_success": "integer",
+      "type_failure": "string",
+      "unit": "mib",
+      "meaning": "nvidia-smi memory.total（VRAM 総量）",
+      "observation_source": "nvidia-smi",
+      "unknown_condition": "パース不能・欠測時は文字列 \"unknown\""
+    },
+    "ok": {
+      "type": "boolean",
+      "meaning": "観測成功=true / 失敗=false",
+      "observation_source": "DERIVED_VALUE"
+    },
+    "status": {
+      "type": "string",
+      "meaning": "成功時 \"ok\"；nvidia-smi 不在 \"unavailable\"；その他失敗 \"error\" 等",
+      "observation_source": "DERIVED_VALUE"
+    },
+    "error": {
+      "type": "string|null",
+      "meaning": "失敗理由コード（例: nvidia-smi_not_found, nvidia_smi_timeout）；成功時 null",
+      "observation_source": "DERIVED_VALUE"
+    },
+    "observation_source": {
+      "type": "string",
+      "const": "real",
+      "meaning": "観測ラベル。成功/失敗に関わらず常に \"real\"（架空成功値を返さない契約）",
+      "observation_source": "CONFIG_VALUE"
+    },
+    "source": {
+      "type": "string",
+      "meaning": "取得経路: \"nvidia-smi\" | \"none\"（バイナリ不在）",
+      "observation_source": "DERIVED_VALUE"
+    }
+  },
+  "success_format": "ok=true かつ gpu/temperature/utilization/vram_* が nvidia-smi 由来（数値または文字列名）",
+  "error_format": {
+    "ok": false,
+    "status": "error|unavailable",
+    "error": "string",
+    "gpu": "unknown",
+    "temperature": "unknown",
+    "utilization": "unknown",
+    "vram_used": "unknown",
+    "vram_total": "unknown",
+    "observation_source": "real",
+    "source": "nvidia-smi|none"
+  },
+  "side_effect": "read_only",
+  "required_permission": ["visibility:agent"],
+  "authentication": "none",
+  "network_access": false,
+  "filesystem_access": "none",
+  "external_service_access": ["nvidia-smi"],
+  "risk_level": "low",
+  "expected_failure": [
+    "nvidia-smi_not_found",
+    "nvidia_smi_timeout",
+    "nvidia_smi_failed",
+    "nvidia_smi_empty"
+  ],
+  "retry_policy": "none",
+  "deterministic": false,
+  "known_limitations": [
+    "NVIDIA GPU + nvidia-smi 必須",
+    "複数 GPU 環境では GPU index 0 のみ（rows[0]）— 他 GPU は返さない",
+    "utilization / vram_used は観測時刻により独立再実行と完全一致しない場合がある",
+    "失敗時メトリクスは数値 null ではなく文字列 \"unknown\" になる場合がある"
+  ],
+  "cost": "free",
+  "tool_status": "available",
+  "catalog_hints": {
+    "experiment_status": "tested",
+    "adoption_status": "approved"
+  },
+  "contract": {
+    "can": [
+      "read_gpu_metrics_via_nvidia_smi",
+      "return_unknown_on_observation_failure"
+    ],
+    "cannot": [
+      "fabricate_gpu_values",
+      "write_to_filesystem",
+      "call_network_apis"
+    ],
+    "must": [
+      "set_observation_source_real",
+      "include_ok_status_error_fields",
+      "return_all_ten_output_keys"
+    ],
+    "must_not": [
+      "fallback_to_hardcoded_temperature_or_utilization",
+      "remove_existing_output_keys",
+      "change_output_key_meanings"
+    ]
+  },
+  "safety_as_observed": {
+    "subprocess": "nvidia-smi 実行（read-only query）",
+    "network_access": false,
+    "filesystem_write": false,
+    "agent_tool_gate": "registry risk=low, visibility=agent",
+    "timeout_seconds": 8.0,
+    "note": "現在の実装記録。将来変更は Human Review 要"
+  },
+  "provider_specific": {
+    "module": "tools.system.gpu.gpu_status",
+    "function": "get_gpu_status",
+    "observation_module": "tools.system.gpu.nvidia_smi",
+    "observation_function": "query_gpu_status",
+    "registry_visibility": "agent",
+    "registry_observation_source": "real",
+    "registry_name": "get_gpu_status"
+  },
+  "migration_meta": {
+    "phase": "legacy_to_current_migration_phase1",
+    "legacy_audit_ref": "docs/ai_tool/project_audit/LEGACY_TOOL_AUDIT.md",
+    "recommended_action_at_audit": "KEEP",
+    "implementation_changed_in_this_phase": false,
+    "registry_changed_in_this_phase": false,
+    "agent_changed_in_this_phase": false
+  },
+  "test_contract_mapping": {
+    "normal": {
+      "N-01": "COVERED — tests/test_gpu_real_observation.py::test_status_success_not_hardcoded_fake",
+      "N-02": "NOT_APPLICABLE — 引数なし",
+      "N-03": "COVERED — 同上（output keys + types mock 検証）"
+    },
+    "boundary": "NOT_APPLICABLE — 引数なし",
+    "invalid": "NOT_APPLICABLE — 引数なし",
+    "failure": {
+      "F-02": "COVERED — test_status_failure_no_rtx_fallback"
+    },
+    "safety": {
+      "S-01": "COVERED — test_source_has_no_hardcoded_rtx_fallback",
+      "S-04": "COVERED — network なし（spec + 実装）"
+    },
+    "live_observation": {
+      "suite": "tests/test_gpu_real_observation.py",
+      "classification": "local_live_observation",
+      "ci_default": "skip unless GPU/nvidia-smi present"
+    },
+    "contract_tests": "tests/ai_tool/tool_creation/test_get_gpu_status_migration.py"
+  },
+  "registry_alignment": {
+    "registry_name": "get_gpu_status",
+    "descriptor_fields_observed": [
+      "name",
+      "visibility",
+      "observation_source",
+      "module",
+      "function",
+      "input",
+      "risk",
+      "description"
+    ],
+    "registry_output_documented": false,
+    "note": "Registry に output schema なし — Specification が補完"
+  }
+}

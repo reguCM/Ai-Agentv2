@@ -1,0 +1,47 @@
+{
+  "experiment_id": "kss13_20260820_154524",
+  "purpose": "KSS-1.3 exploration value / information gain observation",
+  "formalize_phase5_1": false,
+  "auto_routing": false,
+  "confidence_threshold": false,
+  "web_force": false,
+  "common_env": {
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+    "AI_AGENT_KSS1_OBS": "0",
+    "AI_AGENT_KSS11_OBS": "1",
+    "AI_AGENT_KSS12_OBS": "1",
+    "AI_AGENT_KSS13_OBS": "1"
+  },
+  "cases": [
+    "memory_usage",
+    "cpu_temperature",
+    "disk_usage",
+    "gpu_usage",
+    "gpu_vram_usage"
+  ],
+  "trials": 1,
+  "mode": "offline_rebuild",
+  "offline_from": "research/llm_benchmarks/kss11_measurement/kss11_20260820_151041",
+  "available_fields": [
+    "kept_hit_count",
+    "candidate_count",
+    "new_url/source/term counts",
+    "link_coverage",
+    "information_gain_existing",
+    "no_gain_existing",
+    "token/url jaccard"
+  ],
+  "missing_fields": [
+    "search_result_count (unless web_exec live)",
+    "new_entity_count",
+    "exploration_value_score",
+    "semantic_novelty"
+  ]
+}

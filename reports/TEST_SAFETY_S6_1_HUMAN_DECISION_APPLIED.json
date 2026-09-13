@@ -1,0 +1,69 @@
+{
+  "closure_id": "test_safety_s6_1_human_decision_closure",
+  "closed_at": "2026-09-12",
+  "s6_architecture_review_approved": true,
+  "s6_1_code_changes": false,
+  "s7a_entry_allowed": true,
+  "auto_start_s7a": false,
+  "decisions": {
+    "persistence": {
+      "generic_pending_action_store": false,
+      "resolution_state_scope": "explicit_test_runner_single_run",
+      "durable_resume_deferred": true
+    },
+    "freshness": {
+      "time_ttl_primary": false,
+      "primary_checks": [
+        "action_id",
+        "plan_fingerprint",
+        "evaluation_ref",
+        "verify_authorization_for_execution"
+      ],
+      "plan_change_requires_reevaluation": true,
+      "host_or_unknown_change_same_plan_new_evaluation_allowed": true
+    },
+    "connection_scope_s7": {
+      "explicit_test_runner_only": true,
+      "chat_orchestrator": false,
+      "execute_agent_tool": false,
+      "general_shell": false,
+      "ci": false
+    },
+    "human_state": {
+      "safety_forbidden": "BLOCKED",
+      "approval_required": "AWAITING_HUMAN_APPROVAL",
+      "human_approval_runtime_s7": false,
+      "maps_to_test_failed": false
+    },
+    "automatic_resolution": {
+      "max_attempts_per_run": 1,
+      "automatic_retry_loop": false,
+      "reevaluation_on_explicit_retry_or_state_change": true
+    },
+    "original_action": {
+      "preserve_action_id_and_plan": true,
+      "llm_regenerate_test_action": false,
+      "plan_change_requires_new_evaluation": true
+    },
+    "resolver_responsibility": {
+      "detect_missing_auth": true,
+      "validator_gate_bind": true,
+      "resolution_evidence": true,
+      "runs_pytest": false,
+      "delegates_execution_to_runner_wedge": true
+    },
+    "fail_safe": {
+      "no_executor_on_errors": true,
+      "not_test_failed": true
+    }
+  },
+  "s7a_scope": {
+    "implement": "test_safety_resolution_layer",
+    "verify_with": "fixture_and_fake_executor",
+    "general_runtime_connected": false
+  },
+  "evidence_refs": [
+    "reports/TEST_SAFETY_S6_AUTOMATIC_RESOLUTION_ARCHITECTURE.md",
+    "reports/TEST_SAFETY_S6_1_HUMAN_DECISION_CLOSURE.md"
+  ]
+}

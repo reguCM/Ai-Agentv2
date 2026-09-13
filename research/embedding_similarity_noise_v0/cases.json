@@ -1,0 +1,334 @@
+{
+  "note": "Independent Japanese input-noise cases. Not a Production threshold and not a SELECTED rule. gold_is_top is an experimental observation only.",
+  "evaluation_note": "gold_is_top means the intended candidate ranked 1st among this candidate set. It is not a SELECTED rule. No cosine cutoff is canonicalized.",
+  "anchors": {
+    "board": {
+      "label": "テトリスの盤面",
+      "clean_query_id": "board_clean",
+      "gold_id": "c_board"
+    },
+    "runtime": {
+      "label": "実行時に動いている実装",
+      "clean_query_id": "runtime_clean",
+      "gold_id": "c_runtime"
+    },
+    "research": {
+      "label": "研究用のもの",
+      "clean_query_id": "research_clean",
+      "gold_id": "c_research"
+    }
+  },
+  "candidates": [
+    {
+      "id": "c_board",
+      "text": "game board state",
+      "kind": "gold_board"
+    },
+    {
+      "id": "c_runtime",
+      "text": "runtime implementation",
+      "kind": "gold_runtime"
+    },
+    {
+      "id": "c_research",
+      "text": "research experiment",
+      "kind": "gold_research"
+    },
+    {
+      "id": "c_score",
+      "text": "ハイスコアの保存方法",
+      "kind": "wrong_related_game"
+    },
+    {
+      "id": "c_theme",
+      "text": "画面の配色テーマ",
+      "kind": "wrong_related_ui"
+    },
+    {
+      "id": "c_prd",
+      "text": "PRDの書き方",
+      "kind": "wrong_related_docs"
+    },
+    {
+      "id": "c_weather",
+      "text": "今日の天気と降水確率",
+      "kind": "wrong_unrelated"
+    },
+    {
+      "id": "c_cpu",
+      "text": "CPU温度の取得方法",
+      "kind": "wrong_unrelated"
+    },
+    {
+      "id": "c_license",
+      "text": "MIT license text for a Python package",
+      "kind": "wrong_unrelated"
+    }
+  ],
+  "queries": [
+    {
+      "id": "board_clean",
+      "anchor_id": "board",
+      "noise_type": "clean",
+      "text": "テトリスの盤面",
+      "gold_id": "c_board",
+      "note": "ノイズなし正常文"
+    },
+    {
+      "id": "board_typo",
+      "anchor_id": "board",
+      "noise_type": "typo",
+      "text": "テとりすの盤面",
+      "gold_id": "c_board",
+      "note": "カタカナの一部をひらがなで打った"
+    },
+    {
+      "id": "board_conversion",
+      "anchor_id": "board",
+      "noise_type": "conversion",
+      "text": "テトリスの番面",
+      "gold_id": "c_board",
+      "note": "ばんめん→番面"
+    },
+    {
+      "id": "board_missing_char",
+      "anchor_id": "board",
+      "noise_type": "missing_char",
+      "text": "テトリスの盤",
+      "gold_id": "c_board",
+      "note": "面が抜けた"
+    },
+    {
+      "id": "board_particle",
+      "anchor_id": "board",
+      "noise_type": "particle_drop",
+      "text": "テトリス盤面",
+      "gold_id": "c_board",
+      "note": "の 抜け"
+    },
+    {
+      "id": "board_colloquial",
+      "anchor_id": "board",
+      "noise_type": "colloquial",
+      "text": "テトリスの盤面のやつ",
+      "gold_id": "c_board",
+      "note": "口語のやつ"
+    },
+    {
+      "id": "board_filler",
+      "anchor_id": "board",
+      "noise_type": "filler",
+      "text": "えっとテトリスの盤面",
+      "gold_id": "c_board",
+      "note": "フィラー えっと"
+    },
+    {
+      "id": "board_restatement",
+      "anchor_id": "board",
+      "noise_type": "restatement",
+      "text": "いやスコアじゃなくてテトリスの盤面",
+      "gold_id": "c_board",
+      "note": "言い直し。否定語にハイスコアが含まれる"
+    },
+    {
+      "id": "board_asr",
+      "anchor_id": "board",
+      "noise_type": "asr_like",
+      "text": "手取り巣の盤面",
+      "gold_id": "c_board",
+      "note": "テトリスの音声認識風誤変換"
+    },
+    {
+      "id": "board_demonstrative",
+      "anchor_id": "board",
+      "noise_type": "demonstrative",
+      "text": "そっちの盤面",
+      "gold_id": "c_board",
+      "note": "指示語。盤面は残っている"
+    },
+    {
+      "id": "board_compound",
+      "anchor_id": "board",
+      "noise_type": "compound",
+      "text": "えっとテトリスの番面のやつ",
+      "gold_id": "c_board",
+      "note": "フィラー+変換ミス+口語"
+    },
+    {
+      "id": "runtime_clean",
+      "anchor_id": "runtime",
+      "noise_type": "clean",
+      "text": "実行時に動いている実装",
+      "gold_id": "c_runtime",
+      "note": "ノイズなし正常文"
+    },
+    {
+      "id": "runtime_typo",
+      "anchor_id": "runtime",
+      "noise_type": "typo",
+      "text": "実交時に動いている実装",
+      "gold_id": "c_runtime",
+      "note": "行→交 の打ち間違い"
+    },
+    {
+      "id": "runtime_conversion",
+      "anchor_id": "runtime",
+      "noise_type": "conversion",
+      "text": "実効時に動いている実装",
+      "gold_id": "c_runtime",
+      "note": "じっこうじ→実効時"
+    },
+    {
+      "id": "runtime_missing_char",
+      "anchor_id": "runtime",
+      "noise_type": "missing_char",
+      "text": "実行時に動いている実",
+      "gold_id": "c_runtime",
+      "note": "装が抜けた"
+    },
+    {
+      "id": "runtime_particle",
+      "anchor_id": "runtime",
+      "noise_type": "particle_drop",
+      "text": "実行時動いている実装",
+      "gold_id": "c_runtime",
+      "note": "に 抜け"
+    },
+    {
+      "id": "runtime_colloquial",
+      "anchor_id": "runtime",
+      "noise_type": "colloquial",
+      "text": "実際に動いてるほう",
+      "gold_id": "c_runtime",
+      "note": "口語。実装という言葉が無い"
+    },
+    {
+      "id": "runtime_filler",
+      "anchor_id": "runtime",
+      "noise_type": "filler",
+      "text": "あのー実行時に動いている実装なんですけど",
+      "gold_id": "c_runtime",
+      "note": "フィラー+なんですけど"
+    },
+    {
+      "id": "runtime_restatement",
+      "anchor_id": "runtime",
+      "noise_type": "restatement",
+      "text": "実験用じゃなくて実行時に動いている実装",
+      "gold_id": "c_runtime",
+      "note": "言い直し。否定語に実験が含まれる"
+    },
+    {
+      "id": "runtime_asr",
+      "anchor_id": "runtime",
+      "noise_type": "asr_like",
+      "text": "実効時に動いてる実装",
+      "gold_id": "c_runtime",
+      "note": "実効時+口語のてる"
+    },
+    {
+      "id": "runtime_demonstrative",
+      "anchor_id": "runtime",
+      "noise_type": "demonstrative",
+      "text": "実際に使ってる方",
+      "gold_id": "c_runtime",
+      "note": "指示語的な方。前回v0で失敗した口語に近い"
+    },
+    {
+      "id": "runtime_compound",
+      "anchor_id": "runtime",
+      "noise_type": "compound",
+      "text": "あの実際ゲームで使ってるほう",
+      "gold_id": "c_runtime",
+      "note": "フィラー+口語+指示語。実装という言葉が無い"
+    },
+    {
+      "id": "research_clean",
+      "anchor_id": "research",
+      "noise_type": "clean",
+      "text": "研究用のもの",
+      "gold_id": "c_research",
+      "note": "ノイズなし正常文"
+    },
+    {
+      "id": "research_typo",
+      "anchor_id": "research",
+      "noise_type": "typo",
+      "text": "けんきゅう用のもの",
+      "gold_id": "c_research",
+      "note": "漢字をひらがなで打った"
+    },
+    {
+      "id": "research_conversion",
+      "anchor_id": "research",
+      "noise_type": "conversion",
+      "text": "兼休用のもの",
+      "gold_id": "c_research",
+      "note": "けんきゅう→兼休"
+    },
+    {
+      "id": "research_missing_char",
+      "anchor_id": "research",
+      "noise_type": "missing_char",
+      "text": "究用のもの",
+      "gold_id": "c_research",
+      "note": "研が抜けた"
+    },
+    {
+      "id": "research_particle",
+      "anchor_id": "research",
+      "noise_type": "particle_drop",
+      "text": "研究用もの",
+      "gold_id": "c_research",
+      "note": "の 抜け"
+    },
+    {
+      "id": "research_colloquial",
+      "anchor_id": "research",
+      "noise_type": "colloquial",
+      "text": "研究用のやつ",
+      "gold_id": "c_research",
+      "note": "口語のやつ"
+    },
+    {
+      "id": "research_filler",
+      "anchor_id": "research",
+      "noise_type": "filler",
+      "text": "まあ研究用のものかな",
+      "gold_id": "c_research",
+      "note": "フィラー まあ+かな"
+    },
+    {
+      "id": "research_restatement",
+      "anchor_id": "research",
+      "noise_type": "restatement",
+      "text": "本番じゃなくて研究用のもの",
+      "gold_id": "c_research",
+      "note": "言い直し。否定語に本番が含まれる"
+    },
+    {
+      "id": "research_asr",
+      "anchor_id": "research",
+      "noise_type": "asr_like",
+      "text": "兼急用のもの",
+      "gold_id": "c_research",
+      "note": "けんきゅうようの音声認識風誤変換"
+    },
+    {
+      "id": "research_demonstrative",
+      "anchor_id": "research",
+      "noise_type": "demonstrative",
+      "text": "研究用のほう",
+      "gold_id": "c_research",
+      "note": "指示語 ほう。研究用は残っている"
+    },
+    {
+      "id": "research_compound",
+      "anchor_id": "research",
+      "noise_type": "compound",
+      "text": "まあけんきゅう用のも",
+      "gold_id": "c_research",
+      "note": "フィラー+ひらがな+末尾切れ"
+    }
+  ]
+}

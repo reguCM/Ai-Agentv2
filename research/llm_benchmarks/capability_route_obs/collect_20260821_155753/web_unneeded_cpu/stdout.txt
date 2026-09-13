@@ -1,0 +1,127 @@
+[EXECUTION_IDENTITY] event=agent_start EXECUTION_ACTOR=PROJECT_AGENT
+
+CLARITY CHECK:
+{
+  "status": "clear",
+  "next_step": "research",
+  "skipped_for_collection": true
+}
+
+関連Tool:
+[
+  {
+    "score": 2,
+    "name": "get_gpu_status",
+    "category": "system",
+    "subcategory": "gpu",
+    "description": "GPUの基本状態を取得する。GPUモデル、温度、使用率、VRAM使用量を nvidia-smi から実測する。取得不能時は unknown/unavailable を返し固定値へフォールバックしない。",
+    "keywords": [
+      "GPU",
+      "グラボ",
+      "VRAM",
+      "温度",
+      "使用率"
+    ],
+    "module": "tools.system.gpu.gpu_status",
+    "function": "get_gpu_status"
+  },
+  {
+    "score": 2,
+    "name": "cpu_status",
+    "category": "system",
+    "subcategory": "cpu",
+    "description": "CPUの基本状態を取得する。個別メトリクスの取得可否は未確認。",
+    "keywords": [
+      "CPU",
+      "状態"
+    ],
+    "module": "tools.system.cpu.cpu_status",
+    "function": "cpu_status"
+  }
+]
+
+参考Tool:
+[]
+
+参考Toolのソース:
+[]
+
+選択されたTool: cpu_status
+引数: {}
+[EXECUTION_IDENTITY] event=tool_call EXECUTION_ACTOR=PROJECT_AGENT
+[EXECUTION_IDENTITY] event=tool_result EXECUTION_ACTOR=PROJECT_AGENT
+
+Tool実行結果:
+{
+  "tool": "cpu_status",
+  "keys": [
+    "status"
+  ],
+  "note": "stdout要約。LLMには raw result を渡す。"
+}
+[EXECUTION_IDENTITY] event=capability_route_observed EXECUTION_ACTOR=PROJECT_AGENT
+
+[CAPABILITY_ROUTE_OBS]
+{
+  "observation_id": "caproute-ec55534035be",
+  "route": "agent_continue",
+  "reason": "related_agent_public_tools_present",
+  "web_search": {
+    "judgment": {
+      "judged_appropriate": false,
+      "recognized_as_candidate": true,
+      "in_related_tools": false,
+      "reason": "search_web_is_agent_public",
+      "observation_only": true
+    },
+    "execution": {
+      "called": false,
+      "call_count": 0,
+      "outcomes": [],
+      "note": "execution facts only; not a capability judgment"
+    },
+    "comparison_note": "Compare judgment.judged_appropriate / recognized_as_candidate with execution.called / outcomes. Do not treat judgment as execution."
+  },
+  "agent_tools_tried_count": 1,
+  "log": "D:\\AI-Agent\\research\\llm_benchmarks\\capability_route_obs\\collect_20260821_155753\\web_unneeded_cpu\\capability_route.jsonl",
+  "observation_only": true
+}
+
+最終回答:
+CPUの使用率は33%です。この値はCPUコアの利用率を示しており、現在の負荷状態を表しています。より詳細なメトリクス（例: 各コアの使用率、スレッド数など）が必要な場合はお知らせください。
+[EXECUTION_IDENTITY] event=capability_outcome_compared EXECUTION_ACTOR=PROJECT_AGENT
+
+[CAPABILITY_OUTCOME_COMPARE]
+{
+  "observation_id": "caproute-ec55534035be",
+  "stage": 2,
+  "web_pattern": "web_not_judged_not_called",
+  "chain": {
+    "web_judgment": {
+      "judged_appropriate": false,
+      "recognized_as_candidate": true,
+      "reason": "search_web_is_agent_public"
+    },
+    "web_execution": {
+      "called": false,
+      "call_count": 0,
+      "outcomes": [],
+      "primary_outcome": null
+    },
+    "final_answer": {
+      "status": "present",
+      "outcome_proxy": "success_candidate",
+      "signals": [
+        "non_empty_content"
+      ],
+      "char_count": 95,
+      "observation_only": true,
+      "not_ground_truth": true
+    }
+  },
+  "misjudgment_classification": null,
+  "log": "D:\\AI-Agent\\research\\llm_benchmarks\\capability_route_obs\\collect_20260821_155753\\web_unneeded_cpu\\capability_route.jsonl",
+  "observation_only": true
+}
+
+--- STDERR ---

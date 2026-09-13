@@ -1,0 +1,19 @@
+{
+  "certificate_type": "GENERIC_POLICY_AUDIT_CERTIFICATE",
+  "policy_id": "specification-convergence-policy",
+  "policy_path": "docs/SPECIFICATION_CONVERGENCE_POLICY.md",
+  "declared_scope": "GENERIC",
+  "policy_sha256": "9c35a2c86def70c4cf00aa808c6fb941bfce696b57ab41d565b36b7d9c9150c5",
+  "audit_rules_id": "generic-policy-authoring-rules",
+  "audit_rules_version": "1.0.0",
+  "audit_result": "AUDITED_CLEAN",
+  "findings": [{"finding_id": "SCP-001", "result": "REPAIRED", "reason": "Project experiment and architecture application needed explicit non-normative boundaries."}],
+  "exceptions": [],
+  "audited_at": "2026-09-07T10:25:21.2743024+09:00",
+  "audit_method": "manual_static_generic_scope_audit_with_tracked_repair",
+  "auditor": {"role": "development_agent", "id": "codex"},
+  "git_revision": "4da564ee527f27c4cfd717cead62d3519fade693",
+  "working_tree_state": {"dirty": true, "scope_note": "Certificate identifies the audited policy bytes by SHA-256; unrelated dirty changes are excluded."},
+  "report_reference": "reports/policy_audits/generic_policy_baseline_audit_20260907.md",
+  "provenance": {"pre_audit_sha256": "1b0bb130ee7db3281d8778846c723e1913b8755b88bb480fef0c48da50a71d23", "repair_finding_ids": ["SCP-001"]}
+}

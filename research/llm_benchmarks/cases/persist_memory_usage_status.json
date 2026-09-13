@@ -1,0 +1,72 @@
+{
+  "id": "persist_memory_usage_status",
+  "note": "後半の質問は前半の意味を書き直さない。STATE の維持を測る。取得コマンドは材料に書かない。",
+  "task": "Windowsのメモリ使用率を取得するToolを追加する",
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを追加する",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "status.meaning",
+        "value": "memory usage percentage",
+        "source": "judge",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "judge",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "judge",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "rounds": [
+    {
+      "id": "unit",
+      "kind": "query",
+      "question": "statusの単位は？",
+      "expect_any": ["%", "percent", "percentage"]
+    },
+    {
+      "id": "display",
+      "kind": "query",
+      "question": "この値を表示するときどう扱う？",
+      "expect_any": ["%", "0-100", "0〜100", "percent", "percentage"]
+    },
+    {
+      "id": "repair",
+      "kind": "repair",
+      "question": "Validatorでstatusの型が問題になった。修正して",
+      "expect_any": ["%", "0-100", "percent", "percentage", "float", "100"],
+      "materials": {
+        "tool_name": "get_memory_status",
+        "current_source": "def get_memory_status():\n    return {'status': 'ok'}\n",
+        "target_path": "tools/system/memory/memory_status.py",
+        "target_function": "get_memory_status",
+        "target_output": ["status"],
+        "repairable_warnings": [
+          {
+            "code": "semantic_mismatch",
+            "message": "status の型が期待と違う",
+            "fix": "戻り値の型を直す"
+          }
+        ],
+        "test_result": {
+          "result": "NG",
+          "status": "NG",
+          "return_value": {"status": "ok"},
+          "error": null
+        }
+      }
+    }
+  ]
+}

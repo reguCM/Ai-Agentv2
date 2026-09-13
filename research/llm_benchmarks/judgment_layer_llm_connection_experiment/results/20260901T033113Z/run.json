@@ -1,0 +1,44 @@
+{
+  "experiment_id": "judgment_layer_llm_connection",
+  "at": "2026-09-01T03:31:14.559586+00:00",
+  "prompt": "Resolve the problem.",
+  "native_tools": false,
+  "max_turns": 6,
+  "models": [
+    "qwen3:14b",
+    "gemma3:12b"
+  ],
+  "initial_pytest_exit": 1,
+  "initial_main_exit": 1,
+  "models_run": [
+    {
+      "model": "qwen3:14b",
+      "stop_reason": "idle_no_action",
+      "turns": 2,
+      "tools": [
+        [],
+        []
+      ]
+    },
+    {
+      "model": "gemma3:12b",
+      "stop_reason": "idle_no_action",
+      "turns": 5,
+      "tools": [
+        [
+          "read_file"
+        ],
+        [
+          "read_file",
+          "read_file",
+          "read_file"
+        ],
+        [
+          "read_file"
+        ],
+        [],
+        []
+      ]
+    }
+  ]
+}

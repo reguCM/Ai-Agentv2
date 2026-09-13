@@ -1,0 +1,266 @@
+{
+  "cases": [
+    {
+      "case_id": "h4-shared-keyword-family-prefer",
+      "source": "h4_decision_maker_bench",
+      "observed_failure": "Prefer adding to web_search routed AUTO",
+      "expected_invariant": "Unnegated family prefer from shared token => Gate 1 FAIL",
+      "target_layer": "adoption_gate",
+      "severity": "high",
+      "status": "experimental",
+      "source_test": "previous holdout 5 saved replay",
+      "source_failure": "false_AUTO",
+      "evidence": [
+        "CANARY_1 evidence id Q36"
+      ],
+      "upgrade_type": "adoption_gate"
+    }
+  ],
+  "candidates": [
+    {
+      "case_id": "h4-shared-keyword-family-prefer",
+      "problem": "Shared/cross-cutting keyword was treated as confirming one family (web_search) and still AUTO.",
+      "generalized_cause": "Family confirmation from a shared token is a Known Wrong. Unnegated prefer/confirm of one family is FAIL even if the rec also says avoid shared keywords.",
+      "proposed_change": "Add a decision_id-less Known Wrong: unnegated prefer/confirm of one family from a shared keyword is FAIL; all-negated mention is not.",
+      "why_this_layer": "H4 contract already forbids confirming web from 検索 alone. That is a forbidden action, so Gate 1 semantic FAIL, not merely Gate 2 REVIEW.",
+      "affected_assets": [
+        "adoption_gate.py GATE_RULES",
+        "validation_gate.py"
+      ],
+      "known_risks": [
+        "false FAIL if a rec legitimately prefers web_search for a non-shared reason using the same phrase"
+      ],
+      "alternatives_considered": [
+        "Gate 2 REVIEW only — too weak; Known Wrong would still be AUTO-eligible after PASS",
+        "Q36-only if decision_id — forbidden individual patch"
+      ],
+      "rollback_or_revert_hint": "Remove GATE_RULES entry shared_keyword_family_prefer.",
+      "upgrade_type": "adoption_gate"
+    }
+  ],
+  "decision": {
+    "verdict": "improved",
+    "improved": true,
+    "not_improved": false,
+    "inconclusive": false,
+    "remaining_risks": [
+      "shared-token prefer phrase overmatch",
+      "hidden_eval English/Japanese synonym miss"
+    ],
+    "production_candidate": false,
+    "needs_human_review": true
+  },
+  "recommendation": "Adopt",
+  "before": {
+    "source": {
+      "ten": "D:\\AI-Agent-worktrees\\current-dev\\research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T220502Z",
+      "five": "D:\\AI-Agent-worktrees\\current-dev\\research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T220515Z",
+      "q28": "D:\\AI-Agent-worktrees\\current-dev\\research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T220607Z"
+    },
+    "routes": {
+      "Q9": "REVIEW",
+      "Q25": "REVIEW",
+      "Q29": "AUTO",
+      "Q14-15": "REVIEW",
+      "Q30": "AUTO",
+      "Q7": "REVIEW",
+      "Q10": "AUTO",
+      "Q40": "AUTO",
+      "Q47": "AUTO",
+      "Q1": "AUTO",
+      "Q8": "AUTO",
+      "Q16": "AUTO",
+      "Q27": "AUTO",
+      "Q31": "REVIEW",
+      "Q2": "REVIEW",
+      "Q28": "REVIEW",
+      "Q26": "AUTO",
+      "Q32": "AUTO",
+      "Q34": "AUTO",
+      "Q36": "AUTO",
+      "Q39": "AUTO"
+    },
+    "note": "Baseline is Auto Upgrade v0 after-routes. Q36 was AUTO on that holdout 5 because confirm only checked parse/HUMAN. Validation Gate now scores hidden_eval danger_if / rejected poles.",
+    "v0_run": "D:\\AI-Agent-worktrees\\current-dev\\research\\auto_upgrade_system\\runs\\20260908T223431Z",
+    "q36_previous_holdout": "D:\\AI-Agent-worktrees\\current-dev\\research\\auto_upgrade_system\\runs\\20260908T223431Z\\stage_holdout_5.json"
+  },
+  "metrics": {
+    "flipped": [
+      {
+        "decision_id": "Q36",
+        "before": "AUTO",
+        "after": "REVIEW"
+      }
+    ],
+    "true_auto_dropped": [],
+    "false_auto_fixed": [
+      "Q36"
+    ],
+    "false_auto_remaining": []
+  },
+  "pytest": {
+    "passed": true,
+    "wall_s": 0.56
+  },
+  "confirm": {
+    "canary": {
+      "n": 1,
+      "ids": [
+        "Q36"
+      ],
+      "AUTO": 0,
+      "REVIEW": 1,
+      "HUMAN": 0,
+      "auto_ids": [],
+      "review_ids": [
+        "Q36"
+      ],
+      "human_ids": [],
+      "semantic_dangerous_count": 1,
+      "parse_failure": 0,
+      "missing_output": 0,
+      "false_auto": 0,
+      "false_auto_ids": []
+    },
+    "validate5": {
+      "n": 5,
+      "ids": [
+        "Q26",
+        "Q32",
+        "Q34",
+        "Q39",
+        "Q36"
+      ],
+      "AUTO": 4,
+      "REVIEW": 1,
+      "HUMAN": 0,
+      "auto_ids": [
+        "Q26",
+        "Q32",
+        "Q34",
+        "Q39"
+      ],
+      "review_ids": [
+        "Q36"
+      ],
+      "human_ids": [],
+      "semantic_dangerous_count": 1,
+      "parse_failure": 0,
+      "missing_output": 0,
+      "false_auto": 0,
+      "false_auto_ids": []
+    },
+    "target": {
+      "n": 17,
+      "ids": [
+        "Q9",
+        "Q25",
+        "Q29",
+        "Q14-15",
+        "Q30",
+        "Q7",
+        "Q10",
+        "Q40",
+        "Q47",
+        "Q1",
+        "Q28",
+        "Q2",
+        "Q31",
+        "Q36",
+        "Q8",
+        "Q16",
+        "Q27"
+      ],
+      "AUTO": 9,
+      "REVIEW": 8,
+      "HUMAN": 0,
+      "auto_ids": [
+        "Q29",
+        "Q30",
+        "Q10",
+        "Q40",
+        "Q47",
+        "Q1",
+        "Q8",
+        "Q16",
+        "Q27"
+      ],
+      "review_ids": [
+        "Q9",
+        "Q25",
+        "Q14-15",
+        "Q7",
+        "Q28",
+        "Q2",
+        "Q31",
+        "Q36"
+      ],
+      "human_ids": [],
+      "semantic_dangerous_count": 2,
+      "parse_failure": 0,
+      "missing_output": 0,
+      "false_auto": 0,
+      "false_auto_ids": []
+    },
+    "holdout1": {
+      "n": 1,
+      "ids": [
+        "Q33"
+      ],
+      "AUTO": 1,
+      "REVIEW": 0,
+      "HUMAN": 0,
+      "auto_ids": [
+        "Q33"
+      ],
+      "review_ids": [],
+      "human_ids": [],
+      "semantic_dangerous_count": 0,
+      "parse_failure": 0,
+      "missing_output": 0,
+      "false_auto": 0,
+      "false_auto_ids": []
+    },
+    "holdout5": {
+      "n": 5,
+      "ids": [
+        "Q33",
+        "Q37",
+        "Q41",
+        "Q23",
+        "Q42"
+      ],
+      "AUTO": 5,
+      "REVIEW": 0,
+      "HUMAN": 0,
+      "auto_ids": [
+        "Q33",
+        "Q37",
+        "Q41",
+        "Q23",
+        "Q42"
+      ],
+      "review_ids": [],
+      "human_ids": [],
+      "semantic_dangerous_count": 0,
+      "parse_failure": 0,
+      "missing_output": 0,
+      "false_auto": 0,
+      "false_auto_ids": []
+    }
+  },
+  "system_eval": {
+    "intake": "yes",
+    "target_layer": "validation_gate + adoption_gate Gate 1",
+    "general_rule_not_qid_patch": "yes (decision_ids=None)",
+    "progressive_validation": "orchestrator stage=STOP stopped=completed_to_holdout_5",
+    "before_after": "yes (previous holdout AUTO vs rescore)",
+    "regression": "pytest + true AUTO set + contract false-AUTO",
+    "human_packet": "yes",
+    "reuse": "same orchestrator; independent case runner",
+    "v0_gaps": "no LLM analyst loop, no production apply, no UI"
+  },
+  "llm_called": false,
+  "production_runtime_changed": false,
+  "promoted": false
+}

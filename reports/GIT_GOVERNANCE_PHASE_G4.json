@@ -1,0 +1,573 @@
+{
+  "phase": "G4",
+  "status": "COMPLETE",
+  "contract_version": "2026-09-12.2",
+  "actions_total": 21,
+  "by_actual_result": {
+    "CONTRACT_DEFINED": 1,
+    "GUIDANCE_ONLY": 4,
+    "CONTRACT_ONLY": 1,
+    "PARTIALLY_ENFORCED": 6,
+    "NOT_CONNECTED": 6,
+    "NOT_APPLICABLE": 3
+  },
+  "priority_unconnected": [
+    "commit",
+    "amend",
+    "amend_after_hook_failure",
+    "clean",
+    "rebase",
+    "worktree_remove",
+    "branch_delete",
+    "merge_to_main"
+  ],
+  "config_alignment_ok": true,
+  "config_drifts": [
+    {
+      "config": "pre-commit",
+      "field": "forbid_actions",
+      "item": "reset_hard",
+      "classification": "GUARD_STRONGER",
+      "note": "contract HUMAN_APPROVAL_REQUIRED; guard FAIL on --action path"
+    }
+  ],
+  "hook_status": {
+    "documentation": "tools/git_guard/DEPLOYED.md",
+    "deployed_doc_present": true,
+    "shared_git_hooks": {
+      "pre-commit": {
+        "path": "D:\\AI-Agent\\.git\\hooks\\pre-commit",
+        "exists": true,
+        "auto_modify_in_g4": false
+      },
+      "pre-push": {
+        "path": "D:\\AI-Agent\\.git\\hooks\\pre-push",
+        "exists": true,
+        "auto_modify_in_g4": false
+      }
+    },
+    "hook_role": "thin_adapter_to_guard",
+    "configs": [
+      "tools/git_guard/configs/ai-agent.pre-commit.json",
+      "tools/git_guard/configs/ai-agent.pre-push.json"
+    ]
+  },
+  "enforcement_matrix": [
+    {
+      "action_id": "commit",
+      "contract_policy": "TASK_AUTHORIZATION_REQUIRED",
+      "approval_class": "TASK_AUTHORIZATION_REQUIRED",
+      "validator_ref": [],
+      "current_enforcement_path": "",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "RUNTIME_NOT_CONNECTED",
+      "actual_result": "CONTRACT_DEFINED",
+      "gap": [
+        "AUTO_COMMIT_ALLOWED not bound to Runtime",
+        "commit not gated by hooks"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "amend",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [],
+      "current_enforcement_path": "adapters + GIT §4; no git_guard action gate for amend",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "GUIDANCE_ONLY",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP",
+        "HOST_ADAPTER_DRIFT possible"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "amend_after_hook_failure",
+      "contract_policy": "AGENT_ALWAYS_BLOCK",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "validator_ref": [],
+      "current_enforcement_path": "adapters; not git_guard",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "CONTRACT_ONLY",
+      "gap": [
+        "AGENT_ALWAYS_BLOCK not machine-enforced on shell"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "push",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [
+        "pre-push",
+        "git_guard"
+      ],
+      "current_enforcement_path": "pre-push hook → guard --action push → NEED_HUMAN (exit 3)",
+      "hook_connected": true,
+      "guard_connected": true,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "PARTIALLY_ENFORCED",
+      "gap": [
+        "bypass: git push --no-verify",
+        "agent shell may skip hook"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "BLOCKED",
+        "shell": "PARTIALLY_ENFORCED"
+      }
+    },
+    {
+      "action_id": "force_push",
+      "contract_policy": "AGENT_ALWAYS_BLOCK",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "validator_ref": [
+        "pre-push"
+      ],
+      "current_enforcement_path": "guard --action <type> when forbid_actions includes type; pre-push uses push not force",
+      "hook_connected": true,
+      "guard_connected": true,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "PARTIALLY_ENFORCED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP",
+        "direct git CLI bypasses guard"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "BLOCKED",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "force_push_with_lease",
+      "contract_policy": "AGENT_ALWAYS_BLOCK",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "validator_ref": [
+        "git_guard"
+      ],
+      "current_enforcement_path": "guard --action <type> when forbid_actions includes type; pre-push uses push not force",
+      "hook_connected": false,
+      "guard_connected": true,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "PARTIALLY_ENFORCED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP",
+        "direct git CLI bypasses guard"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "BLOCKED",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "reset_hard",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [
+        "git_guard"
+      ],
+      "current_enforcement_path": "forbid_actions on guard --action reset_hard (FAIL exit 2); pre-commit hook does not pass action",
+      "hook_connected": false,
+      "guard_connected": true,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "PARTIALLY_ENFORCED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP",
+        "GUARD_STRONGER vs HUMAN_APPROVAL_REQUIRED"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "clean",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [],
+      "current_enforcement_path": "no git_guard mapping",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_CONNECTED",
+      "actual_result": "NOT_CONNECTED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "rebase",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [],
+      "current_enforcement_path": "no git_guard mapping",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_CONNECTED",
+      "actual_result": "NOT_CONNECTED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "worktree_remove",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [],
+      "current_enforcement_path": "no git_guard mapping",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_CONNECTED",
+      "actual_result": "NOT_CONNECTED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "branch_delete",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [],
+      "current_enforcement_path": "no git_guard mapping",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_CONNECTED",
+      "actual_result": "NOT_CONNECTED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "add_explicit_paths",
+      "contract_policy": "ALLOW",
+      "approval_class": "ALLOW",
+      "validator_ref": [],
+      "current_enforcement_path": "",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "NOT_APPLICABLE",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "GUIDANCE_ONLY",
+      "gap": [],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "NOT_APPLICABLE",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "add_all",
+      "contract_policy": "GUIDANCE_ONLY",
+      "approval_class": "GUIDANCE_ONLY",
+      "validator_ref": [],
+      "current_enforcement_path": "",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "NOT_APPLICABLE",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "GUIDANCE_ONLY",
+      "gap": [],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "NOT_APPLICABLE",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "commit_message",
+      "contract_policy": "GUIDANCE_ONLY",
+      "approval_class": "GUIDANCE_ONLY",
+      "validator_ref": [],
+      "current_enforcement_path": "",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "NOT_APPLICABLE",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "GUIDANCE_ONLY",
+      "gap": [],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "NOT_APPLICABLE",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "stash",
+      "contract_policy": "UNDECIDED",
+      "approval_class": "UNDECIDED",
+      "validator_ref": [],
+      "current_enforcement_path": "no git_guard mapping",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_CONNECTED",
+      "actual_result": "NOT_CONNECTED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "NOT_APPLICABLE",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "merge_to_main",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [],
+      "current_enforcement_path": "",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_CONNECTED",
+      "actual_result": "NOT_CONNECTED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "remote_push_restricted",
+      "contract_policy": "HUMAN_APPROVAL_REQUIRED",
+      "approval_class": "HUMAN_APPROVAL_REQUIRED",
+      "validator_ref": [
+        "git_guard"
+      ],
+      "current_enforcement_path": "remotes[].url_must_contain on hook-invoked guard",
+      "hook_connected": true,
+      "guard_connected": true,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "PARTIALLY_ENFORCED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP when push without hook"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "stage_deny_path_globs",
+      "contract_policy": "AGENT_ALWAYS_BLOCK",
+      "approval_class": "AGENT_ALWAYS_BLOCK",
+      "validator_ref": [
+        "pre-commit"
+      ],
+      "current_enforcement_path": "pre-commit deny_path_globs on changed paths",
+      "hook_connected": true,
+      "guard_connected": true,
+      "raw_cli_covered": "RAW_CLI_ENFORCEMENT_GAP",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "PARTIALLY_ENFORCED",
+      "gap": [
+        "RAW_CLI_ENFORCEMENT_GAP without commit hook"
+      ],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "PROMPT_ONLY",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "BLOCKED",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "status_read",
+      "contract_policy": "ALLOW",
+      "approval_class": "ALLOW",
+      "validator_ref": [],
+      "current_enforcement_path": "",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "NOT_APPLICABLE",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "NOT_APPLICABLE",
+      "gap": [],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "NOT_APPLICABLE",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "diff_read",
+      "contract_policy": "ALLOW",
+      "approval_class": "ALLOW",
+      "validator_ref": [],
+      "current_enforcement_path": "",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "NOT_APPLICABLE",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "NOT_APPLICABLE",
+      "gap": [],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "NOT_APPLICABLE",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    },
+    {
+      "action_id": "log_read",
+      "contract_policy": "ALLOW",
+      "approval_class": "ALLOW",
+      "validator_ref": [],
+      "current_enforcement_path": "",
+      "hook_connected": false,
+      "guard_connected": false,
+      "raw_cli_covered": "NOT_APPLICABLE",
+      "runtime_connected": "NOT_APPLICABLE",
+      "actual_result": "NOT_APPLICABLE",
+      "gap": [],
+      "agent_consumers": {
+        "cursor": "PROMPT_ONLY",
+        "codex": "PROMPT_ONLY",
+        "local_agent": "NOT_APPLICABLE",
+        "automation": "NOT_APPLICABLE",
+        "git_guard": "NOT_APPLICABLE",
+        "shell": "UNCONTROLLED"
+      }
+    }
+  ],
+  "changes_made": [
+    "tools/git_guard/configs/ai-agent.pre-push.json: forbid_actions + force_push_with_lease",
+    "tools/git_guard/configs/ai-agent.pre-commit.json: forbid_actions + force_push_with_lease",
+    "ai_tool/policy/git_governance_enforcement.py (audit + validate)",
+    "ai_tool/policy/git_governance.json: force_push_with_lease validator_binding note",
+    "tests/tools/test_git_guard_governance_alignment.py"
+  ],
+  "changes_not_made": [
+    "D:/AI-Agent/.git/hooks/*",
+    "tools/git_guard/guard.py",
+    "GoalContract / TaskRuntime / AUTO_COMMIT_ALLOWED runtime",
+    "Cursor User Rules",
+    "Git CLI wrapper / shell interception"
+  ],
+  "raw_cli_gaps": [
+    "amend",
+    "force_push",
+    "force_push_with_lease",
+    "reset_hard",
+    "clean",
+    "rebase",
+    "worktree_remove",
+    "branch_delete",
+    "stash",
+    "merge_to_main"
+  ]
+}

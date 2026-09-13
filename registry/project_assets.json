@@ -1,0 +1,1358 @@
+{
+  "schema_version": "1",
+  "registry_role": "project_governance_registry",
+  "note": "Records last verified governance asset state and freshness. Not live repository truth.",
+  "human_view_path": "docs/SYSTEM_ASSET_INDEX.md",
+  "assets": [
+    {
+      "asset_id": "policy_manifest",
+      "name": "Development Policy Manifest",
+      "path": "ai_tool/policy/development_policy.json",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Policy",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/policy/development_policy.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex",
+        "local_agent"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_tests": [
+        "tests/ai_tool/policy/test_development_policy.py",
+        "tests/ai_tool/policy/test_policy_distribution.py"
+      ],
+      "related_validators": [
+        "ai_tool/policy/loader.py",
+        "ai_tool/policy/evaluate.py",
+        "ai_tool/policy/enforce.py"
+      ],
+      "related_policies": [
+        "dev_test_policy"
+      ],
+      "related_assets": [
+        "system_asset_index_view",
+        "git_governance_contract"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "project_asset_registry_reconciliation_20260912",
+        "verification_id": "ve_20260911T214158248025Z_policy_manifest",
+        "evidence_ref": "reports/verification_evidence/asset_policy_manifest.json"
+      },
+      "notes": "Machine contract; prose in canonical_files."
+    },
+    {
+      "asset_id": "dev_test_policy",
+      "name": "Development Test Policy",
+      "path": "docs/DEVELOPMENT_TEST_POLICY.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Policy",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "docs/DEVELOPMENT_TEST_POLICY.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "GUIDANCE",
+      "related_policies": [
+        "policy_manifest"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214156054379Z_dev_test_policy",
+        "evidence_ref": "reports/verification_evidence/asset_dev_test_policy.json"
+      }
+    },
+    {
+      "asset_id": "session_start_policy",
+      "name": "AI Development Session Start Policy",
+      "path": "docs/AI_DEVELOPMENT_SESSION_START_POLICY.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Policy",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "docs/AI_DEVELOPMENT_SESSION_START_POLICY.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "GUIDANCE",
+      "related_assets": [
+        "session_start_skill"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214159544290Z_session_start_policy",
+        "evidence_ref": "reports/verification_evidence/asset_session_start_policy.json"
+      }
+    },
+    {
+      "asset_id": "git_operation_policy",
+      "name": "Git Operation Policy",
+      "path": "docs/GIT_OPERATION_POLICY.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Policy",
+      "status": "DOCUMENT_ONLY",
+      "source_of_truth": "docs/GIT_OPERATION_POLICY.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human",
+        "cursor",
+        "codex",
+        "local_agent"
+      ],
+      "enforcement_level": "DOCUMENTATION",
+      "related_assets": [
+        "git_governance_contract",
+        "git_guard",
+        "git_hooks_deployment"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "git_governance_post_g6_closure_reverify",
+        "verification_id": "ve_20260911T222954161590Z_git_operation_policy",
+        "evidence_ref": "reports/verification_evidence/asset_git_operation_policy.json"
+      },
+      "notes": "Semantic Source of Truth for Git (human prose). Machine contract: git_governance_contract."
+    },
+    {
+      "asset_id": "git_governance_contract",
+      "name": "Git Governance Machine Contract",
+      "path": "ai_tool/policy/git_governance.json",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Schema / Contract",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/policy/git_governance.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex",
+        "local_agent"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_tests": [
+        "tests/ai_tool/policy/test_git_governance.py",
+        "tests/ai_tool/policy/test_git_governance_adapters.py",
+        "tests/ai_tool/policy/test_git_governance_drift.py",
+        "tests/tools/test_git_guard_governance_alignment.py"
+      ],
+      "related_policies": [
+        "git_operation_policy",
+        "policy_manifest"
+      ],
+      "related_assets": [
+        "git_guard",
+        "git_governance_cursor_adapter"
+      ],
+      "freshness_dependencies": [
+        {
+          "kind": "asset_id",
+          "asset_id": "git_operation_policy"
+        }
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "git_governance_post_g6_closure_reverify",
+        "verification_id": "ve_20260911T222954161590Z_git_governance_contract",
+        "evidence_ref": "reports/verification_evidence/asset_git_governance_contract.json"
+      },
+      "notes": "contract_version 2026-09-12.3. G5 verdict CONSISTENT_WITH_KNOWN_GAPS. known_enforcement_gaps: commit authorization, amend, amend_after_hook_failure, clean, rebase, worktree_remove, branch_delete, merge_to_main."
+    },
+    {
+      "asset_id": "git_governance_cursor_adapter",
+      "name": "Git Governance Cursor Adapter",
+      "path": ".cursor/rules/git-governance-adapter.mdc",
+      "scope": [
+        "REPOSITORY",
+        "CURSOR"
+      ],
+      "category": "Cursor Rule",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/policy/git_governance.json (adapter reference; not semantic substitute)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor"
+      ],
+      "enforcement_level": "PROMPT_CONSTRAINT",
+      "related_policies": [
+        "git_operation_policy"
+      ],
+      "related_assets": [
+        "git_governance_contract"
+      ],
+      "freshness_dependencies": [
+        {
+          "kind": "asset_id",
+          "asset_id": "git_governance_contract"
+        }
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "git_governance_post_g6_closure_reverify",
+        "verification_id": "ve_20260911T222954161590Z_git_governance_cursor_adapter",
+        "evidence_ref": "reports/verification_evidence/asset_git_governance_cursor_adapter.json"
+      },
+      "notes": "Host User Rules remain HOST_ADAPTER_NOT_VERIFIED; see docs/adapters/GIT_GOVERNANCE_CURSOR_HOST.md"
+    },
+    {
+      "asset_id": "project_spec",
+      "name": "Project Origin Spec",
+      "path": "PROJECT_SPEC.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Project Rule",
+      "status": "DOCUMENT_ONLY",
+      "source_of_truth": "PROJECT_SPEC.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human"
+      ],
+      "enforcement_level": "DOCUMENTATION",
+      "related_assets": [
+        "concept_definitions"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214247749177Z_project_spec",
+        "evidence_ref": "reports/verification_evidence/asset_project_spec.json"
+      }
+    },
+    {
+      "asset_id": "concept_definitions",
+      "name": "Concept Definitions",
+      "path": "docs/concepts/CONCEPT_DEFINITIONS.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Project Rule",
+      "status": "PROVISIONAL",
+      "source_of_truth": "docs/concepts/CONCEPT_DEFINITIONS.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex",
+        "local_agent"
+      ],
+      "enforcement_level": "GUIDANCE",
+      "related_policies": [
+        "policy_manifest"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214155825674Z_concept_definitions",
+        "evidence_ref": "reports/verification_evidence/asset_concept_definitions.json"
+      }
+    },
+    {
+      "asset_id": "cursor_dev_rule",
+      "name": "Agent Development Policy (Cursor)",
+      "path": ".cursor/rules/agent-development-policy.mdc",
+      "scope": [
+        "REPOSITORY",
+        "CURSOR"
+      ],
+      "category": "Cursor Rule",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/policy/development_policy.json (adapter; not prose canonical)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor"
+      ],
+      "enforcement_level": "PROMPT_CONSTRAINT",
+      "related_policies": [
+        "policy_manifest"
+      ],
+      "related_assets": [
+        "policy_manifest"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214247530080Z_cursor_dev_rule",
+        "evidence_ref": "reports/verification_evidence/asset_cursor_dev_rule.json"
+      },
+      "notes": "alwaysApply: true observed in session."
+    },
+    {
+      "asset_id": "skill_namespace_compat_rule",
+      "name": "Skill Namespace Compatibility Adapter",
+      "path": ".cursor/rules/skill-namespace-compat.mdc",
+      "scope": [
+        "REPOSITORY",
+        "CURSOR"
+      ],
+      "category": "Cursor Rule",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "registry/skills.json alias_index",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor"
+      ],
+      "enforcement_level": "PROMPT_CONSTRAINT",
+      "related_assets": [
+        "skills_registry"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214248077968Z_skill_namespace_compat_rule",
+        "evidence_ref": "reports/verification_evidence/asset_skill_namespace_compat_rule.json"
+      }
+    },
+    {
+      "asset_id": "cursor_user_rules",
+      "name": "Cursor User Rules (Settings)",
+      "scope": [
+        "HOST",
+        "EXTERNAL"
+      ],
+      "category": "Cursor Rule",
+      "status": "UNKNOWN",
+      "source_of_truth": "NOT_OBSERVED (Cursor Settings; not in repository)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor"
+      ],
+      "enforcement_level": "PROMPT_CONSTRAINT",
+      "related_assets": [
+        "git_governance_contract"
+      ],
+      "verification": {
+        "freshness": "UNKNOWN",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_session_prompt_observation",
+        "stale_reason": "Repository path NOT_OBSERVED; HOST_ADAPTER_NOT_VERIFIED (see docs/adapters/GIT_GOVERNANCE_CURSOR_HOST.md)"
+      },
+      "notes": "G5/G6: Host Git rules are not verified from repository CI."
+    },
+    {
+      "asset_id": "codex_adapter",
+      "name": "AGENTS.md Policy Adapter",
+      "path": "AGENTS.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Adapter",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/policy/development_policy.json distribution.consumers.codex",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "codex"
+      ],
+      "enforcement_level": "GUIDANCE",
+      "related_assets": [
+        "policy_manifest"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214247417143Z_codex_adapter",
+        "evidence_ref": "reports/verification_evidence/asset_codex_adapter.json"
+      }
+    },
+    {
+      "asset_id": "project_assets_registry",
+      "name": "Project Governance Asset Registry",
+      "path": "registry/project_assets.json",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Registry",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "registry/project_assets.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human",
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_tests": [
+        "tests/registry/test_project_assets.py"
+      ],
+      "related_validators": [
+        "registry/schema/project_assets.schema.json"
+      ],
+      "related_assets": [
+        "system_asset_index_view"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "project_asset_registry_reconciliation_20260912",
+        "verification_id": "ve_20260911T222631903131Z_project_assets_registry",
+        "evidence_ref": "reports/verification_evidence/asset_project_assets_registry.json"
+      }
+    },
+    {
+      "asset_id": "skills_registry",
+      "name": "Dev Skill Registry",
+      "path": "registry/skills.json",
+      "scope": [
+        "REPOSITORY",
+        "CURSOR"
+      ],
+      "category": "Registry",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "registry/skills.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_tests": [
+        "tests/registry/test_skills_registry.py"
+      ],
+      "related_validators": [
+        "registry/schema/skills.schema.json"
+      ],
+      "related_assets": [
+        "dev_skill_registry_bundle"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214159652884Z_skills_registry",
+        "evidence_ref": "reports/verification_evidence/asset_skills_registry.json"
+      }
+    },
+    {
+      "asset_id": "tools_registry",
+      "name": "Tool Registry",
+      "path": "registry/tools.json",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Registry",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "registry/tools.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "local_agent",
+        "production_runtime"
+      ],
+      "enforcement_level": "ENFORCED",
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214200684262Z_tools_registry",
+        "evidence_ref": "reports/verification_evidence/asset_tools_registry.json"
+      }
+    },
+    {
+      "asset_id": "models_registry",
+      "name": "Models Registry",
+      "path": "registry/models.json",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Registry",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "registry/models.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "local_agent"
+      ],
+      "enforcement_level": "VALIDATED",
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214157440093Z_models_registry",
+        "evidence_ref": "reports/verification_evidence/asset_models_registry.json"
+      }
+    },
+    {
+      "asset_id": "policy_audit_registry",
+      "name": "Policy Audit Certificate Index",
+      "path": "docs/policy_audit_registry.json",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Registry",
+      "status": "GENERATED",
+      "source_of_truth": "docs/policy_audit_registry.json (index only; not policy canonical)",
+      "generated_or_manual": "generated",
+      "consumers": [
+        "human"
+      ],
+      "enforcement_level": "DOCUMENTATION",
+      "related_validators": [
+        "ai_tool/policy/generic_policy_rules.json"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214157559143Z_policy_audit_registry",
+        "evidence_ref": "reports/verification_evidence/asset_policy_audit_registry.json"
+      }
+    },
+    {
+      "asset_id": "goal_handoff_spec",
+      "name": "Goal Handoff v0",
+      "path": "docs/specs/GOAL_HANDOFF_V0.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Schema / Contract",
+      "status": "PROVISIONAL",
+      "source_of_truth": "docs/specs/GOAL_HANDOFF_V0.md + registry/schema/goal_handoff.schema.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_tests": [
+        "tests/registry/test_skills_registry.py"
+      ],
+      "related_assets": [
+        "skills_registry"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214157079343Z_goal_handoff_spec",
+        "evidence_ref": "reports/verification_evidence/asset_goal_handoff_spec.json"
+      }
+    },
+    {
+      "asset_id": "precondition_contract",
+      "name": "Precondition Contract",
+      "path": "registry/schema/precondition_contract.schema.json",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Schema / Contract",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "registry/schema/precondition_contract.schema.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_tests": [
+        "tests/ai_tool/test_precondition_contract.py"
+      ],
+      "related_validators": [
+        "ai_tool/precondition_contract.py"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214159197161Z_precondition_contract",
+        "evidence_ref": "reports/verification_evidence/asset_precondition_contract.json"
+      }
+    },
+    {
+      "asset_id": "goal_completion_gate",
+      "name": "Goal Completion Gate v0",
+      "path": "docs/GOAL_COMPLETION_GATE_V0.md",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Guard / Gate",
+      "status": "PROVISIONAL",
+      "source_of_truth": "docs/GOAL_COMPLETION_GATE_V0.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_validators": [
+        "ai_tool/chat_interface/goal_completion_gate.py"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214156845883Z_goal_completion_gate",
+        "evidence_ref": "reports/verification_evidence/asset_goal_completion_gate.json"
+      }
+    },
+    {
+      "asset_id": "git_guard",
+      "name": "Git Guard",
+      "path": "tools/git_guard/guard.py",
+      "scope": [
+        "REPOSITORY",
+        "EXTERNAL"
+      ],
+      "category": "Guard / Gate",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "tools/git_guard/POLICY.md + configs",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "local_agent",
+        "human"
+      ],
+      "enforcement_level": "ENFORCED",
+      "related_policies": [
+        "git_operation_policy",
+        "git_governance_contract"
+      ],
+      "related_validators": [
+        "tools/git_guard/guard.py"
+      ],
+      "related_assets": [
+        "git_hooks_deployment"
+      ],
+      "freshness_dependencies": [
+        {
+          "kind": "asset_id",
+          "asset_id": "git_governance_contract"
+        },
+        {
+          "kind": "path",
+          "path": "tools/git_guard/configs/ai-agent.pre-commit.json"
+        },
+        {
+          "kind": "path",
+          "path": "tools/git_guard/configs/ai-agent.pre-push.json"
+        }
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T22:29:55.918052+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "git_governance_post_g6_closure_reverify",
+        "verification_id": "ve_20260911T222954161590Z_git_guard",
+        "evidence_ref": "reports/verification_evidence/asset_git_guard.json"
+      },
+      "notes": "Validator/Gate only (not Git Governance semantic SoT). ENFORCED on guard action path + hook-invoked checks; not full agent CLI coverage."
+    },
+    {
+      "asset_id": "git_hooks_deployment",
+      "name": "Git Hooks Deployment (shared .git)",
+      "path": "tools/git_guard/DEPLOYED.md",
+      "scope": [
+        "EXTERNAL"
+      ],
+      "category": "Guard / Gate",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "tools/git_guard/DEPLOYED.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human",
+        "local_agent"
+      ],
+      "enforcement_level": "ENFORCED",
+      "related_assets": [
+        "git_guard"
+      ],
+      "freshness_dependencies": [
+        {
+          "kind": "asset_id",
+          "asset_id": "git_guard"
+        },
+        {
+          "kind": "path",
+          "path": "tools/git_guard/DEPLOYED.md"
+        }
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T22:29:57.086969+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "git_governance_post_g6_closure_reverify",
+        "verification_id": "ve_20260911T222954161590Z_git_hooks_deployment",
+        "evidence_ref": "reports/verification_evidence/asset_git_hooks_deployment.json"
+      },
+      "notes": "Physical hooks: D:\\AI-Agent\\.git\\hooks\\pre-commit and pre-push (thin adapter → worktree tools/git_guard). Not modified in G4–G6."
+    },
+    {
+      "asset_id": "policy_loader",
+      "name": "Development Policy Loader",
+      "path": "ai_tool/policy/loader.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/policy/loader.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "local_agent"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_tests": [
+        "tests/ai_tool/policy/test_policy_distribution.py"
+      ],
+      "related_assets": [
+        "policy_manifest"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214158021349Z_policy_loader",
+        "evidence_ref": "reports/verification_evidence/asset_policy_loader.json"
+      }
+    },
+    {
+      "asset_id": "policy_enforce",
+      "name": "Final Answer Policy Enforce",
+      "path": "ai_tool/policy/enforce.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/policy/enforce.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "local_agent"
+      ],
+      "enforcement_level": "ENFORCED",
+      "related_tests": [
+        "tests/ai_tool/policy/test_development_policy.py"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214157798471Z_policy_enforce",
+        "evidence_ref": "reports/verification_evidence/asset_policy_enforce.json"
+      },
+      "notes": "agent.py final answer path only; Chat run_chat_turn NOT_CONNECTED per TDA."
+    },
+    {
+      "asset_id": "task_execution_guard",
+      "name": "Task Execution Guard",
+      "path": "ai_tool/task_execution_guard.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/task_execution_guard.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "ENFORCED",
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214200573507Z_task_execution_guard",
+        "evidence_ref": "reports/verification_evidence/asset_task_execution_guard.json"
+      }
+    },
+    {
+      "asset_id": "stage7_live_safety_rule",
+      "name": "Live Execution Safety Rule (Stage 7 experiment)",
+      "scope": [
+        "EXPERIMENT"
+      ],
+      "category": "Safety Rule",
+      "status": "LEGACY",
+      "source_of_truth": "NOT_OBSERVED in repository (historical: runs/tetris_goal_recursive_convergence_v0/20260911T133046Z_tetris_fresh_production/stage7/LIVE_EXECUTION_SAFETY_RULE.json)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "experiment_harness"
+      ],
+      "enforcement_level": "NOT_CONNECTED",
+      "related_assets": [
+        "stage7_spawn_authorization"
+      ],
+      "verification": {
+        "freshness": "STALE",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "project_asset_registry_reconciliation_20260912",
+        "stale_reason": "Run artifact path not present in git tree at 1536cc2; registry aligned to committed baseline."
+      },
+      "notes": " EPHEMERAL_RUN; do not require runs/ path on disk for governance registry."
+    },
+    {
+      "asset_id": "stage7_spawn_authorization",
+      "name": "Spawn Authorization (Stage 7 experiment)",
+      "scope": [
+        "EXPERIMENT"
+      ],
+      "category": "Guard / Gate",
+      "status": "LEGACY",
+      "source_of_truth": "NOT_OBSERVED in repository (historical: runs/tetris_goal_recursive_convergence_v0/20260911T133046Z_tetris_fresh_production/stage7/spawn_authorization.py)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "experiment_harness"
+      ],
+      "enforcement_level": "NOT_CONNECTED",
+      "related_assets": [
+        "stage7_live_safety_rule"
+      ],
+      "verification": {
+        "freshness": "STALE",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "project_asset_registry_reconciliation_20260912",
+        "stale_reason": "Run artifact path not present in git tree at 1536cc2; registry aligned to committed baseline."
+      },
+      "notes": " EPHEMERAL_RUN; do not require runs/ path on disk for governance registry."
+    },
+    {
+      "asset_id": "session_start_skill",
+      "name": "Session Start Skill",
+      "path": ".agents/skills/session-start/SKILL.md",
+      "scope": [
+        "REPOSITORY",
+        "CURSOR"
+      ],
+      "category": "Skill",
+      "status": "PROVISIONAL",
+      "source_of_truth": ".agents/skills/session-start/SKILL.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "GUIDANCE",
+      "related_policies": [
+        "session_start_policy"
+      ],
+      "related_assets": [
+        "skills_registry"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "verification_id": "ve_20260911T214247860053Z_session_start_skill",
+        "evidence_ref": "reports/verification_evidence/asset_session_start_skill.json"
+      }
+    },
+    {
+      "asset_id": "dev_skill_registry_bundle",
+      "name": "Dev Skill Registry / Goal Handoff (bundle)",
+      "path": "registry/skills.json",
+      "scope": [
+        "REPOSITORY",
+        "CURSOR"
+      ],
+      "category": "Skill",
+      "status": "PROVISIONAL",
+      "source_of_truth": "registry/skills.json",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "NOT_CONNECTED",
+      "related_tests": [
+        "tests/registry/test_skills_registry.py"
+      ],
+      "related_assets": [
+        "goal_handoff_spec",
+        "skills_registry"
+      ],
+      "verification": {
+        "freshness": "POSSIBLY_STALE",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "migrated_from_system_asset_index_v1",
+        "stale_reason": "Prior index dated 2026-09-10; runtime_connected flags not re-measured."
+      }
+    },
+    {
+      "asset_id": "cursor_host_skills",
+      "name": "Cursor Host Skills",
+      "scope": [
+        "HOST",
+        "EXTERNAL"
+      ],
+      "category": "Skill",
+      "status": "UNKNOWN",
+      "source_of_truth": "NOT_OBSERVED in repository (~/.cursor/skills-cursor/)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "cursor"
+      ],
+      "enforcement_level": "GUIDANCE",
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "cursor_development_governance_audit_read_only",
+        "stale_reason": "Host path observed on disk; not versioned in repo."
+      }
+    },
+    {
+      "asset_id": "system_asset_index_view",
+      "name": "SYSTEM_ASSET_INDEX (human view)",
+      "path": "docs/SYSTEM_ASSET_INDEX.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Index",
+      "status": "GENERATED",
+      "source_of_truth": "registry/project_assets.json",
+      "generated_or_manual": "generated",
+      "consumers": [
+        "human",
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "DOCUMENTATION",
+      "related_validators": [
+        "tools/generate_system_asset_index.py"
+      ],
+      "related_assets": [
+        "project_assets_registry"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "project_asset_registry_reconciliation_20260912",
+        "verification_id": "ve_20260911T222631559616Z_system_asset_index_view",
+        "evidence_ref": "reports/verification_evidence/asset_system_asset_index_view.json"
+      }
+    },
+    {
+      "asset_id": "current_dev_state",
+      "name": "Current Development State",
+      "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Index",
+      "status": "DOCUMENT_ONLY",
+      "source_of_truth": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human",
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "DOCUMENTATION",
+      "verification": {
+        "freshness": "POSSIBLY_STALE",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "migrated_from_system_asset_index_v1",
+        "stale_reason": "Contains 2026-09-04 checkpoint history mixed with追記."
+      }
+    },
+    {
+      "asset_id": "governance_audit_v3",
+      "name": "Safety Rule Application Audit v3 (artifact)",
+      "scope": [
+        "EXPERIMENT"
+      ],
+      "category": "Audit",
+      "status": "LEGACY",
+      "source_of_truth": "NOT_OBSERVED in repository (historical: runs/tetris_goal_recursive_convergence_v0/20260911T133046Z_tetris_fresh_production/stage7/output/stage7b/SAFETY_RULE_APPLICATION_AUDIT_V3.json)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human"
+      ],
+      "enforcement_level": "NOT_CONNECTED",
+      "related_assets": [
+        "stage7_live_safety_rule"
+      ],
+      "verification": {
+        "freshness": "STALE",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "project_asset_registry_reconciliation_20260912",
+        "stale_reason": "Run artifact path not present in git tree at 1536cc2; registry aligned to committed baseline."
+      },
+      "notes": " EPHEMERAL_RUN; do not require runs/ path on disk for governance registry."
+    },
+    {
+      "asset_id": "grill_human_v0",
+      "name": "Grill v0 (human-facing)",
+      "path": "docs/GRILL_V0.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Policy",
+      "status": "PROVISIONAL",
+      "source_of_truth": "docs/GRILL_V0.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human"
+      ],
+      "enforcement_level": "DOCUMENTATION",
+      "verification": {
+        "freshness": "POSSIBLY_STALE",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "migrated_from_system_asset_index_v1"
+      }
+    },
+    {
+      "asset_id": "grill_observation_v0",
+      "name": "Grill Observation Research v0",
+      "path": "research/grill_observation_v0",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Harness",
+      "status": "PROVISIONAL",
+      "source_of_truth": "research/grill_observation_v0/ (per-run specs)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human"
+      ],
+      "enforcement_level": "NOT_CONNECTED",
+      "verification": {
+        "freshness": "POSSIBLY_STALE",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "migrated_from_system_asset_index_v1"
+      }
+    },
+    {
+      "asset_id": "test_improvement_loop",
+      "name": "Test Improvement Loop v0",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Harness",
+      "status": "LEGACY",
+      "source_of_truth": "NOT_OBSERVED in current worktree (historical: research/test_improvement_loop/V0_FREEZE.md)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human"
+      ],
+      "enforcement_level": "NOT_CONNECTED",
+      "verification": {
+        "freshness": "STALE",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "migrated_from_system_asset_index_v1",
+        "stale_reason": "v1 index path not present in worktree at verified_revision (research/ subtree absent on disk)"
+      },
+      "notes": " Canonical path from SYSTEM_ASSET_INDEX v1; file NOT_OBSERVED in current worktree."
+    },
+    {
+      "asset_id": "local_llm_human_judge_proxy",
+      "name": "Local LLM Human-Judge Proxy v0",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Harness",
+      "status": "LEGACY",
+      "source_of_truth": "NOT_OBSERVED in current worktree (historical: research/llm_benchmarks/h4_decision_maker_bench/HUMAN_JUDGE_PROXY_V0.md)",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human"
+      ],
+      "enforcement_level": "NOT_CONNECTED",
+      "verification": {
+        "freshness": "STALE",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "migrated_from_system_asset_index_v1",
+        "stale_reason": "v1 index path not present in worktree at verified_revision (research/ subtree absent on disk)"
+      },
+      "notes": " Canonical path from SYSTEM_ASSET_INDEX v1; file NOT_OBSERVED in current worktree."
+    },
+    {
+      "asset_id": "diagnostic_framework_index",
+      "name": "Diagnostic Framework Index",
+      "path": "docs/diagnostic_framework/INDEX.md",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Index",
+      "status": "LEGACY",
+      "source_of_truth": "docs/diagnostic_framework/INDEX.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human"
+      ],
+      "enforcement_level": "DOCUMENTATION",
+      "verification": {
+        "freshness": "UNKNOWN",
+        "last_verified_at": "2026-09-11T21:19:00+09:00",
+        "verified_revision": "763f8c8e865130c165198696de4d2ab957d9ddfd",
+        "verification_method": "not_reverified_in_governance_audit"
+      }
+    },
+    {
+      "asset_id": "project_asset_verifier",
+      "name": "Project Asset Verification Tool",
+      "path": "tools/project_asset_verification.py",
+      "scope": [
+        "REPOSITORY"
+      ],
+      "category": "Guard / Gate",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "tools/project_asset_verification.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "human",
+        "cursor",
+        "codex"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_assets": [
+        "project_assets_registry"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "project_asset_registry_reconciliation_20260912"
+      }
+    },
+    {
+      "asset_id": "pipeline_observations",
+      "name": "Pipeline Observer Budget",
+      "path": "ai_tool/pipeline_observations.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/pipeline_observations.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "ENFORCED",
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "p2a_dependency_closure_commit_1536cc2"
+      },
+      "notes": "Registered at P2a dependency closure; agent_turn import dependency (not Requirement Architecture dependency)."
+    },
+    {
+      "asset_id": "p2a_progress_classification_v0",
+      "name": "Progress Classification v0 (P2a)",
+      "path": "ai_tool/chat_interface/progress_classification_v0.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/chat_interface/progress_classification_v0.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "ENFORCED",
+      "related_tests": [
+        "tests/ai_tool/chat_interface/test_progress_classification_v0.py"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "p2a_dependency_closure_commit_1536cc2"
+      },
+      "notes": "Registered at P2a dependency closure; agent_turn import dependency (not Requirement Architecture dependency)."
+    },
+    {
+      "asset_id": "p2a_progress_classification_shadow",
+      "name": "Progress Classification Shadow (P2a)",
+      "path": "ai_tool/chat_interface/progress_classification_shadow.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/chat_interface/progress_classification_shadow.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "ENFORCED",
+      "related_tests": [
+        "tests/ai_tool/chat_interface/test_progress_classification_shadow.py"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "p2a_dependency_closure_commit_1536cc2"
+      },
+      "notes": "Registered at P2a dependency closure; agent_turn import dependency (not Requirement Architecture dependency)."
+    },
+    {
+      "asset_id": "p2a_agent_stop_control",
+      "name": "Agent Stop Control (P2a)",
+      "path": "ai_tool/chat_interface/agent_stop_control.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/chat_interface/agent_stop_control.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "ENFORCED",
+      "related_tests": [
+        "tests/ai_tool/chat_interface/test_agent_stop_control.py"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "p2a_dependency_closure_commit_1536cc2"
+      },
+      "notes": "Registered at P2a dependency closure; agent_turn import dependency (not Requirement Architecture dependency)."
+    },
+    {
+      "asset_id": "p2a_semantic_stagnation_warning",
+      "name": "Semantic Stagnation Warning (P2a)",
+      "path": "ai_tool/chat_interface/semantic_stagnation_warning.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/chat_interface/semantic_stagnation_warning.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "ENFORCED",
+      "related_tests": [
+        "tests/ai_tool/chat_interface/test_semantic_stagnation_warning.py"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "p2a_dependency_closure_commit_1536cc2"
+      },
+      "notes": "Registered at P2a dependency closure; agent_turn import dependency (not Requirement Architecture dependency)."
+    },
+    {
+      "asset_id": "p2a_state_cycle_detection_v0",
+      "name": "State Cycle Detection v0 (P2a)",
+      "path": "ai_tool/chat_interface/state_cycle_detection_v0.py",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Runtime Guard",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "ai_tool/chat_interface/state_cycle_detection_v0.py",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "ENFORCED",
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "p2a_dependency_closure_commit_1536cc2"
+      },
+      "notes": "Registered at P2a dependency closure; agent_turn import dependency (not Requirement Architecture dependency)."
+    },
+    {
+      "asset_id": "human_requirement_resolution_wedge",
+      "name": "Human Requirement Resolution Wedge",
+      "path": "reports/HUMAN_REQUIREMENT_RESOLUTION_ARCHITECTURE.md",
+      "scope": [
+        "REPOSITORY",
+        "PRODUCTION"
+      ],
+      "category": "Guard / Gate",
+      "status": "IMPLEMENTED",
+      "source_of_truth": "reports/HUMAN_REQUIREMENT_RESOLUTION_ARCHITECTURE.md",
+      "generated_or_manual": "manual",
+      "consumers": [
+        "production_runtime"
+      ],
+      "enforcement_level": "VALIDATED",
+      "related_validators": [
+        "ai_tool/chat_interface/requirement_resolution.py",
+        "ai_tool/chat_interface/requirement_resolution_grill.py"
+      ],
+      "related_tests": [
+        "tests/ai_tool/chat_interface/test_requirement_resolution_wedge.py",
+        "tests/ai_tool/chat_interface/test_goal_continuation_requirement_gate.py"
+      ],
+      "verification": {
+        "freshness": "VERIFIED",
+        "last_verified_at": "2026-09-12T03:20:00+00:00",
+        "verified_revision": "1536cc2a2e5ea4c7735749eda787e206198e4f50",
+        "verification_method": "project_asset_registry_reconciliation_20260912"
+      }
+    }
+  ]
+}

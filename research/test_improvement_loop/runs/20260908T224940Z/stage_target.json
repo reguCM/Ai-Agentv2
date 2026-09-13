@@ -1,0 +1,523 @@
+{
+  "summary": {
+    "n": 17,
+    "ids": [
+      "Q9",
+      "Q25",
+      "Q29",
+      "Q14-15",
+      "Q30",
+      "Q7",
+      "Q10",
+      "Q40",
+      "Q47",
+      "Q1",
+      "Q28",
+      "Q2",
+      "Q31",
+      "Q36",
+      "Q8",
+      "Q16",
+      "Q27"
+    ],
+    "AUTO": 9,
+    "REVIEW": 8,
+    "HUMAN": 0,
+    "auto_ids": [
+      "Q29",
+      "Q30",
+      "Q10",
+      "Q40",
+      "Q47",
+      "Q1",
+      "Q8",
+      "Q16",
+      "Q27"
+    ],
+    "review_ids": [
+      "Q9",
+      "Q25",
+      "Q14-15",
+      "Q7",
+      "Q28",
+      "Q2",
+      "Q31",
+      "Q36"
+    ],
+    "human_ids": [],
+    "semantic_dangerous_count": 2,
+    "parse_failure": 0,
+    "missing_output": 0,
+    "false_auto": 0,
+    "false_auto_ids": []
+  },
+  "records": [
+    {
+      "decision_id": "Q9",
+      "first_recommendation": "Keep registry_read and generic file keywords strictly separate. Use look_first path metadata to trigger registry_read only when the request explicitly references registry-specific paths (e.g., registry/tools.json).",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "unresolved_artifact_or_api_adjustment"
+      ],
+      "attributes": [
+        "compatibility",
+        "safety"
+      ],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 75,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "汎用 file→prefer read。registry_read は look_first 等。keyword でマージしない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q25",
+      "first_recommendation": "Stop silent read of look_first[0]. Require path for file-read next_action.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "safety_behavior_change_unverified"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "read next_action は path 根拠のみ。look_first[0] 黙読廃止。テストを緑にするため戻さない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q29",
+      "first_recommendation": "Skip next_action if search_files has no query. Do not use text[:80].",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "search text[:80] 禁止。query 機械抽出できなければ next_action なし。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q14-15",
+      "first_recommendation": "Reject selecting among 2+ Help-confirmed candidates by index [0]. For single candidates, select and mark RESOLVED. For multiple candidates, leave unresolved (status=AMBIGUOUS) unless a non-index-based disambiguation rule exists in registry/tools.json.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "unresolved_artifact_or_api_adjustment"
+      ],
+      "attributes": [
+        "compatibility",
+        "safety"
+      ],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 45,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "selected はちょうど1。2+=CANDIDATES_AVAILABLE。[0] ranking しない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q30",
+      "first_recommendation": "Allow pathless '.' for list_files as residual. Do not enforce path requirement during H4 Core.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": false,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "list は selected 時 '.' 可。Residual として明記。Core 中に Q25 同型へ黙って変えない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q7",
+      "first_recommendation": "Keep single API per capability. Allow 0/1/2+ results but return them as a flat list without folding. Do not delete singular APIs.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "api_cardinality_not_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility",
+        "destructive",
+        "irreversible"
+      ],
+      "need_human": false,
+      "needs_deep_review": false,
+      "uncertainty": 15,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "複数形が正本。単数は 0/1/2+エラー。削除しない。常に first に折らない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q10",
+      "first_recommendation": "Remove _RULES from capability core. Avoid allowlist growth.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 30,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "_RULES を正本から外す。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q40",
+      "first_recommendation": "Reject expansion of exclusion rules beyond file-based contexts (e.g., GPU). Maintain strict alignment with Q25-Q26 (read-only look_first signals) and Q30 (list '.' residual).",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": true,
+      "needs_deep_review": true,
+      "uncertainty": 70,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "日本語一致は A のまま。除外を file 以外に広げない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q47",
+      "first_recommendation": "Do not delete leftovers. Keep residuals for Core completion.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility",
+        "destructive",
+        "irreversible"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 10,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "leftover を削除しない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q1",
+      "first_recommendation": "Close H4 Core at capability resolution, gap detection, and sandbox judgment. Do not include full product features like Help English search, UI, or detect_tool_gap internals.",
+      "semantic_gate": "UNKNOWN",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "destructive",
+        "irreversible",
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 10,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "範囲は選択/Gap/expectation/read-only bridge/Sandbox判断。製品全体は含めない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q28",
+      "first_recommendation": "Keep _VERIFIED_ROUTES in capability core. Separate from Index routes.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "canonical_code_table_keep_not_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "_VERIFIED_ROUTES を capability 正本から外す。概念層は残す。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q2",
+      "first_recommendation": "Add web/gpu/cpu as semantic capabilities with keywords only. Do not add IDs.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "REVIEW",
+      "notes": [
+        "decision_polarity_not_closed"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "web/gpu/cpu を Index に semantic capability として足す。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q31",
+      "first_recommendation": "Inject only [0] next_action. Inject none if multiple.",
+      "semantic_gate": "FAIL",
+      "semantic_dangerous": [
+        {
+          "rule_id": "cardinality_index_or_head_select",
+          "kind": "known_wrong",
+          "forbidden": "Selecting, injecting, or resolving among 2+ candidates by list index [0], first, or head without a unique non-index reason."
+        }
+      ],
+      "route": "REVIEW",
+      "notes": [
+        "semantic_fail_contract_recheck"
+      ],
+      "attributes": [
+        "safety"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [
+          "adopts_danger_if"
+        ],
+        "danger_hits": [
+          "inject first of multiple next_action"
+        ],
+        "rejected_hits": [],
+        "adopted_contract": "next_action 2+ なら inject なし。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q36",
+      "first_recommendation": "Avoid shared keywords for web/gpu/cpu. Prefer adding to web_search.",
+      "semantic_gate": "FAIL",
+      "semantic_dangerous": [
+        {
+          "rule_id": "shared_keyword_family_prefer",
+          "kind": "known_wrong",
+          "forbidden": "Confirming or preferring one capability family from a shared / cross-cutting keyword alone (for example 検索 → web_search)."
+        }
+      ],
+      "route": "REVIEW",
+      "notes": [
+        "semantic_fail_contract_recheck"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [
+          "adopts_danger_if",
+          "adopts_rejected_alternative"
+        ],
+        "danger_hits": [
+          "confirm web from 検索 alone"
+        ],
+        "rejected_hits": [
+          "片方へ prefer"
+        ],
+        "adopted_contract": "横断共有だけ（検索、使用率）では確定しない。file対象時 検索だけで web を足さない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q8",
+      "first_recommendation": "Use same inverse lookup for all Index capabilities, not just file.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 15,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "B は file 含む全 Index。file だけの file in text 特例を正本にしない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q16",
+      "first_recommendation": "Do not use _MINIMAL_TOOLS for execution selection. Keep as Gap proposal only.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "suggested は Index、実行に使わない。_MINIMAL_TOOLS で呼ばない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q27",
+      "first_recommendation": "Leave write/execution look_first in Index but have Classifier ignore it.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "destructive",
+        "irreversible"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "look_first を write 側から削除しない（無視）。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    }
+  ],
+  "llm_called": false
+}

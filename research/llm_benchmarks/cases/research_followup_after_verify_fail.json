@@ -1,0 +1,76 @@
+{
+  "id": "research_followup_after_verify_fail",
+  "note": "④ Round 2 相当を固定。前回候補は Verifier 失敗。Judge missing を受けて Research が別候補を出せるかだけを測る。search_results は実検索キャプチャを凍結（手書きの良質ヒットではない）。正解コマンドは採点しない。",
+  "source_run": "research/llm_benchmarks/research_implement_results.json 2026-08-19 verify_fail stagnation",
+  "search_results_captured_at": "2026-08-19T06:02:00Z",
+  "search_results_source": "tools.system.tool_builder.research.executor research_executor source=web",
+  "paused_benchmark": "research_implement",
+  "request": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "proposal": {
+    "name": "get_memory_status",
+    "subcategory": "memory",
+    "output": ["status"]
+  },
+  "scenario": "前回の候補は失敗した。Judge から『total physical memory is still unconfirmed』という missing を受け取った。次の Research で前回とは異なる実現方法を探せるか。",
+  "prior_round": {
+    "failed_command": {
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory,TotalPhysicalMemory | ForEach-Object { [math]::Round(($_.FreePhysicalMemory / $_.TotalPhysicalMemory) * 100) }"
+      ]
+    },
+    "error": "0 で除算しようとしました。",
+    "judge_missing": [
+      "total physical memory is still unconfirmed"
+    ],
+    "judge_reason": "The sample from the PowerShell command execution resulted in an error due to division by zero."
+  },
+  "search_queries": [
+    "powershell wmic Windows memory usage percent PowerShell",
+    "total physical memory is still unconfirmed",
+    "total physical memory is still unconfirmed Windows memory usage percent PowerShell"
+  ],
+  "used_query": "total physical memory is still unconfirmed Windows memory usage percent PowerShell",
+  "search_results": [
+    {
+      "title": "About the Exchange Online PowerShell V3 module",
+      "snippet": "About the Exchange Online PowerShell module Summarize this article for me In this article The Exchange Online PowerShell module (also known as the Exchange Online PowerShell V3 module or EXO V3 module since 2022) uses modern authentication and works with or without multifactor authentication (MFA) for connecting to all Exchange cloud-related.",
+      "url": "https://learn.microsoft.com/en-us/powershell/exchange/exchange-online-powershell-v2",
+      "backend": "learn.microsoft"
+    },
+    {
+      "title": "Protect Dev Drive using performance mode - Microsoft Defender for Endpoint",
+      "snippet": "... Select Apply, then select OK. Manage performance mode with PowerShell Use PowerShell to enable performance mode on the device: Open PowerShell as an administrator on the device. Type set-MpPreference -PerformanceModeStatus Enabled and press Enter. Verify performance mode is enabled To verify that Dev Drive and Defender Performance Mode is.",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint-antivirus-performance-mode",
+      "backend": "learn.microsoft"
+    },
+    {
+      "title": "Set up a Dev Drive on Windows 11",
+      "snippet": "Set up a Dev Drive on Windows 11 Summarize this article for me In this article Dev Drive is a new form of storage volume available to improve performance for key developer workloads. Dev Drive builds on ReFS technology to employ targeted file system optimizations and provide more control over storage volume settings and security, including trust.",
+      "url": "https://learn.microsoft.com/en-us/windows/dev-drive/",
+      "backend": "learn.microsoft"
+    },
+    {
+      "title": "Detect and Remediate RC4 Usage in Kerberos",
+      "snippet": "Detect and remediate RC4 usage in Kerberos Summarize this article for me In this article Kerberos authentication in Active Directory (AD) environments historically relied on the RC4 encryption algorithm.  ... SMB and RC4 is the only value for msDS-SupportedEncryptionTypes, an authentication failure generates a network error, as shown in the.",
+      "url": "https://learn.microsoft.com/en-us/windows-server/security/kerberos/detect-remediate-rc4-kerberos",
+      "backend": "learn.microsoft"
+    },
+    {
+      "title": "Enable memory integrity",
+      "snippet": "Enable virtualization-based protection of code integrity Summarize this article for me In this article Warning Some applications and hardware device drivers may be incompatible with memory integrity.  ...0, Windows 11, and Windows Server 2016 and higher have a WMIThis class can be queried from an elevated Windows PowerShell session by using the.",
+      "url": "https://learn.microsoft.com/en-us/windows/security/hardware-security/enable-virtualization-based-protection-of-code-integrity",
+      "backend": "learn.microsoft"
+    }
+  ],
+  "inventory": {
+    "available_commands": ["powershell", "wmic"]
+  },
+  "subject": {
+    "tool_name": "get_memory_status",
+    "subcategory": "memory"
+  }
+}

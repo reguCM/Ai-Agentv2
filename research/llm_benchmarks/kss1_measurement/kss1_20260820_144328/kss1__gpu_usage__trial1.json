@@ -1,0 +1,113 @@
+{
+  "case": "gpu_usage",
+  "trial": 1,
+  "returncode": 1,
+  "timestamp": "2026-08-20T14:52:30.677626+00:00",
+  "experiment": {
+    "AI_AGENT_EXPERIMENT_ID": "kss1_20260820_144328",
+    "AI_AGENT_EXPERIMENT_CONDITION": "kss1_obs",
+    "AI_AGENT_EXPERIMENT_TRIAL": "1",
+    "AI_AGENT_EXPERIMENT_CASE": "gpu_usage",
+    "AI_AGENT_MEMORY_RECALL": "0",
+    "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+    "AI_AGENT_MEMORY_JUDGE": "0",
+    "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+    "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+    "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+    "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+    "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+    "AI_AGENT_KSS1_OBS": "1"
+  },
+  "metrics": {
+    "pass": false,
+    "fail_stage": "proposal",
+    "error": "proposal_validation_ng",
+    "rounds": null,
+    "llm_calls": 2,
+    "usable_findings": 0,
+    "actual_headroom_min": null,
+    "headroom_gate_ok": null,
+    "context_overflow": false,
+    "kss1_obs_rounds": 0,
+    "kss1_history_events": 0,
+    "decisions_total": 0,
+    "decisions_with_observation": 0,
+    "observation_coverage": null,
+    "high_confidence_zero_gain_rate": null,
+    "high_confidence_repeating_rate": null,
+    "stuck_events": 0,
+    "result_linked_rate": null,
+    "behavior_changed": false,
+    "auto_routing": false,
+    "calibration": {
+      "confidence_buckets": {},
+      "source_calibration": {},
+      "high_confidence_zero_gain_rate": null,
+      "high_confidence_repeating_rate": null,
+      "high_confidence_n": 0,
+      "decisions_with_observation": 0,
+      "decisions_total": 0,
+      "observation_coverage": null,
+      "not_for_decision": true,
+      "phase": "kss-1"
+    }
+  },
+  "pipeline": {
+    "research": null,
+    "judgments": [],
+    "progress": [],
+    "research_rounds_detail": [],
+    "research_history": null,
+    "global_judge_shadow": null,
+    "context_budget_shadow": null,
+    "generated_code": null,
+    "repair": "skipped"
+  },
+  "state": {
+    "task": "GPUの使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "GPUの使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "open_questions": [],
+    "unresolved": [],
+    "research_history": [],
+    "banned_actions": []
+  },
+  "timing": {
+    "total_seconds": 14.2,
+    "llm_seconds": 14.2,
+    "machine_seconds": 0.0,
+    "research_seconds": 0.0,
+    "judge_seconds": 0.0,
+    "implementation_seconds": 0.0,
+    "repair_seconds": 0.0,
+    "validation_seconds": 0.0,
+    "llm_calls": 2
+  }
+}

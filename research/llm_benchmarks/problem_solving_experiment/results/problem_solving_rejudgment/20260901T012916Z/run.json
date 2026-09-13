@@ -1,0 +1,32 @@
+{
+  "experiment_id": "problem_solving_rejudgment",
+  "fixture_version": "real_code_rejudgment_v1",
+  "prompt": "Analyze the problem and resolve it.",
+  "at": "2026-09-01T01:29:17.228529+00:00",
+  "temperature": 0.0,
+  "max_turns": 16,
+  "models": [
+    "deepseek-coder-v2:16b",
+    "qwen3:14b"
+  ],
+  "initial_pytest_exit_code": 1,
+  "initial_main_exit_code": 1,
+  "models_run": [
+    {
+      "model": "deepseek-coder-v2:16b",
+      "stop_reason": "idle_no_tool_or_write",
+      "turns": 2,
+      "patch_rounds": 0,
+      "first_patch_test_pass": null,
+      "call_ok": true
+    },
+    {
+      "model": "qwen3:14b",
+      "stop_reason": "idle_no_tool_or_write",
+      "turns": 6,
+      "patch_rounds": 4,
+      "first_patch_test_pass": false,
+      "call_ok": true
+    }
+  ]
+}

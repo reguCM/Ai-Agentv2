@@ -1,0 +1,103 @@
+{
+  "head": "7e23ad6",
+  "required_files": [
+    {
+      "file": "ai_tool/chat_interface/requirement_resolution.py",
+      "symbols_or_hunks": [
+        "_runtime_adoption_from_rows",
+        "project_to_runtime_adoption_entries",
+        "canonical_requirement_projection_from_dict_rows",
+        "sync_canonical_requirement_projection",
+        "runtime_matches_for_completion_condition",
+        "build_canonical_requirement_evidence_trace",
+        "build_canonical_requirement_runtime_coverage",
+        "_build_canonical_requirement_runtime_trace",
+        "sync_canonical_requirements_from_mission",
+        "__all__ exports for above"
+      ],
+      "reason": "Core req-* projection, sync, and READ-ONLY runtime trace (STEP2–4).",
+      "dependency_of": ["STEP2", "STEP3", "STEP4", "goal_continuation_resume", "agent_turn._attach_requirement_contract"]
+    },
+    {
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "symbols_or_hunks": [
+        "__init__: structured_requirements, requirement_resolution_phase, projected_explicit_constraints, canonical_requirement_projection (NOT handoff_* fields)",
+        "apply_canonical_requirements_from_state",
+        "canonical_requirement_evidence_trace",
+        "canonical_requirement_runtime_coverage",
+        "snapshot(): optional keys structured_requirements, requirement_resolution_phase"
+      ],
+      "reason": "Orchestrator state + snapshot roundtrip (STEP1) + trace wrappers (STEP3–4).",
+      "dependency_of": ["STEP1", "STEP3", "STEP4"]
+    },
+    {
+      "file": "ai_tool/chat_interface/agent_turn.py",
+      "symbols_or_hunks": [
+        "import sync_canonical_requirement_projection",
+        "_attach_requirement_contract: call sync_canonical_requirement_projection(orchestrator) after project_to_runtime_adoption"
+      ],
+      "reason": "HEAD already sets structured_requirements; tests expect canonical_requirement_projection after attach (STEP2).",
+      "dependency_of": ["STEP1", "STEP2"]
+    },
+    {
+      "file": "ai_tool/chat_interface/goal_continuation_resume.py",
+      "symbols_or_hunks": [
+        "import sync_canonical_requirements_from_mission",
+        "restore_orchestrator_from_goal_continuation: sync_canonical_requirements_from_mission(orchestrator, mission_id=...)"
+      ],
+      "reason": "STEP1 goal_continuation_restore + STEP2 T8 mission hydration tests.",
+      "dependency_of": ["STEP1", "STEP2"]
+    }
+  ],
+  "required_tests": [
+    "tests/ai_tool/chat_interface/test_canonical_goal_transport_step1.py",
+    "tests/ai_tool/chat_interface/test_canonical_goal_transport_step2.py",
+    "tests/ai_tool/chat_interface/test_canonical_goal_transport_step3.py",
+    "tests/ai_tool/chat_interface/test_canonical_goal_transport_step4.py"
+  ],
+  "optional_files": [
+    {
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "symbols_or_hunks": [
+        "completion_runtime_slice: include structured_requirements if mission resume stores completion_runtime only"
+      ],
+      "reason": "Not required by step1–4 tests (snapshot() path used); may help production resume parity later."
+    }
+  ],
+  "deferred_files": [
+    {
+      "file": "ai_tool/goal_handoff_runtime_bridge.py",
+      "symbols_or_hunks": [
+        "build_handoff_acceptance_projection",
+        "build_handoff_task_acceptance_mapping",
+        "build_handoff_acceptance_runtime_trace",
+        "attach_handoff_identity_traceability",
+        "seed_orchestrator_from_handoff attach call"
+      ],
+      "reason": "STEP5 handoff-specific transport; not required for req-* baseline or Wedge C prerequisite."
+    },
+    {
+      "file": "ai_tool/chat_interface/task_orchestration.py",
+      "symbols_or_hunks": [
+        "handoff_acceptance_projection",
+        "handoff_task_acceptance_mapping",
+        "handoff_acceptance_runtime_trace"
+      ],
+      "reason": "Coupled to deferred handoff bridge (STEP5)."
+    },
+    {
+      "file": "tests/ai_tool/chat_interface/test_canonical_goal_transport_step5.py",
+      "symbols_or_hunks": ["entire file"],
+      "reason": "Tests deferred handoff trace; commit with separate Handoff Trace wedge if desired."
+    }
+  ],
+  "excluded_unrelated_hunks": [
+    "ai_tool/chat_interface/agent_turn.py — semantic revalidation / completion paths (non-sync hunks)",
+    "ai_tool/chat_interface/requirement_resolution.py — none beyond canonical block at file tail",
+    "ai_tool/environment_policy.py",
+    "ai_tool/requirement_semantic_*.py",
+    "ai_tool/chat_interface/semantic_revalidation_gate.py",
+    "tetris_* / run_tetris_sandbox_e2e.py",
+    "tests for environment / semantic revalidation"
+  ]
+}

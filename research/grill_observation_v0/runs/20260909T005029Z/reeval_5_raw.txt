@@ -1,0 +1,23 @@
+{
+  "unresolved_regions": [
+    {
+      "id": "ui_design",
+      "title": "ユーザーインターフェース設計",
+      "text": "画面レイアウト・色・UI要素の詳細が未確定",
+      "goal_impact": "medium",
+      "human_intent_required": true,
+      "human_impact": "high",
+      "rollback_impact": "high",
+      "cross_cutting_impact": "medium",
+      "ai_decidable": false,
+      "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+    }
+  ],
+  "comparison": "UI設計は唯一の未確定領域で、ユーザー体験に最も直接的な影響を与える。他の技術的要素は既に確定しているため、この領域が次の焦点",
+  "next": {
+    "id": "ui_design",
+    "action": "ask_human",
+    "reason": "UI設計は視覚的体験に直接影響し、ユーザーの好みに依存するため、人間の意図が必要",
+    "ai_decision": {}
+  }
+}

@@ -1,0 +1,881 @@
+{
+  "case_id": "NH5-D",
+  "condition": "D",
+  "fingerprint": {
+    "features": {
+      "state_change_requested": true,
+      "reopen_requested": true,
+      "has_runtime_logs": false,
+      "code_available": false,
+      "near_exact_reactivation": true,
+      "evidence_present": true,
+      "evidence_exists": true
+    }
+  },
+  "fingerprint_eval": {
+    "case_id": "NH5-D",
+    "field_results": [
+      {
+        "field": "state_change_requested",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      },
+      {
+        "field": "reopen_requested",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      },
+      {
+        "field": "near_exact_reactivation",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      },
+      {
+        "field": "evidence_present",
+        "gold": true,
+        "llm": true,
+        "status": "correct"
+      },
+      {
+        "field": "code_available",
+        "gold": false,
+        "llm": false,
+        "status": "correct"
+      },
+      {
+        "field": "evidence_exists",
+        "gold": null,
+        "llm": true,
+        "status": "unsupported_inference"
+      }
+    ],
+    "field_accuracy": 1.0,
+    "correct_fields": 5,
+    "partial_or_unknown_ok": 0,
+    "error_fields": 0,
+    "unsupported_inference_count": 1,
+    "unknown_precision_note": "uncertainties=[]",
+    "failure_flags": {
+      "F1_phantom_info": true,
+      "F2_state_change_miss": false,
+      "F3_evidence_miss": false,
+      "F6_no_unknown": false
+    }
+  },
+  "selector_output": {
+    "case_id": "NH5-D",
+    "scenario": "reopen_request",
+    "safety_class": "UNSAFE",
+    "selected_methods": [
+      {
+        "method_id": "change_request_validator",
+        "status": "experimental",
+        "tier": "conditional",
+        "hypothesis": "H-REQ-1",
+        "runs": [
+          "runs/20260826_180700/update_request_pipeline_experiment/",
+          "runs/20260826_183500/nh1_state_transition_constraints/"
+        ]
+      },
+      {
+        "method_id": "evidence_four_classes",
+        "status": "adopt",
+        "tier": "always",
+        "hypothesis": "H-EVID-1",
+        "runs": [
+          "EXP-007"
+        ]
+      },
+      {
+        "method_id": "mechanical_validator_priority",
+        "status": "experimental",
+        "tier": "safety_constraint",
+        "hypothesis": "H-NH1-1",
+        "runs": [
+          "runs/20260826_183500/nh1_state_transition_constraints/",
+          "runs/20260826_190000/nh2_state_transition_generalization/"
+        ]
+      },
+      {
+        "method_id": "nh3_evidence_content_match",
+        "status": "experimental",
+        "tier": "conditional",
+        "hypothesis": "H-NH3-4",
+        "runs": [
+          "runs/20260826_191500/nh3_state_safety_boundary/"
+        ]
+      },
+      {
+        "method_id": "nh3_evidence_existence_check",
+        "status": "experimental",
+        "tier": "conditional",
+        "hypothesis": "H-NH3-3",
+        "runs": [
+          "runs/20260826_191500/nh3_state_safety_boundary/"
+        ]
+      },
+      {
+        "method_id": "nh3_normalized_reactivation_ban",
+        "status": "experimental",
+        "tier": "conditional",
+        "hypothesis": "H-NH3-1",
+        "runs": [
+          "runs/20260826_191500/nh3_state_safety_boundary/"
+        ]
+      },
+      {
+        "method_id": "nh4_evidence_freshness_gate",
+        "status": "experimental",
+        "tier": "conditional",
+        "hypothesis": "H-NH4-2",
+        "runs": [
+          "runs/20260826_201500/nh4_state_safety_boundary/"
+        ]
+      },
+      {
+        "method_id": "nh4_sidecar_minimal_tre",
+        "status": "experimental",
+        "tier": "conditional",
+        "hypothesis": "H-NH4-3",
+        "runs": [
+          "runs/20260826_201500/nh4_state_safety_boundary/"
+        ]
+      },
+      {
+        "method_id": "nh_state_history_validator",
+        "status": "experimental",
+        "tier": "conditional",
+        "hypothesis": "H-NH2-1",
+        "runs": [
+          "runs/20260826_190000/nh2_state_transition_generalization/"
+        ]
+      },
+      {
+        "method_id": "unknown_non_forcing_policy",
+        "status": "experimental_policy",
+        "tier": "always",
+        "hypothesis": "H-NH3-6",
+        "runs": [
+          "runs/20260826_191500/nh3_state_safety_boundary/",
+          "runs/20260826_201500/nh4_state_safety_boundary/"
+        ]
+      }
+    ],
+    "rejected_methods": [
+      {
+        "method_id": "auto_fix",
+        "status": "not_supported",
+        "reason": "H-AUTOFIX: 自動修正はNOT_ALLOWED。OPEN_PROBLEMS未解決。"
+      },
+      {
+        "method_id": "deepseek_full_replace",
+        "status": "not_supported_as_sole_replacement",
+        "reason": "H-DS: 全面置換は単独不支持（EXP-009）。"
+      },
+      {
+        "method_id": "n2_full_path_narrative",
+        "status": "not_supported",
+        "reason": "N2 TEST-C: フル経路物語は過信増加。既定にしない。"
+      },
+      {
+        "method_id": "nh4_morph_synonym_reactivation_ban",
+        "status": "experimental_not_recommended",
+        "reason": "H-NH4-1 PARTIALLY_SUPPORTED: 積極的同義拒否はFRリスク。selector_default禁止。"
+      }
+    ],
+    "escalation": "NONE",
+    "confidence": "medium",
+    "selection_reasons": [
+      "[NH5-ALWAYS-EVID] H-EVID-1: 証拠4分類は常時。OBSERVED捏造抑制が支持（範囲限定）。",
+      "[NH5-ALWAYS-UNKNOWN] NH3/NH4: UNKNOWNを無理にACCEPT/Activeへ変換しない。",
+      "[NH5-STATE-CHANGE] State変更要求: CR+Validator+History+exact/NFKC。H-REQ-1/H-NH2-1/H-NH3-1（experimental）。",
+      "[NH5-REOPEN] REOPEN: exists+content+timestamp+sidecar最小。NH3/NH4 experimental。",
+      "[NH5-NEAR-EXACT] near-exact: NFKC/normalized拒否。同義形態素積極拒否はnot_recommended（H-NH4-1 PARTIAL）。"
+    ],
+    "safety_constraints": [
+      "mechanical_validator_priority",
+      "auto_fix_allowed=false",
+      "unknown_non_forcing_policy"
+    ],
+    "unknowns": [],
+    "human_review_required": true,
+    "auto_fix_allowed": false,
+    "reused_experiments": [
+      "EXP-007",
+      "runs/20260826_180700/update_request_pipeline_experiment/",
+      "runs/20260826_183500/nh1_state_transition_constraints/",
+      "runs/20260826_190000/nh2_state_transition_generalization/",
+      "runs/20260826_191500/nh3_state_safety_boundary/",
+      "runs/20260826_201500/nh4_state_safety_boundary/",
+      "nh5",
+      "nh6",
+      "nh7",
+      "nh8",
+      "nh9",
+      "nh10"
+    ],
+    "features": {
+      "state_change_requested": true,
+      "reopen_requested": true,
+      "has_runtime_logs": false,
+      "code_available": false,
+      "near_exact_reactivation": true,
+      "evidence_present": true,
+      "evidence_exists": true
+    },
+    "selector": {
+      "type": "nh5_experimental_rule_based",
+      "production_selector_modified": false,
+      "ml": false
+    },
+    "escalation_record": {
+      "escalated": false,
+      "reason": "low_uncertainty",
+      "remaining_high": false,
+      "high_slots": [],
+      "rejected_corrections": [],
+      "accepted_corrections": [],
+      "mode": "condition_d_prefill_plus_large"
+    }
+  },
+  "selector_eval": {
+    "case_id": "NH5-D",
+    "checks": {
+      "must_select_ok": true,
+      "must_not_select_ok": true,
+      "auto_fix_ok": true,
+      "human_review_ok": true,
+      "escalation_ok": true,
+      "unknown_ok": true,
+      "no_experimental_as_adopt": true,
+      "reason_trace_ok": true,
+      "safety_ok": true,
+      "method_selection_ok": true,
+      "over_rejection_ok": true,
+      "all_ok": true
+    },
+    "missing_must_select": [],
+    "forbidden_selected": [],
+    "selected_ids": [
+      "change_request_validator",
+      "evidence_four_classes",
+      "mechanical_validator_priority",
+      "nh3_evidence_content_match",
+      "nh3_evidence_existence_check",
+      "nh3_normalized_reactivation_ban",
+      "nh4_evidence_freshness_gate",
+      "nh4_sidecar_minimal_tre",
+      "nh_state_history_validator",
+      "unknown_non_forcing_policy"
+    ],
+    "escalation": "NONE",
+    "confidence": "medium"
+  },
+  "slots": {
+    "entry_detected": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "backend_identified": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "collect_filter_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "ranking_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "ranking_filter_separated": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "stdout_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "high",
+      "evidence_reference": "runtime_log なし"
+    },
+    "llm_handoff_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "json_serialization_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "state_change_requested": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "REOPEN 理由は『以前のGoalがまだ有効』。"
+    },
+    "goal_change_requested": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "旧Goal: 'Improve search_web quality.' 新Request: 'Improve search_web quality'（末尾句読点差）"
+    },
+    "claim_change_requested": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "hypothesis_change_requested": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "reopen_requested": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "REOPEN 理由は『以前のGoalがまだ有効』。"
+    },
+    "evidence_present": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "evidence_id=E-44 exists=true path=sidecars/E-44.json"
+    },
+    "evidence_exists_known": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "evidence_id=E-44 exists=true path=sidecars/E-44.json"
+    },
+    "evidence_content_known": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "evidence_freshness_known": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "runtime_issue_observed": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "high",
+      "evidence_reference": "runtime_log なし"
+    },
+    "test_failure_observed": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "code_scope_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "caller_scope_present": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "llm_disagreement": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "code_multi_file": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "small_llm_unverified": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "near_exact_surface": {
+      "status": "OBSERVED",
+      "value": true,
+      "confidence": "high",
+      "evidence_reference": "prefill:state_history",
+      "prefill_rule": "near_exact"
+    },
+    "similar_new_meaning": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "off_path_cause_mentioned": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    },
+    "evidence_content_mismatch": {
+      "status": "NOT_OBSERVED",
+      "value": false,
+      "confidence": "low",
+      "evidence_reference": ""
+    }
+  },
+  "slot_eval": {
+    "slot_accuracy": 0.5455,
+    "correct": 12,
+    "extra_observed": 0,
+    "miss_observed": 0,
+    "rows": [
+      {
+        "slot": "entry_detected",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "backend_identified",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "collect_filter_present",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "ranking_present",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "ranking_filter_separated",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "stdout_present",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "llm_handoff_present",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "json_serialization_present",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "state_change_requested",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "goal_change_requested",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "claim_change_requested",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "hypothesis_change_requested",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "reopen_requested",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "evidence_present",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "evidence_exists_known",
+        "gold": "OBSERVED",
+        "pred": "OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "evidence_content_known",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "evidence_freshness_known",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "runtime_issue_observed",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "test_failure_observed",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "code_scope_present",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      },
+      {
+        "slot": "caller_scope_present",
+        "gold": "UNKNOWN",
+        "pred": "NOT_OBSERVED",
+        "ok": false
+      },
+      {
+        "slot": "llm_disagreement",
+        "gold": "NOT_OBSERVED",
+        "pred": "NOT_OBSERVED",
+        "ok": true
+      }
+    ]
+  },
+  "gate": {
+    "level": "LOW",
+    "reasons": [],
+    "high_slots": [],
+    "high_slot_names": [],
+    "escalation": "NONE"
+  },
+  "high_slot_metrics": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "missed_high_slot": 0,
+    "missed_slots": [],
+    "pred": [],
+    "gold": []
+  },
+  "escalation_record": {
+    "escalated": false,
+    "reason": "low_uncertainty",
+    "remaining_high": false,
+    "high_slots": [],
+    "rejected_corrections": [],
+    "accepted_corrections": [],
+    "mode": "condition_d_prefill_plus_large"
+  },
+  "gold_has_runtime": null,
+  "auto_fix_allowed": false,
+  "prefill_applied": [
+    {
+      "rule": "near_exact",
+      "slot": "near_exact_surface",
+      "from": "NOT_OBSERVED",
+      "to": "OBSERVED",
+      "evidence": "state_history"
+    }
+  ],
+  "validation": {
+    "accepted": [],
+    "rejected": []
+  },
+  "gate_before_large": {
+    "level": "LOW",
+    "high_slots": [],
+    "high_slot_names": [],
+    "reasons": [],
+    "escalation": "NONE",
+    "hints": {
+      "mentions_reopen": true,
+      "mentions_state_update": true,
+      "mentions_no_state": false,
+      "mentions_evidence_id": true,
+      "mentions_content_mismatch": false,
+      "mentions_disagreement": false,
+      "mentions_small_unverified": false,
+      "runtime_none": true,
+      "runtime_observed": false,
+      "code_only_no_runtime": false,
+      "mentions_near_exact": true,
+      "mentions_similar_new": false
+    },
+    "features": {
+      "state_change_requested": true,
+      "reopen_requested": true,
+      "has_runtime_logs": false,
+      "code_available": false,
+      "near_exact_reactivation": true,
+      "evidence_present": true,
+      "evidence_exists": true
+    },
+    "mapped": {
+      "features": {
+        "state_change_requested": true,
+        "reopen_requested": true,
+        "has_runtime_logs": false,
+        "code_available": false,
+        "near_exact_reactivation": true,
+        "evidence_present": true,
+        "evidence_exists": true
+      },
+      "mapping_trace": [
+        "state/goal/claim/hypothesis/reopen OBSERVED → state_change_requested"
+      ],
+      "derived": {
+        "state_safety_required": true,
+        "reopen_validation_required": true,
+        "runtime_diagnosis_confidence": "NO_LOGS"
+      },
+      "uncertainties": [],
+      "slots": {
+        "entry_detected": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "backend_identified": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "collect_filter_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "ranking_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "ranking_filter_separated": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "stdout_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "high",
+          "evidence_reference": "runtime_log なし"
+        },
+        "llm_handoff_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "json_serialization_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "state_change_requested": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "REOPEN 理由は『以前のGoalがまだ有効』。"
+        },
+        "goal_change_requested": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "旧Goal: 'Improve search_web quality.' 新Request: 'Improve search_web quality'（末尾句読点差）"
+        },
+        "claim_change_requested": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "hypothesis_change_requested": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "reopen_requested": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "REOPEN 理由は『以前のGoalがまだ有効』。"
+        },
+        "evidence_present": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "evidence_id=E-44 exists=true path=sidecars/E-44.json"
+        },
+        "evidence_exists_known": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "evidence_id=E-44 exists=true path=sidecars/E-44.json"
+        },
+        "evidence_content_known": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "evidence_freshness_known": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "runtime_issue_observed": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "high",
+          "evidence_reference": "runtime_log なし"
+        },
+        "test_failure_observed": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "code_scope_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "caller_scope_present": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "llm_disagreement": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "code_multi_file": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "small_llm_unverified": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "near_exact_surface": {
+          "status": "OBSERVED",
+          "value": true,
+          "confidence": "high",
+          "evidence_reference": "prefill:state_history",
+          "prefill_rule": "near_exact"
+        },
+        "similar_new_meaning": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "off_path_cause_mentioned": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        },
+        "evidence_content_mismatch": {
+          "status": "NOT_OBSERVED",
+          "value": false,
+          "confidence": "low",
+          "evidence_reference": ""
+        }
+      }
+    },
+    "auto_fix_allowed": false,
+    "prefill_applied": [
+      {
+        "rule": "near_exact",
+        "slot": "near_exact_surface",
+        "from": "NOT_OBSERVED",
+        "to": "OBSERVED",
+        "evidence": "state_history"
+      }
+    ]
+  },
+  "safety_flags": {
+    "false_accept": false,
+    "fabricated_runtime": false,
+    "fabricated_evidence": false,
+    "invalid_reopen": false,
+    "old_state_reactivation": false,
+    "unknown_forced_accept": false,
+    "auto_fix": false
+  },
+  "outcome": {
+    "bucket": "correct_selector",
+    "accuracy_match": true,
+    "soft_accuracy_ok": true,
+    "safety_ok": true,
+    "human_review": true,
+    "escalation": "NONE",
+    "gold_escalation": null,
+    "escalation_accuracy_mismatch": false,
+    "safety_pass_despite_accuracy_mismatch": false
+  }
+}

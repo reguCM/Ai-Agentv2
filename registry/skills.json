@@ -1,0 +1,148 @@
+{
+  "schema_version": "1",
+  "note": "Development Skill catalog for Cursor/Codex adapters. Skill bodies are not duplicated here. Alias resolution for max:* names is canonical in alias_index. .cursor/rules/skill-namespace-compat.mdc is the Cursor adapter mirror and must follow alias_index.",
+  "provenance_reference": ".agents/skills/PROVENANCE.md",
+  "skills": [
+    {
+      "id": "grill-me",
+      "path": ".agents/skills/grill-me/SKILL.md",
+      "status": "adopted",
+      "phase": "design",
+      "description": "Interview-driven ambiguity removal for specs, plans, and tickets.",
+      "aliases": ["max:grill-me"],
+      "consumers": ["cursor", "codex"],
+      "invokes": [],
+      "invoked_by": ["write-prd", "tech-spec"],
+      "outputs": ["ambiguity_report"],
+      "provenance_row": "grill-me",
+      "runtime_connected": true
+    },
+    {
+      "id": "write-prd",
+      "path": ".agents/skills/write-prd/SKILL.md",
+      "status": "adopted",
+      "phase": "design",
+      "description": "Turn a rough goal into a grounded PRD with internal grill-me gate.",
+      "aliases": ["max:write-prd"],
+      "consumers": ["cursor", "codex"],
+      "invokes": ["grill-me"],
+      "outputs": ["prd"],
+      "provenance_row": "write-prd",
+      "runtime_connected": false
+    },
+    {
+      "id": "graph-engineering",
+      "path": ".agents/skills/graph-engineering/SKILL.md",
+      "status": "adopted",
+      "phase": "analysis",
+      "description": "Evidence-backed dependency and impact mapping for unfamiliar or multi-component work.",
+      "consumers": ["cursor", "codex"],
+      "invokes": [],
+      "inputs": ["prd"],
+      "outputs": ["knowledge_map"],
+      "provenance_row": "graph-engineering",
+      "runtime_connected": false
+    },
+    {
+      "id": "tech-spec",
+      "path": ".agents/skills/tech-spec/SKILL.md",
+      "status": "adopted",
+      "phase": "design",
+      "description": "Turn an approved PRD into an implementation-oriented technical spec.",
+      "aliases": ["max:tech-spec"],
+      "consumers": ["cursor", "codex"],
+      "invokes": ["grill-me"],
+      "inputs": ["prd", "knowledge_map"],
+      "outputs": ["tech_spec"],
+      "provenance_row": "tech-spec",
+      "runtime_connected": false
+    },
+    {
+      "id": "planning-and-task-breakdown",
+      "path": ".agents/skills/planning-and-task-breakdown/SKILL.md",
+      "status": "adopted",
+      "phase": "planning",
+      "description": "Break an approved spec into ordered, verifiable implementation tasks.",
+      "consumers": ["cursor", "codex"],
+      "invokes": [],
+      "inputs": ["tech_spec"],
+      "outputs": ["implementation_plan", "task_list"],
+      "provenance_row": "planning-and-task-breakdown",
+      "runtime_connected": false
+    },
+    {
+      "id": "goal-handoff",
+      "path": ".agents/skills/goal-handoff/SKILL.md",
+      "status": "provisional",
+      "phase": "handoff",
+      "description": "Emit a machine-readable Goal Handoff Packet after planning for implementation agents.",
+      "consumers": ["cursor", "codex"],
+      "invokes": [],
+      "inputs": ["prd", "tech_spec", "implementation_plan", "task_list"],
+      "outputs": ["goal_handoff_packet"],
+      "output_contract": "goal_handoff",
+      "default_output_path": "docs/handoffs/{handoff_id}.json",
+      "runtime_connected": false
+    },
+    {
+      "id": "session-start",
+      "path": ".agents/skills/session-start/SKILL.md",
+      "status": "provisional",
+      "phase": "utility",
+      "description": "Classify work-resume depth and follow Session Start Policy before development edits.",
+      "consumers": ["cursor", "codex"],
+      "invokes": [],
+      "outputs": ["session_sync_report"],
+      "provenance_row": "session-start",
+      "runtime_connected": false
+    }
+  ],
+  "alias_index": {
+    "max:grill-me": "grill-me",
+    "max:write-prd": "write-prd",
+    "max:tech-spec": "tech-spec"
+  },
+  "compositions": [
+    {
+      "id": "standard-feature-dev",
+      "description": "Default design-to-implementation pipeline for non-trivial repository work.",
+      "status": "standard",
+      "steps": [
+        "write-prd",
+        "graph-engineering",
+        "tech-spec",
+        "planning-and-task-breakdown",
+        "goal-handoff"
+      ],
+      "terminal_output": "goal_handoff_packet"
+    },
+    {
+      "id": "grill-only",
+      "description": "Ambiguity interview without downstream spec generation.",
+      "status": "standard",
+      "steps": ["grill-me"],
+      "terminal_output": "ambiguity_report"
+    },
+    {
+      "id": "tetris-sandbox-e2e",
+      "description": "Tetris sandbox prototype: write-prd (internal grill-me) through Goal Handoff without graph-engineering.",
+      "status": "provisional",
+      "steps": [
+        "write-prd",
+        "tech-spec",
+        "planning-and-task-breakdown",
+        "goal-handoff"
+      ],
+      "terminal_output": "goal_handoff_packet"
+    }
+  ],
+  "output_contracts": {
+    "goal_handoff": {
+      "schema_path": "registry/schema/goal_handoff.schema.json",
+      "description": "Bridge artifact from Dev Skills to implementation. Not a Mission Memory record.",
+      "status": "provisional",
+      "example_path": "docs/handoffs/examples/goal-handoff-example.json",
+      "spec_path": "docs/specs/GOAL_HANDOFF_V0.md"
+    }
+  }
+}

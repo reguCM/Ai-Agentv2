@@ -1,0 +1,43 @@
+{
+  "experiment": "h4_decision_adoption_gate",
+  "started_at": "2026-09-08T21:37:18.346603+00:00",
+  "model_id": "qwen3_14b",
+  "provider_model": "qwen3:14b",
+  "gate_ids": [
+    "Q9",
+    "Q25",
+    "Q29",
+    "Q14-15",
+    "Q30",
+    "Q7",
+    "Q10",
+    "Q40",
+    "Q47",
+    "Q1"
+  ],
+  "replay_dir": "research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T165641Z",
+  "max_gate_retry": 1,
+  "offline": false,
+  "reuse_dirs": [
+    "research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T212543Z",
+    "research\\llm_benchmarks\\h4_decision_maker_bench\\results\\20260908T212713Z"
+  ],
+  "escalation": {
+    "high_uncertainty_threshold": 50,
+    "high_uncertainty_note": "Reuses existing bench HIGH_UNCERTAINTY=50. 38-batch scores were 10-30 (mean 22, 0/38 >=40). Retry scores observed 45 and 75.",
+    "important_decisions": [
+      "Q1",
+      "Q14-15",
+      "Q16",
+      "Q25",
+      "Q27",
+      "Q34",
+      "Q35",
+      "Q47",
+      "Q7",
+      "Q9"
+    ],
+    "important_note": "Provisional. 38-batch set needs_deep_review=true for 38/38, so deep_review alone cannot be an escalation trigger. Important = safety/destructive/compatibility subset, not every lock-group id."
+  },
+  "note": "Experiment-only. Production runtime unchanged. Initial rec is replayed batch first_recommendation. FAIL retry does not include Strong/Cursor adopted answers."
+}

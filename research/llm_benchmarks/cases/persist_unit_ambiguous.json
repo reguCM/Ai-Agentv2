@@ -1,0 +1,47 @@
+{
+  "id": "persist_unit_ambiguous",
+  "note": "曖昧化テスト。質問から status / メモリ / 使用率 を消す。MATERIALS は status=43.2 だけ。STATE の有無で根拠を分ける。",
+  "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "judge",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "judge",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "judge",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "rounds": [
+    {
+      "id": "unit",
+      "kind": "query",
+      "classify": "unit_ambiguous",
+      "question": "この値の単位は？",
+      "materials": {
+        "tool": {
+          "return_value": {
+            "status": 43.2
+          }
+        }
+      }
+    }
+  ]
+}

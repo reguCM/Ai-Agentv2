@@ -1,0 +1,95 @@
+{
+  "id": "implement_from_pipeline_multi_route",
+  "note": "④本体の複数経路探索後、Judge ACCEPT された finding を固定し proposal だけ補完。Implementation → Registry → Tool execution まで通るかを見る。Research/Judge は回さない。",
+  "source_run": "research/llm_benchmarks/research_implement_results.json 2026-08-19T08:42:04Z deepseek_coder_v2_16b",
+  "check_registry": true,
+  "correct_fragments": ["Win32_OperatingSystem", "FreePhysicalMemory", "TotalVisibleMemorySize"],
+  "request": "Windowsのメモリ使用率を取得するToolを作ってください。",
+  "proposal": {
+    "name": "get_memory_status",
+    "category": "system",
+    "subcategory": "memory",
+    "description": "Windows のメモリ使用率を取得する",
+    "module": "tools.system.memory.memory_status",
+    "function": "get_memory_status",
+    "input": {},
+    "output": ["status"],
+    "dependencies": ["powershell"],
+    "implementation_notes": [
+      "Judge は採用済み。usable_findings の verified command (Get-CimInstance Win32_OperatingSystem) をそのまま実装する。",
+      "成功時は status に数値（sample=48.6 相当）を返す。",
+      "フォールバックに未実装という文字列をコードへ書かない。"
+    ]
+  },
+  "state": {
+    "task": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "Windowsのメモリ使用率",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "%",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.range",
+        "value": "0-100",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "research_result": {
+    "usable_findings": [
+      {
+        "kind": "output",
+        "question": "total physical memory is still unconfirmed",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property FreePhysicalMemory, TotalVisibleMemorySize | ForEach-Object { $usagePercent = 100 - ($_.FreePhysicalMemory / $_.TotalVisibleMemorySize * 100); $usagePercent }"
+          ],
+          "returncode": 0,
+          "sample": ["48.6136333987991"],
+          "stderr": "",
+          "error": null,
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      }
+    ],
+    "reference_findings": [],
+    "insufficient_findings": [],
+    "unresolved": []
+  },
+  "judge": {
+    "satisfies_request": true,
+    "reason": "usable_findings sample is 48.6 (0-100). STATE status.meaning is Windows memory usage rate, status.unit is %, status.range is 0-100.",
+    "missing": []
+  },
+  "pipeline_context": {
+    "research_rounds": 2,
+    "stop_reason": "findings_complete",
+    "original_fail": "empty_code / impl_validation_ng"
+  }
+}

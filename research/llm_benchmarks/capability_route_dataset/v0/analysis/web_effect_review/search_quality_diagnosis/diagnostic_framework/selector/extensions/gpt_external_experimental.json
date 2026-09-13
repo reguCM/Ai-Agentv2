@@ -1,0 +1,22 @@
+{
+  "note": "NEW extension file. Does not modify selector.py, rules.json, or method_catalog.json. Not wired until an adopt review.",
+  "method_id": "gpt_external",
+  "status": "experimental",
+  "always_select": false,
+  "proposed_feature_rule": {
+    "rule_id": "R-GPT-ESC",
+    "when_any": [
+      {"needs_path_integration": true, "suspect_stdout_vs_llm_handoff": true},
+      {"needs_path_integration": true, "suspect_ranking_vs_filter": true}
+    ],
+    "select": "gpt_external",
+    "role": "optional_escalation",
+    "reason": "search_web 実験では経路統合・handoff・ranking/filter で Qwen より改善。Composer と役割重複。常用しない。"
+  },
+  "reuse_artifact_candidates": [
+    "diagnostic_framework/runs/20260825_190500/gpt_external_tool_experiment/CONDITION_B_GPT_INDEPENDENT.md",
+    "diagnostic_framework/runs/20260825_190500/gpt_external_tool_experiment/CONDITION_C_GPT_AUDIT.md",
+    "diagnostic_framework/runs/20260825_190500/gpt_external_tool_experiment/COMPARISON_REPORT.md",
+    "diagnostic_framework/runs/20260825_190500/gpt_external_tool_experiment/GPT_METHOD_CANDIDATE.json"
+  ]
+}

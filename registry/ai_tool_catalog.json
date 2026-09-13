@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "note": "Experimental external tool descriptors. NOT merged into registry/tools.json automatically.",
+  "tools": [
+    {
+      "id": "mcp:get_current_time",
+      "name": "get_current_time",
+      "provider": "mcp",
+      "source": "ai_tool.providers.mcp.time_server",
+      "description": "Return current UTC time (read-only MCP reference server).",
+      "capabilities": ["time", "read"],
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "string"
+      },
+      "permissions": ["mcp:stdio"],
+      "risk_level": "low",
+      "execution_mode": "read",
+      "availability": "remote",
+      "authentication": "none",
+      "cost": "free",
+      "status": "experimental",
+      "evidence": ["docs/ai_tool/experiments/EXP-001_local_vs_mcp_time.md"]
+    }
+  ]
+}

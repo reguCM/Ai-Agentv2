@@ -1,0 +1,124 @@
+target_tool: search_web
+
+llm_model_id: qwen3_8b
+llm_timeout_seconds: 180
+
+# 対象ケース（既存の search_web 診断ケースと同じ）
+case_ids:
+  - A06
+  - E04
+  - C03
+  - P02b
+  - C02
+  - A03
+  - A04
+  - C04
+  - B05
+  - WB02
+  - P02a
+  - E02
+
+# 実測データ（観測値）の読み込み方式
+evidence_type: web_effect_review_search_quality_diagnosis
+evidence:
+  review_dataset_json: review_dataset.json
+  ranking_csv: ranking_comparison.csv
+  include_extract_probes: true
+
+# LLMが原因候補を整理するためのラベル（事前結論は与えない）
+cause_candidates:
+  A: 検索候補の生成/API取得
+  B: ranking / 候補絞り込み
+  C: snippet/description/本文取得・抽出
+  D: LLMへの受け渡し
+  E: query生成・query言語
+  F: エラー処理・リトライ・API制限
+  G: その他
+  H: 複合要因
+
+# 読ませるコード抜粋（repository-relative）
+code:
+  notes: |
+    - この診断は「コード上の仕様」と「実測ログ」を照合して原因候補を整理するためのもの。
+    - URL先の本文スクレイピングは本番経路では行っていない（一般_web_search / search_web の仕様から）。
+  snippets:
+    - file: tools/system/network/search_web.py
+      start_line: 1
+      end_line: 60
+    - file: tools/system/network/general_web_search.py
+      start_line: 1
+      end_line: 240
+    - file: tools/system/tool_builder/research/web.py
+      start_line: 1
+      end_line: 220
+    - file: agent.py
+      start_line: 330
+      end_line: 380
+    - file: agent.py
+      start_line: 510
+      end_line: 650
+    - file: agent.py
+      start_line: 820
+      end_line: 880
+    - file: tools/system/capability_route_obs.py
+      start_line: 140
+      end_line: 280
+    - file: research/llm_benchmarks/capability_route_dataset/v0/analysis/web_effect_review/run_web_effect_pilot.py
+      start_line: 70
+      end_line: 170
+
+# ケース別プロンプト（FACT/推測/原因候補/追加確認/修正案に分離して出力）
+# 注意: Python の .format(evidence=...) が使われるため、JSON の { } は {{ }} にエスケープする。
+case_prompt: |
+  あなたは search_web の品質低下原因を調査する診断者です。
+  事前結論（例: 「Cが原因」等）は与えません。必ずコード抜粋と観測ログを根拠にします。
+
+  修正案は「提案のみ」です（実行しない）。一方で、原因の断定は無理にせず unknown を許可します。
+
+  出力は JSON のみ。**次のキーは必ず存在させる**（不明でも空配列[]で埋める）:
+  {{
+    "case_id": "...",
+    "facts": [],
+    "speculation": [],
+    "cause_candidates": [],
+    "additional_confirmations": [],
+    "fix_proposals_not_executed": []
+  }}
+
+  cause_candidates は少なくとも1件入れる（不明なら code="H", ただし理由は unknown を明記）。
+
+  --- 観測ログ（FACT中心） ---
+  {evidence}
+
+  重要:
+  - facts: 観測ログから直接言えることだけ（数・有無・条件・一致/不一致）
+  - speculation: facts から導いた推論・可能性（断定禁止、unknown可）
+  - additional_confirmations: 確定に近づくための次に見るべき情報
+  - fix_proposals_not_executed: 実装はしないが、どこをどう変える“可能性”があるか（原因→根拠→提案の順）
+# 統合プロンプト（優先順位付け・pattern・次の調査）
+synthesis_prompt: |
+  12ケースの「code+log診断（各 case の facts/speculation/cause_candidates）」を統合して、search_web の品質低下の原因候補を整理してください。
+  事前結論は繰り返さず、証拠の強さ（factsの一致/反例）で優先順位を説明します。
+
+  出力は JSON のみ。以下キーを必ず含める（不足は空配列[]）:
+  {{
+    "overall_best_guess": {{
+      "primary_layer_candidates": [
+        {{"code":"A|B|C|D|E|F|G|H","confidence":"strong|moderate|weak|unknown","why":"..."}}
+      ]
+    }},
+    "patterns": {{
+      "snippet_empty_or_description_empty": "...（どの程度/どのケースで見えるか）",
+      "ranking_drops_when_candidates_exist": "...",
+      "api_candidate_sparsity": "...",
+      "language_ja_en_difference": "...",
+      "time_sensitive_currentness": "..."
+    }},
+    "next_best_one_investigation": "...（最優先の追加確認事項）",
+    "fix_proposals_not_executed": ["...（提案のみ）"],
+    "qwen_uncertainties": ["...（自信がない点/判断不能点）"]
+  }}
+
+  --- ケース分析（要約Blob） ---
+  {cases_blob}
+

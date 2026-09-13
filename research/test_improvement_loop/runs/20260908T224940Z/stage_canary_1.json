@@ -1,0 +1,61 @@
+{
+  "summary": {
+    "n": 1,
+    "ids": [
+      "Q36"
+    ],
+    "AUTO": 0,
+    "REVIEW": 1,
+    "HUMAN": 0,
+    "auto_ids": [],
+    "review_ids": [
+      "Q36"
+    ],
+    "human_ids": [],
+    "semantic_dangerous_count": 1,
+    "parse_failure": 0,
+    "missing_output": 0,
+    "false_auto": 0,
+    "false_auto_ids": []
+  },
+  "records": [
+    {
+      "decision_id": "Q36",
+      "first_recommendation": "Avoid shared keywords for web/gpu/cpu. Prefer adding to web_search.",
+      "semantic_gate": "FAIL",
+      "semantic_dangerous": [
+        {
+          "rule_id": "shared_keyword_family_prefer",
+          "kind": "known_wrong",
+          "forbidden": "Confirming or preferring one capability family from a shared / cross-cutting keyword alone (for example 検索 → web_search)."
+        }
+      ],
+      "route": "REVIEW",
+      "notes": [
+        "semantic_fail_contract_recheck"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [
+          "adopts_danger_if",
+          "adopts_rejected_alternative"
+        ],
+        "danger_hits": [
+          "confirm web from 検索 alone"
+        ],
+        "rejected_hits": [
+          "片方へ prefer"
+        ],
+        "adopted_contract": "横断共有だけ（検索、使用率）では確定しない。file対象時 検索だけで web を足さない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    }
+  ],
+  "llm_called": false
+}

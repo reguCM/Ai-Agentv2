@@ -1,0 +1,42 @@
+{
+  "request_text": "Goal:\n来週の人間レビュー資料は、詳細な技術解説を優先するか、結論だけ短くまとめた報告を優先するか、好みを決めてほしい。\n\nCurrent State:\nまだ何も調査していない。方針ファイルの指定もない。\n\n現在の未解決点:\nレビュー資料の詳しさについてのユーザー好みが未決定である。\n\nGrill:\n**掘り下げた未解決点:**  \nユーザーが「詳細な技術解説を優先するか」「結論だけ短くまとめた報告を優先するか」のどちらを希望するか、という**具体的な好みの情報**が未確認である。  \n\n**次の確認が必要な情報:**  \n「来週の人間レビュー資料の目的（例: 技術的議論のための詳細な解説 / 決策支援のための簡潔な結論）」をユーザーに明確に確認する必要がある。  \n\n---  \n**理由:**  \n現状のGoalと未解決点だけでは、ユーザーの好みが「技術的深さを重視するか」「簡潔さを重視するか」のどちらかを判断するための情報が不足している。この情報がないと、レビュー資料の作成方向性が確定できず、次の処理（例: データの収集・構成の設計）に進むことができない。\n",
+  "required_capabilities": [
+    "workspace_file_read"
+  ],
+  "resolutions": [
+    {
+      "required_capability": "workspace_file_read",
+      "source_task_id": "T1",
+      "status": "RESOLVED",
+      "capability_index_checked": true,
+      "registry_checked": true,
+      "candidate_tools": [
+        "read_file"
+      ],
+      "selected_tool": "read_file",
+      "rejection_reasons": [],
+      "tool_gap_confirmed": false,
+      "evidence_ids": [],
+      "existing_candidates": [
+        "read_file"
+      ],
+      "missing_capability": null,
+      "suggested_minimal_tool": null,
+      "requires_human_approval": false,
+      "next_action": null
+    }
+  ],
+  "tool_expectation": {
+    "generated": false,
+    "required_capability": null,
+    "expected_tool": null,
+    "expected_arguments": null,
+    "reason": null,
+    "level": "none",
+    "actual_tool_called": null,
+    "expectation_matched": false
+  },
+  "label": "PARTIAL",
+  "action": null,
+  "stopped_at": "tool_selected_arguments_incomplete"
+}

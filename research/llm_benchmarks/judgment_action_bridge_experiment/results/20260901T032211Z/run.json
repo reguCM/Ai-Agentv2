@@ -1,0 +1,918 @@
+{
+  "experiment_id": "judgment_action_bridge",
+  "at": "2026-09-01T03:22:13.699552+00:00",
+  "llm_used": false,
+  "existing_mapping": "not_used",
+  "fixture": "fixtures/chain_count",
+  "initial_pytest": {
+    "ok": false,
+    "command": [
+      "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+      "-m",
+      "pytest",
+      "tests/test_main.py",
+      "-q"
+    ],
+    "working_directory": "D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace",
+    "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n________________________________ test_assemble ________________________________\n\n    def test_assemble():\n>       result = assemble()\n\ntests\\test_main.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\n    def assemble():\n        items = load_items()\n>       return {\"item\": items[2], \"ready\": is_ready()}\nE       IndexError: list index out of range\n\nmain.py:6: IndexError\n=========================== short test summary info ===========================\nFAILED tests/test_main.py::test_assemble - IndexError: list index out of range\n1 failed in 0.08s\n",
+    "stderr": "",
+    "exit_code": 1,
+    "traceback": "",
+    "execution_time": 0.6138934000045992
+  },
+  "initial_program": {
+    "ok": false,
+    "command": [
+      "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+      "main.py"
+    ],
+    "working_directory": "D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace",
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace\\main.py\", line 16, in <module>\n    main()\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace\\main.py\", line 12, in main\n    print(json.dumps(assemble()))\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace\\main.py\", line 6, in assemble\n    return {\"item\": items[2], \"ready\": is_ready()}\nIndexError: list index out of range\n",
+    "exit_code": 1,
+    "traceback": "\nTraceback (most recent call last):\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace\\main.py\", line 16, in <module>\n    main()\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace\\main.py\", line 12, in main\n    print(json.dumps(assemble()))\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace\\main.py\", line 6, in assemble\n    return {\"item\": items[2], \"ready\": is_ready()}\nIndexError: list index out of range\n",
+    "execution_time": 0.06295099999988452
+  },
+  "phases": {
+    "phase1_single": {
+      "input_text": "helper.pyを確認したい",
+      "judgment_received": true,
+      "clauses": [
+        "helper.pyを確認したい"
+      ],
+      "fences": [],
+      "action_candidates": [
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true
+        },
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい",
+          "tool_name": "search_files",
+          "tool_arguments": {
+            "query": "helper.py"
+          },
+          "execute": false,
+          "reason": "alternate_search",
+          "status": "candidate",
+          "selection_reason": "alternate_search",
+          "validated": true
+        }
+      ],
+      "selected_actions": [
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true,
+          "selected": true
+        }
+      ],
+      "mapping_status": "selected",
+      "action_extracted": true,
+      "action_validated": true,
+      "tool_selected": true,
+      "timestamp": "2026-09-01T03:22:12.308347+00:00"
+    },
+    "phase2_multiple": {
+      "input_text": "helper.pyを確認したい。その後Testを実行したい。",
+      "judgment_received": true,
+      "clauses": [
+        "helper.pyを確認したい。",
+        "その後Testを実行したい。"
+      ],
+      "fences": [],
+      "action_candidates": [
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい。",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true
+        },
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい。",
+          "tool_name": "search_files",
+          "tool_arguments": {
+            "query": "helper.py"
+          },
+          "execute": false,
+          "reason": "alternate_search",
+          "status": "candidate",
+          "selection_reason": "alternate_search",
+          "validated": true
+        },
+        {
+          "order": 2,
+          "intent": "run_test",
+          "target": null,
+          "source_text": "その後Testを実行したい。",
+          "tool_name": "run_test",
+          "tool_arguments": {},
+          "execute": true,
+          "reason": "explicit_run_test",
+          "status": "executable",
+          "selection_reason": "explicit_run_test",
+          "validated": true
+        }
+      ],
+      "selected_actions": [
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい。",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true,
+          "selected": true
+        },
+        {
+          "order": 2,
+          "intent": "run_test",
+          "target": null,
+          "source_text": "その後Testを実行したい。",
+          "tool_name": "run_test",
+          "tool_arguments": {},
+          "execute": true,
+          "reason": "explicit_run_test",
+          "status": "executable",
+          "selection_reason": "explicit_run_test",
+          "validated": true,
+          "selected": true
+        }
+      ],
+      "mapping_status": "selected",
+      "action_extracted": true,
+      "action_validated": true,
+      "tool_selected": true,
+      "timestamp": "2026-09-01T03:22:12.308347+00:00"
+    },
+    "phase3_targets": [
+      {
+        "input_text": "helper.pyの中身を確認したい",
+        "judgment_received": true,
+        "clauses": [
+          "helper.pyの中身を確認したい"
+        ],
+        "fences": [],
+        "action_candidates": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "helper.py",
+            "source_text": "helper.pyの中身を確認したい",
+            "tool_name": "read_file",
+            "tool_arguments": {
+              "path": "helper.py"
+            },
+            "execute": true,
+            "reason": "inspect_named_file",
+            "status": "executable",
+            "selection_reason": "inspect_named_file",
+            "validated": true
+          },
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "helper.py",
+            "source_text": "helper.pyの中身を確認したい",
+            "tool_name": "search_files",
+            "tool_arguments": {
+              "query": "helper.py"
+            },
+            "execute": false,
+            "reason": "alternate_search",
+            "status": "candidate",
+            "selection_reason": "alternate_search",
+            "validated": true
+          }
+        ],
+        "selected_actions": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "helper.py",
+            "source_text": "helper.pyの中身を確認したい",
+            "tool_name": "read_file",
+            "tool_arguments": {
+              "path": "helper.py"
+            },
+            "execute": true,
+            "reason": "inspect_named_file",
+            "status": "executable",
+            "selection_reason": "inspect_named_file",
+            "validated": true,
+            "selected": true
+          }
+        ],
+        "mapping_status": "selected",
+        "action_extracted": true,
+        "action_validated": true,
+        "tool_selected": true,
+        "timestamp": "2026-09-01T03:22:12.308347+00:00"
+      },
+      {
+        "input_text": "main.pyを読んでからhelper.pyを確認したい",
+        "judgment_received": true,
+        "clauses": [
+          "main.pyを読んでからhelper.pyを確認したい"
+        ],
+        "fences": [],
+        "action_candidates": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "main.py",
+            "source_text": "main.pyを読んでからhelper.pyを確認したい",
+            "tool_name": "read_file",
+            "tool_arguments": {
+              "path": "main.py"
+            },
+            "execute": true,
+            "reason": "inspect_named_file",
+            "status": "executable",
+            "selection_reason": "inspect_named_file",
+            "validated": true
+          },
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "main.py",
+            "source_text": "main.pyを読んでからhelper.pyを確認したい",
+            "tool_name": "search_files",
+            "tool_arguments": {
+              "query": "main.py"
+            },
+            "execute": false,
+            "reason": "alternate_search",
+            "status": "candidate",
+            "selection_reason": "alternate_search",
+            "validated": true
+          },
+          {
+            "order": 2,
+            "intent": "inspect",
+            "target": "helper.py",
+            "source_text": "main.pyを読んでからhelper.pyを確認したい",
+            "tool_name": "read_file",
+            "tool_arguments": {
+              "path": "helper.py"
+            },
+            "execute": true,
+            "reason": "inspect_named_file",
+            "status": "executable",
+            "selection_reason": "inspect_named_file",
+            "validated": true
+          },
+          {
+            "order": 2,
+            "intent": "inspect",
+            "target": "helper.py",
+            "source_text": "main.pyを読んでからhelper.pyを確認したい",
+            "tool_name": "search_files",
+            "tool_arguments": {
+              "query": "helper.py"
+            },
+            "execute": false,
+            "reason": "alternate_search",
+            "status": "candidate",
+            "selection_reason": "alternate_search",
+            "validated": true
+          }
+        ],
+        "selected_actions": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "main.py",
+            "source_text": "main.pyを読んでからhelper.pyを確認したい",
+            "tool_name": "read_file",
+            "tool_arguments": {
+              "path": "main.py"
+            },
+            "execute": true,
+            "reason": "inspect_named_file",
+            "status": "executable",
+            "selection_reason": "inspect_named_file",
+            "validated": true,
+            "selected": true
+          },
+          {
+            "order": 2,
+            "intent": "inspect",
+            "target": "helper.py",
+            "source_text": "main.pyを読んでからhelper.pyを確認したい",
+            "tool_name": "read_file",
+            "tool_arguments": {
+              "path": "helper.py"
+            },
+            "execute": true,
+            "reason": "inspect_named_file",
+            "status": "executable",
+            "selection_reason": "inspect_named_file",
+            "validated": true,
+            "selected": true
+          }
+        ],
+        "mapping_status": "selected",
+        "action_extracted": true,
+        "action_validated": true,
+        "tool_selected": true,
+        "timestamp": "2026-09-01T03:22:12.308347+00:00"
+      },
+      {
+        "input_text": "config.pyを調べる必要がある",
+        "judgment_received": true,
+        "clauses": [
+          "config.pyを調べる必要がある"
+        ],
+        "fences": [],
+        "action_candidates": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "config.py",
+            "source_text": "config.pyを調べる必要がある",
+            "tool_name": "read_file",
+            "tool_arguments": {
+              "path": "config.py"
+            },
+            "execute": true,
+            "reason": "inspect_named_file",
+            "status": "executable",
+            "selection_reason": "inspect_named_file",
+            "validated": true
+          },
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "config.py",
+            "source_text": "config.pyを調べる必要がある",
+            "tool_name": "search_files",
+            "tool_arguments": {
+              "query": "config.py"
+            },
+            "execute": false,
+            "reason": "alternate_search",
+            "status": "candidate",
+            "selection_reason": "alternate_search",
+            "validated": true
+          }
+        ],
+        "selected_actions": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": "config.py",
+            "source_text": "config.pyを調べる必要がある",
+            "tool_name": "read_file",
+            "tool_arguments": {
+              "path": "config.py"
+            },
+            "execute": true,
+            "reason": "inspect_named_file",
+            "status": "executable",
+            "selection_reason": "inspect_named_file",
+            "validated": true,
+            "selected": true
+          }
+        ],
+        "mapping_status": "selected",
+        "action_extracted": true,
+        "action_validated": true,
+        "tool_selected": true,
+        "timestamp": "2026-09-01T03:22:12.308347+00:00"
+      },
+      {
+        "input_text": "このファイルを調べてからTestしたい",
+        "judgment_received": true,
+        "clauses": [
+          "このファイルを調べてからTestしたい"
+        ],
+        "fences": [],
+        "action_candidates": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": null,
+            "source_text": "このファイルを調べてからTestしたい",
+            "tool_name": null,
+            "tool_arguments": {},
+            "execute": false,
+            "reason": "needs_clarification",
+            "status": "needs_clarification",
+            "selection_reason": "needs_clarification",
+            "validated": false
+          },
+          {
+            "order": 2,
+            "intent": "run_test",
+            "target": null,
+            "source_text": "このファイルを調べてからTestしたい",
+            "tool_name": "run_test",
+            "tool_arguments": {},
+            "execute": true,
+            "reason": "explicit_run_test",
+            "status": "executable",
+            "selection_reason": "explicit_run_test",
+            "validated": true
+          }
+        ],
+        "selected_actions": [
+          {
+            "order": 2,
+            "intent": "run_test",
+            "target": null,
+            "source_text": "このファイルを調べてからTestしたい",
+            "tool_name": "run_test",
+            "tool_arguments": {},
+            "execute": true,
+            "reason": "explicit_run_test",
+            "status": "executable",
+            "selection_reason": "explicit_run_test",
+            "validated": true,
+            "selected": true
+          }
+        ],
+        "mapping_status": "selected",
+        "action_extracted": true,
+        "action_validated": true,
+        "tool_selected": true,
+        "timestamp": "2026-09-01T03:22:12.308347+00:00"
+      }
+    ],
+    "phase4_no_false_tools": {
+      "input_text": "helper.pyを確認したい。\nTestについてはまだ実行しない。\nパッチ内にはREADYという文字列がある。\n```python\ndef test_ready():\n    # READ\n    # TEST\n    # READY\n```\n",
+      "judgment_received": true,
+      "clauses": [
+        "helper.pyを確認したい。",
+        "Testについてはまだ実行しない。",
+        "パッチ内にはREADYという文字列がある。"
+      ],
+      "fences": [],
+      "action_candidates": [
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい。",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true
+        },
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい。",
+          "tool_name": "search_files",
+          "tool_arguments": {
+            "query": "helper.py"
+          },
+          "execute": false,
+          "reason": "alternate_search",
+          "status": "candidate",
+          "selection_reason": "alternate_search",
+          "validated": true
+        }
+      ],
+      "selected_actions": [
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい。",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true,
+          "selected": true
+        }
+      ],
+      "mapping_status": "selected",
+      "action_extracted": true,
+      "action_validated": true,
+      "tool_selected": true,
+      "timestamp": "2026-09-01T03:22:12.308347+00:00"
+    },
+    "phase5_ambiguous": [
+      {
+        "input_text": "ちょっと確認したい",
+        "judgment_received": true,
+        "clauses": [
+          "ちょっと確認したい"
+        ],
+        "fences": [],
+        "action_candidates": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": null,
+            "source_text": "ちょっと確認したい",
+            "tool_name": null,
+            "tool_arguments": {},
+            "execute": false,
+            "reason": "needs_clarification",
+            "status": "needs_clarification",
+            "selection_reason": "needs_clarification",
+            "validated": false
+          }
+        ],
+        "selected_actions": [],
+        "mapping_status": "needs_clarification",
+        "action_extracted": true,
+        "action_validated": false,
+        "tool_selected": false,
+        "timestamp": "2026-09-01T03:22:12.309348+00:00"
+      },
+      {
+        "input_text": "原因を調べる必要がある",
+        "judgment_received": true,
+        "clauses": [
+          "原因を調べる必要がある"
+        ],
+        "fences": [],
+        "action_candidates": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": null,
+            "source_text": "原因を調べる必要がある",
+            "tool_name": null,
+            "tool_arguments": {},
+            "execute": false,
+            "reason": "needs_clarification",
+            "status": "needs_clarification",
+            "selection_reason": "needs_clarification",
+            "validated": false
+          }
+        ],
+        "selected_actions": [],
+        "mapping_status": "needs_clarification",
+        "action_extracted": true,
+        "action_validated": false,
+        "tool_selected": false,
+        "timestamp": "2026-09-01T03:22:12.309348+00:00"
+      },
+      {
+        "input_text": "この辺を見てください",
+        "judgment_received": true,
+        "clauses": [
+          "この辺を見てください"
+        ],
+        "fences": [],
+        "action_candidates": [
+          {
+            "order": 1,
+            "intent": "inspect",
+            "target": null,
+            "source_text": "この辺を見てください",
+            "tool_name": null,
+            "tool_arguments": {},
+            "execute": false,
+            "reason": "needs_clarification",
+            "status": "needs_clarification",
+            "selection_reason": "needs_clarification",
+            "validated": false
+          }
+        ],
+        "selected_actions": [],
+        "mapping_status": "needs_clarification",
+        "action_extracted": true,
+        "action_validated": false,
+        "tool_selected": false,
+        "timestamp": "2026-09-01T03:22:12.309348+00:00"
+      }
+    ],
+    "phase6_candidates": {
+      "input_text": "helper.pyを調査したい",
+      "judgment_received": true,
+      "clauses": [
+        "helper.pyを調査したい"
+      ],
+      "fences": [],
+      "action_candidates": [
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを調査したい",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true
+        },
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを調査したい",
+          "tool_name": "search_files",
+          "tool_arguments": {
+            "query": "helper.py"
+          },
+          "execute": false,
+          "reason": "alternate_search",
+          "status": "candidate",
+          "selection_reason": "alternate_search",
+          "validated": true
+        }
+      ],
+      "selected_actions": [
+        {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを調査したい",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true,
+          "selected": true
+        }
+      ],
+      "mapping_status": "selected",
+      "action_extracted": true,
+      "action_validated": true,
+      "tool_selected": true,
+      "timestamp": "2026-09-01T03:22:12.309348+00:00"
+    }
+  },
+  "loop": {
+    "read_helper": [
+      {
+        "timestamp": "2026-09-01T03:22:12.316864+00:00",
+        "step_id": 1,
+        "parsed_intent": "inspect",
+        "selected_action": {
+          "order": 1,
+          "intent": "inspect",
+          "target": "helper.py",
+          "source_text": "helper.pyを確認したい",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "helper.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true,
+          "selected": true
+        },
+        "selection_reason": "inspect_named_file",
+        "tool_name": "read_file",
+        "tool_arguments": {
+          "path": "helper.py"
+        },
+        "tool_result": {
+          "ok": true,
+          "path": "helper.py",
+          "text": "from config import FIELD_COUNT, READY\n\nLABELS = [\"alpha\", \"beta\", \"gamma\"]\n\n\ndef load_items():\n    return LABELS[:FIELD_COUNT]\n\n\ndef is_ready():\n    return READY",
+          "total_lines": 11
+        },
+        "execution_status": "ok",
+        "mapping_status": "executable",
+        "next_input": "You asked to inspect helper.py.\n\nHere is the file:\n\nfrom config import FIELD_COUNT, READY\n\nLABELS = [\"alpha\", \"beta\", \"gamma\"]\n\n\ndef load_items():\n    return LABELS[:FIELD_COUNT]\n\n\ndef is_ready():\n    return READY\n",
+        "ok": true
+      }
+    ],
+    "read_config": [
+      {
+        "timestamp": "2026-09-01T03:22:12.317866+00:00",
+        "step_id": 1,
+        "parsed_intent": "inspect",
+        "selected_action": {
+          "order": 1,
+          "intent": "inspect",
+          "target": "config.py",
+          "source_text": "config.pyを確認したい",
+          "tool_name": "read_file",
+          "tool_arguments": {
+            "path": "config.py"
+          },
+          "execute": true,
+          "reason": "inspect_named_file",
+          "status": "executable",
+          "selection_reason": "inspect_named_file",
+          "validated": true,
+          "selected": true
+        },
+        "selection_reason": "inspect_named_file",
+        "tool_name": "read_file",
+        "tool_arguments": {
+          "path": "config.py"
+        },
+        "tool_result": {
+          "ok": true,
+          "path": "config.py",
+          "text": "FIELD_COUNT = 1\nREADY = False",
+          "total_lines": 2
+        },
+        "execution_status": "ok",
+        "mapping_status": "executable",
+        "next_input": "You asked to inspect config.py.\n\nHere is the file:\n\nFIELD_COUNT = 1\nREADY = False\n",
+        "ok": true
+      }
+    ],
+    "patch_partial": [
+      {
+        "timestamp": "2026-09-01T03:22:12.386512+00:00",
+        "step_id": 1,
+        "parsed_intent": "apply_patch",
+        "selected_action": {
+          "order": 1,
+          "intent": "apply_patch",
+          "target": "config.py",
+          "source_text": "config.py を修正する。",
+          "tool_name": "apply_patch",
+          "tool_arguments": {
+            "path": "config.py",
+            "content": "FIELD_COUNT = 3\nREADY = False\n"
+          },
+          "execute": true,
+          "reason": "named_code_fence",
+          "status": "executable",
+          "selection_reason": "named_code_fence",
+          "validated": true,
+          "selected": true
+        },
+        "selection_reason": "named_code_fence",
+        "tool_name": "apply_patch",
+        "tool_arguments": {
+          "path": "config.py",
+          "content": "FIELD_COUNT = 3\nREADY = False\n"
+        },
+        "tool_result": {
+          "ok": true,
+          "path": "config.py",
+          "bytes_written": 32,
+          "git_diff_before": "",
+          "git_diff_after": "diff --git a/config.py b/config.py\nindex b12a5d4..bfbf458 100644\n--- a/config.py\n+++ b/config.py\n@@ -1,2 +1,2 @@\n-FIELD_COUNT = 1\n+FIELD_COUNT = 3\n READY = False\n"
+        },
+        "execution_status": "ok",
+        "mapping_status": "executable",
+        "next_input": "Result:\n{\"ok\": true, \"path\": \"config.py\", \"bytes_written\": 32, \"git_diff_before\": \"\", \"git_diff_after\": \"diff --git a/config.py b/config.py\\nindex b12a5d4..bfbf458 100644\\n--- a/config.py\\n+++ b/config.py\\n@@ -1,2 +1,2 @@\\n-FIELD_COUNT = 1\\n+FIELD_COUNT = 3\\n READY = False\\n\"}\n",
+        "ok": true
+      }
+    ],
+    "test_after_partial": {
+      "ok": false,
+      "command": [
+        "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_main.py",
+        "-q"
+      ],
+      "working_directory": "D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace",
+      "stdout": "F                                                                        [100%]\n================================== FAILURES ===================================\n________________________________ test_assemble ________________________________\n\n    def test_assemble():\n        result = assemble()\n        assert result[\"item\"] == \"gamma\"\n>       assert result[\"ready\"] is True\nE       assert False is True\n\ntests\\test_main.py:7: AssertionError\n=========================== short test summary info ===========================\nFAILED tests/test_main.py::test_assemble - assert False is True\n1 failed in 0.06s\n",
+      "stderr": "",
+      "exit_code": 1,
+      "traceback": "",
+      "execution_time": 0.5911558000079822
+    },
+    "patch_full": [
+      {
+        "timestamp": "2026-09-01T03:22:13.113675+00:00",
+        "step_id": 1,
+        "parsed_intent": "apply_patch",
+        "selected_action": {
+          "order": 1,
+          "intent": "apply_patch",
+          "target": "config.py",
+          "source_text": "config.py を修正する。",
+          "tool_name": "apply_patch",
+          "tool_arguments": {
+            "path": "config.py",
+            "content": "FIELD_COUNT = 3\nREADY = True\n"
+          },
+          "execute": true,
+          "reason": "named_code_fence",
+          "status": "executable",
+          "selection_reason": "named_code_fence",
+          "validated": true,
+          "selected": true
+        },
+        "selection_reason": "named_code_fence",
+        "tool_name": "apply_patch",
+        "tool_arguments": {
+          "path": "config.py",
+          "content": "FIELD_COUNT = 3\nREADY = True\n"
+        },
+        "tool_result": {
+          "ok": true,
+          "path": "config.py",
+          "bytes_written": 31,
+          "git_diff_before": "diff --git a/config.py b/config.py\nindex b12a5d4..bfbf458 100644\n--- a/config.py\n+++ b/config.py\n@@ -1,2 +1,2 @@\n-FIELD_COUNT = 1\n+FIELD_COUNT = 3\n READY = False\n",
+          "git_diff_after": "diff --git a/config.py b/config.py\nindex b12a5d4..f603d22 100644\n--- a/config.py\n+++ b/config.py\n@@ -1,2 +1,2 @@\n-FIELD_COUNT = 1\n-READY = False\n+FIELD_COUNT = 3\n+READY = True\n"
+        },
+        "execution_status": "ok",
+        "mapping_status": "executable",
+        "next_input": "Result:\n{\"ok\": true, \"path\": \"config.py\", \"bytes_written\": 31, \"git_diff_before\": \"diff --git a/config.py b/config.py\\nindex b12a5d4..bfbf458 100644\\n--- a/config.py\\n+++ b/config.py\\n@@ -1,2 +1,2 @@\\n-FIELD_COUNT = 1\\n+FIELD_COUNT = 3\\n READY = False\\n\", \"git_diff_after\": \"diff --git a/config.py b/config.py\\nindex b12a5d4..f603d22 100644\\n--- a/config.py\\n+++ b/config.py\\n@@ -1,2 +1,2 @@\\n-FIELD_COUNT = 1\\n-READY = False\\n+FIELD_COUNT = 3\\n+READY = True\\n\"}\n",
+        "ok": true
+      }
+    ],
+    "test_after_full": {
+      "ok": true,
+      "command": [
+        "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "-m",
+        "pytest",
+        "tests/test_main.py",
+        "-q"
+      ],
+      "working_directory": "D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace",
+      "stdout": ".                                                                        [100%]\n1 passed in 0.01s\n",
+      "stderr": "",
+      "exit_code": 0,
+      "traceback": "",
+      "execution_time": 0.5305520999827422
+    },
+    "program_after_full": {
+      "ok": true,
+      "command": [
+        "C:\\Users\\e1n07\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+        "main.py"
+      ],
+      "working_directory": "D:\\AI-Agent\\research\\llm_benchmarks\\judgment_action_bridge_experiment\\results\\20260901T032211Z\\workspace",
+      "stdout": "{\"item\": \"gamma\", \"ready\": true}\n",
+      "stderr": "",
+      "exit_code": 0,
+      "traceback": "",
+      "execution_time": 0.055280700005823746
+    }
+  },
+  "flags": {
+    "judgment_received": true,
+    "action_extracted": true,
+    "tool_selected": true,
+    "multiple_actions": true,
+    "false_run_test": false,
+    "ambiguous_stopped": true,
+    "loop_test_pass": true,
+    "loop_mid_fail": true
+  }
+}

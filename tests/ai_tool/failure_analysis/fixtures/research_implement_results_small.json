@@ -1,0 +1,31 @@
+{
+  "note": "Small Research Implement result fixture",
+  "benchmark": "research_implement",
+  "runs": [
+    {
+      "timestamp": "2026-08-19T04:39:39.061729+00:00",
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "request": "Create a memory usage tool.",
+      "pass": false,
+      "ok": false,
+      "fail_stage": "research",
+      "research_stop_reason": "stagnation",
+      "error": "insufficient_research",
+      "trace": [{"raw_model_output": "large raw content"}],
+      "pipeline": {"generated_code": "def generated(): pass"},
+      "unknown_future_field": {"value": 1}
+    },
+    {
+      "timestamp": "2026-08-19T05:00:00+00:00",
+      "profile": "qwen",
+      "model": "qwen",
+      "request": "Create a disk usage tool.",
+      "pass": true,
+      "ok": true,
+      "fail_stage": null,
+      "research_stop_reason": "completed",
+      "error": null
+    }
+  ]
+}

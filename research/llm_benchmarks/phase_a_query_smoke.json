@@ -1,0 +1,157 @@
+[
+  {
+    "request": "WindowsのCPU温度を取得するToolを作ってください。",
+    "intent": {
+      "platform": "Windows",
+      "target": "cpu",
+      "metric": "temperature",
+      "unit": "°C",
+      "desired_operation": "get",
+      "implementation_context": "unspecified",
+      "purpose": "tool_output",
+      "source": "fallback_rules"
+    },
+    "exploration_queries": [
+      "Windows cpu temperature °C",
+      "Windows cpu temperature °C command",
+      "Windows cpu temperature sensor"
+    ],
+    "build_search_queries": [
+      "Windows cpu temperature °C",
+      "Windows cpu temperature °C command",
+      "Windows cpu temperature sensor"
+    ],
+    "followup_queries": [
+      "Windows cpu temperature °C status"
+    ],
+    "checks": {
+      "no_single_token_disk": true,
+      "no_get_volume_hardcode": true,
+      "no_disk_disk": true
+    }
+  },
+  {
+    "request": "Windowsのディスク使用率を取得するToolを作ってください。",
+    "intent": {
+      "platform": "Windows",
+      "target": "disk",
+      "metric": "usage",
+      "unit": "%",
+      "desired_operation": "get",
+      "implementation_context": "unspecified",
+      "purpose": "tool_output",
+      "source": "fallback_rules"
+    },
+    "exploration_queries": [
+      "Windows disk usage percentage",
+      "Windows disk usage percentage command",
+      "Windows disk utilization"
+    ],
+    "build_search_queries": [
+      "Windows disk usage percentage",
+      "Windows disk usage percentage command",
+      "Windows disk utilization"
+    ],
+    "followup_queries": [
+      "Windows disk usage percentage status"
+    ],
+    "checks": {
+      "no_single_token_disk": true,
+      "no_get_volume_hardcode": true,
+      "no_disk_disk": true
+    }
+  },
+  {
+    "request": "GPUの使用率を取得するToolを作ってください。",
+    "intent": {
+      "platform": "unspecified",
+      "target": "gpu",
+      "metric": "usage",
+      "unit": "%",
+      "desired_operation": "get",
+      "implementation_context": "unspecified",
+      "purpose": "tool_output",
+      "source": "fallback_rules"
+    },
+    "exploration_queries": [
+      "gpu usage percentage",
+      "gpu usage percentage command",
+      "gpu utilization"
+    ],
+    "build_search_queries": [
+      "gpu usage percentage",
+      "gpu usage percentage command",
+      "gpu utilization"
+    ],
+    "followup_queries": [
+      "gpu usage percentage status"
+    ],
+    "checks": {
+      "no_single_token_disk": true,
+      "no_get_volume_hardcode": true,
+      "no_disk_disk": true
+    }
+  },
+  {
+    "request": "GPU VRAMの使用量をMB単位で取得するToolを作ってください。",
+    "intent": {
+      "platform": "unspecified",
+      "target": "gpu",
+      "metric": "vram_usage",
+      "unit": "MB",
+      "desired_operation": "get",
+      "implementation_context": "unspecified",
+      "purpose": "tool_output",
+      "source": "fallback_rules"
+    },
+    "exploration_queries": [
+      "gpu VRAM usage MB",
+      "gpu VRAM usage MB command",
+      "gpu VRAM memory used"
+    ],
+    "build_search_queries": [
+      "gpu VRAM usage MB",
+      "gpu VRAM usage MB command",
+      "gpu VRAM memory used"
+    ],
+    "followup_queries": [
+      "gpu VRAM usage MB status"
+    ],
+    "checks": {
+      "no_single_token_disk": true,
+      "no_get_volume_hardcode": true,
+      "no_disk_disk": true
+    }
+  },
+  {
+    "request": "Windowsのメモリ使用率を取得するToolを作ってください。",
+    "intent": {
+      "platform": "Windows",
+      "target": "memory",
+      "metric": "usage",
+      "unit": "%",
+      "desired_operation": "get",
+      "implementation_context": "unspecified",
+      "purpose": "tool_output",
+      "source": "fallback_rules"
+    },
+    "exploration_queries": [
+      "Windows memory usage percentage",
+      "Windows memory usage percentage command",
+      "Windows memory utilization"
+    ],
+    "build_search_queries": [
+      "Windows memory usage percentage",
+      "Windows memory usage percentage command",
+      "Windows memory utilization"
+    ],
+    "followup_queries": [
+      "Windows memory usage percentage status"
+    ],
+    "checks": {
+      "no_single_token_disk": true,
+      "no_get_volume_hardcode": true,
+      "no_disk_disk": true
+    }
+  }
+]

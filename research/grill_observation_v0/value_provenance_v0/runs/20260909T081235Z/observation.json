@@ -1,0 +1,66 @@
+{
+  "experiment": "value_provenance_v0",
+  "run_id": "20260909T081235Z",
+  "model": "qwen3:14b",
+  "production_modified": false,
+  "search_query_parser_modified": false,
+  "tool_executed": false,
+  "schema_is_research_only": true,
+  "goal": "gridを検索して、その内容を要約してほしい。",
+  "state": "まだ何も調査していない。",
+  "need": "gridの構造と内容を確認する。",
+  "start_state": {
+    "case": "Case 2 frozen",
+    "source_run": "research/grill_observation_v0/resolver_owner_v0/runs/20260909T064802Z/case2",
+    "source_file": "04_system_retry.json",
+    "system_note_for_record_only": {
+      "required_capability": "workspace_file_search",
+      "selected_tool": "search_files",
+      "stopped_at": "tool_selected_arguments_incomplete",
+      "missing": "query",
+      "next_action": null
+    }
+  },
+  "prompt": "Goal:\ngridを検索して、その内容を要約してほしい。\n\nCurrent State:\nまだ何も調査していない。\n\n現在の未解決点:\ngridの構造と内容を確認する。\n\nSystem の事実:\nSystem は次の実行可能処理まで進めなかった。必要な値が1つ不足している。\n\n依頼:\n現在、次の処理に必要な値が1つ不足している。\n確認済み情報からその値を決められるなら、\n値と、その値を採用できる根拠を示す。\n確認済み情報だけでは決められないなら、\n未確定として返す。\n\n【Grounding】\n\n未確認の意味・対象・値・構造を具体化する際は、\n確認済みの事実から導けない具体情報で不足を埋めないこと。\n\n分からないことは、分からない状態として保持すること。\n\n具体化のために追加情報が必要なら、\nその情報自体を「次に確認すべきこと」として扱うこと。\n\n確認されていない具体例を、\n確認済み事実として扱わないこと。\n\n出力はこのJSONオブジェクト1つのみ。説明文は付けない。\n\n{\n  \"status\": \"PROPOSED または UNRESOLVED\",\n  \"value\": \"文字列 または null\",\n  \"source_type\": \"USER_GOAL または STATE または SYSTEM_CONFIRMED または NONE\",\n  \"source_text\": \"根拠として使う確認済み原文の抜粋 または null\",\n  \"reason\": \"短い説明\"\n}\n\nstatus が UNRESOLVED のとき value と source_text は null、source_type は NONE。\n確認済みでない例・仮説を value に入れない。\n",
+  "raw": "{\n  \"status\": \"UNRESOLVED\",\n  \"value\": null,\n  \"source_type\": \"NONE\",\n  \"source_text\": null,\n  \"reason\": \"gridの構造と内容が確認されていない\"\n}",
+  "visible": "{\n  \"status\": \"UNRESOLVED\",\n  \"value\": null,\n  \"source_type\": \"NONE\",\n  \"source_text\": null,\n  \"reason\": \"gridの構造と内容が確認されていない\"\n}",
+  "parse_error": null,
+  "parsed_proposal": {
+    "status": "UNRESOLVED",
+    "value": null,
+    "source_type": "NONE",
+    "source_text": null,
+    "reason": "gridの構造と内容が確認されていない"
+  },
+  "value": null,
+  "source_type": "NONE",
+  "source_text": null,
+  "reason": "gridの構造と内容が確認されていない",
+  "grounding": {
+    "value": null,
+    "source_type": "NONE",
+    "source_text": null,
+    "reason": "gridの構造と内容が確認されていない",
+    "value_in_goal": false,
+    "value_in_state": false,
+    "value_in_system_confirmed": false,
+    "source_text_in_claimed_source": false,
+    "unconfirmed_example_markers_near_claim": false,
+    "value_absent_from_all_confirmed_sources": false
+  },
+  "validator": {
+    "result": "UNRESOLVED",
+    "source_text_in_claimed_source": false,
+    "value_in_source_text": false,
+    "value_in_claimed_source": false,
+    "checks": [
+      "status_unresolved"
+    ],
+    "note": "AI が未確定とした。意味の正誤は見ていない。"
+  },
+  "promotion": "UNRESOLVED",
+  "verdict": "PARTIAL",
+  "verdict_reason": "AI は安全に UNRESOLVED を返した。",
+  "elapsed_s": 24.338,
+  "error": null
+}

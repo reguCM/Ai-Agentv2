@@ -1,0 +1,154 @@
+{
+  "summary": {
+    "n": 5,
+    "ids": [
+      "Q33",
+      "Q37",
+      "Q41",
+      "Q23",
+      "Q42"
+    ],
+    "AUTO": 5,
+    "REVIEW": 0,
+    "HUMAN": 0,
+    "auto_ids": [
+      "Q33",
+      "Q37",
+      "Q41",
+      "Q23",
+      "Q42"
+    ],
+    "review_ids": [],
+    "human_ids": [],
+    "semantic_dangerous_count": 0,
+    "parse_failure": 0,
+    "missing_output": 0,
+    "false_auto": 0,
+    "false_auto_ids": []
+  },
+  "records": [
+    {
+      "decision_id": "Q33",
+      "first_recommendation": "Make next read after search a capability/Help tool, not fixed read_file.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "search-hit 次読取は Help 確認した workspace_file_read Tool。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q37",
+      "first_recommendation": "Move audit demotion to Index classifier. Remove from _RULES.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "audit 降格を Index classifier へ。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q41",
+      "first_recommendation": "Use file-attached mutation keywords (e.g., 'create file'). Avoid bare verbs.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "file付き表層の最小集合（ファイルを作 等）。裸 verb ではない。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q23",
+      "first_recommendation": "Use file-attached surface forms (e.g., 'edit file') for mutation keywords. Avoid bare verbs.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 25,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "裸 verb と mutation の日本語「ファイル」を足さない。file付き表層+組合せ。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    },
+    {
+      "decision_id": "Q42",
+      "first_recommendation": "Use Index schema for exclusion, not hidden Python set.",
+      "semantic_gate": "PASS",
+      "semantic_dangerous": [],
+      "route": "AUTO",
+      "notes": [
+        "semantic_pass_uniquely_settled"
+      ],
+      "attributes": [
+        "compatibility"
+      ],
+      "need_human": false,
+      "needs_deep_review": true,
+      "uncertainty": 20,
+      "parse_failure": false,
+      "missing_output": false,
+      "contract_eval": {
+        "false_auto": false,
+        "flags": [],
+        "danger_hits": [],
+        "rejected_hits": [],
+        "adopted_contract": "除外正本は Index classifier。schema 2。",
+        "hidden_used_for": "evaluator_confirm_only"
+      }
+    }
+  ],
+  "llm_called": false
+}

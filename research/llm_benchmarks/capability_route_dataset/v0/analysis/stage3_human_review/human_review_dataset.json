@@ -1,0 +1,2992 @@
+{
+  "dataset_name": "v0 Stage 3 Human Review Dataset",
+  "version": "v0-stage3-review-1",
+  "case_count": 50,
+  "principles": [
+    "No automatic gold correctness for PROJECT_AGENT",
+    "human_web_need is separate human-review column",
+    "heuristic_judgment / llm_called / search_outcome / answer_surface are separated",
+    "classification_candidates are not final misjudgment labels",
+    "Do not implement heuristic fixes in this step",
+    "n=50 insufficient to generalize",
+    "Separate judgment issues from web-search tool failures"
+  ],
+  "axis_draft": {
+    "C_layer_mismatch": [
+      "C_layer_mismatch_underflag_candidate",
+      "C_layer_mismatch_overflag_candidate"
+    ],
+    "D_search_path": [
+      "D_search_path_error_candidate",
+      "D_search_path_hits_candidate",
+      "D_search_path_empty_candidate",
+      "D_search_path_blocked_candidate"
+    ],
+    "F_route_related": [
+      "F_route_uncertain_saturated_candidate",
+      "F_related_continue_not_sufficiency_candidate",
+      "F_new_tool_hint_collision_candidate"
+    ],
+    "G_tool_capability": [
+      "G_existing_tool_path_candidate",
+      "G_tool_gap_but_searched_candidate",
+      "G_no_web_human_but_llm_searched_candidate"
+    ],
+    "E_evidence_answer": [
+      "E_insufficient_search_evidence_candidate",
+      "E_hits_use_unverified_candidate"
+    ],
+    "notes": [
+      "Candidates only; misjudgment_final stays null until human finalizes axes.",
+      "human_web_need is curator scaffold, not automatic agent score.",
+      "Separate judgment-layer issues from search-path failures (D_*).",
+      "n=50 is too small to generalize."
+    ]
+  },
+  "topic_summary": {
+    "composite": {
+      "n": 3,
+      "human_web_need": {
+        "ambiguous": 3
+      },
+      "heuristic_yes": 1,
+      "llm_called": 2,
+      "search_primary": {
+        "error": 2,
+        "null": 1
+      },
+      "layer_underflag": 1,
+      "layer_overflag": 0,
+      "search_error": 2
+    },
+    "current_info": {
+      "n": 7,
+      "human_web_need": {
+        "needs_web": 6,
+        "ambiguous": 1
+      },
+      "heuristic_yes": 1,
+      "llm_called": 7,
+      "search_primary": {
+        "error": 7
+      },
+      "layer_underflag": 6,
+      "layer_overflag": 0,
+      "search_error": 7
+    },
+    "file_ops": {
+      "n": 11,
+      "human_web_need": {
+        "no_web": 11
+      },
+      "heuristic_yes": 5,
+      "llm_called": 0,
+      "search_primary": {
+        "null": 11
+      },
+      "layer_underflag": 0,
+      "layer_overflag": 5,
+      "search_error": 0
+    },
+    "general_knowledge": {
+      "n": 2,
+      "human_web_need": {
+        "no_web": 1,
+        "ambiguous": 1
+      },
+      "heuristic_yes": 0,
+      "llm_called": 1,
+      "search_primary": {
+        "null": 1,
+        "error": 1
+      },
+      "layer_underflag": 1,
+      "layer_overflag": 0,
+      "search_error": 1
+    },
+    "local_observation": {
+      "n": 4,
+      "human_web_need": {
+        "no_web": 4
+      },
+      "heuristic_yes": 0,
+      "llm_called": 0,
+      "search_primary": {
+        "null": 4
+      },
+      "layer_underflag": 0,
+      "layer_overflag": 0,
+      "search_error": 0
+    },
+    "news": {
+      "n": 1,
+      "human_web_need": {
+        "needs_web": 1
+      },
+      "heuristic_yes": 1,
+      "llm_called": 1,
+      "search_primary": {
+        "error": 1
+      },
+      "layer_underflag": 0,
+      "layer_overflag": 0,
+      "search_error": 1
+    },
+    "niche_or_fictional": {
+      "n": 4,
+      "human_web_need": {
+        "needs_web": 4
+      },
+      "heuristic_yes": 0,
+      "llm_called": 4,
+      "search_primary": {
+        "error": 4
+      },
+      "layer_underflag": 4,
+      "layer_overflag": 0,
+      "search_error": 4
+    },
+    "product_external": {
+      "n": 3,
+      "human_web_need": {
+        "ambiguous": 2,
+        "needs_web": 1
+      },
+      "heuristic_yes": 0,
+      "llm_called": 3,
+      "search_primary": {
+        "hits": 1,
+        "error": 2
+      },
+      "layer_underflag": 3,
+      "layer_overflag": 0,
+      "search_error": 2
+    },
+    "time_dependent": {
+      "n": 6,
+      "human_web_need": {
+        "needs_web": 3,
+        "ambiguous": 3
+      },
+      "heuristic_yes": 0,
+      "llm_called": 6,
+      "search_primary": {
+        "error": 6
+      },
+      "layer_underflag": 6,
+      "layer_overflag": 0,
+      "search_error": 6
+    },
+    "tool_gap": {
+      "n": 5,
+      "human_web_need": {
+        "reviewer_uncertain": 5
+      },
+      "heuristic_yes": 0,
+      "llm_called": 4,
+      "search_primary": {
+        "error": 4,
+        "null": 1
+      },
+      "layer_underflag": 4,
+      "layer_overflag": 0,
+      "search_error": 4
+    },
+    "weather": {
+      "n": 4,
+      "human_web_need": {
+        "needs_web": 4
+      },
+      "heuristic_yes": 0,
+      "llm_called": 4,
+      "search_primary": {
+        "error": 3,
+        "hits": 1
+      },
+      "layer_underflag": 4,
+      "layer_overflag": 0,
+      "search_error": 3
+    }
+  },
+  "paraphrase_groups": {
+    "para_osaka_weather": [
+      {
+        "case_id": "P01a",
+        "human_web_need": "needs_web",
+        "heuristic_judgment": false,
+        "llm_called": true,
+        "search_primary_outcome": "error",
+        "answer_surface_proxy": "inconclusive",
+        "heuristic_route": "uncertain",
+        "classification_candidates": [
+          "C_layer_mismatch_underflag_candidate",
+          "D_search_path_error_candidate",
+          "F_route_uncertain_saturated_candidate",
+          "E_insufficient_search_evidence_candidate"
+        ]
+      },
+      {
+        "case_id": "P01b",
+        "human_web_need": "needs_web",
+        "heuristic_judgment": false,
+        "llm_called": true,
+        "search_primary_outcome": "hits",
+        "answer_surface_proxy": "inconclusive",
+        "heuristic_route": "uncertain",
+        "classification_candidates": [
+          "C_layer_mismatch_underflag_candidate",
+          "D_search_path_hits_candidate",
+          "F_route_uncertain_saturated_candidate",
+          "E_hits_use_unverified_candidate"
+        ]
+      },
+      {
+        "case_id": "P01c",
+        "human_web_need": "needs_web",
+        "heuristic_judgment": false,
+        "llm_called": true,
+        "search_primary_outcome": "error",
+        "answer_surface_proxy": "inconclusive",
+        "heuristic_route": "uncertain",
+        "classification_candidates": [
+          "C_layer_mismatch_underflag_candidate",
+          "D_search_path_error_candidate",
+          "F_route_uncertain_saturated_candidate",
+          "E_insufficient_search_evidence_candidate"
+        ]
+      }
+    ],
+    "para_rtx3060": [
+      {
+        "case_id": "P02a",
+        "human_web_need": "ambiguous",
+        "heuristic_judgment": false,
+        "llm_called": true,
+        "search_primary_outcome": "error",
+        "answer_surface_proxy": "inconclusive",
+        "heuristic_route": "uncertain",
+        "classification_candidates": [
+          "C_layer_mismatch_underflag_candidate",
+          "D_search_path_error_candidate",
+          "F_route_uncertain_saturated_candidate",
+          "E_insufficient_search_evidence_candidate"
+        ]
+      },
+      {
+        "case_id": "P02b",
+        "human_web_need": "needs_web",
+        "heuristic_judgment": false,
+        "llm_called": true,
+        "search_primary_outcome": "error",
+        "answer_surface_proxy": "inconclusive",
+        "heuristic_route": "uncertain",
+        "classification_candidates": [
+          "C_layer_mismatch_underflag_candidate",
+          "D_search_path_error_candidate",
+          "F_route_uncertain_saturated_candidate",
+          "E_insufficient_search_evidence_candidate"
+        ]
+      }
+    ]
+  },
+  "family_extractions": {
+    "C_layer_mismatch": {
+      "count": 34,
+      "items": [
+        {
+          "case_id": "A03",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A04",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A05",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A06",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C01",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C02",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証"
+        },
+        {
+          "case_id": "C03",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C04",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C05",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "D01",
+          "tag": "C_layer_mismatch_overflag_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D02",
+          "tag": "C_layer_mismatch_overflag_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; needs_new_tool 発火（D02は registryに 衝突の疑い）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D03",
+          "tag": "C_layer_mismatch_overflag_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; related空で uncertain に落ちた構造"
+        },
+        {
+          "case_id": "D04",
+          "tag": "C_layer_mismatch_overflag_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D05",
+          "tag": "C_layer_mismatch_overflag_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）"
+        },
+        {
+          "case_id": "E01",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E02",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E03",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E04",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E05",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F01",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F02",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F03",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F04",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F05",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G06",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G07",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G08",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G10",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "H01",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P01a",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P01b",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証"
+        },
+        {
+          "case_id": "P01c",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P02a",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P02b",
+          "tag": "C_layer_mismatch_underflag_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        }
+      ]
+    },
+    "D_search_path": {
+      "count": 32,
+      "items": [
+        {
+          "case_id": "A01",
+          "tag": "D_search_path_error_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A02",
+          "tag": "D_search_path_error_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A03",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A04",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A05",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A06",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C01",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C02",
+          "tag": "D_search_path_hits_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証"
+        },
+        {
+          "case_id": "C03",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C04",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C05",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E01",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E02",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E03",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E04",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E05",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F01",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F02",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F03",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F04",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F05",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G06",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G07",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G08",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G10",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "H01",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "H02",
+          "tag": "D_search_path_error_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P01a",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P01b",
+          "tag": "D_search_path_hits_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証"
+        },
+        {
+          "case_id": "P01c",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P02a",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P02b",
+          "tag": "D_search_path_error_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        }
+      ]
+    },
+    "F_route_related": {
+      "count": 50,
+      "items": [
+        {
+          "case_id": "A01",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A02",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A03",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A04",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A05",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A06",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "B01",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "B02",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "B03",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "B04",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "B05",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "related空で uncertain に落ちた構造"
+        },
+        {
+          "case_id": "B06",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "C01",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C02",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証"
+        },
+        {
+          "case_id": "C03",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C04",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C05",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "D01",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D02",
+          "tag": "F_new_tool_hint_collision_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; needs_new_tool 発火（D02は registryに 衝突の疑い）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D03",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; related空で uncertain に落ちた構造"
+        },
+        {
+          "case_id": "D04",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D05",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）"
+        },
+        {
+          "case_id": "E01",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E02",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E03",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E04",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E05",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F01",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F02",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F03",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F04",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F05",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G01",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G02",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G03",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G04",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G05",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G06",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G07",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G08",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G09",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "related空で uncertain に落ちた構造"
+        },
+        {
+          "case_id": "G10",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "H01",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "H02",
+          "tag": "F_related_continue_not_sufficiency_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "H03",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "related空で uncertain に落ちた構造"
+        },
+        {
+          "case_id": "P01a",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P01b",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証"
+        },
+        {
+          "case_id": "P01c",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P02a",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P02b",
+          "tag": "F_route_uncertain_saturated_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        }
+      ]
+    },
+    "G_tool_capability": {
+      "count": 17,
+      "items": [
+        {
+          "case_id": "B01",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "B02",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "B03",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "B04",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "B06",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D01",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D02",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; needs_new_tool 発火（D02は registryに 衝突の疑い）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "D04",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G01",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G02",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G03",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G04",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G05",
+          "tag": "G_existing_tool_path_candidate",
+          "reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり"
+        },
+        {
+          "case_id": "G06",
+          "tag": "G_tool_gap_but_searched_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G07",
+          "tag": "G_tool_gap_but_searched_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G08",
+          "tag": "G_tool_gap_but_searched_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G10",
+          "tag": "G_tool_gap_but_searched_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        }
+      ]
+    },
+    "E_evidence_answer": {
+      "count": 32,
+      "items": [
+        {
+          "case_id": "A01",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A02",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A03",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A04",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A05",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "A06",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C01",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C02",
+          "tag": "E_hits_use_unverified_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証"
+        },
+        {
+          "case_id": "C03",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C04",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "C05",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E01",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E02",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E03",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E04",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "E05",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F01",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F02",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F03",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F04",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "F05",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G06",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G07",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G08",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "G10",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "H01",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "H02",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P01a",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P01b",
+          "tag": "E_hits_use_unverified_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証"
+        },
+        {
+          "case_id": "P01c",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P02a",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        },
+        {
+          "case_id": "P02b",
+          "tag": "E_insufficient_search_evidence_candidate",
+          "reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい"
+        }
+      ]
+    }
+  },
+  "additional_collection_proposals": [
+    {
+      "why": "heuristic語ギャップの再現（最近/明日/天気 vs 最新/現在/ニュース）",
+      "n": "6-8",
+      "category_focus": "time_dependent / weather / news contrast"
+    },
+    {
+      "why": "search hits成功連鎖の観測が不足（D_search_path_hits が稀）",
+      "n": "4-6",
+      "category_focus": "stable English / evergreen topics"
+    },
+    {
+      "why": "new_tool ヒント衝突の確認（F_new_tool / registryに 型）",
+      "n": "2-3",
+      "category_focus": "short substring collisions"
+    },
+    {
+      "why": "human no_web なのに LLM検索（G_no_web_human_but_llm_searched）がほぼ無い／逆にD系overflagの再現",
+      "n": "3-4",
+      "category_focus": "web_word_but_unneeded paraphrases"
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "A01",
+      "design_category": "web_needed_clear",
+      "group_id": null,
+      "request": "今日の日本の主なニュースを教えて",
+      "observe_goal": "時事・最新情報でWeb判断が出るか",
+      "content_topic": "news",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "今日のニュースは時間依存の外部情報",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": true,
+      "heuristic_web_reason": "request_hints_web; search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_judged_called_error_answer_declined_unconfirmed",
+      "classification_candidates": [
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate",
+        "aligned_heuristic_yes_llm_called"
+      ],
+      "classification_reason": "検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "A02",
+      "design_category": "web_needed_clear",
+      "group_id": null,
+      "request": "現在のドル円の大まかな為替水準について教えて",
+      "observe_goal": "現在価格・相場系",
+      "content_topic": "current_info",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "為替の現在水準は現在情報",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": true,
+      "heuristic_web_reason": "request_hints_web; search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_judged_called_error_answer_declined_unconfirmed",
+      "classification_candidates": [
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate",
+        "aligned_heuristic_yes_llm_called"
+      ],
+      "classification_reason": "検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "A03",
+      "design_category": "web_needed_clear",
+      "group_id": null,
+      "request": "OpenAIについて最近何か大きな発表はありましたか",
+      "observe_goal": "最近の出来事",
+      "content_topic": "time_dependent",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "最近の発表は時間依存",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "A04",
+      "design_category": "web_needed_clear",
+      "group_id": null,
+      "request": "今のNVIDIAの株価の雰囲気を教えて",
+      "observe_goal": "現在の企業状況",
+      "content_topic": "current_info",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "今の株価雰囲気は現在情報",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "A05",
+      "design_category": "web_needed_clear",
+      "group_id": null,
+      "request": "明日の大阪の天気を教えて",
+      "observe_goal": "予報・外部情報",
+      "content_topic": "weather",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "明日の天気は予報・外部",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "A06",
+      "design_category": "web_needed_clear",
+      "group_id": null,
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "observe_goal": "版固有の外部情報",
+      "content_topic": "current_info",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "特定版の変更点は通常外部確認向き",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "B01",
+      "design_category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "CPU使用率を教えて",
+      "observe_goal": "ローカル観測Tool",
+      "content_topic": "local_observation",
+      "human_web_need": "no_web",
+      "human_web_need_note": "CPU使用率はローカル観測",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "get_gpu_status",
+        "cpu_status"
+      ],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "cpu_status"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_related_continue_not_sufficiency_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "B02",
+      "design_category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "GPUの状態を教えて",
+      "observe_goal": "ローカル観測Tool",
+      "content_topic": "local_observation",
+      "human_web_need": "no_web",
+      "human_web_need_note": "GPU状態はローカル観測",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "get_gpu_status",
+        "get_gpu_processes",
+        "cpu_status"
+      ],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "get_gpu_status"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_related_continue_not_sufficiency_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "B03",
+      "design_category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "registry/tools.json を読んで visibility が agent のTool名を一覧して",
+      "observe_goal": "File Tool",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "registry読取はファイル操作",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "list_files",
+        "list_files",
+        "read_file"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_route_uncertain_saturated_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "B04",
+      "design_category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "docs/v1_basic_specification.md の冒頭にあるV1の目的を要約して",
+      "observe_goal": "ローカル文書",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "ローカル文書要約",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "read_file"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_route_uncertain_saturated_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "B05",
+      "design_category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "observe_goal": "一般知識",
+      "content_topic": "general_knowledge",
+      "human_web_need": "no_web",
+      "human_web_need_note": "言語一般知識で足りうる",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_route_uncertain_saturated_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "related空で uncertain に落ちた構造",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "B06",
+      "design_category": "web_unneeded_clear",
+      "group_id": null,
+      "request": "このリポジトリ直下にどんな主要フォルダがあるか list して",
+      "observe_goal": "list_files",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "ディレクトリ一覧はファイル操作",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "list_files"
+      ],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "list_files"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_related_continue_not_sufficiency_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "C01",
+      "design_category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "WindowsのCPU温度取得って最近どうなってる？",
+      "observe_goal": "曖昧な『最近』",
+      "content_topic": "time_dependent",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "最近どうなってるはWebもローカルも取りうる",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "get_gpu_status",
+        "cpu_status"
+      ],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web",
+        "cpu_status"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_related_continue_not_sufficiency_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "C02",
+      "design_category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "Ollamaについて詳しく教えて",
+      "observe_goal": "詳しく＝Webか知識か曖昧",
+      "content_topic": "product_external",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "詳しくは知識でもWebでも可",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "hits"
+      ],
+      "search_primary_outcome": "hits",
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_hits_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_hits_use_unverified_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "C03",
+      "design_category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "RTX 3060って今どういう扱いですか？",
+      "observe_goal": "『今』の扱いが曖昧",
+      "content_topic": "current_info",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "今の扱いは文脈依存",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "C04",
+      "design_category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "ローカルLLMの事情、最近どう？",
+      "observe_goal": "事情が広い",
+      "content_topic": "time_dependent",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "事情が広い",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "C05",
+      "design_category": "web_needed_ambiguous",
+      "group_id": null,
+      "request": "この手のエージェントって今どこまで実用的なの",
+      "observe_goal": "評価が文脈依存",
+      "content_topic": "time_dependent",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "実用性評価は主観・文脈依存",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "D01",
+      "design_category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "このプロジェクトのWeb検索Toolの実装を、ローカルのコードから説明して",
+      "observe_goal": "『Web検索』語＋ローカル説明",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "ローカル実装説明が主目的（Web語あり）",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": true,
+      "heuristic_web_reason": "request_hints_web; search_web_in_related_tools; search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "search_web"
+      ],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "search_files"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_judged_not_called_answer_present",
+      "classification_candidates": [
+        "C_layer_mismatch_overflag_candidate",
+        "F_related_continue_not_sufficiency_candidate",
+        "G_existing_tool_path_candidate"
+      ],
+      "classification_reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "D02",
+      "design_category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "registryにある最新のTool一覧をファイルから確認して",
+      "observe_goal": "『最新』語＋ローカル",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "registry一覧はローカル（最新という語あり）",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": true,
+      "heuristic_web_reason": "request_hints_web; search_web_is_agent_public",
+      "heuristic_route": "needs_new_tool",
+      "heuristic_route_reason": "request_hints_new_tool; no_related_agent_public_tools",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "list_files",
+        "list_files",
+        "read_file",
+        "list_files",
+        "read_file"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "empty",
+      "answer_surface_proxy": "failure_candidate",
+      "web_pattern": "web_judged_not_called_answer_empty",
+      "classification_candidates": [
+        "C_layer_mismatch_overflag_candidate",
+        "F_new_tool_hint_collision_candidate",
+        "G_existing_tool_path_candidate"
+      ],
+      "classification_reason": "heuristic judged_yes だが search_web 未実行; needs_new_tool 発火（D02は registryに 衝突の疑い）; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "D03",
+      "design_category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "現在のagent公開Toolは何か、tools.jsonを読んで答えて",
+      "observe_goal": "『現在』語＋ローカル",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "tools.json確認はローカル（現在という語あり）",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": true,
+      "heuristic_web_reason": "request_hints_web; search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_judged_not_called_answer_other",
+      "classification_candidates": [
+        "C_layer_mismatch_overflag_candidate",
+        "F_route_uncertain_saturated_candidate"
+      ],
+      "classification_reason": "heuristic judged_yes だが search_web 未実行; related空で uncertain に落ちた構造",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "D04",
+      "design_category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "ニュースという単語がdocsに出てくるか、リポジトリ内を検索して",
+      "observe_goal": "『ニュース』語＋search_files",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "リポジトリ内検索が主目的（ニュース語あり）",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": true,
+      "heuristic_web_reason": "request_hints_web; search_web_in_related_tools; search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "search_web"
+      ],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "search_files"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_judged_not_called_answer_other",
+      "classification_candidates": [
+        "C_layer_mismatch_overflag_candidate",
+        "F_related_continue_not_sufficiency_candidate",
+        "G_existing_tool_path_candidate"
+      ],
+      "classification_reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "D05",
+      "design_category": "web_word_but_unneeded",
+      "group_id": null,
+      "request": "検索結果のJSON形式がコード上どうなっているか、実装を読んで説明して",
+      "observe_goal": "『検索結果』語＋read",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "コード上の形式説明が主目的（検索結果語あり）",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": true,
+      "heuristic_web_reason": "request_hints_web; search_web_in_related_tools; search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "search_web"
+      ],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_judged_not_called_answer_present",
+      "classification_candidates": [
+        "C_layer_mismatch_overflag_candidate",
+        "F_related_continue_not_sufficiency_candidate"
+      ],
+      "classification_reason": "heuristic judged_yes だが search_web 未実行; relatedありで continue（達成保証ではない）",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "E01",
+      "design_category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "岸田政権以降の防衛費議論でよく挙げられる論点を整理して",
+      "observe_goal": "明示語なし・時事",
+      "content_topic": "time_dependent",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "時事論点の整理は外部情報向き（明示Web語なし）",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "E02",
+      "design_category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "ChatGPTの有料プランの違いを教えて",
+      "observe_goal": "製品情報・明示『検索』なし",
+      "content_topic": "product_external",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "プラン差は変わりうる製品情報",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "E03",
+      "design_category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "東京都のごみ分別の基本ルールを教えて",
+      "observe_goal": "地域実務情報",
+      "content_topic": "current_info",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "自治体ルールは外部確認向き",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "E04",
+      "design_category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "鉄道の遅延証明書は一般にどう発行されるか教えて",
+      "observe_goal": "実務手続き",
+      "content_topic": "general_knowledge",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "一般手続きは知識でもWebでも可",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "E05",
+      "design_category": "web_needed_no_web_words",
+      "group_id": null,
+      "request": "Appleの次の大型発表イベントはいつ頃と言われているか教えて",
+      "observe_goal": "予定・噂の外部情報",
+      "content_topic": "time_dependent",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "次の発表時期は時間依存",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "F01",
+      "design_category": "search_hard",
+      "group_id": null,
+      "request": "zxqwv-nonexistent-topic-9f3a2b1c の公式発表日を教えて。分からなければその旨を書いて",
+      "observe_goal": "存在しない話題",
+      "content_topic": "niche_or_fictional",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "存在確認自体に検索が要るが成功は別問題",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "F02",
+      "design_category": "search_hard",
+      "group_id": null,
+      "request": "架空の企業 Quiblaxor Dynamics の2023年売上を教えて",
+      "observe_goal": "架空固有名詞",
+      "content_topic": "niche_or_fictional",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "架空企業の売上は検索しても困難",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "F03",
+      "design_category": "search_hard",
+      "group_id": null,
+      "request": "個人ブログ『みどりのティーカップ日記』の第137話の要約を教えて",
+      "observe_goal": "極端にニッチ",
+      "content_topic": "niche_or_fictional",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "極端ニッチ",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "F04",
+      "design_category": "search_hard",
+      "group_id": null,
+      "request": "同じ出来事について日本語と英語で報じ方の違いを、根拠を分けて比較して",
+      "observe_goal": "複数情報源照合が重い",
+      "content_topic": "current_info",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "多言語比較は検索・照合が重い",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error",
+        "error",
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "empty",
+      "answer_surface_proxy": "failure_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "F05",
+      "design_category": "search_hard",
+      "group_id": null,
+      "request": "2010年ごろのローカル掲示板にだけ載っていた某ツールの使い方を再現して",
+      "observe_goal": "古い・入手困難",
+      "content_topic": "niche_or_fictional",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "古い入手困難情報",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G01",
+      "design_category": "existing_tool_ok",
+      "group_id": null,
+      "request": "GPUを使っているプロセスがあれば一覧して",
+      "observe_goal": "get_gpu_processes",
+      "content_topic": "local_observation",
+      "human_web_need": "no_web",
+      "human_web_need_note": "GPUプロセス一覧はローカル",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "get_gpu_processes",
+        "get_gpu_status"
+      ],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "get_gpu_processes"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_related_continue_not_sufficiency_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G02",
+      "design_category": "existing_tool_ok",
+      "group_id": null,
+      "request": "config/pipeline.yaml の active_model をファイルから確認して",
+      "observe_goal": "read_file",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "yaml確認はファイル",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "read_file"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_route_uncertain_saturated_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G03",
+      "design_category": "existing_tool_ok",
+      "group_id": null,
+      "request": "tools/system 配下で execution_identity という名前のファイルを探して",
+      "observe_goal": "search_files",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "ファイル探索",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "list_files",
+        "list_files"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_route_uncertain_saturated_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G04",
+      "design_category": "existing_tool_ok",
+      "group_id": null,
+      "request": "CPUの状態を確認して短く報告して",
+      "observe_goal": "cpu_status",
+      "content_topic": "local_observation",
+      "human_web_need": "no_web",
+      "human_web_need_note": "CPU状態はローカル",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "cpu_status"
+      ],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "cpu_status"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_related_continue_not_sufficiency_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "relatedありで continue（達成保証ではない）; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G05",
+      "design_category": "existing_tool_ok",
+      "group_id": null,
+      "request": "registry フォルダ直下のファイル名を列挙して",
+      "observe_goal": "list_files",
+      "content_topic": "file_ops",
+      "human_web_need": "no_web",
+      "human_web_need_note": "registry列挙はファイル",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "list_files"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_route_uncertain_saturated_candidate",
+        "G_existing_tool_path_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "related空で uncertain に落ちた構造; 人間レビュー上no_webでローカルTool実行あり",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G06",
+      "design_category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "キーボードのバッテリー残量を取得したい",
+      "observe_goal": "観測対象の不足候補",
+      "content_topic": "tool_gap",
+      "human_web_need": "reviewer_uncertain",
+      "human_web_need_note": "新機能要求。Webが必要かは別問題",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "G_tool_gap_but_searched_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G07",
+      "design_category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "接続中のBluetoothデバイスの電波強度を数値で出したい",
+      "observe_goal": "不足候補",
+      "content_topic": "tool_gap",
+      "human_web_need": "reviewer_uncertain",
+      "human_web_need_note": "同上",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "G_tool_gap_but_searched_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G08",
+      "design_category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "マイク入力のリアルタイム音量ピークを返す機能が欲しい",
+      "observe_goal": "不足候補",
+      "content_topic": "tool_gap",
+      "human_web_need": "reviewer_uncertain",
+      "human_web_need_note": "同上",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "G_tool_gap_but_searched_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G09",
+      "design_category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "母艦のUPS残量パーセントを取得したい",
+      "observe_goal": "不足候補",
+      "content_topic": "tool_gap",
+      "human_web_need": "reviewer_uncertain",
+      "human_web_need_note": "同上",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_route_uncertain_saturated_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "related空で uncertain に落ちた構造",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "G10",
+      "design_category": "tool_gap_candidate",
+      "group_id": null,
+      "request": "ファン回転数を読む機能が欲しい",
+      "observe_goal": "不足候補",
+      "content_topic": "tool_gap",
+      "human_web_need": "reviewer_uncertain",
+      "human_web_need_note": "同上",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web",
+        "get_gpu_status"
+      ],
+      "search_outcomes": [
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "G_tool_gap_but_searched_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 不足候補要求なのに検索が走った; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "H01",
+      "design_category": "composite_multi_tool",
+      "group_id": null,
+      "request": "docs/v1_basic_specification.md のV1目的をファイルから確認し、同様のテーマの一般説明も外部情報で補って比較して",
+      "observe_goal": "File→Web寄り",
+      "content_topic": "composite",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "File必須＋外部補完は任意寄り",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "read_file",
+        "search_web",
+        "list_files",
+        "list_files",
+        "list_files",
+        "read_file"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "empty",
+      "answer_surface_proxy": "failure_candidate",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "H02",
+      "design_category": "composite_multi_tool",
+      "group_id": null,
+      "request": "GPUの状態を確認したうえで、同世代GPUの一般的な消費電力の目安も調べて並べて",
+      "observe_goal": "GPU→Web",
+      "content_topic": "composite",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "GPUローカル＋消費電力の一般情報",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": true,
+      "heuristic_web_reason": "request_hints_web; search_web_is_agent_public",
+      "heuristic_route": "agent_continue",
+      "heuristic_route_reason": "related_agent_public_tools_present",
+      "related_tools": [
+        "get_gpu_status",
+        "get_gpu_processes",
+        "cpu_status"
+      ],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "get_gpu_status",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_judged_called_error_answer_declined_unconfirmed",
+      "classification_candidates": [
+        "D_search_path_error_candidate",
+        "F_related_continue_not_sufficiency_candidate",
+        "E_insufficient_search_evidence_candidate",
+        "aligned_heuristic_yes_llm_called"
+      ],
+      "classification_reason": "検索実行後 outcome=error（判断正誤とは別）; relatedありで continue（達成保証ではない）; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "H03",
+      "design_category": "composite_multi_tool",
+      "group_id": null,
+      "request": "agent_tool_gate の実装方針をコードから読み、同様の『デフォルト確認』の一般的な設計議論も参照して整理して",
+      "observe_goal": "File→Web",
+      "content_topic": "composite",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "コード読取必須＋一般設計議論は任意",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": false,
+      "llm_tools_tried": [
+        "search_files"
+      ],
+      "search_outcomes": [],
+      "search_primary_outcome": null,
+      "answer_surface_status": "present",
+      "answer_surface_proxy": "success_candidate",
+      "web_pattern": "web_not_judged_not_called",
+      "classification_candidates": [
+        "F_route_uncertain_saturated_candidate",
+        "aligned_heuristic_no_llm_not_called"
+      ],
+      "classification_reason": "related空で uncertain に落ちた構造",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "P01a",
+      "design_category": "paraphrase",
+      "group_id": "para_osaka_weather",
+      "request": "大阪の明日の天気を教えて",
+      "observe_goal": "言い換え:天気",
+      "content_topic": "weather",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "明日の大阪の天気",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "P01b",
+      "design_category": "paraphrase",
+      "group_id": "para_osaka_weather",
+      "request": "明日、大阪は雨ですか？",
+      "observe_goal": "言い換え:天気",
+      "content_topic": "weather",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "明日雨か（天気）",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "hits",
+        "error"
+      ],
+      "search_primary_outcome": "hits",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_hits_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_hits_use_unverified_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索で hits あり（利用可否は未判定）; related空で uncertain に落ちた構造; hitsあるが回答利用は未検証",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "P01c",
+      "design_category": "paraphrase",
+      "group_id": "para_osaka_weather",
+      "request": "明日大阪に行くんですが、傘は必要そうですか？",
+      "observe_goal": "言い換え:天気",
+      "content_topic": "weather",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "傘＝天気判断",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "P02a",
+      "design_category": "paraphrase",
+      "group_id": "para_rtx3060",
+      "request": "RTX 3060について教えて",
+      "observe_goal": "言い換え:RTX",
+      "content_topic": "product_external",
+      "human_web_need": "ambiguous",
+      "human_web_need_note": "製品説明は知識でもWebでも可",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "get_gpu_status",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    },
+    {
+      "case_id": "P02b",
+      "design_category": "paraphrase",
+      "group_id": "para_rtx3060",
+      "request": "今のRTX 3060の立ち位置を教えて",
+      "observe_goal": "言い換え:RTX",
+      "content_topic": "current_info",
+      "human_web_need": "needs_web",
+      "human_web_need_note": "今の立ち位置は現在性あり",
+      "human_web_need_is_gold_score": false,
+      "heuristic_judgment": false,
+      "heuristic_web_reason": "search_web_is_agent_public",
+      "heuristic_route": "uncertain",
+      "heuristic_route_reason": "agent_public_tools_exist_but_no_related_match",
+      "related_tools": [],
+      "llm_called_search_web": true,
+      "llm_tools_tried": [
+        "search_web",
+        "search_web",
+        "search_web"
+      ],
+      "search_outcomes": [
+        "error",
+        "error",
+        "error"
+      ],
+      "search_primary_outcome": "error",
+      "answer_surface_status": "declined_unconfirmed",
+      "answer_surface_proxy": "inconclusive",
+      "web_pattern": "web_not_judged_but_called",
+      "classification_candidates": [
+        "C_layer_mismatch_underflag_candidate",
+        "D_search_path_error_candidate",
+        "F_route_uncertain_saturated_candidate",
+        "E_insufficient_search_evidence_candidate"
+      ],
+      "classification_reason": "heuristic judged_no だが LLM が search_web 実行; 検索実行後 outcome=error（判断正誤とは別）; related空で uncertain に落ちた構造; 検索失敗のため根拠不足になりやすい",
+      "misjudgment_final": null,
+      "notes_for_reviewer": "Do not treat human_web_need as automatic agent score. Separate judgment layer vs search-path failure."
+    }
+  ]
+}

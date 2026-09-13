@@ -1,0 +1,137 @@
+{
+  "version": "0.1",
+  "note": "NH5 experimental registry. Maps selectable methods to catalog status and experiment runs. Does NOT modify method_catalog.json.",
+  "methods": {
+    "evidence_four_classes": {
+      "catalog_id": "evidence_four_classes",
+      "tier": "always",
+      "status": "adopt",
+      "hypothesis": "H-EVID-1",
+      "runs": ["EXP-007"]
+    },
+    "unknown_non_forcing_policy": {
+      "catalog_id": null,
+      "tier": "always",
+      "status": "experimental_policy",
+      "hypothesis": "H-NH3-6",
+      "runs": [
+        "runs/20260826_191500/nh3_state_safety_boundary/",
+        "runs/20260826_201500/nh4_state_safety_boundary/"
+      ],
+      "note": "UNKNOWNを無理にACCEPT/Activeへ変換しない方針。NH3/NH4で支持。"
+    },
+    "nh_state_history_validator": {
+      "catalog_id": null,
+      "tier": "conditional",
+      "status": "experimental",
+      "hypothesis": "H-NH2-1",
+      "runs": ["runs/20260826_190000/nh2_state_transition_generalization/"]
+    },
+    "nh3_normalized_reactivation_ban": {
+      "catalog_id": "nh3_normalized_reactivation_ban",
+      "tier": "conditional",
+      "status": "experimental",
+      "hypothesis": "H-NH3-1",
+      "runs": ["runs/20260826_191500/nh3_state_safety_boundary/"]
+    },
+    "change_request_validator": {
+      "catalog_id": null,
+      "tier": "conditional",
+      "status": "experimental",
+      "hypothesis": "H-REQ-1",
+      "runs": [
+        "runs/20260826_180700/update_request_pipeline_experiment/",
+        "runs/20260826_183500/nh1_state_transition_constraints/"
+      ]
+    },
+    "nh3_evidence_existence_check": {
+      "catalog_id": "nh3_evidence_existence_check",
+      "tier": "conditional",
+      "status": "experimental",
+      "hypothesis": "H-NH3-3",
+      "runs": ["runs/20260826_191500/nh3_state_safety_boundary/"]
+    },
+    "nh3_evidence_content_match": {
+      "catalog_id": "nh3_evidence_content_match",
+      "tier": "conditional",
+      "status": "experimental",
+      "hypothesis": "H-NH3-4",
+      "runs": ["runs/20260826_191500/nh3_state_safety_boundary/"]
+    },
+    "nh4_evidence_freshness_gate": {
+      "catalog_id": "nh4_evidence_freshness_gate",
+      "tier": "conditional",
+      "status": "experimental",
+      "hypothesis": "H-NH4-2",
+      "runs": ["runs/20260826_201500/nh4_state_safety_boundary/"]
+    },
+    "nh4_sidecar_minimal_tre": {
+      "catalog_id": "nh4_sidecar_minimal_tre",
+      "tier": "conditional",
+      "status": "experimental",
+      "hypothesis": "H-NH4-3",
+      "runs": ["runs/20260826_201500/nh4_state_safety_boundary/"]
+    },
+    "small_llm_local": {
+      "catalog_id": "small_llm_local",
+      "tier": "escalation",
+      "status": "conditional_adopt",
+      "hypothesis": "H-LARGE",
+      "runs": ["EXP-003", "EXP-010"]
+    },
+    "large_llm_escalation": {
+      "catalog_id": "large_llm_escalation",
+      "tier": "escalation",
+      "status": "conditional_adopt",
+      "hypothesis": "H-LARGE",
+      "runs": ["EXP-010"]
+    },
+    "gpt_external_audit": {
+      "catalog_id": null,
+      "tier": "escalation",
+      "status": "experimental",
+      "hypothesis": "H-LARGE",
+      "runs": ["runs/20260825_190500/gpt_external_tool_experiment/"],
+      "note": "extensions/gpt_external_experimental.json。本番未接続。"
+    },
+    "nh4_morph_synonym_reactivation_ban": {
+      "catalog_id": "nh4_morph_synonym_reactivation_ban",
+      "tier": "not_recommended",
+      "status": "experimental_not_recommended",
+      "hypothesis": "H-NH4-1",
+      "runs": ["runs/20260826_201500/nh4_state_safety_boundary/"]
+    },
+    "deepseek_full_replace": {
+      "catalog_id": "deepseek_full_replace",
+      "tier": "not_recommended",
+      "status": "not_supported",
+      "hypothesis": "H-DS",
+      "runs": ["EXP-009"]
+    },
+    "n2_full_path_narrative": {
+      "catalog_id": "n2_full_path_narrative",
+      "tier": "not_recommended",
+      "status": "not_recommended",
+      "hypothesis": "H-N2",
+      "runs": ["EXP-008"]
+    },
+    "auto_fix": {
+      "catalog_id": "auto_fix",
+      "tier": "not_recommended",
+      "status": "not_supported",
+      "hypothesis": "H-AUTOFIX",
+      "runs": ["EXP-010"]
+    },
+    "mechanical_validator_priority": {
+      "catalog_id": null,
+      "tier": "safety_constraint",
+      "status": "experimental",
+      "hypothesis": "H-NH1-1",
+      "runs": [
+        "runs/20260826_183500/nh1_state_transition_constraints/",
+        "runs/20260826_190000/nh2_state_transition_generalization/"
+      ],
+      "note": "State変更ではLLM判断より機械Validatorを優先。"
+    }
+  }
+}

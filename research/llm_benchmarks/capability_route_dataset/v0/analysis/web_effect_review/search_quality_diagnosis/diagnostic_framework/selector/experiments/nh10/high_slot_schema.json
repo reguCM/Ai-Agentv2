@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "high_slot_item": {
+    "slot": "string",
+    "reason": "string",
+    "evidence": ["material_key or short quote id"],
+    "source": "nh8_reason|prefill|slot_hint|sparse_fingerprint"
+  },
+  "gate_output": {
+    "level": "HIGH|LOW",
+    "high_slots": ["high_slot_item"],
+    "reasons": ["string"],
+    "escalation": "NONE|LARGE_LLM|HUMAN_REVIEW",
+    "auto_fix_allowed": false
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "experiment": "problem_analysis_context_split",
+  "model": "deepseek-coder-v2:16b",
+  "case_id": "D_cuda_init",
+  "condition": "F3",
+  "input": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"runtime_check\",\n  \"status\": \"fail\",\n  \"error_type\": \"RuntimeError\",\n  \"error\": \"CUDA initialization failed\"\n}\n\nsource:\nNOT_RECORDED\n",
+  "raw_output": "The provided information is a JSON object containing details about a runtime error encountered during the execution of a tool or script. Here's a breakdown of the information:\n\n1. **Tool Name**: The name of the tool or script where the error occurred.\n   - **Value**: \"runtime_check\"\n   - This indicates that the error was recorded by a tool named \"runtime_check\".\n\n2. **Status**: The status of the operation.\n   - **Value**: \"fail\"\n   - This indicates that the operation or task failed.\n\n3. **Error Type**: The type of error that occurred.\n   - **Value**: \"RuntimeError\"\n   - This is a general category of errors that occur during the execution of a program.\n\n4. **Error**: A detailed description of the error.\n   - **Value**: \"CUDA initialization failed\"\n   - This specific error indicates that the initialization of CUDA (a parallel computing platform and programming model developed by NVIDIA) failed.\n\n5. **Source**: The origin or context of the error.\n   - **Value**: \"NOT_RECORDED\"\n   - This indicates that the source of the error is not specified or recorded.\n\nIn summary, the error occurred while running a tool named \"runtime_check\", resulting in a \"fail\" status due to a \"RuntimeError\" with the description \"CUDA initialization failed\". The source of the error is not specified.",
+  "timestamp": "2026-09-01T00:17:22.625065+00:00",
+  "call_ok": true,
+  "error": null,
+  "temperature": 0.0,
+  "failure": {
+    "tool_name": "runtime_check",
+    "status": "fail",
+    "error_type": "RuntimeError",
+    "error": "CUDA initialization failed"
+  },
+  "prompt_header": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.",
+  "notes": [
+    "context_split",
+    "no_analysis_taxonomy",
+    "no_tools",
+    "no_invented_traceback_or_source",
+    "f5_conversation_from_previous_fixture"
+  ],
+  "observability": {
+    "experiment_start": "2026-09-01T00:17:22.625065+00:00",
+    "experiment_end": "2026-09-01T00:17:25.418668+00:00",
+    "stop_reason": "single_turn",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Analyze the problem below.\nDo not fix the problem.\nDo not use tools.\n\n{\n  \"tool_name\": \"runtime_check\",\n  \"status\": \"fail\",\n  \"error_type\": \"RuntimeError\",\n  \"error\": \"CUDA initialization failed\"\n}\n\nsource:\nNOT_RECORDED\n"
+      }
+    ],
+    "chat_kwargs": {
+      "model": "deepseek-coder-v2:16b",
+      "tools": "not_used",
+      "keep_alive": "5m",
+      "options": {
+        "num_predict": 2048,
+        "temperature": 0.0,
+        "num_ctx": 4096
+      },
+      "timeout_seconds": 90,
+      "tool_presentation": "none",
+      "kwargs_source": {
+        "harness_chat_call": [
+          "model",
+          "messages"
+        ],
+        "llm_chat_setdefault": [
+          "options",
+          "keep_alive"
+        ],
+        "not_passed": [
+          "tools"
+        ]
+      }
+    },
+    "tools_used": false,
+    "extras": {
+      "traceback_included": false,
+      "source_included": true,
+      "conversation_included": false,
+      "traceback_recorded": false,
+      "source_recorded": false,
+      "conversation_provenance": "problem_analysis_context_cases.py (previous context experiment fixture, not live chat)"
+    },
+    "thinking_observed": false
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "repo": ".",
+  "allow_branches": [
+    "dev/*",
+    "stabilize/*",
+    "wip/*",
+    "sandbox/*",
+    "promote/*",
+    "feature/*",
+    "fix/*"
+  ],
+  "require_clean": true,
+  "ignore_untracked": [
+    ".pytest_cache/**",
+    "**/__pycache__/**",
+    "*.pyc",
+    "pytest-temp/**"
+  ],
+  "diff_refs": {
+    "from": "HEAD~1",
+    "to": "HEAD"
+  },
+  "deny_path_globs": [
+    "ai_tool/**"
+  ],
+  "forbid_actions": [
+    "force_push",
+    "reset_hard"
+  ],
+  "human_gate_actions": [
+    "push",
+    "merge"
+  ]
+}

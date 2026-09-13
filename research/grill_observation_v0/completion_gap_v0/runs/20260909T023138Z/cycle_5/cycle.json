@@ -1,0 +1,144 @@
+{
+  "gap": "ゲームオーバーの判定条件",
+  "classification_this_cycle": "NEXT_from_cycle4_grill",
+  "focus": {
+    "gap": "ゲームオーバーの判定条件",
+    "minimum_focus": [
+      "spawn at top",
+      "collides at spawn => game over"
+    ],
+    "assets": [
+      "spec ゲームオーバー判定",
+      "tetromino.spawn",
+      "collision.collides"
+    ],
+    "vertical_map": false,
+    "horizontal_map": false,
+    "focus_expanded": true,
+    "expand_reason": "判定は生成済みピースの初期位置と衝突APIだけで足りるため spawn と collides のみ参照",
+    "minimum_sufficient_focus": "game_over.py is_game_over; no lock/restart/draw/input"
+  },
+  "test_result": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "D:\\AI-Agent-worktrees\\current-dev\\research\\grill_observation_v0\\completion_gap_v0\\tests\\test_game_over_gap.py",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout": "...                                                                      [100%]\n3 passed in 0.03s\n",
+    "stderr": "",
+    "passed": true
+  },
+  "evidence": {
+    "changed_files": [
+      "workspace/game_over.py",
+      "tests/test_game_over_gap.py"
+    ],
+    "elapsed_s_grill": 87.311
+  },
+  "current_state": {
+    "kind": "observed_facts",
+    "experiment_workspace": "D:\\AI-Agent-worktrees\\current-dev\\research\\grill_observation_v0\\completion_gap_v0\\workspace",
+    "files_in_workspace": [
+      "__init__.py",
+      "collision.py",
+      "game_over.py",
+      "line_clear.py",
+      "movement.py",
+      "tetromino.py",
+      "window_loop.py"
+    ],
+    "python_modules": [
+      {
+        "file": "__init__.py",
+        "functions": [],
+        "simple_constants": {}
+      },
+      {
+        "file": "collision.py",
+        "functions": [
+          "empty_grid",
+          "occupied_cells",
+          "collides"
+        ],
+        "simple_constants": {
+          "GRID_WIDTH": 10,
+          "GRID_HEIGHT": 20
+        }
+      },
+      {
+        "file": "game_over.py",
+        "functions": [
+          "is_game_over"
+        ],
+        "simple_constants": {}
+      },
+      {
+        "file": "line_clear.py",
+        "functions": [
+          "clear_full_lines",
+          "add_score"
+        ],
+        "simple_constants": {}
+      },
+      {
+        "file": "movement.py",
+        "functions": [
+          "try_move",
+          "try_rotate",
+          "fall_due"
+        ],
+        "simple_constants": {
+          "FALL_INTERVAL_MS": 500
+        }
+      },
+      {
+        "file": "tetromino.py",
+        "functions": [
+          "rotate",
+          "spawn"
+        ],
+        "simple_constants": {}
+      },
+      {
+        "file": "window_loop.py",
+        "functions": [
+          "init_window",
+          "handle_events",
+          "update",
+          "draw",
+          "run_one_iteration",
+          "shutdown",
+          "run_forever"
+        ],
+        "simple_constants": {
+          "SCREEN_WIDTH": 300,
+          "SCREEN_HEIGHT": 600
+        }
+      }
+    ],
+    "python": "3.10.11",
+    "pygame_import_ok": true,
+    "pygame_version": "2.5.0",
+    "tests": {
+      "ran": true,
+      "passed": true,
+      "stdout": "...                                                                      [100%]\n3 passed in 0.03s\n"
+    },
+    "errors": [],
+    "completed_gaps": [
+      "ゲームウィンドウの初期化と基本的なゲームループ",
+      "テトロミノの形状と初期配置の実装",
+      "衝突判定の実装",
+      "行の削除（ラインクリア）のロジック",
+      "テトロミノの落下・移動・回転",
+      "ゲームオーバーの判定条件"
+    ],
+    "last_completed_gap": "ゲームオーバーの判定条件",
+    "note": "Facts from workspace files and test process. No inferred features."
+  },
+  "next_classification": "COMPLETE",
+  "next_gap": ""
+}

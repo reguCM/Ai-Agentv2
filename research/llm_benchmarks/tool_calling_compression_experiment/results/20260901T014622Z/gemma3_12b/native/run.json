@@ -1,0 +1,95 @@
+{
+  "experiment_id": "tool_calling_compression",
+  "model": "gemma3:12b",
+  "prompt": "Resolve the problem.",
+  "fixture_version": "ticket_stage_v1",
+  "tool_calling_path": "native",
+  "tool_calling_mode": "unsupported",
+  "application_side_tool_parsing": "not_used",
+  "experiment_start": "2026-09-01T01:52:50.314198+00:00",
+  "experiment_end": "2026-09-01T01:52:50.317606+00:00",
+  "stop_reason": "native_tools_unsupported",
+  "call_ok": false,
+  "error": "registry.ollama.ai/library/gemma3:12b does not support tools (status code: 400)",
+  "native_tools_supported": false,
+  "patch_rounds": 0,
+  "first_patch_test_pass": null,
+  "turns": [
+    {
+      "turn_id": 1,
+      "timestamp": "2026-09-01T01:52:50.314198+00:00",
+      "model": "gemma3:12b",
+      "messages_before": [
+        {
+          "role": "user",
+          "content": "Resolve the problem.\n\npytest\ncommand: [\"C:\\\\Users\\\\e1n07\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python310\\\\python.exe\", \"-m\", \"pytest\", \"tests/test_main.py\", \"-q\"]\nexit_code: 1\nstdout:\nF                                                                        [100%]\n================================== FAILURES ===================================\n____________________________ test_assemble_ticket _____________________________\n\n    def test_assemble_ticket():\n>       ticket = assemble_ticket()\n\ntests\\test_main.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\nmain.py:9: in assemble_ticket\n    \"stage\": select_stage(rows, 2),\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nrows = ['queued'], index = 2\n\n    def select_stage(rows, index):\n>       return rows[index]\nE       IndexError: list index out of range\n\nhelper.py:10: IndexError\n=========================== short test summary info ===========================\nFAILED tests/test_main.py::test_assemble_ticket - IndexError: list index out ...\n1 failed in 0.10s\nstderr:\n\n\npython main.py\ncommand: [\"C:\\\\Users\\\\e1n07\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python310\\\\python.exe\", \"main.py\"]\nexit_code: 1\nstdout:\nstderr:\nTraceback (most recent call last):\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\tool_calling_compression_experiment\\results\\20260901T014622Z\\fixture\\main.py\", line 19, in <module>\n    main()\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\tool_calling_compression_experiment\\results\\20260901T014622Z\\fixture\\main.py\", line 15, in main\n    print(json.dumps(assemble_ticket()))\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\tool_calling_compression_experiment\\results\\20260901T014622Z\\fixture\\main.py\", line 9, in assemble_ticket\n    \"stage\": select_stage(rows, 2),\n  File \"D:\\AI-Agent\\research\\llm_benchmarks\\tool_calling_compression_experiment\\results\\20260901T014622Z\\fixture\\helper.py\", line 10, in select_stage\n    return rows[index]\nIndexError: list index out of range\n\n"
+        }
+      ],
+      "chat_kwargs": {
+        "model": "gemma3:12b",
+        "tools": "ollama_native",
+        "keep_alive": "5m",
+        "options": {
+          "num_predict": 2048,
+          "temperature": 0.0,
+          "num_ctx": 4096
+        },
+        "timeout_seconds": 90,
+        "harness_chat_call": [
+          "model",
+          "messages",
+          "tools"
+        ],
+        "tool_calling_path": "native"
+      },
+      "raw_output": "",
+      "parsed_output": null,
+      "parse_status": "native_tools_unsupported",
+      "tool_calls": [],
+      "tool_results": [],
+      "files_read": [],
+      "files_changed": [],
+      "test_result": null,
+      "error": "registry.ollama.ai/library/gemma3:12b does not support tools (status code: 400)"
+    }
+  ],
+  "final_git_diff": "",
+  "notes": [
+    "not_connected_to_existing_loops",
+    "no_search_order_in_prompt",
+    "no_tool_catalog_in_prompt",
+    "thinking_not_requested",
+    "only_native_tool_calls_executed"
+  ],
+  "mechanical": {
+    "model": "gemma3:12b",
+    "path": "native",
+    "tool_calling_mode": "unsupported",
+    "analysis_observable": false,
+    "tool_selection_observable": false,
+    "tool_call_without_visible_content_any": false,
+    "visible_content_with_tool_call_any": false,
+    "files_read": [],
+    "files_changed": [],
+    "tool_name_sequence": [],
+    "search_scope_events": [],
+    "same_file_repatch_events": [],
+    "test_rounds": [],
+    "test_feedback_sent": false,
+    "final_test_pass": false,
+    "turn_flags": [
+      {
+        "analysis_observable": false,
+        "tool_selection_observable": false,
+        "visible_content_with_tool_call": false,
+        "tool_call_without_visible_content": false,
+        "thinking_observed": false,
+        "thinking_not_used_as_analysis": true
+      }
+    ],
+    "hypothesis_updated": "NOT_DETERMINED",
+    "tool_result_used": "NOT_DETERMINED",
+    "search_scope_changed": false,
+    "test_feedback_used": "NOT_DETERMINED"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "version": "web_effect_pilot_v1",
+  "purpose": "Compare answer_without_web vs answer_with_web. Not agent judgment scoring.",
+  "notes": [
+    "Exclude L-band (local tool essential) from this pilot.",
+    "W0 = pure web compare; W1 = web is main optional/add-on info source.",
+    "Human labels stay empty until review."
+  ],
+  "cases": [
+    {
+      "id": "A01",
+      "band": "W0",
+      "request": "今日の日本の主なニュースを教えて",
+      "why": "時事。ローカルTool不要の純粋WEB比較"
+    },
+    {
+      "id": "A02",
+      "band": "W0",
+      "request": "現在のドル円の大まかな為替水準について教えて",
+      "why": "現在価格。純粋WEB比較"
+    },
+    {
+      "id": "A05",
+      "band": "W0",
+      "request": "明日の大阪の天気を教えて",
+      "why": "予報。純粋WEB比較"
+    },
+    {
+      "id": "A06",
+      "band": "W0",
+      "request": "Python 3.13で追加された主な変更点を教えて",
+      "why": "版固有情報。知識でも部分回答可だがWEBが主"
+    },
+    {
+      "id": "B05",
+      "band": "W1",
+      "request": "Pythonのリストとタプルの違いを簡単に説明して",
+      "why": "一般知識で足りうる（WEB不要寄りでも検索効果を見る）"
+    },
+    {
+      "id": "C02",
+      "band": "W1",
+      "request": "Ollamaについて詳しく教えて",
+      "why": "知識でもWEBでも可。追加情報源としてのWEB"
+    },
+    {
+      "id": "C03",
+      "band": "W1",
+      "request": "RTX 3060って今どういう扱いですか？",
+      "why": "『今』の扱い。WEB任意〜有用"
+    },
+    {
+      "id": "E02",
+      "band": "W0",
+      "request": "ChatGPTの有料プランの違いを教えて",
+      "why": "製品情報。変化しうる外部情報"
+    },
+    {
+      "id": "E05",
+      "band": "W0",
+      "request": "Appleの次の大型発表イベントはいつと言われているか教えて",
+      "why": "時事。純粋WEB比較"
+    },
+    {
+      "id": "P01a",
+      "band": "W0",
+      "request": "大阪の明日の天気を教えて",
+      "why": "天気（A05言い換え）。純粋WEB比較"
+    }
+  ]
+}

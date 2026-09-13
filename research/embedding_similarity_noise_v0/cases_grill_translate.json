@@ -1,0 +1,330 @@
+{
+  "note": "Grill後の照合実験。翻訳層は独立Harness。Production / Conversation Grill には接続しない。類似度閾値は正本化しない。この結果だけで SELECTED 規則は作らない。",
+  "evaluation_note": "主評価は既存 match_clarification_to_candidate_paths が unique gold path になるか。cosine は補助観測であり SELECTED 判定ではない。",
+  "scenario": "人間が『文書を確認して』と依頼し、残候補が実ファイル3件。Grill がどれかを聞いている。人間がノイズ付き日本語で答える。同一検索クエリで3件が同時ヒットした事実ではない。Grill後に残った候補集合としての仮置き。",
+  "original_request": "文書を確認して",
+  "original_search_query": "文書",
+  "translation_layer": {
+    "status": "PROVISIONAL_NOT_IN_PRODUCTION",
+    "model": "qwen3:14b",
+    "sees_candidates": true,
+    "sees_gold": false,
+    "candidate_order": ["docs/CURRENT_DEVELOPMENT_STATE.md", "docs/GRILL_V0.md", "AGENTS.md"],
+    "order_bias_note": "候補提示順は固定。位置バイアスは未分離。"
+  },
+  "anchors": {
+    "current": {
+      "label": "現在の開発状態の文書",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "clean_query_id": "current_clean"
+    },
+    "grill": {
+      "label": "Grillの原則の文書",
+      "gold_path": "docs/GRILL_V0.md",
+      "clean_query_id": "grill_clean"
+    },
+    "agents": {
+      "label": "エージェント方針の文書",
+      "gold_path": "AGENTS.md",
+      "clean_query_id": "agents_clean"
+    }
+  },
+  "candidates": [
+    {
+      "id": "current",
+      "path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "kind": "gold_current",
+      "hit_texts": [
+        "開発状態Checkpoint — Cursor引継ぎ記録",
+        "人間が H4 Core を完了承認した。H4 Core ≠ H4 製品全体。",
+        "現在Repositoryの実態を優先する。"
+      ]
+    },
+    {
+      "id": "grill",
+      "path": "docs/GRILL_V0.md",
+      "kind": "gold_grill",
+      "hit_texts": [
+        "Grill v0 — 人間向け質問原則と出口",
+        "人間の意図が必要なものを優先する",
+        "Technical Grill は別工程"
+      ]
+    },
+    {
+      "id": "agents",
+      "path": "AGENTS.md",
+      "kind": "gold_agents",
+      "hit_texts": [
+        "Repository Policy Adapter for Codex",
+        "Canonical Policy を優先する",
+        "policy-distribution-version"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "id": "current_clean",
+      "anchor_id": "current",
+      "noise_type": "clean",
+      "text": "CURRENTの文書を読んで",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "ノイズなし。path語 CURRENT が残る"
+    },
+    {
+      "id": "current_typo",
+      "anchor_id": "current",
+      "noise_type": "typo",
+      "text": "CURRETの文書を読んで",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "CURRENT の N 抜け"
+    },
+    {
+      "id": "current_conversion",
+      "anchor_id": "current",
+      "noise_type": "conversion",
+      "text": "過連との文書を読んで",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "かれんと → 過連と"
+    },
+    {
+      "id": "current_missing_char",
+      "anchor_id": "current",
+      "noise_type": "missing_char",
+      "text": "CURRENTの文書を読",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "んで が抜けた。CURRENT は残る"
+    },
+    {
+      "id": "current_particle",
+      "anchor_id": "current",
+      "noise_type": "particle_drop",
+      "text": "CURRENT文書読んで",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "の 抜け。CURRENT は残る"
+    },
+    {
+      "id": "current_colloquial",
+      "anchor_id": "current",
+      "noise_type": "colloquial",
+      "text": "今の開発状態のやつ",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "口語。ヒット文の 開発状態 で指す"
+    },
+    {
+      "id": "current_filler",
+      "anchor_id": "current",
+      "noise_type": "filler",
+      "text": "えっとCURRENTの文書を読んでください",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "フィラー えっと。CURRENT は残る"
+    },
+    {
+      "id": "current_restatement",
+      "anchor_id": "current",
+      "noise_type": "restatement",
+      "text": "GrillじゃなくてCURRENTの文書",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "言い直し。否定側に Grill が残る"
+    },
+    {
+      "id": "current_asr",
+      "anchor_id": "current",
+      "noise_type": "asr_like",
+      "text": "カレントの文書を呼んで",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "音声認識風。カレント + 呼んで"
+    },
+    {
+      "id": "current_demonstrative",
+      "anchor_id": "current",
+      "noise_type": "demonstrative",
+      "text": "そっちのCURRENT",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "指示語。CURRENT は残る"
+    },
+    {
+      "id": "current_compound",
+      "anchor_id": "current",
+      "noise_type": "compound",
+      "text": "えっと過連とのやつ読んで",
+      "gold_path": "docs/CURRENT_DEVELOPMENT_STATE.md",
+      "note": "フィラー + 変換ミス + 口語"
+    },
+    {
+      "id": "grill_clean",
+      "anchor_id": "grill",
+      "noise_type": "clean",
+      "text": "Grillの原則の文書",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "ノイズなし。Grill と 原則 が残る"
+    },
+    {
+      "id": "grill_typo",
+      "anchor_id": "grill",
+      "noise_type": "typo",
+      "text": "Grrillの文書",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "Grill の r 重複。原則は入れない"
+    },
+    {
+      "id": "grill_conversion",
+      "anchor_id": "grill",
+      "noise_type": "conversion",
+      "text": "具入るのやつ",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "ぐりる → 具入る"
+    },
+    {
+      "id": "grill_missing_char",
+      "anchor_id": "grill",
+      "noise_type": "missing_char",
+      "text": "Grillの原",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "則 が抜けた。Grill は残る"
+    },
+    {
+      "id": "grill_particle",
+      "anchor_id": "grill",
+      "noise_type": "particle_drop",
+      "text": "Grill原則の文書",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "の 抜け。Grill は残る"
+    },
+    {
+      "id": "grill_colloquial",
+      "anchor_id": "grill",
+      "noise_type": "colloquial",
+      "text": "グリルのやつ",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "口語カタカナ。path語 Grill が無い"
+    },
+    {
+      "id": "grill_filler",
+      "anchor_id": "grill",
+      "noise_type": "filler",
+      "text": "あのーGrillの原則なんですけど",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "フィラー。Grill は残る"
+    },
+    {
+      "id": "grill_restatement",
+      "anchor_id": "grill",
+      "noise_type": "restatement",
+      "text": "CURRENTじゃなくてGrillの原則",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "言い直し。否定側に CURRENT が残る"
+    },
+    {
+      "id": "grill_asr",
+      "anchor_id": "grill",
+      "noise_type": "asr_like",
+      "text": "グリルの文書を呼んで",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "音声認識風。グリル + 呼んで"
+    },
+    {
+      "id": "grill_demonstrative",
+      "anchor_id": "grill",
+      "noise_type": "demonstrative",
+      "text": "原則のほう",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "指示語。ヒット文の 原則 で指す"
+    },
+    {
+      "id": "grill_compound",
+      "anchor_id": "grill",
+      "noise_type": "compound",
+      "text": "まあ具入るのやつ",
+      "gold_path": "docs/GRILL_V0.md",
+      "note": "フィラー + 変換ミス + 口語"
+    },
+    {
+      "id": "agents_clean",
+      "anchor_id": "agents",
+      "noise_type": "clean",
+      "text": "AGENTSの方針",
+      "gold_path": "AGENTS.md",
+      "note": "ノイズなし。path語 AGENTS が残る"
+    },
+    {
+      "id": "agents_typo",
+      "anchor_id": "agents",
+      "noise_type": "typo",
+      "text": "AGNETSの方針",
+      "gold_path": "AGENTS.md",
+      "note": "AGENTS の転置"
+    },
+    {
+      "id": "agents_conversion",
+      "anchor_id": "agents",
+      "noise_type": "conversion",
+      "text": "揚げんつの方針",
+      "gold_path": "AGENTS.md",
+      "note": "えーじぇんつ → 揚げんつ"
+    },
+    {
+      "id": "agents_missing_char",
+      "anchor_id": "agents",
+      "noise_type": "missing_char",
+      "text": "AGENTSの方",
+      "gold_path": "AGENTS.md",
+      "note": "針 が抜けた。AGENTS は残る"
+    },
+    {
+      "id": "agents_particle",
+      "anchor_id": "agents",
+      "noise_type": "particle_drop",
+      "text": "AGENTS方針",
+      "gold_path": "AGENTS.md",
+      "note": "の 抜け。AGENTS は残る"
+    },
+    {
+      "id": "agents_colloquial",
+      "anchor_id": "agents",
+      "noise_type": "colloquial",
+      "text": "エージェントのやつ",
+      "gold_path": "AGENTS.md",
+      "note": "口語。path語 AGENTS が無い"
+    },
+    {
+      "id": "agents_filler",
+      "anchor_id": "agents",
+      "noise_type": "filler",
+      "text": "まあAGENTSの方針かな",
+      "gold_path": "AGENTS.md",
+      "note": "フィラー。AGENTS は残る"
+    },
+    {
+      "id": "agents_restatement",
+      "anchor_id": "agents",
+      "noise_type": "restatement",
+      "text": "CURRENTじゃなくてAGENTSの方針",
+      "gold_path": "AGENTS.md",
+      "note": "言い直し。否定側に CURRENT が残る"
+    },
+    {
+      "id": "agents_asr",
+      "anchor_id": "agents",
+      "noise_type": "asr_like",
+      "text": "エージェンツの方針",
+      "gold_path": "AGENTS.md",
+      "note": "音声認識風。エージェンツ"
+    },
+    {
+      "id": "agents_demonstrative",
+      "anchor_id": "agents",
+      "noise_type": "demonstrative",
+      "text": "ポリシーのほう",
+      "gold_path": "AGENTS.md",
+      "note": "指示語。ヒット文の Policy をカタカナで指す"
+    },
+    {
+      "id": "agents_compound",
+      "anchor_id": "agents",
+      "noise_type": "compound",
+      "text": "まあえーじぇんつのやつ",
+      "gold_path": "AGENTS.md",
+      "note": "フィラー + ひらがな + 口語"
+    }
+  ]
+}

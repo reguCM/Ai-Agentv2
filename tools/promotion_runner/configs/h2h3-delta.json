@@ -1,0 +1,56 @@
+{
+  "name": "h2h3-from-delta",
+  "repo": "D:\\AI-Agent",
+  "source_from": "a52c979",
+  "source_to": "f306559",
+  "target_base": "a8dd03a",
+  "target_branch": "promote/h2h3-from-delta",
+  "mode": "diff_apply",
+  "allow_path_globs": [
+    "ai_tool/help/**",
+    "ai_tool/chat_interface/agent_turn.py",
+    "ai_tool/chat_interface/task_orchestration.py"
+  ],
+  "deny_path_globs": [
+    ".env",
+    "**/*.pem",
+    "**/secrets/**"
+  ],
+  "ignore_path_globs": [
+    "**/__pycache__/**",
+    "**/.pytest_cache/**"
+  ],
+  "forbid_overlap_refs": [],
+  "git_guard_config": "tools/git_guard/configs/local.check-stabilize.json",
+  "required_tests": [
+    {
+      "cmd": "D:\\AI-Agent\\.venv\\Scripts\\python.exe -c \\\"from ai_tool.help.api import handle_h, prefer_tool_for_capability; print('import-ok', prefer_tool_for_capability('workspace_file_read', fallback='read_file'))\\\"",
+      "cwd": "D:\\AI-Agent-worktrees\\_promote-h2h3-from-delta",
+      "timeout_sec": 120
+    }
+  ],
+  "impact_sync": [
+    "正本",
+    "Rule",
+    "Help",
+    "Registry",
+    "Test"
+  ],
+  "human_gate_actions": [
+    "merge",
+    "push",
+    "reset_hard",
+    "delete_branch"
+  ],
+  "auto_commit": true,
+  "commit_message": "promote(h2h3): Help H2+H3 delta a52c979..f306559 onto stabilize tip",
+  "report_dir": "tools/promotion_runner/reports",
+  "apply_worktree": "D:\\AI-Agent-worktrees\\_promote-h2h3-from-delta",
+  "sparse_dirs": [
+    "ai_tool/help",
+    "ai_tool/chat_interface",
+    "tools",
+    "tests"
+  ],
+  "proposed_actions": []
+}

@@ -1,0 +1,78 @@
+{
+  "phase": "G6",
+  "status": "COMPLETE",
+  "contract_version": "2026-09-12.3",
+  "g5_verdict_preserved": "CONSISTENT_WITH_KNOWN_GAPS",
+  "updated_assets": [
+    "git_operation_policy",
+    "git_guard",
+    "policy_manifest",
+    "cursor_user_rules"
+  ],
+  "new_assets": [
+    "git_governance_contract",
+    "git_governance_cursor_adapter",
+    "git_hooks_deployment"
+  ],
+  "source_of_truth_mapping": {
+    "semantic": "git_operation_policy → docs/GIT_OPERATION_POLICY.md",
+    "machine": "git_governance_contract → ai_tool/policy/git_governance.json",
+    "manifest_link": "policy_manifest → distribution.git_governance_ref",
+    "cursor_adapter": "git_governance_cursor_adapter → .cursor/rules/git-governance-adapter.mdc",
+    "validator": "git_guard → tools/git_guard (POLICY.md + configs)",
+    "enforcement_adapter": "git_hooks_deployment → DEPLOYED.md + shared .git/hooks"
+  },
+  "freshness_dependencies_added": [
+    "git_governance_contract → git_operation_policy",
+    "git_guard → git_governance_contract + pre-commit/pre-push configs",
+    "git_hooks_deployment → git_guard + DEPLOYED.md",
+    "git_governance_cursor_adapter → git_governance_contract"
+  ],
+  "enforcement_metadata": {
+    "git_operation_policy": "DOCUMENTATION / DOCUMENT_ONLY",
+    "git_governance_contract": "VALIDATED",
+    "git_guard": "ENFORCED (partial scope; notes in registry)",
+    "git_hooks_deployment": "ENFORCED (commit/push hook path)",
+    "known_gaps_in_contract_notes": true
+  },
+  "verification": {
+    "auto_verified_promotion": false,
+    "git_governance_assets_freshness": "POSSIBLY_STALE (human re-verification candidate)",
+    "evidence_captured": [
+      "reports/verification_evidence/asset_git_governance_contract.json",
+      "reports/verification_evidence/asset_git_governance_cursor_adapter.json",
+      "reports/verification_evidence/asset_git_hooks_deployment.json"
+    ],
+    "phase_reports_linked": [
+      "reports/GIT_GOVERNANCE_PHASE_G2.json",
+      "reports/GIT_GOVERNANCE_PHASE_G3.json",
+      "reports/GIT_GOVERNANCE_PHASE_G4.json",
+      "reports/GIT_GOVERNANCE_PHASE_G5.json"
+    ]
+  },
+  "system_asset_index": {
+    "generated": true,
+    "check_pass": true,
+    "path": "docs/SYSTEM_ASSET_INDEX.md"
+  },
+  "freshness_dry_run": "reports/project_asset_freshness_g6_dry_run.json",
+  "host_adapter": "HOST_ADAPTER_NOT_VERIFIED",
+  "remaining_known_gaps": [
+    "commit authorization (RUNTIME_NOT_CONNECTED)",
+    "amend",
+    "amend_after_hook_failure",
+    "clean",
+    "rebase",
+    "worktree_remove",
+    "branch_delete",
+    "merge_to_main",
+    "RAW_CLI_ENFORCEMENT_GAP (multiple actions)"
+  ],
+  "tests": [
+    "tests/registry/test_git_governance_registry.py",
+    "tests/registry/test_project_assets.py",
+    "tests/registry/test_project_asset_freshness.py",
+    "tests/ai_tool/policy/test_git_governance_drift.py"
+  ],
+  "existing_git_behavior_changed": false
+}

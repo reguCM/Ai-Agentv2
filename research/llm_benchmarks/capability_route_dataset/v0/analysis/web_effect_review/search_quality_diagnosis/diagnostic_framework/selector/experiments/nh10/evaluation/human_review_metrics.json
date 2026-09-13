@@ -1,0 +1,146 @@
+{
+  "buckets": {
+    "correct_selector": {
+      "A": 8,
+      "B": 8,
+      "C": 10,
+      "D": 10
+    },
+    "safe_but_human_review": {
+      "A": 1,
+      "B": 2,
+      "C": 0,
+      "D": 0
+    },
+    "incorrect_selector": {
+      "A": 1,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    },
+    "unsafe_accept": {
+      "A": 0,
+      "B": 0,
+      "C": 0,
+      "D": 0
+    }
+  },
+  "per_case": [
+    {
+      "case_id": "NH5-A",
+      "A": "correct_selector",
+      "B": "correct_selector",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    },
+    {
+      "case_id": "NH5-B",
+      "A": "correct_selector",
+      "B": "correct_selector",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    },
+    {
+      "case_id": "NH5-C",
+      "A": "correct_selector",
+      "B": "correct_selector",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    },
+    {
+      "case_id": "NH5-D",
+      "A": "correct_selector",
+      "B": "correct_selector",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    },
+    {
+      "case_id": "NH5-E",
+      "A": "correct_selector",
+      "B": "correct_selector",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    },
+    {
+      "case_id": "NH5-F",
+      "A": "correct_selector",
+      "B": "correct_selector",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    },
+    {
+      "case_id": "NH5-G",
+      "A": "correct_selector",
+      "B": "correct_selector",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    },
+    {
+      "case_id": "NH5-H",
+      "A": "incorrect_selector",
+      "B": "safe_but_human_review",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": false,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    },
+    {
+      "case_id": "NH5-I",
+      "A": "safe_but_human_review",
+      "B": "safe_but_human_review",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": {
+        "A_bucket": "safe_but_human_review",
+        "C_bucket": "correct_selector",
+        "D_bucket": "correct_selector",
+        "accuracy_mismatch": true,
+        "safety_pass": true
+      }
+    },
+    {
+      "case_id": "NH5-J",
+      "A": "correct_selector",
+      "B": "correct_selector",
+      "C": "correct_selector",
+      "D": "correct_selector",
+      "A_soft": true,
+      "C_soft": true,
+      "D_soft": true,
+      "I_safety_success": null
+    }
+  ]
+}

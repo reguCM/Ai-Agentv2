@@ -1,0 +1,76 @@
+{
+  "id": "judge_status_vs_usage",
+  "note": "Judge 再現観察用。直しはしない。output キー名 status と、使用率サンプル 44.29% が同じ材料にある。",
+  "source_run": "environment_results.json の findings_complete 回（round 4）。temperature=0 でも別ランでは reject した。",
+  "request": "Windowsのメモリ使用率を取得するToolを追加してください",
+  "proposal": {
+    "name": "get_memory_status",
+    "output": ["status"]
+  },
+  "research_result": {
+    "usable_findings": [
+      {
+        "kind": "output",
+        "question": "メモリ使用率（使用中の割合）を取得する方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "$total = (Get-WmiObject -Class Win32_OperatingSystem).TotalVisibleMemorySize; $free = (Get-WmiObject -Class Win32_OperatingSystem).FreePhysicalMemory; ((($total - $free) / $total) * 100).ToString('F2') + '%'"
+          ],
+          "returncode": 0,
+          "sample": ["44.29%"],
+          "stderr": "",
+          "error": null,
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web"
+      }
+    ],
+    "insufficient_findings": [
+      {
+        "kind": "output",
+        "question": "output 'status' の取得方法",
+        "finding": "実環境で取得できた。command=wmic。戻り値サンプルあり",
+        "evidence": {
+          "command": "wmic",
+          "args": ["os", "get", "Caption,OSArchitecture,Version"],
+          "returncode": 0,
+          "sample": [
+            "Caption                    OSArchitecture  Version",
+            "Microsoft Windows 11 Home  64-bit          10.0.26200"
+          ],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web",
+        "insufficient_reason": "取得した'status'はOS情報であり、メモリ使用率の取得には不十分"
+      },
+      {
+        "kind": "output",
+        "question": "メモリ使用率の取得方法",
+        "finding": "実環境で取得できた。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": [
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Get-WmiObject -Class Win32_OperatingSystem | Select-Object -ExpandProperty TotalVisibleMemorySize"
+          ],
+          "returncode": 0,
+          "sample": ["66844080"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web",
+        "insufficient_reason": "取得した値はTotalVisibleMemorySize（総物理メモリサイズ）のみで、メモリ使用率（使用中の割合）を示す情報が不足しています"
+      }
+    ],
+    "unresolved": []
+  }
+}

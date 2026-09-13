@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/mission_memory/execution.schema.json",
+  "title": "Execution record (frozen draft)",
+  "description": "Append-only record of one Agent execution. execution_id is not order. artifact_refs, resume pointers, and implementation-path names are intentionally absent.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "execution_id",
+    "mission_id",
+    "execution_sequence",
+    "result_determination",
+    "execution_end_state_judgment",
+    "goal_achievement_performed",
+    "stop_reason",
+    "unresolved_items",
+    "evidence_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1",
+      "description": "Git-side schema version. Not operational execution data."
+    },
+    "execution_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mission_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Join to Mission. Not a copy of Mission contents."
+    },
+    "execution_sequence": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Order within the same mission_id. Do not derive order from execution_id."
+    },
+    "result_determination": {
+      "type": "string",
+      "enum": ["determined", "undetermined"],
+      "description": "Whether this execution's result is determined. Not an implementation-path name."
+    },
+    "determined_result": {
+      "type": "string",
+      "description": "Present only when result_determination is determined. Empty string is a determined empty result, not missing."
+    },
+    "execution_end_state_judgment": {
+      "type": "string",
+      "enum": ["not_judged", "judged"],
+      "description": "Whether mission state was judged at this execution's end. not_judged is not a fifth mission state."
+    },
+    "execution_end_state": {
+      "type": "string",
+      "enum": ["achieved", "paused", "needs_continuation", "ended_incomplete"],
+      "description": "Mission state at this execution's end only. Not the current mission-wide state."
+    },
+    "goal_achievement_performed": {
+      "type": "boolean",
+      "description": "Whether goal-achievement judgment ran. Auto judgment is not connected; writers currently store false."
+    },
+    "goal_achievement_result": {
+      "type": "string",
+      "enum": ["achieved", "not_achieved"],
+      "description": "Present only when goal_achievement_performed is true."
+    },
+    "stop_reason": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Loop stop reason as input. Not mission state. Not a closed runtime enum copy."
+    },
+    "unresolved_items": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "[] means zero unresolved items captured in this execution. Not proof that none exist."
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "persistent_evidence_id values only. Bodies are not copied. May reference evidence created in another mission. [] means zero refs."
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional Chat Turn reference. Not a substitute for mission_id or execution_id."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": ["result_determination"],
+        "properties": {
+          "result_determination": { "const": "determined" }
+        }
+      },
+      "then": {
+        "required": ["determined_result"]
+      }
+    },
+    {
+      "if": {
+        "required": ["result_determination"],
+        "properties": {
+          "result_determination": { "const": "undetermined" }
+        }
+      },
+      "then": {
+        "not": { "required": ["determined_result"] }
+      }
+    },
+    {
+      "if": {
+        "required": ["execution_end_state_judgment"],
+        "properties": {
+          "execution_end_state_judgment": { "const": "judged" }
+        }
+      },
+      "then": {
+        "required": ["execution_end_state"]
+      }
+    },
+    {
+      "if": {
+        "required": ["execution_end_state_judgment"],
+        "properties": {
+          "execution_end_state_judgment": { "const": "not_judged" }
+        }
+      },
+      "then": {
+        "not": { "required": ["execution_end_state"] }
+      }
+    },
+    {
+      "if": {
+        "required": ["goal_achievement_performed"],
+        "properties": {
+          "goal_achievement_performed": { "const": true }
+        }
+      },
+      "then": {
+        "required": ["goal_achievement_result"]
+      }
+    },
+    {
+      "if": {
+        "required": ["goal_achievement_performed"],
+        "properties": {
+          "goal_achievement_performed": { "const": false }
+        }
+      },
+      "then": {
+        "not": { "required": ["goal_achievement_result"] }
+      }
+    }
+  ]
+}

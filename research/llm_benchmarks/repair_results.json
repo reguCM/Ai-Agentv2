@@ -1,0 +1,2572 @@
+{
+  "note": "実測記録。自己修復の仕様ではない。分岐や Validator をこの数値で変えない。",
+  "test": "python -m tests.test_llm_repair",
+  "fixture": "tests/fixtures/broken_tools.py",
+  "max_repair_rounds": 3,
+  "timeout_seconds": 90,
+  "results": [
+    {
+      "profile": "qwen3_8b",
+      "model": "qwen3:8b",
+      "passed": "4/6",
+      "cases": {
+        "unparsed_output": "ok",
+        "wrong_output_key": "ok",
+        "return_value_not_dict": "ok",
+        "subprocess_result_handling": "ng",
+        "stub_value": "ng",
+        "wrong_command": "ok"
+      },
+      "notes": [
+        "日本語の長い repair 指示を追える",
+        "④はパース例外、⑤は空 code で止まることがある",
+        "⑤は2ラウンド目まで進むことがある（ループ自体は動く）"
+      ]
+    },
+    {
+      "profile": "deepseek_coder_v2_16b",
+      "model": "deepseek-coder-v2:16b",
+      "passed": "2/6",
+      "cases": {
+        "unparsed_output": "ng",
+        "wrong_output_key": "ng",
+        "return_value_not_dict": "ok",
+        "subprocess_result_handling": "ng",
+        "stub_value": "ng",
+        "wrong_command": "ok"
+      },
+      "notes": [
+        "材料を短縮しないと prompt overflow（status 400）",
+        "③⑥は短縮後に通ることがある",
+        "①④は表や区切り線が残る",
+        "⑤は runtime_exception",
+        "②は status が空文字や load になる"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "timestamp": "2026-08-18T09:16:55.052263+00:00",
+      "conditions": {
+        "model": "qwen3:8b",
+        "profile": "qwen3_8b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 5,
+        "total_cases": 6,
+        "passed_ratio": "5/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": "not ok: step=pass, codes_after=[], value={'status': 'error'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T09:30:47.667526+00:00",
+      "conditions": {
+        "model": "deepseek-coder-v2:16b",
+        "profile": "deepseek_coder_v2_16b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "english_compact",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 3,
+        "total_cases": 6,
+        "passed_ratio": "3/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "runtime_exception"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['runtime_exception'], value=None",
+          "failure_pattern": "runtime_exception_after_repair"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "runtime_exception"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['runtime_exception'], value=None",
+          "failure_pattern": "runtime_exception_after_repair"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": false,
+          "step_before": "research_repair",
+          "step_after": "research_repair",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [
+            "stub_value"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=research_repair, codes_after=['stub_value'], value={'status': '未実装'}",
+          "failure_pattern": "stub_not_implemented"
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T09:34:59.079908+00:00",
+      "conditions": {
+        "model": "qwen3:8b",
+        "profile": "qwen3_8b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T09:36:38.202167+00:00",
+      "conditions": {
+        "model": "qwen3:8b",
+        "profile": "qwen3_8b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T09:38:31.787032+00:00",
+      "conditions": {
+        "model": "qwen3:8b",
+        "profile": "qwen3_8b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T09:39:12.090851+00:00",
+      "conditions": {
+        "model": "deepseek-coder-v2:16b",
+        "profile": "deepseek_coder_v2_16b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "english_compact",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 3,
+        "total_cases": 6,
+        "passed_ratio": "3/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "runtime_exception"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['runtime_exception'], value=None",
+          "failure_pattern": "runtime_exception_after_repair"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "runtime_exception"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['runtime_exception'], value=None",
+          "failure_pattern": "runtime_exception_after_repair"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": false,
+          "step_before": "research_repair",
+          "step_after": "research_repair",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [
+            "stub_value"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=research_repair, codes_after=['stub_value'], value={'status': '未実装'}",
+          "failure_pattern": "stub_not_implemented"
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T09:39:51.716872+00:00",
+      "conditions": {
+        "model": "deepseek-coder-v2:16b",
+        "profile": "deepseek_coder_v2_16b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "english_compact",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 3,
+        "total_cases": 6,
+        "passed_ratio": "3/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "runtime_exception"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['runtime_exception'], value=None",
+          "failure_pattern": "runtime_exception_after_repair"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "runtime_exception"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['runtime_exception'], value=None",
+          "failure_pattern": "runtime_exception_after_repair"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": false,
+          "step_before": "research_repair",
+          "step_after": "research_repair",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [
+            "stub_value"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=research_repair, codes_after=['stub_value'], value={'status': '未実装'}",
+          "failure_pattern": "stub_not_implemented"
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T09:40:34.874866+00:00",
+      "conditions": {
+        "model": "deepseek-coder-v2:16b",
+        "profile": "deepseek_coder_v2_16b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "english_compact",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 3,
+        "total_cases": 6,
+        "passed_ratio": "3/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "runtime_exception"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['runtime_exception'], value=None",
+          "failure_pattern": "runtime_exception_after_repair"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "runtime_exception"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['runtime_exception'], value=None",
+          "failure_pattern": "runtime_exception_after_repair"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": false,
+          "step_before": "research_repair",
+          "step_after": "research_repair",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [
+            "stub_value"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=research_repair, codes_after=['stub_value'], value={'status': '未実装'}",
+          "failure_pattern": "stub_not_implemented"
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:01:27.001890+00:00",
+      "conditions": {
+        "model": "qwen3:8b",
+        "profile": "qwen3_8b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:03:40.264994+00:00",
+      "conditions": {
+        "model": "qwen3:8b",
+        "profile": "qwen3_8b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:06:28.833748+00:00",
+      "conditions": {
+        "model": "qwen3:8b",
+        "profile": "qwen3_8b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:07:04.803849+00:00",
+      "conditions": {
+        "model": "deepseek-coder-v2:16b",
+        "profile": "deepseek_coder_v2_16b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "english_compact",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 3,
+        "total_cases": 6,
+        "passed_ratio": "3/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "unparsed_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['unparsed_output'], value={'status': 'LoadPercentage\\n--------------\\n            48'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "unparsed_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['unparsed_output'], value={'status': 'LoadPercentage\\n--------------\\n            31'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": false,
+          "step_before": "research_repair",
+          "step_after": "research_repair",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [
+            "stub_value"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=research_repair, codes_after=['stub_value'], value={'status': '未実装'}",
+          "failure_pattern": "stub_not_implemented"
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:07:41.606851+00:00",
+      "conditions": {
+        "model": "deepseek-coder-v2:16b",
+        "profile": "deepseek_coder_v2_16b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "english_compact",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 3,
+        "total_cases": 6,
+        "passed_ratio": "3/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "unparsed_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['unparsed_output'], value={'status': 'LoadPercentage\\n--------------\\n            40'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "meaningless_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['meaningless_output'], value={'status': 'LoadPercentage'}",
+          "failure_pattern": "meaningless_output_after_repair"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": false,
+          "step_before": "research_repair",
+          "step_after": "research_repair",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [
+            "stub_value"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=research_repair, codes_after=['stub_value'], value={'status': '未実装'}",
+          "failure_pattern": "stub_not_implemented"
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:08:18.549384+00:00",
+      "conditions": {
+        "model": "deepseek-coder-v2:16b",
+        "profile": "deepseek_coder_v2_16b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "english_compact",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 3,
+        "total_cases": 6,
+        "passed_ratio": "3/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "unparsed_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['unparsed_output'], value={'status': 'LoadPercentage\\n--------------\\n            37'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "unparsed_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['unparsed_output'], value={'status': 'LoadPercentage\\n--------------\\n            26'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": false,
+          "step_before": "research_repair",
+          "step_after": "research_repair",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [
+            "stub_value"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=research_repair, codes_after=['stub_value'], value={'status': '未実装'}",
+          "failure_pattern": "stub_not_implemented"
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:35:56.443169+00:00",
+      "conditions": {
+        "model": "qwen3:14b",
+        "profile": "qwen3_14b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:39:04.358766+00:00",
+      "conditions": {
+        "model": "qwen3:14b",
+        "profile": "qwen3_14b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T11:42:25.518916+00:00",
+      "conditions": {
+        "model": "qwen3:14b",
+        "profile": "qwen3_14b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 6,
+        "total_cases": 6,
+        "passed_ratio": "6/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T12:01:28.385413+00:00",
+      "conditions": {
+        "model": "qwen2.5-coder:7b",
+        "profile": "qwen2_5_coder_7b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 4,
+        "total_cases": 6,
+        "passed_ratio": "4/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "meaningless_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['meaningless_output'], value={'status': '--------------'}",
+          "failure_pattern": "separator_line_returned"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "meaningless_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['meaningless_output'], value={'status': '--------------'}",
+          "failure_pattern": "separator_line_returned"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T12:02:21.614887+00:00",
+      "conditions": {
+        "model": "qwen2.5-coder:7b",
+        "profile": "qwen2_5_coder_7b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 4,
+        "total_cases": 6,
+        "passed_ratio": "4/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "meaningless_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['meaningless_output'], value={'status': '--------------'}",
+          "failure_pattern": "separator_line_returned"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "meaningless_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['meaningless_output'], value={'status': '--------------'}",
+          "failure_pattern": "separator_line_returned"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T12:03:15.057060+00:00",
+      "conditions": {
+        "model": "qwen2.5-coder:7b",
+        "profile": "qwen2_5_coder_7b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 4,
+        "total_cases": 6,
+        "passed_ratio": "4/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [
+            "meaningless_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['meaningless_output'], value={'status': '--------------'}",
+          "failure_pattern": "separator_line_returned"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "meaningless_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['meaningless_output'], value={'status': '--------------'}",
+          "failure_pattern": "separator_line_returned"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T12:05:17.312618+00:00",
+      "conditions": {
+        "model": "gemma3:12b",
+        "profile": "gemma3_12b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 4,
+        "total_cases": 6,
+        "passed_ratio": "4/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": "not ok: step=pass, codes_after=[], value={'status': 'Loa'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "unparsed_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['unparsed_output'], value={'status': 'LoadPercentage\\n--------------\\n            37'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 3,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T12:06:50.091195+00:00",
+      "conditions": {
+        "model": "gemma3:12b",
+        "profile": "gemma3_12b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 3,
+        "total_cases": 6,
+        "passed_ratio": "3/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": "not ok: step=pass, codes_after=[], value={'status': 'Loa'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "unparsed_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['unparsed_output'], value={'status': 'LoadPercentage\\n--------------\\n            37'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": false,
+          "step_before": "research_repair",
+          "step_after": "repair",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [
+            "meaningless_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['meaningless_output'], value={'status': 'LoadPercentage'}",
+          "failure_pattern": "meaningless_output_after_repair"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-08-18T12:08:08.539799+00:00",
+      "conditions": {
+        "model": "gemma3:12b",
+        "profile": "gemma3_12b",
+        "temperature": 0.0,
+        "num_predict": 2048,
+        "timeout_seconds": 90,
+        "context_limit": 4096,
+        "prompt_style": "japanese_verbose",
+        "keep_alive": "5m",
+        "max_repair_rounds": 3,
+        "case_filter": null
+      },
+      "summary": {
+        "passed_cases": 4,
+        "total_cases": 6,
+        "passed_ratio": "4/6"
+      },
+      "cases": [
+        {
+          "id": "unparsed_output",
+          "title": "① 生出力 → 数値抽出",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "unparsed_output"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": "not ok: step=pass, codes_after=[], value={'status': 'Loa'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "wrong_output_key",
+          "title": "② outputキー間違い → 正しいキーへ",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_output_key"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "return_value_not_dict",
+          "title": "③ return_valueがdictではない → dict化",
+          "ok": true,
+          "step_before": "repair",
+          "step_after": "pass",
+          "codes_before": [
+            "return_value_not_dict"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "subprocess_result_handling",
+          "title": "④ subprocessの戻り値処理ミス → returncode/stdout修正",
+          "ok": false,
+          "step_before": "repair",
+          "step_after": "repair",
+          "codes_before": [
+            "unparsed_output",
+            "subprocess_result_handling"
+          ],
+          "codes_after": [
+            "unparsed_output"
+          ],
+          "repair_rounds": 3,
+          "error": "not ok: step=repair, codes_after=['unparsed_output'], value={'status': 'LoadPercentage\\n--------------\\n            45'}",
+          "failure_pattern": "other"
+        },
+        {
+          "id": "stub_value",
+          "title": "⑤ 未実装スタブ → research結果を使って実装",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "stub_value"
+          ],
+          "codes_after": [],
+          "repair_rounds": 2,
+          "error": null,
+          "failure_pattern": null
+        },
+        {
+          "id": "wrong_command",
+          "title": "⑥ 間違ったコマンド → researchで確認したコマンドへ",
+          "ok": true,
+          "step_before": "research_repair",
+          "step_after": "pass",
+          "codes_before": [
+            "wrong_command"
+          ],
+          "codes_after": [],
+          "repair_rounds": 1,
+          "error": null,
+          "failure_pattern": null
+        }
+      ]
+    }
+  ]
+}

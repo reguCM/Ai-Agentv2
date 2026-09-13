@@ -1,0 +1,29 @@
+{
+  "note": "検索クエリ生成の現状記録（改善前）。research_followup_after_verify_fail の missing に対する build_search_queries 出力。",
+  "recorded_at": "2026-08-19T06:08:00Z",
+  "case": "research_followup_after_verify_fail",
+  "item": {
+    "kind": "output",
+    "question": "total physical memory is still unconfirmed",
+    "followup": true
+  },
+  "subject": {
+    "subcategory": "memory"
+  },
+  "inventory": {
+    "available_commands": ["powershell", "wmic"]
+  },
+  "generation_rules_then": [
+    "SEARCH_QUERY_TEMPLATES[memory] は空（未定義）",
+    "build_search_query = available_commands + SEARCH_HINTS[memory]",
+    "followup なら question をそのまま追加",
+    "followup なら question + SEARCH_HINTS[memory] を追加"
+  ],
+  "queries": [
+    "powershell wmic Windows memory usage percent PowerShell",
+    "total physical memory is still unconfirmed",
+    "total physical memory is still unconfirmed Windows memory usage percent PowerShell"
+  ],
+  "used_query_on_capture": "total physical memory is still unconfirmed Windows memory usage percent PowerShell",
+  "problem": "missing 文をほぼそのまま query に載せ、計測対象キーワードへの構造化がない。結果として無関係な learn.microsoft ヒットが上位になった。"
+}

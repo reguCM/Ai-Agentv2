@@ -1,0 +1,38 @@
+{
+  "reference_case_id": "p2a_development_policy_regression",
+  "description": "P2a closure regression bundle + supplemental spec API (Human-approved S1 reference).",
+  "test_plan": {
+    "plan_id": "p2a_development_policy_regression",
+    "description": "Mocked unit pytest for development policy final answer boundary; localhost HTTP for spec propose API; optional repo session write on /h help test.",
+    "commands": [
+      "python -m pytest tests/ai_tool/chat_interface/test_development_policy_p2a.py tests/ai_tool/policy/test_development_policy.py tests/ai_tool/chat_interface/test_policy_api.py -q",
+      "python -m pytest tests/ai_tool/spec_proposal/test_propose.py::test_chat_development_saves_proposal -q",
+      "python -m pytest tests/ai_tool/chat_interface/test_spec_proposal_api.py -q"
+    ],
+    "declared_primary_risk_level": "LEVEL_2",
+    "declared_write_scope": [
+      "pytest tmp_path via chat_interface conftest (CONTROLLED)",
+      "possible repository runs/chat_ui/sessions for test_t5_help_route (DECLARED repo write)"
+    ],
+    "declared_dimensions": {
+      "llm": "NONE",
+      "gpu": "NONE",
+      "network": "CONTROLLED",
+      "subprocess": "CONTROLLED",
+      "filesystem_write": "CONTROLLED"
+    },
+    "notes": "Host ollama and unknown high-CPU python observed during P2a preflight; not used by plan. Phase1 jsonl fixture test may ENVIRONMENT_PREREQUISITE_MISSING."
+  },
+  "host_process_notes": [
+    "ollama process present on host (unused by this plan)",
+    "unknown high-CPU python process on host (relevance low for LEVEL_1/L2 mocked pytest)"
+  ],
+  "expectation": {
+    "shadow_gate_decision": "PASS",
+    "human_decision": "PASS",
+    "human_approval_required": false,
+    "warnings_nonempty": true,
+    "postflight_git_check_required": true,
+    "reason": "P2a L2 controlled regression; declared repo write"
+  }
+}

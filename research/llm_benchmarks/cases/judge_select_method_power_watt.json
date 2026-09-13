@@ -1,0 +1,173 @@
+{
+  "id": "judge_select_method_power_watt",
+  "note": "② 直接取得と計算取得の両方を許す。③ 単位変換（kW→W）も許すが Wh は不可。Judge が最終的に要求された意味・単位の値を得られるかで判断できるかを見る。",
+  "request": "現在の消費電力をWで取得するToolを作ってください。",
+  "proposal": {
+    "name": "get_power_status",
+    "output": ["status"]
+  },
+  "state": {
+    "task": "現在の消費電力をWで取得するToolを作ってください。",
+    "facts": [],
+    "decisions": [
+      {
+        "key": "request.metric",
+        "value": "消費電力",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.meaning",
+        "value": "現在の消費電力",
+        "source": "user",
+        "confidence": "confirmed"
+      },
+      {
+        "key": "status.unit",
+        "value": "W",
+        "source": "user",
+        "confidence": "confirmed"
+      }
+    ],
+    "selected_findings": [],
+    "constraints": [],
+    "unresolved": []
+  },
+  "candidates": {
+    "A": {
+      "role": "direct_watt",
+      "label": "電力センサーから W を直接取得",
+      "satisfies": true
+    },
+    "B": {
+      "role": "compute_from_v_and_a",
+      "label": "電圧×電流から W を計算して取得",
+      "satisfies": true
+    },
+    "C": {
+      "role": "convert_kw_to_w",
+      "label": "kW で返すが ×1000 で W に変換可能",
+      "satisfies": true
+    },
+    "D": {
+      "role": "current_only",
+      "label": "電流 A だけ返す（電力にならない）",
+      "satisfies": false
+    },
+    "E": {
+      "role": "energy_wh",
+      "label": "電力量 Wh を返す（電力 W ではない）",
+      "satisfies": false
+    },
+    "F": {
+      "role": "cpu_usage",
+      "label": "CPU使用率を返す（無関係）",
+      "satisfies": false
+    }
+  },
+  "research_result": {
+    "usable_findings": [
+      {
+        "kind": "output",
+        "question": "消費電力の取得方法",
+        "finding": "電力センサーから直接取得。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command",
+            "Get-CimInstance -Namespace root/WMI -Class MSPower_BatteryInfo | Select RemainingCapacity; $w = (Get-CimInstance -Namespace root/cimv2 -Class Win32_Battery).EstimatedChargeRemaining; Write-Output \"123\""],
+          "returncode": 0,
+          "sample": ["123"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web",
+        "_test_label": "A"
+      },
+      {
+        "kind": "output",
+        "question": "消費電力の取得方法",
+        "finding": "電圧と電流を別々に取得し、掛け算で電力を計算。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command",
+            "$v = 100; $a = 2.0; Write-Output ([math]::Round($v * $a))"],
+          "returncode": 0,
+          "sample": ["200"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web",
+        "_test_label": "B"
+      },
+      {
+        "kind": "output",
+        "question": "消費電力の取得方法",
+        "finding": "kW 単位で取得。×1000 で W に変換可能。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command",
+            "Write-Output 0.048"],
+          "returncode": 0,
+          "sample": ["0.048"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web",
+        "_test_label": "C",
+        "_note": "kW value; multiply by 1000 to get 48 W"
+      },
+      {
+        "kind": "output",
+        "question": "消費電力の取得方法",
+        "finding": "電流だけを取得。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command",
+            "Write-Output 2.0"],
+          "returncode": 0,
+          "sample": ["2.0"],
+          "output_key": "status"
+        },
+        "confidence": "medium",
+        "source": "web",
+        "_test_label": "D",
+        "_note": "Current in Amperes only, not power"
+      },
+      {
+        "kind": "output",
+        "question": "消費電力の取得方法",
+        "finding": "電力量 Wh を取得。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command",
+            "Write-Output 200"],
+          "returncode": 0,
+          "sample": ["200"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web",
+        "_test_label": "E",
+        "_note": "Energy in Wh, not power in W"
+      },
+      {
+        "kind": "output",
+        "question": "消費電力の取得方法",
+        "finding": "CPU使用率を取得。command=powershell。戻り値サンプルあり",
+        "evidence": {
+          "command": "powershell",
+          "args": ["-NoProfile", "-NonInteractive", "-Command",
+            "Get-CimInstance -Class Win32_Processor | Select LoadPercentage"],
+          "returncode": 0,
+          "sample": ["LoadPercentage", "--------------", "12"],
+          "output_key": "status"
+        },
+        "confidence": "high",
+        "source": "web",
+        "_test_label": "F"
+      }
+    ],
+    "insufficient_findings": [],
+    "unresolved": []
+  }
+}

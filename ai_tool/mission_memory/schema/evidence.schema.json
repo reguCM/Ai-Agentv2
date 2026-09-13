@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/mission_memory/evidence.schema.json",
+  "title": "Evidence record (frozen draft envelope)",
+  "description": "Independent immutable evidence canonical. Mission/Execution IDs are provenance of first persistence, not ownership or use-scope. Per-source-type locator fields are open. Unknown source_type may be stored; reverification is not guaranteed. Content snapshot is not required.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "persistent_evidence_id",
+    "created_in_mission_id",
+    "created_by_execution_id",
+    "source_type",
+    "source",
+    "summary",
+    "observed_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1",
+      "description": "Git-side schema version. Not operational evidence data."
+    },
+    "persistent_evidence_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Canonical evidence ID. Not the Runtime temporary evidence_id."
+    },
+    "created_in_mission_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Mission that the creating execution belonged to. Does not limit later use to that mission."
+    },
+    "created_by_execution_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Execution that first created and persisted this evidence. Later executions must not mutate this record."
+    },
+    "source_type": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Open string. The type list is not closed. Unknown types are persistable."
+    },
+    "source": {
+      "type": "string",
+      "description": "Source identifier as observed. Empty string is not missing."
+    },
+    "summary": {
+      "type": "string",
+      "description": "Summary of the observation. Not the grounds themselves."
+    },
+    "observed_at": {
+      "type": "string",
+      "minLength": 1,
+      "description": "When the observation was made. Not the persist time. Timestamp format is not closed in this draft."
+    },
+    "persisted_at": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Provisional optional persist time. Separate from observed_at. Omit when not recorded."
+    },
+    "source_locator": {
+      "type": "object",
+      "description": "Provisional per-source-type reference and version object for later reverification. Additional keys are allowed. Omission means reverification is not guaranteed, including unknown source types. Type-specific required keys are not closed in this draft.",
+      "additionalProperties": true
+    }
+  }
+}

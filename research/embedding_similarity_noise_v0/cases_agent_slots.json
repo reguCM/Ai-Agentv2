@@ -1,0 +1,77 @@
+{
+  "note": "Same Human Input Noise queries as cases_ja_gold.json. Candidates are provisional Agent slots, not a Production schema. Not a SELECTED rule.",
+  "gold_label_language": "ja",
+  "slot_schema_status": "PROVISIONAL_NOT_IN_PRODUCTION",
+  "slot_mapping_note": "Goal/Meaning/Focus/Target Role は現行 Registry / Grill record の4欄ではない。実験用に既存の扱いへ仮対応する。Goal=GoalNode/request文、Meaning=対象の意味同一性（Grillが観測テキストと照合する側）、Focus=path/次の読取対象、Target Role=runtime対researchの役割および observation_role。",
+  "anchors": {
+    "board": {
+      "label": "テトリスの盤面",
+      "clean_query_id": "board_clean",
+      "object_id": "board"
+    },
+    "runtime": {
+      "label": "実行時に動いている実装",
+      "clean_query_id": "runtime_clean",
+      "object_id": "runtime"
+    },
+    "research": {
+      "label": "研究用のもの",
+      "clean_query_id": "research_clean",
+      "object_id": "research"
+    }
+  },
+  "candidates": [
+    {"id": "c_goal_board", "slot_type": "goal", "object_id": "board", "text": "Goal: 盤面の内容を読んで要約する", "kind": "goal_board"},
+    {"id": "c_meaning_board", "slot_type": "meaning", "object_id": "board", "text": "Meaning: ゲームの盤面状態", "kind": "meaning_board"},
+    {"id": "c_focus_board", "slot_type": "focus", "object_id": "board", "text": "Focus path: tetris/board_state.py", "kind": "focus_board"},
+    {"id": "c_role_board", "slot_type": "target_role", "object_id": "board", "text": "Target Role: 盤面の観測データ", "kind": "role_board"},
+    {"id": "c_goal_runtime", "slot_type": "goal", "object_id": "runtime", "text": "Goal: 実行時コードを読んで要約する", "kind": "goal_runtime"},
+    {"id": "c_meaning_runtime", "slot_type": "meaning", "object_id": "runtime", "text": "Meaning: 実行時に動いている実装", "kind": "meaning_runtime"},
+    {"id": "c_focus_runtime", "slot_type": "focus", "object_id": "runtime", "text": "Focus path: src/runtime/implementation.py", "kind": "focus_runtime"},
+    {"id": "c_role_runtime", "slot_type": "target_role", "object_id": "runtime", "text": "Target Role: 実行時の本番経路", "kind": "role_runtime"},
+    {"id": "c_goal_research", "slot_type": "goal", "object_id": "research", "text": "Goal: 研究用コードを読んで要約する", "kind": "goal_research"},
+    {"id": "c_meaning_research", "slot_type": "meaning", "object_id": "research", "text": "Meaning: 研究用の実験", "kind": "meaning_research"},
+    {"id": "c_focus_research", "slot_type": "focus", "object_id": "research", "text": "Focus path: research/experiment_harness.py", "kind": "focus_research"},
+    {"id": "c_role_research", "slot_type": "target_role", "object_id": "research", "text": "Target Role: 研究用の実験経路", "kind": "role_research"},
+    {"id": "c_goal_weather", "slot_type": "goal", "object_id": "unrelated", "text": "Goal: 今日の天気を調べる", "kind": "wrong_goal"},
+    {"id": "c_meaning_cpu", "slot_type": "meaning", "object_id": "unrelated", "text": "Meaning: CPU温度の取得方法", "kind": "wrong_meaning"},
+    {"id": "c_meaning_score", "slot_type": "meaning", "object_id": "unrelated", "text": "Meaning: ハイスコアの保存方法", "kind": "wrong_related_game"},
+    {"id": "c_focus_license", "slot_type": "focus", "object_id": "unrelated", "text": "Focus path: LICENSE", "kind": "wrong_focus"},
+    {"id": "c_role_followup", "slot_type": "target_role", "object_id": "unrelated", "text": "Target Role: followup_investigation の追加調査", "kind": "wrong_role"}
+  ],
+  "queries": [
+    {"id": "board_clean", "anchor_id": "board", "noise_type": "clean", "text": "テトリスの盤面", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "ノイズなし。対象のMeaningを指定"},
+    {"id": "board_typo", "anchor_id": "board", "noise_type": "typo", "text": "テとりすの盤面", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "カタカナの一部をひらがなで打った"},
+    {"id": "board_conversion", "anchor_id": "board", "noise_type": "conversion", "text": "テトリスの番面", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "ばんめん→番面"},
+    {"id": "board_missing_char", "anchor_id": "board", "noise_type": "missing_char", "text": "テトリスの盤", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "面が抜けた"},
+    {"id": "board_particle", "anchor_id": "board", "noise_type": "particle_drop", "text": "テトリス盤面", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "の 抜け"},
+    {"id": "board_colloquial", "anchor_id": "board", "noise_type": "colloquial", "text": "テトリスの盤面のやつ", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "口語のやつ"},
+    {"id": "board_filler", "anchor_id": "board", "noise_type": "filler", "text": "えっとテトリスの盤面", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "フィラー えっと"},
+    {"id": "board_restatement", "anchor_id": "board", "noise_type": "restatement", "text": "いやスコアじゃなくてテトリスの盤面", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "言い直し。否定語にハイスコアが含まれる"},
+    {"id": "board_asr", "anchor_id": "board", "noise_type": "asr_like", "text": "手取り巣の盤面", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "テトリスの音声認識風誤変換"},
+    {"id": "board_demonstrative", "anchor_id": "board", "noise_type": "demonstrative", "text": "そっちの盤面", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "指示語。盤面は残っている"},
+    {"id": "board_compound", "anchor_id": "board", "noise_type": "compound", "text": "えっとテトリスの番面のやつ", "gold_id": "c_meaning_board", "intended_slot_id": "c_meaning_board", "note": "フィラー+変換ミス+口語"},
+    {"id": "runtime_clean", "anchor_id": "runtime", "noise_type": "clean", "text": "実行時に動いている実装", "gold_id": "c_meaning_runtime", "intended_slot_id": "c_meaning_runtime", "note": "ノイズなし。対象のMeaningを指定"},
+    {"id": "runtime_typo", "anchor_id": "runtime", "noise_type": "typo", "text": "実交時に動いている実装", "gold_id": "c_meaning_runtime", "intended_slot_id": "c_meaning_runtime", "note": "行→交 の打ち間違い"},
+    {"id": "runtime_conversion", "anchor_id": "runtime", "noise_type": "conversion", "text": "実効時に動いている実装", "gold_id": "c_meaning_runtime", "intended_slot_id": "c_meaning_runtime", "note": "じっこうじ→実効時"},
+    {"id": "runtime_missing_char", "anchor_id": "runtime", "noise_type": "missing_char", "text": "実行時に動いている実", "gold_id": "c_meaning_runtime", "intended_slot_id": "c_meaning_runtime", "note": "装が抜けた"},
+    {"id": "runtime_particle", "anchor_id": "runtime", "noise_type": "particle_drop", "text": "実行時動いている実装", "gold_id": "c_meaning_runtime", "intended_slot_id": "c_meaning_runtime", "note": "に 抜け"},
+    {"id": "runtime_colloquial", "anchor_id": "runtime", "noise_type": "colloquial", "text": "実際に動いてるほう", "gold_id": "c_role_runtime", "intended_slot_id": "c_role_runtime", "note": "口語。どの経路かの Target Role"},
+    {"id": "runtime_filler", "anchor_id": "runtime", "noise_type": "filler", "text": "あのー実行時に動いている実装なんですけど", "gold_id": "c_meaning_runtime", "intended_slot_id": "c_meaning_runtime", "note": "フィラー+なんですけど"},
+    {"id": "runtime_restatement", "anchor_id": "runtime", "noise_type": "restatement", "text": "実験用じゃなくて実行時に動いている実装", "gold_id": "c_meaning_runtime", "intended_slot_id": "c_meaning_runtime", "note": "言い直し。否定語に実験が含まれる"},
+    {"id": "runtime_asr", "anchor_id": "runtime", "noise_type": "asr_like", "text": "実効時に動いてる実装", "gold_id": "c_meaning_runtime", "intended_slot_id": "c_meaning_runtime", "note": "実効時+口語のてる"},
+    {"id": "runtime_demonstrative", "anchor_id": "runtime", "noise_type": "demonstrative", "text": "実際に使ってる方", "gold_id": "c_role_runtime", "intended_slot_id": "c_role_runtime", "note": "指示語的な方。Target Role"},
+    {"id": "runtime_compound", "anchor_id": "runtime", "noise_type": "compound", "text": "あの実際ゲームで使ってるほう", "gold_id": "c_role_runtime", "intended_slot_id": "c_role_runtime", "note": "フィラー+口語+指示語。Target Role"},
+    {"id": "research_clean", "anchor_id": "research", "noise_type": "clean", "text": "研究用のもの", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "どの経路かの Target Role"},
+    {"id": "research_typo", "anchor_id": "research", "noise_type": "typo", "text": "けんきゅう用のもの", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "漢字をひらがなで打った"},
+    {"id": "research_conversion", "anchor_id": "research", "noise_type": "conversion", "text": "兼休用のもの", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "けんきゅう→兼休"},
+    {"id": "research_missing_char", "anchor_id": "research", "noise_type": "missing_char", "text": "究用のもの", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "研が抜けた"},
+    {"id": "research_particle", "anchor_id": "research", "noise_type": "particle_drop", "text": "研究用もの", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "の 抜け"},
+    {"id": "research_colloquial", "anchor_id": "research", "noise_type": "colloquial", "text": "研究用のやつ", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "口語のやつ"},
+    {"id": "research_filler", "anchor_id": "research", "noise_type": "filler", "text": "まあ研究用のものかな", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "フィラー まあ+かな"},
+    {"id": "research_restatement", "anchor_id": "research", "noise_type": "restatement", "text": "本番じゃなくて研究用のもの", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "言い直し。否定語に本番が含まれる"},
+    {"id": "research_asr", "anchor_id": "research", "noise_type": "asr_like", "text": "兼急用のもの", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "けんきゅうようの音声認識風誤変換"},
+    {"id": "research_demonstrative", "anchor_id": "research", "noise_type": "demonstrative", "text": "研究用のほう", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "指示語 ほう"},
+    {"id": "research_compound", "anchor_id": "research", "noise_type": "compound", "text": "まあけんきゅう用のも", "gold_id": "c_role_research", "intended_slot_id": "c_role_research", "note": "フィラー+ひらがな+末尾切れ"}
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "ok": true,
+  "error": null,
+  "ingest_id": "ing-20260831_011350-38f06688",
+  "correlation_id": "mx-20260831_011350-7fc76477",
+  "query": "RTX 3080",
+  "hit_count": 4,
+  "llm_used": false,
+  "research": "NOT_CONNECTED",
+  "records": [
+    {
+      "record_id": "mr-68f32e9fa99a",
+      "entity": "RTX 3080",
+      "attribute": "cited_by",
+      "value": "RTX 3080",
+      "source_url": "https://en.wikipedia.org/wiki/RTX_3080",
+      "source_title": "RTX 3080",
+      "observed_at": "2026-08-31T01:13:53.581245+00:00",
+      "provenance": "web_search → fetch → extract → matrix_write",
+      "ingest_id": "ing-20260831_011350-38f06688",
+      "query": "RTX 3080",
+      "excerpt": null
+    },
+    {
+      "record_id": "mr-0b782e02598d",
+      "entity": "RTX 3080",
+      "attribute": "VRAM capacity",
+      "value": "12 GB",
+      "source_url": "https://en.wikipedia.org/wiki/RTX_3080",
+      "source_title": "RTX 3080",
+      "observed_at": "2026-08-31T01:13:53.581245+00:00",
+      "provenance": "web_search → fetch → extract → matrix_write",
+      "ingest_id": "ing-20260831_011350-38f06688",
+      "query": "RTX 3080",
+      "excerpt": "RTX 3080 {{short description|Series of GPUs by Nvidia}} {{Use American English|date=January 2023}} {{Use mdy dates|date=January 2023}} {{Infobox graphics proce…"
+    }
+  ],
+  "rejected": [
+    {
+      "reason": "ENTITY_SOURCE_MISMATCH",
+      "entity": "RTX 3080",
+      "source_title_entity": "RTX 5000",
+      "attribute": "cited_by",
+      "value": "RTX 5000",
+      "source_title": "RTX 5000",
+      "source_url": "https://en.wikipedia.org/wiki/RTX_5000"
+    },
+    {
+      "reason": "ENTITY_SOURCE_MISMATCH",
+      "entity": "RTX 3080",
+      "source_title_entity": "RTX 4000",
+      "attribute": "cited_by",
+      "value": "RTX 4000",
+      "source_title": "RTX 4000",
+      "source_url": "https://en.wikipedia.org/wiki/RTX_4000"
+    },
+    {
+      "reason": "ENTITY_SOURCE_MISMATCH",
+      "entity": "RTX 3080",
+      "source_title_entity": "RTX 2000",
+      "attribute": "cited_by",
+      "value": "RTX 2000",
+      "source_title": "RTX 2000",
+      "source_url": "https://en.wikipedia.org/wiki/RTX_2000"
+    }
+  ],
+  "events": [
+    {
+      "type": "search",
+      "timestamp": "2026-08-31T01:13:52.462550+00:00",
+      "query": "RTX 3080",
+      "hit_count": 4,
+      "backends_tried": [
+        "duckduckgo",
+        "wikipedia-ja",
+        "wikipedia-en"
+      ],
+      "status": "success",
+      "omitted": [
+        "hits"
+      ],
+      "correlation_id": "mx-20260831_011350-7fc76477",
+      "requested_by": "cursor",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "ingest_id": "ing-20260831_011350-38f06688"
+    },
+    {
+      "type": "fetch",
+      "timestamp": "2026-08-31T01:13:53.578194+00:00",
+      "url": "https://en.wikipedia.org/wiki/RTX_3080",
+      "fetch_kind": "wikipedia_wikitext",
+      "status": "success",
+      "omitted": [
+        "main_text",
+        "wikitext"
+      ],
+      "correlation_id": "mx-20260831_011350-7fc76477",
+      "requested_by": "cursor",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "ingest_id": "ing-20260831_011350-38f06688"
+    },
+    {
+      "type": "extract",
+      "timestamp": "2026-08-31T01:13:53.580194+00:00",
+      "status": "success",
+      "draft_count": 5,
+      "note": "LLM は使っていない。snippet / main_text 全文は保存しない。entity は query から仮置きし、次段で出典と照合する。",
+      "correlation_id": "mx-20260831_011350-7fc76477",
+      "requested_by": "cursor",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "ingest_id": "ing-20260831_011350-38f06688"
+    },
+    {
+      "type": "normalize",
+      "timestamp": "2026-08-31T01:13:53.580194+00:00",
+      "status": "success",
+      "draft_count": 5,
+      "note": "容量表記の単位正規化のみ。Entity / Source 判定ではない。",
+      "correlation_id": "mx-20260831_011350-7fc76477",
+      "requested_by": "cursor",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "ingest_id": "ing-20260831_011350-38f06688"
+    },
+    {
+      "type": "entity_source_check",
+      "timestamp": "2026-08-31T01:13:53.581245+00:00",
+      "status": "filtered",
+      "accepted_count": 2,
+      "rejected_count": 3,
+      "entity_source_mismatch_count": 3,
+      "value_not_supported_count": 0,
+      "rejected": [
+        {
+          "reason": "ENTITY_SOURCE_MISMATCH",
+          "entity": "RTX 3080",
+          "source_title_entity": "RTX 5000",
+          "attribute": "cited_by",
+          "value": "RTX 5000",
+          "source_title": "RTX 5000",
+          "source_url": "https://en.wikipedia.org/wiki/RTX_5000"
+        },
+        {
+          "reason": "ENTITY_SOURCE_MISMATCH",
+          "entity": "RTX 3080",
+          "source_title_entity": "RTX 4000",
+          "attribute": "cited_by",
+          "value": "RTX 4000",
+          "source_title": "RTX 4000",
+          "source_url": "https://en.wikipedia.org/wiki/RTX_4000"
+        },
+        {
+          "reason": "ENTITY_SOURCE_MISMATCH",
+          "entity": "RTX 3080",
+          "source_title_entity": "RTX 2000",
+          "attribute": "cited_by",
+          "value": "RTX 2000",
+          "source_title": "RTX 2000",
+          "source_url": "https://en.wikipedia.org/wiki/RTX_2000"
+        }
+      ],
+      "note": "query Entity と出典 Entity を同一視しない。本文に無い VRAM 値は保存しない。",
+      "correlation_id": "mx-20260831_011350-7fc76477",
+      "requested_by": "cursor",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "ingest_id": "ing-20260831_011350-38f06688"
+    },
+    {
+      "type": "matrix_write",
+      "timestamp": "2026-08-31T01:13:53.582245+00:00",
+      "status": "success",
+      "count": 2,
+      "record_ids": [
+        "mr-68f32e9fa99a",
+        "mr-0b782e02598d"
+      ],
+      "correlation_id": "mx-20260831_011350-7fc76477",
+      "requested_by": "cursor",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "ingest_id": "ing-20260831_011350-38f06688"
+    },
+    {
+      "type": "matrix_result",
+      "timestamp": "2026-08-31T01:13:53.582245+00:00",
+      "status": "success",
+      "count": 2,
+      "records": [
+        {
+          "record_id": "mr-68f32e9fa99a",
+          "entity": "RTX 3080",
+          "attribute": "cited_by",
+          "value": "RTX 3080",
+          "source_url": "https://en.wikipedia.org/wiki/RTX_3080",
+          "source_title": "RTX 3080",
+          "observed_at": "2026-08-31T01:13:53.581245+00:00",
+          "provenance": "web_search → fetch → extract → matrix_write",
+          "ingest_id": "ing-20260831_011350-38f06688",
+          "query": "RTX 3080",
+          "excerpt": null
+        },
+        {
+          "record_id": "mr-0b782e02598d",
+          "entity": "RTX 3080",
+          "attribute": "VRAM capacity",
+          "value": "12 GB",
+          "source_url": "https://en.wikipedia.org/wiki/RTX_3080",
+          "source_title": "RTX 3080",
+          "observed_at": "2026-08-31T01:13:53.581245+00:00",
+          "provenance": "web_search → fetch → extract → matrix_write",
+          "ingest_id": "ing-20260831_011350-38f06688",
+          "query": "RTX 3080",
+          "excerpt": "RTX 3080 {{short description|Series of GPUs by Nvidia}} {{Use American English|date=January 2023}} {{Use mdy dates|date=January 2023}} {{Infobox graphics proce…"
+        }
+      ],
+      "correlation_id": "mx-20260831_011350-7fc76477",
+      "requested_by": "cursor",
+      "executed_by": "matrix_pipeline",
+      "actor": "matrix_pipeline",
+      "source": "matrix",
+      "ingest_id": "ing-20260831_011350-38f06688"
+    }
+  ],
+  "requested_by": "cursor",
+  "executed_by": "matrix_pipeline",
+  "actor": "matrix_pipeline",
+  "source": "matrix"
+}

@@ -1,0 +1,263 @@
+{
+  "experiment_id": "kss1_20260820_144328",
+  "measurement_ok": true,
+  "problems": [],
+  "formalize_phase5_1": false,
+  "auto_routing": false,
+  "n_records": 5,
+  "per_case": [
+    {
+      "case": "memory_usage",
+      "metrics": {
+        "pass": true,
+        "fail_stage": null,
+        "error": null,
+        "rounds": 1,
+        "llm_calls": 5,
+        "usable_findings": 1,
+        "actual_headroom_min": 2960,
+        "headroom_gate_ok": true,
+        "context_overflow": false,
+        "kss1_obs_rounds": 1,
+        "kss1_history_events": 1,
+        "decisions_total": 4,
+        "decisions_with_observation": 0,
+        "observation_coverage": 0.0,
+        "high_confidence_zero_gain_rate": null,
+        "high_confidence_repeating_rate": null,
+        "stuck_events": 0,
+        "result_linked_rate": 0.0,
+        "behavior_changed": false,
+        "auto_routing": false,
+        "calibration": {
+          "confidence_buckets": {
+            "missing": {
+              "n": 4,
+              "success": 0,
+              "useful_failure": 0,
+              "zero_information_failure": 0,
+              "information_gain": 0,
+              "observation_missing": 4,
+              "success_rate": 0.0,
+              "useful_failure_rate": 0.0,
+              "zero_information_failure_rate": 0.0,
+              "information_gain_rate": 0.0
+            }
+          },
+          "source_calibration": {},
+          "high_confidence_zero_gain_rate": null,
+          "high_confidence_repeating_rate": null,
+          "high_confidence_n": 0,
+          "decisions_with_observation": 0,
+          "decisions_total": 4,
+          "observation_coverage": 0.0,
+          "not_for_decision": true,
+          "phase": "kss-1"
+        }
+      }
+    },
+    {
+      "case": "cpu_temperature",
+      "metrics": {
+        "pass": false,
+        "fail_stage": "judge",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 20,
+        "usable_findings": 0,
+        "actual_headroom_min": 969,
+        "headroom_gate_ok": true,
+        "context_overflow": false,
+        "kss1_obs_rounds": 10,
+        "kss1_history_events": 10,
+        "decisions_total": 22,
+        "decisions_with_observation": 0,
+        "observation_coverage": 0.0,
+        "high_confidence_zero_gain_rate": null,
+        "high_confidence_repeating_rate": null,
+        "stuck_events": 0,
+        "result_linked_rate": 0.273,
+        "behavior_changed": false,
+        "auto_routing": false,
+        "calibration": {
+          "confidence_buckets": {
+            "missing": {
+              "n": 22,
+              "success": 0,
+              "useful_failure": 0,
+              "zero_information_failure": 0,
+              "information_gain": 0,
+              "observation_missing": 22,
+              "success_rate": 0.0,
+              "useful_failure_rate": 0.0,
+              "zero_information_failure_rate": 0.0,
+              "information_gain_rate": 0.0
+            }
+          },
+          "source_calibration": {},
+          "high_confidence_zero_gain_rate": null,
+          "high_confidence_repeating_rate": null,
+          "high_confidence_n": 0,
+          "decisions_with_observation": 0,
+          "decisions_total": 22,
+          "observation_coverage": 0.0,
+          "not_for_decision": true,
+          "phase": "kss-1"
+        }
+      }
+    },
+    {
+      "case": "disk_usage",
+      "metrics": {
+        "pass": false,
+        "fail_stage": "research",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 24,
+        "usable_findings": 0,
+        "actual_headroom_min": 823,
+        "headroom_gate_ok": true,
+        "context_overflow": false,
+        "kss1_obs_rounds": 10,
+        "kss1_history_events": 10,
+        "decisions_total": 33,
+        "decisions_with_observation": 0,
+        "observation_coverage": 0.0,
+        "high_confidence_zero_gain_rate": null,
+        "high_confidence_repeating_rate": null,
+        "stuck_events": 0,
+        "result_linked_rate": 0.455,
+        "behavior_changed": false,
+        "auto_routing": false,
+        "calibration": {
+          "confidence_buckets": {
+            "missing": {
+              "n": 33,
+              "success": 0,
+              "useful_failure": 0,
+              "zero_information_failure": 0,
+              "information_gain": 0,
+              "observation_missing": 33,
+              "success_rate": 0.0,
+              "useful_failure_rate": 0.0,
+              "zero_information_failure_rate": 0.0,
+              "information_gain_rate": 0.0
+            }
+          },
+          "source_calibration": {},
+          "high_confidence_zero_gain_rate": null,
+          "high_confidence_repeating_rate": null,
+          "high_confidence_n": 0,
+          "decisions_with_observation": 0,
+          "decisions_total": 33,
+          "observation_coverage": 0.0,
+          "not_for_decision": true,
+          "phase": "kss-1"
+        }
+      }
+    },
+    {
+      "case": "gpu_usage",
+      "metrics": {
+        "pass": false,
+        "fail_stage": "proposal",
+        "error": "proposal_validation_ng",
+        "rounds": null,
+        "llm_calls": 2,
+        "usable_findings": 0,
+        "actual_headroom_min": null,
+        "headroom_gate_ok": null,
+        "context_overflow": false,
+        "kss1_obs_rounds": 0,
+        "kss1_history_events": 0,
+        "decisions_total": 0,
+        "decisions_with_observation": 0,
+        "observation_coverage": null,
+        "high_confidence_zero_gain_rate": null,
+        "high_confidence_repeating_rate": null,
+        "stuck_events": 0,
+        "result_linked_rate": null,
+        "behavior_changed": false,
+        "auto_routing": false,
+        "calibration": {
+          "confidence_buckets": {},
+          "source_calibration": {},
+          "high_confidence_zero_gain_rate": null,
+          "high_confidence_repeating_rate": null,
+          "high_confidence_n": 0,
+          "decisions_with_observation": 0,
+          "decisions_total": 0,
+          "observation_coverage": null,
+          "not_for_decision": true,
+          "phase": "kss-1"
+        }
+      }
+    },
+    {
+      "case": "gpu_vram_usage",
+      "metrics": {
+        "pass": false,
+        "fail_stage": "research",
+        "error": "max_research_rounds",
+        "rounds": 10,
+        "llm_calls": 19,
+        "usable_findings": 0,
+        "actual_headroom_min": 873,
+        "headroom_gate_ok": true,
+        "context_overflow": false,
+        "kss1_obs_rounds": 10,
+        "kss1_history_events": 10,
+        "decisions_total": 20,
+        "decisions_with_observation": 0,
+        "observation_coverage": 0.0,
+        "high_confidence_zero_gain_rate": null,
+        "high_confidence_repeating_rate": null,
+        "stuck_events": 0,
+        "result_linked_rate": 0.3,
+        "behavior_changed": false,
+        "auto_routing": false,
+        "calibration": {
+          "confidence_buckets": {
+            "missing": {
+              "n": 20,
+              "success": 0,
+              "useful_failure": 0,
+              "zero_information_failure": 0,
+              "information_gain": 0,
+              "observation_missing": 20,
+              "success_rate": 0.0,
+              "useful_failure_rate": 0.0,
+              "zero_information_failure_rate": 0.0,
+              "information_gain_rate": 0.0
+            }
+          },
+          "source_calibration": {},
+          "high_confidence_zero_gain_rate": null,
+          "high_confidence_repeating_rate": null,
+          "high_confidence_n": 0,
+          "decisions_with_observation": 0,
+          "decisions_total": 20,
+          "observation_coverage": 0.0,
+          "not_for_decision": true,
+          "phase": "kss-1"
+        }
+      }
+    }
+  ],
+  "past_runs_reanalysis": {
+    "n_runs_scanned": 162,
+    "runs_without_kss1_obs": 158,
+    "note": {
+      "confidence_in_past_runs": "missing",
+      "note": "missing ≠ 0; do not invent confidence for past trials",
+      "reusable_without_confidence": [
+        "no_gain",
+        "error_class_recurrence",
+        "command_family_recurrence",
+        "open_question_loop",
+        "kss0_source_values"
+      ]
+    }
+  },
+  "disclaimer": "Observability measurement only. Do not invent confidence for past runs. Do not design routing thresholds from this single trial alone."
+}

@@ -1,0 +1,51 @@
+{
+  "unresolved_regions": [
+    {
+      "id": "game_mechanics",
+      "title": "ゲームメカニクスの設計",
+      "text": "テトリスの基本動作（ピースの移動・回転・線の消去など）の詳細設計が未確定",
+      "goal_impact": "high",
+      "human_intent_required": false,
+      "human_impact": "low",
+      "rollback_impact": "medium",
+      "cross_cutting_impact": "high",
+      "ai_decidable": true,
+      "why": "ゲームの核となる動作設計で、実装可能性に直接影響"
+    },
+    {
+      "id": "ui_design",
+      "title": "ユーザーインターフェース設計",
+      "text": "画面レイアウト・色・UI要素の詳細が未確定",
+      "goal_impact": "medium",
+      "human_intent_required": true,
+      "human_impact": "high",
+      "rollback_impact": "high",
+      "cross_cutting_impact": "medium",
+      "why": "視覚的体験に直接影響し、ユーザーの好みに依存"
+    },
+    {
+      "id": "scoring_system",
+      "title": "スコアリングシステム",
+      "text": "得点計算方法・レベルアップ条件が未確定",
+      "goal_impact": "medium",
+      "human_intent_required": false,
+      "human_impact": "medium",
+      "rollback_impact": "medium",
+      "cross_cutting_impact": "medium",
+      "why": "ゲームバランスに影響するが、基本動作に比べて優先度は低い"
+    }
+  ],
+  "comparison": "ゲームメカニクスは実装可能性に直接影響し、他の設計要素の基盤となる。UI設計はユーザー体験に強く影響するが、実装可能性に直接的な影響は少ない。スコアリングシステムはゲームバランスに影響するが、他の要素に比べて優先度が低い。",
+  "next": {
+    "id": "game_mechanics",
+    "action": "internal_ai_decision",
+    "reason": "ゲームの核となる動作設計であり、実装可能性に直接影響するため優先的に決定",
+    "ai_decision": {
+      "id": "game_mechanics",
+      "title": "ゲームメカニクスの設計",
+      "value": "標準テトリスルールに基づく実装（I/O操作、ピースの移動・回転、線の消去処理）",
+      "reason": "標準ルールは実装可能性が高く、テトリスの基本動作を担保する",
+      "evidence": "Pygameのドキュメントおよびテトリスの公式ルール書に基づく"
+    }
+  }
+}

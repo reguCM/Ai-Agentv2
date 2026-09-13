@@ -1,0 +1,1343 @@
+{
+  "phase": "kss-1.3",
+  "experiment_dir": "D:\\AI-Agent\\research\\llm_benchmarks\\knowledge_source_obs\\kss13_20260820_154524",
+  "not_for_decision": true,
+  "routing_implemented": false,
+  "confidence_threshold_implemented": false,
+  "case_count": 5,
+  "success_count": 1,
+  "fail_count": 4,
+  "other_count": 0,
+  "per_case": [
+    {
+      "case": "cpu_temperature",
+      "pass": false,
+      "fail_stage": "judge",
+      "rounds": 10,
+      "stop_reason": "max_research_rounds",
+      "path_class": {
+        "labels": [
+          "E_promising_web_unused_by_judge_proxy"
+        ],
+        "notes": [
+          "proxy: medium/high evidence_level or hits but never implement (judge/LLM utilization gap not proven)"
+        ]
+      },
+      "round_snapshots": [
+        {
+          "round_index": 1,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 1,
+          "new_term_count": 102,
+          "new_url_count": 5,
+          "candidate_count": 2,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": false,
+            "reasons_gain": [],
+            "reasons_stuck": []
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": true,
+            "has_new_source": true,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 2,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 1,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [],
+            "reasons_stuck": [
+              "same_error_class:type_convert",
+              "same_command_family:powershell/win32_processor"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 3,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_processor"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 4,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 1,
+          "new_url_count": 0,
+          "candidate_count": 1,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/temperature"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 5,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/temperature"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 6,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 8,
+          "new_url_count": 0,
+          "candidate_count": 3,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_processor"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 7,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 2,
+          "new_url_count": 0,
+          "candidate_count": 1,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "diverse_error_classes",
+              "diverse_command_families"
+            ],
+            "reasons_stuck": []
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": true,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 8,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 1,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "diverse_error_classes",
+              "diverse_command_families"
+            ],
+            "reasons_stuck": []
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": true,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 9,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 4,
+          "new_url_count": 0,
+          "candidate_count": 1,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "recent_verify_ok",
+              "has_usable_selected"
+            ],
+            "reasons_stuck": []
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": true,
+            "progress_has_new_finding": true,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 10,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "recent_verify_ok",
+              "has_usable_selected"
+            ],
+            "reasons_stuck": []
+          },
+          "progress_action": "stop",
+          "progress_reason": "max_research_rounds",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": true,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "case": "disk_usage",
+      "pass": false,
+      "fail_stage": "research",
+      "rounds": 8,
+      "stop_reason": "stagnation",
+      "path_class": {
+        "labels": [
+          "D_candidates_without_core_usable",
+          "E_promising_web_unused_by_judge_proxy"
+        ],
+        "notes": [
+          "candidates generated but no usable/implement",
+          "proxy: medium/high evidence_level or hits but never implement (judge/LLM utilization gap not proven)"
+        ]
+      },
+      "round_snapshots": [
+        {
+          "round_index": 1,
+          "kept_hit_count": 0,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 7,
+          "new_url_count": 0,
+          "candidate_count": 4,
+          "link_coverage": 0.0,
+          "zero_overlap_count": 4,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": false,
+            "reasons_gain": [],
+            "reasons_stuck": []
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 2,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 1,
+          "new_term_count": 78,
+          "new_url_count": 3,
+          "candidate_count": 4,
+          "link_coverage": 0.5,
+          "zero_overlap_count": 2,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_logicaldisk"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": true,
+            "has_new_source": true,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 3,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 122,
+          "new_url_count": 4,
+          "candidate_count": 3,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_logicaldisk"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": true,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 4,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 1,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_logicaldisk"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 5,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 8,
+          "new_url_count": 0,
+          "candidate_count": 3,
+          "link_coverage": 0.667,
+          "zero_overlap_count": 1,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "diverse_error_classes",
+              "diverse_command_families"
+            ],
+            "reasons_stuck": []
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": true,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 6,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 5,
+          "new_url_count": 0,
+          "candidate_count": 4,
+          "link_coverage": 0.5,
+          "zero_overlap_count": 2,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_logicaldisk"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 7,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 2,
+          "new_url_count": 0,
+          "candidate_count": 3,
+          "link_coverage": 0.667,
+          "zero_overlap_count": 1,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_logicaldisk"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 8,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 2,
+          "new_url_count": 0,
+          "candidate_count": 1,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_logicaldisk"
+            ]
+          },
+          "progress_action": "stop",
+          "progress_reason": "stagnation",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "case": "gpu_usage",
+      "pass": false,
+      "fail_stage": "proposal",
+      "rounds": 0,
+      "stop_reason": null,
+      "path_class": {
+        "labels": [
+          "no_rounds"
+        ],
+        "notes": [
+          "zero research rounds"
+        ]
+      },
+      "round_snapshots": [],
+      "error": null
+    },
+    {
+      "case": "gpu_vram_usage",
+      "pass": false,
+      "fail_stage": "research",
+      "rounds": 10,
+      "stop_reason": "max_research_rounds",
+      "path_class": {
+        "labels": [
+          "C_hits_but_weak_candidate_link",
+          "D_candidates_without_core_usable",
+          "E_promising_web_unused_by_judge_proxy"
+        ],
+        "notes": [
+          "kept hits present but candidate↔hit linkage weak",
+          "candidates generated but no usable/implement",
+          "proxy: medium/high evidence_level or hits but never implement (judge/LLM utilization gap not proven)"
+        ]
+      },
+      "round_snapshots": [
+        {
+          "round_index": 1,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 1,
+          "new_term_count": 107,
+          "new_url_count": 5,
+          "candidate_count": 2,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": false,
+            "reasons_gain": [],
+            "reasons_stuck": []
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": true,
+            "has_new_source": true,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 2,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 5,
+          "new_url_count": 0,
+          "candidate_count": 2,
+          "link_coverage": 0.0,
+          "zero_overlap_count": 2,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "diverse_error_classes",
+              "diverse_command_families"
+            ],
+            "reasons_stuck": []
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": true,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 3,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 4,
+          "new_url_count": 0,
+          "candidate_count": 2,
+          "link_coverage": 0.0,
+          "zero_overlap_count": 2,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_videocontroller"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 4,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:powershell/win32_videocontroller"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 5,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [],
+            "reasons_stuck": [
+              "same_error_class:empty_sample",
+              "open_question_loop"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 6,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [],
+            "reasons_stuck": [
+              "same_error_class:empty_sample",
+              "open_question_loop"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 7,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [],
+            "reasons_stuck": [
+              "same_error_class:empty_sample",
+              "open_question_loop"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 8,
+          "kept_hit_count": 8,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [],
+            "reasons_stuck": [
+              "same_error_class:empty_sample"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "new_information",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 9,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 1,
+          "new_url_count": 0,
+          "candidate_count": 1,
+          "link_coverage": 1.0,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:python/memory"
+            ]
+          },
+          "progress_action": "continue",
+          "progress_reason": "no_progress",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": true,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        },
+        {
+          "round_index": 10,
+          "kept_hit_count": 5,
+          "search_result_count": "missing",
+          "new_source_count": 0,
+          "new_term_count": 0,
+          "new_url_count": 0,
+          "candidate_count": 0,
+          "link_coverage": null,
+          "zero_overlap_count": 0,
+          "no_gain_existing": true,
+          "information_gain_existing": {
+            "has_gain": false,
+            "no_gain": true,
+            "reasons_gain": [
+              "diverse_error_classes"
+            ],
+            "reasons_stuck": [
+              "same_command_family:python/memory"
+            ]
+          },
+          "progress_action": "stop",
+          "progress_reason": "max_research_rounds",
+          "exploration_signal": {
+            "has_new_url": false,
+            "has_new_source": false,
+            "has_new_term": false,
+            "has_new_command_key": false,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": false,
+            "progress_has_new_finding": false,
+            "composite_score": "missing"
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "case": "memory_usage",
+      "pass": true,
+      "fail_stage": null,
+      "rounds": 1,
+      "stop_reason": "findings_complete",
+      "path_class": {
+        "labels": [
+          "C_hits_but_weak_candidate_link"
+        ],
+        "notes": [
+          "kept hits present but candidate↔hit linkage weak"
+        ]
+      },
+      "round_snapshots": [
+        {
+          "round_index": 1,
+          "kept_hit_count": 1,
+          "search_result_count": "missing",
+          "new_source_count": 1,
+          "new_term_count": 47,
+          "new_url_count": 1,
+          "candidate_count": 4,
+          "link_coverage": 0.0,
+          "zero_overlap_count": 4,
+          "no_gain_existing": false,
+          "information_gain_existing": {
+            "has_gain": true,
+            "no_gain": false,
+            "reasons_gain": [
+              "recent_verify_ok",
+              "has_usable_selected"
+            ],
+            "reasons_stuck": []
+          },
+          "progress_action": "implement",
+          "progress_reason": "findings_complete",
+          "exploration_signal": {
+            "has_new_url": true,
+            "has_new_source": true,
+            "has_new_term": true,
+            "has_new_command_key": true,
+            "has_linked_candidate": false,
+            "has_information_gain_existing": true,
+            "progress_has_new_finding": true,
+            "composite_score": "missing"
+          }
+        }
+      ],
+      "error": null
+    }
+  ],
+  "compare_success_vs_failure": {
+    "success": {
+      "search_result_count": {
+        "n": 0,
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "kept_hit_count": {
+        "n": 1,
+        "avg": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "median": 1.0
+      },
+      "new_source_count": {
+        "n": 1,
+        "avg": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "median": 1.0
+      },
+      "new_term_count": {
+        "n": 1,
+        "avg": 47.0,
+        "min": 47.0,
+        "max": 47.0,
+        "median": 47.0
+      },
+      "new_url_count": {
+        "n": 1,
+        "avg": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "median": 1.0
+      },
+      "candidate_count": {
+        "n": 1,
+        "avg": 4.0,
+        "min": 4.0,
+        "max": 4.0,
+        "median": 4.0
+      },
+      "link_coverage": {
+        "n": 1,
+        "avg": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "median": 0.0
+      },
+      "zero_overlap_count": {
+        "n": 1,
+        "avg": 4.0,
+        "min": 4.0,
+        "max": 4.0,
+        "median": 4.0
+      },
+      "no_gain": {
+        "n": 1,
+        "avg": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "median": 0.0
+      },
+      "information_gain": {
+        "n": 1,
+        "avg": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "median": 1.0
+      },
+      "rounds_per_case": {
+        "n": 1,
+        "avg": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "median": 1.0
+      }
+    },
+    "failure": {
+      "search_result_count": {
+        "n": 0,
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "kept_hit_count": {
+        "n": 28,
+        "avg": 6.214,
+        "min": 0.0,
+        "max": 8.0,
+        "median": 5.0
+      },
+      "new_source_count": {
+        "n": 28,
+        "avg": 0.107,
+        "min": 0.0,
+        "max": 1.0,
+        "median": 0.0
+      },
+      "new_term_count": {
+        "n": 28,
+        "avg": 16.357,
+        "min": 0.0,
+        "max": 122.0,
+        "median": 1.5
+      },
+      "new_url_count": {
+        "n": 28,
+        "avg": 0.607,
+        "min": 0.0,
+        "max": 5.0,
+        "median": 0.0
+      },
+      "candidate_count": {
+        "n": 28,
+        "avg": 1.429,
+        "min": 0.0,
+        "max": 4.0,
+        "median": 1.0
+      },
+      "link_coverage": {
+        "n": 19,
+        "avg": 0.754,
+        "min": 0.0,
+        "max": 1.0,
+        "median": 1.0
+      },
+      "zero_overlap_count": {
+        "n": 28,
+        "avg": 0.5,
+        "min": 0.0,
+        "max": 4.0,
+        "median": 0.0
+      },
+      "no_gain": {
+        "n": 28,
+        "avg": 0.607,
+        "min": 0.0,
+        "max": 1.0,
+        "median": 1.0
+      },
+      "information_gain": {
+        "n": 28,
+        "avg": 0.214,
+        "min": 0.0,
+        "max": 1.0,
+        "median": 0.0
+      },
+      "rounds_per_case": {
+        "n": 4,
+        "avg": 7.0,
+        "min": 0.0,
+        "max": 10.0,
+        "median": 9.0
+      }
+    },
+    "sample_note": "n is small; treat as tendency only, not established relation"
+  },
+  "hypotheses": {
+    "H1_external_research_value_when_llm_hard": {
+      "status": "observational_only",
+      "note": "Requires cases labeled LLM-hard; proxy=fail with many rounds. Not established.",
+      "fail_cases_with_rounds_ge_5": 3,
+      "established": false
+    },
+    "H2_exploration_leads_predict_later_success": {
+      "lead_round_in_success_runs": 0,
+      "lead_round_in_fail_runs": 15,
+      "established": false,
+      "note": "counts are co-occurrence not causal; sample limited"
+    },
+    "H3_continue_while_novelty_arrives": {
+      "status": "supports_trend",
+      "success_avg": 47.0,
+      "fail_avg": 16.357,
+      "established": false,
+      "note": "sample_small"
+    },
+    "H4_no_gain_streak_lowers_value": {
+      "status": "supports_trend",
+      "success_avg": 0.0,
+      "fail_avg": 0.607,
+      "established": false,
+      "note": "sample_small"
+    },
+    "H5_novelty_and_linkage_beat_hit_count": {
+      "kept_hit_count": {
+        "status": "opposes_trend",
+        "success_avg": 1.0,
+        "fail_avg": 6.214,
+        "established": false,
+        "note": "sample_small"
+      },
+      "new_source_count": {
+        "status": "supports_trend",
+        "success_avg": 1.0,
+        "fail_avg": 0.107,
+        "established": false,
+        "note": "sample_small"
+      },
+      "new_term_count": {
+        "status": "supports_trend",
+        "success_avg": 47.0,
+        "fail_avg": 16.357,
+        "established": false,
+        "note": "sample_small"
+      },
+      "link_coverage": {
+        "status": "opposes_trend",
+        "success_avg": 0.0,
+        "fail_avg": 0.754,
+        "established": false,
+        "note": "sample_small"
+      },
+      "established": false,
+      "note": "compare which metric separates success/fail more; n small"
+    }
+  },
+  "missing_fields_common": [
+    "search_result_count (offline / no web_exec)",
+    "new_entity_count",
+    "exploration_value_score (intentionally not created)",
+    "semantic_novelty"
+  ],
+  "experiment_id": "kss13_20260820_154524",
+  "manifest": {
+    "experiment_id": "kss13_20260820_154524",
+    "purpose": "KSS-1.3 exploration value / information gain observation",
+    "formalize_phase5_1": false,
+    "auto_routing": false,
+    "confidence_threshold": false,
+    "web_force": false,
+    "common_env": {
+      "AI_AGENT_CONTEXT_ALLOC_LIVE": "1",
+      "AI_AGENT_CONTEXT_ALLOC_SHADOW": "1",
+      "AI_AGENT_GLOBAL_JUDGE_LIVE_SKIP": "1",
+      "AI_AGENT_GLOBAL_JUDGE_AUDIT_RATE": "3",
+      "AI_AGENT_MEMORY_JUDGE": "0",
+      "AI_AGENT_MEMORY_RECALL": "0",
+      "AI_AGENT_MEMORY_RECALL_VERSION": "none",
+      "AI_AGENT_KNOWLEDGE_SOURCE_OBS": "1",
+      "AI_AGENT_KSS1_OBS": "0",
+      "AI_AGENT_KSS11_OBS": "1",
+      "AI_AGENT_KSS12_OBS": "1",
+      "AI_AGENT_KSS13_OBS": "1"
+    },
+    "cases": [
+      "memory_usage",
+      "cpu_temperature",
+      "disk_usage",
+      "gpu_usage",
+      "gpu_vram_usage"
+    ],
+    "trials": 1,
+    "mode": "offline_rebuild",
+    "offline_from": "research/llm_benchmarks/kss11_measurement/kss11_20260820_151041",
+    "available_fields": [
+      "kept_hit_count",
+      "candidate_count",
+      "new_url/source/term counts",
+      "link_coverage",
+      "information_gain_existing",
+      "no_gain_existing",
+      "token/url jaccard"
+    ],
+    "missing_fields": [
+      "search_result_count (unless web_exec live)",
+      "new_entity_count",
+      "exploration_value_score",
+      "semantic_novelty"
+    ]
+  },
+  "behavior_unchanged": true
+}
