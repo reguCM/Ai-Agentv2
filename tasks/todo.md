@@ -1,5 +1,7 @@
-# Tasks: session-start Skill（Handoff 試行）
+# Tasks: Phase 3A /goal and /run Boundary
 
-- [x] T1: Create `.agents/skills/session-start/SKILL.md`
-- [x] T2: Register `session-start` in `registry/skills.json` and PROVENANCE
-- [x] Checkpoint: `python -m pytest tests/registry/test_skills_registry.py -q`
+- [x] T1: Implement `/goal` command routing and usage response
+- [x] T2: Implement preparation-only Runtime Bridge conversion
+- [x] T3: Implement fail-closed `/run` from saved handoff
+- [x] T4: Add identity, semantic preservation, and negative tests
+- [x] Checkpoint: 37 compatibility tests passed; one legacy Sandbox test was blocked by `.git` write permission

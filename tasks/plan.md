@@ -1,33 +1,29 @@
-# Implementation Plan: session-start Skill
+# Implementation Plan: Phase 3A /goal and /run Boundary
 
 ## Overview
 
-Goal Handoff v0 の試行として、作業再開用の薄型 `session-start` Skill を追加する。Policy 複製はせず、既存 Session Start Policy を Read して従う手順を Skill 化する。
+Split Production goal definition from Runtime preparation. `/goal` reuses the existing requirement-to-handoff path and stops. `/run` validates and mechanically prepares the exact saved handoff as Runtime Goal/Task records, without LLM calls, sandbox creation, tools, execution, verification, or completion judgment.
 
 ## Architecture Decisions
 
-- Skill 本文は手順と参照のみ。Policy 全文は `docs/AI_DEVELOPMENT_SESSION_START_POLICY.md` に残す
-- `registry/skills.json` で `provisional` 登録。Production 接続はしない
-- Handoff Packet から実装を開始し、完了後に別 commit する
+- Parse `/goal` and `/run` at the Production Chat boundary in `agent_turn.py`.
+- Keep legacy external handoff and Production Handoff paths unchanged for compatibility.
+- Add a preparation-only operation to the existing Goal Handoff Runtime Bridge; keep the existing execution-seeding behavior unchanged.
+- Prove packet identity with the existing `handoff_id`, a canonical JSON hash diagnostic, and immutable-field comparison.
 
 ## Task List
 
-### Phase 1: Skill 追加
-
-- [ ] T1: `.agents/skills/session-start/SKILL.md` を作成
-- [ ] T2: `registry/skills.json` と PROVENANCE を更新
-
-### Checkpoint: Registry
-
-- [ ] Registry schema 検証テスト PASS
+- [x] Add explicit `/goal` routing and standalone usage response.
+- [x] Add fail-closed `/run` routing from `session.production_handoff_packet`.
+- [x] Add preparation-only Runtime conversion with all tasks pending.
+- [x] Test Tetris preservation, exact handoff reuse, no sandbox/execution, and Calculator isolation.
+- [x] Run focused and compatibility regressions (one legacy Sandbox test remains environment-blocked).
 
 ## Risks and Mitigations
 
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Policy と Skill の二重管理 | Med | Skill は参照リンクのみ。判定は Policy 正本 |
-| Skill 数増加で Registry テストが壊れる | Low | test_skills_registry の期待値を同時更新 |
-
-## Open Questions
-
-- なし（試行スコープは session-start 追加のみ）
+| `/run` accidentally enters `_chat_turn` | High | Return a completed boundary result before agent-loop selection |
+| Legacy Handoff regeneration is invoked | High | `/run` calls only validation and Runtime Bridge preparation |
+| Runtime conversion mutates the saved packet | High | Deep-copy input and compare canonical hashes/immutable fields |
+| Existing legacy paths regress | Medium | Keep routing intact and run existing Handoff tests |
