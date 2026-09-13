@@ -96,6 +96,11 @@ _GENERAL_KNOWLEDGE_REQUEST = re.compile(
 )
 
 
+def has_creation_intent(text: str) -> bool:
+    """True when the request is a make/build/create implementation, not mere observation."""
+    return bool(_CREATION_INTENT.search(text or ""))
+
+
 def is_agent_task(
     text: str,
     *,
@@ -4256,6 +4261,7 @@ __all__ = [
     "build_tool_expectation",
     "fold_search_candidate_set",
     "is_agent_task",
+    "has_creation_intent",
     "empty_goal_read_target",
     "empty_user_variable",
     "confirm_interchangeable_paths",

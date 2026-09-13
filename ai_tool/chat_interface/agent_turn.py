@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import importlib
+import hashlib
 import json
 import os
 import time
@@ -69,6 +70,7 @@ from ai_tool.chat_interface.requirement_decomposition import (
 from ai_tool.chat_interface.task_orchestration import (
     AGENT_CORE_PROMPT,
     ChatTaskOrchestrator,
+    has_creation_intent,
     is_agent_task,
 )
 from ai_tool.chat_interface.boundary_grill import (
@@ -139,14 +141,19 @@ from ai_tool.mission_memory.chat_persist import (
 )
 from ai_tool.mission_memory.clarifications import restore_mission_clarifications
 from ai_tool.production_handoff_bridge import (
+    apply_production_grill_human_answer,
     assess_production_handoff_readiness,
     is_explicit_production_handoff_trigger,
     mark_session_production_handoff_completed,
     orchestrator_has_goal_handoff_seed,
     prepare_production_handoff_orchestrator,
     run_production_handoff_pipeline,
+    run_production_spec_handoff_pipeline,
+    run_production_grill_phase1,
     session_has_production_handoff,
 )
+from ai_tool.dev_skill_pipeline import validate_handoff_packet
+from ai_tool.goal_handoff_runtime_bridge import prepare_orchestrator_from_handoff
 from ai_tool.mission_memory.paths import MissionMemoryError
 from ai_tool.mission_memory.ids import new_mission_id
 from ai_tool.mission_memory.store import MissionMemoryStore
@@ -3081,6 +3088,153 @@ def _requirement_resolution_heuristic_enabled() -> bool:
     )
 
 
+def _blocks_new_goal_seed(
+    *,
+    requirement_resolution_packet: dict[str, Any] | None,
+    production_grill_packet: dict[str, Any] | None,
+    goal_continuation_packet: dict[str, Any] | None,
+    goal_continuation_restore_errors: list[str] | None,
+    production_handoff_requested: bool,
+) -> bool:
+    """Pending reply / continuation execution must not start a new Goal."""
+    return bool(
+        requirement_resolution_packet is not None
+        or production_grill_packet is not None
+        or goal_continuation_packet is not None
+        or goal_continuation_restore_errors
+        or production_handoff_requested
+    )
+
+
+def _should_start_production_grill_on_new_goal(
+    *,
+    handoff_packet: Mapping[str, Any] | None,
+    text: str,
+    explicit_goal_command: bool = False,
+) -> bool:
+    """Phase1 belongs to formally adopted production/implementation Goals only."""
+    if handoff_packet is not None:
+        return True
+    return explicit_goal_command or has_creation_intent(text)
+
+
+def _canonical_handoff_hash(packet: Mapping[str, Any]) -> str:
+    encoded = json.dumps(dict(packet), ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
+
+
+def _phase3a_command_result(
+    *,
+    session: Mapping[str, Any],
+    correlation_id: str,
+    memory: dict[str, Any],
+    model: str,
+    goal_usage: bool,
+    run_requested: bool,
+) -> dict[str, Any] | None:
+    if goal_usage:
+        return {
+            "route": "chat",
+            "answer": "/goal <達成したい内容>",
+            "events": [event("production_goal_usage")],
+            "tool_used": False,
+            "tools": [],
+            "web_search": False,
+            "research_saved": False,
+            "executor": "local_agent",
+            "cursor_connected": False,
+            "memory": memory,
+            "task_runtime": None,
+            "runtime_started": False,
+        }
+    if not run_requested:
+        return None
+
+    saved = session.get("production_handoff_packet")
+    packet = json.loads(json.dumps(saved, ensure_ascii=False)) if isinstance(saved, Mapping) else None
+    errors = validate_handoff_packet(packet or {})
+    if packet is None or str(packet.get("status") or "") != "ready" or errors:
+        return {
+            "route": "chat",
+            "answer": "実行可能な確定済みGoalがありません。先に `/goal ...` でGoalを確定してください。",
+            "events": [event("production_run_blocked", reason="missing_or_invalid_handoff")],
+            "tool_used": False,
+            "tools": [],
+            "web_search": False,
+            "research_saved": False,
+            "executor": "local_agent",
+            "cursor_connected": False,
+            "memory": memory,
+            "task_runtime": None,
+            "runtime_prepared": False,
+            "runtime_started": False,
+            "production_run_error": "missing_or_invalid_handoff",
+            "handoff_validation_errors": errors,
+        }
+
+    before_hash = _canonical_handoff_hash(packet)
+    original_request = str((packet.get("goal") or {}).get("original_request_excerpt") or "").strip()
+    orchestrator = ChatTaskOrchestrator(
+        correlation_id,
+        original_request or str((packet.get("goal") or {}).get("summary") or ""),
+    )
+    mission_id = str(session.get("last_mission_id") or "").strip()
+    bind_execution_identity(
+        orchestrator,
+        resume_mission_id=mission_id or None,
+        new_execution=True,
+    )
+    prepare_orchestrator_from_handoff(orchestrator, packet)
+    after_hash = _canonical_handoff_hash(packet)
+    immutable_fields = ("handoff_id", "goal", "scope", "acceptance_criteria", "implementation_tasks")
+    immutable_equal = all(packet.get(key) == saved.get(key) for key in immutable_fields)
+    return {
+        "route": "chat",
+        "answer": "保存済みGoal HandoffをRuntime Goal / Taskへ変換しました。実行はまだ開始していません。",
+        "events": [
+            event(
+                "production_run_prepared",
+                handoff_id=packet.get("handoff_id"),
+                runtime_started=False,
+            )
+        ],
+        "tool_used": False,
+        "tools": [],
+        "web_search": False,
+        "research_saved": False,
+        "executor": "local_agent",
+        "cursor_connected": False,
+        "memory": memory,
+        "task_runtime": orchestrator.snapshot(),
+        "runtime_prepared": True,
+        "runtime_started": False,
+        "sandbox_started": False,
+        "handoff_packet": packet,
+        "handoff_integrity": {
+            "handoff_id": packet.get("handoff_id"),
+            "saved_canonical_hash": before_hash,
+            "runtime_input_canonical_hash": after_hash,
+            "canonical_hash_equal": before_hash == after_hash,
+            "immutable_fields": list(immutable_fields),
+            "immutable_fields_equal": immutable_equal,
+        },
+        "production_status": "RUNTIME_PREPARED_NOT_STARTED",
+        "mission_memory": {"mission_id": mission_id or None},
+        "final_llm_lifecycle": {
+            "llm_request_id": f"{correlation_id}-production-run-prepare",
+            "final_llm_request_started": False,
+            "final_llm_response_received": True,
+            "final_llm_response_received_at": now_iso(),
+            "final_response_accepted": True,
+            "final_response_discarded": False,
+            "late_response_received": False,
+            "turn_closed_before_response": False,
+            "empty_reason": None,
+        },
+        "model": model,
+    }
+
+
 def _new_mission_record(
     mission_id: str,
     bundle: RequirementResolutionBundle,
@@ -3157,6 +3311,123 @@ def _requirement_resolution_blocked_turn(
         "model": model,
         "correlation_id": correlation_id,
     }
+
+
+def _production_grill_phase1_turn(
+    *,
+    correlation_id: str,
+    memory: dict[str, Any],
+    model: str,
+    mission_id: str,
+    original_request: str,
+    step: Mapping[str, Any],
+    chat_fn: ChatFn | None = None,
+) -> dict[str, Any]:
+    awaiting = str(step.get("status") or "") == "awaiting_human"
+    contract = dict(step.get("question_contract") or {})
+    if awaiting:
+        options = [str(row.get("label") or "") for row in contract.get("options") or [] if isinstance(row, Mapping)]
+        answer = str(contract.get("question") or "")
+        if options:
+            answer += "\n\n" + "\n".join(f"- {item}" for item in options)
+    else:
+        answer = "Specification and Goal Handoff are ready."
+    timestamp = now_iso()
+    result = {
+        "route": "chat",
+        "answer": answer,
+        "events": [event("production_grill_me_awaiting_human" if awaiting else "production_grill_me_aligned", mission_id=mission_id)],
+        "tool_used": False,
+        "tools": [],
+        "web_search": False,
+        "research_saved": False,
+        "executor": "local_agent",
+        "cursor_connected": False,
+        "memory": memory,
+        "task_runtime": None,
+        "awaiting_production_grill_me": awaiting,
+        "production_grill_me": contract if awaiting else None,
+        "production_grill_me_state": (
+            {
+                "mission_id": mission_id,
+                "original_request": original_request,
+                "transcript": list(step.get("transcript") or []),
+                "active_contract": contract,
+            }
+            if awaiting
+            else None
+        ),
+        "aligned_spec": dict(step.get("aligned_spec") or {}) if not awaiting else None,
+        "generated_aligned_spec": dict(step.get("generated_aligned_spec") or {}) if not awaiting else None,
+        "semantic_preservation": dict(step.get("semantic_preservation") or {}) if not awaiting else None,
+        "ambiguity_report": dict(step.get("ambiguity_report") or {}),
+        "final_llm_lifecycle": {
+            "llm_request_id": f"{correlation_id}-production-grill-me",
+            "final_llm_request_started": False,
+            "final_llm_request_started_at": None,
+            "final_llm_response_received": True,
+            "final_llm_response_received_at": timestamp,
+            "final_llm_response_length": len(answer),
+            "final_llm_response_empty": not bool(answer.strip()),
+            "final_response_accepted": True,
+            "final_response_discarded": False,
+            "late_response_received": False,
+            "turn_closed_before_response": False,
+            "empty_reason": None,
+        },
+    }
+    if not awaiting:
+        pipeline = run_production_spec_handoff_pipeline(
+            mission_id=mission_id,
+            initial_request=original_request,
+            aligned_spec=result["aligned_spec"] or {},
+            semantic_preservation=result["semantic_preservation"] or {},
+            chat_fn=chat_fn,
+            model=model,
+        )
+        result.update(
+            {
+                "production_status": pipeline.get("production_status"),
+                "dev_skill_pipeline": pipeline,
+                "prd": pipeline.get("prd"),
+                "tech_spec": pipeline.get("tech_spec"),
+                "plan": pipeline.get("plan"),
+                "handoff_packet": pipeline.get("handoff_packet"),
+                "semantic_trace": pipeline.get("semantic_trace"),
+                "runtime_started": False,
+            }
+        )
+        result["events"].append(event("production_spec_handoff_ready", mission_id=mission_id))
+    return result
+
+
+def _production_grill_resume_turn(
+    user_text: str,
+    packet: Mapping[str, Any],
+    *,
+    correlation_id: str,
+    model: str,
+    memory: dict[str, Any],
+    chat_fn: ChatFn | None,
+) -> dict[str, Any]:
+    store = MissionMemoryStore.from_default()
+    mission, resumed = apply_production_grill_human_answer(packet, user_text, store=store)
+    step = run_production_grill_phase1(
+        mission=mission,
+        transcript=resumed.get("transcript") or [],
+        chat_fn=chat_fn,
+        model=model,
+        store=store,
+    )
+    return _production_grill_phase1_turn(
+        correlation_id=correlation_id,
+        memory=memory,
+        model=model,
+        mission_id=str(packet.get("mission_id") or ""),
+        original_request=str(packet.get("original_request") or mission.get("original_goal") or ""),
+        step=step,
+        chat_fn=chat_fn,
+    )
 
 
 def _semantic_revalidation_blocked_turn(
@@ -3266,6 +3537,48 @@ def _requirement_resolution_resume_turn(
             launched=launched,
         )
     original_request = str(packet.get("original_request") or mission.get("original_goal") or "")
+    events.append(
+        event(
+            "requirement_resolution_closed",
+            mission_id=mission_id,
+            phase=PHASE_REQUIREMENTS_RESOLVED,
+        )
+    )
+    if session.get("awaiting_goal_continuation"):
+        timestamp = now_iso()
+        return {
+            "route": "chat",
+            "answer": "要件解決が完了しました。",
+            "events": events,
+            "tool_used": False,
+            "tools": [],
+            "web_search": False,
+            "research_saved": False,
+            "executor": "local_agent",
+            "cursor_connected": False,
+            "memory": memory,
+            "task_runtime": None,
+            "awaiting_requirement_resolution": False,
+            "requirement_resolution_state": None,
+            "requirement_resolution": bundle.as_mission_fields(),
+            "mission_memory": {"mission_id": mission_id},
+            "model": model,
+            "correlation_id": correlation_id,
+            "final_llm_lifecycle": {
+                "llm_request_id": f"{correlation_id}-requirement-resolution",
+                "final_llm_request_started": False,
+                "final_llm_request_started_at": None,
+                "final_llm_response_received": True,
+                "final_llm_response_received_at": timestamp,
+                "final_llm_response_length": len("要件解決が完了しました。"),
+                "final_llm_response_empty": False,
+                "final_response_accepted": True,
+                "final_response_discarded": False,
+                "late_response_received": False,
+                "turn_closed_before_response": False,
+                "empty_reason": None,
+            },
+        }
     concept_resolution = detect_unknown_concept(original_request, known_identifiers=set())
     adopted, constraints = project_to_runtime_adoption(bundle.structured_requirements)
     if not adopted:
@@ -3286,31 +3599,26 @@ def _requirement_resolution_resume_turn(
         new_execution=True,
     )
     restore_mission_clarifications(orchestrator)
-    events.append(
-        event(
-            "requirement_resolution_closed",
-            mission_id=mission_id,
-            phase=PHASE_REQUIREMENTS_RESOLVED,
-        )
-    )
-    chat_result = _chat_turn(
-        original_request,
-        session,
+    step = run_production_grill_phase1(
+        orchestrator=orchestrator,
         chat_fn=chat_fn,
         model=model,
-        memory=memory,
-        correlation_id=correlation_id,
-        orchestrator=orchestrator,
-        timing=timing,
-        local_review_enabled=local_review_enabled,
-        review_chat_fn=review_chat_fn,
-        pipeline_observer=pipeline_observer,
+        store=store,
     )
-    chat_result["events"] = events + list(chat_result.get("events") or [])
-    chat_result["awaiting_requirement_resolution"] = False
-    chat_result["requirement_resolution_state"] = None
-    chat_result["requirement_resolution"] = bundle.as_mission_fields()
-    return chat_result
+    phase1_result = _production_grill_phase1_turn(
+        correlation_id=correlation_id,
+        memory=memory,
+        model=model,
+        mission_id=mission_id,
+        original_request=original_request,
+        step=step,
+        chat_fn=chat_fn,
+    )
+    phase1_result["events"] = events + list(phase1_result.get("events") or [])
+    phase1_result["awaiting_requirement_resolution"] = False
+    phase1_result["requirement_resolution_state"] = None
+    phase1_result["requirement_resolution"] = bundle.as_mission_fields()
+    return phase1_result
 
 
 def _boundary_grill_resume_turn(
@@ -3844,6 +4152,11 @@ def run_chat_turn(
     text = str(user_text or "").strip()
     if not text:
         raise ValueError("message が空です")
+    explicit_goal_command = text == "/goal" or text.startswith("/goal ")
+    goal_usage_requested = text == "/goal"
+    run_command_requested = text == "/run"
+    if explicit_goal_command and not goal_usage_requested:
+        text = text[len("/goal") :].strip()
     # H2: intercept /h before classify / agent turn (no tools, no LLM)
     if text.startswith("/h"):
         mdl = _resolve_runtime_model_name(model, session)
@@ -3949,6 +4262,7 @@ def run_chat_turn(
     decision_change_packet = None
     boundary_grill_packet = None
     requirement_resolution_packet = None
+    production_grill_packet = None
     if session.get("awaiting_decision_change_confirmation"):
         packet = session.get("decision_change_confirmation_state") or {}
         if (
@@ -3977,6 +4291,14 @@ def run_chat_turn(
             and str(packet.get("original_request") or "").strip()
         ):
             requirement_resolution_packet = packet
+    if session.get("awaiting_production_grill_me"):
+        packet = session.get("production_grill_me_state") or {}
+        if (
+            isinstance(packet, dict)
+            and str(packet.get("mission_id") or "").strip()
+            and str(packet.get("original_request") or "").strip()
+        ):
+            production_grill_packet = packet
     goal_completion_packet = None
     if session.get("awaiting_goal_completion_human"):
         packet = session.get("goal_completion_resume") or {}
@@ -4013,10 +4335,13 @@ def run_chat_turn(
             goal_continuation_packet = packet
     route = (
         "chat"
-        if grill_state is not None
+        if explicit_goal_command
+        or run_command_requested
+        or grill_state is not None
         or goal_completion_packet is not None
         or decision_change_packet is not None
         or boundary_grill_packet is not None
+        or production_grill_packet is not None
         or requirement_resolution_packet is not None
         or goal_continuation_packet is not None
         or goal_continuation_restore_errors is not None
@@ -4033,6 +4358,14 @@ def run_chat_turn(
     orchestrator = None
     requirement = None
     requirement_resolution_early_result: dict[str, Any] | None = None
+    phase3a_command_result = _phase3a_command_result(
+        session=session,
+        correlation_id=correlation_id,
+        memory=memory,
+        model=mdl,
+        goal_usage=goal_usage_requested,
+        run_requested=run_command_requested,
+    )
     goal_continuation_gate_blocked: dict[str, Any] | None = None
     concept_resolution = None
     grill_answer = None
@@ -4043,7 +4376,9 @@ def run_chat_turn(
         for item in registry_tools
         if item.get("visibility") == "agent" and item.get("name")
     }
-    if grill_state is not None:
+    if phase3a_command_result is not None:
+        pass
+    elif grill_state is not None:
         grill_answer = text
         orchestrator = ChatTaskOrchestrator.restore_from_grill_resume(
             correlation_id,
@@ -4129,16 +4464,27 @@ def run_chat_turn(
             goal_continuation_restore_errors = list(exc.errors or [exc.reason])
             orchestrator = None
             goal_continuation_context = None
-    elif route == "chat" and (
-        handoff_packet is not None
-        or is_agent_task(
-            text,
-            known_tool_names=available_tool_names,
-            agent_visible_tools=registry_tools,
+    elif (
+        not _blocks_new_goal_seed(
+            requirement_resolution_packet=requirement_resolution_packet,
+            production_grill_packet=production_grill_packet,
+            goal_continuation_packet=goal_continuation_packet,
+            goal_continuation_restore_errors=goal_continuation_restore_errors,
+            production_handoff_requested=production_handoff_requested,
+        )
+        and route == "chat"
+        and (
+            explicit_goal_command
+            or handoff_packet is not None
+            or is_agent_task(
+                text,
+                known_tool_names=available_tool_names,
+                agent_visible_tools=registry_tools,
+            )
         )
     ):
         update_activity(sid, correlation_id, ActivityStatus.GOAL_CREATING)
-        agent_task = is_agent_task(
+        agent_task = explicit_goal_command or is_agent_task(
             text,
             known_tool_names=available_tool_names,
             agent_visible_tools=registry_tools,
@@ -4291,6 +4637,26 @@ def run_chat_turn(
                 if not orchestrator.mission_id:
                     orchestrator.mission_id = mission_id
                 store.put_mission(_new_mission_record(mission_id, resolution_bundle))
+                if _should_start_production_grill_on_new_goal(
+                    handoff_packet=handoff_packet,
+                    text=text,
+                    explicit_goal_command=explicit_goal_command,
+                ):
+                    phase1_step = run_production_grill_phase1(
+                        orchestrator=orchestrator,
+                        chat_fn=fn,
+                        model=mdl,
+                        store=store,
+                    )
+                    requirement_resolution_early_result = _production_grill_phase1_turn(
+                        correlation_id=correlation_id,
+                        memory=memory,
+                        model=mdl,
+                        mission_id=mission_id,
+                        original_request=text,
+                        step=phase1_step,
+                        chat_fn=fn,
+                    )
             update_activity(
                 sid,
                 correlation_id,
@@ -4300,7 +4666,9 @@ def run_chat_turn(
                 task_status=orchestrator.task.status,
             )
 
-    if requirement is not None and requirement.status != RequirementStatus.READY.value:
+    if phase3a_command_result is not None:
+        result = phase3a_command_result
+    elif requirement is not None and requirement.status != RequirementStatus.READY.value:
         clarification = str(requirement.clarification or "完了条件を確認してください。")
         timestamp = now_iso()
         communication_failed = bool(requirement.error_type)
@@ -4402,6 +4770,15 @@ def run_chat_turn(
             model=mdl,
             memory=memory,
             session=session,
+            chat_fn=fn,
+        )
+    elif production_grill_packet is not None:
+        result = _production_grill_resume_turn(
+            text,
+            production_grill_packet,
+            correlation_id=correlation_id,
+            model=mdl,
+            memory=memory,
             chat_fn=fn,
         )
     elif requirement_resolution_packet is not None:
@@ -4657,6 +5034,22 @@ def run_chat_turn(
         session["awaiting_requirement_resolution"] = False
         session["requirement_resolution_grill"] = None
         session["requirement_resolution_state"] = None
+    if result.get("awaiting_production_grill_me"):
+        session["awaiting_production_grill_me"] = True
+        session["production_grill_me"] = result.get("production_grill_me")
+        session["production_grill_me_state"] = result.get("production_grill_me_state")
+    else:
+        session["awaiting_production_grill_me"] = False
+        session["production_grill_me"] = None
+        session["production_grill_me_state"] = None
+        if result.get("aligned_spec"):
+            session["production_aligned_spec"] = result.get("aligned_spec")
+        if result.get("handoff_packet"):
+            session["production_handoff_packet"] = result.get("handoff_packet")
+            session["production_prd"] = result.get("prd")
+            session["production_tech_spec"] = result.get("tech_spec")
+            session["production_plan"] = result.get("plan")
+            session["production_pipeline_status"] = result.get("production_status")
     if result.get("goal_continuation_restore_failed"):
         pass
     elif result.get("goal_continuation_resume"):

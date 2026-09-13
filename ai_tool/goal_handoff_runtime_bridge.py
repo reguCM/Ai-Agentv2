@@ -277,6 +277,25 @@ def seed_orchestrator_from_handoff(orchestrator: Any, handoff_packet: Mapping[st
     refresh_task_revalidation(orchestrator)
 
 
+def prepare_orchestrator_from_handoff(
+    orchestrator: Any,
+    handoff_packet: Mapping[str, Any],
+) -> None:
+    """Convert a handoff to Runtime records without starting task execution."""
+    root_goal, records, first_task_id = build_handoff_task_records(handoff_packet)
+    for record in records:
+        record.status = TaskStatus.PENDING.value
+    orchestrator.runtime.goals.clear()
+    orchestrator.runtime.tasks.clear()
+    orchestrator.runtime.add_goal(root_goal)
+    for record in records:
+        orchestrator.runtime.add_task(record)
+    orchestrator.current_goal_id = ROOT_GOAL_ID
+    orchestrator.current_task_id = first_task_id
+    attach_handoff_identity_traceability(orchestrator, handoff_packet)
+    refresh_task_revalidation(orchestrator)
+
+
 __all__ = [
     "HANDOFF_TASK_SOURCE",
     "ROOT_GOAL_ID",
@@ -286,6 +305,7 @@ __all__ = [
     "build_handoff_task_acceptance_mapping",
     "build_handoff_task_records",
     "map_handoff_dependencies",
+    "prepare_orchestrator_from_handoff",
     "runtime_task_id",
     "seed_orchestrator_from_handoff",
 ]
