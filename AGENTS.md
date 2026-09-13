@@ -1,6 +1,6 @@
 # Repository Policy Adapter for Codex
 
-policy-distribution-version: 2026-09-06.1
+policy-distribution-version: 2026-09-13.1
 
 共通開発ルールは次の正本を参照する。本文をこのファイルへ複製しない。
 

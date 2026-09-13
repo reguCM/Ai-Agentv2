@@ -670,6 +670,8 @@ SHA-256として生成する。
 - Test Run Artifactには実行時に取得したPolicy Identityを保存する。
 - Canonical file、Adapter参照、version marker、Local Agent Loaderの不一致はfail-closedで検出する。
 - 記録済みversion/hashと現在値が一致しなければstaleとして扱い、確認済みにしない。
+- Cursor、Codex、Local Agentなど、AI Consumer自身または別AIによる完了報告は、それ単独では完了の証拠にしない。
+  完了判定は対象Repositoryのコード、実行経路、状態、差分および必要なテストEvidenceで再確認する。
 
 Policy本文の語義・重複整理は`Rulebook Language Cleanup`の別Todoであり、本Contract導入時に
 広範囲な書換えを行わない。

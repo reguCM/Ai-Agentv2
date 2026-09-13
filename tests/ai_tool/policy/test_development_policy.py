@@ -13,7 +13,7 @@ def test_policy_loads():
     assert data["policy_id"] == "ai-agent-development-policy"
     assert "CONNECTED" in data["item_statuses"]
     assert data["version"] == "1.5"
-    assert data["distribution"]["policy_version"] == "2026-09-06.1"
+    assert data["distribution"]["policy_version"] == "2026-09-13.1"
     assert set(data["distribution"]["consumers"]) == {
         "codex", "cursor", "local_agent",
     }
@@ -24,6 +24,8 @@ def test_policy_loads():
     assert data["spec_proposal_observation"]["problem_occurrence_is_not_llm_failure"] is True
     assert data["spec_proposal_observation"]["do_not_infer_parent_proposal_id_from_chat"] is True
     assert data["spec_proposal_observation"]["dual_id_issuance_is_not_automatically_a_bug"] is True
+    assert data["spec_proposal_observation"]["agent_completion_claim_is_not_evidence"] is True
+    assert data["spec_proposal_observation"]["completion_claim_requires_repository_evidence"] is True
     assert data["completion"]["connected_requires_generate_to_next_stage"] is True
     boundary = data["definition_boundary"]
     assert boundary["clear_definition_may_proceed"] is True

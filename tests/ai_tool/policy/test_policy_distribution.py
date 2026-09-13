@@ -77,7 +77,7 @@ def test_repository_policy_distribution_is_connected():
 
     assert result["sync_valid"] is True
     assert result["loaded"] is True
-    assert result["version"] == "2026-09-06.1"
+    assert result["version"] == "2026-09-13.1"
     assert result["canonical_hash"].startswith("sha256:")
     assert set(result["consumers"]) == {"codex", "cursor", "local_agent"}
     assert all((REPO_ROOT / path).is_file() for path in result["canonical_files"])

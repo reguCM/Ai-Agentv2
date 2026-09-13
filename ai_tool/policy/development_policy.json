@@ -6,7 +6,7 @@
   "note": "実行時の機械契約兼Policy Manifest。共通文書はdistribution.canonical_files、各環境固有処理はconsumer adapterを参照する。",
   "distribution": {
     "schema_version": "1",
-    "policy_version": "2026-09-06.1",
+    "policy_version": "2026-09-13.1",
     "canonical_files": [
       "ai_tool/policy/development_policy.json",
       "docs/AI_DEVELOPMENT_SESSION_START_POLICY.md",
@@ -175,6 +175,8 @@
     "do_not_auto_select_current_specification": true,
     "do_not_infer_parent_proposal_id_from_chat": true,
     "dual_id_issuance_is_not_automatically_a_bug": true,
+    "agent_completion_claim_is_not_evidence": true,
+    "completion_claim_requires_repository_evidence": true,
     "cursor_completion_claim_is_not_evidence": true,
     "local_agent_and_cursor_are_not_equivalent": true,
     "do_not_rewrite_historical_records_to_match_current_design": true,

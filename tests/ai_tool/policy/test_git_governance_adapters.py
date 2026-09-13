@@ -40,3 +40,13 @@ def test_git_operation_policy_references_machine_contract():
 def test_adapters_do_not_embed_contract_json():
     data = load_and_validate_git_governance_contract()
     validate_git_governance_adapters(data, repo_root=REPO_ROOT)
+
+
+def test_tool_independent_git_rules_live_in_canonical_policy():
+    git_doc = (REPO_ROOT / "docs/GIT_OPERATION_POLICY.md").read_text(encoding="utf-8")
+    cursor_adapter = (REPO_ROOT / ".cursor/rules/git-governance-adapter.mdc").read_text(encoding="utf-8")
+
+    assert "Cursor / Codex / Local Agent" in git_doc
+    assert "stageまたはcommitしない" in git_doc
+    assert "操作可否を独自に定義しない" in cursor_adapter
+    assert "| action_id | approval_class |" not in cursor_adapter

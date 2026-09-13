@@ -196,7 +196,7 @@ Git 標準では `restore` / `reset` / `clean` / path 単位 `checkout` の**実
 | **BLOCK** | 未コミット変更がある path への `restore` / `checkout -- path`、`reset --hard`（dirty または HEAD 以外）、untracked を消す `git clean -f`、dirty / force worktree 削除 |
 | **NEED_HUMAN** | 安全性を Probe できない、`reset --soft` / `--mixed` で ref を動かす等 **意図が機械確定できない** 操作 |
 
-**Agent / Cursor:** リポジトリ配下への `Remove-Item -Recurse -Force` / `rm -rf` 等の再帰強制削除を自動実行しない。
+**Agent（Cursor / Codex / Local Agent等）:** リポジトリ配下への `Remove-Item -Recurse -Force` / `rm -rf` 等の再帰強制削除を自動実行しない。
 worktree 整理は `git worktree list` で登録を確認し、公式 `git worktree remove` と guard 判定を使う。
 
 stash / reflog での回収可能性だけを理由に、データ破棄を SAFE とみなさない。
@@ -208,6 +208,10 @@ stash / reflog での回収可能性だけを理由に、データ破棄を SAFE
 可能な限り対象ファイルを明示し、今回の作業差分だけをstageする。
 
 既存のunstaged / untrackedファイルが今回の作業と無関係な場合、stageしてはならない。
+
+`.env`、秘密鍵、credential、token等の秘密情報を含む可能性があるファイルはstageまたはcommitしない。
+機械的な対象patternは`ai_tool/policy/git_governance.json`の`stage_deny_path_globs`とgit_guard設定を正本とし、
+AdapterやHost User Rulesへ別の固定一覧を複製しない。
 
 ## 8. commit前確認
 
