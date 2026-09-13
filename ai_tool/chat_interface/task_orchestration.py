@@ -1096,6 +1096,7 @@ class ChatTaskOrchestrator:
         self.canonical_requirement_projection: list[dict[str, str]] = []
         self.handoff_acceptance_projection: list[dict[str, str]] = []
         self.handoff_task_acceptance_mapping: list[dict[str, Any]] = []
+        self.handoff_test_plan: dict[str, Any] = {}
         self.domain_goal_adoption_result: Any = None
         self.task_graph_projection_sidecar: list[dict[str, Any]] = []
 
@@ -2823,6 +2824,16 @@ class ChatTaskOrchestrator:
         mutation = self.pending_mutation_capability_action()
         if mutation is not None:
             return {"outcome": "execute", "action": mutation}
+        from ai_tool.production_verification_acceptance import (
+            advance_runnable_handoff_task,
+            pending_verification_action,
+            pytest_failed_repair_hint,
+        )
+
+        advance_runnable_handoff_task(self)
+        verification = pending_verification_action(self)
+        if verification is not None:
+            return {"outcome": "execute", "action": verification}
         if not self.requires_dedicated_sandbox():
             read_action = self._pending_read_capability_action()
             if read_action is not None:
@@ -2830,6 +2841,9 @@ class ChatTaskOrchestrator:
         continuation = self.pending_observation_continuation()
         if continuation is not None:
             return {"outcome": "continuation", "action": continuation}
+        repair = pytest_failed_repair_hint(self)
+        if repair:
+            return {"outcome": "replan", "replan_hint": repair}
         recovery = self.recovery_hint()
         if recovery:
             return {"outcome": "replan", "replan_hint": recovery}
@@ -2857,6 +2871,16 @@ class ChatTaskOrchestrator:
         mutation = self.pending_mutation_capability_action()
         if mutation is not None:
             return mutation
+        from ai_tool.production_verification_acceptance import (
+            advance_runnable_handoff_task,
+            pending_verification_action,
+        )
+
+        advance_runnable_handoff_task(self)
+        verification = pending_verification_action(self)
+        if verification is not None:
+            self._injected_capability_tool = "run_test_plan"
+            return verification
         continued = self.pending_observation_continuation()
         if continued is not None:
             self._injected_capability_tool = str(continued["tool"])
@@ -4152,8 +4176,25 @@ class ChatTaskOrchestrator:
                     conditions.append("answer produced")
             elif self.task.status == "complete" and "answer produced" not in conditions:
                 conditions.append("answer produced")
+        completed_goal_id = self.task.goal_id
         self.runtime.evaluate_task(self.current_task_id, conditions)
-        self.runtime.evaluate_goal(self.current_goal_id, [])
+        from ai_tool.production_verification_acceptance import advance_runnable_handoff_task
+
+        if completed_goal_id in self.runtime.goals:
+            # Empty satisfied list cannot complete G1 whose conditions are A*.
+            self.runtime.evaluate_goal(completed_goal_id, [])
+        advance_runnable_handoff_task(self)
+        handoff_seeded = any(
+            str(getattr(task, "source", "") or "") == "goal_handoff"
+            for task in self.runtime.tasks.values()
+        )
+        if handoff_seeded:
+            return self.runtime.final_synthesis_context("G1")
+        g1 = self.runtime.goals.get("G1")
+        if g1 is not None:
+            for child_id in g1.child_goal_ids:
+                if child_id in self.runtime.goals:
+                    self.runtime.evaluate_goal(child_id, [])
         self.runtime.evaluate_goal(
             "G1",
             ["all tasks complete"]

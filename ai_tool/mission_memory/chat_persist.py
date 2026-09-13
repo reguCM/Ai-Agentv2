@@ -51,6 +51,18 @@ def persist_chat_execution(
     goal_achievement_result: str | None = None,
 ) -> dict[str, Any]:
     """Persist one execution. Does not search the store to guess the mission."""
+    if goal_achievement_performed is None:
+        from ai_tool.production_verification_acceptance import resolve_mission_achievement
+
+        resolved = resolve_mission_achievement(
+            orchestrator,
+            final_answer=answer,
+        )
+        if resolved and resolved.get("goal_achievement_performed"):
+            goal_achievement_performed = True
+            goal_achievement_result = str(resolved.get("goal_achievement_result") or "PASS")
+            if execution_end_state is None:
+                execution_end_state = str(resolved.get("execution_end_state") or "achieved")
     bind_execution_identity(orchestrator, new_execution=False)
     memory = store or MissionMemoryStore.from_default()
     mission_id = str(orchestrator.mission_id)

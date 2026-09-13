@@ -9,6 +9,11 @@ from ai_tool.human_decision_premise import (
     initialize_premise_validation,
     refresh_task_revalidation,
 )
+from ai_tool.production_verification_acceptance import (
+    attach_handoff_verification_plan,
+    maybe_add_test_run_closed,
+    task_row_requires_pytest_verification,
+)
 from tools.ai.task_runtime import GoalNode, GoalStatus, TaskRecord, TaskStatus
 
 HANDOFF_TASK_SOURCE = "goal_handoff"
@@ -121,6 +126,10 @@ def build_handoff_task_records(
         completion = list(dict.fromkeys([*acceptance, *verification]))
         if not completion:
             completion = completion_conditions[:1] or ["handoff task complete"]
+        completion = maybe_add_test_run_closed(
+            completion,
+            required=task_row_requires_pytest_verification(row, handoff_packet),
+        )
         records.append(
             TaskRecord(
                 task_id=runtime_task_id(source_task_id),
@@ -274,6 +283,7 @@ def seed_orchestrator_from_handoff(orchestrator: Any, handoff_packet: Mapping[st
     orchestrator.current_goal_id = ROOT_GOAL_ID
     orchestrator.current_task_id = first_task_id
     attach_handoff_identity_traceability(orchestrator, handoff_packet)
+    attach_handoff_verification_plan(orchestrator, handoff_packet)
     refresh_task_revalidation(orchestrator)
 
 
