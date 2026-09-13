@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from types import SimpleNamespace
 
 import pytest
 
@@ -186,7 +187,7 @@ def test_goal_command_reuses_specification_path_and_stops_with_saved_handoff(mon
         ),
     ],
 )
-def test_run_starts_sandbox_for_exact_saved_handoff_without_regeneration_or_task_execution(
+def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     monkeypatch,
     tmp_path,
     goal,
@@ -216,7 +217,10 @@ def test_run_starts_sandbox_for_exact_saved_handoff_without_regeneration_or_task
         session_kind="DEDICATED",
     )
 
+    sandbox_starts = {"n": 0}
+
     def start_sandbox(runtime, _source, _parent):
+        sandbox_starts["n"] += 1
         runtime.sandbox_session = sandbox
         return sandbox
 
@@ -226,24 +230,112 @@ def test_run_starts_sandbox_for_exact_saved_handoff_without_regeneration_or_task
     )
     monkeypatch.setattr("tools.ai.task_runtime.verify_sandbox_identity", lambda value: value)
     monkeypatch.setattr(
+        "tools.ai.sandbox_workspace.verify_sandbox_identity",
+        lambda value, **_kwargs: value,
+    )
+    monkeypatch.setattr(
         "ai_tool.chat_interface.agent_turn.resolve_configured_sandbox_parent",
         lambda _source: tmp_path / "sandboxes",
+    )
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.restore_mission_clarifications",
+        lambda orchestrator: orchestrator.confirmed_clarifications.append(
+            {
+                "decision_id": "decision-quality-v1",
+                "decision_key": "quality:definition",
+                "status": "confirmed",
+                "human_confirmed": True,
+                "text": meaning,
+            }
+        ),
     )
 
     monkeypatch.setattr(
         "ai_tool.chat_interface.agent_turn.run_production_handoff_pipeline",
         lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("handoff regenerated")),
     )
+    tool_calls = {"n": 0}
+
+    def execute(name, arguments, *, sandbox_session=None, **_kwargs):
+        tool_calls["n"] += 1
+        assert name == "create_file"
+        target = sandbox_root / arguments["path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(arguments["content"], encoding="utf-8")
+        return {
+            "ok": True,
+            "status": "success",
+            "path": arguments["path"],
+            "mutation": {
+                "tool": "create_file",
+                "sandbox_session_id": sandbox_session.session_id,
+                "relative_path": arguments["path"],
+                "action": "create",
+                "before_hash": None,
+                "after_hash": "test-hash",
+                "changed": True,
+                "timestamp": "2026-09-14T00:00:00+00:00",
+            },
+        }
+
     monkeypatch.setattr(
-        "ai_tool.chat_interface.agent_turn._chat_turn",
-        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("agent loop started")),
+        "ai_tool.chat_interface.agent_turn._execute_agent_tool",
+        execute,
+    )
+    monkeypatch.setattr(
+        "ai_tool.tool_calling_capability_bridge.apply_tool_calling_hard_capability_bridge",
+        lambda *_args, **_kwargs: SimpleNamespace(
+            capability_gap=False,
+            routing_performed=False,
+            selected_model="test",
+            as_dict=lambda: {"capability_gap": False, "routing_performed": False},
+        ),
     )
 
-    result = run_chat_turn(session, "/run", model="test")
+    chat_calls = {"n": 0}
+
+    def chat(**_kwargs):
+        chat_calls["n"] += 1
+        if chat_calls["n"] > 1:
+            return SimpleNamespace(
+                message=SimpleNamespace(
+                    content="",
+                    tool_calls=[
+                        SimpleNamespace(
+                            function=SimpleNamespace(
+                                name="create_file",
+                                arguments={"path": "next-step.txt", "content": "continued\n"},
+                            )
+                        )
+                    ],
+                )
+            )
+        return SimpleNamespace(
+            message=SimpleNamespace(
+                content="",
+                tool_calls=[
+                    SimpleNamespace(
+                        function=SimpleNamespace(
+                            name="create_file",
+                            arguments={"path": path, "content": f"# {meaning}\n"},
+                        )
+                    ),
+                    SimpleNamespace(
+                        function=SimpleNamespace(
+                            name="create_file",
+                            arguments={"path": "should-not-run.txt", "content": "blocked\n"},
+                        )
+                    ),
+                ],
+            )
+        )
+
+    result = run_chat_turn(session, "/run", chat_fn=chat, model="test")
 
     assert result["runtime_prepared"] is True
     assert result["runtime_started"] is True
     assert result["sandbox_started"] is True
+    assert result["task_step_executed"] is True
     assert result["handoff_packet"] == packet
     assert json.dumps(packet, ensure_ascii=False, sort_keys=True) == saved_json
     assert result["handoff_integrity"]["handoff_id"] == packet["handoff_id"]
@@ -251,9 +343,15 @@ def test_run_starts_sandbox_for_exact_saved_handoff_without_regeneration_or_task
     assert result["handoff_integrity"]["immutable_fields_equal"] is True
     runtime = result["task_runtime"]
     assert runtime["sandbox_session"]["session_id"] == sandbox.session_id
-    assert all(row["status"] == "pending" for row in runtime["tasks"])
-    assert runtime["actions"] == []
-    assert runtime["mutations"] == []
+    assert tool_calls["n"] == 1
+    assert result.get("error") is None, result
+    assert runtime["actions"][0]["tool_name"] == "create_file"
+    assert len(runtime["actions"]) == 1
+    assert runtime["mutations"][0]["relative_path"] == path
+    assert len(runtime["mutations"]) == 1
+    assert (sandbox_root / path).is_file()
+    assert not (sandbox_root / "should-not-run.txt").exists()
+    assert any(row["status"] == "in_progress" for row in runtime["tasks"])
     assert session["production_runtime_snapshot"] == runtime
     rendered = json.dumps(result, ensure_ascii=False)
     assert meaning in rendered
@@ -263,6 +361,38 @@ def test_run_starts_sandbox_for_exact_saved_handoff_without_regeneration_or_task
         assert "Tetris" not in rendered
         assert "テトリス" not in rendered
         assert "tetris/main.py" not in rendered
+
+    repeated = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+    assert repeated["runtime_resumed"] is True
+    assert repeated["task_step_executed"] is True
+    assert repeated["sandbox_started"] is False
+    assert sandbox_starts["n"] == 1
+    assert tool_calls["n"] == 2
+    assert len(repeated["task_runtime"]["actions"]) == 2
+    assert (sandbox_root / "next-step.txt").is_file()
+
+    duplicate = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+    assert duplicate["runtime_resumed"] is True
+    assert duplicate["task_step_executed"] is False
+    assert len(duplicate["task_runtime"]["actions"]) == 2
+    assert tool_calls["n"] == 2
+    assert any(
+        row.get("type") == "duplicate_runtime_action_suppressed"
+        for row in duplicate.get("events") or []
+    )
+
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.restore_orchestrator_from_runtime_snapshot",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(ValueError("sandbox identity mismatch")),
+    )
+    invalid_sandbox = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+    assert invalid_sandbox["production_run_error"] == "runtime_resume_validation_failed"
+    assert tool_calls["n"] == 2
+
+    session["production_handoff_packet"]["goal"]["summary"] += " changed"
+    invalid_handoff = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+    assert invalid_handoff["production_run_error"] == "runtime_handoff_mismatch"
+    assert tool_calls["n"] == 2
 
 
 def test_run_fails_closed_when_sandbox_bootstrap_fails(monkeypatch, tmp_path):

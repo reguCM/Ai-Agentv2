@@ -1,6 +1,7 @@
 """Minimal bridge: Goal Handoff implementation_tasks → Production Runtime TaskRecord."""
 from __future__ import annotations
 
+from dataclasses import fields
 from typing import Any, Mapping, Sequence
 
 from ai_tool.dev_skill_pipeline import coerce_task_string_list
@@ -14,7 +15,20 @@ from ai_tool.production_verification_acceptance import (
     maybe_add_test_run_closed,
     task_row_requires_pytest_verification,
 )
-from tools.ai.task_runtime import GoalNode, GoalStatus, TaskRecord, TaskStatus
+from tools.ai.sandbox_workspace import SandboxSession
+from tools.ai.task_runtime import (
+    ActionRecord,
+    ClaimRecord,
+    EvidenceRecord,
+    FailureRecord,
+    GoalNode,
+    GoalStatus,
+    MutationRecord,
+    ReplanRecord,
+    TaskRecord,
+    TaskStatus,
+    ToolGapCandidate,
+)
 
 HANDOFF_TASK_SOURCE = "goal_handoff"
 ROOT_GOAL_ID = "G1"
@@ -306,6 +320,84 @@ def prepare_orchestrator_from_handoff(
     refresh_task_revalidation(orchestrator)
 
 
+def _runtime_record(model: type[Any], value: Mapping[str, Any]) -> Any:
+    allowed = {item.name for item in fields(model)}
+    return model(**{key: value[key] for key in allowed if key in value})
+
+
+def _max_record_index(rows: Sequence[Any], attribute: str, prefix: str) -> int:
+    found = [
+        int(token[len(prefix) :])
+        for row in rows
+        if (token := str(getattr(row, attribute, "") or "")).startswith(prefix)
+        and token[len(prefix) :].isdigit()
+    ]
+    return max(found, default=0)
+
+
+def restore_orchestrator_from_runtime_snapshot(
+    orchestrator: Any,
+    handoff_packet: Mapping[str, Any],
+    snapshot: Mapping[str, Any],
+) -> None:
+    """Restore one Production Runtime continuation from its existing snapshot."""
+    sandbox_row = snapshot.get("sandbox_session")
+    if not isinstance(sandbox_row, Mapping):
+        raise ValueError("Production Runtime snapshot has no Sandbox identity")
+    sandbox = _runtime_record(SandboxSession, sandbox_row)
+    orchestrator.runtime.attach_sandbox_session(sandbox)
+    orchestrator.apply_completion_runtime(snapshot, replace_graph=True)
+    runtime = orchestrator.runtime
+    runtime.actions = [
+        _runtime_record(ActionRecord, row)
+        for row in (snapshot.get("actions") or [])
+        if isinstance(row, Mapping)
+    ]
+    runtime.evidence = {
+        record.evidence_id: record
+        for row in (snapshot.get("evidence") or [])
+        if isinstance(row, Mapping)
+        for record in [_runtime_record(EvidenceRecord, row)]
+    }
+    runtime.claims = [
+        _runtime_record(ClaimRecord, row)
+        for row in (snapshot.get("claims") or [])
+        if isinstance(row, Mapping)
+    ]
+    runtime.failures = [
+        _runtime_record(FailureRecord, row)
+        for row in (snapshot.get("failures") or [])
+        if isinstance(row, Mapping)
+    ]
+    runtime.mutations = [
+        _runtime_record(MutationRecord, row)
+        for row in (snapshot.get("mutations") or [])
+        if isinstance(row, Mapping)
+    ]
+    runtime.replans = [
+        _runtime_record(ReplanRecord, row)
+        for row in (snapshot.get("replans") or [])
+        if isinstance(row, Mapping)
+    ]
+    runtime.tool_gaps = {
+        record.required_capability.casefold().strip(): record
+        for row in (snapshot.get("tool_gaps") or [])
+        if isinstance(row, Mapping)
+        for record in [_runtime_record(ToolGapCandidate, row)]
+    }
+    runtime.task_events = [
+        dict(row) for row in (snapshot.get("events") or []) if isinstance(row, Mapping)
+    ]
+    orchestrator._action_index = _max_record_index(runtime.actions, "action_id", "A")
+    orchestrator._evidence_index = _max_record_index(
+        list(runtime.evidence.values()), "evidence_id", "E"
+    )
+    orchestrator._failure_index = _max_record_index(runtime.failures, "failure_id", "F")
+    attach_handoff_identity_traceability(orchestrator, handoff_packet)
+    attach_handoff_verification_plan(orchestrator, handoff_packet)
+    refresh_task_revalidation(orchestrator)
+
+
 __all__ = [
     "HANDOFF_TASK_SOURCE",
     "ROOT_GOAL_ID",
@@ -316,6 +408,7 @@ __all__ = [
     "build_handoff_task_records",
     "map_handoff_dependencies",
     "prepare_orchestrator_from_handoff",
+    "restore_orchestrator_from_runtime_snapshot",
     "runtime_task_id",
     "seed_orchestrator_from_handoff",
 ]

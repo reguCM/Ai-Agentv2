@@ -153,7 +153,10 @@ from ai_tool.production_handoff_bridge import (
     session_has_production_handoff,
 )
 from ai_tool.dev_skill_pipeline import validate_handoff_packet
-from ai_tool.goal_handoff_runtime_bridge import prepare_orchestrator_from_handoff
+from ai_tool.goal_handoff_runtime_bridge import (
+    prepare_orchestrator_from_handoff,
+    restore_orchestrator_from_runtime_snapshot,
+)
 from ai_tool.mission_memory.paths import MissionMemoryError
 from ai_tool.mission_memory.ids import new_mission_id
 from ai_tool.mission_memory.store import MissionMemoryStore
@@ -897,6 +900,7 @@ def _chat_turn(
     grill_answer: str | None = None,
     goal_continuation_context: dict[str, Any] | None = None,
     pipeline_observer: PipelineObserver | None = None,
+    max_tool_calls_this_turn: int | None = None,
 ) -> dict[str, Any]:
     timing = timing if timing is not None else _new_timing_breakdown()
     events = [
@@ -1520,6 +1524,40 @@ def _chat_turn(
                         }
                     )
                     continue
+                if (
+                    orchestrator is not None
+                    and not orchestrator.runtime.should_execute(
+                        orchestrator.current_task_id,
+                        name,
+                        normalized_arguments,
+                    )
+                ):
+                    duplicate = {
+                        "ok": False,
+                        "status": "failure",
+                        "error": {
+                            "code": "duplicate_action_suppressed",
+                            "message": "The same completed Runtime action was not executed again.",
+                        },
+                    }
+                    messages.append(
+                        {
+                            "role": "tool",
+                            "tool_name": name,
+                            "content": json.dumps(duplicate, ensure_ascii=False, indent=2),
+                        }
+                    )
+                    events.append(
+                        event(
+                            "duplicate_runtime_action_suppressed",
+                            name=name,
+                            task_id=orchestrator.current_task_id,
+                        )
+                    )
+                    if max_tool_calls_this_turn is not None:
+                        stop_reason = LoopStopReason.GOAL_INCOMPLETE_OPEN_WORK
+                        break
+                    continue
                 budget_stop = _pipeline_budget_stop_reason(pipeline_observer)
                 if budget_stop is not None:
                     stop_reason = budget_stop
@@ -1680,6 +1718,23 @@ def _chat_turn(
                     would_have_stopped_by,
                     semantic_warning_enabled=semantic_warning_enabled,
                 )
+                if (
+                    stop_reason is None
+                    and max_tool_calls_this_turn is not None
+                    and counters.total_tool_calls >= max_tool_calls_this_turn
+                ):
+                    stop_reason = (
+                        _incomplete_goal_stop_reason(orchestrator)
+                        if orchestrator is not None
+                        else LoopStopReason.GOAL_INCOMPLETE_OPEN_WORK
+                    ) or LoopStopReason.GOAL_INCOMPLETE_OPEN_WORK
+                    events.append(
+                        event(
+                            "runtime_task_step_boundary",
+                            max_tool_calls=max_tool_calls_this_turn,
+                            observed_tool_calls=counters.total_tool_calls,
+                        )
+                    )
                 if semantic_warning_tracker is not None and orchestrator is not None:
                     semantic_warning_tracker.note_active_fuses(
                         active_semantic_warnings(counters)
@@ -3129,6 +3184,7 @@ def _phase3a_command_result(
     correlation_id: str,
     memory: dict[str, Any],
     model: str,
+    chat_fn: ChatFn,
     goal_usage: bool,
     run_requested: bool,
 ) -> dict[str, Any] | None:
@@ -3171,8 +3227,46 @@ def _phase3a_command_result(
             "production_run_error": "missing_or_invalid_handoff",
             "handoff_validation_errors": errors,
         }
-
+    existing_runtime = session.get("production_runtime_snapshot")
+    existing_sandbox = (
+        existing_runtime.get("sandbox_session")
+        if isinstance(existing_runtime, Mapping)
+        else None
+    )
+    resume_runtime = bool(
+        isinstance(existing_runtime, Mapping)
+        and isinstance(existing_sandbox, Mapping)
+        and str(existing_sandbox.get("status") or "") == "ACTIVE"
+    )
     before_hash = _canonical_handoff_hash(packet)
+    saved_runtime_identity = session.get("production_runtime_handoff_integrity")
+    if resume_runtime and (
+        not isinstance(saved_runtime_identity, Mapping)
+        or str(saved_runtime_identity.get("handoff_id") or "")
+        != str(packet.get("handoff_id") or "")
+        or str(saved_runtime_identity.get("canonical_hash") or "") != before_hash
+    ):
+        return {
+            "route": "chat",
+            "answer": "保存済みRuntimeとGoal Handoffの同一性を確認できないため、再開していません。",
+            "events": [event("production_run_blocked", reason="runtime_handoff_mismatch")],
+            "tool_used": False,
+            "tools": [],
+            "web_search": False,
+            "research_saved": False,
+            "executor": "local_agent",
+            "cursor_connected": False,
+            "memory": memory,
+            "task_runtime": dict(existing_runtime),
+            "runtime_prepared": True,
+            "runtime_started": True,
+            "sandbox_started": False,
+            "production_run_error": "runtime_handoff_mismatch",
+            "handoff_packet": packet,
+            "production_status": "RUNTIME_CONTINUATION_BLOCKED",
+            "model": model,
+        }
+
     original_request = str((packet.get("goal") or {}).get("original_request_excerpt") or "").strip()
     orchestrator = ChatTaskOrchestrator(
         correlation_id,
@@ -3184,23 +3278,33 @@ def _phase3a_command_result(
         resume_mission_id=mission_id or None,
         new_execution=True,
     )
-    prepare_orchestrator_from_handoff(orchestrator, packet)
+    restore_mission_clarifications(orchestrator)
     after_hash = _canonical_handoff_hash(packet)
     immutable_fields = ("handoff_id", "goal", "scope", "acceptance_criteria", "implementation_tasks")
     immutable_equal = all(packet.get(key) == saved.get(key) for key in immutable_fields)
     try:
-        sandbox = orchestrator.runtime.start_dedicated_sandbox(
-            DEVELOPMENT_WORKTREE,
-            resolve_configured_sandbox_parent(DEVELOPMENT_WORKTREE),
-        )
+        if resume_runtime:
+            restore_orchestrator_from_runtime_snapshot(
+                orchestrator,
+                packet,
+                existing_runtime,
+            )
+            sandbox = orchestrator.runtime.sandbox_session
+        else:
+            prepare_orchestrator_from_handoff(orchestrator, packet)
+            sandbox = orchestrator.runtime.start_dedicated_sandbox(
+                DEVELOPMENT_WORKTREE,
+                resolve_configured_sandbox_parent(DEVELOPMENT_WORKTREE),
+            )
     except Exception as exc:
+        reason = "runtime_resume_validation_failed" if resume_runtime else "sandbox_bootstrap_failed"
         return {
             "route": "chat",
-            "answer": "Dedicated Sandboxを開始できなかったため、Runtime実行を開始していません。",
+            "answer": "Runtimeの安全な開始または再開に失敗したため、Taskを実行していません。",
             "events": [
                 event(
                     "production_run_blocked",
-                    reason="sandbox_bootstrap_failed",
+                    reason=reason,
                     error_type=type(exc).__name__,
                 )
             ],
@@ -3215,7 +3319,7 @@ def _phase3a_command_result(
             "runtime_prepared": True,
             "runtime_started": False,
             "sandbox_started": False,
-            "production_run_error": "sandbox_bootstrap_failed",
+            "production_run_error": reason,
             "handoff_packet": packet,
             "handoff_integrity": {
                 "handoff_id": packet.get("handoff_id"),
@@ -3229,32 +3333,46 @@ def _phase3a_command_result(
             "mission_memory": {"mission_id": mission_id or None},
             "model": model,
         }
-    runtime_snapshot = orchestrator.snapshot()
+    action_count_before = len(orchestrator.runtime.actions)
+    execution_result = _chat_turn(
+        original_request or orchestrator.request,
+        session,
+        chat_fn=chat_fn,
+        model=model,
+        memory=memory,
+        correlation_id=correlation_id,
+        orchestrator=orchestrator,
+        max_tool_calls_this_turn=1,
+    )
+    runtime_snapshot = execution_result.get("task_runtime") or orchestrator.snapshot()
     session["production_runtime_snapshot"] = runtime_snapshot
-    return {
-        "route": "chat",
-        "answer": "保存済みGoal HandoffをRuntimeへ渡し、Dedicated Sandboxを開始しました。Task実行はまだ開始していません。",
-        "events": [
+    session["production_runtime_handoff_integrity"] = {
+        "handoff_id": packet.get("handoff_id"),
+        "canonical_hash": before_hash,
+    }
+    task_step_executed = len(runtime_snapshot.get("actions") or []) == action_count_before + 1
+    execution_result.update(
+        {
+            "events": [
             event(
-                "production_run_sandbox_started",
+                (
+                    "production_run_runtime_resumed"
+                    if resume_runtime
+                    else "production_run_sandbox_started"
+                ),
                 handoff_id=packet.get("handoff_id"),
                 sandbox_session_id=sandbox.session_id,
                 runtime_started=True,
-            )
+            ),
+            *(execution_result.get("events") or []),
         ],
-        "tool_used": False,
-        "tools": [],
-        "web_search": False,
-        "research_saved": False,
-        "executor": "local_agent",
-        "cursor_connected": False,
-        "memory": memory,
-        "task_runtime": runtime_snapshot,
-        "runtime_prepared": True,
-        "runtime_started": True,
-        "sandbox_started": True,
-        "handoff_packet": packet,
-        "handoff_integrity": {
+            "task_runtime": runtime_snapshot,
+            "runtime_prepared": True,
+            "runtime_started": True,
+            "sandbox_started": not resume_runtime,
+            "runtime_resumed": resume_runtime,
+            "handoff_packet": packet,
+            "handoff_integrity": {
             "handoff_id": packet.get("handoff_id"),
             "saved_canonical_hash": before_hash,
             "runtime_input_canonical_hash": after_hash,
@@ -3262,21 +3380,15 @@ def _phase3a_command_result(
             "immutable_fields": list(immutable_fields),
             "immutable_fields_equal": immutable_equal,
         },
-        "production_status": "RUNTIME_SANDBOX_READY_TASKS_PENDING",
-        "mission_memory": {"mission_id": mission_id or None},
-        "final_llm_lifecycle": {
-            "llm_request_id": f"{correlation_id}-production-run-prepare",
-            "final_llm_request_started": False,
-            "final_llm_response_received": True,
-            "final_llm_response_received_at": now_iso(),
-            "final_response_accepted": True,
-            "final_response_discarded": False,
-            "late_response_received": False,
-            "turn_closed_before_response": False,
-            "empty_reason": None,
-        },
-        "model": model,
-    }
+            "task_step_executed": task_step_executed,
+            "production_status": (
+                "RUNTIME_FIRST_TASK_STEP_FINISHED"
+                if task_step_executed
+                else "RUNTIME_BLOCKED_BEFORE_TASK_ACTION"
+            ),
+        }
+    )
+    return execution_result
 
 
 def _new_mission_record(
@@ -4407,6 +4519,7 @@ def run_chat_turn(
         correlation_id=correlation_id,
         memory=memory,
         model=mdl,
+        chat_fn=fn,
         goal_usage=goal_usage_requested,
         run_requested=run_command_requested,
     )
