@@ -361,3 +361,81 @@ def test_run_dev_skill_pipeline_phase1_grill_then_value_loop(tmp_path: Path) -> 
     skill_ids = [item.skill_id for item in result.applicability_report.items]
     assert "grill-me" not in skill_ids
     assert skill_ids[0] == "write-prd"
+
+
+def test_production_aligned_spec_skips_standalone_grill_and_builds_generic_handoff(
+    tmp_path: Path,
+) -> None:
+    quality = "操作応答が良く、基本ルールが正しく動き、見た目も最低限整っている"
+    aligned = {
+        "summary": "高品質なテトリスを作る",
+        "numbered_conditions": [quality],
+        "non_goals": ["ネットワーク対戦は含めない"],
+        "acceptance_criteria": [quality],
+    }
+    calls: list[str] = []
+
+    def production_chat(**kwargs):
+        _, user = (
+            str((kwargs.get("messages") or [{}])[0].get("content") or ""),
+            str((kwargs.get("messages") or [{}])[-1].get("content") or ""),
+        )
+        calls.append(user)
+        if "Emit PRD_JSON" in user:
+            return _response_for_test(
+                {
+                    "title": "Tetris PRD",
+                    "problem": "高品質なテトリスが必要",
+                    "goals": quality,
+                    "requirements": quality,
+                    "non_goals": "ネットワーク対戦は含めない",
+                    "constraints": "Runtimeを開始しない",
+                    "acceptance_criteria": [quality],
+                }
+            )
+        if "Emit TECH_SPEC_JSON" in user:
+            return _response_for_test(
+                {
+                    "summary": quality,
+                    "modules": [{"path": "game/main.py", "responsibility": quality}],
+                    "sequencing": [quality],
+                    "sandbox_constraints": "Runtimeを開始しない",
+                    "implementation_tasks": [{"id": "T1", "title": quality, "acceptance": [quality], "size": "S"}],
+                }
+            )
+        if "Emit PLAN_JSON" in user:
+            return _response_for_test(
+                {
+                    "plan_markdown": f"# Plan\n\n{quality}",
+                    "todo_markdown": f"- [ ] T1 {quality}",
+                    "tasks": [{"id": "T1", "title": quality, "acceptance": [quality], "verification": [quality], "affected_paths": ["game/main.py"], "size": "S", "dependencies": []}],
+                }
+            )
+        raise AssertionError(f"standalone grill was unexpectedly invoked: {user[:100]}")
+
+    result = run_dev_skill_pipeline(
+        "高品質なテトリスを作って",
+        composition_id="production-spec-handoff",
+        model="test",
+        output_dir=tmp_path,
+        chat_fn=production_chat,
+        consumer="codex",
+        phase1_aligned_spec=aligned,
+    )
+
+    assert len(calls) == 3
+    assert result.grill_report["source"] == "production_phase1_aligned_spec"
+    assert result.grill_report["human_response_kind"] == "human_ui"
+    assert result.prd and result.tech_spec and result.plan
+    assert result.handoff_packet
+    assert not validate_handoff_packet(result.handoff_packet)
+    assert result.handoff_packet["runtime_boundary"]["production_connected"] is False
+    assert "game/main.py" in result.handoff_packet["scope"]["affected_paths"]
+
+
+def _response_for_test(payload: dict):
+    return type(
+        "Resp",
+        (),
+        {"message": type("Msg", (), {"content": json.dumps(payload, ensure_ascii=False)})()},
+    )()

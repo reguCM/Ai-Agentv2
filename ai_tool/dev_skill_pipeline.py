@@ -21,6 +21,7 @@ from ai_tool.grill_me_loop import (
     SIMULATED_HUMAN_RESPONSE_KIND,
     TEST_AUTO_RECOMMENDATION_POLICY,
     run_grill_me_loop,
+    threshold_for_mode,
 )
 from ai_tool.precondition_contract import validate_preconditions
 from ai_tool.llm_json_parse import (
@@ -71,6 +72,9 @@ class DevSkillPipelineResult:
     selection_policy: str
     grill_report: dict[str, Any] | None = None
     aligned_spec: dict[str, Any] | None = None
+    prd: dict[str, Any] | None = None
+    tech_spec: dict[str, Any] | None = None
+    plan: dict[str, Any] | None = None
     phase1_spec_finalized: bool = False
     value_consumption_report: dict[str, Any] | None = None
     step_results: list[SkillStepResult] = field(default_factory=list)
@@ -364,8 +368,8 @@ def _generate_tech_spec(
         ),
         user=(
             f"PRD JSON:\n{json.dumps(dict(prd), ensure_ascii=False, indent=2)}\n\n"
-            "For this E2E, implementation target is Dedicated Sandbox via Production Chat "
-            "create_file only. Emit TECH_SPEC_JSON with keys: summary, modules, sequencing, "
+            "Design for the approved specification without starting Runtime execution. "
+            "Emit TECH_SPEC_JSON with keys: summary, modules, sequencing, "
             "sandbox_constraints, implementation_tasks (array of {id,title,acceptance,size}), "
             "recommended_answer."
         ),
@@ -503,11 +507,11 @@ def normalize_implementation_tasks(
     """Assign deterministic T1..Tn ids and remap dependency references."""
     raw_rows = [row for row in rows if isinstance(row, Mapping)]
     if not raw_rows:
-        acceptance = default_acceptance or ["Create minimal console Tetris at tetris/main.py"]
+        acceptance = default_acceptance or ["Implement the approved specification"]
         return [
             {
                 "id": "T1",
-                "title": "Create tetris/main.py in Dedicated Sandbox",
+                "title": "Implement the approved specification",
                 "acceptance": acceptance[:3],
                 "verification": default_verification,
                 "dependencies": [],
@@ -521,7 +525,7 @@ def normalize_implementation_tasks(
     for index, row in enumerate(raw_rows, 1):
         canonical_id = f"T{index}"
         acceptance = coerce_task_string_list(row.get("acceptance")) or default_acceptance[:1] or [
-            "Implement minimal Tetris in Sandbox"
+            "Implement the approved specification"
         ]
         verification = coerce_task_string_list(row.get("verification")) or default_verification
         dependencies: list[str] = []
@@ -572,6 +576,23 @@ def _normalize_size(raw: Any) -> str:
     return "S"
 
 
+def _affected_paths_from_design(
+    tech_spec: Mapping[str, Any],
+    tasks: Sequence[Mapping[str, Any]],
+) -> list[str]:
+    paths: list[str] = []
+    for item in tech_spec.get("modules") or []:
+        candidate = str(item.get("path") if isinstance(item, Mapping) else item).strip()
+        if candidate and ("/" in candidate or "\\" in candidate or "." in candidate):
+            paths.append(candidate.replace("\\", "/"))
+    for task in tasks:
+        for item in task.get("affected_paths") or []:
+            candidate = str(item).strip().replace("\\", "/")
+            if candidate:
+                paths.append(candidate)
+    return list(dict.fromkeys(paths)) or ["implementation target defined by tech spec"]
+
+
 def build_handoff_packet(
     *,
     initial_request: str,
@@ -584,7 +605,7 @@ def build_handoff_packet(
     tech_spec: Mapping[str, Any],
     plan: Mapping[str, Any],
     skill_steps: list[str],
-    handoff_slug: str = "tetris-sandbox-e2e",
+    handoff_slug: str = "dev-skill-pipeline",
     confirmed_clarifications: Sequence[Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     if prd is not None:
@@ -598,8 +619,8 @@ def build_handoff_packet(
     acceptance = [
         str(item) for item in (aligned.get("acceptance_criteria") or []) if str(item).strip()
     ]
-    default_acceptance = conditions[:1] or ["Implement minimal Tetris in Sandbox"]
-    default_verification = ["Check tetris/main.py exists in Dedicated Sandbox"]
+    default_acceptance = conditions[:1] or ["Implement the approved specification"]
+    default_verification = ["Verify the implementation against the acceptance criteria"]
     task_rows = plan.get("tasks") or tech_spec.get("implementation_tasks") or []
     tasks = normalize_implementation_tasks(
         task_rows if isinstance(task_rows, list) else [],
@@ -612,7 +633,7 @@ def build_handoff_packet(
         tasks = finalize_handoff_implementation_tasks(tasks, confirmed_clarifications)
 
     acceptance_rows = []
-    for index, statement in enumerate(acceptance or conditions[:2] or ["tetris/main.py exists"], 1):
+    for index, statement in enumerate(acceptance or conditions[:2] or default_acceptance, 1):
         acceptance_rows.append(
             {
                 "id": f"A{index}",
@@ -641,29 +662,21 @@ def build_handoff_packet(
             "summary": str(
                 aligned.get("summary")
                 or tech_spec.get("summary")
-                or "Dedicated Sandbox 内に最小テトリスを実装する。"
+                or "Implement the approved specification."
             ),
             "original_request_excerpt": initial_request[:240],
         },
         "scope": {
-            "in_scope": conditions
-            or [
-                "Dedicated Sandbox 内の tetris/main.py 作成",
-                "コンソール版最小テトリス",
-            ],
-            "non_goals": non_goals
-            or [
-                "Production / dev worktree への書き込み",
-                "GUI 版テトリス",
-            ],
-            "affected_paths": ["tetris/main.py"],
+            "in_scope": conditions or ["Implement the approved specification"],
+            "non_goals": non_goals or ["Work outside the approved specification"],
+            "affected_paths": _affected_paths_from_design(tech_spec, tasks),
         },
         "acceptance_criteria": acceptance_rows,
         "implementation_tasks": tasks,
         "test_plan": {
             "pytest": ["tests/ai_tool/test_dev_skill_pipeline.py"],
-            "e2e": ["ai_tool/run_tetris_sandbox_e2e.py"],
-            "manual": ["Confirm Dedicated Sandbox contains tetris/main.py"],
+            "e2e": [],
+            "manual": ["Confirm the implementation satisfies the approved specification"],
         },
         "human_gates": [],
         "risks": [
@@ -773,7 +786,7 @@ def _run_composition_skill(
                 observer=observer,
             )
             prd_md = (
-                f"# {prd_payload.get('title') or 'Tetris PRD'}\n\n"
+                f"# {prd_payload.get('title') or 'Product Requirements Document'}\n\n"
                 f"## Problem\n{prd_payload.get('problem') or ''}\n\n"
                 f"## Goals\n{prd_payload.get('goals') or ''}\n\n"
                 f"## Requirements\n{prd_payload.get('requirements') or ''}\n\n"
@@ -783,6 +796,7 @@ def _run_composition_skill(
             )
             prd_rel = _write_text(design_dir / "prd.md", prd_md, output_dir=output_dir)
             context["prd"] = prd_payload
+            result.prd = dict(prd_payload)
             context["prd_rel"] = prd_rel
             step.artifact_paths.append(prd_rel)
             step.status = "done"
@@ -810,6 +824,7 @@ def _run_composition_skill(
             )
             tech_rel = _write_text(design_dir / "tech-spec.md", tech_md, output_dir=output_dir)
             context["tech_spec"] = tech_payload
+            result.tech_spec = dict(tech_payload)
             context["tech_spec_rel"] = tech_rel
             step.artifact_paths.append(tech_rel)
             step.status = "done"
@@ -830,15 +845,16 @@ def _run_composition_skill(
             )
             plan_rel = _write_text(
                 design_dir / "plan.md",
-                str(plan_payload.get("plan_markdown") or "# Plan\n\nImplement tetris/main.py in Sandbox.\n"),
+                str(plan_payload.get("plan_markdown") or "# Plan\n\nImplement the approved specification.\n"),
                 output_dir=output_dir,
             )
             todo_rel = _write_text(
                 design_dir / "todo.md",
-                str(plan_payload.get("todo_markdown") or "- [ ] T1 Create tetris/main.py\n"),
+                str(plan_payload.get("todo_markdown") or "- [ ] T1 Implement the approved specification\n"),
                 output_dir=output_dir,
             )
             context["plan"] = plan_payload
+            result.plan = dict(plan_payload)
             context["plan_rel"] = plan_rel
             context["todo_rel"] = todo_rel
             step.artifact_paths.extend([plan_rel, todo_rel])
@@ -948,6 +964,8 @@ def run_dev_skill_pipeline(
     mission_id: str | None = None,
     confirmed_clarifications: Sequence[Mapping[str, Any]] | None = None,
     orchestrator: Any | None = None,
+    phase1_aligned_spec: Mapping[str, Any] | None = None,
+    phase1_semantic_preservation: Mapping[str, Any] | None = None,
 ) -> DevSkillPipelineResult:
     registry = load_registry()
     steps = composition_steps(composition_id, registry)
@@ -977,16 +995,26 @@ def run_dev_skill_pipeline(
     try:
         active_observer.phase_start(PHASE1_GRILL)
         active_observer.skill_start(PHASE1_GRILL, "grill-me")
-        grill = run_grill_me_loop(
-            initial_request,
-            model=model,
-            mode="freeform",
-            max_rounds=max_grill_rounds,
-            min_rounds_before_score=min_grill_rounds_before_score,
-            auto_select=auto_select,
-            chat_fn=chat_fn,
-            observer=active_observer,
-        )
+        if phase1_aligned_spec is None:
+            grill = run_grill_me_loop(
+                initial_request,
+                model=model,
+                mode="freeform",
+                max_rounds=max_grill_rounds,
+                min_rounds_before_score=min_grill_rounds_before_score,
+                auto_select=auto_select,
+                chat_fn=chat_fn,
+                observer=active_observer,
+            )
+        else:
+            grill = GrillMeResult(
+                initial_request=initial_request,
+                mode="spec",
+                threshold=threshold_for_mode("spec"),
+                aligned_spec=dict(phase1_aligned_spec),
+                gate_passed=True,
+                source="production_phase1_aligned_spec",
+            )
     except PipelineBudgetExceeded as exc:
         active_observer.skill_end(PHASE1_GRILL, "grill-me", status="budget_exceeded")
         active_observer.phase_end(PHASE1_GRILL, status="budget_exceeded")
@@ -1000,16 +1028,19 @@ def run_dev_skill_pipeline(
         )
 
     assert grill is not None
+    production_phase1 = phase1_aligned_spec is not None
     result.grill_report = {
         "ambiguity_report": grill.ambiguity_report,
         "gate_passed": grill.gate_passed,
-        "source": "phase1_standalone_grill_me",
+        "source": grill.source if production_phase1 else "phase1_standalone_grill_me",
         "rounds": grill.rounds,
-        "selection_policy": auto_select,
-        "human_response_kind": SIMULATED_HUMAN_RESPONSE_KIND,
+        "selection_policy": "production_human_ui" if production_phase1 else auto_select,
+        "human_response_kind": "human_ui" if production_phase1 else SIMULATED_HUMAN_RESPONSE_KIND,
         "fallback_used": grill.fallback_used,
         "transcript": [asdict(item) for item in grill.transcript],
     }
+    if phase1_semantic_preservation is not None:
+        result.grill_report["semantic_preservation"] = dict(phase1_semantic_preservation)
     result.aligned_spec = dict(grill.aligned_spec)
 
     grill_step = SkillStepResult(skill_id="grill-me", status="pending")
@@ -1029,9 +1060,9 @@ def run_dev_skill_pipeline(
     grill_step.status = "done" if grill.gate_passed else "partial"
     grill_step.notes.extend(
         [
-            "phase1_standalone_spec_gate",
-            f"selection_policy={auto_select}",
-            f"human_response_kind={SIMULATED_HUMAN_RESPONSE_KIND}",
+            "phase1_production_spec_reused" if production_phase1 else "phase1_standalone_spec_gate",
+            f"selection_policy={'production_human_ui' if production_phase1 else auto_select}",
+            f"human_response_kind={'human_ui' if production_phase1 else SIMULATED_HUMAN_RESPONSE_KIND}",
         ]
     )
     if grill.fallback_used:

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Callable, Literal, Mapping, Sequence
 
 from ai_tool.chat_interface.boundary_grill import (
@@ -13,17 +14,22 @@ from ai_tool.chat_interface.boundary_grill import (
 )
 from ai_tool.chat_interface.gap_resolution_router import GapKind, GapResolutionDecision
 from ai_tool.dev_skill_pipeline import (
+    _aligned_spec_from_prd,
     _generate_plan,
     build_handoff_packet,
     load_registry,
     normalize_implementation_tasks,
+    run_dev_skill_pipeline,
     validate_handoff_packet,
 )
 from ai_tool.goal_handoff_runtime_bridge import seed_orchestrator_from_handoff
+from ai_tool.grill_me_loop import run_production_grill_me_step, validate_resolved_requirement_meanings
 from ai_tool.human_decision_premise import (
     active_decision_catalog,
+    normalize_decision_record,
     refresh_task_revalidation,
 )
+from ai_tool.chat_interface.decision_change_gate import new_decision_id
 from ai_tool.mission_memory.clarifications import (
     load_confirmed_clarifications_for_mission,
     restore_mission_clarifications,
@@ -61,6 +67,112 @@ class ProductionHandoffReadiness:
             "blockers": list(self.blockers),
             "reasons": list(self.reasons),
         }
+
+
+def production_grill_prior_context(
+    *,
+    orchestrator: Any | None = None,
+    mission: Mapping[str, Any] | None = None,
+    store: MissionMemoryStore | None = None,
+) -> tuple[str, list[dict[str, Any]], list[dict[str, Any]]]:
+    """Read canonical Mission requirements and decisions without copying them into state."""
+    record = dict(mission or {})
+    if not record and orchestrator is not None:
+        mission_id = str(getattr(orchestrator, "mission_id", "") or "").strip()
+        if mission_id:
+            record = dict((store or MissionMemoryStore.from_default()).get_mission(mission_id) or {})
+    original = str(record.get("original_goal") or getattr(orchestrator, "request", "") or "")
+    rows = [dict(row) for row in (record.get("structured_requirements") or []) if isinstance(row, Mapping)]
+    if not rows and orchestrator is not None:
+        rows = [
+            dict(row)
+            for row in (getattr(orchestrator, "structured_requirements", None) or [])
+            if isinstance(row, Mapping)
+        ]
+    decisions = [
+        dict(row)
+        for row in (record.get("confirmed_clarifications") or [])
+        if isinstance(row, Mapping)
+    ]
+    if not decisions and orchestrator is not None:
+        decisions = resolve_active_clarifications(orchestrator, store=store)
+    return original, rows, decisions
+
+
+def run_production_grill_phase1(
+    *,
+    orchestrator: Any | None = None,
+    mission: Mapping[str, Any] | None = None,
+    transcript: Sequence[Mapping[str, Any]] | None = None,
+    chat_fn: Callable[..., Any] | None = None,
+    model: str = "fake",
+    store: MissionMemoryStore | None = None,
+) -> dict[str, Any]:
+    """Run one Production-safe grill-me step with no simulated Human selection."""
+    original, requirements, decisions = production_grill_prior_context(
+        orchestrator=orchestrator,
+        mission=mission,
+        store=store,
+    )
+    step = run_production_grill_me_step(
+        original,
+        structured_requirements=requirements,
+        confirmed_clarifications=decisions,
+        transcript=transcript,
+        model=model,
+        chat_fn=chat_fn,
+    )
+    return step.as_dict()
+
+
+def apply_production_grill_human_answer(
+    state: Mapping[str, Any],
+    answer: str,
+    *,
+    store: MissionMemoryStore | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Persist a new grill-me Human Decision and return the resumed transient transcript."""
+    memory = store or MissionMemoryStore.from_default()
+    mission_id = str(state.get("mission_id") or "").strip()
+    mission = dict(memory.get_mission(mission_id) or {})
+    contract = dict(state.get("active_contract") or {})
+    text = str(answer or "").strip()
+    if not mission_id or not mission or not text:
+        raise ValueError("production grill resume requires mission_id, mission, and human answer")
+    record = normalize_decision_record(
+        {
+            "decision_id": new_decision_id(),
+            "decision_key": str(contract.get("decision_key") or "spec:general"),
+            "status": "confirmed",
+            "source": "grill",
+            "text": text,
+            "question_id": str(contract.get("question_id") or ""),
+            "dimension": str(contract.get("dimension") or "goals"),
+            "decision_subject": str(contract.get("decision_subject") or "specification"),
+            "human_confirmed": True,
+            "auto_selected": False,
+            "selection_policy": "human_ui",
+            "role": "confirmed_clarification",
+        }
+    )
+    if record is None:
+        raise ValueError("invalid production grill Human Decision")
+    decisions = list(mission.get("confirmed_clarifications") or [])
+    decisions.append(record)
+    mission["confirmed_clarifications"] = decisions
+    memory.put_mission(mission)
+    transcript = [
+        dict(row) for row in (state.get("transcript") or []) if isinstance(row, Mapping)
+    ]
+    transcript.append(
+        {
+            "dimension": str(contract.get("dimension") or "goals"),
+            "question": str(contract.get("question") or ""),
+            "selected_answer": text,
+            "question_id": str(contract.get("question_id") or ""),
+        }
+    )
+    return mission, {**dict(state), "transcript": transcript, "active_contract": None}
 
 
 def orchestrator_has_goal_handoff_seed(orchestrator: Any) -> bool:
@@ -347,6 +459,94 @@ def run_production_handoff_pipeline(
     }
 
 
+def run_production_spec_handoff_pipeline(
+    *,
+    mission_id: str,
+    initial_request: str,
+    aligned_spec: Mapping[str, Any],
+    semantic_preservation: Mapping[str, Any] | None = None,
+    chat_fn: Callable[..., Any] | None = None,
+    model: str = "fake",
+    store: MissionMemoryStore | None = None,
+    output_dir: Path | None = None,
+) -> dict[str, Any]:
+    """Generate a validated Goal Handoff from Phase 1 and stop before Runtime."""
+    memory = store or MissionMemoryStore.from_default()
+    mission = dict(memory.get_mission(mission_id) or {})
+    clarifications = resolve_pipeline_clarifications(
+        mission_id=mission_id,
+        confirmed_clarifications=mission.get("confirmed_clarifications") or [],
+        store=memory,
+    )
+    target = output_dir or (memory.paths.mission_dir(mission_id) / "dev_skill_pipeline")
+    result = run_dev_skill_pipeline(
+        initial_request,
+        composition_id="production-spec-handoff",
+        model=model,
+        output_dir=target,
+        chat_fn=chat_fn,
+        consumer="codex",
+        mission_id=mission_id,
+        confirmed_clarifications=clarifications,
+        phase1_aligned_spec=aligned_spec,
+        phase1_semantic_preservation=semantic_preservation,
+    )
+    payload = result.as_dict()
+    if result.errors or not result.handoff_packet:
+        details = "; ".join(result.errors) or "goal handoff packet was not produced"
+        raise RuntimeError(f"Production spec handoff pipeline failed: {details}")
+    structured = mission.get("structured_requirements") or []
+
+    def trace_status(candidate: Mapping[str, Any]) -> str:
+        status = validate_resolved_requirement_meanings(
+            candidate,
+            structured_requirements=structured,
+        ).get("status")
+        return {
+            "preserved": "PRESERVED",
+            "ambiguous": "PARTIAL",
+            "missing": "MISSING",
+        }.get(str(status), "MISSING")
+
+    prd = payload.get("prd") or {}
+    tech = payload.get("tech_spec") or {}
+    plan = payload.get("plan") or {}
+    handoff = payload.get("handoff_packet") or {}
+    handoff_acceptance = [
+        str(row.get("statement") or "")
+        for row in handoff.get("acceptance_criteria") or []
+        if isinstance(row, Mapping)
+    ]
+    payload["semantic_trace"] = {
+        "aligned_spec": trace_status(aligned_spec),
+        "prd": trace_status(_aligned_spec_from_prd(prd, initial_request)),
+        "tech_spec": trace_status(
+            {
+                "summary": tech.get("summary"),
+                "numbered_conditions": [tech.get("modules"), tech.get("sequencing")],
+                "acceptance_criteria": tech.get("implementation_tasks") or [],
+            }
+        ),
+        "plan": trace_status(
+            {
+                "summary": plan.get("plan_markdown"),
+                "numbered_conditions": [plan.get("todo_markdown")],
+                "acceptance_criteria": plan.get("tasks") or [],
+            }
+        ),
+        "handoff": trace_status(
+            {
+                "summary": (handoff.get("goal") or {}).get("summary"),
+                "numbered_conditions": (handoff.get("scope") or {}).get("in_scope") or [],
+                "acceptance_criteria": handoff_acceptance,
+            }
+        ),
+    }
+    payload["runtime_started"] = False
+    payload["production_status"] = "SPEC_AND_HANDOFF_READY"
+    return payload
+
+
 def production_handoff_decision_catalog(
     orchestrator: Any,
     *,
@@ -366,15 +566,19 @@ def prepare_production_handoff_orchestrator(
 
 __all__ = [
     "ProductionHandoffReadiness",
+    "apply_production_grill_human_answer",
     "assess_production_handoff_readiness",
     "build_production_handoff_packet",
     "is_explicit_production_handoff_trigger",
     "mark_session_production_handoff_completed",
     "orchestrator_has_goal_handoff_seed",
     "prepare_production_handoff_orchestrator",
+    "production_grill_prior_context",
     "production_handoff_decision_catalog",
     "resolve_active_clarifications",
     "resolve_pipeline_clarifications",
     "run_production_handoff_pipeline",
+    "run_production_spec_handoff_pipeline",
+    "run_production_grill_phase1",
     "session_has_production_handoff",
 ]

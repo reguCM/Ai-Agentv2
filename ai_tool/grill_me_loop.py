@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import asdict, dataclass, field
-from typing import Any, Callable, Mapping
+from typing import Any, Callable, Mapping, Sequence
 
 from ai_tool.grill_question_contract import (
     GRILL_REASON_INITIAL,
@@ -101,6 +101,22 @@ class GrillMeResult:
         payload = asdict(self)
         payload["transcript"] = [asdict(item) for item in self.transcript]
         return payload
+
+
+@dataclass
+class ProductionGrillStepResult:
+    """One resumable Production Human-UI step; Chat Session is the carrier."""
+
+    status: str
+    transcript: list[dict[str, Any]] = field(default_factory=list)
+    ambiguity_report: dict[str, Any] = field(default_factory=dict)
+    aligned_spec: dict[str, Any] = field(default_factory=dict)
+    generated_aligned_spec: dict[str, Any] = field(default_factory=dict)
+    semantic_preservation: dict[str, Any] = field(default_factory=dict)
+    question_contract: dict[str, Any] | None = None
+
+    def as_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
 
 def threshold_for_mode(mode: str) -> float:
@@ -212,6 +228,146 @@ def _conversation_block(transcript: list[GrillTurn]) -> str:
     return "\n".join(rows)
 
 
+def format_production_prior_context(
+    structured_requirements: Sequence[Mapping[str, Any]] | None,
+    confirmed_clarifications: Sequence[Mapping[str, Any]] | None,
+) -> str:
+    """Build a prompt-only view of Mission canonical data, not a second source of truth."""
+    requirements = [
+        {
+            key: row.get(key)
+            for key in (
+                "requirement_id", "source_text", "disposition", "resolution_status",
+                "normalized_meaning", "provenance", "materiality",
+            )
+            if key in row
+        }
+        for row in (structured_requirements or [])
+        if isinstance(row, Mapping)
+    ]
+    decisions = [dict(row) for row in (confirmed_clarifications or []) if isinstance(row, Mapping)]
+    return json.dumps(
+        {
+            "canonical_structured_requirements": requirements,
+            "confirmed_human_decisions": decisions,
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
+
+
+def _production_transcript_block(transcript: Sequence[Mapping[str, Any]]) -> str:
+    if not transcript:
+        return "(no prior answers)"
+    lines: list[str] = []
+    for index, row in enumerate(transcript, 1):
+        lines.append(f"Q{index} [{row.get('dimension') or 'goals'}]: {row.get('question') or ''}")
+        lines.append(f"A{index} (human_ui): {row.get('selected_answer') or ''}")
+    return "\n".join(lines)
+
+
+def _resolved_requirement_meanings(
+    structured_requirements: Sequence[Mapping[str, Any]] | None,
+) -> list[str]:
+    meanings: list[str] = []
+    for row in structured_requirements or []:
+        if not isinstance(row, Mapping):
+            continue
+        if str(row.get("resolution_status") or "") not in {"resolved", "waived_by_human"}:
+            continue
+        if str(row.get("disposition") or "") in {"NOISE", "CONTEXT"}:
+            continue
+        meaning = str(row.get("normalized_meaning") or row.get("source_text") or "").strip()
+        if meaning and meaning not in meanings:
+            meanings.append(meaning)
+    return meanings
+
+
+def validate_resolved_requirement_meanings(
+    aligned_spec: Mapping[str, Any] | None,
+    *,
+    structured_requirements: Sequence[Mapping[str, Any]] | None,
+) -> dict[str, Any]:
+    """Inspect generated output without repairing or otherwise mutating it."""
+    aligned = dict(aligned_spec or {})
+    represented = "\n".join(
+        str(item)
+        for key in ("summary", "numbered_conditions", "acceptance_criteria")
+        for item in (
+            [aligned.get(key)]
+            if key == "summary"
+            else (aligned.get(key) or [])
+        )
+        if str(item).strip()
+    )
+    requirements: list[dict[str, Any]] = []
+    for row in structured_requirements or []:
+        if not isinstance(row, Mapping):
+            continue
+        if str(row.get("resolution_status") or "") not in {"resolved", "waived_by_human"}:
+            continue
+        if str(row.get("disposition") or "") in {"NOISE", "CONTEXT"}:
+            continue
+        normalized = str(row.get("normalized_meaning") or "").strip()
+        source = str(row.get("source_text") or "").strip()
+        required = normalized or source
+        if not required:
+            continue
+        if required in represented:
+            status = "preserved"
+        elif normalized and source and source in represented:
+            status = "ambiguous"
+        else:
+            status = "missing"
+        requirements.append(
+            {
+                "requirement_id": str(row.get("requirement_id") or ""),
+                "status": status,
+                "required_meaning": required,
+            }
+        )
+    statuses = {row["status"] for row in requirements}
+    overall = "missing" if "missing" in statuses else "ambiguous" if "ambiguous" in statuses else "preserved"
+    return {"status": overall, "requirements": requirements}
+
+
+def project_canonical_requirements_to_aligned_spec(
+    aligned_spec: Mapping[str, Any] | None,
+    *,
+    initial_request: str,
+    structured_requirements: Sequence[Mapping[str, Any]] | None,
+) -> dict[str, Any]:
+    """Project Mission-canonical meanings into the existing aligned_spec shape."""
+    aligned = dict(aligned_spec or {})
+    aligned.setdefault("title", "Implementation goal")
+    aligned.setdefault("summary", initial_request)
+    aligned.setdefault("non_goals", [])
+    aligned.setdefault("acceptance_criteria", [])
+    numbered = [str(item) for item in (aligned.get("numbered_conditions") or []) if str(item).strip()]
+    acceptance = [str(item) for item in (aligned.get("acceptance_criteria") or []) if str(item).strip()]
+    represented = "\n".join([*numbered, *acceptance])
+    for meaning in _resolved_requirement_meanings(structured_requirements):
+        if meaning not in represented:
+            numbered.append(meaning)
+            represented += "\n" + meaning
+    aligned["numbered_conditions"] = numbered or [initial_request]
+    return aligned
+
+
+def preserve_resolved_requirement_meanings(
+    aligned_spec: Mapping[str, Any] | None,
+    *,
+    initial_request: str,
+    structured_requirements: Sequence[Mapping[str, Any]] | None,
+) -> dict[str, Any]:
+    """Compatibility alias for the explicitly named canonical projection."""
+    return project_canonical_requirements_to_aligned_spec(
+        aligned_spec,
+        initial_request=initial_request,
+        structured_requirements=structured_requirements,
+    )
+
+
 def _normalize_dimensions(raw: Mapping[str, Any]) -> dict[str, float]:
     aliases = {
         "goal": "goals",
@@ -276,6 +432,123 @@ def _merge_aligned_spec(
     if not merged.get("numbered_conditions"):
         merged["numbered_conditions"] = list(fallback.get("numbered_conditions") or [])
     return merged
+
+
+def run_production_grill_me_step(
+    initial_request: str,
+    *,
+    structured_requirements: Sequence[Mapping[str, Any]] | None,
+    confirmed_clarifications: Sequence[Mapping[str, Any]] | None,
+    transcript: Sequence[Mapping[str, Any]] | None,
+    model: str,
+    chat_fn: Callable[..., Any] | None = None,
+    mode: str = "spec",
+) -> ProductionGrillStepResult:
+    """Score once, then finish or emit exactly one unanswered Human-UI question."""
+    prior = format_production_prior_context(structured_requirements, confirmed_clarifications)
+    history = [dict(row) for row in (transcript or []) if isinstance(row, Mapping)]
+    locked = (
+        "Canonical prior context is authoritative. Resolved requirements and confirmed human "
+        "decisions are LOCKED. Preserve them and never ask the human to define or confirm them "
+        "again. Ask only about a still-unanswered material ambiguity."
+    )
+    score_payload = _call_llm_json(
+        model=model,
+        system=_score_system_prompt(mode) + "\n\n" + locked,
+        user=(
+            f"Initial request:\n{initial_request}\n\nCanonical prior context:\n{prior}\n\n"
+            f"Production Human conversation:\n{_production_transcript_block(history)}\n\n"
+            "Score the current artifact. If the gate passes, emit aligned_spec and preserve every "
+            "resolved normalized_meaning verbatim in numbered_conditions or acceptance_criteria."
+        ),
+        chat_fn=chat_fn,
+    )
+    dimensions = _normalize_dimensions(score_payload.get("dimensions") or {})
+    aggregate = float(score_payload.get("aggregate") or mean_score(dimensions))
+    report = {
+        "dimensions": dimensions,
+        "aggregate": aggregate,
+        "threshold": threshold_for_mode(mode),
+        "weakest": list(score_payload.get("weakest") or []),
+        "ready_to_exit": bool(score_payload.get("ready_to_exit")),
+    }
+    if gate_passed(aggregate, mode):
+        raw = score_payload.get("aligned_spec")
+        generated = dict(raw) if isinstance(raw, Mapping) else {}
+        generated_validation = validate_resolved_requirement_meanings(
+            generated,
+            structured_requirements=structured_requirements,
+        )
+        aligned = project_canonical_requirements_to_aligned_spec(
+            generated,
+            initial_request=initial_request,
+            structured_requirements=structured_requirements,
+        )
+        final_validation = validate_resolved_requirement_meanings(
+            aligned,
+            structured_requirements=structured_requirements,
+        )
+        return ProductionGrillStepResult(
+            status="aligned",
+            transcript=history,
+            ambiguity_report=report,
+            aligned_spec=aligned,
+            generated_aligned_spec=generated,
+            semantic_preservation={
+                "generated": generated_validation,
+                "final": final_validation,
+                "canonical_projection_applied": aligned != generated,
+            },
+        )
+
+    round_index = len(history) + 1
+    question_payload: dict[str, Any] | None = None
+    rejected_questions: list[str] = []
+    for _attempt in range(3):
+        candidate = _call_llm_json(
+            model=model,
+            system=_question_system_prompt(mode) + "\n\n" + locked,
+            user=(
+                f"Initial request:\n{initial_request}\n\nCanonical prior context:\n{prior}\n\n"
+                f"Production Human conversation:\n{_production_transcript_block(history)}\n\n"
+                f"Rejected duplicate questions:\n{json.dumps(rejected_questions, ensure_ascii=False)}\n\n"
+                "Ask exactly one highest-value unanswered question. Do not restate or re-open a "
+                "resolved requirement or confirmed decision."
+            ),
+            chat_fn=chat_fn,
+        )
+        audit = _call_llm_json(
+            model=model,
+            system=(
+                "You are a semantic duplicate-question auditor. Compare the candidate question "
+                "with the canonical resolved requirements and confirmed decisions. Return JSON "
+                "with reasks_resolved (boolean) and reason. True means the candidate asks the "
+                "human to define, confirm, or choose a meaning already resolved."
+            ),
+            user=f"Canonical prior context:\n{prior}\n\nCandidate question:\n{candidate.get('question') or ''}",
+            chat_fn=chat_fn,
+        )
+        if audit.get("reasks_resolved") is False:
+            question_payload = candidate
+            break
+        rejected_questions.append(str(candidate.get("question") or ""))
+    if question_payload is None:
+        raise ValueError("grill-me generated only questions that re-open resolved requirements")
+    dimension = str(question_payload.get("dimension") or "goals").strip().casefold()
+    contract = normalize_grill_question_payload(
+        question_payload,
+        question_id=f"production_grill_me:r{round_index}",
+        grill_reason=GRILL_REASON_INITIAL,
+        dimension=dimension,
+    )
+    contract.decision_key = str(question_payload.get("decision_key") or f"spec:{dimension}")
+    contract.decision_subject = str(question_payload.get("decision_subject") or dimension)
+    return ProductionGrillStepResult(
+        status="awaiting_human",
+        transcript=history,
+        ambiguity_report=report,
+        question_contract=contract.as_dict(),
+    )
 
 
 def run_grill_me_loop(
@@ -446,10 +719,16 @@ __all__ = [
     "TETRIS_VAGUE_REQUEST",
     "GrillMeResult",
     "GrillTurn",
+    "ProductionGrillStepResult",
     "build_implementation_prompt",
+    "format_production_prior_context",
     "gate_passed",
     "mean_score",
     "parse_json_content",
     "run_grill_me_loop",
+    "run_production_grill_me_step",
+    "validate_resolved_requirement_meanings",
+    "project_canonical_requirements_to_aligned_spec",
+    "preserve_resolved_requirement_meanings",
     "threshold_for_mode",
 ]
