@@ -6,6 +6,7 @@ from ai_tool.goal_handoff_runtime_bridge import seed_orchestrator_from_handoff
 from ai_tool.mission_memory.chat_persist import persist_chat_execution
 from ai_tool.production_verification_acceptance import (
     TEST_RUN_CLOSED,
+    advance_runnable_handoff_task,
     evaluate_handoff_goal_acceptance,
     pending_verification_action,
     pytest_failed_repair_hint,
@@ -195,3 +196,34 @@ def test_observation_chat_finish_still_uses_all_tasks_complete():
     synthesis = orch.finish("now")
     assert orch.runtime.goals["G1"].status == GoalStatus.COMPLETE.value
     assert synthesis["ready"] is True
+
+
+def test_task_completion_evidence_advances_next_handoff_task_without_executing_it():
+    orch = ChatTaskOrchestrator("task-boundary", "calculator")
+    seed_orchestrator_from_handoff(orch, _calc_packet())
+    task = orch.runtime.tasks["gh-T1"]
+    evidence_id = "E-task-complete"
+    orch.runtime.add_evidence(
+        EvidenceRecord(
+            evidence_id,
+            "tool_result",
+            "tool://create_file",
+            "calculator implementation observed",
+            "A1",
+            tool_name="create_file",
+            supported_completion_conditions=list(task.completion_conditions),
+        ),
+        [task.task_id],
+    )
+    orch.runtime.support_completion_conditions(
+        task.task_id,
+        evidence_id,
+        task.completion_conditions,
+    )
+
+    assert orch.runtime.evaluate_task_from_evidence(task.task_id) is True
+    assert advance_runnable_handoff_task(orch) == "gh-T2"
+    assert task.status == TaskStatus.COMPLETE.value
+    assert orch.current_task_id == "gh-T2"
+    assert orch.runtime.tasks["gh-T2"].status == TaskStatus.IN_PROGRESS.value
+    assert not [action for action in orch.runtime.actions if action.task_id == "gh-T2"]

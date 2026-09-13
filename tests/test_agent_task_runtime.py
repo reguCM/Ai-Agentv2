@@ -9,6 +9,7 @@ from tools.ai.task_runtime import (
     GoalNode,
     ReplanRecord,
     TaskRecord,
+    TaskStatus,
 )
 
 
@@ -275,3 +276,31 @@ def test_34_tool_gap_round_trips_with_runtime_state(tmp_path):
     rt.save(tmp_path)
     loaded = AgentTaskRuntime.load(tmp_path)
     assert loaded.tool_gaps["database export"].candidate_tool == "export_db"
+
+
+def test_35_task_completion_requires_authoritative_condition_evidence():
+    rt = runtime()
+    task = rt.tasks["T1"]
+    condition = task.completion_conditions[0]
+    task.condition_status[condition] = "SATISFIED"
+    task.satisfied_conditions = [condition]
+
+    assert rt.evaluate_task_from_evidence("T1") is False
+    assert task.status == TaskStatus.IN_PROGRESS.value
+
+    rt.add_evidence(
+        EvidenceRecord(
+            "E-complete",
+            "tool_result",
+            "tool://read_file",
+            "condition observed",
+            "A1",
+            tool_name="read_file",
+            supported_completion_conditions=[condition],
+        ),
+        ["T1"],
+    )
+    rt.support_completion_conditions("T1", "E-complete", [condition])
+
+    assert rt.evaluate_task_from_evidence("T1") is True
+    assert task.status == TaskStatus.COMPLETE.value

@@ -3300,6 +3300,7 @@ def _phase3a_command_result(
             "model": model,
         }
     action_count_before = len(orchestrator.runtime.actions)
+    task_id_before = orchestrator.current_task_id
     execution_result = _chat_turn(
         original_request or orchestrator.request,
         session,
@@ -3310,7 +3311,31 @@ def _phase3a_command_result(
         orchestrator=orchestrator,
         max_tool_calls_this_turn=1,
     )
-    runtime_snapshot = execution_result.get("task_runtime") or orchestrator.snapshot()
+    from ai_tool.production_verification_acceptance import advance_runnable_handoff_task
+
+    task_completed = orchestrator.runtime.evaluate_task_from_evidence(task_id_before)
+    if task_completed and orchestrator.current_task_id == task_id_before:
+        advance_runnable_handoff_task(orchestrator)
+    next_task_id = (
+        orchestrator.current_task_id
+        if task_completed and orchestrator.current_task_id != task_id_before
+        else None
+    )
+    completed_task = orchestrator.runtime.tasks[task_id_before]
+    completion_evidence_ids = list(
+        dict.fromkeys(
+            evidence_id
+            for condition in completed_task.completion_conditions
+            if completed_task.condition_status.get(condition) == "SATISFIED"
+            for evidence_id in completed_task.condition_evidence.get(condition, [])
+        )
+    )
+    missing_conditions = [
+        condition
+        for condition in completed_task.completion_conditions
+        if completed_task.condition_status.get(condition) != "SATISFIED"
+    ]
+    runtime_snapshot = orchestrator.snapshot()
     session["production_runtime_snapshot"] = runtime_snapshot
     session["production_runtime_handoff_integrity"] = {
         "handoff_id": packet.get("handoff_id"),
@@ -3347,8 +3372,20 @@ def _phase3a_command_result(
             "immutable_fields_equal": immutable_equal,
         },
             "task_step_executed": task_step_executed,
+            "task_completion_boundary": {
+                "task_id": task_id_before,
+                "completed": task_completed,
+                "completion_evidence_ids": completion_evidence_ids,
+                "missing_conditions": missing_conditions,
+                "next_task_id": next_task_id,
+                "stopped_before_next_task_execution": True,
+            },
             "production_status": (
-                "RUNTIME_FIRST_TASK_STEP_FINISHED"
+                "RUNTIME_TASK_COMPLETED_NEXT_READY"
+                if task_completed and next_task_id
+                else "RUNTIME_TASK_COMPLETED"
+                if task_completed
+                else "RUNTIME_FIRST_TASK_STEP_FINISHED"
                 if task_step_executed
                 else "RUNTIME_BLOCKED_BEFORE_TASK_ACTION"
             ),

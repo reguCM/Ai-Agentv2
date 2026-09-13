@@ -449,6 +449,37 @@ class AgentTaskRuntime:
             self.emit_event("TASK_COMPLETED", task_id=task_id)
         return complete
 
+    def evaluate_task_from_evidence(self, task_id: str) -> bool:
+        """Complete a Task only when every condition has authoritative Evidence."""
+        task = self.tasks[task_id]
+        supported: list[str] = []
+        for condition in task.completion_conditions:
+            refs = list(task.condition_evidence.get(condition) or [])
+            authoritative = any(
+                evidence_id in self.evidence
+                and self.evidence[evidence_id].verified
+                and self.evidence[evidence_id].certainty in AUTHORITATIVE_CERTAINTIES
+                and condition
+                in self.evidence[evidence_id].supported_completion_conditions
+                for evidence_id in refs
+            )
+            task.condition_status[condition] = (
+                ConditionStatus.SATISFIED.value
+                if authoritative
+                else ConditionStatus.UNKNOWN.value
+            )
+            if authoritative:
+                supported.append(condition)
+        was_complete = task.status == TaskStatus.COMPLETE.value
+        complete = bool(task.completion_conditions) and len(supported) == len(
+            task.completion_conditions
+        )
+        task.satisfied_conditions = supported
+        task.status = TaskStatus.COMPLETE.value if complete else TaskStatus.IN_PROGRESS.value
+        if complete and not was_complete:
+            self.emit_event("TASK_COMPLETED", task_id=task_id)
+        return complete
+
     def support_completion_conditions(
         self,
         task_id: str,

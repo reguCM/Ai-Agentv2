@@ -15,6 +15,7 @@ from ai_tool.chat_interface.requirement_resolution import (
 )
 from ai_tool.dev_skill_pipeline import build_handoff_packet, validate_handoff_packet
 from tools.ai.sandbox_workspace import SandboxSession
+from tools.ai.task_runtime import ActionRecord, EvidenceRecord
 
 
 def _packet(*, goal: str, meaning: str, path: str, slug: str) -> dict:
@@ -336,6 +337,11 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     assert result["runtime_started"] is True
     assert result["sandbox_started"] is True
     assert result["task_step_executed"] is True
+    assert result["task_completion_boundary"]["task_id"] == "gh-T1"
+    assert result["task_completion_boundary"]["completed"] is False
+    assert result["task_completion_boundary"]["next_task_id"] is None
+    assert result["task_completion_boundary"]["missing_conditions"]
+    assert result["task_completion_boundary"]["stopped_before_next_task_execution"] is True
     assert result["handoff_packet"] == packet
     assert json.dumps(packet, ensure_ascii=False, sort_keys=True) == saved_json
     assert result["handoff_integrity"]["handoff_id"] == packet["handoff_id"]
@@ -395,6 +401,107 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     invalid_handoff = run_chat_turn(session, "/run", chat_fn=chat, model="test")
     assert invalid_handoff["production_run_error"] == "runtime_handoff_mismatch"
     assert tool_calls["n"] == 3
+
+
+def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
+    monkeypatch, tmp_path
+):
+    _isolate_session(monkeypatch, tmp_path)
+    packet = _packet(
+        goal="PythonでCLI電卓を作って",
+        meaning="CLI電卓の実装が存在する",
+        path="calculator/main.py",
+        slug="task-completion-boundary",
+    )
+    second = dict(packet["implementation_tasks"][0])
+    second.update(
+        {
+            "id": "T2",
+            "title": "電卓を検証する",
+            "acceptance": ["四則演算を検証できる"],
+            "verification": ["pytestを実行する"],
+            "dependencies": ["T1"],
+        }
+    )
+    packet["implementation_tasks"].append(second)
+    assert not validate_handoff_packet(packet)
+    session = empty_session()
+    session["production_handoff_packet"] = packet
+    sandbox_root = tmp_path / "sandbox"
+    sandbox_root.mkdir()
+    sandbox = SandboxSession(
+        session_id="sandbox-task-boundary",
+        sandbox_root=str(sandbox_root),
+        branch="agent-sandbox/task-boundary",
+        base_head="head",
+        current_head="head",
+        status="ACTIVE",
+        created_at="2026-09-14T00:00:00+00:00",
+        production_applied=False,
+        git_base="HEAD:head",
+        workspace_base="working-tree-sha256:test",
+        session_kind="DEDICATED",
+    )
+
+    def start_sandbox(runtime, _source, _parent):
+        runtime.sandbox_session = sandbox
+        return sandbox
+
+    def complete_one_task(*_args, orchestrator=None, **_kwargs):
+        task = orchestrator.task
+        orchestrator.runtime.record_action(
+            ActionRecord("A1", task.task_id, "tool_call", "create_file", {}, "success")
+        )
+        orchestrator.runtime.add_evidence(
+            EvidenceRecord(
+                "E1",
+                "tool_result",
+                "tool://create_file",
+                "implementation observed",
+                "A1",
+                tool_name="create_file",
+                supported_completion_conditions=list(task.completion_conditions),
+            ),
+            [task.task_id],
+        )
+        orchestrator.runtime.support_completion_conditions(
+            task.task_id, "E1", task.completion_conditions
+        )
+        return {"events": [], "task_runtime": orchestrator.snapshot()}
+
+    monkeypatch.setattr(
+        "tools.ai.task_runtime.AgentTaskRuntime.start_dedicated_sandbox", start_sandbox
+    )
+    monkeypatch.setattr("tools.ai.task_runtime.verify_sandbox_identity", lambda value: value)
+    monkeypatch.setattr(
+        "tools.ai.sandbox_workspace.verify_sandbox_identity",
+        lambda value, **_kwargs: value,
+    )
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.resolve_configured_sandbox_parent",
+        lambda _source: tmp_path / "sandboxes",
+    )
+    monkeypatch.setattr("ai_tool.chat_interface.agent_turn._chat_turn", complete_one_task)
+
+    result = run_chat_turn(session, "/run", model="test")
+
+    boundary = result["task_completion_boundary"]
+    assert boundary == {
+        "task_id": "gh-T1",
+        "completed": True,
+        "completion_evidence_ids": ["E1"],
+        "missing_conditions": [],
+        "next_task_id": "gh-T2",
+        "stopped_before_next_task_execution": True,
+    }
+    assert result["production_status"] == "RUNTIME_TASK_COMPLETED_NEXT_READY"
+    assert result["task_runtime"]["current_task_id"] == "gh-T2"
+    assert next(row for row in result["task_runtime"]["tasks"] if row["task_id"] == "gh-T1")[
+        "status"
+    ] == "complete"
+    assert not [
+        row for row in result["task_runtime"]["actions"] if row["task_id"] == "gh-T2"
+    ]
 
 
 def test_run_fails_closed_when_sandbox_bootstrap_fails(monkeypatch, tmp_path):
