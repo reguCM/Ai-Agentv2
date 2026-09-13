@@ -3110,16 +3110,6 @@ class ChatTaskOrchestrator:
             action_id = self.allocate_action_id()
             self._run_test_plan_continuation = None
 
-        arg_dict = dict(arguments)
-        if observe_mode == "full" and not self.runtime.should_execute(
-            self.current_task_id, "run_test_plan", arg_dict
-        ):
-            return self._run_test_plan_duplicate_suppressed(
-                arg_dict,
-                action_id=action_id,
-                relevant_tools=relevant_tools,
-            )
-
         outcome = bridge_test_execution(
             action_id=action_id,
             test_plan=plan,
@@ -3178,51 +3168,6 @@ class ChatTaskOrchestrator:
                 summary=summary,
             )
 
-        return raw
-
-    def _run_test_plan_duplicate_suppressed(
-        self,
-        arguments: Mapping[str, Any],
-        *,
-        action_id: str,
-        relevant_tools: Iterable[str],
-    ) -> dict[str, Any]:
-        from tools.system.tool_result_contract import normalize_tool_result
-
-        prior = next(
-            (
-                item
-                for item in reversed(self.runtime.actions)
-                if item.tool_name == "run_test_plan"
-                and item.arguments == dict(arguments)
-                and item.evidence_gain
-            ),
-            None,
-        )
-        raw = {
-            "ok": True,
-            "status": "partial",
-            "test_safety_duplicate_suppressed": True,
-            "test_safety_summary": {
-                "action_id": prior.action_id if prior else action_id,
-                "resolution_result": "DUPLICATE_SUPPRESSED",
-                "executor_called": False,
-                "test_failed": False,
-                "run_closed": False,
-                "summary": "Identical run_test_plan already produced successful closed evidence.",
-            },
-            "message": "Duplicate run_test_plan suppressed before Test Safety bridge execution.",
-        }
-        normalized = normalize_tool_result(raw, tool_name="run_test_plan")
-        self.observe_tool(
-            "run_test_plan",
-            dict(arguments),
-            normalized,
-            raw["message"],
-            relevant_tools=relevant_tools,
-            raw_result=raw,
-            predetermined_action_id=action_id,
-        )
         return raw
 
     def _finalize_run_test_plan_continuation(
@@ -3403,7 +3348,9 @@ class ChatTaskOrchestrator:
                 status=status,
                 observed_task_id=observed_task_id,
             )
-        novel_action = self.runtime.should_execute(self.current_task_id, tool_name, arguments)
+        novel_action = not self.runtime.has_reusable_evidence(
+            self.current_task_id, tool_name, arguments
+        )
         source_result = raw_result or normalized_result
         if tool_name == "list_files" and status in {"success", "partial"}:
             self._record_directory_listing(arguments, source_result)

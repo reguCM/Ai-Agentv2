@@ -104,14 +104,14 @@ def test_d4_negative_safety_blocked():
     )
 
 
-def test_d3_should_execute_allows_repeat_when_no_evidence_gain():
+def test_d3_no_evidence_gain_is_not_reusable_evidence():
     rt = AgentTaskRuntime("d3")
     rt.add_goal(GoalNode("G1", "g", completion_conditions=["all done"]))
     rt.add_task(TaskRecord("T1", "G1", "t", "work", ["done"]))
     rt.record_action(
         ActionRecord("A1", "T1", "tool_call", "read_file", {"path": "x"}, evidence_gain=False)
     )
-    assert rt.should_execute("T1", "read_file", {"path": "x"}) is True
+    assert rt.has_reusable_evidence("T1", "read_file", {"path": "x"}) is False
 
 
 def _success_outcome():
@@ -148,7 +148,7 @@ def test_d3_failed_retry_allowed_new_bridge_call():
     assert orch.runtime.actions[-2].evidence_gain is False
 
 
-def test_d3_success_duplicate_suppresses_second_bridge_call():
+def test_d3_same_successful_plan_can_run_as_a_new_action():
     orch = ChatTaskOrchestrator("d3-dup", "verify", completion_conditions=["test_run_closed"])
     orch.initialize()
     calls: list[int] = []
@@ -162,9 +162,10 @@ def test_d3_success_duplicate_suppresses_second_bridge_call():
         orch.execute_test_plan_action(args, relevant_tools=["run_test_plan"])
         assert orch.runtime.actions[-1].evidence_gain is True
         orch.execute_test_plan_action(args, relevant_tools=["run_test_plan"])
-    assert len(calls) == 1
-    assert orch.runtime.actions[-1].result_status == "partial"
-    assert orch.runtime.actions[-1].evidence_gain is False
+    assert len(calls) == 2
+    assert [action.action_id for action in orch.runtime.actions] == ["A1", "A2"]
+    assert orch.runtime.actions[-1].result_status == "success"
+    assert orch.runtime.actions[-1].evidence_gain is True
 
 
 def test_d2_action_id_single_increment():

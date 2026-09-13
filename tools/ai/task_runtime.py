@@ -512,14 +512,14 @@ class AgentTaskRuntime:
             self.emit_event("GOAL_COMPLETED", goal_id=goal_id)
         return complete
 
-    def should_execute(
+    def has_reusable_evidence(
         self, task_id: str, tool_name: str, arguments: Mapping[str, Any]
     ) -> bool:
         shared_action_ids = {
             self.evidence[evidence_id].created_by_action
             for evidence_id in self.tasks[task_id].evidence_ids
         }
-        return not any(
+        return any(
             item.tool_name == tool_name
             and item.arguments == dict(arguments)
             and item.evidence_gain

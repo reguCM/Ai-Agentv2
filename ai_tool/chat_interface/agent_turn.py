@@ -1524,40 +1524,6 @@ def _chat_turn(
                         }
                     )
                     continue
-                if (
-                    orchestrator is not None
-                    and not orchestrator.runtime.should_execute(
-                        orchestrator.current_task_id,
-                        name,
-                        normalized_arguments,
-                    )
-                ):
-                    duplicate = {
-                        "ok": False,
-                        "status": "failure",
-                        "error": {
-                            "code": "duplicate_action_suppressed",
-                            "message": "The same completed Runtime action was not executed again.",
-                        },
-                    }
-                    messages.append(
-                        {
-                            "role": "tool",
-                            "tool_name": name,
-                            "content": json.dumps(duplicate, ensure_ascii=False, indent=2),
-                        }
-                    )
-                    events.append(
-                        event(
-                            "duplicate_runtime_action_suppressed",
-                            name=name,
-                            task_id=orchestrator.current_task_id,
-                        )
-                    )
-                    if max_tool_calls_this_turn is not None:
-                        stop_reason = LoopStopReason.GOAL_INCOMPLETE_OPEN_WORK
-                        break
-                    continue
                 budget_stop = _pipeline_budget_stop_reason(pipeline_observer)
                 if budget_stop is not None:
                     stop_reason = budget_stop

@@ -296,7 +296,7 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
 
     def chat(**_kwargs):
         chat_calls["n"] += 1
-        if chat_calls["n"] > 1:
+        if chat_calls["n"] == 2:
             return SimpleNamespace(
                 message=SimpleNamespace(
                     content="",
@@ -371,15 +371,17 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     assert len(repeated["task_runtime"]["actions"]) == 2
     assert (sandbox_root / "next-step.txt").is_file()
 
-    duplicate = run_chat_turn(session, "/run", chat_fn=chat, model="test")
-    assert duplicate["runtime_resumed"] is True
-    assert duplicate["task_step_executed"] is False
-    assert len(duplicate["task_runtime"]["actions"]) == 2
-    assert tool_calls["n"] == 2
-    assert any(
-        row.get("type") == "duplicate_runtime_action_suppressed"
-        for row in duplicate.get("events") or []
-    )
+    same_call_as_new_action = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+    assert same_call_as_new_action["runtime_resumed"] is True
+    assert same_call_as_new_action["task_step_executed"] is True
+    assert len(same_call_as_new_action["task_runtime"]["actions"]) == 3
+    assert tool_calls["n"] == 3
+    assert [
+        row["action_id"] for row in same_call_as_new_action["task_runtime"]["actions"]
+    ] == ["A1", "A2", "A3"]
+    actions = same_call_as_new_action["task_runtime"]["actions"]
+    assert actions[0]["tool_name"] == actions[2]["tool_name"] == "create_file"
+    assert actions[0]["arguments"] == actions[2]["arguments"]
 
     monkeypatch.setattr(
         "ai_tool.chat_interface.agent_turn.restore_orchestrator_from_runtime_snapshot",
@@ -387,12 +389,12 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     )
     invalid_sandbox = run_chat_turn(session, "/run", chat_fn=chat, model="test")
     assert invalid_sandbox["production_run_error"] == "runtime_resume_validation_failed"
-    assert tool_calls["n"] == 2
+    assert tool_calls["n"] == 3
 
     session["production_handoff_packet"]["goal"]["summary"] += " changed"
     invalid_handoff = run_chat_turn(session, "/run", chat_fn=chat, model="test")
     assert invalid_handoff["production_run_error"] == "runtime_handoff_mismatch"
-    assert tool_calls["n"] == 2
+    assert tool_calls["n"] == 3
 
 
 def test_run_fails_closed_when_sandbox_bootstrap_fails(monkeypatch, tmp_path):

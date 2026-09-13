@@ -57,16 +57,16 @@ def test_05_small_hint_reuses_known_evidence():
     assert "four fields" in rt.small_task_hint("T2")
 
 
-def test_06_evidence_gain_suppresses_duplicate_action():
+def test_06_completed_call_exposes_reusable_evidence():
     rt = runtime()
     rt.record_action(ActionRecord("A1", "T1", "tool_call", "read_file", {"path": "x"}, evidence_gain=True))
-    assert not rt.should_execute("T1", "read_file", {"path": "x"})
+    assert rt.has_reusable_evidence("T1", "read_file", {"path": "x"})
 
 
-def test_07_action_without_evidence_can_be_retried():
+def test_07_action_without_evidence_is_not_reusable():
     rt = runtime()
     rt.record_action(ActionRecord("A1", "T1", "tool_call", "read_file", {"path": "x"}))
-    assert rt.should_execute("T1", "read_file", {"path": "x"})
+    assert not rt.has_reusable_evidence("T1", "read_file", {"path": "x"})
 
 
 def test_08_repeated_identical_failure_is_stagnation():
@@ -238,7 +238,7 @@ def test_30_task_requires_every_completion_condition():
     assert rt.evaluate_task("T1", ["read", "verified"])
 
 
-def test_31_shared_evidence_suppresses_duplicate_work_in_next_task():
+def test_31_shared_evidence_is_reusable_in_next_task():
     rt = runtime()
     action = ActionRecord(
         "A1", "T1", "tool_call", "read_file", {"path": "contract.md"}, evidence_gain=True
@@ -247,7 +247,7 @@ def test_31_shared_evidence_suppresses_duplicate_work_in_next_task():
     rt.add_evidence(
         EvidenceRecord("E1", "file", "contract.md", "schema", "A1"), ["T1", "T2"]
     )
-    assert not rt.should_execute("T2", "read_file", {"path": "contract.md"})
+    assert rt.has_reusable_evidence("T2", "read_file", {"path": "contract.md"})
 
 
 def test_32_partial_then_alternate_action_can_complete_task():
