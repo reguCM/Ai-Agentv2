@@ -403,8 +403,16 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     assert tool_calls["n"] == 3
 
 
+@pytest.mark.parametrize(
+    ("acceptance_status", "expected_goal_status", "expected_goal_completed"),
+    [("PASS", "complete", True), ("FAIL", "in_progress", False)],
+)
 def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
-    monkeypatch, tmp_path
+    monkeypatch,
+    tmp_path,
+    acceptance_status,
+    expected_goal_status,
+    expected_goal_completed,
 ):
     _isolate_session(monkeypatch, tmp_path)
     packet = _packet(
@@ -488,7 +496,11 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
 
     def evaluate_once(orchestrator, **kwargs):
         acceptance_calls.append((orchestrator.snapshot(), kwargs))
-        return {"status": "PASS", "failures": [], "criterion_trace": []}
+        return {
+            "status": acceptance_status,
+            "failures": [] if acceptance_status == "PASS" else [{"code": "TEST_FAILURE"}],
+            "criterion_trace": [],
+        }
 
     monkeypatch.setattr(
         "ai_tool.production_verification_acceptance.evaluate_handoff_goal_acceptance",
@@ -526,7 +538,7 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
     assert ready["production_status"] == "GOAL_ACCEPTANCE_EVALUATED"
     assert ready["acceptance_evaluated"] is True
     assert ready["acceptance_reused"] is False
-    assert ready["acceptance_result"]["status"] == "PASS"
+    assert ready["acceptance_result"]["status"] == acceptance_status
     assert len(acceptance_calls) == 1
     assert ready["task_completion_boundary"]["stopped_before_next_task_execution"] is True
     assert session["production_acceptance_readiness"]["acceptance_ready"] is True
@@ -535,11 +547,28 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
         row for row in ready["task_runtime"]["goals"] if row["goal_id"] == "G1"
     )["status"] == "in_progress"
 
+    judged = run_chat_turn(session, "/run", model="test")
+    assert judged["production_status"] == "GOAL_ACCEPTANCE_JUDGED"
+    assert judged["acceptance_evaluated"] is True
+    assert judged["acceptance_reused"] is True
+    assert judged["acceptance_result"] == ready["acceptance_result"]
+    assert judged["goal_acceptance_judgment"]["goal_completed"] is expected_goal_completed
+    assert judged["goal_judgment_reused"] is False
+    assert judged["task_step_executed"] is False
+    assert judged["sandbox_started"] is False
+    assert next(
+        row for row in judged["task_runtime"]["goals"] if row["goal_id"] == "G1"
+    )["status"] == expected_goal_status
+    assert session["production_goal_acceptance_judgment"] == judged[
+        "goal_acceptance_judgment"
+    ]
+    assert len(acceptance_calls) == 1
+
     reused = run_chat_turn(session, "/run", model="test")
-    assert reused["production_status"] == "GOAL_ACCEPTANCE_EVALUATED"
-    assert reused["acceptance_evaluated"] is True
-    assert reused["acceptance_reused"] is True
-    assert reused["acceptance_result"] == ready["acceptance_result"]
+    assert reused["production_status"] == "GOAL_ACCEPTANCE_JUDGED"
+    assert reused["goal_judgment_reused"] is True
+    assert reused["task_runtime"]["actions"] == judged["task_runtime"]["actions"]
+    assert reused["task_runtime"]["goals"] == judged["task_runtime"]["goals"]
     assert reused["task_step_executed"] is False
     assert reused["sandbox_started"] is False
     assert len(acceptance_calls) == 1

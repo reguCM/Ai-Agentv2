@@ -3265,13 +3265,156 @@ def _phase3a_command_result(
                 "model": model,
             }
         saved_result = dict(saved_acceptance.get("result") or {})
+        saved_judgment = session.get("production_goal_acceptance_judgment")
+        if isinstance(saved_judgment, Mapping):
+            judgment_identity_matches = (
+                str(saved_judgment.get("handoff_id") or "")
+                == str(packet.get("handoff_id") or "")
+                and str(saved_judgment.get("canonical_hash") or "") == before_hash
+            )
+            if not judgment_identity_matches:
+                return {
+                    "route": "chat",
+                    "answer": "保存済みGoal判定とGoal Handoffの同一性を確認できないため、実行を停止しました。",
+                    "events": [
+                        event("production_run_blocked", reason="goal_judgment_handoff_mismatch")
+                    ],
+                    "tool_used": False,
+                    "tools": [],
+                    "web_search": False,
+                    "research_saved": False,
+                    "executor": "local_agent",
+                    "cursor_connected": False,
+                    "memory": memory,
+                    "task_runtime": dict(existing_runtime) if isinstance(existing_runtime, Mapping) else None,
+                    "runtime_prepared": bool(existing_runtime),
+                    "runtime_started": bool(existing_runtime),
+                    "sandbox_started": False,
+                    "task_step_executed": False,
+                    "production_run_error": "goal_judgment_handoff_mismatch",
+                    "handoff_packet": packet,
+                    "production_status": "GOAL_ACCEPTANCE_JUDGMENT_BLOCKED",
+                    "model": model,
+                }
+            return {
+                "route": "chat",
+                "answer": "このGoal HandoffへのAcceptance判定は適用済みです。保存済みRuntime Goal状態を返して停止しました。",
+                "events": [
+                    event(
+                        "production_goal_acceptance_judgment_reused",
+                        handoff_id=packet.get("handoff_id"),
+                    )
+                ],
+                "tool_used": False,
+                "tools": [],
+                "web_search": False,
+                "research_saved": False,
+                "executor": "local_agent",
+                "cursor_connected": False,
+                "memory": memory,
+                "task_runtime": dict(existing_runtime) if isinstance(existing_runtime, Mapping) else None,
+                "runtime_prepared": bool(existing_runtime),
+                "runtime_started": bool(existing_runtime),
+                "sandbox_started": False,
+                "task_step_executed": False,
+                "handoff_packet": packet,
+                "acceptance_ready": True,
+                "acceptance_evaluated": True,
+                "acceptance_reused": True,
+                "acceptance_result": saved_result,
+                "goal_acceptance_judgment": dict(saved_judgment),
+                "goal_judgment_reused": True,
+                "production_status": "GOAL_ACCEPTANCE_JUDGED",
+                "model": model,
+            }
+        if not resume_runtime:
+            return {
+                "route": "chat",
+                "answer": "Acceptance結果を適用できるRuntime状態がないため、実行を停止しました。",
+                "events": [event("production_run_blocked", reason="missing_runtime_for_goal_judgment")],
+                "tool_used": False,
+                "tools": [],
+                "web_search": False,
+                "research_saved": False,
+                "executor": "local_agent",
+                "cursor_connected": False,
+                "memory": memory,
+                "task_runtime": None,
+                "runtime_prepared": False,
+                "runtime_started": False,
+                "sandbox_started": False,
+                "task_step_executed": False,
+                "production_run_error": "missing_runtime_for_goal_judgment",
+                "handoff_packet": packet,
+                "production_status": "GOAL_ACCEPTANCE_JUDGMENT_BLOCKED",
+                "model": model,
+            }
+        original_request = str((packet.get("goal") or {}).get("original_request_excerpt") or "").strip()
+        judgment_orchestrator = ChatTaskOrchestrator(
+            correlation_id,
+            original_request or str((packet.get("goal") or {}).get("summary") or ""),
+        )
+        try:
+            restore_orchestrator_from_runtime_snapshot(
+                judgment_orchestrator,
+                packet,
+                existing_runtime,
+            )
+        except Exception as exc:
+            return {
+                "route": "chat",
+                "answer": "Acceptance結果を適用するRuntime状態の復元に失敗したため、実行を停止しました。",
+                "events": [
+                    event(
+                        "production_run_blocked",
+                        reason="goal_judgment_runtime_restore_failed",
+                        error_type=type(exc).__name__,
+                    )
+                ],
+                "tool_used": False,
+                "tools": [],
+                "web_search": False,
+                "research_saved": False,
+                "executor": "local_agent",
+                "cursor_connected": False,
+                "memory": memory,
+                "task_runtime": dict(existing_runtime),
+                "runtime_prepared": True,
+                "runtime_started": True,
+                "sandbox_started": False,
+                "task_step_executed": False,
+                "production_run_error": "goal_judgment_runtime_restore_failed",
+                "handoff_packet": packet,
+                "production_status": "GOAL_ACCEPTANCE_JUDGMENT_BLOCKED",
+                "model": model,
+            }
+        from ai_tool.production_verification_acceptance import (
+            apply_acceptance_pass_to_runtime_goal,
+        )
+
+        goal_completed = apply_acceptance_pass_to_runtime_goal(
+            judgment_orchestrator,
+            saved_result,
+        )
+        judgment_snapshot = judgment_orchestrator.snapshot()
+        judgment = {
+            "handoff_id": packet.get("handoff_id"),
+            "canonical_hash": before_hash,
+            "acceptance_status": saved_result.get("status"),
+            "goal_id": "G1",
+            "goal_completed": goal_completed,
+        }
+        session["production_runtime_snapshot"] = judgment_snapshot
+        session["production_goal_acceptance_judgment"] = judgment
         return {
             "route": "chat",
-            "answer": "このGoal HandoffのAcceptance検証は完了済みです。保存済み結果を再利用して停止しました。",
+            "answer": "保存済みAcceptance結果をRuntime Goalへ適用し、判定状態を保存して停止しました。",
             "events": [
                 event(
-                    "production_goal_acceptance_reused",
+                    "production_goal_acceptance_judged",
                     handoff_id=packet.get("handoff_id"),
+                    acceptance_status=saved_result.get("status"),
+                    goal_completed=goal_completed,
                 )
             ],
             "tool_used": False,
@@ -3281,9 +3424,9 @@ def _phase3a_command_result(
             "executor": "local_agent",
             "cursor_connected": False,
             "memory": memory,
-            "task_runtime": dict(existing_runtime) if isinstance(existing_runtime, Mapping) else None,
-            "runtime_prepared": bool(existing_runtime),
-            "runtime_started": bool(existing_runtime),
+            "task_runtime": judgment_snapshot,
+            "runtime_prepared": True,
+            "runtime_started": True,
             "sandbox_started": False,
             "runtime_resumed": False,
             "task_step_executed": False,
@@ -3292,7 +3435,9 @@ def _phase3a_command_result(
             "acceptance_evaluated": True,
             "acceptance_reused": True,
             "acceptance_result": saved_result,
-            "production_status": "GOAL_ACCEPTANCE_EVALUATED",
+            "goal_acceptance_judgment": judgment,
+            "goal_judgment_reused": False,
+            "production_status": "GOAL_ACCEPTANCE_JUDGED",
             "model": model,
         }
 
