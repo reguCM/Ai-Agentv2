@@ -248,3 +248,27 @@ def test_production_run_resume_uses_meaning_projection_and_fails_closed_on_meani
     assert blocked["run_contract"] == contract
     assert tool_calls["n"] == 2
     assert sandbox_starts["n"] == 1
+
+    revised = _mission()
+    prior = revised["confirmed_clarifications"][0]
+    prior["status"] = "superseded"
+    prior["superseded_by"] = "decision-quality-v2"
+    revised["confirmed_clarifications"].append(
+        {
+            "decision_id": "decision-quality-v2",
+            "decision_key": "quality:definition",
+            "status": "confirmed",
+            "source": "boundary_grill",
+            "text": "Use keyboard controls and a visible score.",
+            "human_confirmed": True,
+            "supersedes": "decision-quality-v1",
+        }
+    )
+    MissionMemoryStore.from_default().put_mission(revised)
+    decision_blocked = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+    assert decision_blocked["production_run_error"] == "invalid_meaning_context"
+    assert "inactive_or_missing_decision_premises:decision-quality-v1" in (
+        decision_blocked["meaning_context_validation_errors"][0]
+    )
+    assert tool_calls["n"] == 2
+    assert sandbox_starts["n"] == 1
