@@ -3200,6 +3200,40 @@ def _has_superseded_handoff_decision_premise(
     return False
 
 
+_PRODUCTION_RUN_ACTIVE_FIELDS = (
+    "production_meaning_context",
+    "production_run_contract",
+    "production_runtime_snapshot",
+    "production_runtime_handoff_integrity",
+    "production_acceptance_readiness",
+    "production_acceptance_evaluation",
+    "production_goal_acceptance_judgment",
+)
+
+
+def _archive_active_production_run_for_new_handoff(
+    session: dict[str, Any], new_handoff: Mapping[str, Any]
+) -> bool:
+    """Archive an old active Run before a distinct /goal Handoff replaces it."""
+    previous = session.get("production_handoff_packet")
+    previous_id = str((previous or {}).get("handoff_id") or "") if isinstance(previous, Mapping) else ""
+    next_id = str(new_handoff.get("handoff_id") or "")
+    if not previous_id or not next_id or previous_id == next_id:
+        return False
+    archive: dict[str, Any] = {
+        "archived_at": now_iso(),
+        "reason": "new_goal_handoff",
+        "handoff_id": previous_id,
+        "handoff_packet": json.loads(json.dumps(previous, ensure_ascii=False, default=str)),
+    }
+    for key in _PRODUCTION_RUN_ACTIVE_FIELDS:
+        if key in session:
+            archive[key] = json.loads(json.dumps(session[key], ensure_ascii=False, default=str))
+            session.pop(key, None)
+    session.setdefault("production_run_generations", []).append(archive)
+    return True
+
+
 def _phase3a_command_result(
     *,
     session: dict[str, Any],
@@ -5799,6 +5833,9 @@ def run_chat_turn(
         if result.get("aligned_spec"):
             session["production_aligned_spec"] = result.get("aligned_spec")
         if result.get("handoff_packet"):
+            _archive_active_production_run_for_new_handoff(
+                session, result["handoff_packet"]
+            )
             session["production_handoff_packet"] = result.get("handoff_packet")
             session["production_prd"] = result.get("prd")
             session["production_tech_spec"] = result.get("tech_spec")
