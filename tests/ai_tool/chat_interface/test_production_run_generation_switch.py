@@ -249,12 +249,28 @@ def test_new_goal_archives_old_run_then_starts_new_run_in_new_sandbox(monkeypatc
         workspace_base="working-tree-sha256:new",
         session_kind="DEDICATED",
     )
+    newest_sandbox_root = tmp_path / "newest-sandbox"
+    newest_sandbox_root.mkdir()
+    newest_sandbox = SandboxSession(
+        session_id="S-newest",
+        sandbox_root=str(newest_sandbox_root),
+        branch="agent-sandbox/S-newest",
+        base_head="head-newest",
+        current_head="head-newest",
+        status="ACTIVE",
+        created_at="2026-09-15T00:00:00+00:00",
+        production_applied=False,
+        git_base="HEAD:head-newest",
+        workspace_base="working-tree-sha256:newest",
+        session_kind="DEDICATED",
+    )
     starts = {"count": 0}
 
     def start_sandbox(runtime, _source, _parent):
         starts["count"] += 1
-        runtime.sandbox_session = new_sandbox
-        return new_sandbox
+        sandbox = (new_sandbox, newest_sandbox)[starts["count"] - 1]
+        runtime.sandbox_session = sandbox
+        return sandbox
 
     monkeypatch.setattr("tools.ai.task_runtime.AgentTaskRuntime.start_dedicated_sandbox", start_sandbox)
     monkeypatch.setattr("tools.ai.task_runtime.verify_sandbox_identity", lambda value: value)
@@ -271,7 +287,7 @@ def test_new_goal_archives_old_run_then_starts_new_run_in_new_sandbox(monkeypatc
 
     def execute(name, arguments, *, sandbox_session=None, **_kwargs):
         assert name == "create_file"
-        assert sandbox_session.session_id == "S-new"
+        assert sandbox_session.session_id in {"S-new", "S-newest"}
         return {
             "ok": True,
             "status": "success",
@@ -334,3 +350,72 @@ def test_new_goal_archives_old_run_then_starts_new_run_in_new_sandbox(monkeypatc
     assert resumed["run_contract"] == new_contract
     assert resumed["task_runtime"]["sandbox_session"]["session_id"] == "S-new"
     assert session["production_run_generations"][-1] == archive
+
+    newest_goal = "new calculator goal"
+    newest_bundle = RequirementResolutionBundle(
+        original_goal=newest_goal,
+        structured_requirements=[
+            StructuredRequirement(
+                requirement_id="req-newest-goal",
+                source_text=newest_goal,
+                source_span=[0, len(newest_goal)],
+                disposition="GOAL",
+                resolution_status="resolved",
+                provenance="user_explicit",
+                materiality="blocks_design",
+                normalized_meaning=newest_goal,
+            )
+        ],
+        requirement_resolution_phase=PHASE_REQUIREMENTS_RESOLVED,
+    )
+    newest_packet = _generation_packet(
+        goal=newest_goal, requirement_ids=["req-newest-goal"], slug="newest-generation"
+    )
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.prepare_implementation_entry_bundle",
+        lambda *_args, **_kwargs: newest_bundle,
+    )
+
+    def fake_newest_spec_pipeline(**kwargs):
+        mission = store.get_mission(kwargs["mission_id"])
+        newest_packet["source_binding"] = build_handoff_source_binding(mission)
+        return {
+            "production_status": "SPEC_AND_HANDOFF_READY",
+            "prd": {"goal": newest_goal},
+            "tech_spec": {"summary": newest_goal},
+            "plan": {"tasks": newest_packet["implementation_tasks"]},
+            "handoff_packet": newest_packet,
+            "semantic_trace": {"handoff": "PRESERVED"},
+            "runtime_started": False,
+        }
+
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.run_production_spec_handoff_pipeline",
+        fake_newest_spec_pipeline,
+    )
+    newest_goal_result = run_chat_turn(session, f"/goal {newest_goal}", model="test")
+
+    assert newest_goal_result["handoff_packet"]["handoff_id"] == newest_packet["handoff_id"]
+    assert "production_runtime_snapshot" not in session
+    assert "production_run_contract" not in session
+    generations = session["production_run_generations"]
+    assert [row["handoff_id"] for row in generations] == [
+        old_packet["handoff_id"],
+        new_packet["handoff_id"],
+    ]
+    assert generations[0] == archive
+    assert generations[1]["production_run_contract"] == new_contract
+    assert generations[1]["production_runtime_snapshot"]["sandbox_session"]["session_id"] == "S-new"
+
+    newest_run = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+
+    assert newest_run["runtime_resumed"] is False
+    assert newest_run["sandbox_started"] is True
+    assert starts["count"] == 2
+    assert newest_run["run_contract"]["handoff_id"] == newest_packet["handoff_id"]
+    assert newest_run["run_contract"]["started_execution_id"] != new_contract["started_execution_id"]
+    assert newest_run["task_runtime"]["sandbox_session"]["session_id"] == "S-newest"
+    assert [row["handoff_id"] for row in session["production_run_generations"]] == [
+        old_packet["handoff_id"],
+        new_packet["handoff_id"],
+    ]
