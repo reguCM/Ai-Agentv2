@@ -150,6 +150,37 @@ def test_non_material_noise_does_not_require_coverage() -> None:
     assert validate_handoff_packet(packet, structured_requirements=noise) == []
 
 
+def test_resolved_material_constraint_uses_existing_requirement_binding() -> None:
+    constraint = {
+        "requirement_id": "req-c1",
+        "source_text": "Do not delete existing files",
+        "disposition": "CONSTRAINT",
+        "constraint_subtype": "prohibition",
+        "resolution_status": "resolved",
+        "materiality": "blocks_design",
+        "normalized_meaning": "Existing files must not be deleted",
+    }
+    packet = _packet(
+        [{"requirement_id": "req-c1", "task_ids": ["T1"], "acceptance_ids": ["A1"]}],
+        requirements=[constraint],
+    )
+    assert validate_handoff_packet(packet, structured_requirements=[constraint]) == []
+
+
+def test_unbound_resolved_material_constraint_fails_closed() -> None:
+    constraint = {
+        "requirement_id": "req-c1",
+        "source_text": "Do not delete existing files",
+        "disposition": "CONSTRAINT",
+        "constraint_subtype": "prohibition",
+        "resolution_status": "resolved",
+        "materiality": "blocks_design",
+        "normalized_meaning": "Existing files must not be deleted",
+    }
+    with pytest.raises(ValueError, match="missing_requirement_bindings"):
+        _packet(None, requirements=[constraint])
+
+
 def test_tetris_trace_is_identity_only_and_complete() -> None:
     requirements = _requirements()
     packet = _packet(
