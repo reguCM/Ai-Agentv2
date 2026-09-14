@@ -480,6 +480,18 @@ class AgentTaskRuntime:
             self.emit_event("TASK_COMPLETED", task_id=task_id)
         return complete
 
+    def record_verification_action(self, action: ActionRecord) -> None:
+        """Append a verification Action without changing implementation Task state."""
+        if action.task_id not in self.tasks:
+            raise ValueError(f"unknown task: {action.task_id}")
+        self.actions.append(action)
+        self.emit_event(
+            "VERIFICATION_ACTION_COMPLETED",
+            action_id=action.action_id,
+            task_id=action.task_id,
+            result_status=action.result_status,
+        )
+
     def support_completion_conditions(
         self,
         task_id: str,

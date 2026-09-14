@@ -46,7 +46,7 @@ def build_verification_meaning_loop_fixture(tmp_path) -> dict[str, Any]:
     mission = {
         "schema_version": "1", "mission_id": "m-verification-loop", "original_goal": "高品質なテトリスを作って",
         "explicit_conditions": [], "explicit_constraints": [], "user_confirmed_supplements": [],
-        "confirmed_clarifications": [{"decision_id": "d1", "decision_key": "quality", "status": "confirmed", "source": "requirement_resolution", "text": "controls", "human_confirmed": True, "revision": 1}],
+        "confirmed_clarifications": [{"decision_id": "d1", "decision_key": "quality", "status": "confirmed", "source": "requirement_resolution", "text": "controls", "human_confirmed": True}],
         "structured_requirements": [
             {"requirement_id": "req-r3", "source_text": "操作応答", "source_span": [0, 4], "disposition": "GOAL", "resolution_status": "resolved", "provenance": "human_confirmed", "materiality": "blocks_design", "normalized_meaning": "操作に素直に応答する"},
             {"requirement_id": "req-r8", "source_text": "別条件", "source_span": [5, 8], "disposition": "GOAL", "resolution_status": "resolved", "provenance": "user_explicit", "materiality": "informational", "normalized_meaning": "別条件"},
@@ -79,8 +79,23 @@ def build_verification_meaning_loop_fixture(tmp_path) -> dict[str, Any]:
     runtime_task_id = f"gh-{source_task_id}"
     task = orchestrator.runtime.tasks[runtime_task_id]
     task.status = TaskStatus.COMPLETE.value
+    wrong_task = orchestrator.runtime.tasks["gh-T8"]
     orchestrator.runtime.record_action(ActionRecord("A5", "gh-T8", "tool_call", "create_file", {}, "success"))
-    orchestrator.runtime.add_evidence(EvidenceRecord("E5", "tool", "tool://wrong", "wrong", "A5"), ["gh-T8"])
+    orchestrator.runtime.add_evidence(
+        EvidenceRecord(
+            "E5",
+            "tool",
+            "tool://wrong",
+            "wrong",
+            "A5",
+            supported_completion_conditions=list(wrong_task.completion_conditions),
+        ),
+        ["gh-T8"],
+    )
+    orchestrator.runtime.support_completion_conditions(
+        "gh-T8", "E5", wrong_task.completion_conditions
+    )
+    orchestrator.runtime.evaluate_task("gh-T8", wrong_task.satisfied_conditions)
     sandbox = _create_fixture_dedicated_sandbox(orchestrator, tmp_path)
     snapshot = orchestrator.snapshot()
     context = build_meaning_context_v0(mission, handoff)
@@ -89,5 +104,5 @@ def build_verification_meaning_loop_fixture(tmp_path) -> dict[str, Any]:
     acceptance = {"status": "PASS", "criterion_trace": [{"acceptance_id": acceptance_id, "evidence_requirement_trace": {"coverage": "MISMATCH", "expected_requirement_ids": ["req-r3"]}}], "meaning_trace_audit": {"criteria_count": 1, "coverage_counts": {"MATCH": 0, "PARTIAL": 0, "MISMATCH": 1, "UNTRACEABLE": 0}, "criteria": [{"acceptance_id": acceptance_id, "acceptance_judgment": "PASS", "meaning_coverage": "MISMATCH", "expected_requirement_ids": ["req-r3"], "observed_requirement_ids": ["req-r8"], "evidence_ids": ["E5"]}]}}
     eligibility = assess_acceptance_meaning_completion_eligibility(acceptance)
     reentry = build_acceptance_meaning_verification_reentry(acceptance, handoff_packet=handoff, mission=mission, runtime=orchestrator.runtime)
-    session = empty_session(); session.update({"last_mission_id": mission["mission_id"], "production_handoff_packet": handoff, "production_run_contract": contract, "production_runtime_snapshot": snapshot, "production_acceptance_evaluation": {"handoff_id": handoff["handoff_id"], "canonical_hash": handoff_hash, "result": acceptance}, "production_goal_acceptance_judgment": {"handoff_id": handoff["handoff_id"], "canonical_hash": handoff_hash, "acceptance_status": "PASS", "goal_id": "G1", "goal_completed": False, "completion_eligibility": eligibility, "verification_reentry": reentry}})
+    session = empty_session(); session.update({"last_mission_id": mission["mission_id"], "production_handoff_packet": handoff, "production_run_contract": contract, "production_runtime_snapshot": snapshot, "production_runtime_handoff_integrity": {"handoff_id": handoff["handoff_id"], "canonical_hash": handoff_hash}, "production_acceptance_evaluation": {"handoff_id": handoff["handoff_id"], "canonical_hash": handoff_hash, "result": acceptance}, "production_goal_acceptance_judgment": {"handoff_id": handoff["handoff_id"], "canonical_hash": handoff_hash, "acceptance_status": "PASS", "goal_id": "G1", "goal_completed": False, "completion_eligibility": eligibility, "verification_reentry": reentry}})
     return {"mission": mission, "handoff_packet": handoff, "run_contract": contract, "runtime_snapshot": snapshot, "session": session, "sandbox": sandbox, "before_acceptance": acceptance, "before_goal_judgment": session["production_goal_acceptance_judgment"]}

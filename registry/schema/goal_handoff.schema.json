@@ -49,6 +49,11 @@
     },
     "source": { "$ref": "#/$defs/source_block" },
     "source_binding": { "$ref": "#/$defs/source_binding" },
+    "requirement_bindings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/requirement_binding" },
+      "description": "Identity-only coverage from Mission Requirements to existing Task and Acceptance ids."
+    },
     "goal": { "$ref": "#/$defs/goal_block" },
     "scope": { "$ref": "#/$defs/scope_block" },
     "acceptance_criteria": {
@@ -101,6 +106,28 @@
           "description": "References to Mission structured_requirements consumed by Production specification generation."
         }
       }
+    },
+    "requirement_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requirement_id", "task_ids", "acceptance_ids"],
+      "properties": {
+        "requirement_id": { "type": "string", "minLength": 1 },
+        "task_ids": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^T[0-9]+$" },
+          "uniqueItems": true
+        },
+        "acceptance_ids": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^A[0-9]+$" },
+          "uniqueItems": true
+        }
+      },
+      "anyOf": [
+        { "properties": { "task_ids": { "minItems": 1 } } },
+        { "properties": { "acceptance_ids": { "minItems": 1 } } }
+      ]
     },
     "source_block": {
       "type": "object",

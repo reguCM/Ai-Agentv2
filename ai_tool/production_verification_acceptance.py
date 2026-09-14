@@ -8,6 +8,11 @@ from __future__ import annotations
 import sys
 from typing import Any, Mapping
 
+from ai_tool.acceptance_meaning_audit import build_acceptance_meaning_audit
+from ai_tool.evidence_requirement_trace import (
+    EvidenceRequirementTraceError,
+    trace_evidence_requirement_identity,
+)
 from ai_tool.goal_acceptance_eval import evaluate_goal_acceptance_from_facts
 from tools.ai.task_runtime import AUTHORITATIVE_CERTAINTIES, GoalStatus, TaskStatus
 
@@ -350,11 +355,115 @@ def handoff_acceptance_extra_failures(orchestrator: Any) -> list[tuple[str, str,
     return failures
 
 
+def _criterion_expected_requirement_ids(
+    handoff_packet: Mapping[str, Any], acceptance_id: str
+) -> list[str]:
+    """Read Requirement references declared for one existing Acceptance id."""
+    result: list[str] = []
+    for row in handoff_packet.get("requirement_bindings") or []:
+        if not isinstance(row, Mapping):
+            continue
+        if acceptance_id not in [
+            str(item).strip() for item in (row.get("acceptance_ids") or []) if str(item).strip()
+        ]:
+            continue
+        requirement_id = str(row.get("requirement_id") or "").strip()
+        if requirement_id and requirement_id not in result:
+            result.append(requirement_id)
+    return result
+
+
+def _criterion_evidence_ids(orchestrator: Any, criterion: Mapping[str, Any]) -> list[str]:
+    """Read Evidence actually attached to mapped Runtime Task conditions."""
+    tasks = getattr(getattr(orchestrator, "runtime", None), "tasks", None) or {}
+    result: list[str] = []
+    for mapped in criterion.get("mapped_runtime_tasks") or []:
+        if not isinstance(mapped, Mapping):
+            continue
+        task = tasks.get(str(mapped.get("runtime_task_id") or ""))
+        if task is None:
+            continue
+        for evidence_ids in (getattr(task, "condition_evidence", None) or {}).values():
+            for evidence_id in evidence_ids or []:
+                token = str(evidence_id or "").strip()
+                if token and token not in result:
+                    result.append(token)
+    return result
+
+
+def build_handoff_acceptance_evidence_requirement_trace(
+    orchestrator: Any,
+    *,
+    handoff_packet: Mapping[str, Any],
+    mission: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    """Enrich criterion explanation only; never influence Acceptance judgment."""
+    trace_fn = getattr(orchestrator, "handoff_acceptance_runtime_trace", None)
+    criteria = list(trace_fn()) if callable(trace_fn) else []
+    enriched: list[dict[str, Any]] = []
+    for criterion in criteria:
+        row = dict(criterion)
+        acceptance_id = str(row.get("acceptance_id") or "").strip()
+        expected_requirement_ids = _criterion_expected_requirement_ids(handoff_packet, acceptance_id)
+        evidence_rows: list[dict[str, Any]] = []
+        derived_requirement_ids: list[str] = []
+        alignments: list[str] = []
+        for evidence_id in _criterion_evidence_ids(orchestrator, row):
+            try:
+                evidence_trace = trace_evidence_requirement_identity(
+                    evidence_id,
+                    runtime=getattr(orchestrator, "runtime", None),
+                    handoff_packet=handoff_packet,
+                    mission=mission,
+                )
+            except EvidenceRequirementTraceError as exc:
+                evidence_rows.append(
+                    {"evidence_id": evidence_id, "alignment": "UNTRACEABLE", "error": str(exc)}
+                )
+                alignments.append("UNTRACEABLE")
+                continue
+            reverse_acceptance_ids = list(evidence_trace.get("acceptance_ids") or [])
+            evidence_requirement_ids = list(evidence_trace.get("requirement_ids") or [])
+            for requirement_id in evidence_requirement_ids:
+                if requirement_id not in derived_requirement_ids:
+                    derived_requirement_ids.append(requirement_id)
+            if acceptance_id not in reverse_acceptance_ids:
+                alignment = "MISMATCH"
+            elif set(evidence_requirement_ids) == set(expected_requirement_ids):
+                alignment = "MATCH"
+            elif set(evidence_requirement_ids) & set(expected_requirement_ids):
+                alignment = "PARTIAL"
+            else:
+                alignment = "MISMATCH"
+            evidence_rows.append(
+                {"evidence_id": evidence_id, "alignment": alignment, "trace": evidence_trace}
+            )
+            alignments.append(alignment)
+
+        if not expected_requirement_ids or not evidence_rows or "UNTRACEABLE" in alignments:
+            coverage = "UNTRACEABLE"
+        elif set(derived_requirement_ids) == set(expected_requirement_ids):
+            coverage = "MATCH"
+        elif set(derived_requirement_ids) & set(expected_requirement_ids):
+            coverage = "PARTIAL"
+        else:
+            coverage = "MISMATCH"
+        row["evidence_requirement_trace"] = {
+            "expected_requirement_ids": expected_requirement_ids,
+            "evidence": evidence_rows,
+            "coverage": coverage,
+        }
+        enriched.append(row)
+    return enriched
+
+
 def evaluate_handoff_goal_acceptance(
     orchestrator: Any,
     *,
     final_answer: str = "",
     llm_response_received: bool | None = None,
+    handoff_packet: Mapping[str, Any] | None = None,
+    mission: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Runtime Goal Acceptance. Does not require Runtime G1 complete (avoids deadlock)."""
     runtime = getattr(orchestrator, "runtime", None)
@@ -383,14 +492,31 @@ def evaluate_handoff_goal_acceptance(
         "extra_failures": extra,
     }
     result = evaluate_goal_acceptance_from_facts(facts)
-    trace_fn = getattr(orchestrator, "handoff_acceptance_runtime_trace", None)
-    result["criterion_trace"] = list(trace_fn()) if callable(trace_fn) else []
+    if isinstance(handoff_packet, Mapping) and isinstance(mission, Mapping):
+        result["criterion_trace"] = build_handoff_acceptance_evidence_requirement_trace(
+            orchestrator, handoff_packet=handoff_packet, mission=mission
+        )
+    else:
+        trace_fn = getattr(orchestrator, "handoff_acceptance_runtime_trace", None)
+        result["criterion_trace"] = list(trace_fn()) if callable(trace_fn) else []
+    if isinstance(handoff_packet, Mapping) and isinstance(mission, Mapping):
+        # Derived audit only. It must not participate in Acceptance judgment.
+        result["meaning_trace_audit"] = build_acceptance_meaning_audit(result)
     result["verification_closed"] = closed_test_evidence_present(orchestrator)
     return result
 
 
-def apply_acceptance_pass_to_runtime_goal(orchestrator: Any, acceptance: Mapping[str, Any]) -> bool:
+def apply_acceptance_pass_to_runtime_goal(
+    orchestrator: Any,
+    acceptance: Mapping[str, Any],
+    *,
+    completion_eligibility: Mapping[str, Any] | None = None,
+) -> bool:
     if str(acceptance.get("status") or "") != "PASS":
+        return False
+    if completion_eligibility is not None and not bool(
+        completion_eligibility.get("completion_eligible")
+    ):
         return False
     runtime = getattr(orchestrator, "runtime", None)
     if runtime is None:
@@ -432,6 +558,7 @@ __all__ = [
     "TEST_RUN_CLOSED",
     "advance_runnable_handoff_task",
     "assess_handoff_acceptance_readiness",
+    "build_handoff_acceptance_evidence_requirement_trace",
     "apply_acceptance_pass_to_runtime_goal",
     "attach_handoff_verification_plan",
     "closed_test_evidence_present",

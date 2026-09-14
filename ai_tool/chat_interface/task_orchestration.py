@@ -3084,6 +3084,7 @@ class ChatTaskOrchestrator:
         *,
         relevant_tools: Iterable[str],
         authorization_packet: Mapping[str, Any] | None = None,
+        verification_only_task_id: str | None = None,
     ) -> dict[str, Any]:
         from test_safety.runtime_bridge import bridge_test_execution, build_llm_tool_summary
         from test_safety.tool_argument_validation import (
@@ -3156,6 +3157,7 @@ class ChatTaskOrchestrator:
                 relevant_tools=relevant_tools,
                 raw_result=raw,
                 predetermined_action_id=action_id,
+                verification_only_task_id=verification_only_task_id,
             )
             if self._run_test_plan_continuation is not None:
                 self._run_test_plan_continuation["observed"] = True
@@ -3210,6 +3212,7 @@ class ChatTaskOrchestrator:
         audit: str,
         status: str,
         observed_task_id: str,
+        verification_only: bool = False,
     ) -> str:
         from test_safety.runtime_bridge import safety_run_closure_predicate
 
@@ -3218,10 +3221,9 @@ class ChatTaskOrchestrator:
         evidence_gain = (
             audit == "ACCEPT" and status in {"success", "partial"} and predicate_ok
         )
-        self.runtime.record_action(
-            ActionRecord(
+        action = ActionRecord(
                 action_id,
-                self.current_task_id,
+                observed_task_id,
                 "tool_call",
                 "run_test_plan",
                 dict(arguments),
@@ -3229,13 +3231,17 @@ class ChatTaskOrchestrator:
                 audit,
                 evidence_gain,
             )
-        )
+        if verification_only:
+            self.runtime.record_verification_action(action)
+        else:
+            self.runtime.record_action(action)
         self._append_test_safety_evidence(
             action_id=action_id,
             arguments=arguments,
             raw_result=raw_result,
             summary=summary,
             predicate_ok=predicate_ok,
+            task_id=observed_task_id,
         )
         if status == "failure":
             self._failure_index += 1
@@ -3251,7 +3257,7 @@ class ChatTaskOrchestrator:
             self.runtime.record_failure(
                 FailureRecord(
                     f"F{self._failure_index}",
-                    self.current_task_id,
+                    observed_task_id,
                     action_id,
                     "run_test_plan",
                     dict(arguments),
@@ -3268,6 +3274,7 @@ class ChatTaskOrchestrator:
         raw_result: Mapping[str, Any],
         summary: Any,
         predicate_ok: bool,
+        task_id: str | None = None,
     ) -> None:
         outcome = raw_result.get("test_safety") or {}
         summary_payload = raw_result.get("test_safety_summary") or {}
@@ -3289,17 +3296,19 @@ class ChatTaskOrchestrator:
                     ["test_run_closed"] if predicate_ok else []
                 ),
             ),
-            [self.current_task_id],
+            [task_id or self.current_task_id],
         )
-        if predicate_ok and "test_run_closed" in self.task.completion_conditions:
+        target_task_id = task_id or self.current_task_id
+        target_task = self.runtime.tasks[target_task_id]
+        if predicate_ok and "test_run_closed" in target_task.completion_conditions:
             self.runtime.support_completion_conditions(
-                self.current_task_id,
+                target_task_id,
                 evidence_id,
                 ["test_run_closed"],
             )
             self.runtime.evaluate_task(
-                self.current_task_id,
-                self.task.satisfied_conditions,
+                target_task_id,
+                target_task.satisfied_conditions,
             )
 
     def observe_tool(
@@ -3312,9 +3321,13 @@ class ChatTaskOrchestrator:
         relevant_tools: Iterable[str],
         raw_result: Mapping[str, Any] | None = None,
         predetermined_action_id: str | None = None,
+        verification_only_task_id: str | None = None,
     ) -> str:
-        self.assert_current_task_executable_for_premise()
-        observed_task_id = self.current_task_id
+        if verification_only_task_id is None:
+            self.assert_current_task_executable_for_premise()
+        observed_task_id = verification_only_task_id or self.current_task_id
+        if observed_task_id not in self.runtime.tasks:
+            raise ValueError(f"unknown verification task: {observed_task_id}")
         if predetermined_action_id:
             action_id = str(predetermined_action_id)
         else:
@@ -3332,7 +3345,7 @@ class ChatTaskOrchestrator:
                 self.tool_expectation.expectation_matched or matched
             )
         audit = self.runtime.audit_relevance(
-            self.current_task_id,
+            observed_task_id,
             tool_name=tool_name,
             relevant_tools=relevant_tools,
         )
@@ -3347,6 +3360,7 @@ class ChatTaskOrchestrator:
                 audit=audit,
                 status=status,
                 observed_task_id=observed_task_id,
+                verification_only=verification_only_task_id is not None,
             )
         novel_action = not self.runtime.has_reusable_evidence(
             self.current_task_id, tool_name, arguments

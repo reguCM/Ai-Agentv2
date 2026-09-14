@@ -387,6 +387,7 @@ def _generate_plan(
     chat_fn: Callable[..., Any] | None,
     observer: PipelineObserver | None = None,
     confirmed_clarifications: Sequence[Mapping[str, Any]] | None = None,
+    material_requirements: Sequence[Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     from ai_tool.human_decision_premise import (
         active_decision_catalog,
@@ -403,14 +404,23 @@ def _generate_plan(
             "depends on a listed decision. Do not attach every decision to every task. "
             "Use exact decision_key strings from the catalog."
         )
+    requirement_block = ""
+    if material_requirements:
+        requirement_block = (
+            "\n\nMaterial Mission Requirements (canonical; do not rewrite):\n"
+            + json.dumps(list(material_requirements), ensure_ascii=False, indent=2)
+            + "\n\nEmit requirement_bindings. Each row must use an exact requirement_id and "
+            "reference generated task ids and/or acceptance ids. Do not omit a Material Requirement."
+        )
     return _call_llm_json(
         model=model,
         system=_skill_system("planning-and-task-breakdown", registry),
         user=(
             f"Tech spec JSON:\n{json.dumps(dict(tech_spec), ensure_ascii=False, indent=2)}"
-            f"{catalog_block}\n\n"
+            f"{catalog_block}{requirement_block}\n\n"
             "Emit PLAN_JSON with keys: plan_markdown, todo_markdown, tasks "
             "(array of {id,title,acceptance,verification,size,dependencies,premise_decision_keys}), "
+            "requirement_bindings (array of {requirement_id,task_ids,acceptance_ids}), "
             "recommended_answer."
         ),
         chat_fn=chat_fn,
@@ -608,6 +618,7 @@ def build_handoff_packet(
     handoff_slug: str = "dev-skill-pipeline",
     confirmed_clarifications: Sequence[Mapping[str, Any]] | None = None,
     source_binding: Mapping[str, Any] | None = None,
+    structured_requirements: Sequence[Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     if prd is not None:
         aligned = _aligned_spec_from_prd(prd, initial_request)
@@ -695,15 +706,32 @@ def build_handoff_packet(
     }
     if source_binding is not None:
         packet["source_binding"] = dict(source_binding)
+    requirement_bindings = plan.get("requirement_bindings") if isinstance(plan, Mapping) else None
+    if isinstance(requirement_bindings, list):
+        packet["requirement_bindings"] = [dict(row) for row in requirement_bindings if isinstance(row, Mapping)]
+    if structured_requirements is not None:
+        from ai_tool.requirement_handoff_binding import validate_requirement_handoff_bindings
+
+        binding_errors = validate_requirement_handoff_bindings(packet, structured_requirements)
+        if binding_errors:
+            raise ValueError("requirement handoff binding errors: " + "; ".join(binding_errors))
     return packet
 
 
-def validate_handoff_packet(packet: Mapping[str, Any]) -> list[str]:
+def validate_handoff_packet(
+    packet: Mapping[str, Any],
+    *,
+    structured_requirements: Sequence[Mapping[str, Any]] | None = None,
+) -> list[str]:
     schema = json.loads(HANDOFF_SCHEMA_PATH.read_text(encoding="utf-8"))
     validator = Draft202012Validator(schema)
     errors = [error.message for error in validator.iter_errors(dict(packet))]
     if "preconditions" in packet:
         errors.extend(validate_preconditions(packet.get("preconditions")))
+    if structured_requirements is not None:
+        from ai_tool.requirement_handoff_binding import validate_requirement_handoff_bindings
+
+        errors.extend(validate_requirement_handoff_bindings(packet, structured_requirements))
     return sorted(errors)
 
 
@@ -846,6 +874,7 @@ def _run_composition_skill(
                 chat_fn=chat_fn,
                 observer=observer,
                 confirmed_clarifications=context.get("confirmed_clarifications"),
+                material_requirements=context.get("material_requirements"),
             )
             plan_rel = _write_text(
                 design_dir / "plan.md",
@@ -884,8 +913,12 @@ def _run_composition_skill(
                 skill_steps=["grill-me", *executed_skills] if executed_skills else steps,
                 confirmed_clarifications=context.get("confirmed_clarifications"),
                 source_binding=context.get("source_binding"),
+                structured_requirements=context.get("structured_requirements"),
             )
-            errors = validate_handoff_packet(packet)
+            errors = validate_handoff_packet(
+                packet,
+                structured_requirements=context.get("structured_requirements"),
+            )
             if errors:
                 raise ValueError("handoff schema errors: " + "; ".join(errors))
             handoff_rel = _write_text(
@@ -972,6 +1005,7 @@ def run_dev_skill_pipeline(
     phase1_aligned_spec: Mapping[str, Any] | None = None,
     phase1_semantic_preservation: Mapping[str, Any] | None = None,
     source_binding: Mapping[str, Any] | None = None,
+    structured_requirements: Sequence[Mapping[str, Any]] | None = None,
 ) -> DevSkillPipelineResult:
     registry = load_registry()
     steps = composition_steps(composition_id, registry)
@@ -1101,6 +1135,12 @@ def run_dev_skill_pipeline(
         mission_id=mission_id,
         confirmed_clarifications=confirmed_clarifications,
     )
+    from ai_tool.requirement_handoff_binding import material_requirement_ids
+
+    structured_rows = [
+        dict(row) for row in (structured_requirements or []) if isinstance(row, Mapping)
+    ]
+    material_ids = set(material_requirement_ids(structured_rows))
     context: dict[str, Any] = {
         "initial_request": initial_request,
         "aligned_spec": result.aligned_spec,
@@ -1109,6 +1149,10 @@ def run_dev_skill_pipeline(
         "confirmed_clarifications": pipeline_clarifications,
         "mission_id": mission_id,
         "source_binding": dict(source_binding) if source_binding is not None else None,
+        "structured_requirements": structured_rows,
+        "material_requirements": [
+            row for row in structured_rows if str(row.get("requirement_id") or "") in material_ids
+        ],
     }
     executed_skills: list[str] = []
 

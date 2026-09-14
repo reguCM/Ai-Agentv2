@@ -890,6 +890,36 @@ def _runtime_status_report(
     }
 
 
+def _run_finalization_only(
+    *,
+    chat_fn: ChatFn,
+    model: str,
+    messages: list[dict[str, Any]],
+    runtime_status_report: Mapping[str, Any],
+    timing: dict[str, Any],
+) -> Any:
+    """Generate the normal tool-free final status from current runtime facts."""
+    finalization_messages = [
+        *messages,
+        {
+            "role": "system",
+            "content": (
+                "Tool execution has stopped. Do not claim the Task or Goal is complete. "
+                "Return a concise human-readable status using these observed facts:\n"
+                + str(runtime_status_report.get("markdown") or "")
+            ),
+        },
+    ]
+    return _timed_llm_call(
+        chat_fn,
+        "final_synthesis_llm",
+        timing,
+        model=model,
+        messages=finalization_messages,
+        tools=[],
+    )
+
+
 def _chat_turn(
     user_text: str,
     session: dict[str, Any],
@@ -1836,16 +1866,6 @@ def _chat_turn(
                 not skip_agent_loop
                 and needs_final_synthesis
             ):
-                messages.append(
-                    {
-                        "role": "system",
-                        "content": (
-                            "Tool execution has stopped. Do not claim the Task or Goal is complete. "
-                            "Return a concise human-readable status using these observed facts:\n"
-                            + runtime_status_report["markdown"]
-                        ),
-                    }
-                )
                 # A stop decision still receives one explicit, synchronous final
                 # synthesis opportunity. Tools are unavailable in this call.
                 activity(ActivityStatus.FINAL_SYNTHESIS)
@@ -1853,13 +1873,12 @@ def _chat_turn(
                 lifecycle["final_llm_request_started"] = True
                 lifecycle["final_llm_request_started_at"] = started_at
                 lifecycle["llm_request_id"] = f"{correlation_id}-final-synthesis"
-                response = _timed_llm_call(
-                    chat_fn,
-                    "final_synthesis_llm",
-                    timing,
+                response = _run_finalization_only(
+                    chat_fn=chat_fn,
                     model=model,
                     messages=messages,
-                    tools=[],
+                    runtime_status_report=runtime_status_report,
+                    timing=timing,
                 )
                 accept_final_response(
                     response,
@@ -3389,6 +3408,127 @@ def _phase3a_command_result(
                     "production_status": "GOAL_ACCEPTANCE_JUDGMENT_BLOCKED",
                     "model": model,
                 }
+            saved_reentry = saved_judgment.get("verification_reentry")
+            if (
+                isinstance(saved_reentry, Mapping)
+                and str(saved_reentry.get("status") or "") == "VERIFICATION_REENTRY_CONTEXT_READY"
+                and bool((saved_judgment.get("completion_eligibility") or {}).get("completion_eligible")) is False
+                and resume_runtime
+            ):
+                from ai_tool.acceptance_meaning_completion import assess_acceptance_meaning_completion_eligibility
+                from ai_tool.acceptance_meaning_verification_reentry import build_acceptance_meaning_verification_reentry
+                from ai_tool.production_verification_acceptance import (
+                    apply_acceptance_pass_to_runtime_goal,
+                    evaluate_handoff_goal_acceptance,
+                )
+                from ai_tool.verification_only_execution import execute_verification_only_reentry
+
+                reentry_orchestrator = ChatTaskOrchestrator(correlation_id, str((packet.get("goal") or {}).get("summary") or ""))
+                try:
+                    restore_orchestrator_from_runtime_snapshot(reentry_orchestrator, packet, existing_runtime)
+                    reentry_execution = execute_verification_only_reentry(reentry_orchestrator, saved_reentry)
+                except Exception as exc:
+                    reentry_execution = {"status": "VERIFICATION_EXECUTION_FAILED", "reason": type(exc).__name__}
+                if reentry_execution.get("status") != "VERIFICATION_EXECUTED":
+                    return {
+                        "route": "chat", "answer": "Verification-only 実行は完了しなかったため、Goalを未完了のまま停止しました。",
+                        "events": [event("verification_only_stopped", status=reentry_execution.get("status"))],
+                        "tool_used": False, "tools": [], "web_search": False, "research_saved": False,
+                        "executor": "local_agent", "cursor_connected": False, "memory": memory,
+                        "task_runtime": dict(existing_runtime), "runtime_prepared": True, "runtime_started": True,
+                        "sandbox_started": False, "task_step_executed": False, "handoff_packet": packet,
+                        "verification_reentry": dict(saved_reentry), "verification_execution": reentry_execution,
+                        "production_status": "VERIFICATION_EXECUTION_GAP", "model": model,
+                    }
+                finalization_timing = _new_timing_breakdown()
+                finalization_report = _runtime_status_report(
+                    LoopStopReason.COMPLETED,
+                    LoopCounters(
+                        stagnation_limit=1,
+                        same_failure_limit=1,
+                        no_evidence_limit=1,
+                    ),
+                    reentry_orchestrator,
+                )
+                try:
+                    finalization_response = _run_finalization_only(
+                        chat_fn=chat_fn,
+                        model=model,
+                        messages=[],
+                        runtime_status_report=finalization_report,
+                        timing=finalization_timing,
+                    )
+                    final_answer = str(
+                        getattr(
+                            getattr(finalization_response, "message", None),
+                            "content",
+                            None,
+                        )
+                        or ""
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    return {
+                        "route": "chat",
+                        "answer": "Verification-only後のFinalizationに失敗したため、Acceptance再評価を停止しました。",
+                        "events": [event("verification_finalization_stopped", reason=type(exc).__name__)],
+                        "tool_used": False, "tools": [], "web_search": False, "research_saved": False,
+                        "executor": "local_agent", "cursor_connected": False, "memory": memory,
+                        "task_runtime": reentry_orchestrator.snapshot(), "runtime_prepared": True,
+                        "runtime_started": True, "sandbox_started": False, "task_step_executed": False,
+                        "handoff_packet": packet, "verification_reentry": dict(saved_reentry),
+                        "verification_execution": reentry_execution,
+                        "production_status": "VERIFICATION_EXECUTION_GAP", "model": model,
+                    }
+                if not final_answer.strip():
+                    return {
+                        "route": "chat",
+                        "answer": "Verification-only後のFinalizationが空応答だったため、Acceptance再評価を停止しました。",
+                        "events": [event("verification_finalization_stopped", reason="LLM_EMPTY_RESPONSE")],
+                        "tool_used": False, "tools": [], "web_search": False, "research_saved": False,
+                        "executor": "local_agent", "cursor_connected": False, "memory": memory,
+                        "task_runtime": reentry_orchestrator.snapshot(), "runtime_prepared": True,
+                        "runtime_started": True, "sandbox_started": False, "task_step_executed": False,
+                        "handoff_packet": packet, "verification_reentry": dict(saved_reentry),
+                        "verification_execution": reentry_execution,
+                        "production_status": "VERIFICATION_EXECUTION_GAP", "model": model,
+                    }
+                refreshed = evaluate_handoff_goal_acceptance(
+                    reentry_orchestrator,
+                    final_answer=final_answer,
+                    handoff_packet=packet,
+                    mission=mission or {},
+                )
+                eligibility = assess_acceptance_meaning_completion_eligibility(refreshed)
+                completed = apply_acceptance_pass_to_runtime_goal(
+                    reentry_orchestrator, refreshed, completion_eligibility=eligibility
+                )
+                refreshed_reentry = build_acceptance_meaning_verification_reentry(
+                    refreshed, handoff_packet=packet, mission=mission, runtime=reentry_orchestrator.runtime
+                )
+                snapshot = reentry_orchestrator.snapshot()
+                judgment = {
+                    "handoff_id": packet.get("handoff_id"), "canonical_hash": before_hash,
+                    "acceptance_status": refreshed.get("status"), "goal_id": "G1",
+                    "goal_completed": completed, "completion_eligibility": eligibility,
+                    "verification_reentry": refreshed_reentry,
+                }
+                session["production_runtime_snapshot"] = snapshot
+                session["production_acceptance_evaluation"] = {"handoff_id": packet.get("handoff_id"), "canonical_hash": before_hash, "result": refreshed}
+                session["production_goal_acceptance_judgment"] = judgment
+                return {
+                    "route": "chat", "answer": "Verification-only 実行後にAcceptanceとGoal判定を再評価して停止しました。",
+                    "events": [event("verification_only_re_evaluated", handoff_id=packet.get("handoff_id"), goal_completed=completed)],
+                    "tool_used": False, "tools": [], "web_search": False, "research_saved": False,
+                    "executor": "local_agent", "cursor_connected": False, "memory": memory,
+                    "task_runtime": snapshot, "runtime_prepared": True, "runtime_started": True,
+                    "sandbox_started": False, "task_step_executed": False, "handoff_packet": packet,
+                    "acceptance_ready": True, "acceptance_evaluated": True, "acceptance_reused": False,
+                    "acceptance_result": refreshed, "goal_acceptance_judgment": judgment,
+                    "goal_judgment_reused": False, "verification_reentry": refreshed_reentry,
+                    "verification_execution": reentry_execution,
+                    "production_status": "GOAL_ACCEPTANCE_JUDGED" if completed else "VERIFICATION_EXECUTION_GAP",
+                    "model": model,
+                }
             return {
                 "route": "chat",
                 "answer": "このGoal HandoffへのAcceptance判定は適用済みです。保存済みRuntime Goal状態を返して停止しました。",
@@ -3417,7 +3557,14 @@ def _phase3a_command_result(
                 "acceptance_result": saved_result,
                 "goal_acceptance_judgment": dict(saved_judgment),
                 "goal_judgment_reused": True,
-                "production_status": "GOAL_ACCEPTANCE_JUDGED",
+                "verification_reentry": dict(saved_judgment.get("verification_reentry") or {}),
+                "production_status": (
+                    "VERIFICATION_EXECUTION_GAP"
+                    if isinstance(saved_judgment.get("verification_reentry"), Mapping)
+                    and str(saved_judgment["verification_reentry"].get("status") or "")
+                    in {"VERIFICATION_REENTRY_CONTEXT_READY", "VERIFICATION_REENTRY_UNRESOLVED"}
+                    else "GOAL_ACCEPTANCE_JUDGED"
+                ),
                 "model": model,
             }
         if not resume_runtime:
@@ -3484,11 +3631,31 @@ def _phase3a_command_result(
         from ai_tool.production_verification_acceptance import (
             apply_acceptance_pass_to_runtime_goal,
         )
+        from ai_tool.acceptance_meaning_completion import (
+            assess_acceptance_meaning_completion_eligibility,
+        )
+        from ai_tool.acceptance_meaning_verification_reentry import (
+            build_acceptance_meaning_verification_reentry,
+        )
 
+        completion_eligibility = assess_acceptance_meaning_completion_eligibility(
+            saved_result
+        )
         goal_completed = apply_acceptance_pass_to_runtime_goal(
             judgment_orchestrator,
             saved_result,
+            completion_eligibility=completion_eligibility,
         )
+        verification_reentry = build_acceptance_meaning_verification_reentry(
+            saved_result,
+            handoff_packet=packet,
+            mission=mission,
+            runtime=judgment_orchestrator.runtime,
+        )
+        verification_execution_gap = str(verification_reentry.get("status") or "") in {
+            "VERIFICATION_REENTRY_CONTEXT_READY",
+            "VERIFICATION_REENTRY_UNRESOLVED",
+        }
         judgment_snapshot = judgment_orchestrator.snapshot()
         judgment = {
             "handoff_id": packet.get("handoff_id"),
@@ -3496,6 +3663,8 @@ def _phase3a_command_result(
             "acceptance_status": saved_result.get("status"),
             "goal_id": "G1",
             "goal_completed": goal_completed,
+            "completion_eligibility": completion_eligibility,
+            "verification_reentry": verification_reentry,
         }
         session["production_runtime_snapshot"] = judgment_snapshot
         session["production_goal_acceptance_judgment"] = judgment
@@ -3508,6 +3677,7 @@ def _phase3a_command_result(
                     handoff_id=packet.get("handoff_id"),
                     acceptance_status=saved_result.get("status"),
                     goal_completed=goal_completed,
+                    completion_eligible=completion_eligibility.get("completion_eligible"),
                 )
             ],
             "tool_used": False,
@@ -3530,7 +3700,12 @@ def _phase3a_command_result(
             "acceptance_result": saved_result,
             "goal_acceptance_judgment": judgment,
             "goal_judgment_reused": False,
-            "production_status": "GOAL_ACCEPTANCE_JUDGED",
+            "verification_reentry": verification_reentry,
+            "production_status": (
+                "VERIFICATION_EXECUTION_GAP"
+                if verification_execution_gap
+                else "GOAL_ACCEPTANCE_JUDGED"
+            ),
             "model": model,
         }
 
@@ -3676,6 +3851,8 @@ def _phase3a_command_result(
             orchestrator,
             final_answer=str(execution_result.get("answer") or ""),
             llm_response_received=llm_response_received,
+            handoff_packet=packet,
+            mission=mission or {},
         )
         session["production_acceptance_evaluation"] = {
             "handoff_id": packet.get("handoff_id"),
@@ -3861,6 +4038,7 @@ def _production_grill_phase1_turn(
         "cursor_connected": False,
         "memory": memory,
         "task_runtime": None,
+        "mission_memory": {"mission_id": mission_id},
         "awaiting_production_grill_me": awaiting,
         "production_grill_me": contract if awaiting else None,
         "production_grill_me_state": (
