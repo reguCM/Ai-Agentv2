@@ -4,9 +4,14 @@ from __future__ import annotations
 import json
 import re
 
+from ai_tool.chat_interface.task_orchestration import ChatTaskOrchestrator
+from ai_tool.evidence_requirement_trace import trace_evidence_requirement_identity
+from ai_tool.goal_handoff_runtime_bridge import prepare_orchestrator_from_handoff
 from ai_tool.mission_memory.store import MissionMemoryStore
 from ai_tool.mission_memory.validate import schema_version
 from ai_tool.production_handoff_bridge import run_production_spec_handoff_pipeline
+from ai_tool.task_execution_guard import task_execution_blocked
+from tools.ai.task_runtime import EvidenceRecord
 
 
 def _response(payload: dict):
@@ -77,7 +82,7 @@ def _phase2_chat(**kwargs):
     raise AssertionError(f"unexpected Production pipeline prompt: {user[:100]}")
 
 
-def test_production_handoff_binds_resolved_material_constraint_requirement(tmp_path):
+def test_production_handoff_binds_constraint_through_runtime_evidence_trace(tmp_path):
     mission = {
         "schema_version": schema_version(),
         "mission_id": "m-production-constraint-binding",
@@ -147,4 +152,32 @@ def test_production_handoff_binds_resolved_material_constraint_requirement(tmp_p
         "req-constraint",
         "req-goal",
     ]
+    # A human-language constraint remains identity-traceable unless an existing
+    # deterministic Guard / Precondition explicitly owns its enforcement.
+    assert "preconditions" not in handoff
     assert result["runtime_started"] is False
+
+    orchestrator = ChatTaskOrchestrator("production-constraint-trace", mission["original_goal"])
+    prepare_orchestrator_from_handoff(orchestrator, handoff)
+    assert task_execution_blocked(orchestrator.runtime.tasks["gh-T1"]) is None
+    orchestrator.runtime.add_evidence(
+        EvidenceRecord(
+            "E-constraint",
+            "tool",
+            "inspect",
+            "Existing files remain intact.",
+            "A1",
+        ),
+        ["gh-T1"],
+    )
+    trace = trace_evidence_requirement_identity(
+        "E-constraint",
+        runtime=orchestrator.runtime,
+        handoff_packet=handoff,
+        mission=mission,
+    )
+    assert trace["runtime_task_ids"] == ["gh-T1"]
+    assert trace["source_task_ids"] == ["T1"]
+    assert trace["acceptance_ids"] == ["A1"]
+    assert set(trace["requirement_ids"]) == {"req-goal", "req-constraint"}
+    assert trace["mission_id"] == mission["mission_id"]
