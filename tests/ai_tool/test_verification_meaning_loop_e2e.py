@@ -109,6 +109,14 @@ def test_verification_only_evidence_uses_run_test_plan_condition_contract(
     assert session["production_goal_acceptance_judgment"]["completion_eligibility"]["completion_eligible"] is True
     assert session["production_goal_acceptance_judgment"]["goal_completed"] is True
     assert result["production_status"] == "GOAL_ACCEPTANCE_JUDGED"
+    closure_report = result["runtime_goal_closure_report"]
+    assert closure_report["handoff_id"] == fixture["handoff_packet"]["handoff_id"]
+    assert closure_report["run_execution_id"] == initial_contract["started_execution_id"]
+    assert closure_report["status"] == "INCONCLUSIVE"
+    assert "missing_acceptance_readiness" in {
+        row["code"] for row in closure_report["blockers"]
+    }
+    assert "runtime_goal_closure_report" not in session
     assert len(finalization_calls) == 1
     assert finalization_calls[0]["tools"] == []
     assert session["production_run_contract"] == initial_contract
@@ -137,6 +145,7 @@ def test_verification_only_evidence_uses_run_test_plan_condition_contract(
     assert second["production_status"] == "GOAL_ACCEPTANCE_JUDGED"
     assert second["acceptance_reused"] is True
     assert second["goal_judgment_reused"] is True
+    assert second["runtime_goal_closure_report"] == closure_report
     assert "verification_execution" not in second
     assert reloaded["production_run_contract"] == initial_contract
     assert (

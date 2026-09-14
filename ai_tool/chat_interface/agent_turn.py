@@ -3169,6 +3169,22 @@ def _canonical_handoff_hash(packet: Mapping[str, Any]) -> str:
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
+def _attach_runtime_goal_closure_report(
+    result: dict[str, Any],
+    *,
+    session: Mapping[str, Any],
+    mission: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    """Attach a derived, non-persistent closure explanation after Goal Judgment."""
+    from ai_tool.runtime_goal_closure_report import build_runtime_goal_closure_report
+
+    result["runtime_goal_closure_report"] = build_runtime_goal_closure_report(
+        session,
+        mission=mission,
+    )
+    return result
+
+
 def _has_superseded_handoff_decision_premise(
     mission: Mapping[str, Any],
     handoff: Mapping[str, Any],
@@ -3593,7 +3609,8 @@ def _phase3a_command_result(
                 session["production_runtime_snapshot"] = snapshot
                 session["production_acceptance_evaluation"] = {"handoff_id": packet.get("handoff_id"), "canonical_hash": before_hash, "result": refreshed}
                 session["production_goal_acceptance_judgment"] = judgment
-                return {
+                return _attach_runtime_goal_closure_report(
+                    {
                     "route": "chat", "answer": "Verification-only 実行後にAcceptanceとGoal判定を再評価して停止しました。",
                     "events": [event("verification_only_re_evaluated", handoff_id=packet.get("handoff_id"), goal_completed=completed)],
                     "tool_used": False, "tools": [], "web_search": False, "research_saved": False,
@@ -3605,9 +3622,13 @@ def _phase3a_command_result(
                     "goal_judgment_reused": False, "verification_reentry": refreshed_reentry,
                     "verification_execution": reentry_execution,
                     "production_status": "GOAL_ACCEPTANCE_JUDGED" if completed else "VERIFICATION_EXECUTION_GAP",
-                    "model": model,
-                }
-            return {
+                        "model": model,
+                    },
+                    session=session,
+                    mission=mission,
+                )
+            return _attach_runtime_goal_closure_report(
+                {
                 "route": "chat",
                 "answer": "このGoal HandoffへのAcceptance判定は適用済みです。保存済みRuntime Goal状態を返して停止しました。",
                 "events": [
@@ -3643,8 +3664,11 @@ def _phase3a_command_result(
                     in {"VERIFICATION_REENTRY_CONTEXT_READY", "VERIFICATION_REENTRY_UNRESOLVED"}
                     else "GOAL_ACCEPTANCE_JUDGED"
                 ),
-                "model": model,
-            }
+                    "model": model,
+                },
+                session=session,
+                mission=mission,
+            )
         if not resume_runtime:
             return {
                 "route": "chat",
@@ -3746,7 +3770,8 @@ def _phase3a_command_result(
         }
         session["production_runtime_snapshot"] = judgment_snapshot
         session["production_goal_acceptance_judgment"] = judgment
-        return {
+        return _attach_runtime_goal_closure_report(
+            {
             "route": "chat",
             "answer": "保存済みAcceptance結果をRuntime Goalへ適用し、判定状態を保存して停止しました。",
             "events": [
@@ -3784,8 +3809,11 @@ def _phase3a_command_result(
                 if verification_execution_gap
                 else "GOAL_ACCEPTANCE_JUDGED"
             ),
-            "model": model,
-        }
+                "model": model,
+            },
+            session=session,
+            mission=mission,
+        )
 
     original_request = str((packet.get("goal") or {}).get("original_request_excerpt") or "").strip()
     orchestrator = ChatTaskOrchestrator(
