@@ -484,6 +484,16 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
         lambda _source: tmp_path / "sandboxes",
     )
     monkeypatch.setattr("ai_tool.chat_interface.agent_turn._chat_turn", complete_one_task)
+    acceptance_calls = []
+
+    def evaluate_once(orchestrator, **kwargs):
+        acceptance_calls.append((orchestrator.snapshot(), kwargs))
+        return {"status": "PASS", "failures": [], "criterion_trace": []}
+
+    monkeypatch.setattr(
+        "ai_tool.production_verification_acceptance.evaluate_handoff_goal_acceptance",
+        evaluate_once,
+    )
 
     result = run_chat_turn(session, "/run", model="test")
 
@@ -513,9 +523,26 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
     assert ready["task_completion_boundary"]["completed"] is True
     assert ready["task_completion_boundary"]["next_task_id"] is None
     assert ready["acceptance_ready"] is True
-    assert ready["production_status"] == "GOAL_ACCEPTANCE_READY"
+    assert ready["production_status"] == "GOAL_ACCEPTANCE_EVALUATED"
+    assert ready["acceptance_evaluated"] is True
+    assert ready["acceptance_reused"] is False
+    assert ready["acceptance_result"]["status"] == "PASS"
+    assert len(acceptance_calls) == 1
     assert ready["task_completion_boundary"]["stopped_before_next_task_execution"] is True
     assert session["production_acceptance_readiness"]["acceptance_ready"] is True
+    assert session["production_acceptance_evaluation"]["handoff_id"] == packet["handoff_id"]
+    assert next(
+        row for row in ready["task_runtime"]["goals"] if row["goal_id"] == "G1"
+    )["status"] == "in_progress"
+
+    reused = run_chat_turn(session, "/run", model="test")
+    assert reused["production_status"] == "GOAL_ACCEPTANCE_EVALUATED"
+    assert reused["acceptance_evaluated"] is True
+    assert reused["acceptance_reused"] is True
+    assert reused["acceptance_result"] == ready["acceptance_result"]
+    assert reused["task_step_executed"] is False
+    assert reused["sandbox_started"] is False
+    assert len(acceptance_calls) == 1
 
 
 def test_run_fails_closed_when_sandbox_bootstrap_fails(monkeypatch, tmp_path):

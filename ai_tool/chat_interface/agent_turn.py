@@ -3233,6 +3233,69 @@ def _phase3a_command_result(
             "model": model,
         }
 
+    saved_acceptance = session.get("production_acceptance_evaluation")
+    if isinstance(saved_acceptance, Mapping):
+        acceptance_identity_matches = (
+            str(saved_acceptance.get("handoff_id") or "")
+            == str(packet.get("handoff_id") or "")
+            and str(saved_acceptance.get("canonical_hash") or "") == before_hash
+        )
+        if not acceptance_identity_matches:
+            return {
+                "route": "chat",
+                "answer": "保存済みAcceptance結果とGoal Handoffの同一性を確認できないため、実行を停止しました。",
+                "events": [
+                    event("production_run_blocked", reason="acceptance_handoff_mismatch")
+                ],
+                "tool_used": False,
+                "tools": [],
+                "web_search": False,
+                "research_saved": False,
+                "executor": "local_agent",
+                "cursor_connected": False,
+                "memory": memory,
+                "task_runtime": dict(existing_runtime) if isinstance(existing_runtime, Mapping) else None,
+                "runtime_prepared": bool(existing_runtime),
+                "runtime_started": bool(existing_runtime),
+                "sandbox_started": False,
+                "task_step_executed": False,
+                "production_run_error": "acceptance_handoff_mismatch",
+                "handoff_packet": packet,
+                "production_status": "GOAL_ACCEPTANCE_REUSE_BLOCKED",
+                "model": model,
+            }
+        saved_result = dict(saved_acceptance.get("result") or {})
+        return {
+            "route": "chat",
+            "answer": "このGoal HandoffのAcceptance検証は完了済みです。保存済み結果を再利用して停止しました。",
+            "events": [
+                event(
+                    "production_goal_acceptance_reused",
+                    handoff_id=packet.get("handoff_id"),
+                )
+            ],
+            "tool_used": False,
+            "tools": [],
+            "web_search": False,
+            "research_saved": False,
+            "executor": "local_agent",
+            "cursor_connected": False,
+            "memory": memory,
+            "task_runtime": dict(existing_runtime) if isinstance(existing_runtime, Mapping) else None,
+            "runtime_prepared": bool(existing_runtime),
+            "runtime_started": bool(existing_runtime),
+            "sandbox_started": False,
+            "runtime_resumed": False,
+            "task_step_executed": False,
+            "handoff_packet": packet,
+            "acceptance_ready": True,
+            "acceptance_evaluated": True,
+            "acceptance_reused": True,
+            "acceptance_result": saved_result,
+            "production_status": "GOAL_ACCEPTANCE_EVALUATED",
+            "model": model,
+        }
+
     original_request = str((packet.get("goal") or {}).get("original_request_excerpt") or "").strip()
     orchestrator = ChatTaskOrchestrator(
         correlation_id,
@@ -3347,6 +3410,28 @@ def _phase3a_command_result(
         "canonical_hash": before_hash,
     }
     task_step_executed = len(runtime_snapshot.get("actions") or []) == action_count_before + 1
+    acceptance_result = None
+    if acceptance_readiness["acceptance_ready"]:
+        from ai_tool.production_verification_acceptance import (
+            evaluate_handoff_goal_acceptance,
+        )
+
+        lifecycle = execution_result.get("final_llm_lifecycle") or {}
+        llm_response_received = (
+            bool(lifecycle.get("final_llm_response_received"))
+            if isinstance(lifecycle, Mapping)
+            else None
+        )
+        acceptance_result = evaluate_handoff_goal_acceptance(
+            orchestrator,
+            final_answer=str(execution_result.get("answer") or ""),
+            llm_response_received=llm_response_received,
+        )
+        session["production_acceptance_evaluation"] = {
+            "handoff_id": packet.get("handoff_id"),
+            "canonical_hash": before_hash,
+            "result": acceptance_result,
+        }
     execution_result.update(
         {
             "events": [
@@ -3387,9 +3472,12 @@ def _phase3a_command_result(
             },
             "acceptance_readiness": acceptance_readiness,
             "acceptance_ready": acceptance_readiness["acceptance_ready"],
+            "acceptance_evaluated": acceptance_result is not None,
+            "acceptance_reused": False,
+            "acceptance_result": acceptance_result,
             "production_status": (
-                "GOAL_ACCEPTANCE_READY"
-                if acceptance_readiness["acceptance_ready"]
+                "GOAL_ACCEPTANCE_EVALUATED"
+                if acceptance_result is not None
                 else "RUNTIME_TASK_COMPLETED_NEXT_READY"
                 if task_completed and next_task_id
                 else "RUNTIME_TASK_COMPLETED"
@@ -3400,6 +3488,14 @@ def _phase3a_command_result(
             ),
         }
     )
+    if acceptance_result is not None:
+        execution_result["events"].append(
+            event(
+                "production_goal_acceptance_evaluated",
+                handoff_id=packet.get("handoff_id"),
+                status=acceptance_result.get("status"),
+            )
+        )
     return execution_result
 
 
