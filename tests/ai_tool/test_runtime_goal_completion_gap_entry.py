@@ -26,6 +26,12 @@ def test_invalid_identity_fails_closed_before_level4() -> None:
     assert _assessment(session, mission)["status"] == "FAIL_CLOSED_IDENTITY"
 
 
+def test_missing_required_source_is_inconclusive_not_an_identity_mismatch() -> None:
+    mission, session = _sources()
+    session.pop("production_acceptance_readiness")
+    assert _assessment(session, mission)["status"] == "INCONCLUSIVE_REQUIRED_SOURCE"
+
+
 def test_incomplete_existing_work_returns_to_level1_or_level2() -> None:
     mission, session = _sources()
     session["production_acceptance_readiness"] = {

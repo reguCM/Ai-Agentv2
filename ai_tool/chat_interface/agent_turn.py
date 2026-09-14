@@ -3175,12 +3175,18 @@ def _attach_runtime_goal_closure_report(
     session: Mapping[str, Any],
     mission: Mapping[str, Any] | None,
 ) -> dict[str, Any]:
-    """Attach a derived, non-persistent closure explanation after Goal Judgment."""
+    """Attach derived, non-persistent closure and Level 4 entry observations."""
+    from ai_tool.runtime_goal_completion_gap_entry import (
+        assess_runtime_goal_completion_gap_entry,
+    )
     from ai_tool.runtime_goal_closure_report import build_runtime_goal_closure_report
 
     result["runtime_goal_closure_report"] = build_runtime_goal_closure_report(
         session,
         mission=mission,
+    )
+    result["runtime_goal_completion_gap_entry_assessment"] = (
+        assess_runtime_goal_completion_gap_entry(session, mission=mission)
     )
     return result
 

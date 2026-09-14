@@ -116,7 +116,12 @@ def test_verification_only_evidence_uses_run_test_plan_condition_contract(
     assert "missing_acceptance_readiness" in {
         row["code"] for row in closure_report["blockers"]
     }
+    level4_assessment = result["runtime_goal_completion_gap_entry_assessment"]
+    assert level4_assessment["handoff_id"] == fixture["handoff_packet"]["handoff_id"]
+    assert level4_assessment["run_execution_id"] == initial_contract["started_execution_id"]
+    assert level4_assessment["status"] == "FAIL_CLOSED_IDENTITY"
     assert "runtime_goal_closure_report" not in session
+    assert "runtime_goal_completion_gap_entry_assessment" not in session
     assert len(finalization_calls) == 1
     assert finalization_calls[0]["tools"] == []
     assert session["production_run_contract"] == initial_contract
@@ -146,6 +151,7 @@ def test_verification_only_evidence_uses_run_test_plan_condition_contract(
     assert second["acceptance_reused"] is True
     assert second["goal_judgment_reused"] is True
     assert second["runtime_goal_closure_report"] == closure_report
+    assert second["runtime_goal_completion_gap_entry_assessment"] == level4_assessment
     assert "verification_execution" not in second
     assert reloaded["production_run_contract"] == initial_contract
     assert (

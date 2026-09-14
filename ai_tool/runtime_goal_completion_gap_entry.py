@@ -82,8 +82,10 @@ def assess_runtime_goal_completion_gap_entry(
 
     if closure_status == "CLOSURE_READY":
         return {**base, "status": "NOT_APPLICABLE_COMPLETED", "blocking_criteria": []}
-    if closure_status == "INCONCLUSIVE" or codes & _IDENTITY_BLOCKER_CODES:
+    if codes & _IDENTITY_BLOCKER_CODES:
         return {**base, "status": "FAIL_CLOSED_IDENTITY", "blocking_criteria": []}
+    if closure_status == "INCONCLUSIVE":
+        return {**base, "status": "INCONCLUSIVE_REQUIRED_SOURCE", "blocking_criteria": []}
 
     readiness = _mapping(session.get("production_acceptance_readiness"))
     if not bool(readiness.get("acceptance_ready")):
