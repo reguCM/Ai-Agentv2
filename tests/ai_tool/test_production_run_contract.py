@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 
-from ai_tool.production_meaning_context import build_meaning_context_v0
+from ai_tool.production_meaning_context import build_meaning_context_v0, resume_meaning_projection
 from ai_tool.production_run_contract import (
     build_production_run_contract,
     validate_production_run_contract,
@@ -113,4 +113,52 @@ def test_run_contract_fails_closed_on_identity_meaning_decision_or_start_task_ch
         meaning_context=meaning_context,
         handoff_canonical_hash=handoff_hash,
         runtime_snapshot={"tasks": [{"task_id": "gh-T2"}]},
+    )
+
+
+def test_resume_projection_ignores_non_meaning_mission_state_but_preserves_meaning_changes():
+    contract, mission, handoff, handoff_hash = _contract()
+    baseline = build_meaning_context_v0(mission, handoff)
+
+    runtime_updated_mission = deepcopy(mission)
+    runtime_updated_mission["completion_runtime"] = {"current_task_id": "gh-T1"}
+    runtime_updated = build_meaning_context_v0(runtime_updated_mission, handoff)
+    assert baseline["identity"]["mission_canonical_hash"] != runtime_updated["identity"][
+        "mission_canonical_hash"
+    ]
+    assert resume_meaning_projection(baseline) == resume_meaning_projection(runtime_updated)
+    assert not validate_production_run_contract(
+        contract,
+        mission=runtime_updated_mission,
+        handoff=handoff,
+        meaning_context=runtime_updated,
+        handoff_canonical_hash=handoff_hash,
+    )
+
+    meaning_changed_mission = deepcopy(mission)
+    meaning_changed_mission["structured_requirements"][0]["normalized_meaning"] = "changed"
+    meaning_changed = build_meaning_context_v0(meaning_changed_mission, handoff)
+    assert "run_contract_meaning_mismatch" in validate_production_run_contract(
+        contract,
+        mission=meaning_changed_mission,
+        handoff=handoff,
+        meaning_context=meaning_changed,
+        handoff_canonical_hash=handoff_hash,
+    )
+
+
+def test_resume_projection_excludes_completion_only_supplements():
+    contract, mission, handoff, handoff_hash = _contract()
+    supplemented_mission = deepcopy(mission)
+    supplemented_mission["user_confirmed_supplements"] = [
+        {"text": "completion-only note", "source": "goal_completion"}
+    ]
+    supplemented = build_meaning_context_v0(supplemented_mission, handoff)
+
+    assert not validate_production_run_contract(
+        contract,
+        mission=supplemented_mission,
+        handoff=handoff,
+        meaning_context=supplemented,
+        handoff_canonical_hash=handoff_hash,
     )

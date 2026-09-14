@@ -4,7 +4,7 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 from ai_tool.human_decision_premise import active_decision_id_for_key
-from ai_tool.production_meaning_context import canonical_hash
+from ai_tool.production_meaning_context import canonical_hash, resume_meaning_projection
 
 
 REQUIRED_FIELDS = {
@@ -71,7 +71,7 @@ def build_production_run_contract(
         "handoff_canonical_hash": str(handoff_canonical_hash or "").strip(),
         "starting_task_id": str(starting_task_id or "").strip(),
         "meaning_context": dict(meaning_context),
-        "meaning_context_hash": canonical_hash(meaning_context),
+        "meaning_context_hash": canonical_hash(resume_meaning_projection(meaning_context)),
         "decision_premises": _decision_premises(mission, handoff),
     }
 
@@ -107,9 +107,13 @@ def validate_production_run_contract(
     stored_meaning = contract.get("meaning_context")
     if not isinstance(stored_meaning, Mapping):
         errors.append("invalid_run_contract_meaning_context")
-    elif str(contract.get("meaning_context_hash") or "") != canonical_hash(stored_meaning):
+    elif str(contract.get("meaning_context_hash") or "") != canonical_hash(
+        resume_meaning_projection(stored_meaning)
+    ):
         errors.append("run_contract_meaning_snapshot_tampered")
-    elif str(contract.get("meaning_context_hash") or "") != canonical_hash(meaning_context):
+    elif str(contract.get("meaning_context_hash") or "") != canonical_hash(
+        resume_meaning_projection(meaning_context)
+    ):
         errors.append("run_contract_meaning_mismatch")
     if list(contract.get("decision_premises") or []) != _decision_premises(mission, handoff):
         errors.append("run_contract_decision_premise_mismatch")

@@ -43,6 +43,41 @@ def _mapping_rows(value: Any) -> list[dict[str, Any]]:
     return [dict(row) for row in (value or []) if isinstance(row, Mapping)]
 
 
+def resume_meaning_projection(context: Mapping[str, Any]) -> dict[str, Any]:
+    """Return the existing Meaning Context fields relevant to Run resume.
+
+    This is a read-only projection, not another Meaning source of truth.  It
+    deliberately excludes record-wide hashes and diagnostic completeness fields:
+    those can change as Runtime state is persisted without changing the Human or
+    Implementation Meaning that a Run is authorized to resume.
+    """
+    identity = context.get("identity") if isinstance(context.get("identity"), Mapping) else {}
+    decisions = (
+        context.get("decision_context")
+        if isinstance(context.get("decision_context"), Mapping)
+        else {}
+    )
+    human = context.get("human_meaning") if isinstance(context.get("human_meaning"), Mapping) else {}
+    implementation = (
+        context.get("implementation_meaning")
+        if isinstance(context.get("implementation_meaning"), Mapping)
+        else {}
+    )
+    return {
+        "identity": {
+            "mission_id": str(identity.get("mission_id") or ""),
+            "handoff_id": str(identity.get("handoff_id") or ""),
+            "binding_status": str(identity.get("binding_status") or ""),
+            "requirement_ids": list(identity.get("requirement_ids") or []),
+        },
+        "human_meaning": dict(human),
+        "decision_context": {
+            "active_decisions": _mapping_rows(decisions.get("active_decisions")),
+        },
+        "implementation_meaning": dict(implementation),
+    }
+
+
 def build_meaning_context_v0(
     mission: Mapping[str, Any],
     handoff: Mapping[str, Any],
@@ -161,5 +196,6 @@ __all__ = [
     "MeaningContextError",
     "build_meaning_context_v0",
     "canonical_hash",
+    "resume_meaning_projection",
     "validate_meaning_context",
 ]
