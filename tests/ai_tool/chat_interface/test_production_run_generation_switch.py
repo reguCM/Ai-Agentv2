@@ -419,3 +419,25 @@ def test_new_goal_archives_old_run_then_starts_new_run_in_new_sandbox(monkeypatc
         old_packet["handoff_id"],
         new_packet["handoff_id"],
     ]
+
+    newest_contract = dict(newest_run["run_contract"])
+    session = load_session(session["session_id"])
+    assert [row["handoff_id"] for row in session["production_run_generations"]] == [
+        old_packet["handoff_id"],
+        new_packet["handoff_id"],
+    ]
+    assert session["production_handoff_packet"]["handoff_id"] == newest_packet["handoff_id"]
+    assert session["production_run_contract"] == newest_contract
+    assert session["production_runtime_snapshot"]["sandbox_session"]["session_id"] == "S-newest"
+
+    newest_resumed = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+
+    assert newest_resumed["runtime_resumed"] is True
+    assert newest_resumed["sandbox_started"] is False
+    assert starts["count"] == 2
+    assert newest_resumed["run_contract"] == newest_contract
+    assert newest_resumed["task_runtime"]["sandbox_session"]["session_id"] == "S-newest"
+    assert [row["handoff_id"] for row in session["production_run_generations"]] == [
+        old_packet["handoff_id"],
+        new_packet["handoff_id"],
+    ]
