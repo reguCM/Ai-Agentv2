@@ -158,6 +158,7 @@ from ai_tool.goal_handoff_runtime_bridge import (
     restore_orchestrator_from_runtime_snapshot,
 )
 from ai_tool.goal_handoff_source_binding import validate_handoff_source_binding
+from ai_tool.production_meaning_context import build_meaning_context_v0
 from ai_tool.mission_memory.paths import MissionMemoryError
 from ai_tool.mission_memory.ids import new_mission_id
 from ai_tool.mission_memory.store import MissionMemoryStore
@@ -3812,7 +3813,22 @@ def _production_grill_phase1_turn(
                 "runtime_started": False,
             }
         )
+        mission = MissionMemoryStore.from_default().get_mission(mission_id) or {}
+        meaning_context = build_meaning_context_v0(
+            mission,
+            result["handoff_packet"] or {},
+        )
+        result["meaning_context"] = meaning_context
+        result["meaning_context_status"] = meaning_context["status"]
         result["events"].append(event("production_spec_handoff_ready", mission_id=mission_id))
+        result["events"].append(
+            event(
+                "production_meaning_context_saved",
+                mission_id=mission_id,
+                handoff_id=(result["handoff_packet"] or {}).get("handoff_id"),
+                status=meaning_context["status"],
+            )
+        )
     return result
 
 
@@ -5466,6 +5482,8 @@ def run_chat_turn(
             session["production_tech_spec"] = result.get("tech_spec")
             session["production_plan"] = result.get("plan")
             session["production_pipeline_status"] = result.get("production_status")
+            if result.get("meaning_context"):
+                session["production_meaning_context"] = result.get("meaning_context")
     if result.get("goal_continuation_restore_failed"):
         pass
     elif result.get("goal_continuation_resume"):

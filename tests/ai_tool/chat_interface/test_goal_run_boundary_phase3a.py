@@ -6,7 +6,7 @@ from types import SimpleNamespace
 import pytest
 
 from ai_tool.chat_interface.agent_turn import run_chat_turn
-from ai_tool.chat_interface.chat_session import empty_session
+from ai_tool.chat_interface.chat_session import empty_session, load_session
 from ai_tool.chat_interface.requirement_decomposition import RequirementDecomposition, RequirementStatus
 from ai_tool.chat_interface.requirement_resolution import (
     PHASE_REQUIREMENTS_RESOLVED,

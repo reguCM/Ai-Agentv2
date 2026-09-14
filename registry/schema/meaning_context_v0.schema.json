@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-agent.local/schemas/registry/meaning_context_v0.schema.json",
+  "title": "Execution Meaning Context v0",
+  "description": "Derived execution view over canonical Mission and Goal Handoff records. Not a human-requirement source of truth.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "status",
+    "identity",
+    "human_meaning",
+    "decision_context",
+    "implementation_meaning",
+    "missing"
+  ],
+  "properties": {
+    "schema_version": { "const": "0" },
+    "kind": { "const": "execution_meaning_context" },
+    "status": { "enum": ["ready", "partial"] },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mission_id",
+        "handoff_id",
+        "mission_canonical_hash",
+        "handoff_canonical_hash",
+        "binding_status",
+        "requirement_ids",
+        "decision_ids",
+        "task_ids",
+        "acceptance_ids"
+      ],
+      "properties": {
+        "mission_id": { "type": "string", "minLength": 1 },
+        "handoff_id": { "type": "string", "minLength": 1 },
+        "mission_canonical_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "handoff_canonical_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "binding_status": { "const": "BOUND" },
+        "requirement_ids": { "type": "array", "items": { "type": "string" } },
+        "decision_ids": { "type": "array", "items": { "type": "string" } },
+        "task_ids": { "type": "array", "items": { "type": "string" } },
+        "acceptance_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "human_meaning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original_goal",
+        "structured_requirements",
+        "explicit_conditions",
+        "explicit_constraints"
+      ],
+      "properties": {
+        "original_goal": { "type": "string" },
+        "structured_requirements": { "type": "array", "items": { "type": "object" } },
+        "explicit_conditions": { "type": "array", "items": { "type": "string" } },
+        "explicit_constraints": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "decision_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirmed_clarifications", "active_decisions"],
+      "properties": {
+        "confirmed_clarifications": { "type": "array", "items": { "type": "object" } },
+        "active_decisions": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "implementation_meaning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goal",
+        "scope",
+        "preconditions",
+        "implementation_tasks",
+        "acceptance_criteria",
+        "test_plan",
+        "human_gates",
+        "runtime_boundary"
+      ],
+      "properties": {
+        "goal": { "type": "object" },
+        "scope": { "type": "object" },
+        "preconditions": { "type": "array", "items": { "type": "object" } },
+        "implementation_tasks": { "type": "array", "items": { "type": "object" } },
+        "acceptance_criteria": { "type": "array", "items": { "type": "object" } },
+        "test_plan": { "type": "object" },
+        "human_gates": { "type": "array" },
+        "runtime_boundary": { "type": "object" }
+      }
+    },
+    "missing": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  }
+}
