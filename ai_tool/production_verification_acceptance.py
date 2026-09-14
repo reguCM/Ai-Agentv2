@@ -9,7 +9,7 @@ import sys
 from typing import Any, Mapping
 
 from ai_tool.goal_acceptance_eval import evaluate_goal_acceptance_from_facts
-from tools.ai.task_runtime import GoalStatus, TaskStatus
+from tools.ai.task_runtime import AUTHORITATIVE_CERTAINTIES, GoalStatus, TaskStatus
 
 HANDOFF_TASK_SOURCE = "goal_handoff"
 
@@ -227,6 +227,78 @@ def advance_runnable_handoff_task(orchestrator: Any) -> str | None:
     return None
 
 
+def assess_handoff_acceptance_readiness(orchestrator: Any) -> dict[str, Any]:
+    """Report whether Goal Acceptance may start, without running Acceptance."""
+    runtime = getattr(orchestrator, "runtime", None)
+    tasks = getattr(runtime, "tasks", None) or {}
+    required_tasks = [
+        task
+        for task in tasks.values()
+        if str(getattr(task, "source", "") or "") == HANDOFF_TASK_SOURCE
+    ]
+    incomplete_task_ids = [
+        str(task.task_id)
+        for task in required_tasks
+        if str(getattr(task, "status", "") or "") != TaskStatus.COMPLETE.value
+    ]
+
+    missing_evidence: list[dict[str, str]] = []
+    evidence = getattr(runtime, "evidence", None) or {}
+    for task in required_tasks:
+        for condition in list(getattr(task, "completion_conditions", None) or []):
+            refs = list((getattr(task, "condition_evidence", None) or {}).get(condition) or [])
+            authoritative = any(
+                evidence_id in evidence
+                and bool(getattr(evidence[evidence_id], "verified", False))
+                and str(getattr(evidence[evidence_id], "certainty", "") or "")
+                in AUTHORITATIVE_CERTAINTIES
+                and condition
+                in list(
+                    getattr(
+                        evidence[evidence_id], "supported_completion_conditions", None
+                    )
+                    or []
+                )
+                for evidence_id in refs
+            )
+            if not authoritative:
+                missing_evidence.append(
+                    {"task_id": str(task.task_id), "condition": str(condition)}
+                )
+
+    unresolved_failure_ids: list[str] = []
+    actions = list(getattr(runtime, "actions", None) or [])
+    for failure in list(getattr(runtime, "failures", None) or []):
+        failure_time = str(getattr(failure, "created_at", "") or "")
+        failure_action_id = str(getattr(failure, "action_id", "") or "")
+        failure_tool = str(getattr(failure, "tool_name", "") or "")
+        resolved = any(
+            str(getattr(action, "task_id", "") or "")
+            == str(getattr(failure, "task_id", "") or "")
+            and (not failure_tool or str(getattr(action, "tool_name", "") or "") == failure_tool)
+            and str(getattr(action, "action_id", "") or "") != failure_action_id
+            and str(getattr(action, "result_status", "") or "") == "success"
+            and (
+                not failure_time
+                or str(getattr(action, "created_at", "") or "") >= failure_time
+            )
+            for action in actions
+        )
+        if not resolved:
+            unresolved_failure_ids.append(str(getattr(failure, "failure_id", "") or ""))
+
+    acceptance_ready = bool(required_tasks) and not (
+        incomplete_task_ids or unresolved_failure_ids or missing_evidence
+    )
+    return {
+        "acceptance_ready": acceptance_ready,
+        "required_task_ids": [str(task.task_id) for task in required_tasks],
+        "incomplete_task_ids": incomplete_task_ids,
+        "unresolved_failure_ids": unresolved_failure_ids,
+        "missing_evidence": missing_evidence,
+    }
+
+
 def pytest_failed_repair_hint(orchestrator: Any) -> str | None:
     if _latest_pytest_failure_action_id(orchestrator) is None:
         return None
@@ -359,6 +431,7 @@ def resolve_mission_achievement(
 __all__ = [
     "TEST_RUN_CLOSED",
     "advance_runnable_handoff_task",
+    "assess_handoff_acceptance_readiness",
     "apply_acceptance_pass_to_runtime_goal",
     "attach_handoff_verification_plan",
     "closed_test_evidence_present",

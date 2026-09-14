@@ -252,3 +252,34 @@ Status: PROVISIONAL
   planning-and-task-breakdown の task と Runtime TaskRecord を同一視する提案が出たとき。
   PROVISIONAL から Current へ昇格するとき。
 ```
+
+---
+
+## runtime_task_in_progress
+
+```text
+Concept: runtime_task_in_progress
+
+Origin: NOT_DETERMINED
+
+Current:
+  Runtime Task の in_progress は、current task として選択済みで実行可能な状態を表す。
+  in_progress だけでは、その Task に対する実 Action の開始または存在を意味しない。
+  実行開始の正本は Action 履歴とする。
+  TASK_STARTED event は pending 状態の Task に Action を記録する経路でのみ発生するため、
+  全経路における実行開始を表すイベントではない。
+
+Evidence:
+  tools/ai/task_runtime.py: TaskStatus / AgentTaskRuntime.record_action
+  ai_tool/goal_handoff_runtime_bridge.py: build_handoff_task_records
+  ai_tool/production_verification_acceptance.py: advance_runnable_handoff_task
+  tests/ai_tool/test_production_verification_acceptance.py:
+    test_task_completion_evidence_advances_next_handoff_task_without_executing_it
+
+Status: CURRENT (observed code contract)
+
+確認が必要になる条件:
+  in_progress を「最初の Action が開始済み」の意味へ変更するとき。
+  ready などの新しい Task 状態を導入するとき。
+  TASK_STARTED を全実行経路共通の開始イベントへ変更するとき。
+```

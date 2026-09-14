@@ -7,6 +7,7 @@ from ai_tool.mission_memory.chat_persist import persist_chat_execution
 from ai_tool.production_verification_acceptance import (
     TEST_RUN_CLOSED,
     advance_runnable_handoff_task,
+    assess_handoff_acceptance_readiness,
     evaluate_handoff_goal_acceptance,
     pending_verification_action,
     pytest_failed_repair_hint,
@@ -227,3 +228,67 @@ def test_task_completion_evidence_advances_next_handoff_task_without_executing_i
     assert orch.current_task_id == "gh-T2"
     assert orch.runtime.tasks["gh-T2"].status == TaskStatus.IN_PROGRESS.value
     assert not [action for action in orch.runtime.actions if action.task_id == "gh-T2"]
+
+
+def _complete_handoff_task_with_evidence(orch, task_id: str, evidence_id: str) -> None:
+    task = orch.runtime.tasks[task_id]
+    orch.runtime.add_evidence(
+        EvidenceRecord(
+            evidence_id,
+            "tool_result",
+            f"tool://{evidence_id}",
+            "completion observed",
+            f"A-{evidence_id}",
+            tool_name="run_test_plan" if TEST_RUN_CLOSED in task.completion_conditions else "create_file",
+            supported_completion_conditions=list(task.completion_conditions),
+        ),
+        [task_id],
+    )
+    orch.runtime.support_completion_conditions(task_id, evidence_id, task.completion_conditions)
+    assert orch.runtime.evaluate_task_from_evidence(task_id) is True
+
+
+def test_acceptance_readiness_requires_all_tasks_evidence_and_no_unresolved_failure():
+    orch = ChatTaskOrchestrator("acceptance-ready", "calculator")
+    seed_orchestrator_from_handoff(orch, _calc_packet())
+
+    initial = assess_handoff_acceptance_readiness(orch)
+    assert initial["acceptance_ready"] is False
+    assert initial["incomplete_task_ids"] == ["gh-T1", "gh-T2"]
+    assert initial["missing_evidence"]
+
+    _complete_handoff_task_with_evidence(orch, "gh-T1", "E-T1")
+    _complete_handoff_task_with_evidence(orch, "gh-T2", "E-T2")
+    orch.runtime.record_failure(
+        FailureRecord(
+            "F-unresolved",
+            "gh-T2",
+            "A-failed",
+            "run_test_plan",
+            {},
+            "pytest_failed",
+            created_at="2026-09-14T00:00:00Z",
+        )
+    )
+
+    blocked = assess_handoff_acceptance_readiness(orch)
+    assert blocked["acceptance_ready"] is False
+    assert blocked["incomplete_task_ids"] == []
+    assert blocked["missing_evidence"] == []
+    assert blocked["unresolved_failure_ids"] == ["F-unresolved"]
+
+    orch.runtime.record_action(
+        ActionRecord(
+            "A-passed",
+            "gh-T2",
+            "tool_call",
+            "run_test_plan",
+            {},
+            "success",
+            created_at="2026-09-14T00:01:00Z",
+        )
+    )
+    assert orch.runtime.evaluate_task_from_evidence("gh-T2") is True
+    ready = assess_handoff_acceptance_readiness(orch)
+    assert ready["acceptance_ready"] is True
+    assert ready["unresolved_failure_ids"] == []

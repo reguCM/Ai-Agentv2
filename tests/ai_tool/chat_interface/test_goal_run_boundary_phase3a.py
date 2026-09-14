@@ -449,23 +449,25 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
 
     def complete_one_task(*_args, orchestrator=None, **_kwargs):
         task = orchestrator.task
+        action_id = f"A{len(orchestrator.runtime.actions) + 1}"
+        evidence_id = f"E{len(orchestrator.runtime.evidence) + 1}"
         orchestrator.runtime.record_action(
-            ActionRecord("A1", task.task_id, "tool_call", "create_file", {}, "success")
+            ActionRecord(action_id, task.task_id, "tool_call", "create_file", {}, "success")
         )
         orchestrator.runtime.add_evidence(
             EvidenceRecord(
-                "E1",
+                evidence_id,
                 "tool_result",
                 "tool://create_file",
                 "implementation observed",
-                "A1",
+                action_id,
                 tool_name="create_file",
                 supported_completion_conditions=list(task.completion_conditions),
             ),
             [task.task_id],
         )
         orchestrator.runtime.support_completion_conditions(
-            task.task_id, "E1", task.completion_conditions
+            task.task_id, evidence_id, task.completion_conditions
         )
         return {"events": [], "task_runtime": orchestrator.snapshot()}
 
@@ -495,6 +497,9 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
         "stopped_before_next_task_execution": True,
     }
     assert result["production_status"] == "RUNTIME_TASK_COMPLETED_NEXT_READY"
+    assert result["acceptance_ready"] is False
+    assert result["acceptance_readiness"]["incomplete_task_ids"] == ["gh-T2"]
+    assert session["production_acceptance_readiness"] == result["acceptance_readiness"]
     assert result["task_runtime"]["current_task_id"] == "gh-T2"
     assert next(row for row in result["task_runtime"]["tasks"] if row["task_id"] == "gh-T1")[
         "status"
@@ -502,6 +507,15 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
     assert not [
         row for row in result["task_runtime"]["actions"] if row["task_id"] == "gh-T2"
     ]
+
+    ready = run_chat_turn(session, "/run", model="test")
+    assert ready["task_completion_boundary"]["task_id"] == "gh-T2"
+    assert ready["task_completion_boundary"]["completed"] is True
+    assert ready["task_completion_boundary"]["next_task_id"] is None
+    assert ready["acceptance_ready"] is True
+    assert ready["production_status"] == "GOAL_ACCEPTANCE_READY"
+    assert ready["task_completion_boundary"]["stopped_before_next_task_execution"] is True
+    assert session["production_acceptance_readiness"]["acceptance_ready"] is True
 
 
 def test_run_fails_closed_when_sandbox_bootstrap_fails(monkeypatch, tmp_path):

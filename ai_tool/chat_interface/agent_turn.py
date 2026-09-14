@@ -3311,7 +3311,10 @@ def _phase3a_command_result(
         orchestrator=orchestrator,
         max_tool_calls_this_turn=1,
     )
-    from ai_tool.production_verification_acceptance import advance_runnable_handoff_task
+    from ai_tool.production_verification_acceptance import (
+        advance_runnable_handoff_task,
+        assess_handoff_acceptance_readiness,
+    )
 
     task_completed = orchestrator.runtime.evaluate_task_from_evidence(task_id_before)
     if task_completed and orchestrator.current_task_id == task_id_before:
@@ -3336,7 +3339,9 @@ def _phase3a_command_result(
         if completed_task.condition_status.get(condition) != "SATISFIED"
     ]
     runtime_snapshot = orchestrator.snapshot()
+    acceptance_readiness = assess_handoff_acceptance_readiness(orchestrator)
     session["production_runtime_snapshot"] = runtime_snapshot
+    session["production_acceptance_readiness"] = acceptance_readiness
     session["production_runtime_handoff_integrity"] = {
         "handoff_id": packet.get("handoff_id"),
         "canonical_hash": before_hash,
@@ -3380,8 +3385,12 @@ def _phase3a_command_result(
                 "next_task_id": next_task_id,
                 "stopped_before_next_task_execution": True,
             },
+            "acceptance_readiness": acceptance_readiness,
+            "acceptance_ready": acceptance_readiness["acceptance_ready"],
             "production_status": (
-                "RUNTIME_TASK_COMPLETED_NEXT_READY"
+                "GOAL_ACCEPTANCE_READY"
+                if acceptance_readiness["acceptance_ready"]
+                else "RUNTIME_TASK_COMPLETED_NEXT_READY"
                 if task_completed and next_task_id
                 else "RUNTIME_TASK_COMPLETED"
                 if task_completed
