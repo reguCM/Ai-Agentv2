@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 
 from ai_tool.chat_interface.agent_turn import run_chat_turn
+from ai_tool.chat_interface.chat_session import load_session, save_session
 from ai_tool.production_verification_acceptance import TEST_RUN_CLOSED
 from ai_tool.verification_only_execution import (
     execute_verification_only_reentry as execute_verification_only_reentry_real,
@@ -14,6 +15,9 @@ from tools.ai.task_runtime import ActionRecord, EvidenceRecord
 def test_verification_only_evidence_uses_run_test_plan_condition_contract(
     tmp_path, monkeypatch
 ):
+    import ai_tool.chat_interface.chat_session as sessions
+
+    monkeypatch.setattr(sessions, "SESSIONS_DIR", tmp_path / "sessions")
     fixture = build_verification_meaning_loop_fixture(tmp_path)
     session = fixture["session"]
     initial_contract = session["production_run_contract"]
@@ -109,3 +113,37 @@ def test_verification_only_evidence_uses_run_test_plan_condition_contract(
     assert finalization_calls[0]["tools"] == []
     assert session["production_run_contract"] == initial_contract
     assert snapshot["sandbox_session"]["session_id"] == initial_sandbox_id
+
+    save_session(session)
+    reloaded = load_session(session["session_id"])
+    assert reloaded["production_run_contract"] == initial_contract
+    assert (
+        reloaded["production_runtime_snapshot"]["sandbox_session"]["session_id"]
+        == initial_sandbox_id
+    )
+
+    def unexpected_finalization(**_kwargs):
+        raise AssertionError("completed Goal must not run finalization again")
+
+    second = run_chat_turn(
+        reloaded,
+        "/run",
+        model="test",
+        chat_fn=unexpected_finalization,
+    )
+
+    assert calls["count"] == 1
+    assert len(finalization_calls) == 1
+    assert second["production_status"] == "GOAL_ACCEPTANCE_JUDGED"
+    assert second["acceptance_reused"] is True
+    assert second["goal_judgment_reused"] is True
+    assert "verification_execution" not in second
+    assert reloaded["production_run_contract"] == initial_contract
+    assert (
+        reloaded["production_runtime_snapshot"]["sandbox_session"]["session_id"]
+        == initial_sandbox_id
+    )
+    assert {row["evidence_id"] for row in reloaded["production_runtime_snapshot"]["evidence"]} >= {
+        "E5",
+        "E6",
+    }
