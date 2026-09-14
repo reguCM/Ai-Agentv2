@@ -323,3 +323,14 @@ def test_new_goal_archives_old_run_then_starts_new_run_in_new_sandbox(monkeypatc
     assert run_result["task_runtime"]["sandbox_session"]["session_id"] == "S-new"
     assert session["production_runtime_snapshot"]["sandbox_session"]["session_id"] == "S-new"
     assert session["production_run_generations"][-1] == archive
+
+    new_contract = dict(run_result["run_contract"])
+    session = load_session(session["session_id"])
+    resumed = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+
+    assert resumed["runtime_resumed"] is True
+    assert resumed["sandbox_started"] is False
+    assert starts["count"] == 1
+    assert resumed["run_contract"] == new_contract
+    assert resumed["task_runtime"]["sandbox_session"]["session_id"] == "S-new"
+    assert session["production_run_generations"][-1] == archive
