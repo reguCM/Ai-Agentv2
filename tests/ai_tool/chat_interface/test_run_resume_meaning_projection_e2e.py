@@ -266,9 +266,10 @@ def test_production_run_resume_uses_meaning_projection_and_fails_closed_on_meani
     )
     MissionMemoryStore.from_default().put_mission(revised)
     decision_blocked = run_chat_turn(session, "/run", chat_fn=chat, model="test")
-    assert decision_blocked["production_run_error"] == "invalid_meaning_context"
+    assert decision_blocked["production_run_error"] == "decision_revision_requires_new_goal"
     assert "inactive_or_missing_decision_premises:decision-quality-v1" in (
         decision_blocked["meaning_context_validation_errors"][0]
     )
+    assert "/goal" in decision_blocked["answer"]
     assert tool_calls["n"] == 2
     assert sandbox_starts["n"] == 1

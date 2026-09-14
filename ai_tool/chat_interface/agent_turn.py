@@ -3169,6 +3169,37 @@ def _canonical_handoff_hash(packet: Mapping[str, Any]) -> str:
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
+def _has_superseded_handoff_decision_premise(
+    mission: Mapping[str, Any],
+    handoff: Mapping[str, Any],
+) -> bool:
+    """Identify a deterministic Decision revision that invalidates saved Handoff premises."""
+    decisions = {
+        str(row.get("decision_id") or "").strip(): row
+        for row in (mission.get("confirmed_clarifications") or [])
+        if isinstance(row, Mapping) and str(row.get("decision_id") or "").strip()
+    }
+    for task in handoff.get("implementation_tasks") or []:
+        if not isinstance(task, Mapping):
+            continue
+        for premise in task.get("decision_premises") or []:
+            if not isinstance(premise, Mapping):
+                continue
+            prior_id = str(premise.get("derived_from_decision_id") or "").strip()
+            prior = decisions.get(prior_id)
+            if not isinstance(prior, Mapping) or str(prior.get("status") or "") != "superseded":
+                continue
+            successor = decisions.get(str(prior.get("superseded_by") or "").strip())
+            if (
+                isinstance(successor, Mapping)
+                and str(successor.get("status") or "") == "confirmed"
+                and str(successor.get("decision_key") or "")
+                == str(premise.get("decision_key") or "")
+            ):
+                return True
+    return False
+
+
 def _phase3a_command_result(
     *,
     session: dict[str, Any],
@@ -3226,13 +3257,26 @@ def _phase3a_command_result(
     try:
         run_meaning_snapshot = build_meaning_context_v0(mission or {}, packet)
     except MeaningContextError as exc:
+        decision_revision_requires_new_goal = _has_superseded_handoff_decision_premise(
+            mission or {}, packet
+        )
+        meaning_error_code = (
+            "decision_revision_requires_new_goal"
+            if decision_revision_requires_new_goal
+            else "invalid_meaning_context"
+        )
         return {
             "route": "chat",
-            "answer": "現在のMissionとGoal Handoffから実行用のMeaning Contextを確定できないため、Runtimeを開始しません。",
+            "answer": (
+                "Human Decisionが改訂されたため、保存済みRunは再開できません。"
+                "`/goal ...` で最新Decisionを含むGoalを確定してから新しいRunを開始してください。"
+                if decision_revision_requires_new_goal
+                else "現在のMissionとGoal Handoffから実行用のMeaning Contextを確定できないため、Runtimeを開始しません。"
+            ),
             "events": [
                 event(
                     "production_run_blocked",
-                    reason="invalid_meaning_context",
+                    reason=meaning_error_code,
                 )
             ],
             "tool_used": False,
@@ -3245,7 +3289,7 @@ def _phase3a_command_result(
             "task_runtime": None,
             "runtime_prepared": False,
             "runtime_started": False,
-            "production_run_error": "invalid_meaning_context",
+            "production_run_error": meaning_error_code,
             "meaning_context_validation_errors": [str(exc)],
         }
     existing_runtime = session.get("production_runtime_snapshot")
