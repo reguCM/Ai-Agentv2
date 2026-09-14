@@ -158,7 +158,11 @@ from ai_tool.goal_handoff_runtime_bridge import (
     restore_orchestrator_from_runtime_snapshot,
 )
 from ai_tool.goal_handoff_source_binding import validate_handoff_source_binding
-from ai_tool.production_meaning_context import build_meaning_context_v0
+from ai_tool.production_meaning_context import MeaningContextError, build_meaning_context_v0
+from ai_tool.production_run_contract import (
+    build_production_run_contract,
+    validate_production_run_contract,
+)
 from ai_tool.mission_memory.paths import MissionMemoryError
 from ai_tool.mission_memory.ids import new_mission_id
 from ai_tool.mission_memory.store import MissionMemoryStore
@@ -3200,6 +3204,31 @@ def _phase3a_command_result(
             "production_run_error": "missing_or_invalid_handoff",
             "handoff_validation_errors": errors,
         }
+    try:
+        run_meaning_snapshot = build_meaning_context_v0(mission or {}, packet)
+    except MeaningContextError as exc:
+        return {
+            "route": "chat",
+            "answer": "現在のMissionとGoal Handoffから実行用のMeaning Contextを確定できないため、Runtimeを開始しません。",
+            "events": [
+                event(
+                    "production_run_blocked",
+                    reason="invalid_meaning_context",
+                )
+            ],
+            "tool_used": False,
+            "tools": [],
+            "web_search": False,
+            "research_saved": False,
+            "executor": "local_agent",
+            "cursor_connected": False,
+            "memory": memory,
+            "task_runtime": None,
+            "runtime_prepared": False,
+            "runtime_started": False,
+            "production_run_error": "invalid_meaning_context",
+            "meaning_context_validation_errors": [str(exc)],
+        }
     existing_runtime = session.get("production_runtime_snapshot")
     existing_sandbox = (
         existing_runtime.get("sandbox_session")
@@ -3212,6 +3241,63 @@ def _phase3a_command_result(
         and str(existing_sandbox.get("status") or "") == "ACTIVE"
     )
     before_hash = _canonical_handoff_hash(packet)
+    existing_contract = session.get("production_run_contract")
+    if isinstance(existing_contract, Mapping):
+        contract_errors = validate_production_run_contract(
+            existing_contract,
+            mission=mission or {},
+            handoff=packet,
+            meaning_context=run_meaning_snapshot,
+            handoff_canonical_hash=before_hash,
+            runtime_snapshot=existing_runtime if resume_runtime else None,
+        )
+        if contract_errors:
+            return {
+                "route": "chat",
+                "answer": "保存済みRun Contractと現在の正本が一致しないため、Runtimeを再開しません。",
+                "events": [
+                    event(
+                        "production_run_blocked",
+                        reason="run_contract_mismatch",
+                    )
+                ],
+                "tool_used": False,
+                "tools": [],
+                "web_search": False,
+                "research_saved": False,
+                "executor": "local_agent",
+                "cursor_connected": False,
+                "memory": memory,
+                "task_runtime": dict(existing_runtime)
+                if isinstance(existing_runtime, Mapping)
+                else None,
+                "runtime_prepared": bool(existing_runtime),
+                "runtime_started": bool(existing_runtime),
+                "sandbox_started": False,
+                "production_run_error": "run_contract_mismatch",
+                "run_contract_validation_errors": contract_errors,
+                "run_contract": dict(existing_contract),
+            }
+    elif resume_runtime:
+        return {
+            "route": "chat",
+            "answer": "再開対象RuntimeにRun Contractが存在しないため、Runtimeを再開しません。",
+            "events": [
+                event("production_run_blocked", reason="missing_run_contract")
+            ],
+            "tool_used": False,
+            "tools": [],
+            "web_search": False,
+            "research_saved": False,
+            "executor": "local_agent",
+            "cursor_connected": False,
+            "memory": memory,
+            "task_runtime": dict(existing_runtime),
+            "runtime_prepared": True,
+            "runtime_started": True,
+            "sandbox_started": False,
+            "production_run_error": "missing_run_contract",
+        }
     saved_runtime_identity = session.get("production_runtime_handoff_integrity")
     if resume_runtime and (
         not isinstance(saved_runtime_identity, Mapping)
@@ -3473,6 +3559,16 @@ def _phase3a_command_result(
             sandbox = orchestrator.runtime.sandbox_session
         else:
             prepare_orchestrator_from_handoff(orchestrator, packet)
+            if not isinstance(existing_contract, Mapping):
+                existing_contract = build_production_run_contract(
+                    started_execution_id=str(orchestrator.execution_id or ""),
+                    mission=mission or {},
+                    handoff=packet,
+                    meaning_context=run_meaning_snapshot,
+                    starting_task_id=str(orchestrator.current_task_id or ""),
+                    handoff_canonical_hash=before_hash,
+                )
+                session["production_run_contract"] = existing_contract
             sandbox = orchestrator.runtime.start_dedicated_sandbox(
                 DEVELOPMENT_WORKTREE,
                 resolve_configured_sandbox_parent(DEVELOPMENT_WORKTREE),
@@ -3502,6 +3598,8 @@ def _phase3a_command_result(
             "sandbox_started": False,
             "production_run_error": reason,
             "handoff_packet": packet,
+            "run_meaning_snapshot": run_meaning_snapshot,
+            "run_contract": dict(existing_contract or {}),
             "handoff_integrity": {
                 "handoff_id": packet.get("handoff_id"),
                 "saved_canonical_hash": before_hash,
@@ -3605,6 +3703,8 @@ def _phase3a_command_result(
             "sandbox_started": not resume_runtime,
             "runtime_resumed": resume_runtime,
             "handoff_packet": packet,
+            "run_meaning_snapshot": run_meaning_snapshot,
+            "run_contract": dict(existing_contract or {}),
             "handoff_integrity": {
             "handoff_id": packet.get("handoff_id"),
             "saved_canonical_hash": before_hash,

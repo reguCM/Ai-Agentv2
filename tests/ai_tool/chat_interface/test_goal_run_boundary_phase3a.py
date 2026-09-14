@@ -16,6 +16,7 @@ from ai_tool.chat_interface.requirement_resolution import (
 from ai_tool.dev_skill_pipeline import build_handoff_packet, validate_handoff_packet
 from ai_tool.goal_handoff_source_binding import build_handoff_source_binding
 from ai_tool.mission_memory.store import MissionMemoryStore
+from ai_tool.production_meaning_context import MeaningContextError
 from tools.ai.sandbox_workspace import SandboxSession
 from tools.ai.task_runtime import ActionRecord, EvidenceRecord
 
@@ -84,6 +85,16 @@ def _put_phase3a_mission() -> None:
                     "materiality": "blocks_design",
                 }
                 for requirement_id in ("req-goal", "req-quality")
+            ],
+            "confirmed_clarifications": [
+                {
+                    "decision_id": "decision-quality-v1",
+                    "decision_key": "quality:definition",
+                    "status": "confirmed",
+                    "source": "requirement_resolution",
+                    "text": "test quality definition",
+                    "human_confirmed": True,
+                }
             ],
         }
     )
@@ -154,6 +165,30 @@ def test_run_fails_closed_for_handoff_source_mismatch(
     assert expected_error in result["handoff_validation_errors"]
     assert result["runtime_started"] is False
     assert result["task_runtime"] is None
+
+
+def test_run_fails_closed_when_current_meaning_context_cannot_be_built(
+    monkeypatch, tmp_path
+):
+    _isolate_session(monkeypatch, tmp_path)
+    session = empty_session()
+    session["last_mission_id"] = "m-phase3a"
+    session["production_handoff_packet"] = _packet(
+        goal="test goal", meaning="test meaning", path="app/main.py", slug="meaning-context"
+    )
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.build_meaning_context_v0",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            MeaningContextError("invalid_source_binding:source_mission_mismatch")
+        ),
+    )
+
+    result = run_chat_turn(session, "/run", model="test")
+
+    assert result["production_run_error"] == "invalid_meaning_context"
+    assert result["runtime_started"] is False
+    assert result["task_runtime"] is None
+    assert "production_run_contract" not in session
 
 
 def test_goal_command_reuses_specification_path_and_stops_with_saved_handoff(monkeypatch, tmp_path):
@@ -434,6 +469,30 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     assert result["handoff_integrity"]["handoff_id"] == packet["handoff_id"]
     assert result["handoff_integrity"]["canonical_hash_equal"] is True
     assert result["handoff_integrity"]["immutable_fields_equal"] is True
+    contract = result["run_contract"]
+    assert contract == session["production_run_contract"]
+    assert contract["started_execution_id"]
+    assert contract["mission_id"] == "m-phase3a"
+    assert contract["requirement_ids"] == ["req-goal", "req-quality"]
+    assert contract["handoff_id"] == packet["handoff_id"]
+    assert contract["handoff_canonical_hash"] == result["handoff_integrity"]["saved_canonical_hash"]
+    assert contract["starting_task_id"] == "gh-T1"
+    assert contract["meaning_context"] == result["run_meaning_snapshot"]
+    assert contract["meaning_context_hash"]
+    assert contract["decision_premises"] == [
+        {
+            "decision_key": "quality:definition",
+            "active_decision_id": "decision-quality-v1",
+            "validated_against_decision_id": "decision-quality-v1",
+        }
+    ]
+    assert "production_run_meaning_snapshot" not in session
+    assert result["run_meaning_snapshot"]["identity"]["mission_id"] == "m-phase3a"
+    assert result["run_meaning_snapshot"]["identity"]["handoff_id"] == packet["handoff_id"]
+    assert result["run_meaning_snapshot"]["identity"]["requirement_ids"] == [
+        "req-goal",
+        "req-quality",
+    ]
     runtime = result["task_runtime"]
     assert runtime["sandbox_session"]["session_id"] == sandbox.session_id
     assert tool_calls["n"] == 1
@@ -457,6 +516,8 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
 
     _put_phase3a_mission()
     repeated = run_chat_turn(session, "/run", chat_fn=chat, model="test")
+    assert repeated["run_contract"] == contract
+    assert session["production_run_contract"] == contract
     assert repeated["runtime_resumed"] is True
     assert repeated["task_step_executed"] is True
     assert repeated["sandbox_started"] is False
@@ -490,7 +551,11 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     session["production_handoff_packet"]["goal"]["summary"] += " changed"
     _put_phase3a_mission()
     invalid_handoff = run_chat_turn(session, "/run", chat_fn=chat, model="test")
-    assert invalid_handoff["production_run_error"] == "runtime_handoff_mismatch"
+    assert invalid_handoff["production_run_error"] == "run_contract_mismatch"
+    assert (
+        "run_contract_handoff_hash_mismatch"
+        in invalid_handoff["run_contract_validation_errors"]
+    )
     assert tool_calls["n"] == 3
 
 
