@@ -23,6 +23,7 @@ from ai_tool.dev_skill_pipeline import (
     validate_handoff_packet,
 )
 from ai_tool.goal_handoff_runtime_bridge import seed_orchestrator_from_handoff
+from ai_tool.goal_handoff_source_binding import build_handoff_source_binding
 from ai_tool.grill_me_loop import run_production_grill_me_step, validate_resolved_requirement_meanings
 from ai_tool.human_decision_premise import (
     active_decision_catalog,
@@ -473,6 +474,7 @@ def run_production_spec_handoff_pipeline(
     """Generate a validated Goal Handoff from Phase 1 and stop before Runtime."""
     memory = store or MissionMemoryStore.from_default()
     mission = dict(memory.get_mission(mission_id) or {})
+    source_binding = build_handoff_source_binding(mission)
     clarifications = resolve_pipeline_clarifications(
         mission_id=mission_id,
         confirmed_clarifications=mission.get("confirmed_clarifications") or [],
@@ -490,6 +492,7 @@ def run_production_spec_handoff_pipeline(
         confirmed_clarifications=clarifications,
         phase1_aligned_spec=aligned_spec,
         phase1_semantic_preservation=semantic_preservation,
+        source_binding=source_binding,
     )
     payload = result.as_dict()
     if result.errors or not result.handoff_packet:

@@ -384,6 +384,12 @@ def test_production_spec_handoff_preserves_quality_and_does_not_start_runtime(tm
     assert result["runtime_started"] is False
     assert set(result["semantic_trace"].values()) == {"PRESERVED"}
     assert quality in json.dumps(result["handoff_packet"], ensure_ascii=False)
+    assert result["handoff_packet"]["source_binding"] == {
+        "mission_id": mission["mission_id"],
+        "requirement_ids": sorted(
+            row["requirement_id"] for row in mission["structured_requirements"]
+        ),
+    }
     assert result["handoff_packet"]["runtime_boundary"]["production_connected"] is False
 
 
@@ -426,6 +432,10 @@ def test_production_spec_handoff_calculator_has_no_tetris_fallback(tmp_path):
     assert "tetris" not in rendered
     assert "テトリス" not in rendered
     assert "calculator/main.py" in rendered
+    assert result["handoff_packet"]["source_binding"] == {
+        "mission_id": mission["mission_id"],
+        "requirement_ids": ["req-calculator"],
+    }
     assert result["runtime_started"] is False
 
 

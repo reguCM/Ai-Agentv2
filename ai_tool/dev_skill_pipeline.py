@@ -607,6 +607,7 @@ def build_handoff_packet(
     skill_steps: list[str],
     handoff_slug: str = "dev-skill-pipeline",
     confirmed_clarifications: Sequence[Mapping[str, Any]] | None = None,
+    source_binding: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     if prd is not None:
         aligned = _aligned_spec_from_prd(prd, initial_request)
@@ -642,7 +643,7 @@ def build_handoff_packet(
             }
         )
 
-    return {
+    packet = {
         "handoff_version": "0.1",
         "handoff_id": _handoff_id(handoff_slug),
         "status": "ready",
@@ -692,6 +693,9 @@ def build_handoff_packet(
             "notes": "E2E harness consumes handoff prompt locally; Production Runtime handoff ingest is NOT CONNECTED.",
         },
     }
+    if source_binding is not None:
+        packet["source_binding"] = dict(source_binding)
+    return packet
 
 
 def validate_handoff_packet(packet: Mapping[str, Any]) -> list[str]:
@@ -879,6 +883,7 @@ def _run_composition_skill(
                 plan=context.get("plan") or {},
                 skill_steps=["grill-me", *executed_skills] if executed_skills else steps,
                 confirmed_clarifications=context.get("confirmed_clarifications"),
+                source_binding=context.get("source_binding"),
             )
             errors = validate_handoff_packet(packet)
             if errors:
@@ -966,6 +971,7 @@ def run_dev_skill_pipeline(
     orchestrator: Any | None = None,
     phase1_aligned_spec: Mapping[str, Any] | None = None,
     phase1_semantic_preservation: Mapping[str, Any] | None = None,
+    source_binding: Mapping[str, Any] | None = None,
 ) -> DevSkillPipelineResult:
     registry = load_registry()
     steps = composition_steps(composition_id, registry)
@@ -1102,6 +1108,7 @@ def run_dev_skill_pipeline(
         "grill_me_executed": True,
         "confirmed_clarifications": pipeline_clarifications,
         "mission_id": mission_id,
+        "source_binding": dict(source_binding) if source_binding is not None else None,
     }
     executed_skills: list[str] = []
 

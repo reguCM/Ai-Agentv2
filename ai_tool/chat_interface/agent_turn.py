@@ -157,6 +157,7 @@ from ai_tool.goal_handoff_runtime_bridge import (
     prepare_orchestrator_from_handoff,
     restore_orchestrator_from_runtime_snapshot,
 )
+from ai_tool.goal_handoff_source_binding import validate_handoff_source_binding
 from ai_tool.mission_memory.paths import MissionMemoryError
 from ai_tool.mission_memory.ids import new_mission_id
 from ai_tool.mission_memory.store import MissionMemoryStore
@@ -3175,6 +3176,11 @@ def _phase3a_command_result(
     saved = session.get("production_handoff_packet")
     packet = json.loads(json.dumps(saved, ensure_ascii=False)) if isinstance(saved, Mapping) else None
     errors = validate_handoff_packet(packet or {})
+    mission_id = str(session.get("last_mission_id") or "").strip()
+    mission = MissionMemoryStore.from_default().get_mission(mission_id) if mission_id else None
+    if packet is not None:
+        errors.extend(validate_handoff_source_binding(packet, mission))
+        errors = sorted(set(errors))
     if packet is None or str(packet.get("status") or "") != "ready" or errors:
         return {
             "route": "chat",

@@ -14,6 +14,8 @@ from ai_tool.chat_interface.requirement_resolution import (
     StructuredRequirement,
 )
 from ai_tool.dev_skill_pipeline import build_handoff_packet, validate_handoff_packet
+from ai_tool.goal_handoff_source_binding import build_handoff_source_binding
+from ai_tool.mission_memory.store import MissionMemoryStore
 from tools.ai.sandbox_workspace import SandboxSession
 from tools.ai.task_runtime import ActionRecord, EvidenceRecord
 
@@ -53,9 +55,38 @@ def _packet(*, goal: str, meaning: str, path: str, slug: str) -> dict:
         },
         skill_steps=["write-prd", "tech-spec", "planning-and-task-breakdown", "goal-handoff"],
         handoff_slug=slug,
+        source_binding={
+            "mission_id": "m-phase3a",
+            "requirement_ids": ["req-goal", "req-quality"],
+        },
     )
     assert not validate_handoff_packet(packet)
     return packet
+
+
+def _put_phase3a_mission() -> None:
+    MissionMemoryStore.from_default().put_mission(
+        {
+            "schema_version": "1",
+            "mission_id": "m-phase3a",
+            "original_goal": "test goal",
+            "explicit_conditions": [],
+            "explicit_constraints": [],
+            "user_confirmed_supplements": [],
+            "structured_requirements": [
+                {
+                    "requirement_id": requirement_id,
+                    "source_text": requirement_id,
+                    "source_span": [0, 0],
+                    "disposition": "GOAL",
+                    "resolution_status": "resolved",
+                    "provenance": "user_explicit",
+                    "materiality": "blocks_design",
+                }
+                for requirement_id in ("req-goal", "req-quality")
+            ],
+        }
+    )
 
 
 def _isolate_session(monkeypatch: pytest.MonkeyPatch, tmp_path) -> None:
@@ -68,6 +99,7 @@ def _isolate_session(monkeypatch: pytest.MonkeyPatch, tmp_path) -> None:
         "ai_tool.mission_memory.store.default_store_root",
         lambda: tmp_path / "mission-memory",
     )
+    _put_phase3a_mission()
 
 
 def test_goal_without_content_returns_usage_and_does_not_start_runtime(monkeypatch, tmp_path):
@@ -89,11 +121,47 @@ def test_run_without_saved_handoff_fails_closed(monkeypatch, tmp_path):
     assert result["task_runtime"] is None
 
 
+@pytest.mark.parametrize(
+    ("mutate", "expected_error"),
+    [
+        (
+            lambda packet: packet["source_binding"].update(mission_id="m-other"),
+            "source_mission_mismatch",
+        ),
+        (
+            lambda packet: packet["source_binding"].update(
+                requirement_ids=["req-goal", "req-unknown"]
+            ),
+            "source_requirement_mismatch",
+        ),
+    ],
+)
+def test_run_fails_closed_for_handoff_source_mismatch(
+    monkeypatch, tmp_path, mutate, expected_error
+):
+    _isolate_session(monkeypatch, tmp_path)
+    packet = _packet(
+        goal="test goal", meaning="test meaning", path="app/main.py", slug="source-mismatch"
+    )
+    mutate(packet)
+    session = empty_session()
+    session["last_mission_id"] = "m-phase3a"
+    session["production_handoff_packet"] = packet
+
+    result = run_chat_turn(session, "/run", model="test")
+
+    assert result["production_run_error"] == "missing_or_invalid_handoff"
+    assert expected_error in result["handoff_validation_errors"]
+    assert result["runtime_started"] is False
+    assert result["task_runtime"] is None
+
+
 def test_goal_command_reuses_specification_path_and_stops_with_saved_handoff(monkeypatch, tmp_path):
     _isolate_session(monkeypatch, tmp_path)
     request = "高品質なテトリスを作って"
     quality = "操作応答が良く、基本ルールが正しく動き、見た目も最低限整っている"
     packet = _packet(goal=request, meaning=quality, path="game/main.py", slug="phase3a-goal")
+    packet["implementation_tasks"][0]["decision_premises"] = []
     bundle = RequirementResolutionBundle(
         original_goal=request,
         structured_requirements=[
@@ -148,9 +216,10 @@ def test_goal_command_reuses_specification_path_and_stops_with_saved_handoff(mon
             "ambiguity_report": {},
         },
     )
-    monkeypatch.setattr(
-        "ai_tool.chat_interface.agent_turn.run_production_spec_handoff_pipeline",
-        lambda **_kwargs: {
+    def fake_spec_pipeline(**kwargs):
+        mission = MissionMemoryStore.from_default().get_mission(kwargs["mission_id"])
+        packet["source_binding"] = build_handoff_source_binding(mission)
+        return {
             "production_status": "SPEC_AND_HANDOFF_READY",
             "prd": {"goals": quality},
             "tech_spec": {"summary": quality},
@@ -158,7 +227,11 @@ def test_goal_command_reuses_specification_path_and_stops_with_saved_handoff(mon
             "handoff_packet": packet,
             "semantic_trace": {"handoff": "PRESERVED"},
             "runtime_started": False,
-        },
+        }
+
+    monkeypatch.setattr(
+        "ai_tool.chat_interface.agent_turn.run_production_spec_handoff_pipeline",
+        fake_spec_pipeline,
     )
     session = empty_session()
 
@@ -169,6 +242,20 @@ def test_goal_command_reuses_specification_path_and_stops_with_saved_handoff(mon
     assert result["runtime_started"] is False
     assert result["task_runtime"] is None
     assert session["production_handoff_packet"] == packet
+    assert result["meaning_context"] == session["production_meaning_context"]
+    assert result["meaning_context"]["identity"]["mission_id"]
+    assert result["meaning_context"]["identity"]["handoff_id"] == packet["handoff_id"]
+    assert result["meaning_context"]["human_meaning"]["original_goal"] == request
+    assert result["meaning_context"]["human_meaning"]["structured_requirements"][0][
+        "normalized_meaning"
+    ] == quality
+    assert result["meaning_context"]["implementation_meaning"]["acceptance_criteria"] == packet[
+        "acceptance_criteria"
+    ]
+    assert result["meaning_context_status"] == "partial"
+    assert load_session(session["session_id"])["production_meaning_context"] == result[
+        "meaning_context"
+    ]
 
 
 @pytest.mark.parametrize(
@@ -368,6 +455,7 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
         assert "テトリス" not in rendered
         assert "tetris/main.py" not in rendered
 
+    _put_phase3a_mission()
     repeated = run_chat_turn(session, "/run", chat_fn=chat, model="test")
     assert repeated["runtime_resumed"] is True
     assert repeated["task_step_executed"] is True
@@ -377,6 +465,7 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
     assert len(repeated["task_runtime"]["actions"]) == 2
     assert (sandbox_root / "next-step.txt").is_file()
 
+    _put_phase3a_mission()
     same_call_as_new_action = run_chat_turn(session, "/run", chat_fn=chat, model="test")
     assert same_call_as_new_action["runtime_resumed"] is True
     assert same_call_as_new_action["task_step_executed"] is True
@@ -393,11 +482,13 @@ def test_run_executes_only_first_task_step_for_exact_saved_handoff(
         "ai_tool.chat_interface.agent_turn.restore_orchestrator_from_runtime_snapshot",
         lambda *_args, **_kwargs: (_ for _ in ()).throw(ValueError("sandbox identity mismatch")),
     )
+    _put_phase3a_mission()
     invalid_sandbox = run_chat_turn(session, "/run", chat_fn=chat, model="test")
     assert invalid_sandbox["production_run_error"] == "runtime_resume_validation_failed"
     assert tool_calls["n"] == 3
 
     session["production_handoff_packet"]["goal"]["summary"] += " changed"
+    _put_phase3a_mission()
     invalid_handoff = run_chat_turn(session, "/run", chat_fn=chat, model="test")
     assert invalid_handoff["production_run_error"] == "runtime_handoff_mismatch"
     assert tool_calls["n"] == 3
@@ -434,6 +525,7 @@ def test_run_completes_current_task_from_evidence_selects_next_task_and_stops(
     packet["implementation_tasks"].append(second)
     assert not validate_handoff_packet(packet)
     session = empty_session()
+    session["last_mission_id"] = "m-phase3a"
     session["production_handoff_packet"] = packet
     sandbox_root = tmp_path / "sandbox"
     sandbox_root.mkdir()
@@ -583,6 +675,7 @@ def test_run_fails_closed_when_sandbox_bootstrap_fails(monkeypatch, tmp_path):
         slug="phase3b-sandbox-failure",
     )
     session = empty_session()
+    session["last_mission_id"] = "m-phase3a"
     session["production_handoff_packet"] = packet
     monkeypatch.setattr(
         "tools.ai.task_runtime.AgentTaskRuntime.start_dedicated_sandbox",
