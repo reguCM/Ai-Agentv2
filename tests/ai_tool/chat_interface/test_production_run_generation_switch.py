@@ -6,7 +6,7 @@ from ai_tool.chat_interface.agent_turn import (
     _archive_active_production_run_for_new_handoff,
     run_chat_turn,
 )
-from ai_tool.chat_interface.chat_session import empty_session
+from ai_tool.chat_interface.chat_session import empty_session, load_session
 from ai_tool.chat_interface.requirement_decomposition import (
     RequirementDecomposition,
     RequirementStatus,
@@ -228,6 +228,11 @@ def test_new_goal_archives_old_run_then_starts_new_run_in_new_sandbox(monkeypatc
     assert archive["handoff_id"] == old_packet["handoff_id"]
     assert archive["production_run_contract"]["started_execution_id"] == "exec-old"
     assert archive["production_runtime_snapshot"]["sandbox_session"]["session_id"] == "S-old"
+    session = load_session(session["session_id"])
+    assert session["production_handoff_packet"]["handoff_id"] == new_packet["handoff_id"]
+    assert "production_runtime_snapshot" not in session
+    assert "production_run_contract" not in session
+    assert session["production_run_generations"][-1] == archive
 
     sandbox_root = tmp_path / "new-sandbox"
     sandbox_root.mkdir()
