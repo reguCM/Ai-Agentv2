@@ -317,10 +317,15 @@ def pytest_failed_repair_hint(orchestrator: Any) -> str | None:
 
 def _mapped_tasks_complete(orchestrator: Any, acceptance_id: str) -> bool | None:
     tasks = getattr(getattr(orchestrator, "runtime", None), "tasks", None) or {}
-    mapped_ids: list[str] = []
-    for item in getattr(orchestrator, "handoff_task_acceptance_mapping", None) or []:
-        if acceptance_id in [str(token) for token in (item.get("maps_to_acceptance") or [])]:
-            mapped_ids.append(str(item.get("runtime_task_id") or ""))
+    trace_fn = getattr(orchestrator, "handoff_acceptance_runtime_trace", None)
+    trace = list(trace_fn()) if callable(trace_fn) else []
+    mapped_ids = [
+        str(item.get("runtime_task_id") or "")
+        for row in trace
+        if str(row.get("acceptance_id") or "") == acceptance_id
+        for item in (row.get("mapped_runtime_tasks") or [])
+        if isinstance(item, Mapping)
+    ]
     mapped_ids = [item for item in mapped_ids if item]
     if not mapped_ids:
         return None

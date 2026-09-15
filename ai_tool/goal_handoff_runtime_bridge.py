@@ -31,6 +31,8 @@ from tools.ai.task_runtime import (
 )
 
 HANDOFF_TASK_SOURCE = "goal_handoff"
+COMPLETION_GAP_TASK_SOURCE = "completion_gap"
+COMPLETION_GAP_ACCEPTANCE_BINDINGS_KEY = "completion_gap_acceptance_bindings"
 ROOT_GOAL_ID = "G1"
 
 
@@ -231,6 +233,119 @@ def build_handoff_task_acceptance_mapping(
     return mapping
 
 
+def _token(value: Any) -> str:
+    return str(value or "").strip()
+
+
+def _validated_completion_gap_acceptance_bindings(orchestrator: Any) -> list[dict[str, str]]:
+    """Return explicit Runtime-only Completion Gap -> Acceptance links.
+
+    A link is valid only when it points back to an existing Handoff T* whose
+    declared ``maps_to_acceptance`` contains the referenced A*.  This keeps
+    the Handoff as the canonical specification while making an extra Runtime
+    task visible to the existing Acceptance trace after snapshot restore.
+    """
+    rows = getattr(orchestrator, "completion_gap_acceptance_bindings", None) or []
+    if not isinstance(rows, list):
+        raise ValueError("invalid_completion_gap_acceptance_bindings")
+    tasks = getattr(getattr(orchestrator, "runtime", None), "tasks", None) or {}
+    handoff_maps = getattr(orchestrator, "handoff_task_acceptance_mapping", None) or []
+    acceptance_ids = {
+        _token(row.get("acceptance_id"))
+        for row in (getattr(orchestrator, "handoff_acceptance_projection", None) or [])
+        if isinstance(row, Mapping) and _token(row.get("acceptance_id"))
+    }
+    allowed: dict[str, set[str]] = {}
+    for row in handoff_maps:
+        if not isinstance(row, Mapping):
+            continue
+        source_task_id = _token(row.get("source_task_id"))
+        if source_task_id:
+            allowed[source_task_id] = {
+                _token(item) for item in (row.get("maps_to_acceptance") or []) if _token(item)
+            }
+
+    result: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for raw in rows:
+        if not isinstance(raw, Mapping):
+            raise ValueError("invalid_completion_gap_acceptance_binding")
+        runtime_task_id = _token(raw.get("runtime_task_id"))
+        source_task_id = _token(raw.get("source_task_id"))
+        acceptance_id = _token(raw.get("acceptance_id"))
+        if not runtime_task_id or not source_task_id or not acceptance_id:
+            raise ValueError("missing_completion_gap_acceptance_binding_identity")
+        pair = (runtime_task_id, acceptance_id)
+        if pair in seen:
+            raise ValueError(
+                f"duplicate_completion_gap_acceptance_binding:{runtime_task_id}:{acceptance_id}"
+            )
+        seen.add(pair)
+        task = tasks.get(runtime_task_id)
+        if task is None:
+            raise ValueError(f"completion_gap_runtime_task_not_found:{runtime_task_id}")
+        if _token(getattr(task, "source", None)) != COMPLETION_GAP_TASK_SOURCE:
+            raise ValueError(f"invalid_completion_gap_task_source:{runtime_task_id}")
+        if _token(getattr(task, "source_task_id", None)) != source_task_id:
+            raise ValueError(f"completion_gap_source_task_mismatch:{runtime_task_id}")
+        if acceptance_id not in acceptance_ids:
+            raise ValueError(f"completion_gap_acceptance_not_found:{acceptance_id}")
+        if acceptance_id not in allowed.get(source_task_id, set()):
+            raise ValueError(
+                f"completion_gap_acceptance_not_mapped:{source_task_id}:{acceptance_id}"
+            )
+        result.append(
+            {
+                "runtime_task_id": runtime_task_id,
+                "source_task_id": source_task_id,
+                "acceptance_id": acceptance_id,
+            }
+        )
+    return result
+
+
+def register_completion_gap_acceptance_binding(
+    orchestrator: Any,
+    *,
+    runtime_task_id: str,
+    source_task_id: str,
+    acceptance_id: str,
+) -> dict[str, str]:
+    """Attach one validated Runtime Completion Gap task to one Handoff A*."""
+    candidate = {
+        "runtime_task_id": _token(runtime_task_id),
+        "source_task_id": _token(source_task_id),
+        "acceptance_id": _token(acceptance_id),
+    }
+    existing = list(getattr(orchestrator, "completion_gap_acceptance_bindings", None) or [])
+    orchestrator.completion_gap_acceptance_bindings = [*existing, candidate]
+    try:
+        validated = _validated_completion_gap_acceptance_bindings(orchestrator)
+    except Exception:
+        orchestrator.completion_gap_acceptance_bindings = existing
+        raise
+    orchestrator.completion_gap_acceptance_bindings = validated
+    return dict(candidate)
+
+
+def restore_completion_gap_acceptance_bindings(
+    orchestrator: Any,
+    snapshot: Mapping[str, Any],
+) -> None:
+    """Restore and fail closed on invalid Runtime-only Acceptance support."""
+    rows = snapshot.get(COMPLETION_GAP_ACCEPTANCE_BINDINGS_KEY) or []
+    if not isinstance(rows, list):
+        raise ValueError("invalid_completion_gap_acceptance_bindings")
+    orchestrator.completion_gap_acceptance_bindings = [
+        dict(row) for row in rows if isinstance(row, Mapping)
+    ]
+    if len(orchestrator.completion_gap_acceptance_bindings) != len(rows):
+        raise ValueError("invalid_completion_gap_acceptance_binding")
+    orchestrator.completion_gap_acceptance_bindings = _validated_completion_gap_acceptance_bindings(
+        orchestrator
+    )
+
+
 def build_handoff_acceptance_runtime_trace(orchestrator: Any) -> list[dict[str, Any]]:
     """READ-ONLY: A* → statement → mapped runtime tasks (from maps_to_acceptance only)."""
     acceptance_rows = list(getattr(orchestrator, "handoff_acceptance_projection", None) or [])
@@ -247,6 +362,10 @@ def build_handoff_acceptance_runtime_trace(orchestrator: Any) -> list[dict[str, 
             refs = runtime_by_acceptance.setdefault(token, [])
             if runtime_task_id_value not in refs:
                 refs.append(runtime_task_id_value)
+    for item in _validated_completion_gap_acceptance_bindings(orchestrator):
+        refs = runtime_by_acceptance.setdefault(item["acceptance_id"], [])
+        if item["runtime_task_id"] not in refs:
+            refs.append(item["runtime_task_id"])
     tasks = getattr(getattr(orchestrator, "runtime", None), "tasks", None) or {}
     trace: list[dict[str, Any]] = []
     for row in acceptance_rows:
@@ -395,11 +514,14 @@ def restore_orchestrator_from_runtime_snapshot(
     orchestrator._failure_index = _max_record_index(runtime.failures, "failure_id", "F")
     attach_handoff_identity_traceability(orchestrator, handoff_packet)
     attach_handoff_verification_plan(orchestrator, handoff_packet)
+    restore_completion_gap_acceptance_bindings(orchestrator, snapshot)
     refresh_task_revalidation(orchestrator)
 
 
 __all__ = [
     "HANDOFF_TASK_SOURCE",
+    "COMPLETION_GAP_ACCEPTANCE_BINDINGS_KEY",
+    "COMPLETION_GAP_TASK_SOURCE",
     "ROOT_GOAL_ID",
     "attach_handoff_identity_traceability",
     "build_handoff_acceptance_projection",
@@ -408,6 +530,8 @@ __all__ = [
     "build_handoff_task_records",
     "map_handoff_dependencies",
     "prepare_orchestrator_from_handoff",
+    "register_completion_gap_acceptance_binding",
+    "restore_completion_gap_acceptance_bindings",
     "restore_orchestrator_from_runtime_snapshot",
     "runtime_task_id",
     "seed_orchestrator_from_handoff",

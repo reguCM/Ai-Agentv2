@@ -1096,6 +1096,9 @@ class ChatTaskOrchestrator:
         self.canonical_requirement_projection: list[dict[str, str]] = []
         self.handoff_acceptance_projection: list[dict[str, str]] = []
         self.handoff_task_acceptance_mapping: list[dict[str, Any]] = []
+        # Runtime-only links for Completion Gap tasks.  The canonical
+        # T* -> A* declaration remains in the Goal Handoff.
+        self.completion_gap_acceptance_bindings: list[dict[str, str]] = []
         self.handoff_test_plan: dict[str, Any] = {}
         self.domain_goal_adoption_result: Any = None
         self.task_graph_projection_sidecar: list[dict[str, Any]] = []
@@ -4237,6 +4240,9 @@ class ChatTaskOrchestrator:
                 ]
                 for task_id, targets in self._review_task_targets.items()
             },
+            "completion_gap_acceptance_bindings": [
+                dict(item) for item in self.completion_gap_acceptance_bindings
+            ],
             "sandbox_session": sandbox,
             "sandbox_status_ja": (
                 sandbox_status_ja(self.runtime.sandbox_session)
