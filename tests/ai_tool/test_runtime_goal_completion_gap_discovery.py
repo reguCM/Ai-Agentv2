@@ -32,6 +32,8 @@ def test_eligible_entry_derives_identity_only_gap_candidate() -> None:
     assert result["run_execution_id"] == "exec-closure"
     assert result["candidates"] == [
         {
+            "handoff_id": session["production_handoff_packet"]["handoff_id"],
+            "run_execution_id": "exec-closure",
             "acceptance_id": "A1",
             "blocker": {
                 "acceptance_id": "A1",

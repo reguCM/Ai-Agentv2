@@ -185,6 +185,8 @@ def discover_runtime_goal_completion_gaps(
             return _fail(base, f"runtime_task_mapping_not_found:{acceptance_id}")
         candidates.append(
             {
+                "handoff_id": base["handoff_id"],
+                "run_execution_id": base["run_execution_id"],
                 "acceptance_id": acceptance_id,
                 "blocker": {
                     "acceptance_id": acceptance_id,
