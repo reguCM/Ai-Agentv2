@@ -17,6 +17,7 @@ from ai_tool.goal_acceptance_eval import evaluate_goal_acceptance_from_facts
 from tools.ai.task_runtime import AUTHORITATIVE_CERTAINTIES, GoalStatus, TaskStatus
 
 HANDOFF_TASK_SOURCE = "goal_handoff"
+COMPLETION_GAP_TASK_SOURCE = "completion_gap"
 
 TEST_RUN_CLOSED = "test_run_closed"
 _OBSERVATION_MARKERS = (
@@ -182,7 +183,10 @@ def closed_test_evidence_present(orchestrator: Any) -> bool:
 def pending_verification_action(orchestrator: Any) -> dict[str, Any] | None:
     """Inject run_test_plan only when the current Handoff task requires it."""
     task = getattr(orchestrator, "task", None)
-    if task is None or str(getattr(task, "source", "") or "") != HANDOFF_TASK_SOURCE:
+    if task is None or str(getattr(task, "source", "") or "") not in {
+        HANDOFF_TASK_SOURCE,
+        COMPLETION_GAP_TASK_SOURCE,
+    }:
         return None
     if str(getattr(task, "status", "") or "") == TaskStatus.COMPLETE.value:
         return None
@@ -205,12 +209,13 @@ def advance_runnable_handoff_task(orchestrator: Any) -> str | None:
     runtime = getattr(orchestrator, "runtime", None)
     tasks = getattr(runtime, "tasks", None) or {}
     current = tasks.get(getattr(orchestrator, "current_task_id", None))
-    if current is None or str(getattr(current, "source", "") or "") != HANDOFF_TASK_SOURCE:
+    executable_sources = {HANDOFF_TASK_SOURCE, COMPLETION_GAP_TASK_SOURCE}
+    if current is None or str(getattr(current, "source", "") or "") not in executable_sources:
         return None
     if str(getattr(current, "status", "") or "") != TaskStatus.COMPLETE.value:
         return None
     for task in tasks.values():
-        if str(getattr(task, "source", "") or "") != HANDOFF_TASK_SOURCE:
+        if str(getattr(task, "source", "") or "") not in executable_sources:
             continue
         if str(getattr(task, "status", "") or "") in {
             TaskStatus.COMPLETE.value,

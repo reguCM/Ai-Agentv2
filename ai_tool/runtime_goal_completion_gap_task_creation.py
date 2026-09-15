@@ -92,6 +92,17 @@ def create_runtime_goal_completion_gap_task(
         return _result("RETURN_TO_EXISTING_WORK", proposal_result, reason="source_runtime_task_incomplete")
     if not acceptance_id:
         return _result("FAIL_CLOSED", proposal_result, reason="missing_acceptance_id")
+    source_conditions = [
+        _token(item)
+        for item in (getattr(source_task, "completion_conditions", None) or [])
+        if _token(item)
+    ]
+    if not source_conditions:
+        return _result(
+            "FAIL_CLOSED",
+            proposal_result,
+            reason="source_runtime_task_conditions_missing",
+        )
 
     existing = getattr(orchestrator, "completion_gap_acceptance_bindings", None) or []
     for row in existing:
@@ -118,9 +129,8 @@ def create_runtime_goal_completion_gap_task(
             "existing Evidence as grounding. Do not reinterpret or change Human Meaning, "
             "Requirements, Acceptance, or Constraints."
         ),
-        completion_conditions=[
-            f"Acceptance {acceptance_id} has new supporting Evidence and is re-evaluated"
-        ],
+        # Reuse the source Runtime Task's existing completion contract.
+        completion_conditions=source_conditions,
         depends_on=[source_runtime_task_id],
         status=TaskStatus.PENDING.value,
         source=COMPLETION_GAP_TASK_SOURCE,

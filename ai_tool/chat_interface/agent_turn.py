@@ -3452,8 +3452,60 @@ def _phase3a_command_result(
             "model": model,
         }
 
+    completion_gap_runtime_open = False
+    if resume_runtime:
+        runtime_rows = existing_runtime.get("tasks") or []
+        completion_gap_runtime_open = any(
+            isinstance(row, Mapping)
+            and str(row.get("source") or "") == "completion_gap"
+            and str(row.get("status") or "") not in {"complete", "cancelled"}
+            for row in runtime_rows
+        )
+        if not completion_gap_runtime_open:
+            from ai_tool.runtime_goal_completion_gap_discovery import (
+                discover_runtime_goal_completion_gaps,
+            )
+            from ai_tool.runtime_goal_completion_gap_task_creation import (
+                create_runtime_goal_completion_gap_task,
+            )
+            from ai_tool.production_verification_acceptance import (
+                advance_runnable_handoff_task,
+                assess_handoff_acceptance_readiness,
+            )
+
+            discovery = discover_runtime_goal_completion_gaps(session, mission=mission)
+            candidates = [
+                row for row in (discovery.get("candidates") or []) if isinstance(row, Mapping)
+            ]
+            if discovery.get("status") == "GAP_CANDIDATE" and len(candidates) == 1:
+                creation_orchestrator = ChatTaskOrchestrator(
+                    correlation_id,
+                    str((packet.get("goal") or {}).get("summary") or ""),
+                )
+                try:
+                    restore_orchestrator_from_runtime_snapshot(
+                        creation_orchestrator, packet, existing_runtime
+                    )
+                    creation = create_runtime_goal_completion_gap_task(
+                        creation_orchestrator,
+                        session,
+                        mission=mission,
+                        candidate=candidates[0],
+                    )
+                    if creation.get("status") in {"TASK_CREATED", "ALREADY_CREATED"}:
+                        advance_runnable_handoff_task(creation_orchestrator)
+                        existing_runtime = creation_orchestrator.snapshot()
+                        session["production_runtime_snapshot"] = existing_runtime
+                        session["production_acceptance_readiness"] = (
+                            assess_handoff_acceptance_readiness(creation_orchestrator)
+                        )
+                        completion_gap_runtime_open = True
+                except Exception:
+                    # Existing /run fail-closed behavior remains authoritative.
+                    completion_gap_runtime_open = False
+
     saved_acceptance = session.get("production_acceptance_evaluation")
-    if isinstance(saved_acceptance, Mapping):
+    if isinstance(saved_acceptance, Mapping) and not completion_gap_runtime_open:
         acceptance_identity_matches = (
             str(saved_acceptance.get("handoff_id") or "")
             == str(packet.get("handoff_id") or "")
@@ -3955,29 +4007,116 @@ def _phase3a_command_result(
     }
     task_step_executed = len(runtime_snapshot.get("actions") or []) == action_count_before + 1
     acceptance_result = None
+    goal_judgment = None
     if acceptance_readiness["acceptance_ready"]:
+        finalization_timing = _new_timing_breakdown()
+        finalization_report = _runtime_status_report(
+            LoopStopReason.COMPLETED,
+            LoopCounters(
+                stagnation_limit=1,
+                same_failure_limit=1,
+                no_evidence_limit=1,
+            ),
+            orchestrator,
+        )
+        try:
+            finalization_response = _run_finalization_only(
+                chat_fn=chat_fn,
+                model=model,
+                messages=[],
+                runtime_status_report=finalization_report,
+                timing=finalization_timing,
+            )
+            final_answer = str(
+                getattr(
+                    getattr(finalization_response, "message", None),
+                    "content",
+                    None,
+                )
+                or ""
+            )
+        except Exception as exc:  # noqa: BLE001
+            execution_result.update(
+                {
+                    "production_status": "RUNTIME_FINALIZATION_BLOCKED",
+                    "production_run_error": "runtime_finalization_failed",
+                    "events": [
+                        *(execution_result.get("events") or []),
+                        event("runtime_finalization_stopped", reason=type(exc).__name__),
+                    ],
+                }
+            )
+            return _attach_runtime_goal_closure_report(
+                execution_result,
+                session=session,
+                mission=mission,
+            )
+        if not final_answer.strip():
+            execution_result.update(
+                {
+                    "production_status": "RUNTIME_FINALIZATION_BLOCKED",
+                    "production_run_error": "runtime_finalization_empty_response",
+                    "events": [
+                        *(execution_result.get("events") or []),
+                        event("runtime_finalization_stopped", reason="LLM_EMPTY_RESPONSE"),
+                    ],
+                }
+            )
+            return _attach_runtime_goal_closure_report(
+                execution_result,
+                session=session,
+                mission=mission,
+            )
         from ai_tool.production_verification_acceptance import (
+            apply_acceptance_pass_to_runtime_goal,
             evaluate_handoff_goal_acceptance,
         )
-
-        lifecycle = execution_result.get("final_llm_lifecycle") or {}
-        llm_response_received = (
-            bool(lifecycle.get("final_llm_response_received"))
-            if isinstance(lifecycle, Mapping)
-            else None
+        from ai_tool.acceptance_meaning_completion import (
+            assess_acceptance_meaning_completion_eligibility,
         )
+        from ai_tool.acceptance_meaning_verification_reentry import (
+            build_acceptance_meaning_verification_reentry,
+        )
+
         acceptance_result = evaluate_handoff_goal_acceptance(
             orchestrator,
-            final_answer=str(execution_result.get("answer") or ""),
-            llm_response_received=llm_response_received,
+            final_answer=final_answer,
+            llm_response_received=True,
             handoff_packet=packet,
             mission=mission or {},
         )
+        completion_eligibility = assess_acceptance_meaning_completion_eligibility(
+            acceptance_result
+        )
+        goal_completed = apply_acceptance_pass_to_runtime_goal(
+            orchestrator,
+            acceptance_result,
+            completion_eligibility=completion_eligibility,
+        )
+        verification_reentry = build_acceptance_meaning_verification_reentry(
+            acceptance_result,
+            handoff_packet=packet,
+            mission=mission,
+            runtime=orchestrator.runtime,
+        )
+        runtime_snapshot = orchestrator.snapshot()
+        goal_judgment = {
+            "handoff_id": packet.get("handoff_id"),
+            "canonical_hash": before_hash,
+            "acceptance_status": acceptance_result.get("status"),
+            "goal_id": "G1",
+            "goal_completed": goal_completed,
+            "completion_eligibility": completion_eligibility,
+            "verification_reentry": verification_reentry,
+        }
+        execution_result["answer"] = final_answer
         session["production_acceptance_evaluation"] = {
             "handoff_id": packet.get("handoff_id"),
             "canonical_hash": before_hash,
             "result": acceptance_result,
         }
+        session["production_runtime_snapshot"] = runtime_snapshot
+        session["production_goal_acceptance_judgment"] = goal_judgment
     execution_result.update(
         {
             "events": [
@@ -4023,9 +4162,14 @@ def _phase3a_command_result(
             "acceptance_evaluated": acceptance_result is not None,
             "acceptance_reused": False,
             "acceptance_result": acceptance_result,
+            "goal_acceptance_judgment": goal_judgment,
+            "goal_judgment_reused": False,
+            "verification_reentry": (
+                goal_judgment.get("verification_reentry") if goal_judgment else None
+            ),
             "production_status": (
-                "GOAL_ACCEPTANCE_EVALUATED"
-                if acceptance_result is not None
+                "GOAL_ACCEPTANCE_JUDGED"
+                if goal_judgment is not None
                 else "RUNTIME_TASK_COMPLETED_NEXT_READY"
                 if task_completed and next_task_id
                 else "RUNTIME_TASK_COMPLETED"
@@ -4044,7 +4188,11 @@ def _phase3a_command_result(
                 status=acceptance_result.get("status"),
             )
         )
-    return execution_result
+    return _attach_runtime_goal_closure_report(
+        execution_result,
+        session=session,
+        mission=mission,
+    )
 
 
 def _new_mission_record(
