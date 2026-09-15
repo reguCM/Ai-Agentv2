@@ -3188,6 +3188,13 @@ def _attach_runtime_goal_closure_report(
     result["runtime_goal_completion_gap_entry_assessment"] = (
         assess_runtime_goal_completion_gap_entry(session, mission=mission)
     )
+    from ai_tool.runtime_goal_completion_gap_discovery import (
+        discover_runtime_goal_completion_gaps,
+    )
+
+    result["runtime_goal_completion_gap_discovery"] = (
+        discover_runtime_goal_completion_gaps(session, mission=mission)
+    )
     return result
 
 

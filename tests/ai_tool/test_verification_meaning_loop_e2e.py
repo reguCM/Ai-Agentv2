@@ -120,6 +120,9 @@ def test_verification_only_evidence_uses_run_test_plan_condition_contract(
     assert level4_assessment["handoff_id"] == fixture["handoff_packet"]["handoff_id"]
     assert level4_assessment["run_execution_id"] == initial_contract["started_execution_id"]
     assert level4_assessment["status"] == "FAIL_CLOSED_IDENTITY"
+    discovery = result["runtime_goal_completion_gap_discovery"]
+    assert discovery["status"] == "FAIL_CLOSED"
+    assert discovery["entry_status"] == "FAIL_CLOSED_IDENTITY"
     assert "runtime_goal_closure_report" not in session
     assert "runtime_goal_completion_gap_entry_assessment" not in session
     assert len(finalization_calls) == 1
